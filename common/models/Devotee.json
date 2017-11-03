@@ -1,5 +1,6 @@
 {
   "name": "Devotee",
+  "base": "User",
   "options": {
     "idInjection": false,
     "mysql": {
