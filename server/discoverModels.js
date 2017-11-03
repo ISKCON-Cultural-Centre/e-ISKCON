@@ -4,7 +4,8 @@ var fs = require('fs');
 var loopback = require('loopback');
 
 var outputPath = path.resolve(__dirname, '../common/models');
-var ds = loopback.createDataSource('mysql', require('../server/datasources').local);
+var ds = loopback.createDataSource('mysql', require('../server/datasources').mysqld);
+
 
 ds.discoverModelDefinitions({ schema: 'icc' }, function (err, models) {
 
@@ -33,3 +34,12 @@ ds.discoverModelDefinitions({ schema: 'icc' }, function (err, models) {
     });
   })
 });
+
+function capitaliseFirstLetter(string) {
+    return string.charAt(0)
+        .toUpperCase() + string.slice(1);
+}
+
+function jsFileString(model_name) {
+    return '' + 'module.exports = function(' + capitaliseFirstLetter(model_name) + ') {\n' + '\t\n' + '};';
+}
