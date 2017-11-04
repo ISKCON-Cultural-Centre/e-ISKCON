@@ -20,7 +20,6 @@ import { AboutComponent } from './pages/about/about.component';
 import { LoginComponent } from './pages/user-module/login/login.component';
 import { ResetPasswordComponent } from './pages/user-module/reset-password/reset-password.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
