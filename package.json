@@ -9,8 +9,8 @@
     "lint": "eslint .",
     "start": "node .",
     "posttest": "npm run lint && nsp check",
-    "remove-sdk": "rm -rf client/src/app/sdk",
-    "generate": "npm run remove-sdk;./node_modules/.bin/lb-sdk server/server client/src/app/sdk -i disabled"
+    "remove-sdk": "rm -rf client/src/app/shared/sdk",
+    "generate": "npm run remove-sdk;./node_modules/.bin/lb-sdk server/server client/src/app/shared/sdk  -d ng2web -i disabled"
   },
   "dependencies": {
     "compression": "^1.0.3",
@@ -24,7 +24,7 @@
     "strong-error-handler": "^2.0.0"
   },
   "devDependencies": {
-    "@mean-expert/loopback-sdk-builder": "^2.1.0-rc.13.5",
+    "@mean-expert/loopback-sdk-builder": "^2.1.0",
     "eslint": "^3.17.1",
     "eslint-config-loopback": "^8.0.0",
     "nsp": "^2.1.0"

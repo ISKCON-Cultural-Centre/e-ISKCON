@@ -14,7 +14,8 @@
     ]
   },
   "User": {
-    "dataSource": "mysqld"
+    "dataSource": "mysqld",
+    "public": false
   },
   "AccessToken": {
     "dataSource": "mysqld",
@@ -26,13 +27,93 @@
   },
   "RoleMapping": {
     "dataSource": "mysqld",
-    "public": false,
+    "public": true,
     "options": {
       "strictObjectIDCoercion": true
     }
   },
   "Role": {
     "dataSource": "mysqld",
-    "public": false
+    "public": true
+  },
+  "Circle": {
+    "dataSource": "mysqld",
+    "public": true
+  },
+  "Circle": {
+    "dataSource": "mysqld",
+    "public": true
+  },
+  "CircleDevotee": {
+    "dataSource": "mysqld",
+    "public": true
+  },
+  "DeekshaGuru": {
+    "dataSource": "mysqld",
+    "public": true
+  },
+  "Devotee": {
+    "dataSource": "mysqld",
+    "public": true
+  },
+  "DevoteeEventCalendar": {
+    "dataSource": "mysqld",
+    "public": true
+  },
+  "DevoteeKarmiFamily": {
+    "dataSource": "mysqld",
+    "public": true
+  },
+  "DevoteeSpiritualFamily": {
+    "dataSource": "mysqld",
+    "public": true
+  },
+  "DonationTypeMaster": {
+    "dataSource": "mysqld",
+    "public": true
+  },
+  "EventMaster": {
+    "dataSource": "mysqld",
+    "public": true
+  },
+  "NewContact": {
+    "dataSource": "mysqld",
+    "public": true
+  },
+  "OutreachMaster": {
+    "dataSource": "mysqld",
+    "public": true
+  },
+  "Payment": {
+    "dataSource": "mysqld",
+    "public": true
+  },
+  "PaymentModeMaster": {
+    "dataSource": "mysqld",
+    "public": true
+  },
+  "Pledge": {
+    "dataSource": "mysqld",
+    "public": true
+  },
+  "PledgePayment": {
+    "dataSource": "mysqld",
+    "public": true
+  },
+  "RelationshipMaster": {
+    "dataSource": "mysqld",
+    "public": true
+  },
+  "SpiritualLevelMaster": {
+    "dataSource": "mysqld",
+    "public": true
+  },
+  "Temple": {
+    "dataSource": "mysqld",
+    "public": true
+  },
+  "TempleBranch": {
+    "dataSource": "mysqld",
+    "public": true
   }
 }

@@ -5,20 +5,20 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
-import { UserModule } from './pages/user-module/user.module';
+import { DevoteeModule } from './pages/devotee/devotee.module';
 
 
 import { MaterialModule } from './material.module';
 
-import { SDKBrowserModule } from './sdk';
+import { SDKBrowserModule } from './shared/sdk';
 import { AuthGuard, AuthService } from './services';
 
 import { AppComponent } from './app.component';
 import { NavgationComponent } from './shared/navgation/navgation.component';
 import { HomeComponent } from './pages/home/home.component';
 import { AboutComponent } from './pages/about/about.component';
-import { LoginComponent } from './pages/user-module/login/login.component';
-import { ResetPasswordComponent } from './pages/user-module/reset-password/reset-password.component';
+import { LoginComponent } from './pages/devotee/login/login.component';
+import { ResetPasswordComponent } from './pages/devotee/reset-password/reset-password.component';
 
 
 @NgModule({
@@ -32,7 +32,7 @@ import { ResetPasswordComponent } from './pages/user-module/reset-password/reset
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,
-    UserModule,
+    DevoteeModule,
     HttpModule,
     SDKBrowserModule.forRoot(),
     RouterModule.forRoot([
