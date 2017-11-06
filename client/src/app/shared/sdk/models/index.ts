@@ -1,5 +1,4 @@
 /* tslint:disable */
-export * from './User';
 export * from './RoleMapping';
 export * from './Role';
 export * from './Circle';

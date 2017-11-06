@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { SDKToken } from '../sdk';
-import { LoopBackAuth } from '../sdk';
+import { SDKToken } from '../shared/sdk';
+import { LoopBackAuth } from '../shared/sdk';
 
-import { InternalStorage } from '../sdk/storage/storage.swaps';
+import { InternalStorage } from '../shared/sdk/storage/storage.swaps';
 
 declare var Object: any;
 @Injectable()

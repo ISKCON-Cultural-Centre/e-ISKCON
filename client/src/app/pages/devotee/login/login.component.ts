@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {FormControl, Validators} from '@angular/forms';
 
-import { SDKToken, UserApi } from '../../../sdk';
+import { SDKToken, DevoteeApi } from '../../../shared/sdk';
 import { AuthService } from '../../../services/auth.service';
 
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   private state: string = 'login';
 
   constructor(
-    private userApi: UserApi,
+    private userApi: DevoteeApi,
     private authService: AuthService,
     private router: Router) {
   }

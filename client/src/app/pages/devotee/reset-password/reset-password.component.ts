@@ -6,7 +6,7 @@ import {FormControl, Validators} from '@angular/forms';
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 const PASSWORD_REGEX = /^[a-zA-Z0-9!#$%&’]$/;
 
-import { LoopBackConfig } from '../../../sdk';
+import { LoopBackConfig } from '../../../shared/sdk';
 @Component({
   selector: 'app-reset-password',
   templateUrl: './reset-password.component.html',

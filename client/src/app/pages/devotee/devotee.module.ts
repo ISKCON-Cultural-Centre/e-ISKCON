@@ -16,4 +16,4 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
   ],
   declarations: [LoginComponent, ResetPasswordComponent]
 })
-export class UserModule { }
+export class DevoteeModule { }
