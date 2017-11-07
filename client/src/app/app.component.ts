@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { BASE_URL, API_VERSION } from './shared/base.url';
+import { LoopBackConfig }        from './shared/sdk';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'ICC-Bangalore';
+  title = 'eISKCON';
+  constructor() {
+    LoopBackConfig.setBaseURL(BASE_URL);
+    LoopBackConfig.setApiVersion(API_VERSION);
+  }
 }
