@@ -15,7 +15,7 @@ const PASSWORD_REGEX = /^[a-zA-Z0-9!#$%&’]$/;
 })
 export class LoginComponent implements OnInit {
 
-  private state: string = 'login';
+  private state: String = 'login';
 
   constructor(
     private userApi: UserApi,
