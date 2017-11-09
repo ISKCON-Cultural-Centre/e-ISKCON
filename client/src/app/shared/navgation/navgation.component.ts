@@ -12,22 +12,22 @@ export class NavgationComponent implements OnInit {
 
   isLogin: boolean = false;
 
-  constructor(
-    private router: Router,
-    private userApi: DevoteeApi) {
+  constructor(private router: Router, private userApi: DevoteeApi) {
 
     this.router.events
-    .subscribe((route) => {
-      this.isLogin = (route as NavigationEnd).url.match('/login') !== null ||
-        (route as NavigationEnd).url.match('/reset') !== null;
-    });
+      .subscribe((route) => {
+        debugger;
+        this.isLogin = (route as NavigationEnd).url.match('/login') !== null ||
+          (route as NavigationEnd).url.match('/reset') !== null;
+      });
   }
 
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   logout() {
     this.userApi.logout().subscribe((response) => {
+      //Clear Token and other local storage 
       this.router.navigate(['/login']);
     });
   }

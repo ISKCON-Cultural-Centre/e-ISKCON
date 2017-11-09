@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { BASE_URL, API_VERSION } from './shared/base.url';
-import { LoopBackConfig }        from './shared/sdk';
+import { LoopBackConfig } from './shared/sdk';
 
 @Component({
   selector: 'app-root',

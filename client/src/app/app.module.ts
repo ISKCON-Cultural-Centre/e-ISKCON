@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -19,6 +19,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { AboutComponent } from './pages/about/about.component';
 import { LoginComponent } from './pages/devotee/login/login.component';
 import { ResetPasswordComponent } from './pages/devotee/reset-password/reset-password.component';
+import { AppRoutingModule } from './/app-routing.module';
 
 @NgModule({
   declarations: [
@@ -34,13 +35,8 @@ import { ResetPasswordComponent } from './pages/devotee/reset-password/reset-pas
     DevoteeModule,
     HttpModule,
     SDKBrowserModule.forRoot(),
-    RouterModule.forRoot([
-      { path: 'login', component: LoginComponent },
-      { path: 'reset', component: ResetPasswordComponent },
-      { path: 'about', component: AboutComponent, canActivate: [AuthGuard] },
-      { path: '', component: HomeComponent, canActivate: [AuthGuard] },
-      { path: '**', redirectTo: '/' }
-    ])
+    RouterModule,
+    AppRoutingModule
   ],
   providers: [
     AuthGuard,

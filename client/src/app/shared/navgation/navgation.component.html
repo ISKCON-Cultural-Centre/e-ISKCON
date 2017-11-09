@@ -1,9 +1,17 @@
-<ul class="nav nav-pills" *ngIf="!isLogin">
+<ul *ngIf="!isLogin">
   <li role="presentation" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
     <a [routerLink]="['']" href="#">Home</a>
   </li>
   <li role="presentation" [routerLinkActive]="['active']">
     <a [routerLink]="['about']" href="#">About</a>
   </li>
-  <li role="presentation"><a (click)="logout()" href="#">Logout</a></li>
+  <li role="presentation" class="dropdown" style="float:right">
+      <a (click)="logout()" href="#" class="dropbtn">Logout</a>
+    <!-- <a href="javascript:void(0)" class="dropbtn">Dropdown</a> -->
+    <div class="dropdown-content">
+      <a href="#">Link 1</a>
+      <a href="#">Link 2</a>
+      <a href="#">Link 3</a>
+    </div>
+  </li>
 </ul>
