@@ -19,7 +19,14 @@
   },
   "AccessToken": {
     "dataSource": "mysqld",
-    "public": false
+    "public": false,
+    "relations": {
+      "user": {
+        "type": "belongsTo",
+        "model": "Devotee",
+        "foreignKey": "id"
+      }
+    }
   },
   "ACL": {
     "dataSource": "mysqld",

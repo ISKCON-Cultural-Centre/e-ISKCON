@@ -71,6 +71,12 @@ CREATE TABLE IF NOT EXISTS `icc`.`devotee` (
   `source` VARCHAR(100) NOT NULL,
   `created-date` DATE NOT NULL,
   `spiritual-level-master-id` VARCHAR(16) NOT NULL,
+  `realm` VARCHAR(512) NULL DEFAULT NULL,
+  `username` VARCHAR(512) NULL DEFAULT NULL,
+  `password` VARCHAR(512) NOT NULL,
+  `email` VARCHAR(512) NOT NULL,
+  `emailVerified` TINYINT(1) NULL DEFAULT NULL,
+  `verificationToken` VARCHAR(512) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_devotee_id_idx` (`id` ASC),
   INDEX `fk_devotee_spiritual-level-master1_idx` (`spiritual-level-master-id` ASC),
@@ -219,6 +225,36 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `icc`.`accesstoken`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `icc`.`accesstoken` (
+  `id` VARCHAR(255) NOT NULL,
+  `ttl` INT(11) NULL DEFAULT NULL,
+  `scopes` TEXT NULL DEFAULT NULL,
+  `created` DATETIME NULL DEFAULT NULL,
+  `userId` VARCHAR(512) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `icc`.`acl`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `icc`.`acl` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `model` VARCHAR(512) NULL DEFAULT NULL,
+  `property` VARCHAR(512) NULL DEFAULT NULL,
+  `accessType` VARCHAR(512) NULL DEFAULT NULL,
+  `permission` VARCHAR(512) NULL DEFAULT NULL,
+  `principalType` VARCHAR(512) NULL DEFAULT NULL,
+  `principalId` VARCHAR(512) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
 -- Table `icc`.`circle`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `icc`.`circle` (
@@ -247,6 +283,34 @@ CREATE TABLE IF NOT EXISTS `icc`.`circle-devotee` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `icc`.`role`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `icc`.`role` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(512) NOT NULL,
+  `description` VARCHAR(512) NULL DEFAULT NULL,
+  `created` DATETIME NULL DEFAULT NULL,
+  `modified` DATETIME NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `icc`.`rolemapping`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `icc`.`rolemapping` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `principalType` VARCHAR(512) NULL DEFAULT NULL,
+  `principalId` VARCHAR(255) NULL DEFAULT NULL,
+  `roleId` INT(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `principalId` (`principalId` ASC))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
@@ -380,53 +444,3 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-
-CREATE TABLE `AccessToken` (
-  `id` varchar(255) NOT NULL,
-  `ttl` int(11) DEFAULT NULL,
-  `scopes` text,
-  `created` datetime DEFAULT NULL,
-  `userId` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB;
-
-CREATE TABLE `ACL` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `model` varchar(512) DEFAULT NULL,
-  `property` varchar(512) DEFAULT NULL,
-  `accessType` varchar(512) DEFAULT NULL,
-  `permission` varchar(512) DEFAULT NULL,
-  `principalType` varchar(512) DEFAULT NULL,
-  `principalId` varchar(512) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB;
-
-CREATE TABLE `Role` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(512) NOT NULL,
-  `description` varchar(512) DEFAULT NULL,
-  `created` datetime DEFAULT NULL,
-  `modified` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB;
-
-CREATE TABLE `RoleMapping` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `principalType` varchar(512) DEFAULT NULL,
-  `principalId` varchar(255) DEFAULT NULL,
-  `roleId` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `principalId` (`principalId`)
-) ENGINE=InnoDB;
-
-CREATE TABLE `User` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `realm` varchar(512) DEFAULT NULL,
-  `username` varchar(512) DEFAULT NULL,
-  `password` varchar(512) NOT NULL,
-  `email` varchar(512) NOT NULL,
-  `emailVerified` tinyint(1) DEFAULT NULL,
-  `verificationToken` varchar(512) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB;
-
