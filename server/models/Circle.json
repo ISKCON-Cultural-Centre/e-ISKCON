@@ -8,7 +8,16 @@
     },
     "relations": {}
   },
-  "forceId": true,
+  "mixins": {
+    "TimeStamp" : {
+      "createdAt" : "created-on",
+      "updatedAt" : "updated-on",
+      "required" : false,
+      "validateUpsert": true,
+      "silenceWarnings": false
+    },
+    "GenerateKey" : true
+  },
   "properties": {
     "id": {
       "type": "String",
@@ -17,7 +26,6 @@
       "precision": null,
       "scale": null,
       "id": true,
-      "defaultFn": "uuidv4",
       "mysql": {
         "columnName": "id",
         "dataType": "varchar",

@@ -15,7 +15,17 @@
       }
     }
   },
-  "forceId": true,  
+
+  "mixins": {
+    "TimeStamp" : {
+      "createdAt" : "created-on",
+      "updatedAt" : "updated-on",
+      "required" : false,
+      "validateUpsert": true,
+      "silenceWarnings": false
+    },
+    "GenerateKey" : true
+  },
   "properties": {
     "id": {
       "type": "String",
@@ -24,7 +34,7 @@
       "precision": null,
       "scale": null,
       "id": true,
-      "defaultFn": "uuidv4",
+
       "mysql": {
         "columnName": "id",
         "dataType": "varchar",
@@ -64,14 +74,14 @@
         "nullable": "Y"
       }
     },
-    "sex": {
+    "gender": {
       "type": "Boolean",
       "required": true,
       "length": 1,
       "precision": null,
       "scale": null,
       "mysql": {
-        "columnName": "sex",
+        "columnName": "gender",
         "dataType": "char",
         "dataLength": 1,
         "dataPrecision": null,
@@ -224,21 +234,6 @@
         "columnName": "source",
         "dataType": "varchar",
         "dataLength": 100,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "N"
-      }
-    },
-    "createdDate": {
-      "type": "Date",
-      "required": true,
-      "length": null,
-      "precision": null,
-      "scale": null,
-      "mysql": {
-        "columnName": "created-date",
-        "dataType": "date",
-        "dataLength": null,
         "dataPrecision": null,
         "dataScale": null,
         "nullable": "N"

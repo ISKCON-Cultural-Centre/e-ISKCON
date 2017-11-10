@@ -24,17 +24,10 @@ USE `icc` ;
 CREATE TABLE IF NOT EXISTS `icc`.`deeksha-guru` (
   `id` VARCHAR(36) NOT NULL,
   `name` VARCHAR(100) NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1;
-
-
--- -----------------------------------------------------
--- Table `icc`.`relationship-master`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `icc`.`relationship-master` (
-  `id` VARCHAR(36) NOT NULL,
-  `relation-name` VARCHAR(100) NOT NULL,
+  `created-on` DATETIME NULL DEFAULT NULL,
+  `updated-on` DATETIME NULL DEFAULT NULL,
+  `created-by` VARCHAR(36) NULL DEFAULT NULL,
+  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
@@ -47,6 +40,10 @@ CREATE TABLE IF NOT EXISTS `icc`.`spiritual-level-master` (
   `id` VARCHAR(36) NOT NULL,
   `level` VARCHAR(30) NOT NULL,
   `description` VARCHAR(50) NOT NULL,
+  `created-on` DATETIME NULL DEFAULT NULL,
+  `updated-on` DATETIME NULL DEFAULT NULL,
+  `created-by` VARCHAR(36) NULL DEFAULT NULL,
+  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -58,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `icc`.`devotee` (
   `id` VARCHAR(36) NOT NULL,
   `legal-name` VARCHAR(100) NOT NULL,
   `spiritual-name` VARCHAR(100) NULL DEFAULT NULL,
-  `sex` CHAR(1) NOT NULL,
+  `gender` CHAR(1) NOT NULL,
   `contact-number` VARCHAR(20) NULL DEFAULT NULL,
   `alt-contact-number` VARCHAR(20) NULL DEFAULT NULL,
   `email-id` VARCHAR(100) NULL DEFAULT NULL,
@@ -69,7 +66,6 @@ CREATE TABLE IF NOT EXISTS `icc`.`devotee` (
   `address-city` VARCHAR(50) NULL DEFAULT NULL,
   `address-pin` VARCHAR(10) NULL DEFAULT NULL,
   `source` VARCHAR(100) NOT NULL,
-  `created-date` DATE NOT NULL,
   `spiritual-level-master-id` VARCHAR(36) NOT NULL,
   `realm` VARCHAR(512) NULL DEFAULT NULL,
   `username` VARCHAR(512) NULL DEFAULT NULL,
@@ -77,6 +73,10 @@ CREATE TABLE IF NOT EXISTS `icc`.`devotee` (
   `email` VARCHAR(512) NOT NULL,
   `emailVerified` TINYINT(1) NULL DEFAULT NULL,
   `verificationToken` VARCHAR(512) NULL DEFAULT NULL,
+  `created-on` DATETIME NULL DEFAULT NULL,
+  `updated-on` DATETIME NULL DEFAULT NULL,
+  `created-by` VARCHAR(36) NULL DEFAULT NULL,
+  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_devotee_id_idx` (`id` ASC),
   INDEX `fk_devotee_spiritual-level-master1_idx` (`spiritual-level-master-id` ASC),
@@ -89,6 +89,21 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `icc`.`relationship-master`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `icc`.`relationship-master` (
+  `id` VARCHAR(36) NOT NULL,
+  `relation-name` VARCHAR(100) NOT NULL,
+  `created-on` DATETIME NULL DEFAULT NULL,
+  `updated-on` DATETIME NULL DEFAULT NULL,
+  `created-by` VARCHAR(36) NULL DEFAULT NULL,
+  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
 -- Table `icc`.`devotee-karmi-family`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `icc`.`devotee-karmi-family` (
@@ -96,17 +111,21 @@ CREATE TABLE IF NOT EXISTS `icc`.`devotee-karmi-family` (
   `family-name` VARCHAR(100) NOT NULL,
   `relationship-id` VARCHAR(36) NOT NULL,
   `devotee-id` VARCHAR(36) NOT NULL,
+  `created-on` DATETIME NULL DEFAULT NULL,
+  `updated-on` DATETIME NULL DEFAULT NULL,
+  `created-by` VARCHAR(36) NULL DEFAULT NULL,
+  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_devotee-karmi-family_relationship-master1_idx` (`relationship-id` ASC),
   INDEX `fk_devotee-karmi-family_devotee2_idx` (`devotee-id` ASC),
-  CONSTRAINT `fk_devotee-karmi-family_relationship-master1`
-    FOREIGN KEY (`relationship-id`)
-    REFERENCES `icc`.`relationship-master` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
   CONSTRAINT `fk_devotee-karmi-family_devotee2`
     FOREIGN KEY (`devotee-id`)
     REFERENCES `icc`.`devotee` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_devotee-karmi-family_relationship-master1`
+    FOREIGN KEY (`relationship-id`)
+    REFERENCES `icc`.`relationship-master` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -120,6 +139,10 @@ CREATE TABLE IF NOT EXISTS `icc`.`devotee-spiritual-family` (
   `id` VARCHAR(36) NOT NULL,
   `devotee-id` VARCHAR(36) NOT NULL,
   `guiding-devotee-id` VARCHAR(36) NOT NULL,
+  `created-on` DATETIME NULL DEFAULT NULL,
+  `updated-on` DATETIME NULL DEFAULT NULL,
+  `created-by` VARCHAR(36) NULL DEFAULT NULL,
+  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_devotee-spiritual-family_devotee1_idx` (`devotee-id` ASC),
   INDEX `fk_devotee-spiritual-family_devotee2_idx` (`guiding-devotee-id` ASC),
@@ -152,6 +175,10 @@ CREATE TABLE IF NOT EXISTS `icc`.`new-contact` (
   `reference` VARCHAR(100) NULL DEFAULT NULL,
   `comments` VARCHAR(45) NULL DEFAULT NULL,
   `altPhone` VARCHAR(45) NULL DEFAULT NULL,
+  `created-on` DATETIME NULL DEFAULT NULL,
+  `updated-on` DATETIME NULL DEFAULT NULL,
+  `created-by` VARCHAR(36) NULL DEFAULT NULL,
+  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 987
@@ -164,6 +191,10 @@ DEFAULT CHARACTER SET = utf8;
 CREATE TABLE IF NOT EXISTS `icc`.`outreach-master` (
   `id` VARCHAR(36) NOT NULL,
   `description` VARCHAR(100) NOT NULL,
+  `created-on` DATETIME NULL DEFAULT NULL,
+  `updated-on` DATETIME NULL DEFAULT NULL,
+  `created-by` VARCHAR(36) NULL DEFAULT NULL,
+  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
@@ -183,6 +214,10 @@ CREATE TABLE IF NOT EXISTS `icc`.`temple` (
   `address-pin` VARCHAR(10) NOT NULL,
   `contact-number` VARCHAR(20) NOT NULL,
   `contact-name` VARCHAR(50) NOT NULL,
+  `created-on` DATETIME NULL DEFAULT NULL,
+  `updated-on` DATETIME NULL DEFAULT NULL,
+  `created-by` VARCHAR(36) NULL DEFAULT NULL,
+  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -202,6 +237,10 @@ CREATE TABLE IF NOT EXISTS `icc`.`temple-branch` (
   `address-pin` VARCHAR(10) NOT NULL,
   `contact-number` VARCHAR(20) NOT NULL,
   `contact-name` VARCHAR(50) NOT NULL,
+  `created-on` DATETIME NULL DEFAULT NULL,
+  `updated-on` DATETIME NULL DEFAULT NULL,
+  `created-by` VARCHAR(36) NULL DEFAULT NULL,
+  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_temple-branch_temple1_idx` (`temple-id` ASC),
   CONSTRAINT `fk_temple-branch_temple1`
@@ -248,6 +287,10 @@ DEFAULT CHARACTER SET = latin1;
 CREATE TABLE IF NOT EXISTS `icc`.`circle` (
   `id` VARCHAR(36) NOT NULL,
   `name` VARCHAR(100) NULL,
+  `created-on` DATETIME NULL DEFAULT NULL,
+  `updated-on` DATETIME NULL DEFAULT NULL,
+  `created-by` VARCHAR(36) NULL DEFAULT NULL,
+  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -258,6 +301,10 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `icc`.`circle-devotee` (
   `circle_id` VARCHAR(36) NOT NULL,
   `devotee_id` VARCHAR(36) NOT NULL,
+  `created-on` DATETIME NULL DEFAULT NULL,
+  `updated-on` DATETIME NULL DEFAULT NULL,
+  `created-by` VARCHAR(36) NULL DEFAULT NULL,
+  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
   PRIMARY KEY (`circle_id`, `devotee_id`),
   INDEX `fk_circle-devotee_devotee1_idx` (`devotee_id` ASC),
   CONSTRAINT `fk_circle-devotee_circle1`
@@ -307,6 +354,10 @@ DEFAULT CHARACTER SET = latin1;
 CREATE TABLE IF NOT EXISTS `icc`.`donation-type-master` (
   `id` VARCHAR(36) NOT NULL,
   `donation-type-name` VARCHAR(50) NOT NULL,
+  `created-on` DATETIME NULL DEFAULT NULL,
+  `updated-on` DATETIME NULL DEFAULT NULL,
+  `created-by` VARCHAR(36) NULL DEFAULT NULL,
+  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -318,6 +369,10 @@ CREATE TABLE IF NOT EXISTS `icc`.`payment-mode-master` (
   `id` VARCHAR(36) NOT NULL,
   `payment-mode-name` VARCHAR(20) NOT NULL,
   `active-ind` TINYINT(4) NOT NULL,
+  `created-on` DATETIME NULL DEFAULT NULL,
+  `updated-on` DATETIME NULL DEFAULT NULL,
+  `created-by` VARCHAR(36) NULL DEFAULT NULL,
+  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -332,6 +387,10 @@ CREATE TABLE IF NOT EXISTS `icc`.`payment` (
   `payment-ref-number` VARCHAR(50) NULL,
   `donation-type-master-id` VARCHAR(36) NOT NULL,
   `payment-mode-master-id` VARCHAR(36) NOT NULL,
+  `created-on` DATETIME NULL DEFAULT NULL,
+  `updated-on` DATETIME NULL DEFAULT NULL,
+  `created-by` VARCHAR(36) NULL DEFAULT NULL,
+  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_payment_devotee2_idx` (`devotee-id` ASC),
   INDEX `fk_payment_donation-type-master1_idx` (`donation-type-master-id` ASC),
@@ -366,6 +425,10 @@ CREATE TABLE IF NOT EXISTS `icc`.`pledge` (
   `pause-ind` TINYINT NOT NULL,
   `devotee-id` VARCHAR(36) NOT NULL,
   `donation-type-master-id` VARCHAR(36) NOT NULL,
+  `created-on` DATETIME NULL DEFAULT NULL,
+  `updated-on` DATETIME NULL DEFAULT NULL,
+  `created-by` VARCHAR(36) NULL DEFAULT NULL,
+  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_pledge_devotee2_idx` (`devotee-id` ASC),
   INDEX `fk_pledge_donation-type-master1_idx` (`donation-type-master-id` ASC),
@@ -391,6 +454,10 @@ CREATE TABLE IF NOT EXISTS `icc`.`pledge-payment` (
   `payment-id` VARCHAR(36) NOT NULL,
   `pledge-date` DATE NULL,
   `pledge-id` VARCHAR(36) NOT NULL,
+  `created-on` DATETIME NULL DEFAULT NULL,
+  `updated-on` DATETIME NULL DEFAULT NULL,
+  `created-by` VARCHAR(36) NULL DEFAULT NULL,
+  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_pledge-payment_payment1_idx` (`payment-id` ASC),
   INDEX `fk_pledge-payment_pledge1_idx` (`pledge-id` ASC),
@@ -413,6 +480,10 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `icc`.`event-master` (
   `id` VARCHAR(36) NOT NULL,
   `event-name` VARCHAR(50) NOT NULL,
+  `created-on` DATETIME NULL DEFAULT NULL,
+  `updated-on` DATETIME NULL DEFAULT NULL,
+  `created-by` VARCHAR(36) NULL DEFAULT NULL,
+  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -424,6 +495,10 @@ CREATE TABLE IF NOT EXISTS `icc`.`devotee-event-calendar` (
   `devotee-id` VARCHAR(36) NOT NULL,
   `event-date` DATE NOT NULL,
   `event-master-id` VARCHAR(36) NOT NULL,
+  `created-on` DATETIME NULL DEFAULT NULL,
+  `updated-on` DATETIME NULL DEFAULT NULL,
+  `created-by` VARCHAR(36) NULL DEFAULT NULL,
+  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
   PRIMARY KEY (`devotee-id`),
   INDEX `fk_devotee-event-calendar_devotee2_idx` (`devotee-id` ASC),
   INDEX `fk_devotee-event-calendar_event-master1_idx` (`event-master-id` ASC),
