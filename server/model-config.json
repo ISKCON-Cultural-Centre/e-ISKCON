@@ -10,7 +10,8 @@
       "loopback/common/mixins",
       "loopback/server/mixins",
       "../common/mixins",
-      "./mixins"
+      "./mixins",
+      "../node_modules/loopback-ds-timestamp-mixin"
     ]
   },
   "User": {
@@ -19,7 +20,14 @@
   },
   "AccessToken": {
     "dataSource": "mysqld",
-    "public": false
+    "public": false,
+    "relations": {
+      "user": {
+        "type": "belongsTo",
+        "model": "Devotee",
+        "foreignKey": "id"
+      }
+    }
   },
   "ACL": {
     "dataSource": "mysqld",

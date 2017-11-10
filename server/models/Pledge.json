@@ -19,14 +19,25 @@
       }
     }
   },
+  "mixins": {
+    "TimeStamp" : {
+      "createdAt" : "created-on",
+      "updatedAt" : "updated-on",
+      "required" : false,
+      "validateUpsert": true,
+      "silenceWarnings": false
+    },
+    "GenerateKey" : true
+  },
   "properties": {
     "id": {
       "type": "String",
       "required": true,
-      "length": 16,
+      "length": 36,
       "precision": null,
       "scale": null,
-      "id": 1,
+      "id": true,
+      "defaultFn": "uuidv4",
       "mysql": {
         "columnName": "id",
         "dataType": "varchar",
@@ -114,7 +125,7 @@
     "devoteeId": {
       "type": "String",
       "required": true,
-      "length": 16,
+      "length": 36,
       "precision": null,
       "scale": null,
       "mysql": {
@@ -129,7 +140,7 @@
     "donationTypeMasterId": {
       "type": "String",
       "required": true,
-      "length": 16,
+      "length": 36,
       "precision": null,
       "scale": null,
       "mysql": {

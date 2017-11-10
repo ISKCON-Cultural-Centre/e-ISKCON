@@ -19,18 +19,29 @@
       }
     }
   },
+  "mixins": {
+    "TimeStamp" : {
+      "createdAt" : "created-on",
+      "updatedAt" : "updated-on",
+      "required" : false,
+      "validateUpsert": true,
+      "silenceWarnings": false
+    },
+    "GenerateKey" : true
+  },  
   "properties": {
     "circleId": {
       "type": "String",
       "required": true,
-      "length": 16,
+      "length": 36,
       "precision": null,
       "scale": null,
-      "id": 1,
+      "id": true,
+      "defaultFn": "uuidv4",
       "mysql": {
         "columnName": "circle_id",
         "dataType": "varchar",
-        "dataLength": 16,
+        "dataLength": 36,
         "dataPrecision": null,
         "dataScale": null,
         "nullable": "N"
@@ -39,14 +50,14 @@
     "devoteeId": {
       "type": "String",
       "required": true,
-      "length": 16,
+      "length": 36,
       "precision": null,
       "scale": null,
       "id": 2,
       "mysql": {
         "columnName": "devotee_id",
         "dataType": "varchar",
-        "dataLength": 16,
+        "dataLength": 36,
         "dataPrecision": null,
         "dataScale": null,
         "nullable": "N"

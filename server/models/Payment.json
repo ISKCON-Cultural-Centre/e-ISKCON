@@ -24,18 +24,29 @@
       }
     }
   },
+  "mixins": {
+    "TimeStamp" : {
+      "createdAt" : "created-on",
+      "updatedAt" : "updated-on",
+      "required" : false,
+      "validateUpsert": true,
+      "silenceWarnings": false
+    },
+    "GenerateKey" : true
+  },
   "properties": {
     "id": {
       "type": "String",
       "required": true,
-      "length": 16,
+      "length": 36,
       "precision": null,
       "scale": null,
-      "id": 1,
+      "id": true,
+      "defaultFn": "uuidv4",
       "mysql": {
         "columnName": "id",
         "dataType": "varchar",
-        "dataLength": 16,
+        "dataLength": 36,
         "dataPrecision": null,
         "dataScale": null,
         "nullable": "N"
@@ -44,13 +55,13 @@
     "devoteeId": {
       "type": "String",
       "required": true,
-      "length": 16,
+      "length": 36,
       "precision": null,
       "scale": null,
       "mysql": {
         "columnName": "devotee-id",
         "dataType": "varchar",
-        "dataLength": 16,
+        "dataLength": 36,
         "dataPrecision": null,
         "dataScale": null,
         "nullable": "N"
@@ -72,15 +83,14 @@
       }
     },
     "paymentModeMasterId": {
-      "type": "Number",
+      "type": "String",
       "required": true,
-      "length": null,
-      "precision": 5,
+      "length": 36,
       "scale": 0,
       "mysql": {
         "columnName": "payment-mode-master-id",
-        "dataType": "smallint",
-        "dataLength": null,
+        "dataType": "varchar",
+        "dataLength": 16,
         "dataPrecision": 5,
         "dataScale": 0,
         "nullable": "N"
@@ -104,13 +114,13 @@
     "donationTypeMasterId": {
       "type": "String",
       "required": true,
-      "length": 16,
+      "length": 36,
       "precision": null,
       "scale": null,
       "mysql": {
         "columnName": "donation-type-master-id",
         "dataType": "varchar",
-        "dataLength": 16,
+        "dataLength": 36,
         "dataPrecision": null,
         "dataScale": null,
         "nullable": "N"

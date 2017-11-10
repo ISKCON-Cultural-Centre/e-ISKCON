@@ -15,18 +15,30 @@
       }
     }
   },
+
+  "mixins": {
+    "TimeStamp" : {
+      "createdAt" : "created-on",
+      "updatedAt" : "updated-on",
+      "required" : false,
+      "validateUpsert": true,
+      "silenceWarnings": false
+    },
+    "GenerateKey" : true
+  },
   "properties": {
     "id": {
       "type": "String",
       "required": true,
-      "length": 16,
+      "length": 36,
       "precision": null,
       "scale": null,
-      "id": 1,
+      "id": true,
+
       "mysql": {
         "columnName": "id",
         "dataType": "varchar",
-        "dataLength": 16,
+        "dataLength": 36,
         "dataPrecision": null,
         "dataScale": null,
         "nullable": "N"
@@ -62,14 +74,14 @@
         "nullable": "Y"
       }
     },
-    "sex": {
+    "gender": {
       "type": "Boolean",
       "required": true,
       "length": 1,
       "precision": null,
       "scale": null,
       "mysql": {
-        "columnName": "sex",
+        "columnName": "gender",
         "dataType": "char",
         "dataLength": 1,
         "dataPrecision": null,
@@ -227,31 +239,16 @@
         "nullable": "N"
       }
     },
-    "createdDate": {
-      "type": "Date",
-      "required": true,
-      "length": null,
-      "precision": null,
-      "scale": null,
-      "mysql": {
-        "columnName": "created-date",
-        "dataType": "date",
-        "dataLength": null,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "N"
-      }
-    },
     "spiritualLevelMasterId": {
       "type": "String",
       "required": true,
-      "length": 16,
+      "length": 36,
       "precision": null,
       "scale": null,
       "mysql": {
         "columnName": "spiritual-level-master-id",
         "dataType": "varchar",
-        "dataLength": 16,
+        "dataLength": 36,
         "dataPrecision": null,
         "dataScale": null,
         "nullable": "N"
