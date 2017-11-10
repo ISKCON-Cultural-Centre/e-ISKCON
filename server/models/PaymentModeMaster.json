@@ -10,16 +10,17 @@
   },
   "properties": {
     "id": {
-      "type": "Number",
+      "type": "String",
       "required": true,
-      "length": null,
+      "length": 36,
       "precision": 5,
       "scale": 0,
-      "id": 1,
+      "id": true,
+      "defaultFn": "uuidv4",
       "mysql": {
         "columnName": "id",
-        "dataType": "smallint",
-        "dataLength": null,
+        "dataType": "varchar",
+        "dataLength": 36,
         "dataPrecision": 5,
         "dataScale": 0,
         "nullable": "N"

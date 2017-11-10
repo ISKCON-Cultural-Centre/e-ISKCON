@@ -15,18 +15,20 @@
       }
     }
   },
+  "forceId": true,  
   "properties": {
     "id": {
       "type": "String",
       "required": true,
-      "length": 16,
+      "length": 36,
       "precision": null,
       "scale": null,
-      "id": 1,
+      "id": true,
+      "defaultFn": "uuidv4",
       "mysql": {
         "columnName": "id",
         "dataType": "varchar",
-        "dataLength": 16,
+        "dataLength": 36,
         "dataPrecision": null,
         "dataScale": null,
         "nullable": "N"
@@ -245,13 +247,13 @@
     "spiritualLevelMasterId": {
       "type": "String",
       "required": true,
-      "length": 16,
+      "length": 36,
       "precision": null,
       "scale": null,
       "mysql": {
         "columnName": "spiritual-level-master-id",
         "dataType": "varchar",
-        "dataLength": 16,
+        "dataLength": 36,
         "dataPrecision": null,
         "dataScale": null,
         "nullable": "N"
