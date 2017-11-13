@@ -19,7 +19,6 @@ export class NavgationComponent implements OnInit {
 
     this.router.events
       .subscribe((route) => {
-        debugger;
         this.isLogin = (route as NavigationEnd).url.match('/login') !== null ||
           (route as NavigationEnd).url.match('/reset') !== null;
       });
