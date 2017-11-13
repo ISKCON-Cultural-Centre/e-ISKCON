@@ -5,7 +5,7 @@ import {FormControl, Validators} from '@angular/forms';
 import { SDKToken, DevoteeApi } from '../../../shared/sdk';
 import { AuthService } from '../../../services/auth.service';
 
-const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+const USERNAME_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 const PASSWORD_REGEX = /^[a-zA-Z0-9!#$%&’]$/;
 
 @Component({
@@ -18,14 +18,13 @@ export class LoginComponent implements OnInit {
   private state: String = 'login';
 
   constructor(
-    private userApi: DevoteeApi,
+    private devoteeApi: DevoteeApi,
     private authService: AuthService,
     private router: Router) {
   }
 
-  emailFormControl = new FormControl('', [
-    Validators.required,
-    Validators.pattern(EMAIL_REGEX)]);
+  userNameFormControl = new FormControl('', [
+    Validators.required]);
 
   passwordFormControl = new FormControl('', [
     Validators.required,
@@ -37,9 +36,10 @@ export class LoginComponent implements OnInit {
     this.state = state;
   }
 
-  login(email, password) {
-    this.userApi.login({ email: email.value, password: password.value })
+  login(userName, password) {
+    this.devoteeApi.login({ username: userName.value, password: password.value })
     .subscribe((token: SDKToken) => {
+      console.log(token);
       this.authService.setUser(token);
       this.router.navigate(['/']);
     }, err => {
@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
       return alert('Passwords must match!');
     }
 
-    this.userApi.create({
+    this.devoteeApi.create({
       username: username.value,
       email: email.value,
       password: password.value,
@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit {
   }
 
   resetPassword(email) {
-    this.userApi.resetPassword({
+    this.devoteeApi.resetPassword({
       email: email.value
     }).subscribe((res) => {
       console.log('Restted!', res);
