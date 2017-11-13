@@ -48,14 +48,6 @@
     "dataSource": "mysqld",
     "public": true
   },
-  "Circle": {
-    "dataSource": "mysqld",
-    "public": true
-  },
-  "CircleDevotee": {
-    "dataSource": "mysqld",
-    "public": true
-  },
   "DeekshaGuru": {
     "dataSource": "mysqld",
     "public": true
@@ -121,6 +113,22 @@
     "public": true
   },
   "TempleBranch": {
+    "dataSource": "mysqld",
+    "public": true
+  },
+  "ElectronicAddress": {
+    "dataSource": "mysqld",
+    "public": true
+  },
+  "ElectronicAddressTypeMaster": {
+    "dataSource": "mysqld",
+    "public": true
+  },
+  "PhysicalAddress": {
+    "dataSource": "mysqld",
+    "public": true
+  },
+  "PhysicalAddressTypeMaster": {
     "dataSource": "mysqld",
     "public": true
   }

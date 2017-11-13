@@ -1,30 +1,37 @@
 /* tslint:disable */
+import {
+  PhysicalAddress
+} from '../index';
 
 declare var Object: any;
 export interface TempleInterface {
   "id": string;
   "name": string;
-  "addressLine1": string;
-  "addressLine2": string;
-  "addressArea": string;
-  "addressCity": string;
-  "addressCountry": string;
-  "addressPin": string;
   "contactNumber": string;
   "contactName": string;
+  "createdOn"?: Date;
+  "updatedOn"?: Date;
+  "createdBy"?: string;
+  "updatedBy"?: string;
+  "physicalAddressId": string;
+  "created-on"?: Date;
+  "updated-on"?: Date;
+  fkTemplePhysicalAddress1rel?: PhysicalAddress;
 }
 
 export class Temple implements TempleInterface {
   "id": string;
   "name": string;
-  "addressLine1": string;
-  "addressLine2": string;
-  "addressArea": string;
-  "addressCity": string;
-  "addressCountry": string;
-  "addressPin": string;
   "contactNumber": string;
   "contactName": string;
+  "createdOn": Date;
+  "updatedOn": Date;
+  "createdBy": string;
+  "updatedBy": string;
+  "physicalAddressId": string;
+  "created-on": Date;
+  "updated-on": Date;
+  fkTemplePhysicalAddress1rel: PhysicalAddress;
   constructor(data?: TempleInterface) {
     Object.assign(this, data);
   }
@@ -56,7 +63,6 @@ export class Temple implements TempleInterface {
       name: 'Temple',
       plural: 'Temples',
       path: 'Temples',
-      idName: 'id',
       properties: {
         "id": {
           name: 'id',
@@ -64,30 +70,6 @@ export class Temple implements TempleInterface {
         },
         "name": {
           name: 'name',
-          type: 'string'
-        },
-        "addressLine1": {
-          name: 'addressLine1',
-          type: 'string'
-        },
-        "addressLine2": {
-          name: 'addressLine2',
-          type: 'string'
-        },
-        "addressArea": {
-          name: 'addressArea',
-          type: 'string'
-        },
-        "addressCity": {
-          name: 'addressCity',
-          type: 'string'
-        },
-        "addressCountry": {
-          name: 'addressCountry',
-          type: 'string'
-        },
-        "addressPin": {
-          name: 'addressPin',
           type: 'string'
         },
         "contactNumber": {
@@ -98,8 +80,41 @@ export class Temple implements TempleInterface {
           name: 'contactName',
           type: 'string'
         },
+        "createdOn": {
+          name: 'createdOn',
+          type: 'Date'
+        },
+        "updatedOn": {
+          name: 'updatedOn',
+          type: 'Date'
+        },
+        "createdBy": {
+          name: 'createdBy',
+          type: 'string'
+        },
+        "updatedBy": {
+          name: 'updatedBy',
+          type: 'string'
+        },
+        "physicalAddressId": {
+          name: 'physicalAddressId',
+          type: 'string'
+        },
+        "created-on": {
+          name: 'created-on',
+          type: 'Date'
+        },
+        "updated-on": {
+          name: 'updated-on',
+          type: 'Date'
+        },
       },
       relations: {
+        fkTemplePhysicalAddress1rel: {
+          name: 'fkTemplePhysicalAddress1rel',
+          type: 'PhysicalAddress',
+          model: 'PhysicalAddress'
+        },
       }
     }
   }

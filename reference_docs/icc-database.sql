@@ -49,23 +49,106 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `icc`.`circle`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `icc`.`circle` (
+  `id` VARCHAR(36) NOT NULL,
+  `name` VARCHAR(100) NULL,
+  `created-on` DATETIME NULL DEFAULT NULL,
+  `updated-on` DATETIME NULL DEFAULT NULL,
+  `created-by` VARCHAR(36) NULL DEFAULT NULL,
+  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `icc`.`physical-address-type-master`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `icc`.`physical-address-type-master` (
+  `id` VARCHAR(36) NOT NULL,
+  `address-type` VARCHAR(50) NOT NULL,
+  `created-on` DATETIME NULL DEFAULT NULL,
+  `updated-on` DATETIME NULL DEFAULT NULL,
+  `created-by` VARCHAR(36) NULL DEFAULT NULL,
+  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `icc`.`physical-address`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `icc`.`physical-address` (
+  `id` VARCHAR(36) NOT NULL,
+  `address-type-master-id` VARCHAR(36) NOT NULL,
+  `address-line-1` VARCHAR(100) NOT NULL,
+  `address-line-2` VARCHAR(100) NOT NULL,
+  `address-area` VARCHAR(100) NOT NULL,
+  `address-city` VARCHAR(100) NOT NULL,
+  `address-country` VARCHAR(100) NOT NULL,
+  `address-pin` VARCHAR(10) NOT NULL,
+  `created-on` DATETIME NULL DEFAULT NULL,
+  `updated-on` DATETIME NULL DEFAULT NULL,
+  `created-by` VARCHAR(36) NULL DEFAULT NULL,
+  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_physical-address_address-type-master1_idx` (`address-type-master-id` ASC),
+  CONSTRAINT `fk_physical-address_address-type-master1`
+    FOREIGN KEY (`address-type-master-id`)
+    REFERENCES `icc`.`physical-address-type-master` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `icc`.`electronic-address-type-master`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `icc`.`electronic-address-type-master` (
+  `id` VARCHAR(36) NOT NULL,
+  `name` VARCHAR(50) NULL,
+  `created-on` DATETIME NULL DEFAULT NULL,
+  `updated-on` DATETIME NULL DEFAULT NULL,
+  `created-by` VARCHAR(36) NULL DEFAULT NULL,
+  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `icc`.`electronic-address`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `icc`.`electronic-address` (
+  `id` VARCHAR(36) NOT NULL,
+  `electronic-address-type-master-id` VARCHAR(36) NOT NULL,
+  `electronic-address` VARCHAR(50) NOT NULL,
+  `created-on` DATETIME NULL DEFAULT NULL,
+  `updated-on` DATETIME NULL DEFAULT NULL,
+  `created-by` VARCHAR(36) NULL DEFAULT NULL,
+  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_electronic-address_electronic-address-type-master1_idx` (`electronic-address-type-master-id` ASC),
+  CONSTRAINT `fk_electronic-address_electronic-address-type-master1`
+    FOREIGN KEY (`electronic-address-type-master-id`)
+    REFERENCES `icc`.`electronic-address-type-master` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `icc`.`devotee`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `icc`.`devotee` (
   `id` VARCHAR(36) NOT NULL,
   `legal-name` VARCHAR(100) NOT NULL,
   `spiritual-name` VARCHAR(100) NULL DEFAULT NULL,
-  `gender` CHAR(1) NOT NULL,
-  `contact-number` VARCHAR(20) NULL DEFAULT NULL,
-  `alt-contact-number` VARCHAR(20) NULL DEFAULT NULL,
-  `email-id` VARCHAR(100) NULL DEFAULT NULL,
+  `circle-id` VARCHAR(36) NULL,
+  `gender` CHAR(1) NOT NULL DEFAULT 'M',
+  `physical-address-id` VARCHAR(36) NULL,
+  `electronic-address-id` VARCHAR(36) NULL,
   `shiksha-level` VARCHAR(100) NULL DEFAULT NULL,
-  `address-line-1` VARCHAR(255) NULL DEFAULT NULL,
-  `address-line-2` VARCHAR(100) NULL DEFAULT NULL,
-  `address-area` VARCHAR(50) NULL DEFAULT NULL,
-  `address-city` VARCHAR(50) NULL DEFAULT NULL,
-  `address-pin` VARCHAR(10) NULL DEFAULT NULL,
-  `source` VARCHAR(100) NOT NULL,
   `spiritual-level-master-id` VARCHAR(36) NOT NULL,
   `realm` VARCHAR(512) NULL DEFAULT NULL,
   `username` VARCHAR(512) NULL DEFAULT NULL,
@@ -80,9 +163,27 @@ CREATE TABLE IF NOT EXISTS `icc`.`devotee` (
   PRIMARY KEY (`id`),
   INDEX `fk_devotee_id_idx` (`id` ASC),
   INDEX `fk_devotee_spiritual-level-master1_idx` (`spiritual-level-master-id` ASC),
+  INDEX `fk_devotee_circle1_idx` (`circle-id` ASC),
+  INDEX `fk_devotee_physical-address1_idx` (`physical-address-id` ASC),
+  INDEX `fk_devotee_electronic-address1_idx` (`electronic-address-id` ASC),
   CONSTRAINT `fk_devotee_spiritual-level-master1`
     FOREIGN KEY (`spiritual-level-master-id`)
     REFERENCES `icc`.`spiritual-level-master` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_devotee_circle1`
+    FOREIGN KEY (`circle-id`)
+    REFERENCES `icc`.`circle` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_devotee_physical-address1`
+    FOREIGN KEY (`physical-address-id`)
+    REFERENCES `icc`.`physical-address` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_devotee_electronic-address1`
+    FOREIGN KEY (`electronic-address-id`)
+    REFERENCES `icc`.`electronic-address` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -161,31 +262,6 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `icc`.`new-contact`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `icc`.`new-contact` (
-  `id` VARCHAR(36) NOT NULL,
-  `name` VARCHAR(255) NULL DEFAULT NULL,
-  `addressLine1` VARCHAR(255) NULL DEFAULT NULL,
-  `addressArea` VARCHAR(255) NULL DEFAULT NULL,
-  `addressCity` VARCHAR(255) NULL DEFAULT NULL,
-  `addressPin` VARCHAR(20) NULL DEFAULT NULL,
-  `phone` VARCHAR(20) NULL DEFAULT NULL,
-  `email` VARCHAR(100) NULL DEFAULT NULL,
-  `reference` VARCHAR(100) NULL DEFAULT NULL,
-  `comments` VARCHAR(45) NULL DEFAULT NULL,
-  `altPhone` VARCHAR(45) NULL DEFAULT NULL,
-  `created-on` DATETIME NULL DEFAULT NULL,
-  `updated-on` DATETIME NULL DEFAULT NULL,
-  `created-by` VARCHAR(36) NULL DEFAULT NULL,
-  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB
-AUTO_INCREMENT = 987
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
 -- Table `icc`.`outreach-master`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `icc`.`outreach-master` (
@@ -206,19 +282,20 @@ DEFAULT CHARACTER SET = utf8;
 CREATE TABLE IF NOT EXISTS `icc`.`temple` (
   `id` VARCHAR(36) NOT NULL,
   `name` VARCHAR(100) NOT NULL,
-  `address-line-1` VARCHAR(100) NOT NULL,
-  `address-line-2` VARCHAR(100) NOT NULL,
-  `address-area` VARCHAR(100) NOT NULL,
-  `address-city` VARCHAR(100) NOT NULL,
-  `address-country` VARCHAR(100) NOT NULL,
-  `address-pin` VARCHAR(10) NOT NULL,
   `contact-number` VARCHAR(20) NOT NULL,
   `contact-name` VARCHAR(50) NOT NULL,
   `created-on` DATETIME NULL DEFAULT NULL,
   `updated-on` DATETIME NULL DEFAULT NULL,
   `created-by` VARCHAR(36) NULL DEFAULT NULL,
   `updated-by` VARCHAR(36) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`))
+  `physical-address-id` VARCHAR(36) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_temple_physical-address1_idx` (`physical-address-id` ASC),
+  CONSTRAINT `fk_temple_physical-address1`
+    FOREIGN KEY (`physical-address-id`)
+    REFERENCES `icc`.`physical-address` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -229,12 +306,7 @@ CREATE TABLE IF NOT EXISTS `icc`.`temple-branch` (
   `id` VARCHAR(36) NOT NULL,
   `name` VARCHAR(100) NOT NULL,
   `temple-id` VARCHAR(16) NOT NULL,
-  `address-line-1` VARCHAR(100) NOT NULL,
-  `address-line-2` VARCHAR(100) NOT NULL,
-  `address-area` VARCHAR(100) NOT NULL,
-  `address-city` VARCHAR(100) NOT NULL,
-  `address-country` VARCHAR(100) NOT NULL,
-  `address-pin` VARCHAR(10) NOT NULL,
+  `physical-address-id` VARCHAR(36) NOT NULL,
   `contact-number` VARCHAR(20) NOT NULL,
   `contact-name` VARCHAR(50) NOT NULL,
   `created-on` DATETIME NULL DEFAULT NULL,
@@ -243,9 +315,15 @@ CREATE TABLE IF NOT EXISTS `icc`.`temple-branch` (
   `updated-by` VARCHAR(36) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_temple-branch_temple1_idx` (`temple-id` ASC),
+  INDEX `fk_temple-branch_physical-address1_idx` (`physical-address-id` ASC),
   CONSTRAINT `fk_temple-branch_temple1`
     FOREIGN KEY (`temple-id`)
     REFERENCES `icc`.`temple` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_temple-branch_physical-address1`
+    FOREIGN KEY (`physical-address-id`)
+    REFERENCES `icc`.`physical-address` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -279,45 +357,6 @@ CREATE TABLE IF NOT EXISTS `icc`.`acl` (
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
-
-
--- -----------------------------------------------------
--- Table `icc`.`circle`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `icc`.`circle` (
-  `id` VARCHAR(36) NOT NULL,
-  `name` VARCHAR(100) NULL,
-  `created-on` DATETIME NULL DEFAULT NULL,
-  `updated-on` DATETIME NULL DEFAULT NULL,
-  `created-by` VARCHAR(36) NULL DEFAULT NULL,
-  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `icc`.`circle-devotee`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `icc`.`circle-devotee` (
-  `circle_id` VARCHAR(36) NOT NULL,
-  `devotee_id` VARCHAR(36) NOT NULL,
-  `created-on` DATETIME NULL DEFAULT NULL,
-  `updated-on` DATETIME NULL DEFAULT NULL,
-  `created-by` VARCHAR(36) NULL DEFAULT NULL,
-  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
-  PRIMARY KEY (`circle_id`, `devotee_id`),
-  INDEX `fk_circle-devotee_devotee1_idx` (`devotee_id` ASC),
-  CONSTRAINT `fk_circle-devotee_circle1`
-    FOREIGN KEY (`circle_id`)
-    REFERENCES `icc`.`circle` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_circle-devotee_devotee1`
-    FOREIGN KEY (`devotee_id`)
-    REFERENCES `icc`.`devotee` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -510,6 +549,36 @@ CREATE TABLE IF NOT EXISTS `icc`.`devotee-event-calendar` (
   CONSTRAINT `fk_devotee-event-calendar_event-master1`
     FOREIGN KEY (`event-master-id`)
     REFERENCES `icc`.`event-master` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `icc`.`new-contact`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `icc`.`new-contact` (
+  `id` VARCHAR(36) NOT NULL,
+  `name` VARCHAR(255) NOT NULL,
+  `physical-address-id` VARCHAR(36) NOT NULL,
+  `electronic-address-id` VARCHAR(36) NOT NULL,
+  `reference` VARCHAR(100) NULL DEFAULT NULL,
+  `comments` VARCHAR(45) NULL DEFAULT NULL,
+  `created-on` DATETIME NULL DEFAULT NULL,
+  `updated-on` DATETIME NULL DEFAULT NULL,
+  `created-by` VARCHAR(36) NULL DEFAULT NULL,
+  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_table1_physical-address1_idx` (`physical-address-id` ASC),
+  INDEX `fk_table1_electronic-address1_idx` (`electronic-address-id` ASC),
+  CONSTRAINT `fk_table1_physical-address1`
+    FOREIGN KEY (`physical-address-id`)
+    REFERENCES `icc`.`physical-address` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_table1_electronic-address1`
+    FOREIGN KEY (`electronic-address-id`)
+    REFERENCES `icc`.`electronic-address` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

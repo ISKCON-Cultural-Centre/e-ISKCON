@@ -2,7 +2,6 @@
 export * from './RoleMapping';
 export * from './Role';
 export * from './Circle';
-export * from './CircleDevotee';
 export * from './DeekshaGuru';
 export * from './Devotee';
 export * from './DevoteeEventCalendar';
@@ -20,5 +19,9 @@ export * from './RelationshipMaster';
 export * from './SpiritualLevelMaster';
 export * from './Temple';
 export * from './TempleBranch';
+export * from './ElectronicAddress';
+export * from './ElectronicAddressTypeMaster';
+export * from './PhysicalAddress';
+export * from './PhysicalAddressTypeMaster';
 export * from './SDKModels';
 export * from './logger.service';

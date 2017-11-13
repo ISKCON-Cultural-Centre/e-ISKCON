@@ -8,6 +8,12 @@ export interface DevoteeSpiritualFamilyInterface {
   "id": string;
   "devoteeId": string;
   "guidingDevoteeId": string;
+  "createdOn"?: Date;
+  "updatedOn"?: Date;
+  "createdBy"?: string;
+  "updatedBy"?: string;
+  "created-on"?: Date;
+  "updated-on"?: Date;
   fkDevoteeSpiritualFamilyDevotee1rel?: Devotee;
   fkDevoteeSpiritualFamilyDevotee2rel?: Devotee;
 }
@@ -16,6 +22,12 @@ export class DevoteeSpiritualFamily implements DevoteeSpiritualFamilyInterface {
   "id": string;
   "devoteeId": string;
   "guidingDevoteeId": string;
+  "createdOn": Date;
+  "updatedOn": Date;
+  "createdBy": string;
+  "updatedBy": string;
+  "created-on": Date;
+  "updated-on": Date;
   fkDevoteeSpiritualFamilyDevotee1rel: Devotee;
   fkDevoteeSpiritualFamilyDevotee2rel: Devotee;
   constructor(data?: DevoteeSpiritualFamilyInterface) {
@@ -49,7 +61,6 @@ export class DevoteeSpiritualFamily implements DevoteeSpiritualFamilyInterface {
       name: 'DevoteeSpiritualFamily',
       plural: 'DevoteeSpiritualFamilies',
       path: 'DevoteeSpiritualFamilies',
-      idName: 'id',
       properties: {
         "id": {
           name: 'id',
@@ -63,23 +74,41 @@ export class DevoteeSpiritualFamily implements DevoteeSpiritualFamilyInterface {
           name: 'guidingDevoteeId',
           type: 'string'
         },
+        "createdOn": {
+          name: 'createdOn',
+          type: 'Date'
+        },
+        "updatedOn": {
+          name: 'updatedOn',
+          type: 'Date'
+        },
+        "createdBy": {
+          name: 'createdBy',
+          type: 'string'
+        },
+        "updatedBy": {
+          name: 'updatedBy',
+          type: 'string'
+        },
+        "created-on": {
+          name: 'created-on',
+          type: 'Date'
+        },
+        "updated-on": {
+          name: 'updated-on',
+          type: 'Date'
+        },
       },
       relations: {
         fkDevoteeSpiritualFamilyDevotee1rel: {
           name: 'fkDevoteeSpiritualFamilyDevotee1rel',
           type: 'Devotee',
-          model: 'Devotee',
-          relationType: 'belongsTo',
-                  keyFrom: 'devoteeId',
-          keyTo: 'id'
+          model: 'Devotee'
         },
         fkDevoteeSpiritualFamilyDevotee2rel: {
           name: 'fkDevoteeSpiritualFamilyDevotee2rel',
           type: 'Devotee',
-          model: 'Devotee',
-          relationType: 'belongsTo',
-                  keyFrom: 'guidingDevoteeId',
-          keyTo: 'id'
+          model: 'Devotee'
         },
       }
     }

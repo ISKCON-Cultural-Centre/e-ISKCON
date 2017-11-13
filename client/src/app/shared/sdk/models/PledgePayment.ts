@@ -11,6 +11,12 @@ export interface PledgePaymentInterface {
   "paymentId": string;
   "pledgeDate"?: Date;
   "pledgeId": string;
+  "createdOn"?: Date;
+  "updatedOn"?: Date;
+  "createdBy"?: string;
+  "updatedBy"?: string;
+  "created-on"?: Date;
+  "updated-on"?: Date;
   fkPledgePaymentPayment1rel?: Payment;
   fkPledgePaymentPledge1rel?: Pledge;
 }
@@ -21,6 +27,12 @@ export class PledgePayment implements PledgePaymentInterface {
   "paymentId": string;
   "pledgeDate": Date;
   "pledgeId": string;
+  "createdOn": Date;
+  "updatedOn": Date;
+  "createdBy": string;
+  "updatedBy": string;
+  "created-on": Date;
+  "updated-on": Date;
   fkPledgePaymentPayment1rel: Payment;
   fkPledgePaymentPledge1rel: Pledge;
   constructor(data?: PledgePaymentInterface) {
@@ -54,7 +66,6 @@ export class PledgePayment implements PledgePaymentInterface {
       name: 'PledgePayment',
       plural: 'PledgePayments',
       path: 'PledgePayments',
-      idName: 'id',
       properties: {
         "id": {
           name: 'id',
@@ -76,23 +87,41 @@ export class PledgePayment implements PledgePaymentInterface {
           name: 'pledgeId',
           type: 'string'
         },
+        "createdOn": {
+          name: 'createdOn',
+          type: 'Date'
+        },
+        "updatedOn": {
+          name: 'updatedOn',
+          type: 'Date'
+        },
+        "createdBy": {
+          name: 'createdBy',
+          type: 'string'
+        },
+        "updatedBy": {
+          name: 'updatedBy',
+          type: 'string'
+        },
+        "created-on": {
+          name: 'created-on',
+          type: 'Date'
+        },
+        "updated-on": {
+          name: 'updated-on',
+          type: 'Date'
+        },
       },
       relations: {
         fkPledgePaymentPayment1rel: {
           name: 'fkPledgePaymentPayment1rel',
           type: 'Payment',
-          model: 'Payment',
-          relationType: 'belongsTo',
-                  keyFrom: 'paymentId',
-          keyTo: 'id'
+          model: 'Payment'
         },
         fkPledgePaymentPledge1rel: {
           name: 'fkPledgePaymentPledge1rel',
           type: 'Pledge',
-          model: 'Pledge',
-          relationType: 'belongsTo',
-                  keyFrom: 'pledgeId',
-          keyTo: 'id'
+          model: 'Pledge'
         },
       }
     }

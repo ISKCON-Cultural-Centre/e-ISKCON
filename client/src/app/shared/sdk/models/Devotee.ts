@@ -1,6 +1,9 @@
 /* tslint:disable */
 import {
-  SpiritualLevelMaster
+  Circle,
+  SpiritualLevelMaster,
+  ElectronicAddress,
+  PhysicalAddress
 } from '../index';
 
 declare var Object: any;
@@ -8,18 +11,11 @@ export interface DevoteeInterface {
   "id": string;
   "legalName": string;
   "spiritualName"?: string;
-  "sex": boolean;
-  "contactNumber"?: string;
-  "altContactNumber"?: string;
-  "emailId"?: string;
+  "circleId"?: string;
+  "gender": boolean;
+  "physicalAddressId"?: string;
+  "electronicAddressId"?: string;
   "shikshaLevel"?: string;
-  "addressLine1"?: string;
-  "addressLine2"?: string;
-  "addressArea"?: string;
-  "addressCity"?: string;
-  "addressPin"?: string;
-  "source": string;
-  "createdDate": Date;
   "spiritualLevelMasterId": string;
   "realm"?: string;
   "username"?: string;
@@ -27,25 +23,21 @@ export interface DevoteeInterface {
   "emailVerified"?: boolean;
   "password"?: string;
   accessTokens?: any[];
+  fkDevoteeCircle1rel?: Circle;
   fkDevoteeSpiritualLevelMaster1rel?: SpiritualLevelMaster;
+  fkDevoteeElectronicAddress1rel?: ElectronicAddress;
+  fkDevoteePhysicalAddress1rel?: PhysicalAddress;
 }
 
 export class Devotee implements DevoteeInterface {
   "id": string;
   "legalName": string;
   "spiritualName": string;
-  "sex": boolean;
-  "contactNumber": string;
-  "altContactNumber": string;
-  "emailId": string;
+  "circleId": string;
+  "gender": boolean;
+  "physicalAddressId": string;
+  "electronicAddressId": string;
   "shikshaLevel": string;
-  "addressLine1": string;
-  "addressLine2": string;
-  "addressArea": string;
-  "addressCity": string;
-  "addressPin": string;
-  "source": string;
-  "createdDate": Date;
   "spiritualLevelMasterId": string;
   "realm": string;
   "username": string;
@@ -53,7 +45,10 @@ export class Devotee implements DevoteeInterface {
   "emailVerified": boolean;
   "password": string;
   accessTokens: any[];
+  fkDevoteeCircle1rel: Circle;
   fkDevoteeSpiritualLevelMaster1rel: SpiritualLevelMaster;
+  fkDevoteeElectronicAddress1rel: ElectronicAddress;
+  fkDevoteePhysicalAddress1rel: PhysicalAddress;
   constructor(data?: DevoteeInterface) {
     Object.assign(this, data);
   }
@@ -85,7 +80,6 @@ export class Devotee implements DevoteeInterface {
       name: 'Devotee',
       plural: 'Devotees',
       path: 'Devotees',
-      idName: 'id',
       properties: {
         "id": {
           name: 'id',
@@ -99,53 +93,25 @@ export class Devotee implements DevoteeInterface {
           name: 'spiritualName',
           type: 'string'
         },
-        "sex": {
-          name: 'sex',
+        "circleId": {
+          name: 'circleId',
+          type: 'string'
+        },
+        "gender": {
+          name: 'gender',
           type: 'boolean'
         },
-        "contactNumber": {
-          name: 'contactNumber',
+        "physicalAddressId": {
+          name: 'physicalAddressId',
           type: 'string'
         },
-        "altContactNumber": {
-          name: 'altContactNumber',
-          type: 'string'
-        },
-        "emailId": {
-          name: 'emailId',
+        "electronicAddressId": {
+          name: 'electronicAddressId',
           type: 'string'
         },
         "shikshaLevel": {
           name: 'shikshaLevel',
           type: 'string'
-        },
-        "addressLine1": {
-          name: 'addressLine1',
-          type: 'string'
-        },
-        "addressLine2": {
-          name: 'addressLine2',
-          type: 'string'
-        },
-        "addressArea": {
-          name: 'addressArea',
-          type: 'string'
-        },
-        "addressCity": {
-          name: 'addressCity',
-          type: 'string'
-        },
-        "addressPin": {
-          name: 'addressPin',
-          type: 'string'
-        },
-        "source": {
-          name: 'source',
-          type: 'string'
-        },
-        "createdDate": {
-          name: 'createdDate',
-          type: 'Date'
         },
         "spiritualLevelMasterId": {
           name: 'spiritualLevelMasterId',
@@ -176,18 +142,27 @@ export class Devotee implements DevoteeInterface {
         accessTokens: {
           name: 'accessTokens',
           type: 'any[]',
-          model: '',
-          relationType: 'hasMany',
-                  keyFrom: 'id',
-          keyTo: 'userId'
+          model: ''
+        },
+        fkDevoteeCircle1rel: {
+          name: 'fkDevoteeCircle1rel',
+          type: 'Circle',
+          model: 'Circle'
         },
         fkDevoteeSpiritualLevelMaster1rel: {
           name: 'fkDevoteeSpiritualLevelMaster1rel',
           type: 'SpiritualLevelMaster',
-          model: 'SpiritualLevelMaster',
-          relationType: 'belongsTo',
-                  keyFrom: 'spiritualLevelMasterId',
-          keyTo: 'id'
+          model: 'SpiritualLevelMaster'
+        },
+        fkDevoteeElectronicAddress1rel: {
+          name: 'fkDevoteeElectronicAddress1rel',
+          type: 'ElectronicAddress',
+          model: 'ElectronicAddress'
+        },
+        fkDevoteePhysicalAddress1rel: {
+          name: 'fkDevoteePhysicalAddress1rel',
+          type: 'PhysicalAddress',
+          model: 'PhysicalAddress'
         },
       }
     }

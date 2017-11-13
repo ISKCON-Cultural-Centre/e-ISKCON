@@ -17,7 +17,7 @@
         "type": "belongsTo",
         "foreignKey": "donationTypeMasterId"
       },
-      "fkPaymentPaymentModeMaster2rel": {
+      "fkPaymentPaymentModeMaster1rel": {
         "model": "PaymentModeMaster",
         "type": "belongsTo",
         "foreignKey": "paymentModeMasterId"
@@ -41,8 +41,7 @@
       "length": 36,
       "precision": null,
       "scale": null,
-      "id": true,
-      "defaultFn": "uuidv4",
+      "id": 1,
       "mysql": {
         "columnName": "id",
         "dataType": "varchar",
@@ -82,20 +81,6 @@
         "nullable": "N"
       }
     },
-    "paymentModeMasterId": {
-      "type": "String",
-      "required": true,
-      "length": 36,
-      "scale": 0,
-      "mysql": {
-        "columnName": "payment-mode-master-id",
-        "dataType": "varchar",
-        "dataLength": 16,
-        "dataPrecision": 5,
-        "dataScale": 0,
-        "nullable": "N"
-      }
-    },
     "paymentRefNumber": {
       "type": "String",
       "required": false,
@@ -124,6 +109,81 @@
         "dataPrecision": null,
         "dataScale": null,
         "nullable": "N"
+      }
+    },
+    "paymentModeMasterId": {
+      "type": "String",
+      "required": true,
+      "length": 36,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "payment-mode-master-id",
+        "dataType": "varchar",
+        "dataLength": 36,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "N"
+      }
+    },
+    "createdOn": {
+      "type": "Date",
+      "required": false,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "created-on",
+        "dataType": "datetime",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "Y"
+      }
+    },
+    "updatedOn": {
+      "type": "Date",
+      "required": false,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "updated-on",
+        "dataType": "datetime",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "Y"
+      }
+    },
+    "createdBy": {
+      "type": "String",
+      "required": false,
+      "length": 36,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "created-by",
+        "dataType": "varchar",
+        "dataLength": 36,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "Y"
+      }
+    },
+    "updatedBy": {
+      "type": "String",
+      "required": false,
+      "length": 36,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "updated-by",
+        "dataType": "varchar",
+        "dataLength": 36,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "Y"
       }
     }
   }

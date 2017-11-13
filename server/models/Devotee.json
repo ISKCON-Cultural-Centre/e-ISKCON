@@ -2,29 +2,33 @@
   "name": "Devotee",
   "options": {
     "idInjection": false,
-    "base": "User",
+
     "mysql": {
       "schema": "icc",
       "table": "devotee"
     },
     "relations": {
+      "fkDevoteeCircle1rel": {
+        "model": "Circle",
+        "type": "belongsTo",
+        "foreignKey": "circleId"
+      },
+      "fkDevoteeElectronicAddress1rel": {
+        "model": "ElectronicAddress",
+        "type": "belongsTo",
+        "foreignKey": "electronicAddressId"
+      },
+      "fkDevoteePhysicalAddress1rel": {
+        "model": "PhysicalAddress",
+        "type": "belongsTo",
+        "foreignKey": "physicalAddressId"
+      },
       "fkDevoteeSpiritualLevelMaster1rel": {
         "model": "SpiritualLevelMaster",
         "type": "belongsTo",
         "foreignKey": "spiritualLevelMasterId"
       }
     }
-  },
-
-  "mixins": {
-    "TimeStamp" : {
-      "createdAt" : "created-on",
-      "updatedAt" : "updated-on",
-      "required" : false,
-      "validateUpsert": true,
-      "silenceWarnings": false
-    },
-    "GenerateKey" : true
   },
   "properties": {
     "id": {
@@ -33,8 +37,7 @@
       "length": 36,
       "precision": null,
       "scale": null,
-      "id": true,
-
+      "id": 1,
       "mysql": {
         "columnName": "id",
         "dataType": "varchar",
@@ -74,6 +77,21 @@
         "nullable": "Y"
       }
     },
+    "circleId": {
+      "type": "String",
+      "required": false,
+      "length": 36,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "circle-id",
+        "dataType": "varchar",
+        "dataLength": 36,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "Y"
+      }
+    },
     "gender": {
       "type": "Boolean",
       "required": true,
@@ -89,46 +107,31 @@
         "nullable": "N"
       }
     },
-    "contactNumber": {
+    "physicalAddressId": {
       "type": "String",
       "required": false,
-      "length": 20,
+      "length": 36,
       "precision": null,
       "scale": null,
       "mysql": {
-        "columnName": "contact-number",
+        "columnName": "physical-address-id",
         "dataType": "varchar",
-        "dataLength": 20,
+        "dataLength": 36,
         "dataPrecision": null,
         "dataScale": null,
         "nullable": "Y"
       }
     },
-    "altContactNumber": {
+    "electronicAddressId": {
       "type": "String",
       "required": false,
-      "length": 20,
+      "length": 36,
       "precision": null,
       "scale": null,
       "mysql": {
-        "columnName": "alt-contact-number",
+        "columnName": "electronic-address-id",
         "dataType": "varchar",
-        "dataLength": 20,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "Y"
-      }
-    },
-    "emailId": {
-      "type": "String",
-      "required": false,
-      "length": 100,
-      "precision": null,
-      "scale": null,
-      "mysql": {
-        "columnName": "email-id",
-        "dataType": "varchar",
-        "dataLength": 100,
+        "dataLength": 36,
         "dataPrecision": null,
         "dataScale": null,
         "nullable": "Y"
@@ -147,96 +150,6 @@
         "dataPrecision": null,
         "dataScale": null,
         "nullable": "Y"
-      }
-    },
-    "addressLine1": {
-      "type": "String",
-      "required": false,
-      "length": 255,
-      "precision": null,
-      "scale": null,
-      "mysql": {
-        "columnName": "address-line-1",
-        "dataType": "varchar",
-        "dataLength": 255,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "Y"
-      }
-    },
-    "addressLine2": {
-      "type": "String",
-      "required": false,
-      "length": 100,
-      "precision": null,
-      "scale": null,
-      "mysql": {
-        "columnName": "address-line-2",
-        "dataType": "varchar",
-        "dataLength": 100,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "Y"
-      }
-    },
-    "addressArea": {
-      "type": "String",
-      "required": false,
-      "length": 50,
-      "precision": null,
-      "scale": null,
-      "mysql": {
-        "columnName": "address-area",
-        "dataType": "varchar",
-        "dataLength": 50,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "Y"
-      }
-    },
-    "addressCity": {
-      "type": "String",
-      "required": false,
-      "length": 50,
-      "precision": null,
-      "scale": null,
-      "mysql": {
-        "columnName": "address-city",
-        "dataType": "varchar",
-        "dataLength": 50,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "Y"
-      }
-    },
-    "addressPin": {
-      "type": "String",
-      "required": false,
-      "length": 10,
-      "precision": null,
-      "scale": null,
-      "mysql": {
-        "columnName": "address-pin",
-        "dataType": "varchar",
-        "dataLength": 10,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "Y"
-      }
-    },
-    "source": {
-      "type": "String",
-      "required": true,
-      "length": 100,
-      "precision": null,
-      "scale": null,
-      "mysql": {
-        "columnName": "source",
-        "dataType": "varchar",
-        "dataLength": 100,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "N"
       }
     },
     "spiritualLevelMasterId": {

@@ -1,32 +1,42 @@
 /* tslint:disable */
+import {
+  ElectronicAddress,
+  PhysicalAddress
+} from '../index';
 
 declare var Object: any;
 export interface NewContactInterface {
   "id": string;
-  "name"?: string;
-  "addressline1"?: string;
-  "addressarea"?: string;
-  "addresscity"?: string;
-  "addresspin"?: string;
-  "phone"?: string;
-  "email"?: string;
+  "name": string;
+  "physicalAddressId": string;
+  "electronicAddressId": string;
   "reference"?: string;
   "comments"?: string;
-  "altphone"?: string;
+  "createdOn"?: Date;
+  "updatedOn"?: Date;
+  "createdBy"?: string;
+  "updatedBy"?: string;
+  "created-on"?: Date;
+  "updated-on"?: Date;
+  fkTable1ElectronicAddress1rel?: ElectronicAddress;
+  fkTable1PhysicalAddress1rel?: PhysicalAddress;
 }
 
 export class NewContact implements NewContactInterface {
   "id": string;
   "name": string;
-  "addressline1": string;
-  "addressarea": string;
-  "addresscity": string;
-  "addresspin": string;
-  "phone": string;
-  "email": string;
+  "physicalAddressId": string;
+  "electronicAddressId": string;
   "reference": string;
   "comments": string;
-  "altphone": string;
+  "createdOn": Date;
+  "updatedOn": Date;
+  "createdBy": string;
+  "updatedBy": string;
+  "created-on": Date;
+  "updated-on": Date;
+  fkTable1ElectronicAddress1rel: ElectronicAddress;
+  fkTable1PhysicalAddress1rel: PhysicalAddress;
   constructor(data?: NewContactInterface) {
     Object.assign(this, data);
   }
@@ -58,7 +68,6 @@ export class NewContact implements NewContactInterface {
       name: 'NewContact',
       plural: 'NewContacts',
       path: 'NewContacts',
-      idName: 'id',
       properties: {
         "id": {
           name: 'id',
@@ -68,28 +77,12 @@ export class NewContact implements NewContactInterface {
           name: 'name',
           type: 'string'
         },
-        "addressline1": {
-          name: 'addressline1',
+        "physicalAddressId": {
+          name: 'physicalAddressId',
           type: 'string'
         },
-        "addressarea": {
-          name: 'addressarea',
-          type: 'string'
-        },
-        "addresscity": {
-          name: 'addresscity',
-          type: 'string'
-        },
-        "addresspin": {
-          name: 'addresspin',
-          type: 'string'
-        },
-        "phone": {
-          name: 'phone',
-          type: 'string'
-        },
-        "email": {
-          name: 'email',
+        "electronicAddressId": {
+          name: 'electronicAddressId',
           type: 'string'
         },
         "reference": {
@@ -100,12 +93,42 @@ export class NewContact implements NewContactInterface {
           name: 'comments',
           type: 'string'
         },
-        "altphone": {
-          name: 'altphone',
+        "createdOn": {
+          name: 'createdOn',
+          type: 'Date'
+        },
+        "updatedOn": {
+          name: 'updatedOn',
+          type: 'Date'
+        },
+        "createdBy": {
+          name: 'createdBy',
           type: 'string'
+        },
+        "updatedBy": {
+          name: 'updatedBy',
+          type: 'string'
+        },
+        "created-on": {
+          name: 'created-on',
+          type: 'Date'
+        },
+        "updated-on": {
+          name: 'updated-on',
+          type: 'Date'
         },
       },
       relations: {
+        fkTable1ElectronicAddress1rel: {
+          name: 'fkTable1ElectronicAddress1rel',
+          type: 'ElectronicAddress',
+          model: 'ElectronicAddress'
+        },
+        fkTable1PhysicalAddress1rel: {
+          name: 'fkTable1PhysicalAddress1rel',
+          type: 'PhysicalAddress',
+          model: 'PhysicalAddress'
+        },
       }
     }
   }

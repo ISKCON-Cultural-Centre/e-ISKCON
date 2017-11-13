@@ -9,6 +9,12 @@ export interface DevoteeEventCalendarInterface {
   "devoteeId": string;
   "eventDate": Date;
   "eventMasterId": string;
+  "createdOn"?: Date;
+  "updatedOn"?: Date;
+  "createdBy"?: string;
+  "updatedBy"?: string;
+  "created-on"?: Date;
+  "updated-on"?: Date;
   fkDevoteeEventCalendarDevotee2rel?: Devotee;
   fkDevoteeEventCalendarEventMaster1rel?: EventMaster;
 }
@@ -17,6 +23,12 @@ export class DevoteeEventCalendar implements DevoteeEventCalendarInterface {
   "devoteeId": string;
   "eventDate": Date;
   "eventMasterId": string;
+  "createdOn": Date;
+  "updatedOn": Date;
+  "createdBy": string;
+  "updatedBy": string;
+  "created-on": Date;
+  "updated-on": Date;
   fkDevoteeEventCalendarDevotee2rel: Devotee;
   fkDevoteeEventCalendarEventMaster1rel: EventMaster;
   constructor(data?: DevoteeEventCalendarInterface) {
@@ -50,7 +62,6 @@ export class DevoteeEventCalendar implements DevoteeEventCalendarInterface {
       name: 'DevoteeEventCalendar',
       plural: 'DevoteeEventCalendars',
       path: 'DevoteeEventCalendars',
-      idName: 'devoteeId',
       properties: {
         "devoteeId": {
           name: 'devoteeId',
@@ -64,23 +75,41 @@ export class DevoteeEventCalendar implements DevoteeEventCalendarInterface {
           name: 'eventMasterId',
           type: 'string'
         },
+        "createdOn": {
+          name: 'createdOn',
+          type: 'Date'
+        },
+        "updatedOn": {
+          name: 'updatedOn',
+          type: 'Date'
+        },
+        "createdBy": {
+          name: 'createdBy',
+          type: 'string'
+        },
+        "updatedBy": {
+          name: 'updatedBy',
+          type: 'string'
+        },
+        "created-on": {
+          name: 'created-on',
+          type: 'Date'
+        },
+        "updated-on": {
+          name: 'updated-on',
+          type: 'Date'
+        },
       },
       relations: {
         fkDevoteeEventCalendarDevotee2rel: {
           name: 'fkDevoteeEventCalendarDevotee2rel',
           type: 'Devotee',
-          model: 'Devotee',
-          relationType: 'belongsTo',
-                  keyFrom: 'devoteeId',
-          keyTo: 'id'
+          model: 'Devotee'
         },
         fkDevoteeEventCalendarEventMaster1rel: {
           name: 'fkDevoteeEventCalendarEventMaster1rel',
           type: 'EventMaster',
-          model: 'EventMaster',
-          relationType: 'belongsTo',
-                  keyFrom: 'eventMasterId',
-          keyTo: 'id'
+          model: 'EventMaster'
         },
       }
     }

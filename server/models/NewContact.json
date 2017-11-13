@@ -6,7 +6,18 @@
       "schema": "icc",
       "table": "new-contact"
     },
-    "relations": {}
+    "relations": {
+      "fkTable1ElectronicAddress1rel": {
+        "model": "ElectronicAddress",
+        "type": "belongsTo",
+        "foreignKey": "electronicAddressId"
+      },
+      "fkTable1PhysicalAddress1rel": {
+        "model": "PhysicalAddress",
+        "type": "belongsTo",
+        "foreignKey": "physicalAddressId"
+      }
+    }
   },
   "mixins": {
     "TimeStamp" : {
@@ -25,8 +36,7 @@
       "length": 36,
       "precision": null,
       "scale": null,
-      "id": true,
-      "defaultFn": "uuidv4",
+      "id": 1,
       "mysql": {
         "columnName": "id",
         "dataType": "varchar",
@@ -38,7 +48,7 @@
     },
     "name": {
       "type": "String",
-      "required": false,
+      "required": true,
       "length": 255,
       "precision": null,
       "scale": null,
@@ -48,97 +58,37 @@
         "dataLength": 255,
         "dataPrecision": null,
         "dataScale": null,
-        "nullable": "Y"
+        "nullable": "N"
       }
     },
-    "addressline1": {
+    "physicalAddressId": {
       "type": "String",
-      "required": false,
-      "length": 255,
+      "required": true,
+      "length": 36,
       "precision": null,
       "scale": null,
       "mysql": {
-        "columnName": "addressLine1",
+        "columnName": "physical-address-id",
         "dataType": "varchar",
-        "dataLength": 255,
+        "dataLength": 36,
         "dataPrecision": null,
         "dataScale": null,
-        "nullable": "Y"
+        "nullable": "N"
       }
     },
-    "addressarea": {
+    "electronicAddressId": {
       "type": "String",
-      "required": false,
-      "length": 255,
+      "required": true,
+      "length": 36,
       "precision": null,
       "scale": null,
       "mysql": {
-        "columnName": "addressArea",
+        "columnName": "electronic-address-id",
         "dataType": "varchar",
-        "dataLength": 255,
+        "dataLength": 36,
         "dataPrecision": null,
         "dataScale": null,
-        "nullable": "Y"
-      }
-    },
-    "addresscity": {
-      "type": "String",
-      "required": false,
-      "length": 255,
-      "precision": null,
-      "scale": null,
-      "mysql": {
-        "columnName": "addressCity",
-        "dataType": "varchar",
-        "dataLength": 255,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "Y"
-      }
-    },
-    "addresspin": {
-      "type": "String",
-      "required": false,
-      "length": 20,
-      "precision": null,
-      "scale": null,
-      "mysql": {
-        "columnName": "addressPin",
-        "dataType": "varchar",
-        "dataLength": 20,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "Y"
-      }
-    },
-    "phone": {
-      "type": "String",
-      "required": false,
-      "length": 20,
-      "precision": null,
-      "scale": null,
-      "mysql": {
-        "columnName": "phone",
-        "dataType": "varchar",
-        "dataLength": 20,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "Y"
-      }
-    },
-    "email": {
-      "type": "String",
-      "required": false,
-      "length": 100,
-      "precision": null,
-      "scale": null,
-      "mysql": {
-        "columnName": "email",
-        "dataType": "varchar",
-        "dataLength": 100,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "Y"
+        "nullable": "N"
       }
     },
     "reference": {
@@ -171,16 +121,61 @@
         "nullable": "Y"
       }
     },
-    "altphone": {
-      "type": "String",
+    "createdOn": {
+      "type": "Date",
       "required": false,
-      "length": 45,
+      "length": null,
       "precision": null,
       "scale": null,
       "mysql": {
-        "columnName": "altPhone",
+        "columnName": "created-on",
+        "dataType": "datetime",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "Y"
+      }
+    },
+    "updatedOn": {
+      "type": "Date",
+      "required": false,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "updated-on",
+        "dataType": "datetime",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "Y"
+      }
+    },
+    "createdBy": {
+      "type": "String",
+      "required": false,
+      "length": 36,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "created-by",
         "dataType": "varchar",
-        "dataLength": 45,
+        "dataLength": 36,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "Y"
+      }
+    },
+    "updatedBy": {
+      "type": "String",
+      "required": false,
+      "length": 36,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "updated-by",
+        "dataType": "varchar",
+        "dataLength": 36,
         "dataPrecision": null,
         "dataScale": null,
         "nullable": "Y"

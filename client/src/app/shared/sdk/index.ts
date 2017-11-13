@@ -1,4 +1,3 @@
-/* tslint:disable */
 /**
 * @module SDKModule
 * @author Jonathan Casarrubias <t:@johncasarrubias> <gh:jonathan-casarrubias>
@@ -48,7 +47,6 @@ import { StorageBrowser } from './storage/storage.browser';
 import { RoleMappingApi } from './services/custom/RoleMapping';
 import { RoleApi } from './services/custom/Role';
 import { CircleApi } from './services/custom/Circle';
-import { CircleDevoteeApi } from './services/custom/CircleDevotee';
 import { DeekshaGuruApi } from './services/custom/DeekshaGuru';
 import { DevoteeApi } from './services/custom/Devotee';
 import { DevoteeEventCalendarApi } from './services/custom/DevoteeEventCalendar';
@@ -66,6 +64,10 @@ import { RelationshipMasterApi } from './services/custom/RelationshipMaster';
 import { SpiritualLevelMasterApi } from './services/custom/SpiritualLevelMaster';
 import { TempleApi } from './services/custom/Temple';
 import { TempleBranchApi } from './services/custom/TempleBranch';
+import { ElectronicAddressApi } from './services/custom/ElectronicAddress';
+import { ElectronicAddressTypeMasterApi } from './services/custom/ElectronicAddressTypeMaster';
+import { PhysicalAddressApi } from './services/custom/PhysicalAddress';
+import { PhysicalAddressTypeMasterApi } from './services/custom/PhysicalAddressTypeMaster';
 /**
 * @module SDKBrowserModule
 * @description
@@ -98,7 +100,6 @@ export class SDKBrowserModule {
         RoleMappingApi,
         RoleApi,
         CircleApi,
-        CircleDevoteeApi,
         DeekshaGuruApi,
         DevoteeApi,
         DevoteeEventCalendarApi,
@@ -116,6 +117,10 @@ export class SDKBrowserModule {
         SpiritualLevelMasterApi,
         TempleApi,
         TempleBranchApi,
+        ElectronicAddressApi,
+        ElectronicAddressTypeMasterApi,
+        PhysicalAddressApi,
+        PhysicalAddressTypeMasterApi,
         internalStorageProvider,
         { provide: SDKStorage, useClass: StorageBrowser }
       ]
@@ -132,4 +137,3 @@ export * from './lb.config';
 export * from './storage/storage.swaps';
 export { CookieBrowser } from './storage/cookie.browser';
 export { StorageBrowser } from './storage/storage.browser';
-

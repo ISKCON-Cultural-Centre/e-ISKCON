@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { RoleMapping } from '../../models/RoleMapping';
 import { Role } from '../../models/Role';
 import { Circle } from '../../models/Circle';
-import { CircleDevotee } from '../../models/CircleDevotee';
 import { DeekshaGuru } from '../../models/DeekshaGuru';
 import { Devotee } from '../../models/Devotee';
 import { DevoteeEventCalendar } from '../../models/DevoteeEventCalendar';
@@ -21,6 +20,10 @@ import { RelationshipMaster } from '../../models/RelationshipMaster';
 import { SpiritualLevelMaster } from '../../models/SpiritualLevelMaster';
 import { Temple } from '../../models/Temple';
 import { TempleBranch } from '../../models/TempleBranch';
+import { ElectronicAddress } from '../../models/ElectronicAddress';
+import { ElectronicAddressTypeMaster } from '../../models/ElectronicAddressTypeMaster';
+import { PhysicalAddress } from '../../models/PhysicalAddress';
+import { PhysicalAddressTypeMaster } from '../../models/PhysicalAddressTypeMaster';
 
 export interface Models { [name: string]: any }
 
@@ -31,7 +34,6 @@ export class SDKModels {
     RoleMapping: RoleMapping,
     Role: Role,
     Circle: Circle,
-    CircleDevotee: CircleDevotee,
     DeekshaGuru: DeekshaGuru,
     Devotee: Devotee,
     DevoteeEventCalendar: DevoteeEventCalendar,
@@ -49,6 +51,10 @@ export class SDKModels {
     SpiritualLevelMaster: SpiritualLevelMaster,
     Temple: Temple,
     TempleBranch: TempleBranch,
+    ElectronicAddress: ElectronicAddress,
+    ElectronicAddressTypeMaster: ElectronicAddressTypeMaster,
+    PhysicalAddress: PhysicalAddress,
+    PhysicalAddressTypeMaster: PhysicalAddressTypeMaster,
     
   };
 

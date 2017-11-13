@@ -10,24 +10,36 @@ export interface PaymentInterface {
   "id": string;
   "devoteeId": string;
   "date": Date;
-  "paymentModeMasterId": number;
   "paymentRefNumber"?: string;
   "donationTypeMasterId": string;
+  "paymentModeMasterId": string;
+  "createdOn"?: Date;
+  "updatedOn"?: Date;
+  "createdBy"?: string;
+  "updatedBy"?: string;
+  "created-on"?: Date;
+  "updated-on"?: Date;
   fkPaymentDevotee2rel?: Devotee;
   fkPaymentDonationTypeMaster1rel?: DonationTypeMaster;
-  fkPaymentPaymentModeMaster2rel?: PaymentModeMaster;
+  fkPaymentPaymentModeMaster1rel?: PaymentModeMaster;
 }
 
 export class Payment implements PaymentInterface {
   "id": string;
   "devoteeId": string;
   "date": Date;
-  "paymentModeMasterId": number;
   "paymentRefNumber": string;
   "donationTypeMasterId": string;
+  "paymentModeMasterId": string;
+  "createdOn": Date;
+  "updatedOn": Date;
+  "createdBy": string;
+  "updatedBy": string;
+  "created-on": Date;
+  "updated-on": Date;
   fkPaymentDevotee2rel: Devotee;
   fkPaymentDonationTypeMaster1rel: DonationTypeMaster;
-  fkPaymentPaymentModeMaster2rel: PaymentModeMaster;
+  fkPaymentPaymentModeMaster1rel: PaymentModeMaster;
   constructor(data?: PaymentInterface) {
     Object.assign(this, data);
   }
@@ -59,7 +71,6 @@ export class Payment implements PaymentInterface {
       name: 'Payment',
       plural: 'Payments',
       path: 'Payments',
-      idName: 'id',
       properties: {
         "id": {
           name: 'id',
@@ -73,10 +84,6 @@ export class Payment implements PaymentInterface {
           name: 'date',
           type: 'Date'
         },
-        "paymentModeMasterId": {
-          name: 'paymentModeMasterId',
-          type: 'number'
-        },
         "paymentRefNumber": {
           name: 'paymentRefNumber',
           type: 'string'
@@ -85,31 +92,50 @@ export class Payment implements PaymentInterface {
           name: 'donationTypeMasterId',
           type: 'string'
         },
+        "paymentModeMasterId": {
+          name: 'paymentModeMasterId',
+          type: 'string'
+        },
+        "createdOn": {
+          name: 'createdOn',
+          type: 'Date'
+        },
+        "updatedOn": {
+          name: 'updatedOn',
+          type: 'Date'
+        },
+        "createdBy": {
+          name: 'createdBy',
+          type: 'string'
+        },
+        "updatedBy": {
+          name: 'updatedBy',
+          type: 'string'
+        },
+        "created-on": {
+          name: 'created-on',
+          type: 'Date'
+        },
+        "updated-on": {
+          name: 'updated-on',
+          type: 'Date'
+        },
       },
       relations: {
         fkPaymentDevotee2rel: {
           name: 'fkPaymentDevotee2rel',
           type: 'Devotee',
-          model: 'Devotee',
-          relationType: 'belongsTo',
-                  keyFrom: 'devoteeId',
-          keyTo: 'id'
+          model: 'Devotee'
         },
         fkPaymentDonationTypeMaster1rel: {
           name: 'fkPaymentDonationTypeMaster1rel',
           type: 'DonationTypeMaster',
-          model: 'DonationTypeMaster',
-          relationType: 'belongsTo',
-                  keyFrom: 'donationTypeMasterId',
-          keyTo: 'id'
+          model: 'DonationTypeMaster'
         },
-        fkPaymentPaymentModeMaster2rel: {
-          name: 'fkPaymentPaymentModeMaster2rel',
+        fkPaymentPaymentModeMaster1rel: {
+          name: 'fkPaymentPaymentModeMaster1rel',
           type: 'PaymentModeMaster',
-          model: 'PaymentModeMaster',
-          relationType: 'belongsTo',
-                  keyFrom: 'paymentModeMasterId',
-          keyTo: 'id'
+          model: 'PaymentModeMaster'
         },
       }
     }

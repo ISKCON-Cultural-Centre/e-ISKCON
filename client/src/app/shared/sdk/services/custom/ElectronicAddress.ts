@@ -10,16 +10,15 @@ import { JSONSearchParams } from '../core/search.params';
 import { ErrorHandler } from '../core/error.service';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
-import { CircleDevotee } from '../../models/CircleDevotee';
-import { Circle } from '../../models/Circle';
-import { Devotee } from '../../models/Devotee';
+import { ElectronicAddress } from '../../models/ElectronicAddress';
+import { ElectronicAddressTypeMaster } from '../../models/ElectronicAddressTypeMaster';
 
 
 /**
- * Api services for the `CircleDevotee` model.
+ * Api services for the `ElectronicAddress` model.
  */
 @Injectable()
-export class CircleDevoteeApi extends BaseLoopBackApi {
+export class ElectronicAddressApi extends BaseLoopBackApi {
 
   constructor(
     @Inject(Http) protected http: Http,
@@ -32,39 +31,9 @@ export class CircleDevoteeApi extends BaseLoopBackApi {
   }
 
   /**
-   * Fetches belongsTo relation fkCircleDevoteeCircle1rel.
+   * Fetches belongsTo relation fkElectronicAddressElectronicAddressTypeMaster1rel.
    *
-   * @param {any} id CircleDevotee id
-   *
-   * @param {boolean} refresh 
-   *
-   * @returns {object} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `CircleDevotee` object.)
-   * </em>
-   */
-  public getFkCircleDevoteeCircle1rel(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
-    let _method: string = "GET";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/CircleDevotees/:id/fkCircleDevoteeCircle1rel";
-    let _routeParams: any = {
-      id: id
-    };
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    if (typeof refresh !== 'undefined' && refresh !== null) _urlParams.refresh = refresh;
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
-  }
-
-  /**
-   * Fetches belongsTo relation fkCircleDevoteeDevotee1rel.
-   *
-   * @param {any} id CircleDevotee id
+   * @param {any} id ElectronicAddress id
    *
    * @param {boolean} refresh 
    *
@@ -74,13 +43,13 @@ export class CircleDevoteeApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `CircleDevotee` object.)
+   * This usually means the response is a `ElectronicAddress` object.)
    * </em>
    */
-  public getFkCircleDevoteeDevotee1rel(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
+  public getFkElectronicAddressElectronicAddressTypeMaster1rel(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/CircleDevotees/:id/fkCircleDevoteeDevotee1rel";
+    "/ElectronicAddresses/:id/fkElectronicAddressElectronicAddressTypeMaster1rel";
     let _routeParams: any = {
       id: id
     };
@@ -104,13 +73,13 @@ export class CircleDevoteeApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `CircleDevotee` object.)
+   * This usually means the response is a `ElectronicAddress` object.)
    * </em>
    */
   public patchOrCreate(data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PATCH";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/CircleDevotees";
+    "/ElectronicAddresses";
     let _routeParams: any = {};
     let _postBody: any = {
       data: data
@@ -123,7 +92,7 @@ export class CircleDevoteeApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param {any} id CircleDevotee id
+   * @param {any} id ElectronicAddress id
    *
    * @param {object} data Request data.
    *
@@ -135,13 +104,13 @@ export class CircleDevoteeApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `CircleDevotee` object.)
+   * This usually means the response is a `ElectronicAddress` object.)
    * </em>
    */
   public patchAttributes(id: any, data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PATCH";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/CircleDevotees/:id";
+    "/ElectronicAddresses/:id";
     let _routeParams: any = {
       id: id
     };
@@ -155,9 +124,9 @@ export class CircleDevoteeApi extends BaseLoopBackApi {
 
   /**
    * The name of the model represented by this $resource,
-   * i.e. `CircleDevotee`.
+   * i.e. `ElectronicAddress`.
    */
   public getModelName() {
-    return "CircleDevotee";
+    return "ElectronicAddress";
   }
 }

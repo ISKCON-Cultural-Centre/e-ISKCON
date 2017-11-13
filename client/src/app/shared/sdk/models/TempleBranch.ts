@@ -1,6 +1,7 @@
 /* tslint:disable */
 import {
-  Temple
+  Temple,
+  PhysicalAddress
 } from '../index';
 
 declare var Object: any;
@@ -8,30 +9,34 @@ export interface TempleBranchInterface {
   "id": string;
   "name": string;
   "templeId": string;
-  "addressLine1": string;
-  "addressLine2": string;
-  "addressArea": string;
-  "addressCity": string;
-  "addressCountry": string;
-  "addressPin": string;
+  "physicalAddressId": string;
   "contactNumber": string;
   "contactName": string;
+  "createdOn"?: Date;
+  "updatedOn"?: Date;
+  "createdBy"?: string;
+  "updatedBy"?: string;
+  "created-on"?: Date;
+  "updated-on"?: Date;
   fkTempleBranchTemple1rel?: Temple;
+  fkTempleBranchPhysicalAddress1rel?: PhysicalAddress;
 }
 
 export class TempleBranch implements TempleBranchInterface {
   "id": string;
   "name": string;
   "templeId": string;
-  "addressLine1": string;
-  "addressLine2": string;
-  "addressArea": string;
-  "addressCity": string;
-  "addressCountry": string;
-  "addressPin": string;
+  "physicalAddressId": string;
   "contactNumber": string;
   "contactName": string;
+  "createdOn": Date;
+  "updatedOn": Date;
+  "createdBy": string;
+  "updatedBy": string;
+  "created-on": Date;
+  "updated-on": Date;
   fkTempleBranchTemple1rel: Temple;
+  fkTempleBranchPhysicalAddress1rel: PhysicalAddress;
   constructor(data?: TempleBranchInterface) {
     Object.assign(this, data);
   }
@@ -63,7 +68,6 @@ export class TempleBranch implements TempleBranchInterface {
       name: 'TempleBranch',
       plural: 'TempleBranches',
       path: 'TempleBranches',
-      idName: 'id',
       properties: {
         "id": {
           name: 'id',
@@ -77,28 +81,8 @@ export class TempleBranch implements TempleBranchInterface {
           name: 'templeId',
           type: 'string'
         },
-        "addressLine1": {
-          name: 'addressLine1',
-          type: 'string'
-        },
-        "addressLine2": {
-          name: 'addressLine2',
-          type: 'string'
-        },
-        "addressArea": {
-          name: 'addressArea',
-          type: 'string'
-        },
-        "addressCity": {
-          name: 'addressCity',
-          type: 'string'
-        },
-        "addressCountry": {
-          name: 'addressCountry',
-          type: 'string'
-        },
-        "addressPin": {
-          name: 'addressPin',
+        "physicalAddressId": {
+          name: 'physicalAddressId',
           type: 'string'
         },
         "contactNumber": {
@@ -109,15 +93,41 @@ export class TempleBranch implements TempleBranchInterface {
           name: 'contactName',
           type: 'string'
         },
+        "createdOn": {
+          name: 'createdOn',
+          type: 'Date'
+        },
+        "updatedOn": {
+          name: 'updatedOn',
+          type: 'Date'
+        },
+        "createdBy": {
+          name: 'createdBy',
+          type: 'string'
+        },
+        "updatedBy": {
+          name: 'updatedBy',
+          type: 'string'
+        },
+        "created-on": {
+          name: 'created-on',
+          type: 'Date'
+        },
+        "updated-on": {
+          name: 'updated-on',
+          type: 'Date'
+        },
       },
       relations: {
         fkTempleBranchTemple1rel: {
           name: 'fkTempleBranchTemple1rel',
           type: 'Temple',
-          model: 'Temple',
-          relationType: 'belongsTo',
-                  keyFrom: 'templeId',
-          keyTo: 'id'
+          model: 'Temple'
+        },
+        fkTempleBranchPhysicalAddress1rel: {
+          name: 'fkTempleBranchPhysicalAddress1rel',
+          type: 'PhysicalAddress',
+          model: 'PhysicalAddress'
         },
       }
     }

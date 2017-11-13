@@ -14,6 +14,12 @@ export interface PledgeInterface {
   "pauseInd": number;
   "devoteeId": string;
   "donationTypeMasterId": string;
+  "createdOn"?: Date;
+  "updatedOn"?: Date;
+  "createdBy"?: string;
+  "updatedBy"?: string;
+  "created-on"?: Date;
+  "updated-on"?: Date;
   fkPledgeDevotee2rel?: Devotee;
   fkPledgeDonationTypeMaster1rel?: DonationTypeMaster;
 }
@@ -27,6 +33,12 @@ export class Pledge implements PledgeInterface {
   "pauseInd": number;
   "devoteeId": string;
   "donationTypeMasterId": string;
+  "createdOn": Date;
+  "updatedOn": Date;
+  "createdBy": string;
+  "updatedBy": string;
+  "created-on": Date;
+  "updated-on": Date;
   fkPledgeDevotee2rel: Devotee;
   fkPledgeDonationTypeMaster1rel: DonationTypeMaster;
   constructor(data?: PledgeInterface) {
@@ -60,7 +72,6 @@ export class Pledge implements PledgeInterface {
       name: 'Pledge',
       plural: 'Pledges',
       path: 'Pledges',
-      idName: 'id',
       properties: {
         "id": {
           name: 'id',
@@ -94,23 +105,41 @@ export class Pledge implements PledgeInterface {
           name: 'donationTypeMasterId',
           type: 'string'
         },
+        "createdOn": {
+          name: 'createdOn',
+          type: 'Date'
+        },
+        "updatedOn": {
+          name: 'updatedOn',
+          type: 'Date'
+        },
+        "createdBy": {
+          name: 'createdBy',
+          type: 'string'
+        },
+        "updatedBy": {
+          name: 'updatedBy',
+          type: 'string'
+        },
+        "created-on": {
+          name: 'created-on',
+          type: 'Date'
+        },
+        "updated-on": {
+          name: 'updated-on',
+          type: 'Date'
+        },
       },
       relations: {
         fkPledgeDevotee2rel: {
           name: 'fkPledgeDevotee2rel',
           type: 'Devotee',
-          model: 'Devotee',
-          relationType: 'belongsTo',
-                  keyFrom: 'devoteeId',
-          keyTo: 'id'
+          model: 'Devotee'
         },
         fkPledgeDonationTypeMaster1rel: {
           name: 'fkPledgeDonationTypeMaster1rel',
           type: 'DonationTypeMaster',
-          model: 'DonationTypeMaster',
-          relationType: 'belongsTo',
-                  keyFrom: 'donationTypeMasterId',
-          keyTo: 'id'
+          model: 'DonationTypeMaster'
         },
       }
     }
