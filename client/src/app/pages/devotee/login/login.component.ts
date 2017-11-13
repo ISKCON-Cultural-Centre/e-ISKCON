@@ -39,8 +39,7 @@ export class LoginComponent implements OnInit {
   login(userName, password) {
     this.devoteeApi.login({ username: userName.value, password: password.value })
     .subscribe((token: SDKToken) => {
-      console.log(token);
-      this.authService.setUser(token);
+      this.authService.setToken(token);
       this.router.navigate(['/']);
     }, err => {
       alert(err && err.message ? err.message : 'Login failed!');

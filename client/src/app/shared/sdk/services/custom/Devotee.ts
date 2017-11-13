@@ -128,7 +128,7 @@ export class DevoteeApi extends BaseLoopBackApi {
    *
    * @param {any} id Devotee id
    *
-   * @param {boolean} refresh 
+   * @param {boolean} refresh
    *
    * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -158,7 +158,7 @@ export class DevoteeApi extends BaseLoopBackApi {
    *
    * @param {any} id Devotee id
    *
-   * @param {object} filter 
+   * @param {object} filter
    *
    * @returns {object[]} An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -253,7 +253,7 @@ export class DevoteeApi extends BaseLoopBackApi {
    *
    * Data properties:
    *
-   *  - `count` – `{number}` - 
+   *  - `count` – `{number}` -
    */
   public countAccessTokens(id: any, where: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
@@ -351,9 +351,9 @@ export class DevoteeApi extends BaseLoopBackApi {
    *
    * The response body contains properties of the AccessToken created on login.
    * Depending on the value of `include` parameter, the body may contain additional properties:
-   * 
+   *
    *   - `user` - `U+007BUserU+007D` - Data of the currently logged in user. (`include=user`)
-   * 
+   *
    *
    */
   public login(credentials: any, include: any = 'user', rememberMe: boolean = true, customHeaders?: Function): Observable<any> {
@@ -376,7 +376,7 @@ export class DevoteeApi extends BaseLoopBackApi {
         }
       );
       return result;
-      
+
   }
 
   /**
@@ -400,7 +400,9 @@ export class DevoteeApi extends BaseLoopBackApi {
     let _postBody: any = {};
     let _urlParams: any = {};
        _urlParams.access_token = this.auth.getAccessTokenId();
-    this.auth.clear(); 
+console.log("URL Parameters");
+       console.log(_urlParams.access_token);
+    this.auth.clear();
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -436,11 +438,11 @@ export class DevoteeApi extends BaseLoopBackApi {
   /**
    * Confirm a user registration with identity verification token.
    *
-   * @param {string} uid 
+   * @param {string} uid
    *
-   * @param {string} token 
+   * @param {string} token
    *
-   * @param {string} redirect 
+   * @param {string} redirect
    *
    * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -493,9 +495,9 @@ export class DevoteeApi extends BaseLoopBackApi {
    *
    * @param {object} data Request data.
    *
-   *  - `oldPassword` – `{string}` - 
+   *  - `oldPassword` – `{string}` -
    *
-   *  - `newPassword` – `{string}` - 
+   *  - `newPassword` – `{string}` -
    *
    * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -524,7 +526,7 @@ export class DevoteeApi extends BaseLoopBackApi {
    *
    * @param {object} data Request data.
    *
-   *  - `newPassword` – `{string}` - 
+   *  - `newPassword` – `{string}` -
    *
    * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
