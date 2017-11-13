@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 
+import { AuthService } from '../../../services/auth.service';
+
 import { DevoteeApi } from '../../shared/sdk';
+
 
 @Component({
   selector: 'app-navgation',
@@ -12,7 +15,7 @@ export class NavgationComponent implements OnInit {
 
   isLogin: boolean = false;
 
-  constructor(private router: Router, private userApi: DevoteeApi) {
+  constructor(private router: Router, private devoteeApi: DevoteeApi) {
 
     this.router.events
       .subscribe((route) => {
@@ -26,8 +29,8 @@ export class NavgationComponent implements OnInit {
   ngOnInit() { }
 
   logout() {
-    this.userApi.logout().subscribe((response) => {
-      //Clear Token and other local storage 
+    this.devoteeApi.logout().subscribe((response) => {
+      //Clear Token and other local storage
       this.router.navigate(['/login']);
     });
   }
