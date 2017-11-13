@@ -400,8 +400,6 @@ export class DevoteeApi extends BaseLoopBackApi {
     let _postBody: any = {};
     let _urlParams: any = {};
        _urlParams.access_token = this.auth.getAccessTokenId();
-console.log("URL Parameters");
-       console.log(_urlParams.access_token);
     this.auth.clear();
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
