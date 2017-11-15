@@ -21,6 +21,8 @@ export interface DevoteeInterface {
   "username"?: string;
   "email": string;
   "emailVerified"?: boolean;
+  "created-on"?: Date;
+  "updated-on"?: Date;
   "password"?: string;
   accessTokens?: any[];
   fkDevoteeCircle1rel?: Circle;
@@ -43,6 +45,8 @@ export class Devotee implements DevoteeInterface {
   "username": string;
   "email": string;
   "emailVerified": boolean;
+  "created-on": Date;
+  "updated-on": Date;
   "password": string;
   accessTokens: any[];
   fkDevoteeCircle1rel: Circle;
@@ -132,6 +136,14 @@ export class Devotee implements DevoteeInterface {
         "emailVerified": {
           name: 'emailVerified',
           type: 'boolean'
+        },
+        "created-on": {
+          name: 'created-on',
+          type: 'Date'
+        },
+        "updated-on": {
+          name: 'updated-on',
+          type: 'Date'
         },
         "password": {
           name: 'password',
