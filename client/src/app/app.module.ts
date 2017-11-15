@@ -5,34 +5,30 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
-import { DevoteeModule } from './pages/devotee/devotee.module';
-
-
 import { MaterialModule } from './material.module';
 
 import { SDKBrowserModule } from './shared/sdk';
-import { AuthGuard, AuthService } from './services';
+import { AuthGuard, AuthService } from './shared/services';
 
 import { AppComponent } from './app.component';
-import { NavgationComponent } from './shared/navgation/navgation.component';
-import { HomeComponent } from './pages/home/home.component';
-import { AboutComponent } from './pages/about/about.component';
-import { LoginComponent } from './pages/devotee/login/login.component';
-import { ResetPasswordComponent } from './pages/devotee/reset-password/reset-password.component';
-import { AppRoutingModule } from './/app-routing.module';
+import { PageNotFoundComponent } from './pageNotFound.component';
+import { NavgationComponent } from './navgation/navgation.component';
+import { HomeComponent } from './home/home.component';
+import { AppRoutingModule } from './app-routing.module';
+import { LoginModule } from './login/login.module';
 
 @NgModule({
   declarations: [
     AppComponent,
+    PageNotFoundComponent,
     NavgationComponent,
-    HomeComponent,
-    AboutComponent
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,
-    DevoteeModule,
+    LoginModule,
     HttpModule,
     SDKBrowserModule.forRoot(),
     RouterModule,

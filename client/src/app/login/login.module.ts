@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
-import { MaterialModule } from '../../material.module';
+import { MaterialModule } from '../material.module';
 
-import { LoginComponent } from './login/login.component';
-import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { LoginComponent } from './login.component';
+import { ResetPasswordComponent } from './reset-password.component';
 
 @NgModule({
   imports: [
@@ -16,4 +16,4 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
   ],
   declarations: [LoginComponent, ResetPasswordComponent]
 })
-export class DevoteeModule { }
+export class LoginModule { }

@@ -3,7 +3,7 @@ import { Router, NavigationEnd } from '@angular/router';
 
 
 
-import { DevoteeApi } from '../../shared/sdk';
+import { DevoteeApi } from '../shared/sdk';
 
 
 @Component({

@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {FormControl, Validators} from '@angular/forms';
 
-import { SDKToken, DevoteeApi } from '../../../shared/sdk';
-import { AuthService } from '../../../services/auth.service';
+import { SDKToken, DevoteeApi } from '../shared/sdk';
+import { AuthService } from '../shared/services/auth.service';
 
 const USERNAME_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 const PASSWORD_REGEX = /^[a-zA-Z0-9!#$%&’]$/;
