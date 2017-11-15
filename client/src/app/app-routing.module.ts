@@ -5,11 +5,14 @@ import { ResetPasswordComponent } from './pages/devotee/reset-password/reset-pas
 import { AboutComponent } from './pages/about/about.component';
 import { HomeComponent } from './pages/home/home.component';
 
+import { AuthGuard as AuthGuard } from './services/auth.guard';
+
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full', canActivate: [AuthGuard] },
+  { path: 'home',  component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'reset', component: ResetPasswordComponent },
-  { path: 'about', component: AboutComponent }
+  { path: 'about', component: AboutComponent, canActivate: [AuthGuard] }
 ];
 
 
