@@ -16,13 +16,14 @@ import { NavgationComponent } from './navgation/navgation.component';
 import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginModule } from './login/login.module';
-
+import { DashboardComponent } from './components/dashboard.component';
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent,
     NavgationComponent,
-    HomeComponent
+    HomeComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
