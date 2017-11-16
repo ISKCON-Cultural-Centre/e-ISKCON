@@ -11,7 +11,7 @@ import { AuthGuard as AuthGuard } from './shared/services/auth.guard';
 const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
-  { path: 'dashboard', component: DashboardComponent },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'reset', component: ResetPasswordComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full', canActivate: [AuthGuard] },
   { path: '**', component: PageNotFoundComponent }
