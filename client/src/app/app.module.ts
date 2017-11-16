@@ -17,13 +17,16 @@ import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginModule } from './login/login.module';
 import { DashboardComponent } from './components/dashboard.component';
+import { DevoteeComponent } from './components/devotee.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent,
     NavgationComponent,
     HomeComponent,
-    DashboardComponent
+    DashboardComponent,
+    DevoteeComponent
   ],
   imports: [
     BrowserModule,
