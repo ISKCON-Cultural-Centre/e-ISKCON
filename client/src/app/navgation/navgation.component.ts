@@ -13,7 +13,7 @@ import { DevoteeApi } from '../shared/sdk';
 })
 export class NavgationComponent implements OnInit {
 
-  isLogin: boolean = false;
+  isLogin: Boolean = false;
 
   constructor(private router: Router, private devoteeApi: DevoteeApi) {
 
@@ -29,7 +29,7 @@ export class NavgationComponent implements OnInit {
 
   logout() {
     this.devoteeApi.logout().subscribe((response) => {
-      //Clear Token and other local storage
+      // Clear Token and other local storage
       this.router.navigate(['/login']);
     });
   }
