@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {FormControl, Validators} from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 
 import { SDKToken, DevoteeApi } from '../shared/sdk';
 import { AuthService } from '../shared/services/auth.service';
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
     Validators.required,
     Validators.pattern(PASSWORD_REGEX)]);
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   setState(state: string) {
     this.state = state;
@@ -38,17 +38,17 @@ export class LoginComponent implements OnInit {
 
   login(userName, password) {
     this.devoteeApi.login({ username: userName.value, password: password.value })
-    .subscribe((token: SDKToken) => {
-      this.authService.setToken(token);
-      this.router.navigate(['/']);
-    }, err => {
-      alert(err && err.message ? err.message : 'Login failed!');
-      password.value = '';
-    });
+      .subscribe((token: SDKToken) => {
+        this.authService.setToken(token);
+        this.router.navigate(['/']);
+      }, err => {
+        alert(err && err.message ? err.message : 'Login failed!');
+        password.value = '';
+      });
   }
 
   signup(username, email, password, passwordConfirm, type) {
-    if(password.value !== passwordConfirm.value) {
+    if (password.value !== passwordConfirm.value) {
       return alert('Passwords must match!');
     }
 
@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
       type: type.value
     }).subscribe((res) => {
       console.log('created.', res);
-      if(res.username) {
+      if (res.username) {
         this.login(email, password);
       }
     });
