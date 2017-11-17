@@ -1,0 +1,505 @@
+[33mcommit e4036b7e7216ab88833a8c2bc3b2f9ccc5df4aef[m
+Author: Rajendra <hairajendra@gmail.com>
+Date:   Thu Nov 16 15:24:42 2017 +0530
+
+    data model updates
+
+[33mcommit 69ced861e884234e00402b09e65c8b7990143f35[m
+Merge: 376f1fb 31fbe6d
+Author: Rajendra <hairajendra@gmail.com>
+Date:   Thu Nov 16 14:15:47 2017 +0530
+
+    Merge branch 'feature/book-marathon' of https://github.com/ISKCON-Cultural-Centre/eISKCON into feature/book-marathon
+
+[33mcommit 376f1fb91082f7c60d2a310c68e3c1021f6585fa[m
+Author: Rajendra <hairajendra@gmail.com>
+Date:   Thu Nov 16 14:15:12 2017 +0530
+
+    data model updates
+
+[33mcommit 31fbe6db08656db3f17c14353337e580641760b6[m
+Merge: 93bc3d7 4f0065f
+Author: karunakar <karunakar1008@gmail.com>
+Date:   Thu Nov 16 14:03:41 2017 +0530
+
+    Merge branch 'feature/book-marathon' of https://github.com/ISKCON-Cultural-Centre/eISKCON into feature/book-marathon
+
+[33mcommit 93bc3d7e3ccf137a6b02a3da793855b497ff8628[m
+Author: karunakar <karunakar1008@gmail.com>
+Date:   Thu Nov 16 14:03:33 2017 +0530
+
+    Cleared the token on logout
+
+[33mcommit 3beaaa7d210d758fd71287fcee3366e75ec0cb1d[m
+Author: karunakar <karunakar1008@gmail.com>
+Date:   Thu Nov 16 13:51:46 2017 +0530
+
+    Changed filed format
+
+[33mcommit 4f0065fbdcc6b8b76885f6dd4c397e4ce659cc5d[m
+Merge: 47b424a 4271aef
+Author: Rajendra <hairajendra@gmail.com>
+Date:   Thu Nov 16 13:36:55 2017 +0530
+
+    Merge branch 'feature/book-marathon' of https://github.com/ISKCON-Cultural-Centre/eISKCON into feature/book-marathon
+
+[33mcommit 47b424a1a377a88250665cd99ca848ecf29a4d73[m
+Author: Rajendra <hairajendra@gmail.com>
+Date:   Thu Nov 16 13:35:49 2017 +0530
+
+    diable authentication for API
+
+[33mcommit 4271aef0d3dc1fe5507d7475e901f4e2625f0d52[m
+Author: karunakar <karunakar1008@gmail.com>
+Date:   Thu Nov 16 12:58:00 2017 +0530
+
+    Update angular cli version to 1.5
+
+[33mcommit 59bcdce0039f84c347deb9a2284913230c5f3653[m
+Merge: a1f0b10 dae5d38
+Author: Rajendra <hairajendra@gmail.com>
+Date:   Thu Nov 16 12:38:53 2017 +0530
+
+    Merge branch 'BookMarathon-Feature' of https://github.com/ISKCON-Cultural-Centre/eISKCON into BookMarathon-Feature
+
+[33mcommit a1f0b1030dc8e1f41aab1b759b4e3afe51bc1647[m
+Author: Rajendra <hairajendra@gmail.com>
+Date:   Thu Nov 16 12:38:17 2017 +0530
+
+    Data Model Updates
+
+[33mcommit dae5d38d9d58ed57047fe6625d3639466f176a59[m
+Author: karunakar <karunakar1008@gmail.com>
+Date:   Thu Nov 16 12:30:11 2017 +0530
+
+    Changed file formt
+
+[33mcommit cc504d34b963f1f20e795e8e82cda99eb8966fc9[m
+Author: Rajendra <hairajendra@gmail.com>
+Date:   Wed Nov 15 18:44:33 2017 +0530
+
+    Minor changes
+
+[33mcommit 67766f43f5d4644e771ca78a03f9cf58dfcc1da1[m
+Author: rajendra <rajendra@iskconbengaluru.co.in>
+Date:   Wed Nov 15 18:18:55 2017 +0530
+
+    Re-oraganized the directories client/src/app to enable development in the form of feature modules.
+
+[33mcommit e91d803c734275c1a743504d9fb21218ecd4fb13[m
+Author: Rajendra <hairajendra@gmail.com>
+Date:   Wed Nov 15 15:34:47 2017 +0530
+
+    Added Page-not-found page for catch-all situation
+
+[33mcommit c59724b334c43c824df3d002c5fa8d72e773b56f[m
+Merge: fb7d0ac c1d32f9
+Author: Rajendra <hairajendra@gmail.com>
+Date:   Wed Nov 15 12:17:07 2017 +0530
+
+    Merge branch 'BookMarathon-Feature' of https://github.com/ISKCON-Cultural-Centre/eISKCON into BookMarathon-Feature
+
+[33mcommit fb7d0ac87d679f502cf7bf018cbcc962e73edda7[m
+Author: Rajendra <hairajendra@gmail.com>
+Date:   Wed Nov 15 12:15:23 2017 +0530
+
+    Authguard Implemented. Routing will be to login page i the user is not authenticated
+
+[33mcommit c1d32f9956cb3c927370e339583ab2acf2a9ab12[m
+Author: rajendra <rajendra@iskconbengaluru.co.in>
+Date:   Tue Nov 14 19:36:37 2017 +0530
+
+    Daata model updates EOD commit
+
+[33mcommit 27e5bffe9bc0c3a0c42eaabf5fdfdaeef678cee8[m
+Author: Rajendra <hairajendra@gmail.com>
+Date:   Tue Nov 14 15:33:37 2017 +0530
+
+    Prototype for Book Marathon
+
+[33mcommit ab13f6827292f86b5ec11b41df7708fa232020c0[m
+Author: rajendra <rajendra@iskconbengaluru.co.in>
+Date:   Tue Nov 14 10:15:35 2017 +0530
+
+    Daily Development close Commit
+
+[33mcommit a5a2a4afa4b90d3768ba9aef5a3be90f768ccc32[m
+Author: rajendra <rajendra@iskconbengaluru.co.in>
+Date:   Mon Nov 13 20:33:56 2017 +0530
+
+    Fixed stuff after genrating models/sdk from loopback
+
+[33mcommit 754e2bdcfc217c1580b6c085c1f52418f700f6ff[m
+Author: rajendra <rajendra@iskconbengaluru.co.in>
+Date:   Mon Nov 13 19:55:46 2017 +0530
+
+    Data Model modified for addresses
+
+[33mcommit d49e131a1909d4d64811c46171cdb1417683096c[m
+Author: Rajendra <hairajendra@gmail.com>
+Date:   Mon Nov 13 14:07:30 2017 +0530
+
+    Removed debugger: line
+
+[33mcommit 4a1d00cc23dda8f6ac06e118a4eddee7aaf78cf7[m
+Author: Rajendra <hairajendra@gmail.com>
+Date:   Mon Nov 13 14:02:20 2017 +0530
+
+    removed console.log lines....
+
+[33mcommit a4f189a414c12d6f7ac18a8de8d929bb1d877462[m
+Author: Rajendra <hairajendra@gmail.com>
+Date:   Mon Nov 13 13:55:19 2017 +0530
+
+    Login/Logout is working now...
+
+[33mcommit 510431ab827fe30b4be6919330a899f4b4b2a183[m
+Author: Rajendra <hairajendra@gmail.com>
+Date:   Mon Nov 13 13:26:26 2017 +0530
+
+    Few more updates
+
+[33mcommit c1fea6da23949c66f2726903666b19a534dd9d2b[m
+Author: Rajendra <hairajendra@gmail.com>
+Date:   Mon Nov 13 13:18:27 2017 +0530
+
+    Few more changes
+
+[33mcommit 555b950e553300df509b642062e4a438f2aa16c9[m
+Author: Rajendra <hairajendra@gmail.com>
+Date:   Mon Nov 13 12:34:42 2017 +0530
+
+    Changes done for Login to talk to the API.
+
+[33mcommit bfa8f6531c6bbbba47dc882b4259c59ab67c9728[m
+Merge: 7969f45 a802398
+Author: rajendra <rajendra@iskconbengaluru.co.in>
+Date:   Fri Nov 10 21:40:42 2017 +0530
+
+    Merge branch 'Authentication-API' into Login-Feature
+
+[33mcommit a802398959607d82d131c942633c26fe97afcda0[m
+Author: rajendra <rajendra@iskconbengaluru.co.in>
+Date:   Fri Nov 10 21:30:18 2017 +0530
+
+    Loopback Mixin created for auto key generation & audit columns created/updated dates
+
+[33mcommit 5eeed5961ee8615f4306e862c5ccf4e16738d98f[m
+Author: Rajendra <hairajendra@gmail.com>
+Date:   Fri Nov 10 16:11:06 2017 +0530
+
+    WIP - Model Changes in Loopback
+
+[33mcommit 1a5365ae4376a01895950b785d04673e05a5ffc1[m
+Author: Rajendra <hairajendra@gmail.com>
+Date:   Fri Nov 10 11:40:34 2017 +0530
+
+    Update data model and Script to solve Error 500 issue
+
+[33mcommit 7969f4525cdcdb53290340ad98cd33ed1448aa89[m
+Author: karunakar <karunakar1008@gmail.com>
+Date:   Fri Nov 10 01:22:53 2017 +0530
+
+    Modified files to move routing to a commn place and hrader naigation
+
+[33mcommit d63cf73f51f9187803d50afeb398999fc78a25e4[m
+Author: rajendra <rajendra@iskconbengaluru.co.in>
+Date:   Tue Nov 7 15:50:26 2017 +0530
+
+    added GIT Flow Diagram
+
+[33mcommit a2a3cd84e0f363360bfb5ac89c31fb64ebfb0e72[m
+Author: shaurya8aatish <atish7288@gmail.com>
+Date:   Tue Nov 7 13:58:50 2017 +0530
+
+    icon updated
+
+[33mcommit 6860ca414e53bb315fc2b732d1d017e5d56040a2[m
+Merge: 89a51ae 5cc59b8
+Author: Rajendra <hairajendra@gmail.com>
+Date:   Tue Nov 7 12:21:59 2017 +0530
+
+    Merge branch 'Authentication-API' into Login-Feature
+
+[33mcommit 89a51ae0e24a6237c1b5fb724314bc94139887be[m
+Author: shaurya8aatish <atish7288@gmail.com>
+Date:   Tue Nov 7 12:04:37 2017 +0530
+
+    grid updated
+
+[33mcommit c5f3cc6704a961563f3981a5a8fb72f60c72424b[m
+Merge: df10526 2b2e69f
+Author: shaurya8aatish <atish7288@gmail.com>
+Date:   Tue Nov 7 11:41:40 2017 +0530
+
+    Merge branch 'Login-Feature' of https://github.com/ISKCON-Cultural-Centre/eISKCON into Login-Feature
+
+[33mcommit df10526daeb8beb17c6b603c3bb8f725f5f52e0f[m
+Author: shaurya8aatish <atish7288@gmail.com>
+Date:   Tue Nov 7 11:30:14 2017 +0530
+
+    icon changed
+
+[33mcommit 7f58ee13b7bf1bceb7cdd5e62ae2d2fdccac80f8[m
+Author: shaurya8aatish <atish7288@gmail.com>
+Date:   Tue Nov 7 09:42:39 2017 +0530
+
+    have changed browser icon and added grid
+
+[33mcommit 5cc59b8546dde51863b6381babeac1fa092fc24c[m
+Author: Rasaraja Syamasundara Dasa <hairajendra@gmail.com>
+Date:   Mon Nov 6 03:18:17 2017 -0500
+
+    Moved Prototype file to its appropriate folder
+
+[33mcommit 9154ac7c5039a8a880cfc94189da075b257b67a9[m
+Merge: f16c77d 9533be2
+Author: Rasaraja Syamasundara Dasa <hairajendra@gmail.com>
+Date:   Mon Nov 6 03:11:55 2017 -0500
+
+    Merge branch 'Authentication-API' of https://github.com/ISKCON-Cultural-Centre/eISKCON into Authentication-API
+    
+    Conflicts:
+    	server/boot/authentication.js
+
+[33mcommit f16c77de1c2cafdb47dbe0c9035ae2127cc650d8[m
+Author: Rasaraja Syamasundara Dasa <hairajendra@gmail.com>
+Date:   Mon Nov 6 02:43:50 2017 -0500
+
+    authentication disabled for now
+
+[33mcommit 9533be2617045d209acf44cfe5bc40fa686bcf15[m
+Author: Rajendra <hairajendra@gmail.com>
+Date:   Mon Nov 6 13:04:55 2017 +0530
+
+    User entity replaced with Devotee in the middleware. In the frontend, please change UserAPI to DevoteeAPI...
+
+[33mcommit 6db804b2c5f5cfa376146d0e60442fb7c979cf40[m
+Author: Rajendra <hairajendra@gmail.com>
+Date:   Mon Nov 6 12:03:16 2017 +0530
+
+    Generated data model in middleware and API SDK for client
+
+[33mcommit 4d5fab1603accca6d05052d94b973d0c02a0cf8c[m
+Merge: 259f4da 93dcc8d
+Author: Rajendra <hairajendra@gmail.com>
+Date:   Mon Nov 6 10:50:04 2017 +0530
+
+    Merge branch 'Authentication-API' of https://github.com/ISKCON-Cultural-Centre/eISKCON into Authentication-API
+
+[33mcommit 259f4dad12845b4dbdadef103934806ccae60d10[m
+Author: Rajendra <hairajendra@gmail.com>
+Date:   Mon Nov 6 10:48:41 2017 +0530
+
+    Added Git Reference doc
+
+[33mcommit 2b2e69f8adc9b573cf31ca1f1854d7a38cba5c1e[m
+Author: karunakar <karunakar1008@gmail.com>
+Date:   Sat Nov 4 15:30:38 2017 +0530
+
+    Modified files to include bootstrap navigation menu
+
+[33mcommit 1344e701e3edaf1a77d0ade557fbd105b6a1da18[m
+Author: karunakar <karunakar1008@gmail.com>
+Date:   Sat Nov 4 14:47:03 2017 +0530
+
+    Changed datatype
+
+[33mcommit 9eea15e708475257f7fe33b47b5b31574756e707[m
+Author: karunakar <karunakar1008@gmail.com>
+Date:   Sat Nov 4 14:44:02 2017 +0530
+
+    Added bootstrap css in angular cli json
+
+[33mcommit d5944efead74b30d14cb4a4461a0494fa725f192[m
+Author: karunakar <karunakar1008@gmail.com>
+Date:   Sat Nov 4 14:27:36 2017 +0530
+
+    Added ngx-bootstrap plugin to support bootstarp in app
+
+[33mcommit 0a0f321d8bd273ba6357669e6fbfe4e6f43bbfd8[m
+Author: karunakar <karunakar1008@gmail.com>
+Date:   Sat Nov 4 14:14:51 2017 +0530
+
+    Added packagelockjson file which is added in npm5 version
+
+[33mcommit 8888c1cb5807bb13609a943670c4ff181ee769bb[m
+Author: Karunakar Bhogyari <Karunakar.Bhogyari@brandmuscle.com>
+Date:   Sat Nov 4 13:44:39 2017 +0530
+
+    Removed duplicate dependency and formatted file properly
+
+[33mcommit 93dcc8d5c90e8443af131bf6daef0f8ebcd37910[m
+Author: rajendra <rajendra@iskconbengaluru.co.in>
+Date:   Fri Nov 3 17:56:46 2017 +0530
+
+    Devotee Entity extends built-in User Entity
+
+[33mcommit 46bddda1a3a019cef164894166ea040a084343e0[m
+Author: rajendra <rajendra@iskconbengaluru.co.in>
+Date:   Fri Nov 3 17:53:46 2017 +0530
+
+    Added loopback models generated from the database
+
+[33mcommit cb562b6031860b0dd1b6b6f22663663869cd1f7a[m
+Author: rajendra <rajendra@iskconbengaluru.co.in>
+Date:   Fri Nov 3 17:52:19 2017 +0530
+
+    Updated discoverModels.js to an existing datasource
+
+[33mcommit 6773b125c10127305f189430225a1565c5fdbd85[m
+Author: rajendra <rajendra@iskconbengaluru.co.in>
+Date:   Fri Nov 3 17:31:14 2017 +0530
+
+    Model Discovery Script
+
+[33mcommit d19b2520ff79122cdc1a355aec348b14aaadab4d[m
+Author: Rajendra <hairajendra@gmail.com>
+Date:   Wed Nov 1 14:42:25 2017 +0530
+
+    Added database DDL SQL scripts
+
+[33mcommit fd5c5455e41fdb90a0e9bb8d4ffb3622f3ae5a94[m
+Author: Rajendra <hairajendra@gmail.com>
+Date:   Wed Nov 1 14:24:51 2017 +0530
+
+    Added reference_docs folder for data models, git commands, etc
+
+[33mcommit 2171f92dc5261b2f9b16a1d01518426eb00494da[m
+Author: rajendra <rajendra@iskconbengaluru.co.in>
+Date:   Tue Oct 31 17:48:31 2017 +0530
+
+    login files modified
+
+[33mcommit 8f03c150a41ecc1fbb1196d9c6b422d9ef41d726[m
+Author: Rajendra <hairajendra@gmail.com>
+Date:   Wed Oct 25 19:07:01 2017 +0530
+
+    Delete datasources.json
+
+[33mcommit 528b1309fb0733c71d59b79221d29d6c490116db[m
+Author: rajendra <rajendra@iskconbengaluru.co.in>
+Date:   Wed Oct 25 19:05:23 2017 +0530
+
+    removed datasources
+
+[33mcommit a64abd608eaa29dec020345bdb4a1c13bffa6102[m
+Merge: 24fa749 ef8c676
+Author: rajendra <rajendra@iskconbengaluru.co.in>
+Date:   Wed Oct 25 19:00:57 2017 +0530
+
+    Merge branch 'master' of https://github.com/ISKCON-Cultural-Centre/eISKCON
+
+[33mcommit 24fa749a8eb28be7ef28cc348532e1044a09a9ef[m
+Author: rajendra <rajendra@iskconbengaluru.co.in>
+Date:   Wed Oct 25 18:58:18 2017 +0530
+
+    Updated to Material Beta 2....12
+
+[33mcommit ef8c6766bd42d18970cf9348d932cf5719bde4cc[m
+Author: Rajendra <hairajendra@gmail.com>
+Date:   Wed Oct 25 18:46:26 2017 +0530
+
+    Update README.md
+
+[33mcommit 3131bc25b287be1ef941945d1320fd3d4d83e0f7[m
+Author: Rajendra <hairajendra@gmail.com>
+Date:   Wed Oct 25 18:35:09 2017 +0530
+
+    Update datasources.json
+
+[33mcommit b56366411fd378dc3f587d893962e8521b7963fb[m
+Author: Rajendra <hairajendra@gmail.com>
+Date:   Tue Oct 24 12:31:51 2017 +0530
+
+    Delete contributors
+
+[33mcommit c8d7bf0513c219496ba57ec743cc801a3c262daa[m
+Author: Rajendra <hairajendra@gmail.com>
+Date:   Tue Oct 24 12:31:07 2017 +0530
+
+    Update README.md
+
+[33mcommit f9c164080516c7ce1c53a3ebac5b0968f1ef7ee0[m
+Author: Rajendra <hairajendra@gmail.com>
+Date:   Tue Oct 24 12:29:57 2017 +0530
+
+    Create contributors
+
+[33mcommit c1bf120a445998dc3a138370d096e429219c6857[m
+Author: Rajendra <hairajendra@gmail.com>
+Date:   Tue Oct 24 12:28:51 2017 +0530
+
+    Update README.md
+
+[33mcommit a686e5148ebc9b464a572c08b6344050ea6f9808[m
+Author: Rajendra <hairajendra@gmail.com>
+Date:   Tue Oct 24 11:49:54 2017 +0530
+
+    Loopback and Angular - Login Feature : Initial Version
+
+[33mcommit b433df2a037d96426a99b61204eba0bdf524ada3[m
+Author: Rajendra <hairajendra@gmail.com>
+Date:   Tue Oct 24 11:41:46 2017 +0530
+
+    Update .gitignore
+
+[33mcommit 8bc3346d096d96964009866cdc1a8e3593c91ec5[m
+Author: Rajendra <hairajendra@gmail.com>
+Date:   Tue Oct 24 04:56:55 2017 +0530
+
+    Update README.md
+
+[33mcommit e1cb2f3f64019ac129565ecc50d6af3449bb7643[m
+Author: Rajendra <hairajendra@gmail.com>
+Date:   Mon Oct 23 19:29:16 2017 +0530
+
+    Update README.md
+
+[33mcommit c7faf0c5877186038cab53d3f6098051fce5dde8[m
+Author: Rajendra <hairajendra@gmail.com>
+Date:   Mon Oct 23 18:58:51 2017 +0530
+
+    Update README.md
+
+[33mcommit 64b4270fccd45a029828b357c554bfaf947075de[m
+Author: Rajendra <hairajendra@gmail.com>
+Date:   Mon Oct 23 18:57:36 2017 +0530
+
+    Update README.md
+
+[33mcommit 1b99257d2ed073bd32d5fe9b95fd8a81b890386f[m
+Author: Rajendra <hairajendra@gmail.com>
+Date:   Mon Oct 23 18:49:04 2017 +0530
+
+    Update README.md
+
+[33mcommit e7344a0c3af088328cdc077ff59d685225c1cf3a[m
+Author: Rajendra <hairajendra@gmail.com>
+Date:   Mon Oct 23 18:48:06 2017 +0530
+
+    Update README.md
+
+[33mcommit 478333d02fa926a349c2483872cf3fffb9803ff5[m
+Author: Rajendra <hairajendra@gmail.com>
+Date:   Mon Oct 23 18:44:57 2017 +0530
+
+    Add files via upload
+
+[33mcommit 55ffa1a4dfdced4d3090cb93bc207da6593db247[m
+Author: Rajendra <hairajendra@gmail.com>
+Date:   Mon Oct 23 18:42:34 2017 +0530
+
+    Update README.md
+
+[33mcommit 646d354923b9ef8b7907bdee9b0327c53039324c[m
+Author: Rajendra <hairajendra@gmail.com>
+Date:   Mon Oct 23 18:28:20 2017 +0530
+
+    Add files via upload
+
+[33mcommit 904c1c553ce1666daf79e2d3f55fce5d3981c429[m
+Author: Rajendra <hairajendra@gmail.com>
+Date:   Mon Oct 23 18:20:26 2017 +0530
+
+    Initial commit
