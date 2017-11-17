@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationStart, NavigationEnd } from '@angular/router';
 import { AuthService } from './../shared/services/auth.service';
 
 
@@ -17,11 +17,13 @@ export class NavgationComponent implements OnInit {
 
   constructor(private router: Router, private devoteeApi: DevoteeApi, private authService: AuthService) {
 
-    this.router.events
-      .subscribe((route) => {
-        this.isLogin = (route as NavigationEnd).url.match('/login') !== null ||
-          (route as NavigationEnd).url.match('/reset') !== null;
-      });
+    // This is to restrict navigation header in login and Reset pages
+    this.router.events.subscribe((evt) => {
+      if (evt instanceof NavigationEnd) {
+        // console.log(evt.url.match('/login'));
+        this.isLogin = evt.url.match('/login') != null || evt.url.match('/login') != null;
+      }
+    });
   }
 
 
