@@ -5,9 +5,9 @@ import { ResetPasswordComponent } from './login/reset-password.component';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './pageNotFound.component';
 import { DashboardComponent } from './components/dashboard.component';
-import { DevoteeComponent} from './components/devotee.component';
-
+import { DevoteeComponent } from './components/devotee.component';
 import { AuthGuard as AuthGuard } from './shared/services/auth.guard';
+import { RegisterComponent } from './login/register/register.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
@@ -16,6 +16,7 @@ const routes: Routes = [
   { path: 'devotee', component: DevoteeComponent, canActivate: [AuthGuard] },
   { path: 'reset', component: ResetPasswordComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full', canActivate: [AuthGuard] },
+  { path: 'register', component: RegisterComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 

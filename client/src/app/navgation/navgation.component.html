@@ -1,9 +1,14 @@
 <ul *ngIf="!isLogin">
   <li role="presentation" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
-    <a [routerLink]="['home']" href="#">Home</a>
+    <!-- <a [routerLink]="['home']" href="#">Home</a> -->
+    <a routerLink="home">Home</a>
+  </li>
+  <li role="presentation" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+    <!-- <a [routerLink]="['devotee']" href="#">Admin</a> -->
+    <a routerLink="devotee">Admin</a>
   </li>
   <li role="presentation" class="dropdown" style="float:right">
-      <a (click)="logout()" href="#" class="dropbtn">Logout</a>
+    <a (click)="logout()" href="#" class="dropbtn">Logout</a>
     <!-- <a href="javascript:void(0)" class="dropbtn">Dropdown</a> -->
     <div class="dropdown-content">
       <a href="#">Link 1</a>

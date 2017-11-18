@@ -21,7 +21,7 @@ export class NavgationComponent implements OnInit {
     this.router.events.subscribe((evt) => {
       if (evt instanceof NavigationEnd) {
         // console.log(evt.url.match('/login'));
-        this.isLogin = evt.url.match('/login') != null || evt.url.match('/login') != null;
+        this.isLogin = evt.url.match('/login') != null || evt.url.match('/reset') != null || evt.url.match('/register') != null;
       }
     });
   }

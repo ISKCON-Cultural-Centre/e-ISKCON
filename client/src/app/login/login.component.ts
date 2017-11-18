@@ -70,7 +70,10 @@ export class LoginComponent implements OnInit {
       email: email.value
     }).subscribe((res) => {
       console.log('Restted!', res);
-    })
+    });
+  }
+  redirectToRegister() {
+    this.router.navigate(['./register']);
   }
 
 }

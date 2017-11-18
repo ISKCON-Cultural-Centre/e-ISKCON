@@ -9,15 +9,16 @@ import { MaterialModule } from './material.module';
 
 import { SDKBrowserModule } from './shared/sdk';
 import { AuthGuard, AuthService } from './shared/services';
-
 import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './pageNotFound.component';
 import { NavgationComponent } from './navgation/navgation.component';
 import { HomeComponent } from './home/home.component';
+import { RegisterComponent } from './login/register/register.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginModule } from './login/login.module';
 import { DashboardComponent } from './components/dashboard.component';
 import { DevoteeComponent } from './components/devotee.component';
+import { DevoteeModule } from '../app/devotee/devotee.module';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { DevoteeComponent } from './components/devotee.component';
     HttpModule,
     SDKBrowserModule.forRoot(),
     RouterModule,
-    AppRoutingModule
+    AppRoutingModule,
+    DevoteeModule
   ],
   providers: [
     AuthGuard,

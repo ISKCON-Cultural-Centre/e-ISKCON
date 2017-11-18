@@ -6,6 +6,7 @@ import { MaterialModule } from '../material.module';
 
 import { LoginComponent } from './login.component';
 import { ResetPasswordComponent } from './reset-password.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   imports: [
@@ -14,6 +15,6 @@ import { ResetPasswordComponent } from './reset-password.component';
     FormsModule,
     MaterialModule
   ],
-  declarations: [LoginComponent, ResetPasswordComponent]
+  declarations: [LoginComponent, ResetPasswordComponent, RegisterComponent]
 })
 export class LoginModule { }
