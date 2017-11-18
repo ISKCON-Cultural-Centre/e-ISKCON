@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 import { Router } from '@angular/router';
-import { DevoteeApi } from '../../app/shared/sdk/services/custom/Devotee';
 import { Devotee } from '../../app/shared/sdk/models/Devotee';
+import { DevoteeApi } from '../../app/shared/sdk/services/custom/Devotee';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { SDKToken } from '../shared/sdk';
@@ -15,19 +15,20 @@ import { AuthService } from '../shared/services/auth.service';
 })
 export class DevoteeComponent implements OnInit {
 
-  displayedColumns = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
-
-  devotees: Observable<Devotee[]>;
+  // displayedColumns = ['position', 'name', 'weight', 'symbol'];
+  displayedColumns = ['legalName', 'spiritualName', 'gender', 'username'];
+  devotees: Devotee[] = [];
+  dataSource: any;
   constructor(
     private devoteeApi: DevoteeApi,
     private authService: AuthService,
     private router: Router) {
+    this.getAllDevotees();
   }
 
   ngOnInit() {
-    this.devotees = this.getDevotees();
     console.log(this.devotees);
+    this.dataSource = new MatTableDataSource(this.devotees);
   }
 
   InitializeDataSource() {
@@ -40,6 +41,15 @@ export class DevoteeComponent implements OnInit {
   }
   getDevotees(): Observable<Devotee[]> {
     return this.devoteeApi.find<Devotee>();
+  }
+  getAllDevotees() {
+    this.devoteeApi.find()
+      .subscribe((devotees) => {
+        this.devotees = devotees as Devotee[];
+        console.log(this.devotees);
+      }, err => {
+        alert(err && err.message ? err.message : 'Fetching Devotees Failed');
+      });
   }
 }
 
