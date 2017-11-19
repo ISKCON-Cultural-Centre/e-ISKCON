@@ -24,52 +24,66 @@ DROP SCHEMA IF EXISTS `mg` ;
 -- -----------------------------------------------------
 -- Schema mg
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mg` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ;
+CREATE SCHEMA IF NOT EXISTS `mg` DEFAULT CHARACTER SET utf8 ;
 USE `icc` ;
+
+-- -----------------------------------------------------
+-- Table `icc`.`deeksha-guru`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `icc`.`deeksha-guru` (
+  `id` VARCHAR(36) NOT NULL,
+  `name` VARCHAR(100) NULL,
+  `created-on` DATETIME NULL DEFAULT NULL,
+  `updated-on` DATETIME NULL DEFAULT NULL,
+  `created-by` VARCHAR(36) NULL DEFAULT NULL,
+  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
 
 -- -----------------------------------------------------
 -- Table `icc`.`circle`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `icc`.`circle` (
-  `id` VARCHAR(36) CHARACTER SET 'utf8' NOT NULL,
-  `name` VARCHAR(100) CHARACTER SET 'utf8' NULL,
+  `id` VARCHAR(36) NOT NULL,
+  `name` VARCHAR(100) NULL,
   `created-on` DATETIME NULL DEFAULT NULL,
   `updated-on` DATETIME NULL DEFAULT NULL,
-  `created-by` VARCHAR(36) CHARACTER SET 'utf8' NULL DEFAULT NULL,
-  `updated-by` VARCHAR(36) CHARACTER SET 'utf8' NULL DEFAULT NULL,
-  PRIMARY KEY (`id`))
+  `created-by` VARCHAR(36) NULL DEFAULT NULL,
+  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `idx_circle` (`id` ASC))
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci;
+DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
 -- Table `icc`.`electronic-address-type-master`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `icc`.`electronic-address-type-master` (
-  `id` VARCHAR(36) CHARACTER SET 'utf8' NOT NULL,
-  `name` VARCHAR(50) CHARACTER SET 'utf8' NULL,
+  `id` VARCHAR(36) NOT NULL,
+  `name` VARCHAR(50) NULL,
   `created-on` DATETIME NULL DEFAULT NULL,
   `updated-on` DATETIME NULL DEFAULT NULL,
-  `created-by` VARCHAR(36) CHARACTER SET 'utf8' NULL DEFAULT NULL,
-  `updated-by` VARCHAR(36) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+  `created-by` VARCHAR(36) NULL DEFAULT NULL,
+  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci;
+DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
 -- Table `icc`.`electronic-address`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `icc`.`electronic-address` (
-  `id` VARCHAR(36) CHARACTER SET 'utf8' NOT NULL,
-  `electronic-address-type-master-id` VARCHAR(36) CHARACTER SET 'utf8' NULL,
-  `electronic-address` VARCHAR(50) CHARACTER SET 'utf8' NULL,
+  `id` VARCHAR(36) NOT NULL,
+  `electronic-address-type-master-id` VARCHAR(36) NULL,
+  `electronic-address` VARCHAR(50) NULL,
   `created-on` DATETIME NULL DEFAULT NULL,
   `updated-on` DATETIME NULL DEFAULT NULL,
-  `created-by` VARCHAR(36) CHARACTER SET 'utf8' NULL DEFAULT NULL,
-  `updated-by` VARCHAR(36) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+  `created-by` VARCHAR(36) NULL DEFAULT NULL,
+  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_electronic-address_electronic-address-type-master1_idx` (`electronic-address-type-master-id` ASC),
   CONSTRAINT `fk_electronic-address_electronic-address-type-master1`
@@ -78,42 +92,40 @@ CREATE TABLE IF NOT EXISTS `icc`.`electronic-address` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci;
+DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
 -- Table `icc`.`physical-address-type-master`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `icc`.`physical-address-type-master` (
-  `id` VARCHAR(36) CHARACTER SET 'utf8' NOT NULL,
-  `address-type` VARCHAR(50) CHARACTER SET 'utf8' NULL,
+  `id` VARCHAR(36) NOT NULL,
+  `address-type` VARCHAR(50) NULL,
   `created-on` DATETIME NULL DEFAULT NULL,
   `updated-on` DATETIME NULL DEFAULT NULL,
-  `created-by` VARCHAR(36) CHARACTER SET 'utf8' NULL DEFAULT NULL,
-  `updated-by` VARCHAR(36) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+  `created-by` VARCHAR(36) NULL DEFAULT NULL,
+  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci;
+DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
 -- Table `icc`.`physical-address`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `icc`.`physical-address` (
-  `id` VARCHAR(36) CHARACTER SET 'utf8' NOT NULL,
-  `address-type-master-id` VARCHAR(36) CHARACTER SET 'utf8' NULL,
-  `address-line-1` VARCHAR(100) CHARACTER SET 'utf8' NULL,
-  `address-line-2` VARCHAR(100) CHARACTER SET 'utf8' NULL,
-  `address-area` VARCHAR(100) CHARACTER SET 'utf8' NULL,
-  `address-city` VARCHAR(100) CHARACTER SET 'utf8' NULL,
-  `address-country` VARCHAR(100) CHARACTER SET 'utf8' NULL,
-  `address-pin` VARCHAR(10) CHARACTER SET 'utf8' NULL,
+  `id` VARCHAR(36) NOT NULL,
+  `address-type-master-id` VARCHAR(36) NULL,
+  `address-line-1` VARCHAR(100) NULL,
+  `address-line-2` VARCHAR(100) NULL,
+  `address-area` VARCHAR(100) NULL,
+  `address-city` VARCHAR(100) NULL,
+  `address-country` VARCHAR(100) NULL,
+  `address-pin` VARCHAR(10) NULL,
   `created-on` DATETIME NULL DEFAULT NULL,
   `updated-on` DATETIME NULL DEFAULT NULL,
-  `created-by` VARCHAR(36) CHARACTER SET 'utf8' NULL DEFAULT NULL,
-  `updated-by` VARCHAR(36) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+  `created-by` VARCHAR(36) NULL DEFAULT NULL,
+  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_physical-address_address-type-master1_idx` (`address-type-master-id` ASC),
   CONSTRAINT `fk_physical-address_address-type-master1`
@@ -122,50 +134,48 @@ CREATE TABLE IF NOT EXISTS `icc`.`physical-address` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci;
+DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
 -- Table `icc`.`spiritual-level-master`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `icc`.`spiritual-level-master` (
-  `id` VARCHAR(36) CHARACTER SET 'utf8' NOT NULL,
-  `level` VARCHAR(30) CHARACTER SET 'utf8' NULL,
-  `description` VARCHAR(50) CHARACTER SET 'utf8' NULL,
+  `id` VARCHAR(36) NOT NULL,
+  `level` VARCHAR(30) NULL,
+  `description` VARCHAR(50) NULL,
   `created-on` DATETIME NULL DEFAULT NULL,
   `updated-on` DATETIME NULL DEFAULT NULL,
-  `created-by` VARCHAR(36) CHARACTER SET 'utf8' NULL DEFAULT NULL,
-  `updated-by` VARCHAR(36) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+  `created-by` VARCHAR(36) NULL DEFAULT NULL,
+  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci;
+DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
 -- Table `icc`.`devotee`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `icc`.`devotee` (
-  `id` VARCHAR(36) COLLATE 'utf8_unicode_ci' NOT NULL,
-  `legal-name` VARCHAR(100) COLLATE 'utf8_unicode_ci' NULL,
-  `spiritual-name` VARCHAR(100) COLLATE 'utf8_unicode_ci' NULL DEFAULT NULL,
-  `circle-id` VARCHAR(36) COLLATE 'utf8_unicode_ci' NULL,
-  `gender` CHAR(1) COLLATE 'utf8_unicode_ci' NULL DEFAULT NULL,
-  `physical-address-id` VARCHAR(36) COLLATE 'utf8_unicode_ci' NULL,
-  `electronic-address-id` VARCHAR(36) COLLATE 'utf8_unicode_ci' NULL,
-  `shiksha-level` VARCHAR(100) COLLATE 'utf8_unicode_ci' NULL DEFAULT NULL,
-  `spiritual-level-master-id` VARCHAR(36) COLLATE 'utf8_unicode_ci' NULL,
-  `realm` VARCHAR(512) COLLATE 'utf8_unicode_ci' NULL DEFAULT NULL,
-  `username` VARCHAR(512) COLLATE 'utf8_unicode_ci' NULL DEFAULT NULL,
-  `password` VARCHAR(512) COLLATE 'utf8_unicode_ci' NULL,
-  `email` VARCHAR(512) COLLATE 'utf8_unicode_ci' NULL,
+  `id` VARCHAR(36) NOT NULL,
+  `legal-name` VARCHAR(100) NULL,
+  `spiritual-name` VARCHAR(100) NULL DEFAULT NULL,
+  `circle-id` VARCHAR(36) NULL,
+  `gender` CHAR(1) NULL DEFAULT NULL,
+  `physical-address-id` VARCHAR(36) NULL,
+  `electronic-address-id` VARCHAR(36) NULL,
+  `shiksha-level` VARCHAR(100) NULL DEFAULT NULL,
+  `spiritual-level-master-id` VARCHAR(36) NULL,
+  `realm` VARCHAR(512) NULL DEFAULT NULL,
+  `username` VARCHAR(512) NULL DEFAULT NULL,
+  `password` VARCHAR(512) NULL,
+  `email` VARCHAR(512) NULL,
   `emailVerified` TINYINT(1) NULL DEFAULT NULL,
-  `verificationToken` VARCHAR(512) COLLATE 'utf8_unicode_ci' NULL DEFAULT NULL,
+  `verificationToken` VARCHAR(512) NULL DEFAULT NULL,
   `created-on` DATETIME NULL DEFAULT NULL,
   `updated-on` DATETIME NULL DEFAULT NULL,
-  `created-by` VARCHAR(36) COLLATE 'utf8_unicode_ci' NULL DEFAULT NULL,
-  `updated-by` VARCHAR(36) COLLATE 'utf8_unicode_ci' NULL DEFAULT NULL,
+  `created-by` VARCHAR(36) NULL DEFAULT NULL,
+  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_devotee_id_idx` (`id` ASC),
   INDEX `fk_devotee_spiritual-level-master1_idx` (`spiritual-level-master-id` ASC),
@@ -193,51 +203,7 @@ CREATE TABLE IF NOT EXISTS `icc`.`devotee` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci;
-
-
--- -----------------------------------------------------
--- Table `icc`.`circle-devotee`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `icc`.`circle-devotee` (
-  `circle_id` VARCHAR(36) CHARACTER SET 'utf8' NOT NULL,
-  `devotee_id` VARCHAR(36) CHARACTER SET 'utf8' NOT NULL,
-  `created-on` DATETIME NULL DEFAULT NULL,
-  `updated-on` DATETIME NULL DEFAULT NULL,
-  `created-by` VARCHAR(36) CHARACTER SET 'utf8' NULL DEFAULT NULL,
-  `updated-by` VARCHAR(36) CHARACTER SET 'utf8' NULL DEFAULT NULL,
-  PRIMARY KEY (`circle_id`, `devotee_id`),
-  INDEX `fk_circle-devotee_devotee1_idx` (`devotee_id` ASC),
-  CONSTRAINT `fk_circle-devotee_circle1`
-    FOREIGN KEY (`circle_id`)
-    REFERENCES `icc`.`circle` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_circle-devotee_devotee1`
-    FOREIGN KEY (`devotee_id`)
-    REFERENCES `icc`.`devotee` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci;
-
-
--- -----------------------------------------------------
--- Table `icc`.`deeksha-guru`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `icc`.`deeksha-guru` (
-  `id` VARCHAR(36) CHARACTER SET 'utf8' NOT NULL,
-  `name` VARCHAR(100) CHARACTER SET 'utf8' NULL,
-  `created-on` DATETIME NULL DEFAULT NULL,
-  `updated-on` DATETIME NULL DEFAULT NULL,
-  `created-by` VARCHAR(36) CHARACTER SET 'utf8' NULL DEFAULT NULL,
-  `updated-by` VARCHAR(36) CHARACTER SET 'utf8' NULL DEFAULT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci;
+DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
@@ -708,8 +674,7 @@ CREATE TABLE IF NOT EXISTS `icc`.`department` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci;
+DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
@@ -722,7 +687,8 @@ CREATE TABLE IF NOT EXISTS `icc`.`approval-rule` (
   `role-id` INT(11) NOT NULL,
   `last-approval-sequence-ind` TINYINT NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`))
-ENGINE = InnoDB;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
@@ -752,8 +718,7 @@ CREATE TABLE IF NOT EXISTS `icc`.`approval-que` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci;
+DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
@@ -770,6 +735,32 @@ CREATE TABLE IF NOT EXISTS `icc`.`approval-artefact` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_unicode_ci;
+
+
+-- -----------------------------------------------------
+-- Table `icc`.`circle-devotee`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `icc`.`circle-devotee` (
+  `devotee-id` VARCHAR(36) NOT NULL,
+  `circle-id` VARCHAR(36) NOT NULL,
+  `created-on` DATETIME NULL DEFAULT NULL,
+  `updated-on` DATETIME NULL DEFAULT NULL,
+  `created-by` VARCHAR(36) NULL DEFAULT NULL,
+  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
+  INDEX `fk_table1_devotee1_idx` (`devotee-id` ASC),
+  INDEX `fk_circle-devotee_circle1_idx` (`circle-id` ASC),
+  CONSTRAINT `fk_table1_devotee1`
+    FOREIGN KEY (`devotee-id`)
+    REFERENCES `icc`.`devotee` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_circle-devotee_circle1`
+    FOREIGN KEY (`circle-id`)
+    REFERENCES `icc`.`circle` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 
 USE `mg` ;
 
@@ -797,8 +788,7 @@ CREATE TABLE IF NOT EXISTS `mg`.`book` (
   UNIQUE INDEX `PRODUCTS_INX_1` (`bar-code` ASC),
   INDEX `PRODUCTS_NAME_INX` (`title` ASC))
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci;
+DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
@@ -815,8 +805,7 @@ CREATE TABLE IF NOT EXISTS `mg`.`book-request-status` (
   `updated-by` VARCHAR(36) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci;
+DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
@@ -837,7 +826,8 @@ CREATE TABLE IF NOT EXISTS `mg`.`book-marathon-return-detail` (
     REFERENCES `mg`.`book` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
@@ -907,7 +897,8 @@ CREATE TABLE IF NOT EXISTS `mg`.`book-marathon-return` (
     REFERENCES `icc`.`devotee` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
@@ -933,8 +924,7 @@ CREATE TABLE IF NOT EXISTS `mg`.`book-marathon-settlement` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci;
+DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
@@ -964,7 +954,8 @@ CREATE TABLE IF NOT EXISTS `mg`.`book-marathon-order` (
     REFERENCES `icc`.`devotee` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
@@ -979,7 +970,7 @@ CREATE TABLE IF NOT EXISTS `mg`.`book-marathon-reported-sale` (
   `created-by` VARCHAR(36) NULL DEFAULT NULL,
   `updated-by` VARCHAR(36) NULL DEFAULT NULL,
   `book-id` VARCHAR(36) NOT NULL,
-  `devotee-id` VARCHAR(36) COLLATE 'utf8_unicode_ci' NOT NULL,
+  `devotee-id` VARCHAR(36) NOT NULL,
   INDEX `fk_book-marathon-reported-sale_book1_idx` (`book-id` ASC),
   INDEX `fk_book-marathon-reported-sale_devotee1_idx` (`devotee-id` ASC),
   PRIMARY KEY (`id`),
@@ -993,7 +984,8 @@ CREATE TABLE IF NOT EXISTS `mg`.`book-marathon-reported-sale` (
     REFERENCES `icc`.`devotee` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
