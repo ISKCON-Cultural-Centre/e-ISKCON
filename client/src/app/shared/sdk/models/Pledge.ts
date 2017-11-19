@@ -72,6 +72,7 @@ export class Pledge implements PledgeInterface {
       name: 'Pledge',
       plural: 'Pledges',
       path: 'Pledges',
+      idName: 'id',
       properties: {
         "id": {
           name: 'id',
@@ -134,12 +135,18 @@ export class Pledge implements PledgeInterface {
         fkPledgeDevotee2rel: {
           name: 'fkPledgeDevotee2rel',
           type: 'Devotee',
-          model: 'Devotee'
+          model: 'Devotee',
+          relationType: 'belongsTo',
+                  keyFrom: 'devoteeId',
+          keyTo: 'id'
         },
         fkPledgeDonationTypeMaster1rel: {
           name: 'fkPledgeDonationTypeMaster1rel',
           type: 'DonationTypeMaster',
-          model: 'DonationTypeMaster'
+          model: 'DonationTypeMaster',
+          relationType: 'belongsTo',
+                  keyFrom: 'donationTypeMasterId',
+          keyTo: 'id'
         },
       }
     }

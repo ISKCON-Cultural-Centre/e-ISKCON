@@ -71,6 +71,7 @@ export class Payment implements PaymentInterface {
       name: 'Payment',
       plural: 'Payments',
       path: 'Payments',
+      idName: 'id',
       properties: {
         "id": {
           name: 'id',
@@ -125,17 +126,26 @@ export class Payment implements PaymentInterface {
         fkPaymentDevotee2rel: {
           name: 'fkPaymentDevotee2rel',
           type: 'Devotee',
-          model: 'Devotee'
+          model: 'Devotee',
+          relationType: 'belongsTo',
+                  keyFrom: 'devoteeId',
+          keyTo: 'id'
         },
         fkPaymentDonationTypeMaster1rel: {
           name: 'fkPaymentDonationTypeMaster1rel',
           type: 'DonationTypeMaster',
-          model: 'DonationTypeMaster'
+          model: 'DonationTypeMaster',
+          relationType: 'belongsTo',
+                  keyFrom: 'donationTypeMasterId',
+          keyTo: 'id'
         },
         fkPaymentPaymentModeMaster1rel: {
           name: 'fkPaymentPaymentModeMaster1rel',
           type: 'PaymentModeMaster',
-          model: 'PaymentModeMaster'
+          model: 'PaymentModeMaster',
+          relationType: 'belongsTo',
+                  keyFrom: 'paymentModeMasterId',
+          keyTo: 'id'
         },
       }
     }

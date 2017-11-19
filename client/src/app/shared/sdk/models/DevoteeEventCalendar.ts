@@ -62,6 +62,7 @@ export class DevoteeEventCalendar implements DevoteeEventCalendarInterface {
       name: 'DevoteeEventCalendar',
       plural: 'DevoteeEventCalendars',
       path: 'DevoteeEventCalendars',
+      idName: 'devoteeId',
       properties: {
         "devoteeId": {
           name: 'devoteeId',
@@ -104,12 +105,18 @@ export class DevoteeEventCalendar implements DevoteeEventCalendarInterface {
         fkDevoteeEventCalendarDevotee2rel: {
           name: 'fkDevoteeEventCalendarDevotee2rel',
           type: 'Devotee',
-          model: 'Devotee'
+          model: 'Devotee',
+          relationType: 'belongsTo',
+                  keyFrom: 'devoteeId',
+          keyTo: 'id'
         },
         fkDevoteeEventCalendarEventMaster1rel: {
           name: 'fkDevoteeEventCalendarEventMaster1rel',
           type: 'EventMaster',
-          model: 'EventMaster'
+          model: 'EventMaster',
+          relationType: 'belongsTo',
+                  keyFrom: 'eventMasterId',
+          keyTo: 'id'
         },
       }
     }

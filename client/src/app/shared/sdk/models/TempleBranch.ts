@@ -68,6 +68,7 @@ export class TempleBranch implements TempleBranchInterface {
       name: 'TempleBranch',
       plural: 'TempleBranches',
       path: 'TempleBranches',
+      idName: 'id',
       properties: {
         "id": {
           name: 'id',
@@ -122,12 +123,18 @@ export class TempleBranch implements TempleBranchInterface {
         fkTempleBranchTemple1rel: {
           name: 'fkTempleBranchTemple1rel',
           type: 'Temple',
-          model: 'Temple'
+          model: 'Temple',
+          relationType: 'belongsTo',
+                  keyFrom: 'templeId',
+          keyTo: 'id'
         },
         fkTempleBranchPhysicalAddress1rel: {
           name: 'fkTempleBranchPhysicalAddress1rel',
           type: 'PhysicalAddress',
-          model: 'PhysicalAddress'
+          model: 'PhysicalAddress',
+          relationType: 'belongsTo',
+                  keyFrom: 'physicalAddressId',
+          keyTo: 'id'
         },
       }
     }

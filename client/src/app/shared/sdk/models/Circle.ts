@@ -52,6 +52,7 @@ export class Circle implements CircleInterface {
       name: 'Circle',
       plural: 'Circles',
       path: 'Circles',
+      idName: 'id',
       properties: {
         "id": {
           name: 'id',

@@ -64,6 +64,7 @@ export class PhysicalAddress implements PhysicalAddressInterface {
       name: 'PhysicalAddress',
       plural: 'PhysicalAddresses',
       path: 'PhysicalAddresses',
+      idName: 'id',
       properties: {
         "id": {
           name: 'id',

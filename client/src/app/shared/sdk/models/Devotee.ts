@@ -84,6 +84,7 @@ export class Devotee implements DevoteeInterface {
       name: 'Devotee',
       plural: 'Devotees',
       path: 'Devotees',
+      idName: 'id',
       properties: {
         "id": {
           name: 'id',
@@ -154,27 +155,42 @@ export class Devotee implements DevoteeInterface {
         accessTokens: {
           name: 'accessTokens',
           type: 'any[]',
-          model: ''
+          model: '',
+          relationType: 'hasMany',
+                  keyFrom: 'id',
+          keyTo: 'userId'
         },
         fkDevoteeCircle1rel: {
           name: 'fkDevoteeCircle1rel',
           type: 'Circle',
-          model: 'Circle'
+          model: 'Circle',
+          relationType: 'belongsTo',
+                  keyFrom: 'circleId',
+          keyTo: 'id'
         },
         fkDevoteeSpiritualLevelMaster1rel: {
           name: 'fkDevoteeSpiritualLevelMaster1rel',
           type: 'SpiritualLevelMaster',
-          model: 'SpiritualLevelMaster'
+          model: 'SpiritualLevelMaster',
+          relationType: 'belongsTo',
+                  keyFrom: 'spiritualLevelMasterId',
+          keyTo: 'id'
         },
         fkDevoteeElectronicAddress1rel: {
           name: 'fkDevoteeElectronicAddress1rel',
           type: 'ElectronicAddress',
-          model: 'ElectronicAddress'
+          model: 'ElectronicAddress',
+          relationType: 'belongsTo',
+                  keyFrom: 'electronicAddressId',
+          keyTo: 'id'
         },
         fkDevoteePhysicalAddress1rel: {
           name: 'fkDevoteePhysicalAddress1rel',
           type: 'PhysicalAddress',
-          model: 'PhysicalAddress'
+          model: 'PhysicalAddress',
+          relationType: 'belongsTo',
+                  keyFrom: 'physicalAddressId',
+          keyTo: 'id'
         },
       }
     }

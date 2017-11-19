@@ -63,6 +63,7 @@ export class Temple implements TempleInterface {
       name: 'Temple',
       plural: 'Temples',
       path: 'Temples',
+      idName: 'id',
       properties: {
         "id": {
           name: 'id',
@@ -113,7 +114,10 @@ export class Temple implements TempleInterface {
         fkTemplePhysicalAddress1rel: {
           name: 'fkTemplePhysicalAddress1rel',
           type: 'PhysicalAddress',
-          model: 'PhysicalAddress'
+          model: 'PhysicalAddress',
+          relationType: 'belongsTo',
+                  keyFrom: 'physicalAddressId',
+          keyTo: 'id'
         },
       }
     }

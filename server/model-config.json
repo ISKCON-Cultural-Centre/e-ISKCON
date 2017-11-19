@@ -131,5 +131,62 @@
   "PhysicalAddressTypeMaster": {
     "dataSource": "mysqld",
     "public": true
+  },
+  "ApprovalArtefact": {
+    "dataSource": "mysqld",
+    "public": true
+  },
+  "ApprovalQue": {
+    "dataSource": "mysqld",
+    "public": true
+  },
+  "ApprovalRule": {
+    "dataSource": "mysqld",
+    "public": true
+  },
+  "Department": {
+    "dataSource": "mysqld",
+    "public": true
+  },
+  "DepartmentRole": {
+    "dataSource": "mysqld",
+    "public": true
+  },
+  "RoleTaskMaster": {
+    "dataSource": "mysqld",
+    "public": true
+  },
+  "TaskMaster": {
+    "dataSource": "mysqld",
+    "public": true
+  },
+
+  "Book": {
+    "dataSource": "mysqld1",
+    "public": true
+  },
+  "BookLanguageMap": {
+    "dataSource": "mysqld1",
+    "public": true
+  },
+  "BookMarathonOrder": {
+    "dataSource": "mysqld1",
+    "public": true
+  } ,
+  "BookMarathonOrderDetail": {
+    "dataSource": "mysqld1",
+    "public": true
+  } ,
+  "BookMarathonReportedSale": {
+    "dataSource": "mysqld1",
+    "public": true
+  } ,
+  "BookMarathonSettlement": {
+    "dataSource": "mysqld1",
+    "public": true
+  },
+  "BookRequestStatus": {
+    "dataSource": "mysqld1",
+    "public": true
   }
 }

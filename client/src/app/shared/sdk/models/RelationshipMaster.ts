@@ -52,6 +52,7 @@ export class RelationshipMaster implements RelationshipMasterInterface {
       name: 'RelationshipMaster',
       plural: 'RelationshipMasters',
       path: 'RelationshipMasters',
+      idName: 'id',
       properties: {
         "id": {
           name: 'id',

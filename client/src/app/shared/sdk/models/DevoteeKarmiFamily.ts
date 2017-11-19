@@ -64,6 +64,7 @@ export class DevoteeKarmiFamily implements DevoteeKarmiFamilyInterface {
       name: 'DevoteeKarmiFamily',
       plural: 'DevoteeKarmiFamilies',
       path: 'DevoteeKarmiFamilies',
+      idName: 'id',
       properties: {
         "id": {
           name: 'id',
@@ -110,12 +111,18 @@ export class DevoteeKarmiFamily implements DevoteeKarmiFamilyInterface {
         fkDevoteeKarmiFamilyDevotee2rel: {
           name: 'fkDevoteeKarmiFamilyDevotee2rel',
           type: 'Devotee',
-          model: 'Devotee'
+          model: 'Devotee',
+          relationType: 'belongsTo',
+                  keyFrom: 'devoteeId',
+          keyTo: 'id'
         },
         fkDevoteeKarmiFamilyRelationshipMaster1rel: {
           name: 'fkDevoteeKarmiFamilyRelationshipMaster1rel',
           type: 'RelationshipMaster',
-          model: 'RelationshipMaster'
+          model: 'RelationshipMaster',
+          relationType: 'belongsTo',
+                  keyFrom: 'relationshipId',
+          keyTo: 'id'
         },
       }
     }

@@ -54,6 +54,7 @@ export class PaymentModeMaster implements PaymentModeMasterInterface {
       name: 'PaymentModeMaster',
       plural: 'PaymentModeMasters',
       path: 'PaymentModeMasters',
+      idName: 'id',
       properties: {
         "id": {
           name: 'id',

@@ -68,6 +68,7 @@ export class NewContact implements NewContactInterface {
       name: 'NewContact',
       plural: 'NewContacts',
       path: 'NewContacts',
+      idName: 'id',
       properties: {
         "id": {
           name: 'id',
@@ -122,12 +123,18 @@ export class NewContact implements NewContactInterface {
         fkTable1ElectronicAddress1rel: {
           name: 'fkTable1ElectronicAddress1rel',
           type: 'ElectronicAddress',
-          model: 'ElectronicAddress'
+          model: 'ElectronicAddress',
+          relationType: 'belongsTo',
+                  keyFrom: 'electronicAddressId',
+          keyTo: 'id'
         },
         fkTable1PhysicalAddress1rel: {
           name: 'fkTable1PhysicalAddress1rel',
           type: 'PhysicalAddress',
-          model: 'PhysicalAddress'
+          model: 'PhysicalAddress',
+          relationType: 'belongsTo',
+                  keyFrom: 'physicalAddressId',
+          keyTo: 'id'
         },
       }
     }

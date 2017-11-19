@@ -24,6 +24,20 @@ import { ElectronicAddress } from '../../models/ElectronicAddress';
 import { ElectronicAddressTypeMaster } from '../../models/ElectronicAddressTypeMaster';
 import { PhysicalAddress } from '../../models/PhysicalAddress';
 import { PhysicalAddressTypeMaster } from '../../models/PhysicalAddressTypeMaster';
+import { ApprovalArtefact } from '../../models/ApprovalArtefact';
+import { ApprovalQue } from '../../models/ApprovalQue';
+import { ApprovalRule } from '../../models/ApprovalRule';
+import { Department } from '../../models/Department';
+import { DepartmentRole } from '../../models/DepartmentRole';
+import { RoleTaskMaster } from '../../models/RoleTaskMaster';
+import { TaskMaster } from '../../models/TaskMaster';
+import { Book } from '../../models/Book';
+import { BookLanguageMap } from '../../models/BookLanguageMap';
+import { BookMarathonOrder } from '../../models/BookMarathonOrder';
+import { BookMarathonOrderDetail } from '../../models/BookMarathonOrderDetail';
+import { BookMarathonReportedSale } from '../../models/BookMarathonReportedSale';
+import { BookMarathonSettlement } from '../../models/BookMarathonSettlement';
+import { BookRequestStatus } from '../../models/BookRequestStatus';
 
 export interface Models { [name: string]: any }
 
@@ -55,6 +69,20 @@ export class SDKModels {
     ElectronicAddressTypeMaster: ElectronicAddressTypeMaster,
     PhysicalAddress: PhysicalAddress,
     PhysicalAddressTypeMaster: PhysicalAddressTypeMaster,
+    ApprovalArtefact: ApprovalArtefact,
+    ApprovalQue: ApprovalQue,
+    ApprovalRule: ApprovalRule,
+    Department: Department,
+    DepartmentRole: DepartmentRole,
+    RoleTaskMaster: RoleTaskMaster,
+    TaskMaster: TaskMaster,
+    Book: Book,
+    BookLanguageMap: BookLanguageMap,
+    BookMarathonOrder: BookMarathonOrder,
+    BookMarathonOrderDetail: BookMarathonOrderDetail,
+    BookMarathonReportedSale: BookMarathonReportedSale,
+    BookMarathonSettlement: BookMarathonSettlement,
+    BookRequestStatus: BookRequestStatus,
     
   };
 

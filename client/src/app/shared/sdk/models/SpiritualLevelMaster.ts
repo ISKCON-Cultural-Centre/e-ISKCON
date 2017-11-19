@@ -54,6 +54,7 @@ export class SpiritualLevelMaster implements SpiritualLevelMasterInterface {
       name: 'SpiritualLevelMaster',
       plural: 'SpiritualLevelMasters',
       path: 'SpiritualLevelMasters',
+      idName: 'id',
       properties: {
         "id": {
           name: 'id',

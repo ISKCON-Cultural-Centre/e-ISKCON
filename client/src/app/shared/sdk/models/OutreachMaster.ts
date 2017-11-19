@@ -52,6 +52,7 @@ export class OutreachMaster implements OutreachMasterInterface {
       name: 'OutreachMaster',
       plural: 'OutreachMasters',
       path: 'OutreachMasters',
+      idName: 'id',
       properties: {
         "id": {
           name: 'id',

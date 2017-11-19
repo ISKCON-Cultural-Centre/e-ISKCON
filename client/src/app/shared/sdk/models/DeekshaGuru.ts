@@ -52,6 +52,7 @@ export class DeekshaGuru implements DeekshaGuruInterface {
       name: 'DeekshaGuru',
       plural: 'DeekshaGurus',
       path: 'DeekshaGurus',
+      idName: 'id',
       properties: {
         "id": {
           name: 'id',

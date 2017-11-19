@@ -52,6 +52,7 @@ export class PhysicalAddressTypeMaster implements PhysicalAddressTypeMasterInter
       name: 'PhysicalAddressTypeMaster',
       plural: 'PhysicalAddressTypeMasters',
       path: 'PhysicalAddressTypeMasters',
+      idName: 'id',
       properties: {
         "id": {
           name: 'id',

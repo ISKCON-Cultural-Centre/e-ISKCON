@@ -66,6 +66,7 @@ export class PledgePayment implements PledgePaymentInterface {
       name: 'PledgePayment',
       plural: 'PledgePayments',
       path: 'PledgePayments',
+      idName: 'id',
       properties: {
         "id": {
           name: 'id',
@@ -116,12 +117,18 @@ export class PledgePayment implements PledgePaymentInterface {
         fkPledgePaymentPayment1rel: {
           name: 'fkPledgePaymentPayment1rel',
           type: 'Payment',
-          model: 'Payment'
+          model: 'Payment',
+          relationType: 'belongsTo',
+                  keyFrom: 'paymentId',
+          keyTo: 'id'
         },
         fkPledgePaymentPledge1rel: {
           name: 'fkPledgePaymentPledge1rel',
           type: 'Pledge',
-          model: 'Pledge'
+          model: 'Pledge',
+          relationType: 'belongsTo',
+                  keyFrom: 'pledgeId',
+          keyTo: 'id'
         },
       }
     }

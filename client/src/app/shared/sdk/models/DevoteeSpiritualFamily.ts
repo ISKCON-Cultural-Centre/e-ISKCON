@@ -61,6 +61,7 @@ export class DevoteeSpiritualFamily implements DevoteeSpiritualFamilyInterface {
       name: 'DevoteeSpiritualFamily',
       plural: 'DevoteeSpiritualFamilies',
       path: 'DevoteeSpiritualFamilies',
+      idName: 'id',
       properties: {
         "id": {
           name: 'id',
@@ -103,12 +104,18 @@ export class DevoteeSpiritualFamily implements DevoteeSpiritualFamilyInterface {
         fkDevoteeSpiritualFamilyDevotee1rel: {
           name: 'fkDevoteeSpiritualFamilyDevotee1rel',
           type: 'Devotee',
-          model: 'Devotee'
+          model: 'Devotee',
+          relationType: 'belongsTo',
+                  keyFrom: 'devoteeId',
+          keyTo: 'id'
         },
         fkDevoteeSpiritualFamilyDevotee2rel: {
           name: 'fkDevoteeSpiritualFamilyDevotee2rel',
           type: 'Devotee',
-          model: 'Devotee'
+          model: 'Devotee',
+          relationType: 'belongsTo',
+                  keyFrom: 'guidingDevoteeId',
+          keyTo: 'id'
         },
       }
     }

@@ -52,6 +52,7 @@ export class EventMaster implements EventMasterInterface {
       name: 'EventMaster',
       plural: 'EventMasters',
       path: 'EventMasters',
+      idName: 'id',
       properties: {
         "id": {
           name: 'id',

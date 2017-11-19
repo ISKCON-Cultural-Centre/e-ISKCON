@@ -52,6 +52,7 @@ export class ElectronicAddressTypeMaster implements ElectronicAddressTypeMasterI
       name: 'ElectronicAddressTypeMaster',
       plural: 'ElectronicAddressTypeMasters',
       path: 'ElectronicAddressTypeMasters',
+      idName: 'id',
       properties: {
         "id": {
           name: 'id',

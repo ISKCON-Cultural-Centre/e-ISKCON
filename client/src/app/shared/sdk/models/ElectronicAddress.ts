@@ -59,6 +59,7 @@ export class ElectronicAddress implements ElectronicAddressInterface {
       name: 'ElectronicAddress',
       plural: 'ElectronicAddresses',
       path: 'ElectronicAddresses',
+      idName: 'id',
       properties: {
         "id": {
           name: 'id',
@@ -101,7 +102,10 @@ export class ElectronicAddress implements ElectronicAddressInterface {
         fkElectronicAddressElectronicAddressTypeMaster1rel: {
           name: 'fkElectronicAddressElectronicAddressTypeMaster1rel',
           type: 'ElectronicAddressTypeMaster',
-          model: 'ElectronicAddressTypeMaster'
+          model: 'ElectronicAddressTypeMaster',
+          relationType: 'belongsTo',
+                  keyFrom: 'electronicAddressTypeMasterId',
+          keyTo: 'id'
         },
       }
     }

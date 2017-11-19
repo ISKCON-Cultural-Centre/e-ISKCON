@@ -546,21 +546,6 @@ COLLATE = utf8_unicode_ci;
 
 
 -- -----------------------------------------------------
--- Table `icc`.`role`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `icc`.`role` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(512) CHARACTER SET 'utf8' NULL,
-  `description` VARCHAR(512) CHARACTER SET 'utf8' NULL DEFAULT NULL,
-  `created` DATETIME NULL DEFAULT NULL,
-  `modified` DATETIME NULL DEFAULT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci;
-
-
--- -----------------------------------------------------
 -- Table `icc`.`pledge-payment`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `icc`.`pledge-payment` (
@@ -658,6 +643,130 @@ CREATE TABLE IF NOT EXISTS `icc`.`temple-branch` (
     REFERENCES `icc`.`temple` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_unicode_ci;
+
+
+-- -----------------------------------------------------
+-- Table `icc`.`task-master`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `icc`.`task-master` (
+  `id` VARCHAR(36) NOT NULL,
+  `task-name` VARCHAR(50) NOT NULL,
+  `application-route` VARCHAR(255) NOT NULL,
+  `task-description` VARCHAR(50) NULL,
+  `approval-rules-apply-ind` TINYINT NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `icc`.`role-task-master`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `icc`.`role-task-master` (
+  `task-master-id1` VARCHAR(36) NOT NULL,
+  `roles-ID` VARCHAR(255) NOT NULL,
+  INDEX `fk_role-task-master_task-master1_idx` (`task-master-id1` ASC),
+  CONSTRAINT `fk_role-task-master_task-master1`
+    FOREIGN KEY (`task-master-id1`)
+    REFERENCES `icc`.`task-master` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `icc`.`department-role`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `icc`.`department-role` (
+  `department-id` VARCHAR(36) NOT NULL,
+  `role-id` INT(11) NOT NULL,
+  PRIMARY KEY (`department-id`, `role-id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `icc`.`department`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `icc`.`department` (
+  `id` VARCHAR(36) NOT NULL,
+  `temple-id` VARCHAR(36) NOT NULL,
+  `department-name` VARCHAR(50) NOT NULL,
+  `department-leader-devotee-id` VARCHAR(36) NOT NULL,
+  INDEX `fk_department_temple1_idx` (`temple-id` ASC),
+  PRIMARY KEY (`id`),
+  INDEX `fk_department_devotee1_idx` (`department-leader-devotee-id` ASC),
+  CONSTRAINT `fk_department_temple1`
+    FOREIGN KEY (`temple-id`)
+    REFERENCES `icc`.`temple` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_department_devotee1`
+    FOREIGN KEY (`department-leader-devotee-id`)
+    REFERENCES `icc`.`devotee` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_unicode_ci;
+
+
+-- -----------------------------------------------------
+-- Table `icc`.`approval-rule`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `icc`.`approval-rule` (
+  `id` VARCHAR(36) NOT NULL,
+  `approval-artefact-id` VARCHAR(36) NOT NULL,
+  `sequence-no` SMALLINT NOT NULL,
+  `role-id` INT(11) NOT NULL,
+  `last-approval-sequence-ind` TINYINT NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `icc`.`approval-que`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `icc`.`approval-que` (
+  `id` VARCHAR(36) NOT NULL,
+  `approver-id` VARCHAR(36) NOT NULL,
+  `artefact-instance-id` VARCHAR(36) NOT NULL,
+  `requesting-devotee-id` VARCHAR(36) NOT NULL,
+  `approval-sequence-no` SMALLINT NOT NULL,
+  `last-approver-ind` TINYINT NOT NULL DEFAULT 0,
+  `approval-ind` TINYINT NULL DEFAULT 0,
+  `activated-ind` TINYINT NOT NULL DEFAULT 0,
+  `approver-remarks` VARCHAR(100) NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_approval-que_devotee1_idx` (`approver-id` ASC),
+  INDEX `fk_approval-que_devotee3_idx` (`requesting-devotee-id` ASC),
+  CONSTRAINT `fk_approval-que_devotee1`
+    FOREIGN KEY (`approver-id`)
+    REFERENCES `icc`.`devotee` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_approval-que_devotee3`
+    FOREIGN KEY (`requesting-devotee-id`)
+    REFERENCES `icc`.`devotee` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_unicode_ci;
+
+
+-- -----------------------------------------------------
+-- Table `icc`.`approval-artefact`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `icc`.`approval-artefact` (
+  `id` VARCHAR(36) NOT NULL,
+  `artefact-name` VARCHAR(50) NULL,
+  `description` VARCHAR(100) NOT NULL,
+  `approval-after-action-message` VARCHAR(50) NOT NULL,
+  `rejection-after-action-message` VARCHAR(50) NOT NULL,
+  `approval-artefact-entity-name` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_unicode_ci;

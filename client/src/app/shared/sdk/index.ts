@@ -1,3 +1,4 @@
+/* tslint:disable */
 /**
 * @module SDKModule
 * @author Jonathan Casarrubias <t:@johncasarrubias> <gh:jonathan-casarrubias>
@@ -68,6 +69,20 @@ import { ElectronicAddressApi } from './services/custom/ElectronicAddress';
 import { ElectronicAddressTypeMasterApi } from './services/custom/ElectronicAddressTypeMaster';
 import { PhysicalAddressApi } from './services/custom/PhysicalAddress';
 import { PhysicalAddressTypeMasterApi } from './services/custom/PhysicalAddressTypeMaster';
+import { ApprovalArtefactApi } from './services/custom/ApprovalArtefact';
+import { ApprovalQueApi } from './services/custom/ApprovalQue';
+import { ApprovalRuleApi } from './services/custom/ApprovalRule';
+import { DepartmentApi } from './services/custom/Department';
+import { DepartmentRoleApi } from './services/custom/DepartmentRole';
+import { RoleTaskMasterApi } from './services/custom/RoleTaskMaster';
+import { TaskMasterApi } from './services/custom/TaskMaster';
+import { BookApi } from './services/custom/Book';
+import { BookLanguageMapApi } from './services/custom/BookLanguageMap';
+import { BookMarathonOrderApi } from './services/custom/BookMarathonOrder';
+import { BookMarathonOrderDetailApi } from './services/custom/BookMarathonOrderDetail';
+import { BookMarathonReportedSaleApi } from './services/custom/BookMarathonReportedSale';
+import { BookMarathonSettlementApi } from './services/custom/BookMarathonSettlement';
+import { BookRequestStatusApi } from './services/custom/BookRequestStatus';
 /**
 * @module SDKBrowserModule
 * @description
@@ -121,6 +136,20 @@ export class SDKBrowserModule {
         ElectronicAddressTypeMasterApi,
         PhysicalAddressApi,
         PhysicalAddressTypeMasterApi,
+        ApprovalArtefactApi,
+        ApprovalQueApi,
+        ApprovalRuleApi,
+        DepartmentApi,
+        DepartmentRoleApi,
+        RoleTaskMasterApi,
+        TaskMasterApi,
+        BookApi,
+        BookLanguageMapApi,
+        BookMarathonOrderApi,
+        BookMarathonOrderDetailApi,
+        BookMarathonReportedSaleApi,
+        BookMarathonSettlementApi,
+        BookRequestStatusApi,
         internalStorageProvider,
         { provide: SDKStorage, useClass: StorageBrowser }
       ]
@@ -137,3 +166,4 @@ export * from './lb.config';
 export * from './storage/storage.swaps';
 export { CookieBrowser } from './storage/cookie.browser';
 export { StorageBrowser } from './storage/storage.browser';
+

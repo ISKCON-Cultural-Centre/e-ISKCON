@@ -52,6 +52,7 @@ export class DonationTypeMaster implements DonationTypeMasterInterface {
       name: 'DonationTypeMaster',
       plural: 'DonationTypeMasters',
       path: 'DonationTypeMasters',
+      idName: 'id',
       properties: {
         "id": {
           name: 'id',
