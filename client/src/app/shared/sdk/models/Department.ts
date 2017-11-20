@@ -10,6 +10,8 @@ export interface DepartmentInterface {
   "templeId": string;
   "departmentName": string;
   "departmentLeaderDevoteeId": string;
+  "created-on"?: Date;
+  "updated-on"?: Date;
   fkDepartmentDevotee1rel?: Devotee;
   fkDepartmentTemple1rel?: Temple;
 }
@@ -19,6 +21,8 @@ export class Department implements DepartmentInterface {
   "templeId": string;
   "departmentName": string;
   "departmentLeaderDevoteeId": string;
+  "created-on": Date;
+  "updated-on": Date;
   fkDepartmentDevotee1rel: Devotee;
   fkDepartmentTemple1rel: Temple;
   constructor(data?: DepartmentInterface) {
@@ -69,6 +73,14 @@ export class Department implements DepartmentInterface {
         "departmentLeaderDevoteeId": {
           name: 'departmentLeaderDevoteeId',
           type: 'string'
+        },
+        "created-on": {
+          name: 'created-on',
+          type: 'Date'
+        },
+        "updated-on": {
+          name: 'updated-on',
+          type: 'Date'
         },
       },
       relations: {

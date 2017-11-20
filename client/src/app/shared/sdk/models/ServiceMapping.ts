@@ -1,41 +1,43 @@
 /* tslint:disable */
 import {
-  Role
+  Service
 } from '../index';
 
 declare var Object: any;
-export interface RoleMappingInterface {
-  "id"?: number;
+export interface ServiceMappingInterface {
+  "id": string;
   "principalType"?: string;
   "principalId"?: string;
-  "roleId"?: number;
-  role?: Role;
+  "roleId": string;
+  fkServiceMappingService1rel?: Service;
+  roleId?: Service;
 }
 
-export class RoleMapping implements RoleMappingInterface {
-  "id": number;
+export class ServiceMapping implements ServiceMappingInterface {
+  "id": string;
   "principalType": string;
   "principalId": string;
-  "roleId": number;
-  role: Role;
-  constructor(data?: RoleMappingInterface) {
+  "roleId": string;
+  fkServiceMappingService1rel: Service;
+  roleId: Service;
+  constructor(data?: ServiceMappingInterface) {
     Object.assign(this, data);
   }
   /**
    * The name of the model represented by this $resource,
-   * i.e. `RoleMapping`.
+   * i.e. `ServiceMapping`.
    */
   public static getModelName() {
-    return "RoleMapping";
+    return "ServiceMapping";
   }
   /**
   * @method factory
   * @author Jonathan Casarrubias
   * @license MIT
-  * This method creates an instance of RoleMapping for dynamic purposes.
+  * This method creates an instance of ServiceMapping for dynamic purposes.
   **/
-  public static factory(data: RoleMappingInterface): RoleMapping{
-    return new RoleMapping(data);
+  public static factory(data: ServiceMappingInterface): ServiceMapping{
+    return new ServiceMapping(data);
   }
   /**
   * @method getModelDefinition
@@ -46,14 +48,14 @@ export class RoleMapping implements RoleMappingInterface {
   **/
   public static getModelDefinition() {
     return {
-      name: 'RoleMapping',
-      plural: 'RoleMappings',
-      path: 'RoleMappings',
+      name: 'ServiceMapping',
+      plural: 'ServiceMappings',
+      path: 'ServiceMappings',
       idName: 'id',
       properties: {
         "id": {
           name: 'id',
-          type: 'number'
+          type: 'string'
         },
         "principalType": {
           name: 'principalType',
@@ -65,16 +67,24 @@ export class RoleMapping implements RoleMappingInterface {
         },
         "roleId": {
           name: 'roleId',
-          type: 'number'
+          type: 'string'
         },
       },
       relations: {
-        role: {
-          name: 'role',
-          type: 'Role',
-          model: 'Role',
+        fkServiceMappingService1rel: {
+          name: 'fkServiceMappingService1rel',
+          type: 'Service',
+          model: 'Service',
           relationType: 'belongsTo',
                   keyFrom: 'roleId',
+          keyTo: 'id'
+        },
+        roleId: {
+          name: 'roleId',
+          type: 'Service',
+          model: 'Service',
+          relationType: 'belongsTo',
+                  keyFrom: 'id',
           keyTo: 'id'
         },
       }

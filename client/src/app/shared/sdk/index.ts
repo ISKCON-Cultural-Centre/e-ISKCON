@@ -45,9 +45,10 @@ import { CommonModule } from '@angular/common';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CookieBrowser } from './storage/cookie.browser';
 import { StorageBrowser } from './storage/storage.browser';
-import { RoleMappingApi } from './services/custom/RoleMapping';
-import { RoleApi } from './services/custom/Role';
+import { ServiceApi } from './services/custom/Service';
+import { ServiceMappingApi } from './services/custom/ServiceMapping';
 import { CircleApi } from './services/custom/Circle';
+import { CircleDevoteeApi } from './services/custom/CircleDevotee';
 import { DeekshaGuruApi } from './services/custom/DeekshaGuru';
 import { DevoteeApi } from './services/custom/Devotee';
 import { DevoteeEventCalendarApi } from './services/custom/DevoteeEventCalendar';
@@ -73,8 +74,8 @@ import { ApprovalArtefactApi } from './services/custom/ApprovalArtefact';
 import { ApprovalQueApi } from './services/custom/ApprovalQue';
 import { ApprovalRuleApi } from './services/custom/ApprovalRule';
 import { DepartmentApi } from './services/custom/Department';
-import { DepartmentRoleApi } from './services/custom/DepartmentRole';
-import { RoleTaskMasterApi } from './services/custom/RoleTaskMaster';
+import { DepartmentServiceApi } from './services/custom/DepartmentService';
+import { ServiceTaskMasterApi } from './services/custom/ServiceTaskMaster';
 import { TaskMasterApi } from './services/custom/TaskMaster';
 import { BookApi } from './services/custom/Book';
 import { BookLanguageMapApi } from './services/custom/BookLanguageMap';
@@ -112,9 +113,10 @@ export class SDKBrowserModule {
         LoggerService,
         JSONSearchParams,
         SDKModels,
-        RoleMappingApi,
-        RoleApi,
+        ServiceApi,
+        ServiceMappingApi,
         CircleApi,
+        CircleDevoteeApi,
         DeekshaGuruApi,
         DevoteeApi,
         DevoteeEventCalendarApi,
@@ -140,8 +142,8 @@ export class SDKBrowserModule {
         ApprovalQueApi,
         ApprovalRuleApi,
         DepartmentApi,
-        DepartmentRoleApi,
-        RoleTaskMasterApi,
+        DepartmentServiceApi,
+        ServiceTaskMasterApi,
         TaskMasterApi,
         BookApi,
         BookLanguageMapApi,

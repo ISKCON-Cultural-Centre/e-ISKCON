@@ -1,6 +1,5 @@
 /* tslint:disable */
 import {
-  Circle,
   SpiritualLevelMaster,
   ElectronicAddress,
   PhysicalAddress
@@ -11,7 +10,6 @@ export interface DevoteeInterface {
   "id": string;
   "legalName": string;
   "spiritualName"?: string;
-  "circleId"?: string;
   "gender": boolean;
   "physicalAddressId"?: string;
   "electronicAddressId"?: string;
@@ -25,7 +23,6 @@ export interface DevoteeInterface {
   "updated-on"?: Date;
   "password"?: string;
   accessTokens?: any[];
-  fkDevoteeCircle1rel?: Circle;
   fkDevoteeSpiritualLevelMaster1rel?: SpiritualLevelMaster;
   fkDevoteeElectronicAddress1rel?: ElectronicAddress;
   fkDevoteePhysicalAddress1rel?: PhysicalAddress;
@@ -35,7 +32,6 @@ export class Devotee implements DevoteeInterface {
   "id": string;
   "legalName": string;
   "spiritualName": string;
-  "circleId": string;
   "gender": boolean;
   "physicalAddressId": string;
   "electronicAddressId": string;
@@ -49,7 +45,6 @@ export class Devotee implements DevoteeInterface {
   "updated-on": Date;
   "password": string;
   accessTokens: any[];
-  fkDevoteeCircle1rel: Circle;
   fkDevoteeSpiritualLevelMaster1rel: SpiritualLevelMaster;
   fkDevoteeElectronicAddress1rel: ElectronicAddress;
   fkDevoteePhysicalAddress1rel: PhysicalAddress;
@@ -96,10 +91,6 @@ export class Devotee implements DevoteeInterface {
         },
         "spiritualName": {
           name: 'spiritualName',
-          type: 'string'
-        },
-        "circleId": {
-          name: 'circleId',
           type: 'string'
         },
         "gender": {
@@ -159,14 +150,6 @@ export class Devotee implements DevoteeInterface {
           relationType: 'hasMany',
                   keyFrom: 'id',
           keyTo: 'userId'
-        },
-        fkDevoteeCircle1rel: {
-          name: 'fkDevoteeCircle1rel',
-          type: 'Circle',
-          model: 'Circle',
-          relationType: 'belongsTo',
-                  keyFrom: 'circleId',
-          keyTo: 'id'
         },
         fkDevoteeSpiritualLevelMaster1rel: {
           name: 'fkDevoteeSpiritualLevelMaster1rel',

@@ -10,15 +10,16 @@ import { JSONSearchParams } from '../core/search.params';
 import { ErrorHandler } from '../core/error.service';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
-import { RoleTaskMaster } from '../../models/RoleTaskMaster';
-import { TaskMaster } from '../../models/TaskMaster';
+import { CircleDevotee } from '../../models/CircleDevotee';
+import { Circle } from '../../models/Circle';
+import { Devotee } from '../../models/Devotee';
 
 
 /**
- * Api services for the `RoleTaskMaster` model.
+ * Api services for the `CircleDevotee` model.
  */
 @Injectable()
-export class RoleTaskMasterApi extends BaseLoopBackApi {
+export class CircleDevoteeApi extends BaseLoopBackApi {
 
   constructor(
     @Inject(Http) protected http: Http,
@@ -31,9 +32,9 @@ export class RoleTaskMasterApi extends BaseLoopBackApi {
   }
 
   /**
-   * Fetches belongsTo relation fkRoleTaskMasterTaskMaster1rel.
+   * Fetches belongsTo relation fkCircleDevoteeCircle1rel.
    *
-   * @param {any} id RoleTaskMaster id
+   * @param {any} id CircleDevotee id
    *
    * @param {boolean} refresh 
    *
@@ -43,13 +44,43 @@ export class RoleTaskMasterApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `RoleTaskMaster` object.)
+   * This usually means the response is a `CircleDevotee` object.)
    * </em>
    */
-  public getFkRoleTaskMasterTaskMaster1rel(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
+  public getFkCircleDevoteeCircle1rel(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/RoleTaskMasters/:id/fkRoleTaskMasterTaskMaster1rel";
+    "/CircleDevotees/:id/fkCircleDevoteeCircle1rel";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (typeof refresh !== 'undefined' && refresh !== null) _urlParams.refresh = refresh;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
+   * Fetches belongsTo relation fkTable1Devotee1rel.
+   *
+   * @param {any} id CircleDevotee id
+   *
+   * @param {boolean} refresh 
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `CircleDevotee` object.)
+   * </em>
+   */
+  public getFkTable1Devotee1rel(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/CircleDevotees/:id/fkTable1Devotee1rel";
     let _routeParams: any = {
       id: id
     };
@@ -73,13 +104,13 @@ export class RoleTaskMasterApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `RoleTaskMaster` object.)
+   * This usually means the response is a `CircleDevotee` object.)
    * </em>
    */
   public patchOrCreate(data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PATCH";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/RoleTaskMasters";
+    "/CircleDevotees";
     let _routeParams: any = {};
     let _postBody: any = {
       data: data
@@ -92,7 +123,7 @@ export class RoleTaskMasterApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param {any} id RoleTaskMaster id
+   * @param {any} id CircleDevotee id
    *
    * @param {object} data Request data.
    *
@@ -104,13 +135,13 @@ export class RoleTaskMasterApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `RoleTaskMaster` object.)
+   * This usually means the response is a `CircleDevotee` object.)
    * </em>
    */
   public patchAttributes(id: any, data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PATCH";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/RoleTaskMasters/:id";
+    "/CircleDevotees/:id";
     let _routeParams: any = {
       id: id
     };
@@ -124,9 +155,9 @@ export class RoleTaskMasterApi extends BaseLoopBackApi {
 
   /**
    * The name of the model represented by this $resource,
-   * i.e. `RoleTaskMaster`.
+   * i.e. `CircleDevotee`.
    */
   public getModelName() {
-    return "RoleTaskMaster";
+    return "CircleDevotee";
   }
 }

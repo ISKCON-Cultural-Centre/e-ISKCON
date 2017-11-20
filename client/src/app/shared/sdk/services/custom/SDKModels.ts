@@ -1,8 +1,9 @@
 /* tslint:disable */
 import { Injectable } from '@angular/core';
-import { RoleMapping } from '../../models/RoleMapping';
-import { Role } from '../../models/Role';
+import { Service } from '../../models/Service';
+import { ServiceMapping } from '../../models/ServiceMapping';
 import { Circle } from '../../models/Circle';
+import { CircleDevotee } from '../../models/CircleDevotee';
 import { DeekshaGuru } from '../../models/DeekshaGuru';
 import { Devotee } from '../../models/Devotee';
 import { DevoteeEventCalendar } from '../../models/DevoteeEventCalendar';
@@ -28,8 +29,8 @@ import { ApprovalArtefact } from '../../models/ApprovalArtefact';
 import { ApprovalQue } from '../../models/ApprovalQue';
 import { ApprovalRule } from '../../models/ApprovalRule';
 import { Department } from '../../models/Department';
-import { DepartmentRole } from '../../models/DepartmentRole';
-import { RoleTaskMaster } from '../../models/RoleTaskMaster';
+import { DepartmentService } from '../../models/DepartmentService';
+import { ServiceTaskMaster } from '../../models/ServiceTaskMaster';
 import { TaskMaster } from '../../models/TaskMaster';
 import { Book } from '../../models/Book';
 import { BookLanguageMap } from '../../models/BookLanguageMap';
@@ -45,9 +46,10 @@ export interface Models { [name: string]: any }
 export class SDKModels {
 
   private models: Models = {
-    RoleMapping: RoleMapping,
-    Role: Role,
+    Service: Service,
+    ServiceMapping: ServiceMapping,
     Circle: Circle,
+    CircleDevotee: CircleDevotee,
     DeekshaGuru: DeekshaGuru,
     Devotee: Devotee,
     DevoteeEventCalendar: DevoteeEventCalendar,
@@ -73,8 +75,8 @@ export class SDKModels {
     ApprovalQue: ApprovalQue,
     ApprovalRule: ApprovalRule,
     Department: Department,
-    DepartmentRole: DepartmentRole,
-    RoleTaskMaster: RoleTaskMaster,
+    DepartmentService: DepartmentService,
+    ServiceTaskMaster: ServiceTaskMaster,
     TaskMaster: TaskMaster,
     Book: Book,
     BookLanguageMap: BookLanguageMap,

@@ -1,50 +1,52 @@
 /* tslint:disable */
 
 declare var Object: any;
-export interface TaskMasterInterface {
+export interface ServiceInterface {
   "id": string;
-  "taskName": string;
-  "applicationRoute": string;
-  "taskDescription"?: string;
-  "approvalRulesApplyInd": number;
+  "name": string;
+  "description"?: string;
+  "created"?: Date;
+  "modified"?: Date;
   "createdOn"?: Date;
   "updatedOn"?: Date;
   "createdBy"?: string;
   "updatedBy"?: string;
   "created-on"?: Date;
   "updated-on"?: Date;
+  principals?: any[];
 }
 
-export class TaskMaster implements TaskMasterInterface {
+export class Service implements ServiceInterface {
   "id": string;
-  "taskName": string;
-  "applicationRoute": string;
-  "taskDescription": string;
-  "approvalRulesApplyInd": number;
+  "name": string;
+  "description": string;
+  "created": Date;
+  "modified": Date;
   "createdOn": Date;
   "updatedOn": Date;
   "createdBy": string;
   "updatedBy": string;
   "created-on": Date;
   "updated-on": Date;
-  constructor(data?: TaskMasterInterface) {
+  principals: any[];
+  constructor(data?: ServiceInterface) {
     Object.assign(this, data);
   }
   /**
    * The name of the model represented by this $resource,
-   * i.e. `TaskMaster`.
+   * i.e. `Service`.
    */
   public static getModelName() {
-    return "TaskMaster";
+    return "Service";
   }
   /**
   * @method factory
   * @author Jonathan Casarrubias
   * @license MIT
-  * This method creates an instance of TaskMaster for dynamic purposes.
+  * This method creates an instance of Service for dynamic purposes.
   **/
-  public static factory(data: TaskMasterInterface): TaskMaster{
-    return new TaskMaster(data);
+  public static factory(data: ServiceInterface): Service{
+    return new Service(data);
   }
   /**
   * @method getModelDefinition
@@ -55,30 +57,30 @@ export class TaskMaster implements TaskMasterInterface {
   **/
   public static getModelDefinition() {
     return {
-      name: 'TaskMaster',
-      plural: 'TaskMasters',
-      path: 'TaskMasters',
+      name: 'Service',
+      plural: 'Services',
+      path: 'Services',
       idName: 'id',
       properties: {
         "id": {
           name: 'id',
           type: 'string'
         },
-        "taskName": {
-          name: 'taskName',
+        "name": {
+          name: 'name',
           type: 'string'
         },
-        "applicationRoute": {
-          name: 'applicationRoute',
+        "description": {
+          name: 'description',
           type: 'string'
         },
-        "taskDescription": {
-          name: 'taskDescription',
-          type: 'string'
+        "created": {
+          name: 'created',
+          type: 'Date'
         },
-        "approvalRulesApplyInd": {
-          name: 'approvalRulesApplyInd',
-          type: 'number'
+        "modified": {
+          name: 'modified',
+          type: 'Date'
         },
         "createdOn": {
           name: 'createdOn',
@@ -106,6 +108,14 @@ export class TaskMaster implements TaskMasterInterface {
         },
       },
       relations: {
+        principals: {
+          name: 'principals',
+          type: 'any[]',
+          model: '',
+          relationType: 'hasMany',
+                  keyFrom: 'id',
+          keyTo: 'roleId'
+        },
       }
     }
   }

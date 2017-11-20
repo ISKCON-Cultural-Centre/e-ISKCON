@@ -1,7 +1,8 @@
 /* tslint:disable */
-export * from './RoleMapping';
-export * from './Role';
+export * from './Service';
+export * from './ServiceMapping';
 export * from './Circle';
+export * from './CircleDevotee';
 export * from './DeekshaGuru';
 export * from './Devotee';
 export * from './DevoteeEventCalendar';
@@ -27,8 +28,8 @@ export * from './ApprovalArtefact';
 export * from './ApprovalQue';
 export * from './ApprovalRule';
 export * from './Department';
-export * from './DepartmentRole';
-export * from './RoleTaskMaster';
+export * from './DepartmentService';
+export * from './ServiceTaskMaster';
 export * from './TaskMaster';
 export * from './Book';
 export * from './BookLanguageMap';

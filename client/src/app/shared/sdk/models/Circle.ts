@@ -4,10 +4,7 @@ declare var Object: any;
 export interface CircleInterface {
   "id": string;
   "name"?: string;
-  "createdOn"?: Date;
-  "updatedOn"?: Date;
-  "createdBy"?: string;
-  "updatedBy"?: string;
+  "leaderDevoteeId"?: string;
   "created-on"?: Date;
   "updated-on"?: Date;
 }
@@ -15,10 +12,7 @@ export interface CircleInterface {
 export class Circle implements CircleInterface {
   "id": string;
   "name": string;
-  "createdOn": Date;
-  "updatedOn": Date;
-  "createdBy": string;
-  "updatedBy": string;
+  "leaderDevoteeId": string;
   "created-on": Date;
   "updated-on": Date;
   constructor(data?: CircleInterface) {
@@ -62,20 +56,8 @@ export class Circle implements CircleInterface {
           name: 'name',
           type: 'string'
         },
-        "createdOn": {
-          name: 'createdOn',
-          type: 'Date'
-        },
-        "updatedOn": {
-          name: 'updatedOn',
-          type: 'Date'
-        },
-        "createdBy": {
-          name: 'createdBy',
-          type: 'string'
-        },
-        "updatedBy": {
-          name: 'updatedBy',
+        "leaderDevoteeId": {
+          name: 'leaderDevoteeId',
           type: 'string'
         },
         "created-on": {
