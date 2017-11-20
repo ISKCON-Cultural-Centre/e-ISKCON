@@ -57,17 +57,7 @@
   },
   "ServiceMapping": {
     "dataSource": "mysqld",
-    "public": true,
-    "relations": {
-      "roleId": {
-        "type": "belongsTo",
-        "model": "Service",
-        "foreignKey": "id"
-      }
-    },
-    "options": {
-      "strictObjectIDCoercion": false
-    }
+    "public": true
   },
   "Circle": {
     "dataSource": "mysqld",

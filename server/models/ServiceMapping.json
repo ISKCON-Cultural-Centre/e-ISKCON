@@ -2,6 +2,7 @@
   "name": "ServiceMapping",
   "options": {
     "idInjection": false,
+    "base": "RoleMapping",
     "mysql": {
       "schema": "icc",
       "table": "service-mapping"
