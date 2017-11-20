@@ -11,6 +11,7 @@ delete from service;
 delete from `spiritual-level-master`;
 delete from `task-master`;
 delete from temple;
+delete from `service-mapping`;
 
 
 source ~/software/eISKCON/reference_docs/sample-data/circle-devotee.sql;
@@ -23,6 +24,6 @@ source ~/software/eISKCON/reference_docs/sample-data/service.sql;
 source ~/software/eISKCON/reference_docs/sample-data/spiritual-level-master.sql;
 source ~/software/eISKCON/reference_docs/sample-data/task-master.sql;
 source ~/software/eISKCON/reference_docs/sample-data/temple.sql;
-
+source ~/software/eISKCON/reference_docs/sample-data/service-mapping.sql
 
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
