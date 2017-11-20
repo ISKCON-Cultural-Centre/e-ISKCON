@@ -22,7 +22,7 @@ source ~/software/eISKCON/reference_docs/sample-data/service-task-master.sql;
 source ~/software/eISKCON/reference_docs/sample-data/service.sql;
 source ~/software/eISKCON/reference_docs/sample-data/spiritual-level-master.sql;
 source ~/software/eISKCON/reference_docs/sample-data/task-master.sql;
-source ~/software/eISKCON/reference_docs/sample-data/temple;
+source ~/software/eISKCON/reference_docs/sample-data/temple.sql;
 
 
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
