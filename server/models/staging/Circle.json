@@ -6,7 +6,13 @@
       "schema": "icc",
       "table": "circle"
     },
-    "relations": {}
+    "relations": {
+      "fkCircleDevotee1rel": {
+        "model": "Devotee",
+        "type": "belongsTo",
+        "foreignKey": "leaderDevoteeId"
+      }
+    }
   },
   "properties": {
     "id": {
@@ -35,6 +41,21 @@
         "columnName": "name",
         "dataType": "varchar",
         "dataLength": 100,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "Y"
+      }
+    },
+    "leaderDevoteeId": {
+      "type": "String",
+      "required": false,
+      "length": 36,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "leader-devotee-id",
+        "dataType": "varchar",
+        "dataLength": 36,
         "dataPrecision": null,
         "dataScale": null,
         "nullable": "Y"

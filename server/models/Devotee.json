@@ -16,13 +16,8 @@
         "silenceWarnings": false
       },
       "GenerateKey" : true
-    }, 
+    },
     "relations": {
-      "fkDevoteeCircle1rel": {
-        "model": "Circle",
-        "type": "belongsTo",
-        "foreignKey": "circleId"
-      },
       "fkDevoteeElectronicAddress1rel": {
         "model": "ElectronicAddress",
         "type": "belongsTo",
@@ -82,21 +77,6 @@
         "columnName": "spiritual-name",
         "dataType": "varchar",
         "dataLength": 100,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "Y"
-      }
-    },
-    "circleId": {
-      "type": "String",
-      "required": false,
-      "length": 36,
-      "precision": null,
-      "scale": null,
-      "mysql": {
-        "columnName": "circle-id",
-        "dataType": "varchar",
-        "dataLength": 36,
         "dataPrecision": null,
         "dataScale": null,
         "nullable": "Y"

@@ -35,16 +35,45 @@
   },
   "RoleMapping": {
     "dataSource": "mysqld",
-    "public": true,
+    "public": false,
+    "relations": {
+      "roleId": {
+        "type": "belongsTo",
+        "model": "Service",
+        "foreignKey": "id"
+      }
+    },
     "options": {
-      "strictObjectIDCoercion": true
+      "strictObjectIDCoercion": false
     }
   },
   "Role": {
     "dataSource": "mysqld",
+    "public": false
+  },
+  "Service": {
+    "dataSource": "mysqld",
     "public": true
   },
+  "ServiceMapping": {
+    "dataSource": "mysqld",
+    "public": true,
+    "relations": {
+      "roleId": {
+        "type": "belongsTo",
+        "model": "Service",
+        "foreignKey": "id"
+      }
+    },
+    "options": {
+      "strictObjectIDCoercion": false
+    }
+  },
   "Circle": {
+    "dataSource": "mysqld",
+    "public": true
+  },
+  "CircleDevotee": {
     "dataSource": "mysqld",
     "public": true
   },
@@ -148,11 +177,11 @@
     "dataSource": "mysqld",
     "public": true
   },
-  "DepartmentRole": {
+  "DepartmentService": {
     "dataSource": "mysqld",
     "public": true
   },
-  "RoleTaskMaster": {
+  "ServiceTaskMaster": {
     "dataSource": "mysqld",
     "public": true
   },

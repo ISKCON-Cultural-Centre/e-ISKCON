@@ -1,31 +1,16 @@
 {
-  "name": "Department",
+  "name": "ServiceMapping",
   "options": {
     "idInjection": false,
     "mysql": {
       "schema": "icc",
-      "table": "department"
+      "table": "service-mapping"
     },
-    "mixins": {
-      "TimeStamp" : {
-        "createdAt" : "created-on",
-        "updatedAt" : "updated-on",
-        "required" : false,
-        "validateUpsert": true,
-        "silenceWarnings": false
-      },
-      "GenerateKey" : true
-    },     
     "relations": {
-      "fkDepartmentDevotee1rel": {
-        "model": "Devotee",
+      "fkServiceMappingService1rel": {
+        "model": "Service",
         "type": "belongsTo",
-        "foreignKey": "departmentLeaderDevoteeId"
-      },
-      "fkDepartmentTemple1rel": {
-        "model": "Temple",
-        "type": "belongsTo",
-        "foreignKey": "templeId"
+        "foreignKey": "roleId"
       }
     }
   },
@@ -46,44 +31,44 @@
         "nullable": "N"
       }
     },
-    "templeId": {
+    "principalType": {
+      "type": "String",
+      "required": false,
+      "length": 512,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "principal-type",
+        "dataType": "varchar",
+        "dataLength": 512,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "Y"
+      }
+    },
+    "principalId": {
+      "type": "String",
+      "required": false,
+      "length": 255,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "principal-id",
+        "dataType": "varchar",
+        "dataLength": 255,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "Y"
+      }
+    },
+    "roleId": {
       "type": "String",
       "required": true,
       "length": 36,
       "precision": null,
       "scale": null,
       "mysql": {
-        "columnName": "temple-id",
-        "dataType": "varchar",
-        "dataLength": 36,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "N"
-      }
-    },
-    "departmentName": {
-      "type": "String",
-      "required": true,
-      "length": 50,
-      "precision": null,
-      "scale": null,
-      "mysql": {
-        "columnName": "department-name",
-        "dataType": "varchar",
-        "dataLength": 50,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "N"
-      }
-    },
-    "departmentLeaderDevoteeId": {
-      "type": "String",
-      "required": true,
-      "length": 36,
-      "precision": null,
-      "scale": null,
-      "mysql": {
-        "columnName": "department-leader-devotee-id",
+        "columnName": "role-id",
         "dataType": "varchar",
         "dataLength": 36,
         "dataPrecision": null,

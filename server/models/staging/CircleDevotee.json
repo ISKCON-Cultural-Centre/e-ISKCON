@@ -12,7 +12,7 @@
         "type": "belongsTo",
         "foreignKey": "circleId"
       },
-      "fkCircleDevoteeDevotee1rel": {
+      "fkTable1Devotee1rel": {
         "model": "Devotee",
         "type": "belongsTo",
         "foreignKey": "devoteeId"
@@ -20,7 +20,7 @@
     }
   },
   "properties": {
-    "circleId": {
+    "devoteeId": {
       "type": "String",
       "required": true,
       "length": 36,
@@ -28,7 +28,7 @@
       "scale": null,
       "id": 1,
       "mysql": {
-        "columnName": "circle_id",
+        "columnName": "devotee-id",
         "dataType": "varchar",
         "dataLength": 36,
         "dataPrecision": null,
@@ -36,7 +36,7 @@
         "nullable": "N"
       }
     },
-    "devoteeId": {
+    "circleId": {
       "type": "String",
       "required": true,
       "length": 36,
@@ -44,7 +44,7 @@
       "scale": null,
       "id": 2,
       "mysql": {
-        "columnName": "devotee_id",
+        "columnName": "circle-id",
         "dataType": "varchar",
         "dataLength": 36,
         "dataPrecision": null,

@@ -1,36 +1,15 @@
 {
-  "name": "BookMarathonOrderDetail",
+  "name": "Service",
   "options": {
     "idInjection": false,
     "mysql": {
-      "schema": "mg",
-      "table": "book-marathon-order-detail"
+      "schema": "icc",
+      "table": "service"
     },
-    "relations": {
-      "fkBookMarathonOrderDetailBook1rel": {
-        "model": "Book",
-        "type": "belongsTo",
-        "foreignKey": "bookId"
-      }
-    }
+    "relations": {}
   },
   "properties": {
-    "bookMarathonOrderId": {
-      "type": "String",
-      "required": true,
-      "length": 16,
-      "precision": null,
-      "scale": null,
-      "mysql": {
-        "columnName": "book-marathon-order-id",
-        "dataType": "varchar",
-        "dataLength": 16,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "N"
-      }
-    },
-    "bookId": {
+    "id": {
       "type": "String",
       "required": true,
       "length": 36,
@@ -38,7 +17,7 @@
       "scale": null,
       "id": 1,
       "mysql": {
-        "columnName": "book-id",
+        "columnName": "id",
         "dataType": "varchar",
         "dataLength": 36,
         "dataPrecision": null,
@@ -46,79 +25,64 @@
         "nullable": "N"
       }
     },
-    "requestQty": {
-      "type": "Number",
+    "name": {
+      "type": "String",
       "required": true,
-      "length": null,
-      "precision": 10,
-      "scale": 0,
+      "length": 512,
+      "precision": null,
+      "scale": null,
       "mysql": {
-        "columnName": "request-qty",
-        "dataType": "int",
-        "dataLength": null,
-        "dataPrecision": 10,
-        "dataScale": 0,
+        "columnName": "name",
+        "dataType": "varchar",
+        "dataLength": 512,
+        "dataPrecision": null,
+        "dataScale": null,
         "nullable": "N"
       }
     },
-    "approvedQty": {
-      "type": "Number",
+    "description": {
+      "type": "String",
       "required": false,
-      "length": null,
-      "precision": 10,
-      "scale": 0,
+      "length": 512,
+      "precision": null,
+      "scale": null,
       "mysql": {
-        "columnName": "approved-qty",
-        "dataType": "int",
-        "dataLength": null,
-        "dataPrecision": 10,
-        "dataScale": 0,
+        "columnName": "description",
+        "dataType": "varchar",
+        "dataLength": 512,
+        "dataPrecision": null,
+        "dataScale": null,
         "nullable": "Y"
       }
     },
-    "packedQty": {
-      "type": "Number",
+    "created": {
+      "type": "Date",
       "required": false,
       "length": null,
-      "precision": 10,
-      "scale": 0,
+      "precision": null,
+      "scale": null,
       "mysql": {
-        "columnName": "packed-qty",
-        "dataType": "int",
+        "columnName": "created",
+        "dataType": "datetime",
         "dataLength": null,
-        "dataPrecision": 10,
-        "dataScale": 0,
+        "dataPrecision": null,
+        "dataScale": null,
         "nullable": "Y"
       }
     },
-    "mrp": {
-      "type": "String",
-      "required": true,
+    "modified": {
+      "type": "Date",
+      "required": false,
       "length": null,
-      "precision": 10,
-      "scale": 2,
+      "precision": null,
+      "scale": null,
       "mysql": {
-        "columnName": "mrp",
-        "dataType": "decimal",
+        "columnName": "modified",
+        "dataType": "datetime",
         "dataLength": null,
-        "dataPrecision": 10,
-        "dataScale": 2,
-        "nullable": "N"
-      }
-    },
-    "sellPrice": {
-      "type": "String",
-      "required": true,
-      "length": null,
-      "precision": 10,
-      "scale": 2,
-      "mysql": {
-        "columnName": "sell-price",
-        "dataType": "decimal",
-        "dataLength": null,
-        "dataPrecision": 10,
-        "dataScale": 2,
-        "nullable": "N"
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "Y"
       }
     },
     "createdOn": {

@@ -1,84 +1,99 @@
 {
-  "name": "BookMarathonOrder",
+  "name": "Service",
   "options": {
     "idInjection": false,
+    "base": "Role",
     "mysql": {
-      "schema": "mg",
-      "table": "book-marathon-order"
+      "schema": "icc",
+      "table": "service"
     },
-    "relations": {
-      "fkTable1BookRequestStatus1rel": {
-        "model": "BookRequestStatus",
-        "type": "belongsTo",
-        "foreignKey": "bookRequestStatusId"
+    "mixins": {
+      "TimeStamp" : {
+        "createdAt" : "created-on",
+        "updatedAt" : "updated-on",
+        "required" : false,
+        "validateUpsert": true,
+        "silenceWarnings": false
       },
-      "fkTable1Devotee2rel": {
-        "model": "Devotee",
-        "type": "belongsTo",
-        "foreignKey": "devoteeId"
-      }
-    }
+      "GenerateKey" : true
+    },     
+    "relations": {}
   },
   "properties": {
     "id": {
       "type": "String",
       "required": true,
-      "length": 16,
+      "length": 36,
       "precision": null,
       "scale": null,
       "id": 1,
       "mysql": {
         "columnName": "id",
         "dataType": "varchar",
-        "dataLength": 16,
+        "dataLength": 36,
         "dataPrecision": null,
         "dataScale": null,
         "nullable": "N"
       }
     },
-    "requestDateTime": {
-      "type": "Date",
+    "name": {
+      "type": "String",
       "required": true,
+      "length": 512,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "name",
+        "dataType": "varchar",
+        "dataLength": 512,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "N"
+      }
+    },
+    "description": {
+      "type": "String",
+      "required": false,
+      "length": 512,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "description",
+        "dataType": "varchar",
+        "dataLength": 512,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "Y"
+      }
+    },
+    "created": {
+      "type": "Date",
+      "required": false,
       "length": null,
       "precision": null,
       "scale": null,
       "mysql": {
-        "columnName": "request-date-time",
+        "columnName": "created",
         "dataType": "datetime",
         "dataLength": null,
         "dataPrecision": null,
         "dataScale": null,
-        "nullable": "N"
+        "nullable": "Y"
       }
     },
-    "requestNo": {
-      "type": "Number",
-      "required": true,
+    "modified": {
+      "type": "Date",
+      "required": false,
       "length": null,
-      "precision": 10,
-      "scale": 0,
+      "precision": null,
+      "scale": null,
       "mysql": {
-        "columnName": "request-no",
-        "dataType": "int",
+        "columnName": "modified",
+        "dataType": "datetime",
         "dataLength": null,
-        "dataPrecision": 10,
-        "dataScale": 0,
-        "nullable": "N"
-      }
-    },
-    "orderNo": {
-      "type": "Number",
-      "required": true,
-      "length": null,
-      "precision": 10,
-      "scale": 0,
-      "mysql": {
-        "columnName": "order-no",
-        "dataType": "int",
-        "dataLength": null,
-        "dataPrecision": 10,
-        "dataScale": 0,
-        "nullable": "N"
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "Y"
       }
     },
     "createdOn": {
@@ -139,36 +154,6 @@
         "dataPrecision": null,
         "dataScale": null,
         "nullable": "Y"
-      }
-    },
-    "bookRequestStatusId": {
-      "type": "String",
-      "required": true,
-      "length": 16,
-      "precision": null,
-      "scale": null,
-      "mysql": {
-        "columnName": "book-request-status-id",
-        "dataType": "varchar",
-        "dataLength": 16,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "N"
-      }
-    },
-    "devoteeId": {
-      "type": "String",
-      "required": true,
-      "length": 36,
-      "precision": null,
-      "scale": null,
-      "mysql": {
-        "columnName": "devotee-id",
-        "dataType": "varchar",
-        "dataLength": 36,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "N"
       }
     }
   }

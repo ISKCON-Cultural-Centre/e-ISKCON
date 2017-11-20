@@ -1,0 +1,65 @@
+{
+  "name": "CircleDevotee",
+  "options": {
+    "idInjection": false,
+    "mysql": {
+      "schema": "icc",
+      "table": "circle-devotee"
+    },
+    "mixins": {
+      "TimeStamp" : {
+        "createdAt" : "created-on",
+        "updatedAt" : "updated-on",
+        "required" : false,
+        "validateUpsert": true,
+        "silenceWarnings": false
+      }
+    },
+    "relations": {
+      "fkCircleDevoteeCircle1rel": {
+        "model": "Circle",
+        "type": "belongsTo",
+        "foreignKey": "circleId"
+      },
+      "fkTable1Devotee1rel": {
+        "model": "Devotee",
+        "type": "belongsTo",
+        "foreignKey": "devoteeId"
+      }
+    }
+  },
+  "properties": {
+    "devoteeId": {
+      "type": "String",
+      "required": true,
+      "length": 36,
+      "precision": null,
+      "scale": null,
+      "id": 1,
+      "mysql": {
+        "columnName": "devotee-id",
+        "dataType": "varchar",
+        "dataLength": 36,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "N"
+      }
+    },
+    "circleId": {
+      "type": "String",
+      "required": true,
+      "length": 36,
+      "precision": null,
+      "scale": null,
+      "id": 2,
+      "mysql": {
+        "columnName": "circle-id",
+        "dataType": "varchar",
+        "dataLength": 36,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "N"
+      }
+    }
+  }
+}

@@ -43,22 +43,6 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `icc`.`circle`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `icc`.`circle` (
-  `id` VARCHAR(36) NOT NULL,
-  `name` VARCHAR(100) NULL,
-  `created-on` DATETIME NULL DEFAULT NULL,
-  `updated-on` DATETIME NULL DEFAULT NULL,
-  `created-by` VARCHAR(36) NULL DEFAULT NULL,
-  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `idx_circle` (`id` ASC))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
 -- Table `icc`.`electronic-address-type-master`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `icc`.`electronic-address-type-master` (
@@ -160,7 +144,6 @@ CREATE TABLE IF NOT EXISTS `icc`.`devotee` (
   `id` VARCHAR(36) NOT NULL,
   `legal-name` VARCHAR(100) NULL,
   `spiritual-name` VARCHAR(100) NULL DEFAULT NULL,
-  `circle-id` VARCHAR(36) NULL,
   `gender` CHAR(1) NULL DEFAULT NULL,
   `physical-address-id` VARCHAR(36) NULL,
   `electronic-address-id` VARCHAR(36) NULL,
@@ -179,14 +162,8 @@ CREATE TABLE IF NOT EXISTS `icc`.`devotee` (
   PRIMARY KEY (`id`),
   INDEX `fk_devotee_id_idx` (`id` ASC),
   INDEX `fk_devotee_spiritual-level-master1_idx` (`spiritual-level-master-id` ASC),
-  INDEX `fk_devotee_circle1_idx` (`circle-id` ASC),
   INDEX `fk_devotee_physical-address1_idx` (`physical-address-id` ASC),
   INDEX `fk_devotee_electronic-address1_idx` (`electronic-address-id` ASC),
-  CONSTRAINT `fk_devotee_circle1`
-    FOREIGN KEY (`circle-id`)
-    REFERENCES `icc`.`circle` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
   CONSTRAINT `fk_devotee_electronic-address1`
     FOREIGN KEY (`electronic-address-id`)
     REFERENCES `icc`.`electronic-address` (`id`)
@@ -210,16 +187,15 @@ DEFAULT CHARACTER SET = utf8;
 -- Table `icc`.`relationship-master`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `icc`.`relationship-master` (
-  `id` VARCHAR(36) CHARACTER SET 'utf8' NOT NULL,
-  `relation-name` VARCHAR(100) CHARACTER SET 'utf8' NULL,
+  `id` VARCHAR(36) NOT NULL,
+  `relation-name` VARCHAR(100) NULL,
   `created-on` DATETIME NULL DEFAULT NULL,
   `updated-on` DATETIME NULL DEFAULT NULL,
-  `created-by` VARCHAR(36) CHARACTER SET 'utf8' NULL DEFAULT NULL,
-  `updated-by` VARCHAR(36) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+  `created-by` VARCHAR(36) NULL DEFAULT NULL,
+  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci;
+DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
@@ -311,6 +287,29 @@ CREATE TABLE IF NOT EXISTS `icc`.`acl` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_unicode_ci;
+
+
+-- -----------------------------------------------------
+-- Table `icc`.`circle`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `icc`.`circle` (
+  `id` VARCHAR(36) NOT NULL,
+  `name` VARCHAR(100) NULL,
+  `leader-devotee-id` VARCHAR(36) NULL,
+  `created-on` DATETIME NULL DEFAULT NULL,
+  `updated-on` DATETIME NULL DEFAULT NULL,
+  `created-by` VARCHAR(36) NULL DEFAULT NULL,
+  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `idx_circle` (`id` ASC),
+  INDEX `fk_circle_devotee1_idx` (`leader-devotee-id` ASC),
+  CONSTRAINT `fk_circle_devotee1`
+    FOREIGN KEY (`leader-devotee-id`)
+    REFERENCES `icc`.`devotee` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
@@ -615,49 +614,56 @@ COLLATE = utf8_unicode_ci;
 
 
 -- -----------------------------------------------------
--- Table `icc`.`role`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `icc`.`role` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(512) NOT NULL,
-  `description` VARCHAR(512) NULL DEFAULT NULL,
-  `created` DATETIME NULL DEFAULT NULL,
-  `modified` DATETIME NULL DEFAULT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
 -- Table `icc`.`task-master`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `icc`.`task-master` (
   `id` VARCHAR(36) NOT NULL,
   `task-name` VARCHAR(50) NOT NULL,
   `application-route` VARCHAR(255) NOT NULL,
-  `task-description` VARCHAR(50) NULL,
+  `task-description` VARCHAR(100) NULL,
   `approval-rules-apply-ind` TINYINT NOT NULL DEFAULT 0,
+  `created-on` DATETIME NULL DEFAULT NULL,
+  `updated-on` DATETIME NULL DEFAULT NULL,
+  `created-by` VARCHAR(36) NULL DEFAULT NULL,
+  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `icc`.`role-task-master`
+-- Table `icc`.`service`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `icc`.`role-task-master` (
-  `task-master-id1` VARCHAR(36) NOT NULL,
-  `role-id` INT(11) NOT NULL,
-  INDEX `fk_role-task-master_task-master1_idx` (`task-master-id1` ASC),
-  INDEX `fk_role-task-master_role1_idx` (`role-id` ASC),
-  PRIMARY KEY (`task-master-id1`, `role-id`),
+CREATE TABLE IF NOT EXISTS `icc`.`service` (
+  `id` VARCHAR(36) NOT NULL,
+  `name` VARCHAR(512) NOT NULL,
+  `description` VARCHAR(512) NULL DEFAULT NULL,
+  `created` DATETIME NULL DEFAULT NULL,
+  `modified` DATETIME NULL DEFAULT NULL,
+  `created-on` DATETIME NULL DEFAULT NULL,
+  `updated-on` DATETIME NULL DEFAULT NULL,
+  `created-by` VARCHAR(36) NULL DEFAULT NULL,
+  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `icc`.`service-task-master`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `icc`.`service-task-master` (
+  `task-master-id` VARCHAR(36) NOT NULL,
+  `service-id` VARCHAR(36) NOT NULL,
+  INDEX `fk_role-task-master_task-master1_idx` (`task-master-id` ASC),
+  PRIMARY KEY (`task-master-id`, `service-id`),
+  INDEX `fk_service-task-master_service1_idx` (`service-id` ASC),
   CONSTRAINT `fk_role-task-master_task-master1`
-    FOREIGN KEY (`task-master-id1`)
+    FOREIGN KEY (`task-master-id`)
     REFERENCES `icc`.`task-master` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_role-task-master_role1`
-    FOREIGN KEY (`role-id`)
-    REFERENCES `icc`.`role` (`id`)
+  CONSTRAINT `fk_service-task-master_service1`
+    FOREIGN KEY (`service-id`)
+    REFERENCES `icc`.`service` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -671,6 +677,10 @@ CREATE TABLE IF NOT EXISTS `icc`.`department` (
   `temple-id` VARCHAR(36) NOT NULL,
   `department-name` VARCHAR(50) NOT NULL,
   `department-leader-devotee-id` VARCHAR(36) NOT NULL,
+  `created-on` DATETIME NULL DEFAULT NULL,
+  `updated-on` DATETIME NULL DEFAULT NULL,
+  `created-by` VARCHAR(36) NULL DEFAULT NULL,
+  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
   INDEX `fk_department_temple1_idx` (`temple-id` ASC),
   PRIMARY KEY (`id`),
   INDEX `fk_department_devotee1_idx` (`department-leader-devotee-id` ASC),
@@ -689,22 +699,22 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `icc`.`department-role`
+-- Table `icc`.`department-service`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `icc`.`department-role` (
-  `role-id` INT(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `icc`.`department-service` (
   `department-id` VARCHAR(36) NOT NULL,
-  INDEX `fk_department-role_role1_idx` (`role-id` ASC),
+  `service-id` VARCHAR(36) NOT NULL,
   INDEX `fk_department-role_department1_idx` (`department-id` ASC),
-  PRIMARY KEY (`role-id`, `department-id`),
-  CONSTRAINT `fk_department-role_role1`
-    FOREIGN KEY (`role-id`)
-    REFERENCES `icc`.`role` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+  PRIMARY KEY (`department-id`, `service-id`),
+  INDEX `fk_department-role_service1_idx` (`service-id` ASC),
   CONSTRAINT `fk_department-role_department1`
     FOREIGN KEY (`department-id`)
     REFERENCES `icc`.`department` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_department-role_service1`
+    FOREIGN KEY (`service-id`)
+    REFERENCES `icc`.`service` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -782,6 +792,7 @@ CREATE TABLE IF NOT EXISTS `icc`.`circle-devotee` (
   `updated-by` VARCHAR(36) NULL DEFAULT NULL,
   INDEX `fk_table1_devotee1_idx` (`devotee-id` ASC),
   INDEX `fk_circle-devotee_circle1_idx` (`circle-id` ASC),
+  PRIMARY KEY (`devotee-id`, `circle-id`),
   CONSTRAINT `fk_table1_devotee1`
     FOREIGN KEY (`devotee-id`)
     REFERENCES `icc`.`devotee` (`id`)
@@ -794,6 +805,24 @@ CREATE TABLE IF NOT EXISTS `icc`.`circle-devotee` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `icc`.`service-mapping`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `icc`.`service-mapping` (
+  `id` VARCHAR(36) NOT NULL,
+  `principal-type` VARCHAR(512) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+  `principal-id` VARCHAR(255) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+  `role-id` VARCHAR(36) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_service-mapping_service1_idx` (`role-id` ASC),
+  CONSTRAINT `fk_service-mapping_service1`
+    FOREIGN KEY (`role-id`)
+    REFERENCES `icc`.`service` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
 USE `mg` ;
 

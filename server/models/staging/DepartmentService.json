@@ -1,0 +1,56 @@
+{
+  "name": "DepartmentService",
+  "options": {
+    "idInjection": false,
+    "mysql": {
+      "schema": "icc",
+      "table": "department-service"
+    },
+    "relations": {
+      "fkDepartmentRoleDepartment1rel": {
+        "model": "Department",
+        "type": "belongsTo",
+        "foreignKey": "departmentId"
+      },
+      "fkDepartmentRoleService1rel": {
+        "model": "Service",
+        "type": "belongsTo",
+        "foreignKey": "serviceId"
+      }
+    }
+  },
+  "properties": {
+    "departmentId": {
+      "type": "String",
+      "required": true,
+      "length": 36,
+      "precision": null,
+      "scale": null,
+      "id": 1,
+      "mysql": {
+        "columnName": "department-id",
+        "dataType": "varchar",
+        "dataLength": 36,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "N"
+      }
+    },
+    "serviceId": {
+      "type": "String",
+      "required": true,
+      "length": 36,
+      "precision": null,
+      "scale": null,
+      "id": 2,
+      "mysql": {
+        "columnName": "service-id",
+        "dataType": "varchar",
+        "dataLength": 36,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "N"
+      }
+    }
+  }
+}
