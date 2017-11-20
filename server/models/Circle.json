@@ -50,59 +50,14 @@
         "nullable": "Y"
       }
     },
-    "createdOn": {
-      "type": "Date",
-      "required": false,
-      "length": null,
-      "precision": null,
-      "scale": null,
-      "mysql": {
-        "columnName": "created-on",
-        "dataType": "datetime",
-        "dataLength": null,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "Y"
-      }
-    },
-    "updatedOn": {
-      "type": "Date",
-      "required": false,
-      "length": null,
-      "precision": null,
-      "scale": null,
-      "mysql": {
-        "columnName": "updated-on",
-        "dataType": "datetime",
-        "dataLength": null,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "Y"
-      }
-    },
-    "createdBy": {
+    "leaderDevoteeId": {
       "type": "String",
       "required": false,
       "length": 36,
       "precision": null,
       "scale": null,
       "mysql": {
-        "columnName": "created-by",
-        "dataType": "varchar",
-        "dataLength": 36,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "Y"
-      }
-    },
-    "updatedBy": {
-      "type": "String",
-      "required": false,
-      "length": 36,
-      "precision": null,
-      "scale": null,
-      "mysql": {
-        "columnName": "updated-by",
+        "columnName": "leader-devotee-id",
         "dataType": "varchar",
         "dataLength": 36,
         "dataPrecision": null,
