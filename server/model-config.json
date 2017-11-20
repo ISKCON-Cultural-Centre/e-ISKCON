@@ -162,31 +162,31 @@
   },
 
   "Book": {
-    "dataSource": "mysqld1",
+    "dataSource": "mysqld",
     "public": true
   },
   "BookLanguageMap": {
-    "dataSource": "mysqld1",
+    "dataSource": "mysqld",
     "public": true
   },
   "BookMarathonOrder": {
-    "dataSource": "mysqld1",
+    "dataSource": "mysqld",
     "public": true
   } ,
   "BookMarathonOrderDetail": {
-    "dataSource": "mysqld1",
+    "dataSource": "mysqld",
     "public": true
   } ,
   "BookMarathonReportedSale": {
-    "dataSource": "mysqld1",
+    "dataSource": "mysqld",
     "public": true
   } ,
   "BookMarathonSettlement": {
-    "dataSource": "mysqld1",
+    "dataSource": "mysqld",
     "public": true
   },
   "BookRequestStatus": {
-    "dataSource": "mysqld1",
+    "dataSource": "mysqld",
     "public": true
   }
 }

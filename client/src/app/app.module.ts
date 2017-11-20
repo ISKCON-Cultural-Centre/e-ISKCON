@@ -19,6 +19,7 @@ import { LoginModule } from './login/login.module';
 import { DashboardComponent } from './components/dashboard.component';
 import { DevoteeComponent } from './components/devotee.component';
 import { DevoteeModule } from '../app/devotee/devotee.module';
+import { MyServicesModule } from './my-services/my-services.module';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { DevoteeModule } from '../app/devotee/devotee.module';
     SDKBrowserModule.forRoot(),
     RouterModule,
     AppRoutingModule,
-    DevoteeModule
+    DevoteeModule,
+    MyServicesModule
   ],
   providers: [
     AuthGuard,

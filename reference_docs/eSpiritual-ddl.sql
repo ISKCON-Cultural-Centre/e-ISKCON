@@ -615,6 +615,20 @@ COLLATE = utf8_unicode_ci;
 
 
 -- -----------------------------------------------------
+-- Table `icc`.`role`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `icc`.`role` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(512) NOT NULL,
+  `description` VARCHAR(512) NULL DEFAULT NULL,
+  `created` DATETIME NULL DEFAULT NULL,
+  `modified` DATETIME NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
 -- Table `icc`.`task-master`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `icc`.`task-master` (
@@ -632,23 +646,20 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `icc`.`role-task-master` (
   `task-master-id1` VARCHAR(36) NOT NULL,
-  `roles-ID` VARCHAR(255) NOT NULL,
+  `role-id` INT(11) NOT NULL,
   INDEX `fk_role-task-master_task-master1_idx` (`task-master-id1` ASC),
+  INDEX `fk_role-task-master_role1_idx` (`role-id` ASC),
+  PRIMARY KEY (`task-master-id1`, `role-id`),
   CONSTRAINT `fk_role-task-master_task-master1`
     FOREIGN KEY (`task-master-id1`)
     REFERENCES `icc`.`task-master` (`id`)
     ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_role-task-master_role1`
+    FOREIGN KEY (`role-id`)
+    REFERENCES `icc`.`role` (`id`)
+    ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `icc`.`department-role`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `icc`.`department-role` (
-  `department-id` VARCHAR(36) NOT NULL,
-  `role-id` INT(11) NOT NULL,
-  PRIMARY KEY (`department-id`, `role-id`))
 ENGINE = InnoDB;
 
 
@@ -675,6 +686,28 @@ CREATE TABLE IF NOT EXISTS `icc`.`department` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `icc`.`department-role`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `icc`.`department-role` (
+  `role-id` INT(11) NOT NULL,
+  `department-id` VARCHAR(36) NOT NULL,
+  INDEX `fk_department-role_role1_idx` (`role-id` ASC),
+  INDEX `fk_department-role_department1_idx` (`department-id` ASC),
+  PRIMARY KEY (`role-id`, `department-id`),
+  CONSTRAINT `fk_department-role_role1`
+    FOREIGN KEY (`role-id`)
+    REFERENCES `icc`.`role` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_department-role_department1`
+    FOREIGN KEY (`department-id`)
+    REFERENCES `icc`.`department` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
