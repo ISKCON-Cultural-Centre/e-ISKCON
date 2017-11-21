@@ -63,10 +63,6 @@
     "dataSource": "mysqld",
     "public": true
   },
-  "CircleDevotee": {
-    "dataSource": "mysqld",
-    "public": true
-  },
   "DeekshaGuru": {
     "dataSource": "mysqld",
     "public": true

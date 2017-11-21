@@ -48,7 +48,6 @@ import { StorageBrowser } from './storage/storage.browser';
 import { ServiceApi } from './services/custom/Service';
 import { ServiceMappingApi } from './services/custom/ServiceMapping';
 import { CircleApi } from './services/custom/Circle';
-import { CircleDevoteeApi } from './services/custom/CircleDevotee';
 import { DeekshaGuruApi } from './services/custom/DeekshaGuru';
 import { DevoteeApi } from './services/custom/Devotee';
 import { DevoteeEventCalendarApi } from './services/custom/DevoteeEventCalendar';
@@ -116,7 +115,6 @@ export class SDKBrowserModule {
         ServiceApi,
         ServiceMappingApi,
         CircleApi,
-        CircleDevoteeApi,
         DeekshaGuruApi,
         DevoteeApi,
         DevoteeEventCalendarApi,

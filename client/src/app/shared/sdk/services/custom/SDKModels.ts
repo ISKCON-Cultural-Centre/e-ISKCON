@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Service } from '../../models/Service';
 import { ServiceMapping } from '../../models/ServiceMapping';
 import { Circle } from '../../models/Circle';
-import { CircleDevotee } from '../../models/CircleDevotee';
 import { DeekshaGuru } from '../../models/DeekshaGuru';
 import { Devotee } from '../../models/Devotee';
 import { DevoteeEventCalendar } from '../../models/DevoteeEventCalendar';
@@ -49,7 +48,6 @@ export class SDKModels {
     Service: Service,
     ServiceMapping: ServiceMapping,
     Circle: Circle,
-    CircleDevotee: CircleDevotee,
     DeekshaGuru: DeekshaGuru,
     Devotee: Devotee,
     DevoteeEventCalendar: DevoteeEventCalendar,

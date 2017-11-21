@@ -138,11 +138,35 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
+-- Table `icc`.`circle`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `icc`.`circle` (
+  `id` VARCHAR(36) NOT NULL,
+  `name` VARCHAR(100) NULL,
+  `leader-devotee-id` VARCHAR(36) NULL,
+  `created-on` DATETIME NULL DEFAULT NULL,
+  `updated-on` DATETIME NULL DEFAULT NULL,
+  `created-by` VARCHAR(36) NULL DEFAULT NULL,
+  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `idx_circle` (`id` ASC),
+  INDEX `fk_circle_devotee1_idx` (`leader-devotee-id` ASC),
+  CONSTRAINT `fk_circle_devotee1`
+    FOREIGN KEY (`leader-devotee-id`)
+    REFERENCES `icc`.`devotee` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
 -- Table `icc`.`devotee`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `icc`.`devotee` (
   `id` VARCHAR(36) NOT NULL,
   `legal-name` VARCHAR(100) NULL,
+  `circle-id` VARCHAR(36) NULL,
   `spiritual-name` VARCHAR(100) NULL DEFAULT NULL,
   `gender` CHAR(1) NULL DEFAULT NULL,
   `physical-address-id` VARCHAR(36) NULL,
@@ -164,6 +188,7 @@ CREATE TABLE IF NOT EXISTS `icc`.`devotee` (
   INDEX `fk_devotee_spiritual-level-master1_idx` (`spiritual-level-master-id` ASC),
   INDEX `fk_devotee_physical-address1_idx` (`physical-address-id` ASC),
   INDEX `fk_devotee_electronic-address1_idx` (`electronic-address-id` ASC),
+  INDEX `fk_devotee_circle1_idx` (`circle-id` ASC),
   CONSTRAINT `fk_devotee_electronic-address1`
     FOREIGN KEY (`electronic-address-id`)
     REFERENCES `icc`.`electronic-address` (`id`)
@@ -177,6 +202,11 @@ CREATE TABLE IF NOT EXISTS `icc`.`devotee` (
   CONSTRAINT `fk_devotee_spiritual-level-master1`
     FOREIGN KEY (`spiritual-level-master-id`)
     REFERENCES `icc`.`spiritual-level-master` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_devotee_circle1`
+    FOREIGN KEY (`circle-id`)
+    REFERENCES `icc`.`circle` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -287,29 +317,6 @@ CREATE TABLE IF NOT EXISTS `icc`.`acl` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_unicode_ci;
-
-
--- -----------------------------------------------------
--- Table `icc`.`circle`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `icc`.`circle` (
-  `id` VARCHAR(36) NOT NULL,
-  `name` VARCHAR(100) NULL,
-  `leader-devotee-id` VARCHAR(36) NULL,
-  `created-on` DATETIME NULL DEFAULT NULL,
-  `updated-on` DATETIME NULL DEFAULT NULL,
-  `created-by` VARCHAR(36) NULL DEFAULT NULL,
-  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `idx_circle` (`id` ASC),
-  INDEX `fk_circle_devotee1_idx` (`leader-devotee-id` ASC),
-  CONSTRAINT `fk_circle_devotee1`
-    FOREIGN KEY (`leader-devotee-id`)
-    REFERENCES `icc`.`devotee` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
@@ -778,33 +785,6 @@ CREATE TABLE IF NOT EXISTS `icc`.`approval-artefact` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_unicode_ci;
-
-
--- -----------------------------------------------------
--- Table `icc`.`circle-devotee`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `icc`.`circle-devotee` (
-  `devotee-id` VARCHAR(36) NOT NULL,
-  `circle-id` VARCHAR(36) NOT NULL,
-  `created-on` DATETIME NULL DEFAULT NULL,
-  `updated-on` DATETIME NULL DEFAULT NULL,
-  `created-by` VARCHAR(36) NULL DEFAULT NULL,
-  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
-  INDEX `fk_table1_devotee1_idx` (`devotee-id` ASC),
-  INDEX `fk_circle-devotee_circle1_idx` (`circle-id` ASC),
-  PRIMARY KEY (`devotee-id`, `circle-id`),
-  CONSTRAINT `fk_table1_devotee1`
-    FOREIGN KEY (`devotee-id`)
-    REFERENCES `icc`.`devotee` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_circle-devotee_circle1`
-    FOREIGN KEY (`circle-id`)
-    REFERENCES `icc`.`circle` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------

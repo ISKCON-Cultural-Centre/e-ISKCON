@@ -2,7 +2,6 @@
 export * from './Service';
 export * from './ServiceMapping';
 export * from './Circle';
-export * from './CircleDevotee';
 export * from './DeekshaGuru';
 export * from './Devotee';
 export * from './DevoteeEventCalendar';

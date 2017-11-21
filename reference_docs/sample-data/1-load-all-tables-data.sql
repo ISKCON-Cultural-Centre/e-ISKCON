@@ -1,7 +1,6 @@
 use icc;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 
-delete from `circle-devotee`;
 delete from circle;
 delete from `department-service`;
 delete from department;
@@ -14,7 +13,6 @@ delete from temple;
 delete from `service-mapping`;
 
 
-source ~/software/eISKCON/reference_docs/sample-data/circle-devotee.sql;
 source ~/software/eISKCON/reference_docs/sample-data/circle.sql;
 source ~/software/eISKCON/reference_docs/sample-data/department-service.sql;
 source ~/software/eISKCON/reference_docs/sample-data/department.sql;
