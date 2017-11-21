@@ -12,23 +12,23 @@ import { AuthGuard, AuthService } from './shared/services';
 import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './pageNotFound.component';
 import { NavgationComponent } from './navgation/navgation.component';
-import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './login/register/register.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginModule } from './login/login.module';
-import { DashboardComponent } from './components/dashboard.component';
-import { DevoteeComponent } from './components/devotee.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { DevoteeModule } from '../app/devotee/devotee.module';
 import { MyServicesModule } from './my-services/my-services.module';
+import { MyActionsModule } from './my-actions/my-actions.module';
+import { MyMessagesModule } from './my-messages/my-messages.module';
+import { CatalogueModule } from './matchless-gifts/catalogue/catalogue.module';
+import { MatchlessGiftsModule } from './matchless-gifts/matchless-gifts.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent,
     NavgationComponent,
-    HomeComponent,
     DashboardComponent,
-    DevoteeComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +40,11 @@ import { MyServicesModule } from './my-services/my-services.module';
     RouterModule,
     AppRoutingModule,
     DevoteeModule,
-    MyServicesModule
+    MyServicesModule,
+    MyActionsModule,
+    MyMessagesModule,
+    CatalogueModule,
+    MatchlessGiftsModule
   ],
   providers: [
     AuthGuard,
