@@ -21,6 +21,7 @@
               <strong>required</strong>
             </mat-error>
           </mat-form-field>
+          <br/>
           <mat-form-field>
             <input type="text" matInput placeholder="Email Address" #userName [formControl]="userNameFormControl">
             <mat-error *ngIf="userNameFormControl.hasError('required')">
@@ -28,6 +29,7 @@
               <strong>required</strong>
             </mat-error>
           </mat-form-field>
+          <br/>
           <mat-form-field>
             <input type="text" matInput placeholder="Contact Number" #userName [formControl]="userNameFormControl">
             <mat-error *ngIf="userNameFormControl.hasError('required')">
@@ -37,7 +39,15 @@
           </mat-form-field>
           <br/>
           <mat-form-field>
-            <input type="password" matInput placeholder="Circle Leader" #password [formControl]="passwordFormControl">
+            <input type="text" matInput placeholder="Username" #userName [formControl]="userNameFormControl">
+            <mat-error *ngIf="userNameFormControl.hasError('required')">
+              Username is
+              <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          <br/>
+          <mat-form-field>
+            <input type="password" matInput placeholder="Password" #password [formControl]="passwordFormControl">
             <mat-error *ngIf="passwordFormControl.hasError('required')">
               Password is
               <strong>required</strong>
