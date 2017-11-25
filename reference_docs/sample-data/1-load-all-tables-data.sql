@@ -24,4 +24,8 @@ source ~/software/eISKCON/reference_docs/sample-data/task-master.sql;
 source ~/software/eISKCON/reference_docs/sample-data/temple.sql;
 source ~/software/eISKCON/reference_docs/sample-data/service-mapping.sql
 
+use mg;
+source ~/software/eISKCON/reference_docs/sample-data/book.sql
+source ~/software/eISKCON/reference_docs/sample-data/book-language-map.sql
+
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
