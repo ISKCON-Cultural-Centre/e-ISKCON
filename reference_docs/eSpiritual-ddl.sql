@@ -816,12 +816,11 @@ CREATE TABLE IF NOT EXISTS `mg`.`book` (
   `bar-code-type` VARCHAR(50) NULL DEFAULT NULL,
   `title` VARCHAR(255) NOT NULL,
   `maximum-retail-price` DOUBLE NOT NULL DEFAULT '0',
-  `image` MEDIUMBLOB NULL DEFAULT NULL,
   `hsn-code` VARCHAR(50) NULL DEFAULT NULL,
   `discounted` VARCHAR(5) NULL DEFAULT 'no',
-  `discount-allowed-ind` BIT(1) NOT NULL DEFAULT b'1',
+  `discount-allowed-ind` TINYINT NOT NULL DEFAULT b'1',
   `in-stock-qty` INT NOT NULL DEFAULT 0,
-  `manage-stock` BIT(1) NULL DEFAULT b'1',
+  `manage-stock` TINYINT NULL DEFAULT b'1',
   `created-on` DATETIME NULL DEFAULT NULL,
   `updated-on` DATETIME NULL DEFAULT NULL,
   `created-by` VARCHAR(36) NULL DEFAULT NULL,
@@ -1036,7 +1035,7 @@ USE `icc` ;
 -- -----------------------------------------------------
 -- Placeholder table for view `icc`.`book-filter-bbt`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `icc`.`book-filter-bbt` (`name` INT, `id` INT, `REFERENCE` INT, `CODE` INT, `CODETYPE` INT, `NAME` INT, `PRICESELL` INT, `image` INT, `alias` INT, `discounted` INT, `candiscount` INT, `units` INT, `managestock` INT, `curdate()` INT, `'script'` INT);
+CREATE TABLE IF NOT EXISTS `icc`.`book-filter-bbt` (`id` INT, `REFERENCE` INT, `CODE` INT, `CODETYPE` INT, `NAME` INT, `PRICESELL` INT, `image` INT, `alias` INT, `discounted` INT, `candiscount` INT, `units` INT, `managestock` INT, `curdate()` INT, `'script'` INT);
 
 -- -----------------------------------------------------
 -- View `icc`.`book-filter-bbt`
@@ -1044,7 +1043,9 @@ CREATE TABLE IF NOT EXISTS `icc`.`book-filter-bbt` (`name` INT, `id` INT, `REFER
 DROP TABLE IF EXISTS `icc`.`book-filter-bbt`;
 USE `icc`;
 CREATE  OR REPLACE VIEW `book-filter-bbt` AS
-select b.name, a.id, REFERENCE, CODE, CODETYPE, a.NAME, PRICESELL, image, alias, discounted, candiscount, c.units, managestock,
+select a.id, REFERENCE, CODE, CODETYPE, a.NAME, 
+PRICESELL, image, alias, discounted, candiscount, 
+c.units, managestock,
 curdate(), curdate(), 'script', 'script'   from chromispos.products a
 inner join chromispos.category_tree b
 on a.category = b.id 

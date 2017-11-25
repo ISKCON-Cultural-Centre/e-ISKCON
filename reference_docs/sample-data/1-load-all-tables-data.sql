@@ -12,7 +12,12 @@ delete from `task-master`;
 delete from temple;
 delete from `service-mapping`;
 
+use mg;
+delete from `book-language-map`;
+delete from book;
 
+
+use icc;
 source ~/software/eISKCON/reference_docs/sample-data/circle.sql;
 source ~/software/eISKCON/reference_docs/sample-data/department-service.sql;
 source ~/software/eISKCON/reference_docs/sample-data/department.sql;
