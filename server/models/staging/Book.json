@@ -100,21 +100,6 @@
         "nullable": "N"
       }
     },
-    "image": {
-      "type": "Binary",
-      "required": false,
-      "length": 16777215,
-      "precision": null,
-      "scale": null,
-      "mysql": {
-        "columnName": "image",
-        "dataType": "mediumblob",
-        "dataLength": 16777215,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "Y"
-      }
-    },
     "hsnCode": {
       "type": "String",
       "required": false,
@@ -146,17 +131,17 @@
       }
     },
     "discountAllowedInd": {
-      "type": "Binary",
+      "type": "Number",
       "required": true,
       "length": null,
-      "precision": 1,
-      "scale": null,
+      "precision": 3,
+      "scale": 0,
       "mysql": {
         "columnName": "discount-allowed-ind",
-        "dataType": "bit",
+        "dataType": "tinyint",
         "dataLength": null,
-        "dataPrecision": 1,
-        "dataScale": null,
+        "dataPrecision": 3,
+        "dataScale": 0,
         "nullable": "N"
       }
     },
@@ -176,17 +161,17 @@
       }
     },
     "manageStock": {
-      "type": "Binary",
+      "type": "Number",
       "required": false,
       "length": null,
-      "precision": 1,
-      "scale": null,
+      "precision": 3,
+      "scale": 0,
       "mysql": {
         "columnName": "manage-stock",
-        "dataType": "bit",
+        "dataType": "tinyint",
         "dataLength": null,
-        "dataPrecision": 1,
-        "dataScale": null,
+        "dataPrecision": 3,
+        "dataScale": 0,
         "nullable": "Y"
       }
     },
