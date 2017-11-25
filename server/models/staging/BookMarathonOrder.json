@@ -1,70 +1,84 @@
 {
-  "name": "BookLanguageMap",
+  "name": "BookMarathonOrder",
   "options": {
     "idInjection": false,
     "mysql": {
       "schema": "mg",
-      "table": "book-language-map"
+      "table": "book-marathon-order"
     },
     "relations": {
-      "fkBookLanguageMapProduct1rel": {
-        "model": "Book",
+      "fkTable1BookRequestStatus1rel": {
+        "model": "BookRequestStatus",
         "type": "belongsTo",
-        "foreignKey": "bookId"
+        "foreignKey": "bookRequestStatusId"
       },
-      "fkBookLanguageMapProduct2rel": {
-        "model": "Book",
+      "fkTable1Devotee2rel": {
+        "model": "Devotee",
         "type": "belongsTo",
-        "foreignKey": "englishBookId"
+        "foreignKey": "devoteeId"
       }
     }
   },
   "properties": {
-    "bookId": {
+    "id": {
       "type": "String",
       "required": true,
-      "length": 36,
+      "length": 16,
       "precision": null,
       "scale": null,
       "id": 1,
       "mysql": {
-        "columnName": "book-id",
+        "columnName": "id",
         "dataType": "varchar",
-        "dataLength": 36,
+        "dataLength": 16,
         "dataPrecision": null,
         "dataScale": null,
         "nullable": "N"
       }
     },
-    "englishBookId": {
-      "type": "String",
+    "requestDateTime": {
+      "type": "Date",
       "required": true,
-      "length": 36,
+      "length": null,
       "precision": null,
       "scale": null,
-      "id": 2,
       "mysql": {
-        "columnName": "english-book-id",
-        "dataType": "varchar",
-        "dataLength": 36,
+        "columnName": "request-date-time",
+        "dataType": "datetime",
+        "dataLength": null,
         "dataPrecision": null,
         "dataScale": null,
         "nullable": "N"
       }
     },
-    "language": {
-      "type": "String",
-      "required": false,
-      "length": 50,
-      "precision": null,
-      "scale": null,
+    "requestNo": {
+      "type": "Number",
+      "required": true,
+      "length": null,
+      "precision": 10,
+      "scale": 0,
       "mysql": {
-        "columnName": "language",
-        "dataType": "varchar",
-        "dataLength": 50,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "Y"
+        "columnName": "request-no",
+        "dataType": "int",
+        "dataLength": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
+        "nullable": "N"
+      }
+    },
+    "orderNo": {
+      "type": "Number",
+      "required": true,
+      "length": null,
+      "precision": 10,
+      "scale": 0,
+      "mysql": {
+        "columnName": "order-no",
+        "dataType": "int",
+        "dataLength": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
+        "nullable": "N"
       }
     },
     "createdOn": {
@@ -125,6 +139,36 @@
         "dataPrecision": null,
         "dataScale": null,
         "nullable": "Y"
+      }
+    },
+    "bookRequestStatusId": {
+      "type": "String",
+      "required": true,
+      "length": 16,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "book-request-status-id",
+        "dataType": "varchar",
+        "dataLength": 16,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "N"
+      }
+    },
+    "devoteeId": {
+      "type": "String",
+      "required": true,
+      "length": 36,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "devotee-id",
+        "dataType": "varchar",
+        "dataLength": 36,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "N"
       }
     }
   }

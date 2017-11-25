@@ -7,6 +7,7 @@ declare var Object: any;
 export interface BookLanguageMapInterface {
   "bookId": string;
   "englishBookId": string;
+  "language"?: string;
   "createdOn"?: Date;
   "updatedOn"?: Date;
   "createdBy"?: string;
@@ -18,6 +19,7 @@ export interface BookLanguageMapInterface {
 export class BookLanguageMap implements BookLanguageMapInterface {
   "bookId": string;
   "englishBookId": string;
+  "language": string;
   "createdOn": Date;
   "updatedOn": Date;
   "createdBy": string;
@@ -63,6 +65,10 @@ export class BookLanguageMap implements BookLanguageMapInterface {
         },
         "englishBookId": {
           name: 'englishBookId',
+          type: 'string'
+        },
+        "language": {
+          name: 'language',
           type: 'string'
         },
         "createdOn": {

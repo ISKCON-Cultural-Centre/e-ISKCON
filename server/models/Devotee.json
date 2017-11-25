@@ -67,6 +67,21 @@
         "nullable": "N"
       }
     },
+    "circleId": {
+      "type": "String",
+      "required": false,
+      "length": 36,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "circle-id",
+        "dataType": "varchar",
+        "dataLength": 36,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "Y"
+      }
+    },
     "spiritualName": {
       "type": "String",
       "required": false,

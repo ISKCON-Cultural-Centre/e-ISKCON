@@ -1,26 +1,26 @@
 {
-  "name": "BookLanguageMap",
+  "name": "BookMarathonReportedSale",
   "options": {
     "idInjection": false,
     "mysql": {
       "schema": "mg",
-      "table": "book-language-map"
+      "table": "book-marathon-reported-sale"
     },
     "relations": {
-      "fkBookLanguageMapProduct1rel": {
+      "fkBookMarathonReportedSaleDevotee1rel": {
+        "model": "Devotee",
+        "type": "belongsTo",
+        "foreignKey": "devoteeId"
+      },
+      "fkTbookMarathonReportedSaleBook1rel": {
         "model": "Book",
         "type": "belongsTo",
         "foreignKey": "bookId"
-      },
-      "fkBookLanguageMapProduct2rel": {
-        "model": "Book",
-        "type": "belongsTo",
-        "foreignKey": "englishBookId"
       }
     }
   },
   "properties": {
-    "bookId": {
+    "id": {
       "type": "String",
       "required": true,
       "length": 36,
@@ -28,7 +28,7 @@
       "scale": null,
       "id": 1,
       "mysql": {
-        "columnName": "book-id",
+        "columnName": "id",
         "dataType": "varchar",
         "dataLength": 36,
         "dataPrecision": null,
@@ -36,34 +36,33 @@
         "nullable": "N"
       }
     },
-    "englishBookId": {
-      "type": "String",
+    "date": {
+      "type": "Date",
       "required": true,
-      "length": 36,
+      "length": null,
       "precision": null,
       "scale": null,
-      "id": 2,
       "mysql": {
-        "columnName": "english-book-id",
-        "dataType": "varchar",
-        "dataLength": 36,
+        "columnName": "date",
+        "dataType": "date",
+        "dataLength": null,
         "dataPrecision": null,
         "dataScale": null,
         "nullable": "N"
       }
     },
-    "language": {
-      "type": "String",
+    "saleQuantity": {
+      "type": "Number",
       "required": false,
-      "length": 50,
-      "precision": null,
-      "scale": null,
+      "length": null,
+      "precision": 10,
+      "scale": 0,
       "mysql": {
-        "columnName": "language",
-        "dataType": "varchar",
-        "dataLength": 50,
-        "dataPrecision": null,
-        "dataScale": null,
+        "columnName": "sale-quantity",
+        "dataType": "int",
+        "dataLength": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
         "nullable": "Y"
       }
     },
@@ -125,6 +124,36 @@
         "dataPrecision": null,
         "dataScale": null,
         "nullable": "Y"
+      }
+    },
+    "bookId": {
+      "type": "String",
+      "required": true,
+      "length": 36,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "book-id",
+        "dataType": "varchar",
+        "dataLength": 36,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "N"
+      }
+    },
+    "devoteeId": {
+      "type": "String",
+      "required": true,
+      "length": 36,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "devotee-id",
+        "dataType": "varchar",
+        "dataLength": 36,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "N"
       }
     }
   }

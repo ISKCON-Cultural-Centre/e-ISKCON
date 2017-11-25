@@ -9,6 +9,7 @@ declare var Object: any;
 export interface DevoteeInterface {
   "id": string;
   "legalName": string;
+  "circleId"?: string;
   "spiritualName"?: string;
   "gender": boolean;
   "physicalAddressId"?: string;
@@ -31,6 +32,7 @@ export interface DevoteeInterface {
 export class Devotee implements DevoteeInterface {
   "id": string;
   "legalName": string;
+  "circleId": string;
   "spiritualName": string;
   "gender": boolean;
   "physicalAddressId": string;
@@ -87,6 +89,10 @@ export class Devotee implements DevoteeInterface {
         },
         "legalName": {
           name: 'legalName',
+          type: 'string'
+        },
+        "circleId": {
+          name: 'circleId',
           type: 'string'
         },
         "spiritualName": {

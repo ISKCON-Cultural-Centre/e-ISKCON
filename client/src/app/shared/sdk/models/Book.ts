@@ -12,6 +12,7 @@ export interface BookInterface {
   "hsnCode"?: string;
   "discounted"?: string;
   "discountAllowedInd": any;
+  "inStockQty": number;
   "manageStock"?: any;
   "createdOn"?: Date;
   "updatedOn"?: Date;
@@ -30,6 +31,7 @@ export class Book implements BookInterface {
   "hsnCode": string;
   "discounted": string;
   "discountAllowedInd": any;
+  "inStockQty": number;
   "manageStock": any;
   "createdOn": Date;
   "updatedOn": Date;
@@ -107,6 +109,10 @@ export class Book implements BookInterface {
         "discountAllowedInd": {
           name: 'discountAllowedInd',
           type: 'any'
+        },
+        "inStockQty": {
+          name: 'inStockQty',
+          type: 'number'
         },
         "manageStock": {
           name: 'manageStock',

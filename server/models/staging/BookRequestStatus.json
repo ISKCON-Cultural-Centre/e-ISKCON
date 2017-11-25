@@ -1,70 +1,73 @@
 {
-  "name": "BookLanguageMap",
+  "name": "BookRequestStatus",
   "options": {
     "idInjection": false,
     "mysql": {
       "schema": "mg",
-      "table": "book-language-map"
+      "table": "book-request-status"
     },
-    "relations": {
-      "fkBookLanguageMapProduct1rel": {
-        "model": "Book",
-        "type": "belongsTo",
-        "foreignKey": "bookId"
-      },
-      "fkBookLanguageMapProduct2rel": {
-        "model": "Book",
-        "type": "belongsTo",
-        "foreignKey": "englishBookId"
-      }
-    }
+    "relations": {}
   },
   "properties": {
-    "bookId": {
+    "id": {
       "type": "String",
       "required": true,
-      "length": 36,
+      "length": 16,
       "precision": null,
       "scale": null,
       "id": 1,
       "mysql": {
-        "columnName": "book-id",
+        "columnName": "id",
         "dataType": "varchar",
-        "dataLength": 36,
+        "dataLength": 16,
         "dataPrecision": null,
         "dataScale": null,
         "nullable": "N"
       }
     },
-    "englishBookId": {
+    "requestStatus": {
       "type": "String",
       "required": true,
-      "length": 36,
+      "length": 20,
       "precision": null,
       "scale": null,
-      "id": 2,
       "mysql": {
-        "columnName": "english-book-id",
+        "columnName": "request-status",
         "dataType": "varchar",
-        "dataLength": 36,
+        "dataLength": 20,
         "dataPrecision": null,
         "dataScale": null,
         "nullable": "N"
       }
     },
-    "language": {
+    "requestDescription": {
       "type": "String",
-      "required": false,
+      "required": true,
       "length": 50,
       "precision": null,
       "scale": null,
       "mysql": {
-        "columnName": "language",
+        "columnName": "request-description",
         "dataType": "varchar",
         "dataLength": 50,
         "dataPrecision": null,
         "dataScale": null,
-        "nullable": "Y"
+        "nullable": "N"
+      }
+    },
+    "crudAllowed": {
+      "type": "String",
+      "required": true,
+      "length": 4,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "crud-allowed",
+        "dataType": "varchar",
+        "dataLength": 4,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "N"
       }
     },
     "createdOn": {

@@ -4,10 +4,10 @@ var fs = require('fs');
 var loopback = require('loopback');
 
 var outputPath = path.resolve(__dirname, '../server/models/staging');
-var ds = loopback.createDataSource('mysql', require('../server/datasources').mysqld);
+var ds = loopback.createDataSource('mysql', require('../server/datasources').mysqld1);
 
 
-ds.discoverModelDefinitions({ schema: 'icc' }, function (err, models) {
+ds.discoverModelDefinitions({ schema: 'mg' }, function (err, models) {
 
     var count = models.length;
       //console.log(models.length);

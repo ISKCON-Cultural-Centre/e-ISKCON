@@ -1,32 +1,43 @@
 {
-  "name": "BookLanguageMap",
+  "name": "BookMarathonReturnDetail",
   "options": {
     "idInjection": false,
     "mysql": {
       "schema": "mg",
-      "table": "book-language-map"
+      "table": "book-marathon-return-detail"
     },
     "relations": {
-      "fkBookLanguageMapProduct1rel": {
+      "fkBookMarathonReturnDetailBook1rel": {
         "model": "Book",
         "type": "belongsTo",
         "foreignKey": "bookId"
-      },
-      "fkBookLanguageMapProduct2rel": {
-        "model": "Book",
-        "type": "belongsTo",
-        "foreignKey": "englishBookId"
       }
     }
   },
   "properties": {
-    "bookId": {
+    "bookMarathonReturnId": {
       "type": "String",
       "required": true,
       "length": 36,
       "precision": null,
       "scale": null,
       "id": 1,
+      "mysql": {
+        "columnName": "book-marathon-return-id",
+        "dataType": "varchar",
+        "dataLength": 36,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "N"
+      }
+    },
+    "bookId": {
+      "type": "String",
+      "required": true,
+      "length": 36,
+      "precision": null,
+      "scale": null,
+      "id": 2,
       "mysql": {
         "columnName": "book-id",
         "dataType": "varchar",
@@ -36,35 +47,19 @@
         "nullable": "N"
       }
     },
-    "englishBookId": {
-      "type": "String",
+    "returnQty": {
+      "type": "Number",
       "required": true,
-      "length": 36,
-      "precision": null,
-      "scale": null,
-      "id": 2,
+      "length": null,
+      "precision": 10,
+      "scale": 0,
       "mysql": {
-        "columnName": "english-book-id",
-        "dataType": "varchar",
-        "dataLength": 36,
-        "dataPrecision": null,
-        "dataScale": null,
+        "columnName": "return-qty",
+        "dataType": "int",
+        "dataLength": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
         "nullable": "N"
-      }
-    },
-    "language": {
-      "type": "String",
-      "required": false,
-      "length": 50,
-      "precision": null,
-      "scale": null,
-      "mysql": {
-        "columnName": "language",
-        "dataType": "varchar",
-        "dataLength": 50,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "Y"
       }
     },
     "createdOn": {
