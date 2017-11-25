@@ -820,6 +820,7 @@ CREATE TABLE IF NOT EXISTS `mg`.`book` (
   `hsn-code` VARCHAR(50) NULL DEFAULT NULL,
   `discounted` VARCHAR(5) NULL DEFAULT 'no',
   `discount-allowed-ind` BIT(1) NOT NULL DEFAULT b'1',
+  `in-stock-qty` INT NOT NULL DEFAULT 0,
   `manage-stock` BIT(1) NULL DEFAULT b'1',
   `created-on` DATETIME NULL DEFAULT NULL,
   `updated-on` DATETIME NULL DEFAULT NULL,
@@ -903,6 +904,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `mg`.`book-language-map` (
   `book-id` VARCHAR(36) NOT NULL,
   `english-book-id` VARCHAR(36) NOT NULL,
+  `language` VARCHAR(50) NULL,
   `created-on` DATETIME NULL DEFAULT NULL,
   `updated-on` DATETIME NULL DEFAULT NULL,
   `created-by` VARCHAR(36) NULL DEFAULT NULL,
@@ -1029,6 +1031,26 @@ CREATE TABLE IF NOT EXISTS `mg`.`book-marathon-reported-sale` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
+USE `icc` ;
+
+-- -----------------------------------------------------
+-- Placeholder table for view `icc`.`book-filter-bbt`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `icc`.`book-filter-bbt` (`name` INT, `id` INT, `REFERENCE` INT, `CODE` INT, `CODETYPE` INT, `NAME` INT, `PRICESELL` INT, `image` INT, `alias` INT, `discounted` INT, `candiscount` INT, `units` INT, `managestock` INT, `curdate()` INT, `'script'` INT);
+
+-- -----------------------------------------------------
+-- View `icc`.`book-filter-bbt`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `icc`.`book-filter-bbt`;
+USE `icc`;
+CREATE  OR REPLACE VIEW `book-filter-bbt` AS
+select b.name, a.id, REFERENCE, CODE, CODETYPE, a.NAME, PRICESELL, image, alias, discounted, candiscount, c.units, managestock,
+curdate(), curdate(), 'script', 'script'   from chromispos.products a
+inner join chromispos.category_tree b
+on a.category = b.id 
+inner join chromispos.stockcurrent c
+on a.id = c.product
+where b.top_parent_id='fadd29bd-5821-46dd-978c-e19097dd5633';
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
