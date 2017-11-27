@@ -25,6 +25,15 @@ DROP SCHEMA IF EXISTS `mg` ;
 -- Schema mg
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `mg` DEFAULT CHARACTER SET utf8 ;
+-- -----------------------------------------------------
+-- Schema placeholder
+-- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `placeholder` ;
+
+-- -----------------------------------------------------
+-- Schema placeholder
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `placeholder` ;
 USE `icc` ;
 
 -- -----------------------------------------------------
@@ -804,12 +813,191 @@ CREATE TABLE IF NOT EXISTS `icc`.`service-mapping` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+
+-- -----------------------------------------------------
+-- Table `mg`.`order-status`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mg`.`order-status` (
+  `id` VARCHAR(16) NOT NULL,
+  `order-status` VARCHAR(20) NOT NULL,
+  `order-status-description` VARCHAR(50) NOT NULL,
+  `crud-allowed` VARCHAR(4) NOT NULL,
+  `created-on` DATETIME NULL DEFAULT NULL,
+  `updated-on` DATETIME NULL DEFAULT NULL,
+  `created-by` VARCHAR(36) NULL DEFAULT NULL,
+  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `mg`.`order-type`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mg`.`order-type` (
+  `id` VARCHAR(36) NOT NULL,
+  `name` VARCHAR(50) NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mg`.`order-purpose`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mg`.`order-purpose` (
+  `id` VARCHAR(36) NOT NULL,
+  `purpose-name` VARCHAR(50) NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mg`.`order`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mg`.`order` (
+  `id` VARCHAR(16) NOT NULL,
+  `order-date-time` DATETIME NOT NULL,
+  `request-no` INT NOT NULL,
+  `order-no` INT NOT NULL,
+  `created-on` DATETIME NULL DEFAULT NULL,
+  `updated-on` DATETIME NULL DEFAULT NULL,
+  `created-by` VARCHAR(36) NULL DEFAULT NULL,
+  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
+  `order-status-id` VARCHAR(16) NOT NULL,
+  `devotee-id` VARCHAR(36) NOT NULL,
+  `order-type-id` VARCHAR(36) NOT NULL,
+  `serving-devotee-id` VARCHAR(36) NULL,
+  `order-purpose-id` VARCHAR(36) NOT NULL,
+  INDEX `fk_table1_book-request-status1_idx` (`order-status-id` ASC),
+  INDEX `fk_table1_devotee2_idx` (`devotee-id` ASC),
+  PRIMARY KEY (`id`),
+  INDEX `fk_book-marathon-order_order-purpose1_idx` (`order-type-id` ASC),
+  INDEX `fk_order_devotee1_idx` (`serving-devotee-id` ASC),
+  INDEX `fk_order_order-purpose1_idx` (`order-purpose-id` ASC),
+  CONSTRAINT `fk_table1_book-request-status1`
+    FOREIGN KEY (`order-status-id`)
+    REFERENCES `mg`.`order-status` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_table1_devotee2`
+    FOREIGN KEY (`devotee-id`)
+    REFERENCES `icc`.`devotee` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_book-marathon-order_order-purpose1`
+    FOREIGN KEY (`order-type-id`)
+    REFERENCES `mg`.`order-type` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_order_devotee1`
+    FOREIGN KEY (`serving-devotee-id`)
+    REFERENCES `icc`.`devotee` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_order_order-purpose1`
+    FOREIGN KEY (`order-purpose-id`)
+    REFERENCES `mg`.`order-purpose` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `mg`.`payment-mode-master`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mg`.`payment-mode-master` (
+  `id` VARCHAR(36) NOT NULL,
+  `mode-name` VARCHAR(50) NOT NULL,
+  `description` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mg`.`payment`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mg`.`payment` (
+  `id` VARCHAR(36) NOT NULL,
+  `devotee-id` VARCHAR(36) NOT NULL,
+  `payment-mode-master-id` VARCHAR(36) NOT NULL,
+  `payment-date` DATETIME NOT NULL,
+  `payment-amount` DECIMAL(10,2) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`),
+  INDEX `fk_order-payment_devotee1_idx` (`devotee-id` ASC),
+  INDEX `fk_devotee-payment_payment-mode-master1_idx` (`payment-mode-master-id` ASC),
+  CONSTRAINT `fk_order-payment_devotee1`
+    FOREIGN KEY (`devotee-id`)
+    REFERENCES `icc`.`devotee` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_devotee-payment_payment-mode-master1`
+    FOREIGN KEY (`payment-mode-master-id`)
+    REFERENCES `mg`.`payment-mode-master` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
 USE `mg` ;
 
 -- -----------------------------------------------------
--- Table `mg`.`book`
+-- Table `mg`.`product-attribute`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mg`.`book` (
+CREATE TABLE IF NOT EXISTS `mg`.`product-attribute` (
+  `id` VARCHAR(36) NOT NULL,
+  `name` VARCHAR(50) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mg`.`product-attribute-instance`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mg`.`product-attribute-instance` (
+  `id` VARCHAR(36) NOT NULL,
+  `product-attribute-instance-value` VARCHAR(100) NOT NULL,
+  `product-attribute-id` VARCHAR(36) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_product-attribute-instance_product-attribute1_idx` (`product-attribute-id` ASC),
+  CONSTRAINT `fk_product-attribute-instance_product-attribute1`
+    FOREIGN KEY (`product-attribute-id`)
+    REFERENCES `mg`.`product-attribute` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mg`.`unit-of-measure`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mg`.`unit-of-measure` (
+  `id` VARCHAR(36) NOT NULL,
+  `uom-name` VARCHAR(50) NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mg`.`product`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mg`.`product` (
+  `id` VARCHAR(36) NOT NULL,
+  `name` VARCHAR(100) NULL,
+  `unit-of-measure-id` VARCHAR(36) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_product_unit-of-measure1_idx` (`unit-of-measure-id` ASC),
+  CONSTRAINT `fk_product_unit-of-measure1`
+    FOREIGN KEY (`unit-of-measure-id`)
+    REFERENCES `mg`.`unit-of-measure` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mg`.`product-sku`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mg`.`product-sku` (
   `id` VARCHAR(36) NOT NULL,
   `REFERENCE` VARCHAR(255) NOT NULL,
   `bar-code` VARCHAR(255) NOT NULL,
@@ -825,47 +1013,22 @@ CREATE TABLE IF NOT EXISTS `mg`.`book` (
   `updated-on` DATETIME NULL DEFAULT NULL,
   `created-by` VARCHAR(36) NULL DEFAULT NULL,
   `updated-by` VARCHAR(36) NULL DEFAULT NULL,
+  `product-attribute-instance-id` VARCHAR(36) NOT NULL,
+  `product-id` VARCHAR(36) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `PRODUCTS_INX_0` (`REFERENCE` ASC),
   UNIQUE INDEX `PRODUCTS_INX_1` (`bar-code` ASC),
-  INDEX `PRODUCTS_NAME_INX` (`title` ASC))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
--- Table `mg`.`book-request-status`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mg`.`book-request-status` (
-  `id` VARCHAR(16) NOT NULL,
-  `request-status` VARCHAR(20) NOT NULL,
-  `request-description` VARCHAR(50) NOT NULL,
-  `crud-allowed` VARCHAR(4) NOT NULL,
-  `created-on` DATETIME NULL DEFAULT NULL,
-  `updated-on` DATETIME NULL DEFAULT NULL,
-  `created-by` VARCHAR(36) NULL DEFAULT NULL,
-  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
--- Table `mg`.`book-marathon-return-detail`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mg`.`book-marathon-return-detail` (
-  `book-marathon-return-id` VARCHAR(36) NOT NULL,
-  `book-id` VARCHAR(36) NOT NULL,
-  `return-qty` INT NOT NULL,
-  `created-on` DATETIME NULL DEFAULT NULL,
-  `updated-on` DATETIME NULL DEFAULT NULL,
-  `created-by` VARCHAR(36) NULL DEFAULT NULL,
-  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
-  PRIMARY KEY (`book-marathon-return-id`, `book-id`),
-  INDEX `fk_book-marathon-return-detail_book1_idx` (`book-id` ASC),
-  CONSTRAINT `fk_book-marathon-return-detail_book1`
-    FOREIGN KEY (`book-id`)
-    REFERENCES `mg`.`book` (`id`)
+  INDEX `PRODUCTS_NAME_INX` (`title` ASC),
+  INDEX `fk_product-instance_product-attribute-instance1_idx` (`product-attribute-instance-id` ASC),
+  INDEX `fk_product-sku_product1_idx` (`product-id` ASC),
+  CONSTRAINT `fk_product-instance_product-attribute-instance1`
+    FOREIGN KEY (`product-attribute-instance-id`)
+    REFERENCES `mg`.`product-attribute-instance` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_product-sku_product1`
+    FOREIGN KEY (`product-id`)
+    REFERENCES `mg`.`product` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -873,11 +1036,61 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `mg`.`book-marathon-order-detail`
+-- Table `mg`.`order-return`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mg`.`book-marathon-order-detail` (
-  `book-marathon-order-id` VARCHAR(16) NOT NULL,
-  `book-id` VARCHAR(36) NOT NULL,
+CREATE TABLE IF NOT EXISTS `mg`.`order-return` (
+  `id` VARCHAR(36) NOT NULL,
+  `date` DATE NOT NULL,
+  `created-on` DATETIME NULL DEFAULT NULL,
+  `updated-on` DATETIME NULL DEFAULT NULL,
+  `created-by` VARCHAR(36) NULL DEFAULT NULL,
+  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
+  `devotee-id` VARCHAR(36) NOT NULL,
+  INDEX `fk_table1_devotee1_idx` (`devotee-id` ASC),
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_table1_devotee1`
+    FOREIGN KEY (`devotee-id`)
+    REFERENCES `icc`.`devotee` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `mg`.`order-return-line`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mg`.`order-return-line` (
+  `order-return-id` VARCHAR(36) NOT NULL,
+  `product-instance-id` VARCHAR(36) NOT NULL,
+  `return-qty` INT NOT NULL,
+  `created-on` DATETIME NULL DEFAULT NULL,
+  `updated-on` DATETIME NULL DEFAULT NULL,
+  `created-by` VARCHAR(36) NULL DEFAULT NULL,
+  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
+  PRIMARY KEY (`order-return-id`, `product-instance-id`),
+  INDEX `fk_book-marathon-return-detail_book1_idx` (`product-instance-id` ASC),
+  INDEX `fk_order-return-line_order-return1_idx` (`order-return-id` ASC),
+  CONSTRAINT `fk_book-marathon-return-detail_book1`
+    FOREIGN KEY (`product-instance-id`)
+    REFERENCES `mg`.`product-sku` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_order-return-line_order-return1`
+    FOREIGN KEY (`order-return-id`)
+    REFERENCES `mg`.`order-return` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `mg`.`order-line`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mg`.`order-line` (
+  `order-id` VARCHAR(16) NOT NULL,
+  `product-instance-id` VARCHAR(36) NOT NULL,
   `request-qty` INT NOT NULL,
   `approved-qty` INT NULL,
   `packed-qty` INT NULL,
@@ -887,11 +1100,17 @@ CREATE TABLE IF NOT EXISTS `mg`.`book-marathon-order-detail` (
   `updated-on` DATETIME NULL DEFAULT NULL,
   `created-by` VARCHAR(36) NULL DEFAULT NULL,
   `updated-by` VARCHAR(36) NULL DEFAULT NULL,
-  PRIMARY KEY (`book-id`),
-  INDEX `fk_book-marathon-order-detail_book1_idx` (`book-id` ASC),
+  PRIMARY KEY (`order-id`, `product-instance-id`),
+  INDEX `fk_book-marathon-order-detail_book1_idx` (`product-instance-id` ASC),
+  INDEX `fk_book-marathon-order-detail_book-marathon-order1_idx` (`order-id` ASC),
   CONSTRAINT `fk_book-marathon-order-detail_book1`
-    FOREIGN KEY (`book-id`)
-    REFERENCES `mg`.`book` (`id`)
+    FOREIGN KEY (`product-instance-id`)
+    REFERENCES `mg`.`product-sku` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_book-marathon-order-detail_book-marathon-order1`
+    FOREIGN KEY (`order-id`)
+    REFERENCES `mg`.`order` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -912,30 +1131,40 @@ CREATE TABLE IF NOT EXISTS `mg`.`book-language-map` (
   INDEX `fk_book-language-map_product2_idx` (`english-book-id` ASC),
   CONSTRAINT `fk_book-language-map_product1`
     FOREIGN KEY (`book-id`)
-    REFERENCES `mg`.`book` (`id`)
+    REFERENCES `mg`.`product-sku` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_book-language-map_product2`
     FOREIGN KEY (`english-book-id`)
-    REFERENCES `mg`.`book` (`id`)
+    REFERENCES `mg`.`product-sku` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+USE `placeholder` ;
 
 -- -----------------------------------------------------
--- Table `mg`.`book-marathon-return`
+-- Table `placeholder`.`book-marathon-reported-sale`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mg`.`book-marathon-return` (
+CREATE TABLE IF NOT EXISTS `placeholder`.`book-marathon-reported-sale` (
   `id` VARCHAR(36) NOT NULL,
   `date` DATE NOT NULL,
+  `sale-quantity` INT NULL,
   `created-on` DATETIME NULL DEFAULT NULL,
   `updated-on` DATETIME NULL DEFAULT NULL,
   `created-by` VARCHAR(36) NULL DEFAULT NULL,
   `updated-by` VARCHAR(36) NULL DEFAULT NULL,
+  `product-instance-id` VARCHAR(36) NOT NULL,
   `devotee-id` VARCHAR(36) NOT NULL,
-  INDEX `fk_table1_devotee1_idx` (`devotee-id` ASC),
-  CONSTRAINT `fk_table1_devotee1`
+  INDEX `fk_book-marathon-reported-sale_book1_idx` (`product-instance-id` ASC),
+  INDEX `fk_book-marathon-reported-sale_devotee1_idx` (`devotee-id` ASC),
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_tbook-marathon-reported-sale_book1`
+    FOREIGN KEY (`product-instance-id`)
+    REFERENCES `mg`.`product-sku` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_book-marathon-reported-sale_devotee1`
     FOREIGN KEY (`devotee-id`)
     REFERENCES `icc`.`devotee` (`id`)
     ON DELETE NO ACTION
@@ -945,9 +1174,9 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `mg`.`book-marathon-settlement`
+-- Table `placeholder`.`book-marathon-settlement`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mg`.`book-marathon-settlement` (
+CREATE TABLE IF NOT EXISTS `placeholder`.`book-marathon-settlement` (
   `id` VARCHAR(36) NOT NULL,
   `devotee-id` VARCHAR(36) NOT NULL,
   `settlement-date` DATE NOT NULL,
@@ -962,67 +1191,6 @@ CREATE TABLE IF NOT EXISTS `mg`.`book-marathon-settlement` (
   INDEX `fk_table2_devotee1_idx` (`devotee-id` ASC),
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_table2_devotee1`
-    FOREIGN KEY (`devotee-id`)
-    REFERENCES `icc`.`devotee` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
--- Table `mg`.`book-marathon-order`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mg`.`book-marathon-order` (
-  `id` VARCHAR(16) NOT NULL,
-  `request-date-time` DATETIME NOT NULL,
-  `request-no` INT NOT NULL,
-  `order-no` INT NOT NULL,
-  `created-on` DATETIME NULL DEFAULT NULL,
-  `updated-on` DATETIME NULL DEFAULT NULL,
-  `created-by` VARCHAR(36) NULL DEFAULT NULL,
-  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
-  `book-request-status-id` VARCHAR(16) NOT NULL,
-  `devotee-id` VARCHAR(36) NOT NULL,
-  INDEX `fk_table1_book-request-status1_idx` (`book-request-status-id` ASC),
-  INDEX `fk_table1_devotee2_idx` (`devotee-id` ASC),
-  PRIMARY KEY (`id`),
-  CONSTRAINT `fk_table1_book-request-status1`
-    FOREIGN KEY (`book-request-status-id`)
-    REFERENCES `mg`.`book-request-status` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_table1_devotee2`
-    FOREIGN KEY (`devotee-id`)
-    REFERENCES `icc`.`devotee` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
--- Table `mg`.`book-marathon-reported-sale`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mg`.`book-marathon-reported-sale` (
-  `id` VARCHAR(36) NOT NULL,
-  `date` DATE NOT NULL,
-  `sale-quantity` INT NULL,
-  `created-on` DATETIME NULL DEFAULT NULL,
-  `updated-on` DATETIME NULL DEFAULT NULL,
-  `created-by` VARCHAR(36) NULL DEFAULT NULL,
-  `updated-by` VARCHAR(36) NULL DEFAULT NULL,
-  `book-id` VARCHAR(36) NOT NULL,
-  `devotee-id` VARCHAR(36) NOT NULL,
-  INDEX `fk_book-marathon-reported-sale_book1_idx` (`book-id` ASC),
-  INDEX `fk_book-marathon-reported-sale_devotee1_idx` (`devotee-id` ASC),
-  PRIMARY KEY (`id`),
-  CONSTRAINT `fk_tbook-marathon-reported-sale_book1`
-    FOREIGN KEY (`book-id`)
-    REFERENCES `mg`.`book` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_book-marathon-reported-sale_devotee1`
     FOREIGN KEY (`devotee-id`)
     REFERENCES `icc`.`devotee` (`id`)
     ON DELETE NO ACTION
