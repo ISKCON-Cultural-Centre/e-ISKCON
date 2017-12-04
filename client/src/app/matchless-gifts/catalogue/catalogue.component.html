@@ -1,3 +1,9 @@
-<p>
-  catalogue works!
-</p>
+<div class="main-div">
+	<div class="title-div">Books Catalogue</div>
+  <ul>
+    <div class="catalogue-item" *ngFor="let title of titles; let i = index">
+      {{title.titleName}}
+      <button mat-raised-button class="mat-raised-button" *ngFor="let book of title.books" color="primary">{{book.language + " (" + book.inStockQty + ")"}}</button>
+    </div>
+  </ul>
+</div>

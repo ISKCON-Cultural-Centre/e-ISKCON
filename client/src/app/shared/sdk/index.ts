@@ -16,7 +16,7 @@
 * ============================================================================
 * import { NgModule }       from '@angular/core';
 * import { BrowserModule }  from '@angular/platform-browser';
-* // App Root 
+* // App Root
 * import { AppComponent }   from './app.component';
 * // Feature Modules
 * import { SDK[Browser|Node|Native]Module } from './shared/sdk/sdk.module';
@@ -83,6 +83,7 @@ import { BookMarathonOrderDetailApi } from './services/custom/BookMarathonOrderD
 import { BookMarathonReportedSaleApi } from './services/custom/BookMarathonReportedSale';
 import { BookMarathonSettlementApi } from './services/custom/BookMarathonSettlement';
 import { BookRequestStatusApi } from './services/custom/BookRequestStatus';
+import { DummyService } from './services/core/dummy.service';
 /**
 * @module SDKBrowserModule
 * @description
@@ -151,6 +152,7 @@ export class SDKBrowserModule {
         BookMarathonSettlementApi,
         BookRequestStatusApi,
         internalStorageProvider,
+        DummyService,
         { provide: SDKStorage, useClass: StorageBrowser }
       ]
     };
@@ -166,4 +168,3 @@ export * from './lb.config';
 export * from './storage/storage.swaps';
 export { CookieBrowser } from './storage/cookie.browser';
 export { StorageBrowser } from './storage/storage.browser';
-
