@@ -4,11 +4,17 @@ declare var Object: any;
 export interface CircleInterface {
   "id": string;
   "name"?: string;
+  "leaderDevoteeId"?: string;
+  "created-on"?: Date;
+  "updated-on"?: Date;
 }
 
 export class Circle implements CircleInterface {
   "id": string;
   "name": string;
+  "leaderDevoteeId": string;
+  "created-on": Date;
+  "updated-on": Date;
   constructor(data?: CircleInterface) {
     Object.assign(this, data);
   }
@@ -49,6 +55,18 @@ export class Circle implements CircleInterface {
         "name": {
           name: 'name',
           type: 'string'
+        },
+        "leaderDevoteeId": {
+          name: 'leaderDevoteeId',
+          type: 'string'
+        },
+        "created-on": {
+          name: 'created-on',
+          type: 'Date'
+        },
+        "updated-on": {
+          name: 'updated-on',
+          type: 'Date'
         },
       },
       relations: {

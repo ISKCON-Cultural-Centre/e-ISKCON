@@ -14,6 +14,12 @@ export interface PledgeInterface {
   "pauseInd": number;
   "devoteeId": string;
   "donationTypeMasterId": string;
+  "createdOn"?: Date;
+  "updatedOn"?: Date;
+  "createdBy"?: string;
+  "updatedBy"?: string;
+  "created-on"?: Date;
+  "updated-on"?: Date;
   fkPledgeDevotee2rel?: Devotee;
   fkPledgeDonationTypeMaster1rel?: DonationTypeMaster;
 }
@@ -27,6 +33,12 @@ export class Pledge implements PledgeInterface {
   "pauseInd": number;
   "devoteeId": string;
   "donationTypeMasterId": string;
+  "createdOn": Date;
+  "updatedOn": Date;
+  "createdBy": string;
+  "updatedBy": string;
+  "created-on": Date;
+  "updated-on": Date;
   fkPledgeDevotee2rel: Devotee;
   fkPledgeDonationTypeMaster1rel: DonationTypeMaster;
   constructor(data?: PledgeInterface) {
@@ -93,6 +105,30 @@ export class Pledge implements PledgeInterface {
         "donationTypeMasterId": {
           name: 'donationTypeMasterId',
           type: 'string'
+        },
+        "createdOn": {
+          name: 'createdOn',
+          type: 'Date'
+        },
+        "updatedOn": {
+          name: 'updatedOn',
+          type: 'Date'
+        },
+        "createdBy": {
+          name: 'createdBy',
+          type: 'string'
+        },
+        "updatedBy": {
+          name: 'updatedBy',
+          type: 'string'
+        },
+        "created-on": {
+          name: 'created-on',
+          type: 'Date'
+        },
+        "updated-on": {
+          name: 'updated-on',
+          type: 'Date'
         },
       },
       relations: {

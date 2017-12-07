@@ -12,6 +12,8 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
 import { Devotee } from '../../models/Devotee';
 import { SpiritualLevelMaster } from '../../models/SpiritualLevelMaster';
+import { ElectronicAddress } from '../../models/ElectronicAddress';
+import { PhysicalAddress } from '../../models/PhysicalAddress';
 
 
 /**
@@ -128,7 +130,7 @@ export class DevoteeApi extends BaseLoopBackApi {
    *
    * @param {any} id Devotee id
    *
-   * @param {boolean} refresh
+   * @param {boolean} refresh 
    *
    * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -154,11 +156,71 @@ export class DevoteeApi extends BaseLoopBackApi {
   }
 
   /**
+   * Fetches belongsTo relation fkDevoteeElectronicAddress1rel.
+   *
+   * @param {any} id Devotee id
+   *
+   * @param {boolean} refresh 
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Devotee` object.)
+   * </em>
+   */
+  public getFkDevoteeElectronicAddress1rel(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Devotees/:id/fkDevoteeElectronicAddress1rel";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (typeof refresh !== 'undefined' && refresh !== null) _urlParams.refresh = refresh;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
+   * Fetches belongsTo relation fkDevoteePhysicalAddress1rel.
+   *
+   * @param {any} id Devotee id
+   *
+   * @param {boolean} refresh 
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Devotee` object.)
+   * </em>
+   */
+  public getFkDevoteePhysicalAddress1rel(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Devotees/:id/fkDevoteePhysicalAddress1rel";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (typeof refresh !== 'undefined' && refresh !== null) _urlParams.refresh = refresh;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
    * Queries accessTokens of Devotee.
    *
    * @param {any} id Devotee id
    *
-   * @param {object} filter
+   * @param {object} filter 
    *
    * @returns {object[]} An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -253,7 +315,7 @@ export class DevoteeApi extends BaseLoopBackApi {
    *
    * Data properties:
    *
-   *  - `count` – `{number}` -
+   *  - `count` – `{number}` - 
    */
   public countAccessTokens(id: any, where: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
@@ -351,9 +413,9 @@ export class DevoteeApi extends BaseLoopBackApi {
    *
    * The response body contains properties of the AccessToken created on login.
    * Depending on the value of `include` parameter, the body may contain additional properties:
-   *
+   * 
    *   - `user` - `U+007BUserU+007D` - Data of the currently logged in user. (`include=user`)
-   *
+   * 
    *
    */
   public login(credentials: any, include: any = 'user', rememberMe: boolean = true, customHeaders?: Function): Observable<any> {
@@ -376,7 +438,7 @@ export class DevoteeApi extends BaseLoopBackApi {
         }
       );
       return result;
-
+      
   }
 
   /**
@@ -400,7 +462,7 @@ export class DevoteeApi extends BaseLoopBackApi {
     let _postBody: any = {};
     let _urlParams: any = {};
        _urlParams.access_token = this.auth.getAccessTokenId();
-    this.auth.clear();
+    this.auth.clear(); 
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -436,11 +498,11 @@ export class DevoteeApi extends BaseLoopBackApi {
   /**
    * Confirm a user registration with identity verification token.
    *
-   * @param {string} uid
+   * @param {string} uid 
    *
-   * @param {string} token
+   * @param {string} token 
    *
-   * @param {string} redirect
+   * @param {string} redirect 
    *
    * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -493,9 +555,9 @@ export class DevoteeApi extends BaseLoopBackApi {
    *
    * @param {object} data Request data.
    *
-   *  - `oldPassword` – `{string}` -
+   *  - `oldPassword` – `{string}` - 
    *
-   *  - `newPassword` – `{string}` -
+   *  - `newPassword` – `{string}` - 
    *
    * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -524,7 +586,7 @@ export class DevoteeApi extends BaseLoopBackApi {
    *
    * @param {object} data Request data.
    *
-   *  - `newPassword` – `{string}` -
+   *  - `newPassword` – `{string}` - 
    *
    * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned

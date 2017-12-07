@@ -16,7 +16,7 @@
 * ============================================================================
 * import { NgModule }       from '@angular/core';
 * import { BrowserModule }  from '@angular/platform-browser';
-* // App Root 
+* // App Root
 * import { AppComponent }   from './app.component';
 * // Feature Modules
 * import { SDK[Browser|Node|Native]Module } from './shared/sdk/sdk.module';
@@ -45,10 +45,9 @@ import { CommonModule } from '@angular/common';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CookieBrowser } from './storage/cookie.browser';
 import { StorageBrowser } from './storage/storage.browser';
-import { RoleMappingApi } from './services/custom/RoleMapping';
-import { RoleApi } from './services/custom/Role';
+import { ServiceApi } from './services/custom/Service';
+import { ServiceMappingApi } from './services/custom/ServiceMapping';
 import { CircleApi } from './services/custom/Circle';
-import { CircleDevoteeApi } from './services/custom/CircleDevotee';
 import { DeekshaGuruApi } from './services/custom/DeekshaGuru';
 import { DevoteeApi } from './services/custom/Devotee';
 import { DevoteeEventCalendarApi } from './services/custom/DevoteeEventCalendar';
@@ -66,6 +65,25 @@ import { RelationshipMasterApi } from './services/custom/RelationshipMaster';
 import { SpiritualLevelMasterApi } from './services/custom/SpiritualLevelMaster';
 import { TempleApi } from './services/custom/Temple';
 import { TempleBranchApi } from './services/custom/TempleBranch';
+import { ElectronicAddressApi } from './services/custom/ElectronicAddress';
+import { ElectronicAddressTypeMasterApi } from './services/custom/ElectronicAddressTypeMaster';
+import { PhysicalAddressApi } from './services/custom/PhysicalAddress';
+import { PhysicalAddressTypeMasterApi } from './services/custom/PhysicalAddressTypeMaster';
+import { ApprovalArtefactApi } from './services/custom/ApprovalArtefact';
+import { ApprovalQueApi } from './services/custom/ApprovalQue';
+import { ApprovalRuleApi } from './services/custom/ApprovalRule';
+import { DepartmentApi } from './services/custom/Department';
+import { DepartmentServiceApi } from './services/custom/DepartmentService';
+import { ServiceTaskMasterApi } from './services/custom/ServiceTaskMaster';
+import { TaskMasterApi } from './services/custom/TaskMaster';
+import { BookApi } from './services/custom/Book';
+import { BookLanguageMapApi } from './services/custom/BookLanguageMap';
+import { BookMarathonOrderApi } from './services/custom/BookMarathonOrder';
+import { BookMarathonOrderDetailApi } from './services/custom/BookMarathonOrderDetail';
+import { BookMarathonReportedSaleApi } from './services/custom/BookMarathonReportedSale';
+import { BookMarathonSettlementApi } from './services/custom/BookMarathonSettlement';
+import { BookRequestStatusApi } from './services/custom/BookRequestStatus';
+import { DummyService } from './services/core/dummy.service';
 /**
 * @module SDKBrowserModule
 * @description
@@ -95,10 +113,9 @@ export class SDKBrowserModule {
         LoggerService,
         JSONSearchParams,
         SDKModels,
-        RoleMappingApi,
-        RoleApi,
+        ServiceApi,
+        ServiceMappingApi,
         CircleApi,
-        CircleDevoteeApi,
         DeekshaGuruApi,
         DevoteeApi,
         DevoteeEventCalendarApi,
@@ -116,7 +133,26 @@ export class SDKBrowserModule {
         SpiritualLevelMasterApi,
         TempleApi,
         TempleBranchApi,
+        ElectronicAddressApi,
+        ElectronicAddressTypeMasterApi,
+        PhysicalAddressApi,
+        PhysicalAddressTypeMasterApi,
+        ApprovalArtefactApi,
+        ApprovalQueApi,
+        ApprovalRuleApi,
+        DepartmentApi,
+        DepartmentServiceApi,
+        ServiceTaskMasterApi,
+        TaskMasterApi,
+        BookApi,
+        BookLanguageMapApi,
+        BookMarathonOrderApi,
+        BookMarathonOrderDetailApi,
+        BookMarathonReportedSaleApi,
+        BookMarathonSettlementApi,
+        BookRequestStatusApi,
         internalStorageProvider,
+        DummyService,
         { provide: SDKStorage, useClass: StorageBrowser }
       ]
     };
@@ -132,4 +168,3 @@ export * from './lb.config';
 export * from './storage/storage.swaps';
 export { CookieBrowser } from './storage/cookie.browser';
 export { StorageBrowser } from './storage/storage.browser';
-

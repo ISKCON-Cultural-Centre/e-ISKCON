@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('irkcc App', () => {
+describe('ng5app App', () => {
   let page: AppPage;
 
   beforeEach(() => {

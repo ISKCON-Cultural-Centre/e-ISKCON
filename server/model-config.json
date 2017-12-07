@@ -35,24 +35,31 @@
   },
   "RoleMapping": {
     "dataSource": "mysqld",
-    "public": true,
+    "public": false,
+    "relations": {
+      "roleId": {
+        "type": "belongsTo",
+        "model": "Service",
+        "foreignKey": "id"
+      }
+    },
     "options": {
-      "strictObjectIDCoercion": true
+      "strictObjectIDCoercion": false
     }
   },
   "Role": {
     "dataSource": "mysqld",
+    "public": false
+  },
+  "Service": {
+    "dataSource": "mysqld",
     "public": true
   },
-  "Circle": {
+  "ServiceMapping": {
     "dataSource": "mysqld",
     "public": true
   },
   "Circle": {
-    "dataSource": "mysqld",
-    "public": true
-  },
-  "CircleDevotee": {
     "dataSource": "mysqld",
     "public": true
   },
@@ -122,6 +129,79 @@
   },
   "TempleBranch": {
     "dataSource": "mysqld",
+    "public": true
+  },
+  "ElectronicAddress": {
+    "dataSource": "mysqld",
+    "public": true
+  },
+  "ElectronicAddressTypeMaster": {
+    "dataSource": "mysqld",
+    "public": true
+  },
+  "PhysicalAddress": {
+    "dataSource": "mysqld",
+    "public": true
+  },
+  "PhysicalAddressTypeMaster": {
+    "dataSource": "mysqld",
+    "public": true
+  },
+  "ApprovalArtefact": {
+    "dataSource": "mysqld",
+    "public": true
+  },
+  "ApprovalQue": {
+    "dataSource": "mysqld",
+    "public": true
+  },
+  "ApprovalRule": {
+    "dataSource": "mysqld",
+    "public": true
+  },
+  "Department": {
+    "dataSource": "mysqld",
+    "public": true
+  },
+  "DepartmentService": {
+    "dataSource": "mysqld",
+    "public": true
+  },
+  "ServiceTaskMaster": {
+    "dataSource": "mysqld",
+    "public": true
+  },
+  "TaskMaster": {
+    "dataSource": "mysqld",
+    "public": true
+  },
+
+  "Book": {
+    "dataSource": "mysqld1",
+    "public": true
+  },
+  "BookLanguageMap": {
+    "dataSource": "mysqld1",
+    "public": true
+  },
+  "BookMarathonOrder": {
+    "dataSource": "mysqld1",
+    "public": true
+  } ,
+  "BookMarathonOrderDetail": {
+    "dataSource": "mysqld1",
+    "public": true
+  } ,
+  "BookMarathonReportedSale": {
+    "dataSource": "mysqld1",
+    "public": true
+  } ,
+  "BookMarathonSettlement": {
+    "dataSource": "mysqld1",
+    "public": true
+  },
+  "BookRequestStatus": {
+    "dataSource": "mysqld1",
     "public": true
   }
 }

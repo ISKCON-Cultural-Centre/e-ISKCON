@@ -8,6 +8,12 @@ export interface DevoteeSpiritualFamilyInterface {
   "id": string;
   "devoteeId": string;
   "guidingDevoteeId": string;
+  "createdOn"?: Date;
+  "updatedOn"?: Date;
+  "createdBy"?: string;
+  "updatedBy"?: string;
+  "created-on"?: Date;
+  "updated-on"?: Date;
   fkDevoteeSpiritualFamilyDevotee1rel?: Devotee;
   fkDevoteeSpiritualFamilyDevotee2rel?: Devotee;
 }
@@ -16,6 +22,12 @@ export class DevoteeSpiritualFamily implements DevoteeSpiritualFamilyInterface {
   "id": string;
   "devoteeId": string;
   "guidingDevoteeId": string;
+  "createdOn": Date;
+  "updatedOn": Date;
+  "createdBy": string;
+  "updatedBy": string;
+  "created-on": Date;
+  "updated-on": Date;
   fkDevoteeSpiritualFamilyDevotee1rel: Devotee;
   fkDevoteeSpiritualFamilyDevotee2rel: Devotee;
   constructor(data?: DevoteeSpiritualFamilyInterface) {
@@ -62,6 +74,30 @@ export class DevoteeSpiritualFamily implements DevoteeSpiritualFamilyInterface {
         "guidingDevoteeId": {
           name: 'guidingDevoteeId',
           type: 'string'
+        },
+        "createdOn": {
+          name: 'createdOn',
+          type: 'Date'
+        },
+        "updatedOn": {
+          name: 'updatedOn',
+          type: 'Date'
+        },
+        "createdBy": {
+          name: 'createdBy',
+          type: 'string'
+        },
+        "updatedBy": {
+          name: 'updatedBy',
+          type: 'string'
+        },
+        "created-on": {
+          name: 'created-on',
+          type: 'Date'
+        },
+        "updated-on": {
+          name: 'updated-on',
+          type: 'Date'
         },
       },
       relations: {

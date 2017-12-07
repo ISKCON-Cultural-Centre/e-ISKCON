@@ -10,6 +10,12 @@ export interface DevoteeKarmiFamilyInterface {
   "familyName": string;
   "relationshipId": string;
   "devoteeId": string;
+  "createdOn"?: Date;
+  "updatedOn"?: Date;
+  "createdBy"?: string;
+  "updatedBy"?: string;
+  "created-on"?: Date;
+  "updated-on"?: Date;
   fkDevoteeKarmiFamilyDevotee2rel?: Devotee;
   fkDevoteeKarmiFamilyRelationshipMaster1rel?: RelationshipMaster;
 }
@@ -19,6 +25,12 @@ export class DevoteeKarmiFamily implements DevoteeKarmiFamilyInterface {
   "familyName": string;
   "relationshipId": string;
   "devoteeId": string;
+  "createdOn": Date;
+  "updatedOn": Date;
+  "createdBy": string;
+  "updatedBy": string;
+  "created-on": Date;
+  "updated-on": Date;
   fkDevoteeKarmiFamilyDevotee2rel: Devotee;
   fkDevoteeKarmiFamilyRelationshipMaster1rel: RelationshipMaster;
   constructor(data?: DevoteeKarmiFamilyInterface) {
@@ -69,6 +81,30 @@ export class DevoteeKarmiFamily implements DevoteeKarmiFamilyInterface {
         "devoteeId": {
           name: 'devoteeId',
           type: 'string'
+        },
+        "createdOn": {
+          name: 'createdOn',
+          type: 'Date'
+        },
+        "updatedOn": {
+          name: 'updatedOn',
+          type: 'Date'
+        },
+        "createdBy": {
+          name: 'createdBy',
+          type: 'string'
+        },
+        "updatedBy": {
+          name: 'updatedBy',
+          type: 'string'
+        },
+        "created-on": {
+          name: 'created-on',
+          type: 'Date'
+        },
+        "updated-on": {
+          name: 'updated-on',
+          type: 'Date'
         },
       },
       relations: {

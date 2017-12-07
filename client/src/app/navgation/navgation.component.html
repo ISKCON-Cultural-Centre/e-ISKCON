@@ -1,0 +1,17 @@
+<ul *ngIf="!isLogin">
+  <li role="presentation" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+    <!-- <a [routerLink]="['home']" href="#">Home</a> -->
+    <a routerLink="dashboard">Home</a>
+  </li>
+  <li role="presentation" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+    <!-- <a [routerLink]="['devotee']" href="#">Admin</a> -->
+    <a routerLink="devotee">Admin</a>
+  </li>
+  <li role="presentation" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+    <!-- <a [routerLink]="['devotee']" href="#">Admin</a> -->
+    <a routerLink="catalogue">Catelogue</a>
+  </li>
+  <li role="presentation" class="dropdown" style="float:right">
+    <a (click)="logout()" href="#" class="dropbtn">Logout</a>
+  </li>
+</ul>

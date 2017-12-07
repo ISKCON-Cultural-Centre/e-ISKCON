@@ -6,7 +6,13 @@
       "schema": "icc",
       "table": "temple"
     },
-    "relations": {}
+    "relations": {
+      "fkTemplePhysicalAddress1rel": {
+        "model": "PhysicalAddress",
+        "type": "belongsTo",
+        "foreignKey": "physicalAddressId"
+      }
+    }
   },
   "mixins": {
     "TimeStamp" : {
@@ -25,8 +31,7 @@
       "length": 36,
       "precision": null,
       "scale": null,
-      "id": true,
-      "defaultFn": "uuidv4",
+      "id": 1,
       "mysql": {
         "columnName": "id",
         "dataType": "varchar",
@@ -46,96 +51,6 @@
         "columnName": "name",
         "dataType": "varchar",
         "dataLength": 100,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "N"
-      }
-    },
-    "addressLine1": {
-      "type": "String",
-      "required": true,
-      "length": 100,
-      "precision": null,
-      "scale": null,
-      "mysql": {
-        "columnName": "address-line-1",
-        "dataType": "varchar",
-        "dataLength": 100,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "N"
-      }
-    },
-    "addressLine2": {
-      "type": "String",
-      "required": true,
-      "length": 100,
-      "precision": null,
-      "scale": null,
-      "mysql": {
-        "columnName": "address-line-2",
-        "dataType": "varchar",
-        "dataLength": 100,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "N"
-      }
-    },
-    "addressArea": {
-      "type": "String",
-      "required": true,
-      "length": 100,
-      "precision": null,
-      "scale": null,
-      "mysql": {
-        "columnName": "address-area",
-        "dataType": "varchar",
-        "dataLength": 100,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "N"
-      }
-    },
-    "addressCity": {
-      "type": "String",
-      "required": true,
-      "length": 100,
-      "precision": null,
-      "scale": null,
-      "mysql": {
-        "columnName": "address-city",
-        "dataType": "varchar",
-        "dataLength": 100,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "N"
-      }
-    },
-    "addressCountry": {
-      "type": "String",
-      "required": true,
-      "length": 100,
-      "precision": null,
-      "scale": null,
-      "mysql": {
-        "columnName": "address-country",
-        "dataType": "varchar",
-        "dataLength": 100,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "N"
-      }
-    },
-    "addressPin": {
-      "type": "String",
-      "required": true,
-      "length": 10,
-      "precision": null,
-      "scale": null,
-      "mysql": {
-        "columnName": "address-pin",
-        "dataType": "varchar",
-        "dataLength": 10,
         "dataPrecision": null,
         "dataScale": null,
         "nullable": "N"
@@ -166,6 +81,81 @@
         "columnName": "contact-name",
         "dataType": "varchar",
         "dataLength": 50,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "N"
+      }
+    },
+    "createdOn": {
+      "type": "Date",
+      "required": false,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "created-on",
+        "dataType": "datetime",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "Y"
+      }
+    },
+    "updatedOn": {
+      "type": "Date",
+      "required": false,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "updated-on",
+        "dataType": "datetime",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "Y"
+      }
+    },
+    "createdBy": {
+      "type": "String",
+      "required": false,
+      "length": 36,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "created-by",
+        "dataType": "varchar",
+        "dataLength": 36,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "Y"
+      }
+    },
+    "updatedBy": {
+      "type": "String",
+      "required": false,
+      "length": 36,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "updated-by",
+        "dataType": "varchar",
+        "dataLength": 36,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "Y"
+      }
+    },
+    "physicalAddressId": {
+      "type": "String",
+      "required": true,
+      "length": 36,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "physical-address-id",
+        "dataType": "varchar",
+        "dataLength": 36,
         "dataPrecision": null,
         "dataScale": null,
         "nullable": "N"

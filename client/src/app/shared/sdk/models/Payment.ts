@@ -10,24 +10,36 @@ export interface PaymentInterface {
   "id": string;
   "devoteeId": string;
   "date": Date;
-  "paymentModeMasterId": number;
   "paymentRefNumber"?: string;
   "donationTypeMasterId": string;
+  "paymentModeMasterId": string;
+  "createdOn"?: Date;
+  "updatedOn"?: Date;
+  "createdBy"?: string;
+  "updatedBy"?: string;
+  "created-on"?: Date;
+  "updated-on"?: Date;
   fkPaymentDevotee2rel?: Devotee;
   fkPaymentDonationTypeMaster1rel?: DonationTypeMaster;
-  fkPaymentPaymentModeMaster2rel?: PaymentModeMaster;
+  fkPaymentPaymentModeMaster1rel?: PaymentModeMaster;
 }
 
 export class Payment implements PaymentInterface {
   "id": string;
   "devoteeId": string;
   "date": Date;
-  "paymentModeMasterId": number;
   "paymentRefNumber": string;
   "donationTypeMasterId": string;
+  "paymentModeMasterId": string;
+  "createdOn": Date;
+  "updatedOn": Date;
+  "createdBy": string;
+  "updatedBy": string;
+  "created-on": Date;
+  "updated-on": Date;
   fkPaymentDevotee2rel: Devotee;
   fkPaymentDonationTypeMaster1rel: DonationTypeMaster;
-  fkPaymentPaymentModeMaster2rel: PaymentModeMaster;
+  fkPaymentPaymentModeMaster1rel: PaymentModeMaster;
   constructor(data?: PaymentInterface) {
     Object.assign(this, data);
   }
@@ -73,10 +85,6 @@ export class Payment implements PaymentInterface {
           name: 'date',
           type: 'Date'
         },
-        "paymentModeMasterId": {
-          name: 'paymentModeMasterId',
-          type: 'number'
-        },
         "paymentRefNumber": {
           name: 'paymentRefNumber',
           type: 'string'
@@ -84,6 +92,34 @@ export class Payment implements PaymentInterface {
         "donationTypeMasterId": {
           name: 'donationTypeMasterId',
           type: 'string'
+        },
+        "paymentModeMasterId": {
+          name: 'paymentModeMasterId',
+          type: 'string'
+        },
+        "createdOn": {
+          name: 'createdOn',
+          type: 'Date'
+        },
+        "updatedOn": {
+          name: 'updatedOn',
+          type: 'Date'
+        },
+        "createdBy": {
+          name: 'createdBy',
+          type: 'string'
+        },
+        "updatedBy": {
+          name: 'updatedBy',
+          type: 'string'
+        },
+        "created-on": {
+          name: 'created-on',
+          type: 'Date'
+        },
+        "updated-on": {
+          name: 'updated-on',
+          type: 'Date'
         },
       },
       relations: {
@@ -103,8 +139,8 @@ export class Payment implements PaymentInterface {
                   keyFrom: 'donationTypeMasterId',
           keyTo: 'id'
         },
-        fkPaymentPaymentModeMaster2rel: {
-          name: 'fkPaymentPaymentModeMaster2rel',
+        fkPaymentPaymentModeMaster1rel: {
+          name: 'fkPaymentPaymentModeMaster1rel',
           type: 'PaymentModeMaster',
           model: 'PaymentModeMaster',
           relationType: 'belongsTo',

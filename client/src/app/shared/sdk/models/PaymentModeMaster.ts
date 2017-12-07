@@ -2,15 +2,27 @@
 
 declare var Object: any;
 export interface PaymentModeMasterInterface {
-  "id": number;
+  "id": string;
   "paymentModeName": string;
   "activeInd": number;
+  "createdOn"?: Date;
+  "updatedOn"?: Date;
+  "createdBy"?: string;
+  "updatedBy"?: string;
+  "created-on"?: Date;
+  "updated-on"?: Date;
 }
 
 export class PaymentModeMaster implements PaymentModeMasterInterface {
-  "id": number;
+  "id": string;
   "paymentModeName": string;
   "activeInd": number;
+  "createdOn": Date;
+  "updatedOn": Date;
+  "createdBy": string;
+  "updatedBy": string;
+  "created-on": Date;
+  "updated-on": Date;
   constructor(data?: PaymentModeMasterInterface) {
     Object.assign(this, data);
   }
@@ -46,7 +58,7 @@ export class PaymentModeMaster implements PaymentModeMasterInterface {
       properties: {
         "id": {
           name: 'id',
-          type: 'number'
+          type: 'string'
         },
         "paymentModeName": {
           name: 'paymentModeName',
@@ -55,6 +67,30 @@ export class PaymentModeMaster implements PaymentModeMasterInterface {
         "activeInd": {
           name: 'activeInd',
           type: 'number'
+        },
+        "createdOn": {
+          name: 'createdOn',
+          type: 'Date'
+        },
+        "updatedOn": {
+          name: 'updatedOn',
+          type: 'Date'
+        },
+        "createdBy": {
+          name: 'createdBy',
+          type: 'string'
+        },
+        "updatedBy": {
+          name: 'updatedBy',
+          type: 'string'
+        },
+        "created-on": {
+          name: 'created-on',
+          type: 'Date'
+        },
+        "updated-on": {
+          name: 'updated-on',
+          type: 'Date'
         },
       },
       relations: {

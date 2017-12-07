@@ -93,7 +93,7 @@ export class PaymentApi extends BaseLoopBackApi {
   }
 
   /**
-   * Fetches belongsTo relation fkPaymentPaymentModeMaster2rel.
+   * Fetches belongsTo relation fkPaymentPaymentModeMaster1rel.
    *
    * @param {any} id Payment id
    *
@@ -108,10 +108,10 @@ export class PaymentApi extends BaseLoopBackApi {
    * This usually means the response is a `Payment` object.)
    * </em>
    */
-  public getFkPaymentPaymentModeMaster2rel(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
+  public getFkPaymentPaymentModeMaster1rel(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Payments/:id/fkPaymentPaymentModeMaster2rel";
+    "/Payments/:id/fkPaymentPaymentModeMaster1rel";
     let _routeParams: any = {
       id: id
     };

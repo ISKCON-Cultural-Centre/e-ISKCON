@@ -1,16 +1,25 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './pages/devotee/login/login.component';
-import { ResetPasswordComponent } from './pages/devotee/reset-password/reset-password.component';
-import { AboutComponent } from './pages/about/about.component';
-import { HomeComponent } from './pages/home/home.component';
+import { LoginComponent } from './login/login.component';
+import { ResetPasswordComponent } from './login/reset-password.component';
+import { PageNotFoundComponent } from './pageNotFound.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { DevoteeComponent } from './devotee/devotee.component';
+import { AuthGuard as AuthGuard } from './shared/services/auth.guard';
+import { RegisterComponent } from './login/register/register.component';
+import { CatalogueComponent } from './matchless-gifts/catalogue/catalogue.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'register', component: RegisterComponent },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
+  { path: 'devotee', component: DevoteeComponent, canActivate: [AuthGuard] },
+  { path: 'catalogue', component: CatalogueComponent, canActivate: [AuthGuard] },
   { path: 'reset', component: ResetPasswordComponent },
-  { path: 'about', component: AboutComponent }
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full', canActivate: [AuthGuard] },
+  { path: '**', component: PageNotFoundComponent }
 ];
+
 
 
 @NgModule({
