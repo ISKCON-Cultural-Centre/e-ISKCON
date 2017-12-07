@@ -174,34 +174,5 @@
   "TaskMaster": {
     "dataSource": "mysqld",
     "public": true
-  },
-
-  "Book": {
-    "dataSource": "mysqld1",
-    "public": true
-  },
-  "BookLanguageMap": {
-    "dataSource": "mysqld1",
-    "public": true
-  },
-  "BookMarathonOrder": {
-    "dataSource": "mysqld1",
-    "public": true
-  } ,
-  "BookMarathonOrderDetail": {
-    "dataSource": "mysqld1",
-    "public": true
-  } ,
-  "BookMarathonReportedSale": {
-    "dataSource": "mysqld1",
-    "public": true
-  } ,
-  "BookMarathonSettlement": {
-    "dataSource": "mysqld1",
-    "public": true
-  },
-  "BookRequestStatus": {
-    "dataSource": "mysqld1",
-    "public": true
   }
 }
