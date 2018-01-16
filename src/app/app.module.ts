@@ -11,6 +11,7 @@ import { SDKBrowserModule } from './shared/sdk';
 import { AuthGuard, AuthService } from './shared/services';
 import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './pageNotFound.component';
+import { HeaderComponent } from './header.component';
 import { NavgationComponent } from './navgation/navgation.component';
 import { RegisterComponent } from './login/register/register.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -27,6 +28,7 @@ import { MatchlessGiftsModule } from './matchless-gifts/matchless-gifts.module';
   declarations: [
     AppComponent,
     PageNotFoundComponent,
+    HeaderComponent,
     NavgationComponent,
     DashboardComponent,
   ],

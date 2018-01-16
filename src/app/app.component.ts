@@ -8,7 +8,6 @@ import { LoopBackConfig } from './shared/sdk';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'eISKCON';
   constructor() {
     LoopBackConfig.setBaseURL(BASE_URL);
     LoopBackConfig.setApiVersion(API_VERSION);
