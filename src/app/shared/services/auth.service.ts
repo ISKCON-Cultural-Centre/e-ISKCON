@@ -1,18 +1,62 @@
 import { Injectable } from '@angular/core';
-import { SDKToken } from '../sdk';
+import { SDKToken, DevoteeApi } from '../sdk';
 import { LoopBackAuth } from '../sdk';
 
+import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { User } from './user';
+
 import { InternalStorage } from '../sdk/storage/storage.swaps';
+
 
 declare var Object: any;
 @Injectable()
 export class AuthService extends LoopBackAuth {
+
+    private loggedIn = new BehaviorSubject<boolean>(false);
+
     private sessiontoken: SDKToken = new SDKToken();
     private remembeMe: Boolean = true;
-    constructor(internalStorage: InternalStorage) {
+
+    constructor(internalStorage: InternalStorage, 
+        private devoteeApi: DevoteeApi,
+        private router: Router)
+    {
         super(internalStorage);
         this.loadFromSession();
+        if (devoteeApi.isAuthenticated()) {
+            this.loggedIn.next(true);
+        }
     }
+
+
+    get isLoggedIn() {
+      return this.loggedIn.asObservable();
+    }
+
+
+    login(user: User) {
+        this.devoteeApi.login({ username: user.userName, password: user.password })
+          .subscribe((token: SDKToken) => {
+            super.setToken(token);
+            this.loggedIn.next(true);
+            this.router.navigate(['/']);
+          }, err => {
+            alert(err && err.message ? err.message : 'Login failed!');
+            user.password = '';
+          });
+      }
+
+
+      logout() {
+        this.devoteeApi.logout().subscribe((response) => {
+          // Clear Token and other local storage
+          this.clearFromSession();
+          this.loggedIn.next(false);
+          this.router.navigate(['/login']);
+        });
+      }
+
 
     clear(): void {
         super.clear();

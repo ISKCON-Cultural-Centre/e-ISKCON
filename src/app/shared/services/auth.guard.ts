@@ -1,36 +1,44 @@
-import { Injectable } from "@angular/core";
-import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/router";
-import { AuthService } from "./auth.service";
+import { Injectable } from '@angular/core';
+import {
+  CanActivate,
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot,
+  Router
+} from '@angular/router';
+import { AuthService } from './auth.service';
+import { DevoteeApi } from '../sdk';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/take';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-    constructor(private router: Router, private auth: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private devoteeApi: DevoteeApi
+  ) {}
 
-/*    canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-      let path: string = next.url[0] ? next.url[0].path : "";
-      if (((path === "login") || (path === "register")) && this.isAuthenticated()) {
-        this.router.navigate(["/"]);
-        return false;
-      } else if (((path === "login") || (path === "register")) && (!this.isAuthenticated()) ) {
-        return true;
-      } else if (((path !== "login") && (path !== "register")) && (!this.isAuthenticated()) ){
-        this.router.navigate(["/login"]);
-        return true;
-      }else{
-        return true;
-      }
+   canActivate(): boolean {
+    if (!this.devoteeApi.isAuthenticated()) {
+      this.router.navigate(['login']);
+      return false;
     }
-*/
-    canActivate(): boolean {
-      if (!this.isAuthenticated()) {
-        this.router.navigate(['login']);
-        return false;
-      }
-      return true;
-    }
+    return true;
+  } 
 
-
-    isAuthenticated(): boolean {
-      return !!this.auth.getAccessTokenId();
-    }
+ /* canActivate(
+    next: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Observable<boolean> {
+    return this.authService.isLoggedIn
+      .take(1)
+      .map((isLoggedIn: boolean) => {
+        if (!isLoggedIn){
+          this.router.navigate(['/login']);
+          return false;
+        }
+        return true;
+      });*/
+  }
 }

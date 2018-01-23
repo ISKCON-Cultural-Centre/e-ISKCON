@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
 import { SDKToken, DevoteeApi } from '../shared/sdk';
 import { AuthService } from '../shared/services/auth.service';
+
+import { GlobalEventsManager } from '../shared/services/globalEventsManager.service';
 
 const USERNAME_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 const PASSWORD_REGEX = /^[a-zA-Z0-9!#$%&’]$/;
@@ -15,12 +17,17 @@ const PASSWORD_REGEX = /^[a-zA-Z0-9!#$%&’]$/;
 })
 export class LoginComponent implements OnInit {
 
+  form: FormGroup;
+  private formSubmitAttempt: boolean; 
+
   private state: String = 'login';
 
   constructor(
-    private devoteeApi: DevoteeApi,
+    private fb: FormBuilder,
+    // private devoteeApi: DevoteeApi,
     private authService: AuthService,
-    private router: Router) {
+    // private router: Router,
+    private globalEventsManager: GlobalEventsManager) {
   }
 
   userNameFormControl = new FormControl('', [
@@ -30,24 +37,34 @@ export class LoginComponent implements OnInit {
     Validators.required,
     Validators.pattern(PASSWORD_REGEX)]);
 
-  ngOnInit() { }
+  ngOnInit() { 
+    this.form = this.fb.group({
+      userName: ['', this.userNameFormControl],
+      password: ['', this.passwordFormControl]
+    });
+  }
 
+  isFieldInvalid(field: string) { // {6}
+    return (
+      (!this.form.get(field).valid && this.form.get(field).touched) ||
+      (this.form.get(field).untouched && this.formSubmitAttempt)
+    );
+  }
+
+  onSubmit() {
+    if (this.form.valid) {
+      this.authService.login(this.form.value);
+    }
+    this.formSubmitAttempt = true; 
+  }
+
+/* 
   setState(state: string) {
     this.state = state;
-  }
+  } */
 
-  login(userName, password) {
-    this.devoteeApi.login({ username: userName.value, password: password.value })
-      .subscribe((token: SDKToken) => {
-        this.authService.setToken(token);
-        this.router.navigate(['/']);
-      }, err => {
-        alert(err && err.message ? err.message : 'Login failed!');
-        password.value = '';
-      });
-  }
 
-  signup(username, email, password, passwordConfirm, type) {
+/*   signup(username, email, password, passwordConfirm, type) {
     if (password.value !== passwordConfirm.value) {
       return alert('Passwords must match!');
     }
@@ -74,6 +91,6 @@ export class LoginComponent implements OnInit {
   }
   redirectToRegister() {
     this.router.navigate(['./register']);
-  }
+  } */
 
 }

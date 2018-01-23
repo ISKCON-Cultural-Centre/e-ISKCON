@@ -11,26 +11,29 @@ import { SDKBrowserModule } from './shared/sdk';
 import { AuthGuard, AuthService } from './shared/services';
 import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './pageNotFound.component';
-import { HeaderComponent } from './header.component';
-import { NavgationComponent } from './navgation/navgation.component';
+import { HeaderComponent } from './header/header.component';
 import { RegisterComponent } from './login/register/register.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginModule } from './login/login.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { MessagesComponent } from './messages/messages.component';
 import { DevoteeModule } from '../app/devotee/devotee.module';
 import { MyServicesModule } from './my-services/my-services.module';
 import { MyActionsModule } from './my-actions/my-actions.module';
 import { MyMessagesModule } from './my-messages/my-messages.module';
 import { CatalogueModule } from './matchless-gifts/catalogue/catalogue.module';
 import { MatchlessGiftsModule } from './matchless-gifts/matchless-gifts.module';
+import { MessageService } from './shared/services/message.service';
+import { MyServicesService } from './shared/services/myServices.service';
+import { GlobalEventsManager } from './shared/services/globalEventsManager.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent,
     HeaderComponent,
-    NavgationComponent,
     DashboardComponent,
+    MessagesComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,7 +53,10 @@ import { MatchlessGiftsModule } from './matchless-gifts/matchless-gifts.module';
   ],
   providers: [
     AuthGuard,
-    AuthService
+    AuthService,
+    MessageService,
+    MyServicesService,
+    GlobalEventsManager,
   ],
   bootstrap: [AppComponent]
 })

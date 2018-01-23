@@ -1,0 +1,17 @@
+<mat-toolbar color="primary" *ngIf="isLoggedIn$ | async as isLoggedIn">
+  <span>
+
+    <!--    <img src="../assets/images/icc_logo.png" class="angular-logo"> -->
+  </span> ISKCON Cultural Centre
+  <span>
+    <span *ngFor="let myService of myServices">
+      <button mat-button routerLink={{myService.route}} [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+        <mat-icon>{{myService.icon}}</mat-icon>
+        <span>{{myService.serviceName}}</span>
+      </button>
+    </span>     
+  </span> 
+  <span class="fill-remaining-space"></span>  
+  <button mat-button routerLink="login" *ngIf="!isLoggedIn">Login</button>
+  <button mat-button (click)="onLogout()" *ngIf="isLoggedIn">Logout</button>
+</mat-toolbar>
