@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DummyService } from '../../shared/sdk/services/core/dummy.service';
-import { Book } from '../../shared/sdk';
+import { DummyService } from '../../shared/services/dummy.service';
+//import { Book } from '../../shared/sdk';
 
 @Component({
   selector: 'app-catalogue',
