@@ -11,9 +11,8 @@ import { ErrorHandler } from '../core/error.service';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
 import { Devotee } from '../../models/Devotee';
-import { SpiritualLevelMaster } from '../../models/SpiritualLevelMaster';
-import { ElectronicAddress } from '../../models/ElectronicAddress';
-import { PhysicalAddress } from '../../models/PhysicalAddress';
+import { Circle } from '../../models/Circle';
+import { Language } from '../../models/Language';
 
 
 /**
@@ -35,7 +34,7 @@ export class DevoteeApi extends BaseLoopBackApi {
   /**
    * Find a related item by id for accessTokens.
    *
-   * @param {any} id Devotee id
+   * @param {any} id User id
    *
    * @param {any} fk Foreign key for accessTokens
    *
@@ -65,7 +64,7 @@ export class DevoteeApi extends BaseLoopBackApi {
   /**
    * Delete a related item by id for accessTokens.
    *
-   * @param {any} id Devotee id
+   * @param {any} id User id
    *
    * @param {any} fk Foreign key for accessTokens
    *
@@ -92,7 +91,7 @@ export class DevoteeApi extends BaseLoopBackApi {
   /**
    * Update a related item by id for accessTokens.
    *
-   * @param {any} id Devotee id
+   * @param {any} id User id
    *
    * @param {any} fk Foreign key for accessTokens
    *
@@ -126,9 +125,9 @@ export class DevoteeApi extends BaseLoopBackApi {
   }
 
   /**
-   * Fetches belongsTo relation fkDevoteeSpiritualLevelMaster1rel.
+   * Fetches belongsTo relation fkDevoteeCircle1rel.
    *
-   * @param {any} id Devotee id
+   * @param {any} id User id
    *
    * @param {boolean} refresh 
    *
@@ -141,10 +140,10 @@ export class DevoteeApi extends BaseLoopBackApi {
    * This usually means the response is a `Devotee` object.)
    * </em>
    */
-  public getFkDevoteeSpiritualLevelMaster1rel(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
+  public getFkDevoteeCircle1rel(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Devotees/:id/fkDevoteeSpiritualLevelMaster1rel";
+    "/Devotees/:id/fkDevoteeCircle1rel";
     let _routeParams: any = {
       id: id
     };
@@ -156,39 +155,9 @@ export class DevoteeApi extends BaseLoopBackApi {
   }
 
   /**
-   * Fetches belongsTo relation fkDevoteeElectronicAddress1rel.
+   * Fetches belongsTo relation fkDevoteeLanguage1rel.
    *
-   * @param {any} id Devotee id
-   *
-   * @param {boolean} refresh 
-   *
-   * @returns {object} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Devotee` object.)
-   * </em>
-   */
-  public getFkDevoteeElectronicAddress1rel(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
-    let _method: string = "GET";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Devotees/:id/fkDevoteeElectronicAddress1rel";
-    let _routeParams: any = {
-      id: id
-    };
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    if (typeof refresh !== 'undefined' && refresh !== null) _urlParams.refresh = refresh;
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
-  }
-
-  /**
-   * Fetches belongsTo relation fkDevoteePhysicalAddress1rel.
-   *
-   * @param {any} id Devotee id
+   * @param {any} id User id
    *
    * @param {boolean} refresh 
    *
@@ -201,10 +170,10 @@ export class DevoteeApi extends BaseLoopBackApi {
    * This usually means the response is a `Devotee` object.)
    * </em>
    */
-  public getFkDevoteePhysicalAddress1rel(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
+  public getFkDevoteeLanguage1rel(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Devotees/:id/fkDevoteePhysicalAddress1rel";
+    "/Devotees/:id/fkDevoteeLanguage1rel";
     let _routeParams: any = {
       id: id
     };
@@ -218,7 +187,7 @@ export class DevoteeApi extends BaseLoopBackApi {
   /**
    * Queries accessTokens of Devotee.
    *
-   * @param {any} id Devotee id
+   * @param {any} id User id
    *
    * @param {object} filter 
    *
@@ -248,7 +217,7 @@ export class DevoteeApi extends BaseLoopBackApi {
   /**
    * Creates a new instance in accessTokens of this model.
    *
-   * @param {any} id Devotee id
+   * @param {any} id User id
    *
    * @param {object} data Request data.
    *
@@ -281,7 +250,7 @@ export class DevoteeApi extends BaseLoopBackApi {
   /**
    * Deletes all accessTokens of this model.
    *
-   * @param {any} id Devotee id
+   * @param {any} id User id
    *
    * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -305,7 +274,7 @@ export class DevoteeApi extends BaseLoopBackApi {
   /**
    * Counts accessTokens of Devotee.
    *
-   * @param {any} id Devotee id
+   * @param {any} id User id
    *
    * @param {object} where Criteria to match model instances
    *
@@ -363,7 +332,7 @@ export class DevoteeApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param {any} id Devotee id
+   * @param {any} id User id
    *
    * @param {object} data Request data.
    *
@@ -468,35 +437,7 @@ export class DevoteeApi extends BaseLoopBackApi {
   }
 
   /**
-   * Trigger user's identity verification with configured verifyOptions
-   *
-   * @param {any} id Devotee id
-   *
-   * @param {object} data Request data.
-   *
-   * This method does not accept any data. Supply an empty object.
-   *
-   * @returns {object} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * This method returns no data.
-   */
-  public verify(id: any, customHeaders?: Function): Observable<any> {
-    let _method: string = "POST";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Devotees/:id/verify";
-    let _routeParams: any = {
-      id: id
-    };
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
-  }
-
-  /**
-   * Confirm a user registration with identity verification token.
+   * Confirm a user registration with email verification token.
    *
    * @param {string} uid 
    *
@@ -551,68 +492,9 @@ export class DevoteeApi extends BaseLoopBackApi {
   }
 
   /**
-   * Change a user's password.
-   *
-   * @param {object} data Request data.
-   *
-   *  - `oldPassword` – `{string}` - 
-   *
-   *  - `newPassword` – `{string}` - 
-   *
-   * @returns {object} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * This method returns no data.
-   */
-  public changePassword(oldPassword: any, newPassword: any, customHeaders?: Function): Observable<any> {
-    let _method: string = "POST";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Devotees/change-password";
-    let _routeParams: any = {};
-    let _postBody: any = {
-      data: {
-        oldPassword: oldPassword,
-        newPassword: newPassword
-      }
-    };
-    let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
-  }
-
-  /**
-   * Reset user's password via a password-reset token.
-   *
-   * @param {object} data Request data.
-   *
-   *  - `newPassword` – `{string}` - 
-   *
-   * @returns {object} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * This method returns no data.
-   */
-  public setPassword(newPassword: any, customHeaders?: Function): Observable<any> {
-    let _method: string = "POST";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Devotees/reset-password";
-    let _routeParams: any = {};
-    let _postBody: any = {
-      data: {
-        newPassword: newPassword
-      }
-    };
-    let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
-  }
-
-  /**
    * Creates a new instance in accessTokens of this model.
    *
-   * @param {any} id Devotee id
+   * @param {any} id User id
    *
    * @param {object} data Request data.
    *

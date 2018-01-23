@@ -61,7 +61,7 @@ export class PaymentModeMasterApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param {any} id PaymentModeMaster id
+   * @param {any} id PersistedModel id
    *
    * @param {object} data Request data.
    *

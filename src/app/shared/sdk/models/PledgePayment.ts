@@ -6,34 +6,34 @@ import {
 
 declare var Object: any;
 export interface PledgePaymentInterface {
-  "id": string;
+  "id"?: string;
   "instalmentNumber": number;
-  "paymentId": string;
   "pledgeDate"?: Date;
-  "pledgeId": string;
+  "pledgeId"?: string;
   "createdOn"?: Date;
   "updatedOn"?: Date;
   "createdBy"?: string;
   "updatedBy"?: string;
+  "mgPaymentId": string;
   "created-on"?: Date;
   "updated-on"?: Date;
-  fkPledgePaymentPayment1rel?: Payment;
+  fkPledgePaymentMgPayment1rel?: Payment;
   fkPledgePaymentPledge1rel?: Pledge;
 }
 
 export class PledgePayment implements PledgePaymentInterface {
   "id": string;
   "instalmentNumber": number;
-  "paymentId": string;
   "pledgeDate": Date;
   "pledgeId": string;
   "createdOn": Date;
   "updatedOn": Date;
   "createdBy": string;
   "updatedBy": string;
+  "mgPaymentId": string;
   "created-on": Date;
   "updated-on": Date;
-  fkPledgePaymentPayment1rel: Payment;
+  fkPledgePaymentMgPayment1rel: Payment;
   fkPledgePaymentPledge1rel: Pledge;
   constructor(data?: PledgePaymentInterface) {
     Object.assign(this, data);
@@ -76,10 +76,6 @@ export class PledgePayment implements PledgePaymentInterface {
           name: 'instalmentNumber',
           type: 'number'
         },
-        "paymentId": {
-          name: 'paymentId',
-          type: 'string'
-        },
         "pledgeDate": {
           name: 'pledgeDate',
           type: 'Date'
@@ -104,6 +100,10 @@ export class PledgePayment implements PledgePaymentInterface {
           name: 'updatedBy',
           type: 'string'
         },
+        "mgPaymentId": {
+          name: 'mgPaymentId',
+          type: 'string'
+        },
         "created-on": {
           name: 'created-on',
           type: 'Date'
@@ -114,12 +114,12 @@ export class PledgePayment implements PledgePaymentInterface {
         },
       },
       relations: {
-        fkPledgePaymentPayment1rel: {
-          name: 'fkPledgePaymentPayment1rel',
+        fkPledgePaymentMgPayment1rel: {
+          name: 'fkPledgePaymentMgPayment1rel',
           type: 'Payment',
           model: 'Payment',
           relationType: 'belongsTo',
-                  keyFrom: 'paymentId',
+                  keyFrom: 'mgPaymentId',
           keyTo: 'id'
         },
         fkPledgePaymentPledge1rel: {

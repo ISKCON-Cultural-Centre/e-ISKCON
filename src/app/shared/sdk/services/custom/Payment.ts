@@ -12,7 +12,6 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
 import { Payment } from '../../models/Payment';
 import { Devotee } from '../../models/Devotee';
-import { DonationTypeMaster } from '../../models/DonationTypeMaster';
 import { PaymentModeMaster } from '../../models/PaymentModeMaster';
 
 
@@ -33,9 +32,9 @@ export class PaymentApi extends BaseLoopBackApi {
   }
 
   /**
-   * Fetches belongsTo relation fkPaymentDevotee2rel.
+   * Fetches belongsTo relation fkOrderPaymentDevotee1rel.
    *
-   * @param {any} id Payment id
+   * @param {any} id PersistedModel id
    *
    * @param {boolean} refresh 
    *
@@ -48,10 +47,10 @@ export class PaymentApi extends BaseLoopBackApi {
    * This usually means the response is a `Payment` object.)
    * </em>
    */
-  public getFkPaymentDevotee2rel(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
+  public getFkOrderPaymentDevotee1rel(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Payments/:id/fkPaymentDevotee2rel";
+    "/Payments/:id/fkOrderPaymentDevotee1rel";
     let _routeParams: any = {
       id: id
     };
@@ -63,39 +62,9 @@ export class PaymentApi extends BaseLoopBackApi {
   }
 
   /**
-   * Fetches belongsTo relation fkPaymentDonationTypeMaster1rel.
+   * Fetches belongsTo relation fkDevoteePaymentPaymentModeMaster1rel.
    *
-   * @param {any} id Payment id
-   *
-   * @param {boolean} refresh 
-   *
-   * @returns {object} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Payment` object.)
-   * </em>
-   */
-  public getFkPaymentDonationTypeMaster1rel(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
-    let _method: string = "GET";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Payments/:id/fkPaymentDonationTypeMaster1rel";
-    let _routeParams: any = {
-      id: id
-    };
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    if (typeof refresh !== 'undefined' && refresh !== null) _urlParams.refresh = refresh;
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
-  }
-
-  /**
-   * Fetches belongsTo relation fkPaymentPaymentModeMaster1rel.
-   *
-   * @param {any} id Payment id
+   * @param {any} id PersistedModel id
    *
    * @param {boolean} refresh 
    *
@@ -108,10 +77,10 @@ export class PaymentApi extends BaseLoopBackApi {
    * This usually means the response is a `Payment` object.)
    * </em>
    */
-  public getFkPaymentPaymentModeMaster1rel(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
+  public getFkDevoteePaymentPaymentModeMaster1rel(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Payments/:id/fkPaymentPaymentModeMaster1rel";
+    "/Payments/:id/fkDevoteePaymentPaymentModeMaster1rel";
     let _routeParams: any = {
       id: id
     };
@@ -154,7 +123,7 @@ export class PaymentApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param {any} id Payment id
+   * @param {any} id PersistedModel id
    *
    * @param {object} data Request data.
    *

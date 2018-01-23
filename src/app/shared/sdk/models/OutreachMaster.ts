@@ -2,8 +2,8 @@
 
 declare var Object: any;
 export interface OutreachMasterInterface {
-  "id": string;
-  "description": string;
+  "id"?: string;
+  "description"?: string;
   "createdOn"?: Date;
   "updatedOn"?: Date;
   "createdBy"?: string;

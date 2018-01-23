@@ -2,8 +2,8 @@
 
 declare var Object: any;
 export interface EventMasterInterface {
-  "id": string;
-  "eventName": string;
+  "id"?: string;
+  "eventName"?: string;
   "createdOn"?: Date;
   "updatedOn"?: Date;
   "createdBy"?: string;

@@ -2,10 +2,8 @@
 
 declare var Object: any;
 export interface PhysicalAddressTypeMasterInterface {
-  "id": string;
-  "addressType": string;
-  "createdOn"?: Date;
-  "updatedOn"?: Date;
+  "id"?: string;
+  "addressType"?: string;
   "createdBy"?: string;
   "updatedBy"?: string;
   "created-on"?: Date;
@@ -15,8 +13,6 @@ export interface PhysicalAddressTypeMasterInterface {
 export class PhysicalAddressTypeMaster implements PhysicalAddressTypeMasterInterface {
   "id": string;
   "addressType": string;
-  "createdOn": Date;
-  "updatedOn": Date;
   "createdBy": string;
   "updatedBy": string;
   "created-on": Date;
@@ -61,14 +57,6 @@ export class PhysicalAddressTypeMaster implements PhysicalAddressTypeMasterInter
         "addressType": {
           name: 'addressType',
           type: 'string'
-        },
-        "createdOn": {
-          name: 'createdOn',
-          type: 'Date'
-        },
-        "updatedOn": {
-          name: 'updatedOn',
-          type: 'Date'
         },
         "createdBy": {
           name: 'createdBy',

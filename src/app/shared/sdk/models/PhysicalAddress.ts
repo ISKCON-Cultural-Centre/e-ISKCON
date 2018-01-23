@@ -1,21 +1,25 @@
 /* tslint:disable */
+import {
+  PhysicalAddressTypeMaster
+} from '../index';
 
 declare var Object: any;
 export interface PhysicalAddressInterface {
-  "id": string;
-  "addressTypeMasterId": string;
-  "addressLine1": string;
-  "addressLine2": string;
-  "addressArea": string;
-  "addressCity": string;
-  "addressCountry": string;
-  "addressPin": string;
+  "id"?: string;
+  "addressTypeMasterId"?: string;
+  "addressLine1"?: string;
+  "addressLine2"?: string;
+  "addressArea"?: string;
+  "addressCity"?: string;
+  "addressCountry"?: string;
+  "addressPin"?: string;
   "createdOn"?: Date;
   "updatedOn"?: Date;
   "createdBy"?: string;
   "updatedBy"?: string;
   "created-on"?: Date;
   "updated-on"?: Date;
+  fkPhysicalAddressAddressTypeMaster1rel?: PhysicalAddressTypeMaster;
 }
 
 export class PhysicalAddress implements PhysicalAddressInterface {
@@ -33,6 +37,7 @@ export class PhysicalAddress implements PhysicalAddressInterface {
   "updatedBy": string;
   "created-on": Date;
   "updated-on": Date;
+  fkPhysicalAddressAddressTypeMaster1rel: PhysicalAddressTypeMaster;
   constructor(data?: PhysicalAddressInterface) {
     Object.assign(this, data);
   }
@@ -124,6 +129,14 @@ export class PhysicalAddress implements PhysicalAddressInterface {
         },
       },
       relations: {
+        fkPhysicalAddressAddressTypeMaster1rel: {
+          name: 'fkPhysicalAddressAddressTypeMaster1rel',
+          type: 'PhysicalAddressTypeMaster',
+          model: 'PhysicalAddressTypeMaster',
+          relationType: 'belongsTo',
+                  keyFrom: 'addressTypeMasterId',
+          keyTo: 'id'
+        },
       }
     }
   }

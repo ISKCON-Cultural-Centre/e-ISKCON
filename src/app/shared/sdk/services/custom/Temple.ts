@@ -33,7 +33,7 @@ export class TempleApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation fkTemplePhysicalAddress1rel.
    *
-   * @param {any} id Temple id
+   * @param {any} id PersistedModel id
    *
    * @param {boolean} refresh 
    *
@@ -92,7 +92,7 @@ export class TempleApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param {any} id Temple id
+   * @param {any} id PersistedModel id
    *
    * @param {object} data Request data.
    *

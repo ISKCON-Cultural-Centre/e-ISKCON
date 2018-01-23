@@ -2,25 +2,17 @@
 
 declare var Object: any;
 export interface PaymentModeMasterInterface {
-  "id": string;
-  "paymentModeName": string;
-  "activeInd": number;
-  "createdOn"?: Date;
-  "updatedOn"?: Date;
-  "createdBy"?: string;
-  "updatedBy"?: string;
+  "id"?: string;
+  "modeName": string;
+  "description": string;
   "created-on"?: Date;
   "updated-on"?: Date;
 }
 
 export class PaymentModeMaster implements PaymentModeMasterInterface {
   "id": string;
-  "paymentModeName": string;
-  "activeInd": number;
-  "createdOn": Date;
-  "updatedOn": Date;
-  "createdBy": string;
-  "updatedBy": string;
+  "modeName": string;
+  "description": string;
   "created-on": Date;
   "updated-on": Date;
   constructor(data?: PaymentModeMasterInterface) {
@@ -60,28 +52,12 @@ export class PaymentModeMaster implements PaymentModeMasterInterface {
           name: 'id',
           type: 'string'
         },
-        "paymentModeName": {
-          name: 'paymentModeName',
+        "modeName": {
+          name: 'modeName',
           type: 'string'
         },
-        "activeInd": {
-          name: 'activeInd',
-          type: 'number'
-        },
-        "createdOn": {
-          name: 'createdOn',
-          type: 'Date'
-        },
-        "updatedOn": {
-          name: 'updatedOn',
-          type: 'Date'
-        },
-        "createdBy": {
-          name: 'createdBy',
-          type: 'string'
-        },
-        "updatedBy": {
-          name: 'updatedBy',
+        "description": {
+          name: 'description',
           type: 'string'
         },
         "created-on": {

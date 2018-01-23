@@ -5,9 +5,9 @@ import {
 
 declare var Object: any;
 export interface ElectronicAddressInterface {
-  "id": string;
-  "electronicAddressTypeMasterId": string;
-  "electronicAddress": string;
+  "id"?: string;
+  "electronicAddressTypeMasterId"?: string;
+  "electronicAddress"?: string;
   "createdOn"?: Date;
   "updatedOn"?: Date;
   "createdBy"?: string;

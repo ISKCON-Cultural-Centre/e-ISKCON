@@ -2,15 +2,11 @@
 
 declare var Object: any;
 export interface TaskMasterInterface {
-  "id": string;
+  "id"?: string;
   "taskName": string;
   "applicationRoute": string;
   "taskDescription"?: string;
   "approvalRulesApplyInd": number;
-  "createdOn"?: Date;
-  "updatedOn"?: Date;
-  "createdBy"?: string;
-  "updatedBy"?: string;
   "created-on"?: Date;
   "updated-on"?: Date;
 }
@@ -21,10 +17,6 @@ export class TaskMaster implements TaskMasterInterface {
   "applicationRoute": string;
   "taskDescription": string;
   "approvalRulesApplyInd": number;
-  "createdOn": Date;
-  "updatedOn": Date;
-  "createdBy": string;
-  "updatedBy": string;
   "created-on": Date;
   "updated-on": Date;
   constructor(data?: TaskMasterInterface) {
@@ -79,22 +71,6 @@ export class TaskMaster implements TaskMasterInterface {
         "approvalRulesApplyInd": {
           name: 'approvalRulesApplyInd',
           type: 'number'
-        },
-        "createdOn": {
-          name: 'createdOn',
-          type: 'Date'
-        },
-        "updatedOn": {
-          name: 'updatedOn',
-          type: 'Date'
-        },
-        "createdBy": {
-          name: 'createdBy',
-          type: 'string'
-        },
-        "updatedBy": {
-          name: 'updatedBy',
-          type: 'string'
         },
         "created-on": {
           name: 'created-on',

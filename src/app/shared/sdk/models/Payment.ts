@@ -1,45 +1,32 @@
 /* tslint:disable */
 import {
   Devotee,
-  DonationTypeMaster,
   PaymentModeMaster
 } from '../index';
 
 declare var Object: any;
 export interface PaymentInterface {
-  "id": string;
+  "id"?: string;
   "devoteeId": string;
-  "date": Date;
-  "paymentRefNumber"?: string;
-  "donationTypeMasterId": string;
   "paymentModeMasterId": string;
-  "createdOn"?: Date;
-  "updatedOn"?: Date;
-  "createdBy"?: string;
-  "updatedBy"?: string;
+  "paymentDate": Date;
+  "paymentAmount": string;
   "created-on"?: Date;
   "updated-on"?: Date;
-  fkPaymentDevotee2rel?: Devotee;
-  fkPaymentDonationTypeMaster1rel?: DonationTypeMaster;
-  fkPaymentPaymentModeMaster1rel?: PaymentModeMaster;
+  fkOrderPaymentDevotee1rel?: Devotee;
+  fkDevoteePaymentPaymentModeMaster1rel?: PaymentModeMaster;
 }
 
 export class Payment implements PaymentInterface {
   "id": string;
   "devoteeId": string;
-  "date": Date;
-  "paymentRefNumber": string;
-  "donationTypeMasterId": string;
   "paymentModeMasterId": string;
-  "createdOn": Date;
-  "updatedOn": Date;
-  "createdBy": string;
-  "updatedBy": string;
+  "paymentDate": Date;
+  "paymentAmount": string;
   "created-on": Date;
   "updated-on": Date;
-  fkPaymentDevotee2rel: Devotee;
-  fkPaymentDonationTypeMaster1rel: DonationTypeMaster;
-  fkPaymentPaymentModeMaster1rel: PaymentModeMaster;
+  fkOrderPaymentDevotee1rel: Devotee;
+  fkDevoteePaymentPaymentModeMaster1rel: PaymentModeMaster;
   constructor(data?: PaymentInterface) {
     Object.assign(this, data);
   }
@@ -81,36 +68,16 @@ export class Payment implements PaymentInterface {
           name: 'devoteeId',
           type: 'string'
         },
-        "date": {
-          name: 'date',
-          type: 'Date'
-        },
-        "paymentRefNumber": {
-          name: 'paymentRefNumber',
-          type: 'string'
-        },
-        "donationTypeMasterId": {
-          name: 'donationTypeMasterId',
-          type: 'string'
-        },
         "paymentModeMasterId": {
           name: 'paymentModeMasterId',
           type: 'string'
         },
-        "createdOn": {
-          name: 'createdOn',
+        "paymentDate": {
+          name: 'paymentDate',
           type: 'Date'
         },
-        "updatedOn": {
-          name: 'updatedOn',
-          type: 'Date'
-        },
-        "createdBy": {
-          name: 'createdBy',
-          type: 'string'
-        },
-        "updatedBy": {
-          name: 'updatedBy',
+        "paymentAmount": {
+          name: 'paymentAmount',
           type: 'string'
         },
         "created-on": {
@@ -123,24 +90,16 @@ export class Payment implements PaymentInterface {
         },
       },
       relations: {
-        fkPaymentDevotee2rel: {
-          name: 'fkPaymentDevotee2rel',
+        fkOrderPaymentDevotee1rel: {
+          name: 'fkOrderPaymentDevotee1rel',
           type: 'Devotee',
           model: 'Devotee',
           relationType: 'belongsTo',
                   keyFrom: 'devoteeId',
           keyTo: 'id'
         },
-        fkPaymentDonationTypeMaster1rel: {
-          name: 'fkPaymentDonationTypeMaster1rel',
-          type: 'DonationTypeMaster',
-          model: 'DonationTypeMaster',
-          relationType: 'belongsTo',
-                  keyFrom: 'donationTypeMasterId',
-          keyTo: 'id'
-        },
-        fkPaymentPaymentModeMaster1rel: {
-          name: 'fkPaymentPaymentModeMaster1rel',
+        fkDevoteePaymentPaymentModeMaster1rel: {
+          name: 'fkDevoteePaymentPaymentModeMaster1rel',
           type: 'PaymentModeMaster',
           model: 'PaymentModeMaster',
           relationType: 'belongsTo',

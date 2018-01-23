@@ -16,7 +16,7 @@
 * ============================================================================
 * import { NgModule }       from '@angular/core';
 * import { BrowserModule }  from '@angular/platform-browser';
-* // App Root
+* // App Root 
 * import { AppComponent }   from './app.component';
 * // Feature Modules
 * import { SDK[Browser|Node|Native]Module } from './shared/sdk/sdk.module';
@@ -48,11 +48,9 @@ import { StorageBrowser } from './storage/storage.browser';
 import { ServiceApi } from './services/custom/Service';
 import { ServiceMappingApi } from './services/custom/ServiceMapping';
 import { CircleApi } from './services/custom/Circle';
-import { DeekshaGuruApi } from './services/custom/DeekshaGuru';
 import { DevoteeApi } from './services/custom/Devotee';
 import { DevoteeEventCalendarApi } from './services/custom/DevoteeEventCalendar';
 import { DevoteeKarmiFamilyApi } from './services/custom/DevoteeKarmiFamily';
-import { DevoteeSpiritualFamilyApi } from './services/custom/DevoteeSpiritualFamily';
 import { DonationTypeMasterApi } from './services/custom/DonationTypeMaster';
 import { EventMasterApi } from './services/custom/EventMaster';
 import { NewContactApi } from './services/custom/NewContact';
@@ -76,14 +74,48 @@ import { DepartmentApi } from './services/custom/Department';
 import { DepartmentServiceApi } from './services/custom/DepartmentService';
 import { ServiceTaskMasterApi } from './services/custom/ServiceTaskMaster';
 import { TaskMasterApi } from './services/custom/TaskMaster';
-import { BookApi } from './services/custom/Book';
-import { BookLanguageMapApi } from './services/custom/BookLanguageMap';
-import { BookMarathonOrderApi } from './services/custom/BookMarathonOrder';
-import { BookMarathonOrderDetailApi } from './services/custom/BookMarathonOrderDetail';
-import { BookMarathonReportedSaleApi } from './services/custom/BookMarathonReportedSale';
-import { BookMarathonSettlementApi } from './services/custom/BookMarathonSettlement';
-import { BookRequestStatusApi } from './services/custom/BookRequestStatus';
-import { DummyService } from './services/core/dummy.service';
+import { MgCreditNoteApi } from './services/custom/MgCreditNote';
+import { MgDeliveryNoteApi } from './services/custom/MgDeliveryNote';
+import { DevoteeElectronicAddressApi } from './services/custom/DevoteeElectronicAddress';
+import { DevoteePhysicalAddressApi } from './services/custom/DevoteePhysicalAddress';
+import { MgInvoiceApi } from './services/custom/MgInvoice';
+import { MgOrderChannelApi } from './services/custom/MgOrderChannel';
+import { MgOrderLineApi } from './services/custom/MgOrderLine';
+import { MgOrderReturnApi } from './services/custom/MgOrderReturn';
+import { MgOrderReturnLineApi } from './services/custom/MgOrderReturnLine';
+import { MgOrderStatusApi } from './services/custom/MgOrderStatus';
+import { MgProductApi } from './services/custom/MgProduct';
+import { MgProductAttributeApi } from './services/custom/MgProductAttribute';
+import { MgProductAttributeInstanceApi } from './services/custom/MgProductAttributeInstance';
+import { MgProductSkuApi } from './services/custom/MgProductSku';
+import { MgStockCurrentApi } from './services/custom/MgStockCurrent';
+import { MgStockInwardApi } from './services/custom/MgStockInward';
+import { MgStockInwardDiaryApi } from './services/custom/MgStockInwardDiary';
+import { MgSupplierApi } from './services/custom/MgSupplier';
+import { MgSupplierElectronicAddressApi } from './services/custom/MgSupplierElectronicAddress';
+import { MgSupplierPhysicalAddressApi } from './services/custom/MgSupplierPhysicalAddress';
+import { MgTaxCategoryApi } from './services/custom/MgTaxCategory';
+import { MgTaxCategoryComponentApi } from './services/custom/MgTaxCategoryComponent';
+import { MgTaxComponentApi } from './services/custom/MgTaxComponent';
+import { MgTaxLineApi } from './services/custom/MgTaxLine';
+import { MgUnitOfMeasureApi } from './services/custom/MgUnitOfMeasure';
+import { AsramaMasterApi } from './services/custom/AsramaMaster';
+import { DevoteeAsramaApi } from './services/custom/DevoteeAsrama';
+import { DevoteeLanguageApi } from './services/custom/DevoteeLanguage';
+import { DevoteeServiceApi } from './services/custom/DevoteeService';
+import { DevoteeServiceAvailabilityApi } from './services/custom/DevoteeServiceAvailability';
+import { DevoteeServiceInterestApi } from './services/custom/DevoteeServiceInterest';
+import { DevoteeSkillApi } from './services/custom/DevoteeSkill';
+import { DevoteeSpiritualProgressApi } from './services/custom/DevoteeSpiritualProgress';
+import { DonationReceiptApi } from './services/custom/DonationReceipt';
+import { FestivalCalendarApi } from './services/custom/FestivalCalendar';
+import { FestivalMasterApi } from './services/custom/FestivalMaster';
+import { LanguageApi } from './services/custom/Language';
+import { MgHsnApi } from './services/custom/MgHsn';
+import { MgOrderApi } from './services/custom/MgOrder';
+import { ServiceAreaApi } from './services/custom/ServiceArea';
+import { SkillApi } from './services/custom/Skill';
+import { SkillCategoryApi } from './services/custom/SkillCategory';
 /**
 * @module SDKBrowserModule
 * @description
@@ -116,11 +148,9 @@ export class SDKBrowserModule {
         ServiceApi,
         ServiceMappingApi,
         CircleApi,
-        DeekshaGuruApi,
         DevoteeApi,
         DevoteeEventCalendarApi,
         DevoteeKarmiFamilyApi,
-        DevoteeSpiritualFamilyApi,
         DonationTypeMasterApi,
         EventMasterApi,
         NewContactApi,
@@ -144,15 +174,49 @@ export class SDKBrowserModule {
         DepartmentServiceApi,
         ServiceTaskMasterApi,
         TaskMasterApi,
-        BookApi,
-        BookLanguageMapApi,
-        BookMarathonOrderApi,
-        BookMarathonOrderDetailApi,
-        BookMarathonReportedSaleApi,
-        BookMarathonSettlementApi,
-        BookRequestStatusApi,
+        MgCreditNoteApi,
+        MgDeliveryNoteApi,
+        DevoteeElectronicAddressApi,
+        DevoteePhysicalAddressApi,
+        MgInvoiceApi,
+        MgOrderChannelApi,
+        MgOrderLineApi,
+        MgOrderReturnApi,
+        MgOrderReturnLineApi,
+        MgOrderStatusApi,
+        MgProductApi,
+        MgProductAttributeApi,
+        MgProductAttributeInstanceApi,
+        MgProductSkuApi,
+        MgStockCurrentApi,
+        MgStockInwardApi,
+        MgStockInwardDiaryApi,
+        MgSupplierApi,
+        MgSupplierElectronicAddressApi,
+        MgSupplierPhysicalAddressApi,
+        MgTaxCategoryApi,
+        MgTaxCategoryComponentApi,
+        MgTaxComponentApi,
+        MgTaxLineApi,
+        MgUnitOfMeasureApi,
+        AsramaMasterApi,
+        DevoteeAsramaApi,
+        DevoteeLanguageApi,
+        DevoteeServiceApi,
+        DevoteeServiceAvailabilityApi,
+        DevoteeServiceInterestApi,
+        DevoteeSkillApi,
+        DevoteeSpiritualProgressApi,
+        DonationReceiptApi,
+        FestivalCalendarApi,
+        FestivalMasterApi,
+        LanguageApi,
+        MgHsnApi,
+        MgOrderApi,
+        ServiceAreaApi,
+        SkillApi,
+        SkillCategoryApi,
         internalStorageProvider,
-        DummyService,
         { provide: SDKStorage, useClass: StorageBrowser }
       ]
     };
@@ -168,3 +232,4 @@ export * from './lb.config';
 export * from './storage/storage.swaps';
 export { CookieBrowser } from './storage/cookie.browser';
 export { StorageBrowser } from './storage/storage.browser';
+

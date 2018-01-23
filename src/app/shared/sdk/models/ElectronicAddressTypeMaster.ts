@@ -2,10 +2,8 @@
 
 declare var Object: any;
 export interface ElectronicAddressTypeMasterInterface {
-  "id": string;
+  "id"?: string;
   "name"?: string;
-  "createdOn"?: Date;
-  "updatedOn"?: Date;
   "createdBy"?: string;
   "updatedBy"?: string;
   "created-on"?: Date;
@@ -15,8 +13,6 @@ export interface ElectronicAddressTypeMasterInterface {
 export class ElectronicAddressTypeMaster implements ElectronicAddressTypeMasterInterface {
   "id": string;
   "name": string;
-  "createdOn": Date;
-  "updatedOn": Date;
   "createdBy": string;
   "updatedBy": string;
   "created-on": Date;
@@ -61,14 +57,6 @@ export class ElectronicAddressTypeMaster implements ElectronicAddressTypeMasterI
         "name": {
           name: 'name',
           type: 'string'
-        },
-        "createdOn": {
-          name: 'createdOn',
-          type: 'Date'
-        },
-        "updatedOn": {
-          name: 'updatedOn',
-          type: 'Date'
         },
         "createdBy": {
           name: 'createdBy',

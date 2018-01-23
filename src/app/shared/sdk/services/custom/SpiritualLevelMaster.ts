@@ -61,7 +61,7 @@ export class SpiritualLevelMasterApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param {any} id SpiritualLevelMaster id
+   * @param {any} id PersistedModel id
    *
    * @param {object} data Request data.
    *

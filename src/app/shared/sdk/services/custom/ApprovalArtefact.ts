@@ -61,7 +61,7 @@ export class ApprovalArtefactApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param {any} id ApprovalArtefact id
+   * @param {any} id PersistedModel id
    *
    * @param {object} data Request data.
    *

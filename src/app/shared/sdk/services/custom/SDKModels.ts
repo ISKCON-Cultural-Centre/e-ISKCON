@@ -3,11 +3,9 @@ import { Injectable } from '@angular/core';
 import { Service } from '../../models/Service';
 import { ServiceMapping } from '../../models/ServiceMapping';
 import { Circle } from '../../models/Circle';
-import { DeekshaGuru } from '../../models/DeekshaGuru';
 import { Devotee } from '../../models/Devotee';
 import { DevoteeEventCalendar } from '../../models/DevoteeEventCalendar';
 import { DevoteeKarmiFamily } from '../../models/DevoteeKarmiFamily';
-import { DevoteeSpiritualFamily } from '../../models/DevoteeSpiritualFamily';
 import { DonationTypeMaster } from '../../models/DonationTypeMaster';
 import { EventMaster } from '../../models/EventMaster';
 import { NewContact } from '../../models/NewContact';
@@ -31,13 +29,48 @@ import { Department } from '../../models/Department';
 import { DepartmentService } from '../../models/DepartmentService';
 import { ServiceTaskMaster } from '../../models/ServiceTaskMaster';
 import { TaskMaster } from '../../models/TaskMaster';
-import { Book } from '../../models/Book';
-import { BookLanguageMap } from '../../models/BookLanguageMap';
-import { BookMarathonOrder } from '../../models/BookMarathonOrder';
-import { BookMarathonOrderDetail } from '../../models/BookMarathonOrderDetail';
-import { BookMarathonReportedSale } from '../../models/BookMarathonReportedSale';
-import { BookMarathonSettlement } from '../../models/BookMarathonSettlement';
-import { BookRequestStatus } from '../../models/BookRequestStatus';
+import { MgCreditNote } from '../../models/MgCreditNote';
+import { MgDeliveryNote } from '../../models/MgDeliveryNote';
+import { DevoteeElectronicAddress } from '../../models/DevoteeElectronicAddress';
+import { DevoteePhysicalAddress } from '../../models/DevoteePhysicalAddress';
+import { MgInvoice } from '../../models/MgInvoice';
+import { MgOrderChannel } from '../../models/MgOrderChannel';
+import { MgOrderLine } from '../../models/MgOrderLine';
+import { MgOrderReturn } from '../../models/MgOrderReturn';
+import { MgOrderReturnLine } from '../../models/MgOrderReturnLine';
+import { MgOrderStatus } from '../../models/MgOrderStatus';
+import { MgProduct } from '../../models/MgProduct';
+import { MgProductAttribute } from '../../models/MgProductAttribute';
+import { MgProductAttributeInstance } from '../../models/MgProductAttributeInstance';
+import { MgProductSku } from '../../models/MgProductSku';
+import { MgStockCurrent } from '../../models/MgStockCurrent';
+import { MgStockInward } from '../../models/MgStockInward';
+import { MgStockInwardDiary } from '../../models/MgStockInwardDiary';
+import { MgSupplier } from '../../models/MgSupplier';
+import { MgSupplierElectronicAddress } from '../../models/MgSupplierElectronicAddress';
+import { MgSupplierPhysicalAddress } from '../../models/MgSupplierPhysicalAddress';
+import { MgTaxCategory } from '../../models/MgTaxCategory';
+import { MgTaxCategoryComponent } from '../../models/MgTaxCategoryComponent';
+import { MgTaxComponent } from '../../models/MgTaxComponent';
+import { MgTaxLine } from '../../models/MgTaxLine';
+import { MgUnitOfMeasure } from '../../models/MgUnitOfMeasure';
+import { AsramaMaster } from '../../models/AsramaMaster';
+import { DevoteeAsrama } from '../../models/DevoteeAsrama';
+import { DevoteeLanguage } from '../../models/DevoteeLanguage';
+import { DevoteeService } from '../../models/DevoteeService';
+import { DevoteeServiceAvailability } from '../../models/DevoteeServiceAvailability';
+import { DevoteeServiceInterest } from '../../models/DevoteeServiceInterest';
+import { DevoteeSkill } from '../../models/DevoteeSkill';
+import { DevoteeSpiritualProgress } from '../../models/DevoteeSpiritualProgress';
+import { DonationReceipt } from '../../models/DonationReceipt';
+import { FestivalCalendar } from '../../models/FestivalCalendar';
+import { FestivalMaster } from '../../models/FestivalMaster';
+import { Language } from '../../models/Language';
+import { MgHsn } from '../../models/MgHsn';
+import { MgOrder } from '../../models/MgOrder';
+import { ServiceArea } from '../../models/ServiceArea';
+import { Skill } from '../../models/Skill';
+import { SkillCategory } from '../../models/SkillCategory';
 
 export interface Models { [name: string]: any }
 
@@ -48,11 +81,9 @@ export class SDKModels {
     Service: Service,
     ServiceMapping: ServiceMapping,
     Circle: Circle,
-    DeekshaGuru: DeekshaGuru,
     Devotee: Devotee,
     DevoteeEventCalendar: DevoteeEventCalendar,
     DevoteeKarmiFamily: DevoteeKarmiFamily,
-    DevoteeSpiritualFamily: DevoteeSpiritualFamily,
     DonationTypeMaster: DonationTypeMaster,
     EventMaster: EventMaster,
     NewContact: NewContact,
@@ -76,13 +107,48 @@ export class SDKModels {
     DepartmentService: DepartmentService,
     ServiceTaskMaster: ServiceTaskMaster,
     TaskMaster: TaskMaster,
-    Book: Book,
-    BookLanguageMap: BookLanguageMap,
-    BookMarathonOrder: BookMarathonOrder,
-    BookMarathonOrderDetail: BookMarathonOrderDetail,
-    BookMarathonReportedSale: BookMarathonReportedSale,
-    BookMarathonSettlement: BookMarathonSettlement,
-    BookRequestStatus: BookRequestStatus,
+    MgCreditNote: MgCreditNote,
+    MgDeliveryNote: MgDeliveryNote,
+    DevoteeElectronicAddress: DevoteeElectronicAddress,
+    DevoteePhysicalAddress: DevoteePhysicalAddress,
+    MgInvoice: MgInvoice,
+    MgOrderChannel: MgOrderChannel,
+    MgOrderLine: MgOrderLine,
+    MgOrderReturn: MgOrderReturn,
+    MgOrderReturnLine: MgOrderReturnLine,
+    MgOrderStatus: MgOrderStatus,
+    MgProduct: MgProduct,
+    MgProductAttribute: MgProductAttribute,
+    MgProductAttributeInstance: MgProductAttributeInstance,
+    MgProductSku: MgProductSku,
+    MgStockCurrent: MgStockCurrent,
+    MgStockInward: MgStockInward,
+    MgStockInwardDiary: MgStockInwardDiary,
+    MgSupplier: MgSupplier,
+    MgSupplierElectronicAddress: MgSupplierElectronicAddress,
+    MgSupplierPhysicalAddress: MgSupplierPhysicalAddress,
+    MgTaxCategory: MgTaxCategory,
+    MgTaxCategoryComponent: MgTaxCategoryComponent,
+    MgTaxComponent: MgTaxComponent,
+    MgTaxLine: MgTaxLine,
+    MgUnitOfMeasure: MgUnitOfMeasure,
+    AsramaMaster: AsramaMaster,
+    DevoteeAsrama: DevoteeAsrama,
+    DevoteeLanguage: DevoteeLanguage,
+    DevoteeService: DevoteeService,
+    DevoteeServiceAvailability: DevoteeServiceAvailability,
+    DevoteeServiceInterest: DevoteeServiceInterest,
+    DevoteeSkill: DevoteeSkill,
+    DevoteeSpiritualProgress: DevoteeSpiritualProgress,
+    DonationReceipt: DonationReceipt,
+    FestivalCalendar: FestivalCalendar,
+    FestivalMaster: FestivalMaster,
+    Language: Language,
+    MgHsn: MgHsn,
+    MgOrder: MgOrder,
+    ServiceArea: ServiceArea,
+    Skill: Skill,
+    SkillCategory: SkillCategory,
     
   };
 

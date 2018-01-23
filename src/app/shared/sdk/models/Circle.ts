@@ -1,20 +1,29 @@
 /* tslint:disable */
+import {
+  Devotee
+} from '../index';
 
 declare var Object: any;
 export interface CircleInterface {
-  "id": string;
+  "id"?: string;
   "name"?: string;
   "leaderDevoteeId"?: string;
+  "createdBy"?: string;
+  "updatedBy"?: string;
   "created-on"?: Date;
   "updated-on"?: Date;
+  fkCircleDevotee1rel?: Devotee;
 }
 
 export class Circle implements CircleInterface {
   "id": string;
   "name": string;
   "leaderDevoteeId": string;
+  "createdBy": string;
+  "updatedBy": string;
   "created-on": Date;
   "updated-on": Date;
+  fkCircleDevotee1rel: Devotee;
   constructor(data?: CircleInterface) {
     Object.assign(this, data);
   }
@@ -60,6 +69,14 @@ export class Circle implements CircleInterface {
           name: 'leaderDevoteeId',
           type: 'string'
         },
+        "createdBy": {
+          name: 'createdBy',
+          type: 'string'
+        },
+        "updatedBy": {
+          name: 'updatedBy',
+          type: 'string'
+        },
         "created-on": {
           name: 'created-on',
           type: 'Date'
@@ -70,6 +87,14 @@ export class Circle implements CircleInterface {
         },
       },
       relations: {
+        fkCircleDevotee1rel: {
+          name: 'fkCircleDevotee1rel',
+          type: 'Devotee',
+          model: 'Devotee',
+          relationType: 'belongsTo',
+                  keyFrom: 'leaderDevoteeId',
+          keyTo: 'id'
+        },
       }
     }
   }

@@ -11,6 +11,7 @@ import { ErrorHandler } from '../core/error.service';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
 import { Service } from '../../models/Service';
+import { ServiceMapping } from '../../models/ServiceMapping';
 
 
 /**
@@ -32,7 +33,7 @@ export class ServiceApi extends BaseLoopBackApi {
   /**
    * Find a related item by id for principals.
    *
-   * @param {any} id Service id
+   * @param {any} id Role id
    *
    * @param {any} fk Foreign key for principals
    *
@@ -62,7 +63,7 @@ export class ServiceApi extends BaseLoopBackApi {
   /**
    * Delete a related item by id for principals.
    *
-   * @param {any} id Service id
+   * @param {any} id Role id
    *
    * @param {any} fk Foreign key for principals
    *
@@ -89,7 +90,7 @@ export class ServiceApi extends BaseLoopBackApi {
   /**
    * Update a related item by id for principals.
    *
-   * @param {any} id Service id
+   * @param {any} id Role id
    *
    * @param {any} fk Foreign key for principals
    *
@@ -125,7 +126,7 @@ export class ServiceApi extends BaseLoopBackApi {
   /**
    * Queries principals of Service.
    *
-   * @param {any} id Service id
+   * @param {any} id Role id
    *
    * @param {object} filter 
    *
@@ -155,7 +156,7 @@ export class ServiceApi extends BaseLoopBackApi {
   /**
    * Creates a new instance in principals of this model.
    *
-   * @param {any} id Service id
+   * @param {any} id Role id
    *
    * @param {object} data Request data.
    *
@@ -188,7 +189,7 @@ export class ServiceApi extends BaseLoopBackApi {
   /**
    * Deletes all principals of this model.
    *
-   * @param {any} id Service id
+   * @param {any} id Role id
    *
    * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -212,7 +213,7 @@ export class ServiceApi extends BaseLoopBackApi {
   /**
    * Counts principals of Service.
    *
-   * @param {any} id Service id
+   * @param {any} id Role id
    *
    * @param {object} where Criteria to match model instances
    *
@@ -270,7 +271,7 @@ export class ServiceApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param {any} id Service id
+   * @param {any} id Role id
    *
    * @param {object} data Request data.
    *
@@ -303,7 +304,7 @@ export class ServiceApi extends BaseLoopBackApi {
   /**
    * Creates a new instance in principals of this model.
    *
-   * @param {any} id Service id
+   * @param {any} id Role id
    *
    * @param {object} data Request data.
    *

@@ -5,7 +5,7 @@ import {
 
 declare var Object: any;
 export interface ApprovalQueInterface {
-  "id": string;
+  "id"?: string;
   "approverId": string;
   "artefactInstanceId": string;
   "requestingDevoteeId": string;
@@ -14,6 +14,8 @@ export interface ApprovalQueInterface {
   "approvalInd"?: number;
   "activatedInd": number;
   "approverRemarks"?: string;
+  "created-on"?: Date;
+  "updated-on"?: Date;
   fkApprovalQueDevotee1rel?: Devotee;
   fkApprovalQueDevotee3rel?: Devotee;
 }
@@ -28,6 +30,8 @@ export class ApprovalQue implements ApprovalQueInterface {
   "approvalInd": number;
   "activatedInd": number;
   "approverRemarks": string;
+  "created-on": Date;
+  "updated-on": Date;
   fkApprovalQueDevotee1rel: Devotee;
   fkApprovalQueDevotee3rel: Devotee;
   constructor(data?: ApprovalQueInterface) {
@@ -98,6 +102,14 @@ export class ApprovalQue implements ApprovalQueInterface {
         "approverRemarks": {
           name: 'approverRemarks',
           type: 'string'
+        },
+        "created-on": {
+          name: 'created-on',
+          type: 'Date'
+        },
+        "updated-on": {
+          name: 'updated-on',
+          type: 'Date'
         },
       },
       relations: {

@@ -2,10 +2,8 @@
 
 declare var Object: any;
 export interface RelationshipMasterInterface {
-  "id": string;
-  "relationName": string;
-  "createdOn"?: Date;
-  "updatedOn"?: Date;
+  "id"?: string;
+  "relationName"?: string;
   "createdBy"?: string;
   "updatedBy"?: string;
   "created-on"?: Date;
@@ -15,8 +13,6 @@ export interface RelationshipMasterInterface {
 export class RelationshipMaster implements RelationshipMasterInterface {
   "id": string;
   "relationName": string;
-  "createdOn": Date;
-  "updatedOn": Date;
   "createdBy": string;
   "updatedBy": string;
   "created-on": Date;
@@ -61,14 +57,6 @@ export class RelationshipMaster implements RelationshipMasterInterface {
         "relationName": {
           name: 'relationName',
           type: 'string'
-        },
-        "createdOn": {
-          name: 'createdOn',
-          type: 'Date'
-        },
-        "updatedOn": {
-          name: 'updatedOn',
-          type: 'Date'
         },
         "createdBy": {
           name: 'createdBy',

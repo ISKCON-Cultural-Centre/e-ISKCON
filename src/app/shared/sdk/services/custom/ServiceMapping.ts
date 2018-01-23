@@ -37,7 +37,7 @@ export class ServiceMappingApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation role.
    *
-   * @param {any} id ServiceMapping id
+   * @param {any} id RoleMapping id
    *
    * @param {boolean} refresh 
    *
@@ -67,7 +67,7 @@ export class ServiceMappingApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation fkServiceMappingService1rel.
    *
-   * @param {any} id ServiceMapping id
+   * @param {any} id RoleMapping id
    *
    * @param {boolean} refresh 
    *
@@ -126,7 +126,7 @@ export class ServiceMappingApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param {any} id ServiceMapping id
+   * @param {any} id RoleMapping id
    *
    * @param {object} data Request data.
    *

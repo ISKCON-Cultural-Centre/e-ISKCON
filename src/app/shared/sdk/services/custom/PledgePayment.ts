@@ -32,9 +32,9 @@ export class PledgePaymentApi extends BaseLoopBackApi {
   }
 
   /**
-   * Fetches belongsTo relation fkPledgePaymentPayment1rel.
+   * Fetches belongsTo relation fkPledgePaymentMgPayment1rel.
    *
-   * @param {any} id PledgePayment id
+   * @param {any} id PersistedModel id
    *
    * @param {boolean} refresh 
    *
@@ -47,10 +47,10 @@ export class PledgePaymentApi extends BaseLoopBackApi {
    * This usually means the response is a `PledgePayment` object.)
    * </em>
    */
-  public getFkPledgePaymentPayment1rel(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
+  public getFkPledgePaymentMgPayment1rel(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/PledgePayments/:id/fkPledgePaymentPayment1rel";
+    "/PledgePayments/:id/fkPledgePaymentMgPayment1rel";
     let _routeParams: any = {
       id: id
     };
@@ -64,7 +64,7 @@ export class PledgePaymentApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation fkPledgePaymentPledge1rel.
    *
-   * @param {any} id PledgePayment id
+   * @param {any} id PersistedModel id
    *
    * @param {boolean} refresh 
    *
@@ -123,7 +123,7 @@ export class PledgePaymentApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param {any} id PledgePayment id
+   * @param {any} id PersistedModel id
    *
    * @param {object} data Request data.
    *

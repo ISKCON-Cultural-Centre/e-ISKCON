@@ -34,7 +34,7 @@ export class DepartmentApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation fkDepartmentDevotee1rel.
    *
-   * @param {any} id Department id
+   * @param {any} id PersistedModel id
    *
    * @param {boolean} refresh 
    *
@@ -64,7 +64,7 @@ export class DepartmentApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation fkDepartmentTemple1rel.
    *
-   * @param {any} id Department id
+   * @param {any} id PersistedModel id
    *
    * @param {boolean} refresh 
    *
@@ -123,7 +123,7 @@ export class DepartmentApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param {any} id Department id
+   * @param {any} id PersistedModel id
    *
    * @param {object} data Request data.
    *
