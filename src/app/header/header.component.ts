@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 import { AuthService } from '../shared/services/auth.service';
-import { DevoteeApi } from '../shared/sdk';
 
-import { MyService } from '../shared/services/myService';
+import { MyService } from '../shared/services/models/myService';
 import { MyServicesService } from '../shared/services/myServices.service';
 
 
@@ -18,13 +17,13 @@ export class HeaderComponent implements OnInit {
   myServices: MyService[];
   isLoggedIn$: Observable<boolean>;
 
-
-  constructor(private devoteeApi: DevoteeApi, private authService: AuthService, private myServicesService: MyServicesService) { }
+  constructor(private authService: AuthService, private myServicesService: MyServicesService) { }
 
   ngOnInit() {
-    if (this.devoteeApi.isAuthenticated) {
-      this.isLoggedIn$ = this.authService.isLoggedIn;
-      this.getAuthorizations();
+    this.isLoggedIn$ = this.authService.isLoggedIn;
+    // console.log('asdf' + this.authService.isLoggedIn);
+    if (this.isLoggedIn$) {
+      this.getAuthorizedServices();
     }
   }
 
@@ -32,8 +31,8 @@ export class HeaderComponent implements OnInit {
     this.authService.logout();
   }
 
-  getAuthorizations(): void {
-    this.myServicesService.getAuthorizations()
+  getAuthorizedServices(): void {
+    this.myServicesService.getAuthorizedServices()
       .subscribe(myServices => this.myServices = myServices);
   }
 

@@ -25,9 +25,9 @@ export class AuthGuard implements CanActivate {
       return false;
     }
     return true;
-  } 
+  }
 
- /* canActivate(
+/*   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> {
@@ -39,6 +39,6 @@ export class AuthGuard implements CanActivate {
           return false;
         }
         return true;
-      });*/
-  }
+      });
+  } */
 }
