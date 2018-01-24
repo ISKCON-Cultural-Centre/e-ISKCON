@@ -3,9 +3,7 @@ import {Subject} from 'rxjs/Subject';
 
 @Injectable()
 export class NotificationService {
-    public notificationSubject: Subject<string> = new Subject();
-  }
+  public notificationSubject: Subject<string> = new Subject();
+  constructor() {}
 }
-
-
 

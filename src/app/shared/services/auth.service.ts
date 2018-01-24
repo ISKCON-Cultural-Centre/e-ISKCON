@@ -4,7 +4,8 @@ import { LoopBackAuth } from '../sdk';
 
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { User } from './user';
+import { User } from './models/user';
+import { NotificationService } from './notification.service';
 
 import { InternalStorage } from '../sdk/storage/storage.swaps';
 
@@ -18,9 +19,12 @@ export class AuthService extends LoopBackAuth {
     private sessiontoken: SDKToken = new SDKToken();
     private remembeMe: Boolean = true;
 
-    constructor(internalStorage: InternalStorage, 
+    constructor(
+        internalStorage: InternalStorage, 
+        private router: Router,
         private devoteeApi: DevoteeApi,
-        private router: Router)
+        private notificationService: NotificationService
+    )
     {
         super(internalStorage);
         this.loadFromSession();
@@ -40,9 +44,10 @@ export class AuthService extends LoopBackAuth {
           .subscribe((token: SDKToken) => {
             super.setToken(token);
             this.loggedIn.next(true);
+            this.notificationService.notificationSubject.next('Login Successful');
             this.router.navigate(['/']);
           }, err => {
-            alert(err && err.message ? err.message : 'Login failed!');
+            this.notificationService.notificationSubject.next('Login Failed');
             user.password = '';
           });
       }

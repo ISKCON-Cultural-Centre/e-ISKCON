@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { AuthService } from '../shared/services/auth.service';
 
-import { MyService } from '../shared/services/models/myService';
+import { MyDepartment } from '../shared/services/models/myDepartment';
 import { MyServicesService } from '../shared/services/myServices.service';
 
 
@@ -14,26 +14,27 @@ import { MyServicesService } from '../shared/services/myServices.service';
 })
 export class HeaderComponent implements OnInit {
 
-  myServices: MyService[];
+  myDepartments: MyDepartment[];
   isLoggedIn$: Observable<boolean>;
 
   constructor(private authService: AuthService, private myServicesService: MyServicesService) { }
 
   ngOnInit() {
+
     this.isLoggedIn$ = this.authService.isLoggedIn;
-    // console.log('asdf' + this.authService.isLoggedIn);
-    if (this.isLoggedIn$) {
-      this.getAuthorizedServices();
-    }
+
+    this.isLoggedIn$
+      .subscribe(isLoggedIn => { if (isLoggedIn) {console.log(isLoggedIn); this.getAuthorizedDepartments(); } } );    
+
   }
 
   onLogout() {
     this.authService.logout();
   }
-
-  getAuthorizedServices(): void {
-    this.myServicesService.getAuthorizedServices()
-      .subscribe(myServices => this.myServices = myServices);
+ 
+  getAuthorizedDepartments(): void {
+    this.myServicesService.getAuthorizedDepartments()
+      .subscribe(myDepartments => this.myDepartments = myDepartments);
   }
 
 }

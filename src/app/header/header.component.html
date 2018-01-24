@@ -1,17 +1,16 @@
-<mat-toolbar color="primary" *ngIf="isLoggedIn$ | async as isLoggedIn">
+<mat-toolbar color="primary" *ngIf="isLoggedIn$ as isLoggedIn">
   <span>
 
     <!--    <img src="../assets/images/icc_logo.png" class="angular-logo"> -->
   </span> ISKCON Cultural Centre
-  <span>
-    <span *ngFor="let myService of myServices">
-      <button mat-button routerLink={{myService.route}} [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
-        <mat-icon>{{myService.icon}}</mat-icon>
-        <span>{{myService.serviceName}}</span>
-      </button>
-    </span>     
-  </span> 
   <span class="fill-remaining-space"></span>  
+  <button mat-button [matMenuTriggerFor]="menu">My Services</button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item  *ngFor="let myDepartment of myDepartments" routerLink={{myDepartment.route}} [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+      <mat-icon>{{myDepartment.icon}}</mat-icon>
+      <span>{{myDepartment.departmentName}}</span>
+    </button>
+  </mat-menu>
   <button mat-button routerLink="login" *ngIf="!isLoggedIn">Login</button>
-  <button mat-button (click)="onLogout()" *ngIf="isLoggedIn">Logout</button>
+  <button mat-button (click)="onLogout()" *ngIf="isLoggedIn"><mat-icon>ic_exit_to_app</mat-icon> Logout</button>
 </mat-toolbar>

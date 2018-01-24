@@ -16,10 +16,11 @@ export class AppComponent {
     public snackBar: MatSnackBar) 
     {
       this.notificationService.notificationSubject.subscribe((message) => {
-      snackBar.open(message,null , { duration: 2000, });
+        snackBar.open(message, null , { duration: 2000, });
+      });
 
       LoopBackConfig.setBaseURL(BASE_URL);
-      LoopBackConfig.setApiVersion(API_VERSION);    
+      LoopBackConfig.setApiVersion(API_VERSION);
 
-  }
+    }
 }

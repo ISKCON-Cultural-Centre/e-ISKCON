@@ -3,10 +3,10 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 
-import { MyService } from './models/myService';
-import { MYSERVICES } from './mocks/mock-my-services';
+import { MYDEPARTMENTS } from './mocks/mock-my-departments';
 import { MessageService } from './message.service';
 import { NotificationService } from './notification.service';
+import { MyDepartment } from './models/myDepartment';
 
 @Injectable()
 export class MyServicesService {
@@ -14,11 +14,10 @@ export class MyServicesService {
   constructor(private notificationService: NotificationService,
     /* private messageService: MessageService */) { }
 
-  getAuthorizedServices(): Observable<MyService[]> {
-    // Todo: send the message _after_ fetching the heroes
+  getAuthorizedDepartments(): Observable<MyDepartment[]> {
     this.notificationService.notificationSubject.next('authorizedService: fetched authorized services');
     /*this.messageService.openSnackBar('authorizedService: fetched authorized services', 'Dismiss');*/
-    return of(MYSERVICES);
+    return of(MYDEPARTMENTS);
   }
 
 }
