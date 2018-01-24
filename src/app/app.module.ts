@@ -26,6 +26,7 @@ import { MatchlessGiftsModule } from './matchless-gifts/matchless-gifts.module';
 import { MessageService } from './shared/services/message.service';
 import { MyServicesService } from './shared/services/myServices.service';
 import { GlobalEventsManager } from './shared/services/globalEventsManager.service';
+import { NotificationService } from './shared/services/notification.service';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { GlobalEventsManager } from './shared/services/globalEventsManager.servi
     MessageService,
     MyServicesService,
     GlobalEventsManager,
+    NotificationService
   ],
   bootstrap: [AppComponent]
 })
