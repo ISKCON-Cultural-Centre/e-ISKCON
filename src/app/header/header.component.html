@@ -1,6 +1,5 @@
-<mat-toolbar color="primary" *ngIf="isLoggedIn$ as isLoggedIn">
+<mat-toolbar color="primary" *ngIf="isLoggedIn$ | async as isLoggedIn">
   <span>
-
     <!--    <img src="../assets/images/icc_logo.png" class="angular-logo"> -->
   </span> ISKCON Cultural Centre
   <span class="fill-remaining-space"></span>  
