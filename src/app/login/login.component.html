@@ -5,15 +5,13 @@
         <p>ISKCON Cultural Centre - Services Portal</p>
         <p>Please Login to Continue</p>
         <mat-input-container class="full-width-input">
-          <input matInput placeholder="User" 
-                 formControlName="userName" required>
+          <input matInput placeholder="User" formControlName="userName" required>
           <mat-error *ngIf="isFieldInvalid('userName')">
             Please inform your user name
           </mat-error>
         </mat-input-container>
         <mat-input-container class="full-width-input">
-          <input matInput type="password" placeholder="Password" 
-                 formControlName="password" required>
+          <input matInput type="password" placeholder="Password" formControlName="password" required>
           <mat-error *ngIf="isFieldInvalid('userName')">
             Please inform your password
           </mat-error>
