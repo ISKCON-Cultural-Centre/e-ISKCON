@@ -9,7 +9,7 @@ export const MYDEPARTMENTS: MyDepartment[] = [
   },
   {
     departmentId: '2',
-    departmentName: 'Academy',
+    departmentName: 'Devotee Care',
     icon: 'book',
     route: 'devotee'
   },
