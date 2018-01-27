@@ -34,7 +34,7 @@ export class DevoteeKarmiFamilyApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation fkDevoteeKarmiFamilyDevotee1rel.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id DevoteeKarmiFamily id
    *
    * @param {boolean} refresh 
    *
@@ -64,7 +64,7 @@ export class DevoteeKarmiFamilyApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation fkDevoteeKarmiFamilyDevotee2rel.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id DevoteeKarmiFamily id
    *
    * @param {boolean} refresh 
    *
@@ -94,7 +94,7 @@ export class DevoteeKarmiFamilyApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation fkDevoteeKarmiFamilyRelationshipMaster1rel.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id DevoteeKarmiFamily id
    *
    * @param {boolean} refresh 
    *
@@ -153,7 +153,7 @@ export class DevoteeKarmiFamilyApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id DevoteeKarmiFamily id
    *
    * @param {object} data Request data.
    *

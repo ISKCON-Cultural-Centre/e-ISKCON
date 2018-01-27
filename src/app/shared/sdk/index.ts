@@ -45,8 +45,8 @@ import { CommonModule } from '@angular/common';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CookieBrowser } from './storage/cookie.browser';
 import { StorageBrowser } from './storage/storage.browser';
-import { ServiceApi } from './services/custom/Service';
-import { ServiceMappingApi } from './services/custom/ServiceMapping';
+import { ServiceRoleApi } from './services/custom/ServiceRole';
+import { ServiceRoleMappingApi } from './services/custom/ServiceRoleMapping';
 import { CircleApi } from './services/custom/Circle';
 import { DevoteeApi } from './services/custom/Devotee';
 import { DevoteeEventCalendarApi } from './services/custom/DevoteeEventCalendar';
@@ -71,8 +71,8 @@ import { ApprovalArtefactApi } from './services/custom/ApprovalArtefact';
 import { ApprovalQueApi } from './services/custom/ApprovalQue';
 import { ApprovalRuleApi } from './services/custom/ApprovalRule';
 import { DepartmentApi } from './services/custom/Department';
-import { DepartmentServiceApi } from './services/custom/DepartmentService';
-import { ServiceTaskMasterApi } from './services/custom/ServiceTaskMaster';
+import { DepartmentRoleApi } from './services/custom/DepartmentRole';
+import { RoleTaskMasterApi } from './services/custom/RoleTaskMaster';
 import { TaskMasterApi } from './services/custom/TaskMaster';
 import { MgCreditNoteApi } from './services/custom/MgCreditNote';
 import { MgDeliveryNoteApi } from './services/custom/MgDeliveryNote';
@@ -145,8 +145,8 @@ export class SDKBrowserModule {
         LoggerService,
         JSONSearchParams,
         SDKModels,
-        ServiceApi,
-        ServiceMappingApi,
+        ServiceRoleApi,
+        ServiceRoleMappingApi,
         CircleApi,
         DevoteeApi,
         DevoteeEventCalendarApi,
@@ -171,8 +171,8 @@ export class SDKBrowserModule {
         ApprovalQueApi,
         ApprovalRuleApi,
         DepartmentApi,
-        DepartmentServiceApi,
-        ServiceTaskMasterApi,
+        DepartmentRoleApi,
+        RoleTaskMasterApi,
         TaskMasterApi,
         MgCreditNoteApi,
         MgDeliveryNoteApi,

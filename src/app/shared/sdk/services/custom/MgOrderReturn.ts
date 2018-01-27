@@ -33,7 +33,7 @@ export class MgOrderReturnApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation fkTable1Devotee1rel.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id MgOrderReturn id
    *
    * @param {boolean} refresh 
    *
@@ -92,7 +92,7 @@ export class MgOrderReturnApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id MgOrderReturn id
    *
    * @param {object} data Request data.
    *

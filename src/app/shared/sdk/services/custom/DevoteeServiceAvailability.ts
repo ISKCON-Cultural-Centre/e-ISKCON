@@ -33,7 +33,7 @@ export class DevoteeServiceAvailabilityApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation fkDevoteeServiceAvailabilityDevotee1rel.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id DevoteeServiceAvailability id
    *
    * @param {boolean} refresh 
    *
@@ -92,7 +92,7 @@ export class DevoteeServiceAvailabilityApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id DevoteeServiceAvailability id
    *
    * @param {object} data Request data.
    *

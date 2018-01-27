@@ -34,7 +34,7 @@ export class MgCreditNoteApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation fkCreditNotePayment1rel.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id MgCreditNote id
    *
    * @param {boolean} refresh 
    *
@@ -64,7 +64,7 @@ export class MgCreditNoteApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation fkCreditNoteOrder1rel.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id MgCreditNote id
    *
    * @param {boolean} refresh 
    *
@@ -123,7 +123,7 @@ export class MgCreditNoteApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id MgCreditNote id
    *
    * @param {object} data Request data.
    *

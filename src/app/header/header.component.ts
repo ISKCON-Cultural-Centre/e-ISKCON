@@ -5,6 +5,7 @@ import { AuthService } from '../shared/services/auth.service';
 
 import { MyDepartment } from '../shared/services/models/myDepartment';
 import { MyServicesService } from '../shared/services/myServices.service';
+import { NotificationService } from '../shared/services/notification.service';
 
 
 @Component({
@@ -17,7 +18,9 @@ export class HeaderComponent implements OnInit {
   myDepartments: MyDepartment[];
   isLoggedIn$: Observable<boolean>;
 
-  constructor(private authService: AuthService, private myServicesService: MyServicesService) { }
+  constructor(private authService: AuthService, 
+    private notificationService: NotificationService,
+    private myServicesService: MyServicesService) { }
 
   ngOnInit() {
 
@@ -34,7 +37,9 @@ export class HeaderComponent implements OnInit {
  
   getAuthorizedDepartments(): void {
     this.myServicesService.getAuthorizedDepartments()
-      .subscribe(myDepartments => this.myDepartments = myDepartments);
+      .subscribe(myDepartments => {(this.myDepartments = myDepartments);
+        this.notificationService.notificationSubject.next('authorizedService: fetched authorized services');
+      });
   }
 
 }

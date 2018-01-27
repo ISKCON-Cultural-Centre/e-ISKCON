@@ -35,7 +35,7 @@ export class MgProductSkuApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation fkProductInstanceProductAttributeInstance1rel.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id MgProductSku id
    *
    * @param {boolean} refresh 
    *
@@ -65,7 +65,7 @@ export class MgProductSkuApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation fkProductSkuProduct1rel.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id MgProductSku id
    *
    * @param {boolean} refresh 
    *
@@ -95,7 +95,7 @@ export class MgProductSkuApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation fkProductSkuHsn1rel.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id MgProductSku id
    *
    * @param {boolean} refresh 
    *
@@ -154,7 +154,7 @@ export class MgProductSkuApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id MgProductSku id
    *
    * @param {object} data Request data.
    *

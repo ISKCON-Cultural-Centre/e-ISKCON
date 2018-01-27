@@ -33,7 +33,7 @@ export class PledgeApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation fkPledgeDevotee2rel.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id Pledge id
    *
    * @param {boolean} refresh 
    *
@@ -92,7 +92,7 @@ export class PledgeApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id Pledge id
    *
    * @param {object} data Request data.
    *

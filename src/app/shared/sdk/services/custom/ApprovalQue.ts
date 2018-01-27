@@ -33,7 +33,7 @@ export class ApprovalQueApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation fkApprovalQueDevotee1rel.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id ApprovalQue id
    *
    * @param {boolean} refresh 
    *
@@ -63,7 +63,7 @@ export class ApprovalQueApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation fkApprovalQueDevotee3rel.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id ApprovalQue id
    *
    * @param {boolean} refresh 
    *
@@ -122,7 +122,7 @@ export class ApprovalQueApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id ApprovalQue id
    *
    * @param {object} data Request data.
    *

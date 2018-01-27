@@ -35,7 +35,7 @@ export class DonationReceiptApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation fkDonationReceiptDevotee1rel.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id DonationReceipt id
    *
    * @param {boolean} refresh 
    *
@@ -65,7 +65,7 @@ export class DonationReceiptApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation fkDonationReceiptDonationTypeMaster1rel.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id DonationReceipt id
    *
    * @param {boolean} refresh 
    *
@@ -95,7 +95,7 @@ export class DonationReceiptApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation fkDonationReceiptMgPayment1rel.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id DonationReceipt id
    *
    * @param {boolean} refresh 
    *
@@ -154,7 +154,7 @@ export class DonationReceiptApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id DonationReceipt id
    *
    * @param {object} data Request data.
    *

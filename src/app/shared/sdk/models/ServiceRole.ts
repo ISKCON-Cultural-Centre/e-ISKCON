@@ -1,10 +1,10 @@
 /* tslint:disable */
 import {
-  ServiceMapping
+  ServiceRoleMapping
 } from '../index';
 
 declare var Object: any;
-export interface ServiceInterface {
+export interface ServiceRoleInterface {
   "id": string;
   "name": string;
   "description"?: string;
@@ -12,10 +12,10 @@ export interface ServiceInterface {
   "modified"?: Date;
   "created-on"?: Date;
   "updated-on"?: Date;
-  principals?: ServiceMapping[];
+  principals?: ServiceRoleMapping[];
 }
 
-export class Service implements ServiceInterface {
+export class ServiceRole implements ServiceRoleInterface {
   "id": string;
   "name": string;
   "description": string;
@@ -23,25 +23,25 @@ export class Service implements ServiceInterface {
   "modified": Date;
   "created-on": Date;
   "updated-on": Date;
-  principals: ServiceMapping[];
-  constructor(data?: ServiceInterface) {
+  principals: ServiceRoleMapping[];
+  constructor(data?: ServiceRoleInterface) {
     Object.assign(this, data);
   }
   /**
    * The name of the model represented by this $resource,
-   * i.e. `Service`.
+   * i.e. `ServiceRole`.
    */
   public static getModelName() {
-    return "Service";
+    return "ServiceRole";
   }
   /**
   * @method factory
   * @author Jonathan Casarrubias
   * @license MIT
-  * This method creates an instance of Service for dynamic purposes.
+  * This method creates an instance of ServiceRole for dynamic purposes.
   **/
-  public static factory(data: ServiceInterface): Service{
-    return new Service(data);
+  public static factory(data: ServiceRoleInterface): ServiceRole{
+    return new ServiceRole(data);
   }
   /**
   * @method getModelDefinition
@@ -52,9 +52,9 @@ export class Service implements ServiceInterface {
   **/
   public static getModelDefinition() {
     return {
-      name: 'Service',
-      plural: 'Services',
-      path: 'Services',
+      name: 'ServiceRole',
+      plural: 'ServiceRoles',
+      path: 'ServiceRoles',
       idName: 'id',
       properties: {
         "id": {
@@ -89,8 +89,8 @@ export class Service implements ServiceInterface {
       relations: {
         principals: {
           name: 'principals',
-          type: 'ServiceMapping[]',
-          model: 'ServiceMapping',
+          type: 'ServiceRoleMapping[]',
+          model: 'ServiceRoleMapping',
           relationType: 'hasMany',
                   keyFrom: 'id',
           keyTo: 'roleId'

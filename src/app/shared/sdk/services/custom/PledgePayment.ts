@@ -34,7 +34,7 @@ export class PledgePaymentApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation fkPledgePaymentMgPayment1rel.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id PledgePayment id
    *
    * @param {boolean} refresh 
    *
@@ -64,7 +64,7 @@ export class PledgePaymentApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation fkPledgePaymentPledge1rel.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id PledgePayment id
    *
    * @param {boolean} refresh 
    *
@@ -123,7 +123,7 @@ export class PledgePaymentApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id PledgePayment id
    *
    * @param {object} data Request data.
    *

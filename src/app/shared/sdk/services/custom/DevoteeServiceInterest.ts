@@ -34,7 +34,7 @@ export class DevoteeServiceInterestApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation fkDevoteeServiceInterestDevotee1rel.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id DevoteeServiceInterest id
    *
    * @param {boolean} refresh 
    *
@@ -64,7 +64,7 @@ export class DevoteeServiceInterestApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation fkDevoteeServiceInterestServiceArea1rel.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id DevoteeServiceInterest id
    *
    * @param {boolean} refresh 
    *
@@ -123,7 +123,7 @@ export class DevoteeServiceInterestApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id DevoteeServiceInterest id
    *
    * @param {object} data Request data.
    *

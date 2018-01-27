@@ -33,7 +33,7 @@ export class MgProductApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation fkProductUnitOfMeasure1rel.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id MgProduct id
    *
    * @param {boolean} refresh 
    *
@@ -92,7 +92,7 @@ export class MgProductApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id MgProduct id
    *
    * @param {object} data Request data.
    *

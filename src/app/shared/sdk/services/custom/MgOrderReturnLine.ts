@@ -34,7 +34,7 @@ export class MgOrderReturnLineApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation fkOrderReturnLineOrderReturn1rel.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id MgOrderReturnLine id
    *
    * @param {boolean} refresh 
    *
@@ -64,7 +64,7 @@ export class MgOrderReturnLineApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation fkBookMarathonReturnDetailBook1rel.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id MgOrderReturnLine id
    *
    * @param {boolean} refresh 
    *
@@ -123,7 +123,7 @@ export class MgOrderReturnLineApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id MgOrderReturnLine id
    *
    * @param {object} data Request data.
    *

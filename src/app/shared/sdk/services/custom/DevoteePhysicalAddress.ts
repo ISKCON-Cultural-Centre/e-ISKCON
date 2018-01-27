@@ -34,7 +34,7 @@ export class DevoteePhysicalAddressApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation fkDevoteeAddressDevotee1rel.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id DevoteePhysicalAddress id
    *
    * @param {boolean} refresh 
    *
@@ -64,7 +64,7 @@ export class DevoteePhysicalAddressApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation fkDevoteeAddressPhysicalAddress1rel.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id DevoteePhysicalAddress id
    *
    * @param {boolean} refresh 
    *
@@ -123,7 +123,7 @@ export class DevoteePhysicalAddressApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id DevoteePhysicalAddress id
    *
    * @param {object} data Request data.
    *

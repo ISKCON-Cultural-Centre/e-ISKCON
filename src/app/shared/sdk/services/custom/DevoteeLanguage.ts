@@ -34,7 +34,7 @@ export class DevoteeLanguageApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation fkDevoteeLanguageDevotee1rel.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id DevoteeLanguage id
    *
    * @param {boolean} refresh 
    *
@@ -64,7 +64,7 @@ export class DevoteeLanguageApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation fkTable1Language1rel.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id DevoteeLanguage id
    *
    * @param {boolean} refresh 
    *
@@ -123,7 +123,7 @@ export class DevoteeLanguageApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id DevoteeLanguage id
    *
    * @param {object} data Request data.
    *

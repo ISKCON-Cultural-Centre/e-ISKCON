@@ -34,7 +34,7 @@ export class DevoteeAsramaApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation fkTable1AsramaMaster1rel.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id DevoteeAsrama id
    *
    * @param {boolean} refresh 
    *
@@ -64,7 +64,7 @@ export class DevoteeAsramaApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation fkTable1Devotee3rel.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id DevoteeAsrama id
    *
    * @param {boolean} refresh 
    *
@@ -123,7 +123,7 @@ export class DevoteeAsramaApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id DevoteeAsrama id
    *
    * @param {object} data Request data.
    *
