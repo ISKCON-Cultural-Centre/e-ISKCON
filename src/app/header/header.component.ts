@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { AuthService } from '../shared/services/auth.service';
 
-import { MyDepartment } from '../shared/services/models/myDepartment';
+import { Department } from '../shared/sdk/models/Department';
 import { MyServicesService } from '../shared/services/myServices.service';
 import { NotificationService } from '../shared/services/notification.service';
 
@@ -15,7 +15,7 @@ import { NotificationService } from '../shared/services/notification.service';
 })
 export class HeaderComponent implements OnInit {
 
-  myDepartments: MyDepartment[];
+  myDepartments: Department[];
   isLoggedIn$: Observable<boolean>;
 
   constructor(private authService: AuthService, 
