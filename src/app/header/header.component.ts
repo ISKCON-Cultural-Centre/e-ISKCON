@@ -3,6 +3,8 @@ import { Observable } from 'rxjs/Observable';
 
 import { AuthService } from '../shared/services/auth.service';
 
+import { DevoteeApi } from '../shared/sdk';
+
 import { MyDepartment } from '../shared/services/models/myDepartment';
 import { MyServicesService } from '../shared/services/myServices.service';
 
@@ -15,17 +17,15 @@ import { MyServicesService } from '../shared/services/myServices.service';
 export class HeaderComponent implements OnInit {
 
   myDepartments: MyDepartment[];
-  isLoggedIn$: Observable<boolean>;
 
-  constructor(private authService: AuthService, private myServicesService: MyServicesService) { }
+
+  constructor(private authService: AuthService,
+    private myServicesService: MyServicesService) { }
 
   ngOnInit() {
-
-    this.isLoggedIn$ = this.authService.isLoggedIn;
-
-    this.isLoggedIn$
-      .subscribe(isLoggedIn => { if (isLoggedIn) {this.getAuthorizedDepartments(); } } );    
-
+   if (this.authService.isAuthenticated) {
+     this.getAuthorizedDepartments();
+    }
   }
 
   onLogout() {
