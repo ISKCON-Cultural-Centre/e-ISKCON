@@ -14,7 +14,6 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'devotee', component: DevoteeComponent, canActivate: [AuthGuard] },
-  { path: 'catalogue', component: CatalogueComponent, canActivate: [AuthGuard] },
   { path: 'reset', component: ResetPasswordComponent },
   { path: '', redirectTo: 'dashboard', pathMatch: 'full', canActivate: [AuthGuard] },
   { path: '**', component: PageNotFoundComponent }

@@ -1,4 +1,4 @@
-<mat-toolbar color="primary" *ngIf="this.authService.isAuthenticated async as isLoggedIn">
+<mat-toolbar color="primary" *ngIf="isLoggedIn$ | async as isLoggedIn">
   <span>
     <!--    <img src="../assets/images/icc_logo.png" class="angular-logo"> -->
   </span> ISKCON Cultural Centre
@@ -11,5 +11,12 @@
     </button>
   </mat-menu>
   <button mat-button routerLink="login" *ngIf="!isLoggedIn">Login</button>
-  <button mat-button (click)="onLogout()" *ngIf="isLoggedIn"><mat-icon>ic_exit_to_app</mat-icon> Logout</button>
+  <button mat-button [matMenuTriggerFor]="profileMenu"><span>Welcome ! {{devoteeName.spiritualName}}</span></button>
+  <mat-menu #profileMenu="matMenu">
+    <button mat-menu-item (click)="editProfile()" >
+      <mat-icon>ic_perm_identity</mat-icon>
+      <span>My Profile</span>
+    </button>
+    <button mat-menu-item (click)="onLogout()" *ngIf="isLoggedIn"><span><mat-icon>ic_exit_to_app</mat-icon></span><span>Logout</span></button>
+  </mat-menu>
 </mat-toolbar>
