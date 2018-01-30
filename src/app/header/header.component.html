@@ -1,4 +1,4 @@
-<mat-toolbar color="primary" *ngIf="isLoggedIn$ | async as isLoggedIn">
+<mat-toolbar color="primary" *ngIf="this.authService.isAuthenticated async as isLoggedIn">
   <span>
     <!--    <img src="../assets/images/icc_logo.png" class="angular-logo"> -->
   </span> ISKCON Cultural Centre

@@ -5,6 +5,7 @@ import { LoopBackAuth } from '../sdk';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { User } from './models/user';
+import { Devotee } from '../sdk';
 import { NotificationService } from './notification.service';
 
 import { InternalStorage } from '../sdk/storage/storage.swaps';
@@ -14,10 +15,11 @@ declare var Object: any;
 @Injectable()
 export class AuthService extends LoopBackAuth {
 
-    private loggedIn = new BehaviorSubject<boolean>(false);
+    private loggedIn: Boolean = false;
 
     private sessiontoken: SDKToken = new SDKToken();
     private remembeMe: Boolean = true;
+    private devotee: Devotee;
 
     constructor(
         internalStorage: InternalStorage, 
@@ -28,22 +30,19 @@ export class AuthService extends LoopBackAuth {
     {
         super(internalStorage);
         this.loadFromSession();
-        if (devoteeApi.isAuthenticated()) {
-            this.loggedIn.next(true);
-        }
     }
 
 
-    get isLoggedIn() {
-      return this.loggedIn.asObservable();
+    isAuthenticated() {
+      return this.devoteeApi.isAuthenticated();
     }
 
 
     login(user: User) {
-        this.devoteeApi.login({ username: user.userName, password: user.password })
+        this.devoteeApi.login({ username: user.userName, password: user.password }, 'user')
           .subscribe((token: SDKToken) => {
-            super.setToken(token);
-            this.loggedIn.next(true);
+            this.devotee = token.user;
+            console.log(this.devotee);
             this.notificationService.notificationSubject.next('Login Successful');
             this.router.navigate(['/']);
           }, err => {
@@ -57,7 +56,6 @@ export class AuthService extends LoopBackAuth {
         this.devoteeApi.logout().subscribe((response) => {
           // Clear Token and other local storage
           this.clearFromSession();
-          this.loggedIn.next(false);
           this.router.navigate(['/login']);
         });
       }
