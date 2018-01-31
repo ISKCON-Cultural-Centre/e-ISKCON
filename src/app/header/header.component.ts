@@ -20,26 +20,34 @@ import { OnChanges } from '@angular/core/src/metadata/lifecycle_hooks';
 export class HeaderComponent implements OnInit {
 
   myDepartments: Department[];
-  isLoggedIn: boolean;
-  isLoggedIn$: Observable <boolean>;
-  devoteeName: any;
-
+  isLoggedIn: Boolean;
+  isLoggedIn$: Observable <Boolean>;
+  devoteeName$: Observable <String>;
+  username: String = '';
 
   constructor(private authService: AuthService,
     private notificationService: NotificationService,
-    private myServicesService: MyServicesService) { }
+    private myServicesService: MyServicesService) {
+      if (this.authService.loggedIn) {
+        console.log(' Point 1');
+        console.log(this.authService.getCurrentUserData());
+        this.authService.devoteeName.next(this.authService.getCurrentUserData());
+      }
+     }
 
   ngOnInit() {
+    this.devoteeName$ = this.authService.getDevoteeName;
     this.isLoggedIn$ = this.authService.isLoggedIn;
     this.authService.isLoggedIn
     .subscribe(
       isLoggedIn => {
-        this.devoteeName = this.authService.getCurrentUserData();
         this.isLoggedIn = isLoggedIn;
-        if (isLoggedIn.valueOf()) {
-          this.devoteeName = this.authService.getCurrentUserData();
+        if (isLoggedIn) {
+          console.log(' Point 2');
+          console.log(this.authService.getCurrentUserData());
+          this.username = this.authService.getCurrentUserData();
           this.getAuthorizedDepartments();
-      }
+      } else {}
     });
   }
 

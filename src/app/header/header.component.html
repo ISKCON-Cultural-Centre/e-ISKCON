@@ -11,7 +11,7 @@
     </button>
   </mat-menu>
   <button mat-button routerLink="login" *ngIf="!isLoggedIn">Login</button>
-  <button mat-button [matMenuTriggerFor]="profileMenu"><span>Welcome ! {{devoteeName.spiritualName}}</span></button>
+  <button mat-button [matMenuTriggerFor]="profileMenu"><span>Welcome ! {{devoteeName$ | async}}</span></button>
   <mat-menu #profileMenu="matMenu">
     <button mat-menu-item (click)="editProfile()" >
       <mat-icon>ic_perm_identity</mat-icon>

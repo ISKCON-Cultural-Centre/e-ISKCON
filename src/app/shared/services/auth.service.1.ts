@@ -22,6 +22,10 @@ export class AuthService extends LoopBackAuth {
 
   public devoteeName = new BehaviorSubject<string>('');
 
+
+    public sessiontoken: SDKToken = new SDKToken();
+    private rememberMe: Boolean = true;
+
     constructor(
         internalStorage: InternalStorage, 
         private router: Router,
@@ -32,20 +36,20 @@ export class AuthService extends LoopBackAuth {
         super(internalStorage);
         if (this.devoteeApi.isAuthenticated()) {
             this.setLoggedIn(true);
-            this.decode(this.getCurrentUserData());
         }
     }
 
     private decode(devotee: Devotee) {
         this.devoteeName.next(devotee.spiritualName);
-    }
+      }
 
     get isLoggedIn() {
         return this.loggedIn$.asObservable(); 
       }
 
     get getDevoteeName() {
-        return this.devoteeName.asObservable();
+        //return this.getCurrentUserData();
+     return this.devoteeName.asObservable();
     }
 
 
@@ -57,9 +61,8 @@ export class AuthService extends LoopBackAuth {
     login(user: User) {
         this.devoteeApi.login({ username: user.userName, password: user.password }, 'user', true)
           .subscribe((token: SDKToken) => {
-            this.setRememberMe(true);
-            this.setToken(token);
-            this.save();
+            super.save();
+            this.loadFromSession();
             this.setLoggedIn(true);
             this.loggedIn = true;
             this.decode(token.user);
@@ -74,11 +77,47 @@ export class AuthService extends LoopBackAuth {
 
       logout() {
         this.devoteeApi.logout().subscribe((response) => {
-        // Clear Token and other local storage
-        this.clear();
+          // Clear Token and other local storage
+        this.clearFromSession();
         this.notificationService.notificationSubject.next('Logout Successful');
         this.router.navigate(['/login']);
         this.setLoggedIn(false);
+
         });
       }
+
+
+    clear(): void {
+        super.clear();
+        this.clearFromSession();
+    }
+
+    saveToSession(): void {
+        this.rememberMe = true;
+        this.persist('id', super.getAccessTokenId());
+        this.persist('userId', super.getCurrentUserId);
+        this.persist('user', super.getCurrentUserData());
+    }
+
+    loadFromSession(): void {
+        this.sessiontoken.id = localStorage.getItem('id');
+        this.sessiontoken.userId = localStorage.getItem('userId');
+        this.sessiontoken.user = localStorage.getItem('user');
+        if (this.sessiontoken.id && this.sessiontoken.user && this.sessiontoken.userId) {
+            super.setUser(this.sessiontoken);
+        }
+    }
+
+    clearFromSession(): void {
+        Object.keys(this.sessiontoken).forEach(prop => localStorage.removeItem(prop));
+        this.sessiontoken = new SDKToken();
+    }
+
+    persist(prop: string, value: any): void {
+        if (this.rememberMe) {
+            super.persist(prop, value);
+        } else {
+            localStorage.setItem(prop, JSON.stringify(value));
+        }
+    }
 }
