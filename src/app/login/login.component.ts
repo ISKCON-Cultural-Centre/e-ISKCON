@@ -20,6 +20,8 @@ export class LoginComponent implements OnInit {
   form: FormGroup;
   private formSubmitAttempt: boolean; 
 
+  private spinner: Boolean = false;
+
   private state: String = 'login';
 
   constructor(
@@ -52,6 +54,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    this.spinner = true;
     if (this.form.valid) {
       this.authService.login(this.form.value);
     }

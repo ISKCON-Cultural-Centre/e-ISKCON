@@ -29,8 +29,6 @@ export class HeaderComponent implements OnInit {
     private notificationService: NotificationService,
     private myServicesService: MyServicesService) {
       if (this.authService.loggedIn) {
-        console.log(' Point 1');
-        console.log(this.authService.getCurrentUserData());
         this.authService.devoteeName.next(this.authService.getCurrentUserData());
       }
      }
@@ -43,8 +41,6 @@ export class HeaderComponent implements OnInit {
       isLoggedIn => {
         this.isLoggedIn = isLoggedIn;
         if (isLoggedIn) {
-          console.log(' Point 2');
-          console.log(this.authService.getCurrentUserData());
           this.username = this.authService.getCurrentUserData();
           this.getAuthorizedDepartments();
       } else {}
