@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   form: FormGroup;
   private formSubmitAttempt: boolean; 
 
-  private spinner: Boolean = false;
+  spinner: Boolean = false;
 
   private state: String = 'login';
 
