@@ -50,6 +50,8 @@ export class HeaderComponent implements OnInit {
   onLogout() {
     this.authService.logout();
   }
+
+
  
   getAuthorizedDepartments(): void {
     this.myServicesService.getAuthorizedDepartments()

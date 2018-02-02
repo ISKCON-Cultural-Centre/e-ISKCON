@@ -22,6 +22,10 @@
       <mat-icon>perm_identity</mat-icon>
       <span>My Profile</span>
     </button>
+    <button mat-menu-item routerLink="changePassword" >
+        <mat-icon>vpn_keyy</mat-icon>
+        <span>Change Password</span>
+      </button>    
     <button mat-menu-item  (click)="onLogout()" *ngIf="isLoggedIn">
       <mat-icon>exit_to_app</mat-icon>
       <span>Logout</span>

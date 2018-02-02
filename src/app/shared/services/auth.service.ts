@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import { User } from './models/user';
+import { ChangePassword } from './models/changePassword';
 import { Devotee } from '../sdk';
 import { NotificationService } from './notification.service';
 
@@ -54,7 +55,7 @@ export class AuthService extends LoopBackAuth {
         this.loggedIn$.next(value);
       }
 
-    login(user: User) {
+    login(user: User): any {
         this.devoteeApi.login({ username: user.userName, password: user.password }, 'user', true)
           .subscribe((token: SDKToken) => {
             this.setRememberMe(true);
@@ -67,7 +68,6 @@ export class AuthService extends LoopBackAuth {
             this.router.navigate(['/']);
           }, err => {
             this.notificationService.notificationSubject.next('Login Failed');
-            user.password = '';
           });
       }
 
@@ -80,5 +80,13 @@ export class AuthService extends LoopBackAuth {
         this.router.navigate(['/login']);
         this.setLoggedIn(false);
         });
+      }
+
+     resetPassword() {
+        this.devoteeApi.resetPassword({});
+      }
+
+      changePassword(changePassword: ChangePassword) {
+        return this.devoteeApi.changePassword(changePassword.oldPassword, changePassword.newPassword );
       }
 }
