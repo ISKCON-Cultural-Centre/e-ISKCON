@@ -15,7 +15,7 @@ import { LookupTableData } from '../shared/services/models/lookupTableData';
   styleUrls: ['./lookup.component.css']
 })
 export class LookupComponent implements OnInit {
-
+  
   relationships: RelationshipMaster[];  
   lookupData: LookupData[];
   isLoggedIn: Boolean;
