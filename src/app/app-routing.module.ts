@@ -9,6 +9,7 @@ import { AuthGuard as AuthGuard } from './shared/services/auth.guard';
 import { RegisterComponent } from './login/register/register.component';
 import { ChangePasswordComponent } from './login/change-password.component';
 import { CatalogueComponent } from './matchless-gifts/catalogue/catalogue.component';
+import { LookupComponent } from './lookup/lookup.component';
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'resetPassword', component: ResetPasswordComponent },  
   { path: 'devotee', component: DevoteeComponent, canActivate: [AuthGuard] },
   { path: 'reset', component: ResetPasswordComponent },
+  { path: 'lookup', component: LookupComponent },
   { path: '', redirectTo: 'dashboard', pathMatch: 'full', canActivate: [AuthGuard] },
   { path: '**', component: PageNotFoundComponent }
 ];

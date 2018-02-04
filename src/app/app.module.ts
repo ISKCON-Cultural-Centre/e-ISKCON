@@ -28,6 +28,7 @@ import { MessageService } from './shared/services/message.service';
 import { MyServicesService } from './shared/services/myServices.service';
 import { GlobalEventsManager } from './shared/services/globalEventsManager.service';
 import { NotificationService } from './shared/services/notification.service';
+import { LookupModule } from '../app/lookup/lookup.module';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { NotificationService } from './shared/services/notification.service';
     MyActionsModule,
     MyMessagesModule,
     CatalogueModule,
-    MatchlessGiftsModule
+    MatchlessGiftsModule,
+    LookupModule
   ],
   providers: [
     AuthGuard,

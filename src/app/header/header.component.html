@@ -2,7 +2,8 @@
   <span>
     <!--    <img src="../assets/images/icc_logo.png" class="angular-logo"> -->
   </span> ISKCON Cultural Centre
-  <span class="fill-remaining-space"></span>  
+  <span class="fill-remaining-space"></span>
+  <a routerLink="lookup">Lookup</a>  
   <button mat-button [matMenuTriggerFor]="menu">My Services</button>
   <mat-menu #menu="matMenu">
     <button mat-menu-item  *ngFor="let myDepartment of myDepartments" 
