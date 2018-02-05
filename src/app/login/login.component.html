@@ -8,7 +8,7 @@
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <mat-input-container class="full-width-input">
           <input matInput placeholder="User" 
-                 formControlName="userName" required>
+                 formControlName="userName" required autofocus>
           <mat-error *ngIf="isFieldInvalid('userName')">
             Please inform your user name
           </mat-error>
