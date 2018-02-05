@@ -2,12 +2,22 @@ body{
     margin: auto;
 }
 
+footer {
+  background-color: rgb(81, 21, 247);
+  position:fixed;
+  bottom: 20px;
+  width: 100%;
+  text-align: center;
+  -webkit-text-fill-color: white;
+  }
+
+
 .example-container {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    top: 100px;
+    bottom: 100px;
+    left: 100px;
+    right: 100px;
+    padding: 50px;    
   }
   
   .example-radio-group {
