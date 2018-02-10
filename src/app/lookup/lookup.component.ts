@@ -149,6 +149,5 @@ export class LookupComponent implements OnInit {
       console.log('The dialog was closed');
       this.newLookupData = result;
     });
-  }
-
+  }  
 }
