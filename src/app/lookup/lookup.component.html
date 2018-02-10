@@ -1,3 +1,77 @@
 <p>
-  lookup works!
+  Lookup Master
 </p>
+
+<div>
+   <mat-input-container>
+          <label>Lookup Table</label>
+          <mat-select [(ngModel)]="selectedLookupTable" (change)="getLookupTableData()">
+            <mat-option *ngFor="let lookupTable of lookupTables" [value]="lookupTable">
+              {{lookupTable.name}}
+            </mat-option>
+          </mat-select>
+        </mat-input-container>
+</div>
+
+<div class="example-header">
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+</div>
+
+<div style="display: flex; justify-content: flex-end">
+   <button mat-raised-button class="mat-raised-button" color="primary">New</button>
+   <button mat-raised-button class="mat-raised-button" color="primary">Modify</button>
+   <button mat-raised-button class="mat-raised-button" color="primary">Delete</button>
+
+</div>
+<div class="example-container mat-elevation-z8">
+
+  <mat-table #table *ngIf="dataSource" [dataSource]="dataSource" matSort>
+
+    <!-- Select Column-->
+    <ng-container matColumnDef="select">
+      <mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="$event ? masterToggle() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()">
+        </mat-checkbox>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)">
+        </mat-checkbox>
+      </mat-cell>
+    </ng-container>
+
+    
+    <ng-container *ngFor="let column of displayedColumns | slice:1" [matColumnDef]="column">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>{{ column }}</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row[column] }}</mat-cell>
+    </ng-container>
+    
+
+    <!-- ID Column -->
+    <!-- <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+    </ng-container>
+
+    
+    <ng-container matColumnDef="relationName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Relation </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.relationName}} </mat-cell>
+    </ng-container> -->
+
+<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"></mat-row>
+    </mat-table>
+
+  <mat-paginator #paginator
+                 [pageSize]="10"
+                 [pageSizeOptions]="[5, 10, 20]">
+  </mat-paginator>
+</div>
+
+
