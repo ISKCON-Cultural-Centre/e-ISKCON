@@ -68,7 +68,6 @@ export class AppComponent  implements OnInit {
     getAuthorizedDepartments(): void {
       this.myServicesService.getAuthorizedDepartments()
         .subscribe(myDepartments => {(this.myDepartments = myDepartments);
-          this.notificationService.notificationSubject.next('authorizedService: fetched authorized services');
         });
     }
 

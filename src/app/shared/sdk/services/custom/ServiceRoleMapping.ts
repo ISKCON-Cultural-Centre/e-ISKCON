@@ -12,6 +12,7 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
 import { ServiceRoleMapping } from '../../models/ServiceRoleMapping';
 import { ServiceRole } from '../../models/ServiceRole';
+import { Devotee } from '../../models/Devotee';
 
 
 /**
@@ -35,7 +36,7 @@ export class ServiceRoleMappingApi extends BaseLoopBackApi {
   }
 
   /**
-   * Fetches belongsTo relation fkServiceMappingService1rel.
+   * Fetches belongsTo relation ServiceRole.
    *
    * @param {any} id ServiceRoleMapping id
    *
@@ -50,10 +51,40 @@ export class ServiceRoleMappingApi extends BaseLoopBackApi {
    * This usually means the response is a `ServiceRoleMapping` object.)
    * </em>
    */
-  public getFkServiceMappingService1rel(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
+  public getServiceRole(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/ServiceRoleMappings/:id/fkServiceMappingService1rel";
+    "/ServiceRoleMappings/:id/ServiceRole";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (typeof refresh !== 'undefined' && refresh !== null) _urlParams.refresh = refresh;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
+   * Fetches belongsTo relation fkServiceMappingDevoteerel.
+   *
+   * @param {any} id ServiceRoleMapping id
+   *
+   * @param {boolean} refresh 
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `ServiceRoleMapping` object.)
+   * </em>
+   */
+  public getFkServiceMappingDevoteerel(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/ServiceRoleMappings/:id/fkServiceMappingDevoteerel";
     let _routeParams: any = {
       id: id
     };

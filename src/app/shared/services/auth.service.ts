@@ -56,8 +56,10 @@ export class AuthService extends LoopBackAuth {
       }
 
     login(user: User): any {
-        this.devoteeApi.login({ username: user.userName, password: user.password }, 'user', true)
+        this.devoteeApi.login({ username: user.userName, password: user.password }, 'user')
           .subscribe((token: SDKToken) => {
+            this.router.navigate(['dashboard']);
+            console.log(token);
             this.setRememberMe(true);
             this.setToken(token);
             this.save();
@@ -65,12 +67,12 @@ export class AuthService extends LoopBackAuth {
             this.loggedIn = true;
             this.decode(token.user);
             this.notificationService.notificationSubject.next('Login Successful');
-            this.router.navigate(['/']);
+
           }, err => {
             this.notificationService.notificationSubject.next('Login Failed');
           });
       }
-
+  
 
       logout() {
         this.devoteeApi.logout().subscribe((response) => {
