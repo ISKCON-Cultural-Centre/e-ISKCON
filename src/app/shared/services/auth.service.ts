@@ -59,7 +59,6 @@ export class AuthService extends LoopBackAuth {
         this.devoteeApi.login({ username: user.userName, password: user.password }, 'user')
           .subscribe((token: SDKToken) => {
             this.router.navigate(['dashboard']);
-            console.log(token);
             this.setRememberMe(true);
             this.setToken(token);
             this.save();

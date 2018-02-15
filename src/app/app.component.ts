@@ -22,7 +22,7 @@ export class AppComponent  implements OnInit {
 
   mode = new FormControl('over');
 
-  myDepartments: Department[];
+  myDepartments: Department[] = [];
   isLoggedIn: Boolean;
   isLoggedIn$: Observable <Boolean>;
   devoteeName$: Observable <String>;
@@ -30,7 +30,7 @@ export class AppComponent  implements OnInit {
 
   constructor(private notificationService: NotificationService,
     private authService: AuthService,
-    private myServicesService: MyServicesService,    
+    private myServicesService: MyServicesService,
     private snackBar: MatSnackBar)
     {
       if (this.authService.loggedIn) {
@@ -60,6 +60,7 @@ export class AppComponent  implements OnInit {
     }
   
     onLogout() {
+      this.myDepartments = [];
       this.authService.logout();
     }
   
@@ -67,7 +68,7 @@ export class AppComponent  implements OnInit {
    
     getAuthorizedDepartments(): void {
       this.myServicesService.getAuthorizedDepartments()
-        .subscribe(myDepartments => {(this.myDepartments = myDepartments);
+        .subscribe(departments => { this.myDepartments = departments;
         });
     }
 

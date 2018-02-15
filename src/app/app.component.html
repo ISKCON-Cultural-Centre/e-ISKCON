@@ -2,7 +2,7 @@
     <mat-sidenav-container fxFlex>
         <mat-sidenav #mainSideNav mode="over" closed  >
             <mat-toolbar color="primary" *ngIf="isLoggedIn$ | async as isLoggedIn">
-                <img src="../assets/images/feather.ico" style="height:80%"> eICC
+               My Departments
             </mat-toolbar>
             <mat-nav-list *ngIf="isLoggedIn$ | async as isLoggedIn">
                 <a *ngFor="let myDepartment of myDepartments"
