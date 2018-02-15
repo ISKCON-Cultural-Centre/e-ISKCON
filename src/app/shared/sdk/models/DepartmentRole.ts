@@ -1,40 +1,41 @@
 /* tslint:disable */
 import {
-  Department,
-  Service
+  Department
 } from '../index';
 
 declare var Object: any;
-export interface DepartmentServiceInterface {
+export interface DepartmentRoleInterface {
   "departmentId": string;
-  "serviceId": string;
+  "roleId": string;
+  "created-on"?: Date;
+  "updated-on"?: Date;
   fkDepartmentRoleDepartment1rel?: Department;
-  fkDepartmentRoleService1rel?: Service;
 }
 
-export class DepartmentService implements DepartmentServiceInterface {
+export class DepartmentRole implements DepartmentRoleInterface {
   "departmentId": string;
-  "serviceId": string;
+  "roleId": string;
+  "created-on": Date;
+  "updated-on": Date;
   fkDepartmentRoleDepartment1rel: Department;
-  fkDepartmentRoleService1rel: Service;
-  constructor(data?: DepartmentServiceInterface) {
+  constructor(data?: DepartmentRoleInterface) {
     Object.assign(this, data);
   }
   /**
    * The name of the model represented by this $resource,
-   * i.e. `DepartmentService`.
+   * i.e. `DepartmentRole`.
    */
   public static getModelName() {
-    return "DepartmentService";
+    return "DepartmentRole";
   }
   /**
   * @method factory
   * @author Jonathan Casarrubias
   * @license MIT
-  * This method creates an instance of DepartmentService for dynamic purposes.
+  * This method creates an instance of DepartmentRole for dynamic purposes.
   **/
-  public static factory(data: DepartmentServiceInterface): DepartmentService{
-    return new DepartmentService(data);
+  public static factory(data: DepartmentRoleInterface): DepartmentRole{
+    return new DepartmentRole(data);
   }
   /**
   * @method getModelDefinition
@@ -45,18 +46,26 @@ export class DepartmentService implements DepartmentServiceInterface {
   **/
   public static getModelDefinition() {
     return {
-      name: 'DepartmentService',
-      plural: 'DepartmentServices',
-      path: 'DepartmentServices',
+      name: 'DepartmentRole',
+      plural: 'DepartmentRoles',
+      path: 'DepartmentRoles',
       idName: 'departmentId',
       properties: {
         "departmentId": {
           name: 'departmentId',
           type: 'string'
         },
-        "serviceId": {
-          name: 'serviceId',
+        "roleId": {
+          name: 'roleId',
           type: 'string'
+        },
+        "created-on": {
+          name: 'created-on',
+          type: 'Date'
+        },
+        "updated-on": {
+          name: 'updated-on',
+          type: 'Date'
         },
       },
       relations: {
@@ -66,14 +75,6 @@ export class DepartmentService implements DepartmentServiceInterface {
           model: 'Department',
           relationType: 'belongsTo',
                   keyFrom: 'departmentId',
-          keyTo: 'id'
-        },
-        fkDepartmentRoleService1rel: {
-          name: 'fkDepartmentRoleService1rel',
-          type: 'Service',
-          model: 'Service',
-          relationType: 'belongsTo',
-                  keyFrom: 'serviceId',
           keyTo: 'id'
         },
       }

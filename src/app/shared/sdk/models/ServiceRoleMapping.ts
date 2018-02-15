@@ -1,47 +1,45 @@
 /* tslint:disable */
 import {
-  Service
+  ServiceRole
 } from '../index';
 
 declare var Object: any;
-export interface ServiceMappingInterface {
+export interface ServiceRoleMappingInterface {
   "id": string;
   "principalType"?: string;
   "principalId"?: string;
   "roleId": string;
   "created-on"?: Date;
   "updated-on"?: Date;
-  role?: any;
-  fkServiceMappingService1rel?: Service;
+  fkServiceMappingService1rel?: ServiceRole;
 }
 
-export class ServiceMapping implements ServiceMappingInterface {
+export class ServiceRoleMapping implements ServiceRoleMappingInterface {
   "id": string;
   "principalType": string;
   "principalId": string;
   "roleId": string;
   "created-on": Date;
   "updated-on": Date;
-  role: any;
-  fkServiceMappingService1rel: Service;
-  constructor(data?: ServiceMappingInterface) {
+  fkServiceMappingService1rel: ServiceRole;
+  constructor(data?: ServiceRoleMappingInterface) {
     Object.assign(this, data);
   }
   /**
    * The name of the model represented by this $resource,
-   * i.e. `ServiceMapping`.
+   * i.e. `ServiceRoleMapping`.
    */
   public static getModelName() {
-    return "ServiceMapping";
+    return "ServiceRoleMapping";
   }
   /**
   * @method factory
   * @author Jonathan Casarrubias
   * @license MIT
-  * This method creates an instance of ServiceMapping for dynamic purposes.
+  * This method creates an instance of ServiceRoleMapping for dynamic purposes.
   **/
-  public static factory(data: ServiceMappingInterface): ServiceMapping{
-    return new ServiceMapping(data);
+  public static factory(data: ServiceRoleMappingInterface): ServiceRoleMapping{
+    return new ServiceRoleMapping(data);
   }
   /**
   * @method getModelDefinition
@@ -52,9 +50,9 @@ export class ServiceMapping implements ServiceMappingInterface {
   **/
   public static getModelDefinition() {
     return {
-      name: 'ServiceMapping',
-      plural: 'ServiceMappings',
-      path: 'ServiceMappings',
+      name: 'ServiceRoleMapping',
+      plural: 'ServiceRoleMappings',
+      path: 'ServiceRoleMappings',
       idName: 'id',
       properties: {
         "id": {
@@ -83,18 +81,10 @@ export class ServiceMapping implements ServiceMappingInterface {
         },
       },
       relations: {
-        role: {
-          name: 'role',
-          type: 'any',
-          model: '',
-          relationType: 'belongsTo',
-                  keyFrom: 'roleId',
-          keyTo: 'id'
-        },
         fkServiceMappingService1rel: {
           name: 'fkServiceMappingService1rel',
-          type: 'Service',
-          model: 'Service',
+          type: 'ServiceRole',
+          model: 'ServiceRole',
           relationType: 'belongsTo',
                   keyFrom: 'roleId',
           keyTo: 'id'

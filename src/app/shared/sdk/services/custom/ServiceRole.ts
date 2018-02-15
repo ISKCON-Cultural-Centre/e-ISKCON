@@ -10,15 +10,15 @@ import { JSONSearchParams } from '../core/search.params';
 import { ErrorHandler } from '../core/error.service';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
-import { Service } from '../../models/Service';
-import { ServiceMapping } from '../../models/ServiceMapping';
+import { ServiceRole } from '../../models/ServiceRole';
+import { ServiceRoleMapping } from '../../models/ServiceRoleMapping';
 
 
 /**
- * Api services for the `Service` model.
+ * Api services for the `ServiceRole` model.
  */
 @Injectable()
-export class ServiceApi extends BaseLoopBackApi {
+export class ServiceRoleApi extends BaseLoopBackApi {
 
   constructor(
     @Inject(Http) protected http: Http,
@@ -33,7 +33,7 @@ export class ServiceApi extends BaseLoopBackApi {
   /**
    * Find a related item by id for principals.
    *
-   * @param {any} id Role id
+   * @param {any} id ServiceRole id
    *
    * @param {any} fk Foreign key for principals
    *
@@ -43,13 +43,13 @@ export class ServiceApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Service` object.)
+   * This usually means the response is a `ServiceRole` object.)
    * </em>
    */
   public findByIdPrincipals(id: any, fk: any, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Services/:id/principals/:fk";
+    "/ServiceRoles/:id/principals/:fk";
     let _routeParams: any = {
       id: id,
       fk: fk
@@ -63,7 +63,7 @@ export class ServiceApi extends BaseLoopBackApi {
   /**
    * Delete a related item by id for principals.
    *
-   * @param {any} id Role id
+   * @param {any} id ServiceRole id
    *
    * @param {any} fk Foreign key for principals
    *
@@ -76,7 +76,7 @@ export class ServiceApi extends BaseLoopBackApi {
   public destroyByIdPrincipals(id: any, fk: any, customHeaders?: Function): Observable<any> {
     let _method: string = "DELETE";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Services/:id/principals/:fk";
+    "/ServiceRoles/:id/principals/:fk";
     let _routeParams: any = {
       id: id,
       fk: fk
@@ -90,7 +90,7 @@ export class ServiceApi extends BaseLoopBackApi {
   /**
    * Update a related item by id for principals.
    *
-   * @param {any} id Role id
+   * @param {any} id ServiceRole id
    *
    * @param {any} fk Foreign key for principals
    *
@@ -104,13 +104,13 @@ export class ServiceApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Service` object.)
+   * This usually means the response is a `ServiceRole` object.)
    * </em>
    */
   public updateByIdPrincipals(id: any, fk: any, data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PUT";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Services/:id/principals/:fk";
+    "/ServiceRoles/:id/principals/:fk";
     let _routeParams: any = {
       id: id,
       fk: fk
@@ -124,9 +124,9 @@ export class ServiceApi extends BaseLoopBackApi {
   }
 
   /**
-   * Queries principals of Service.
+   * Queries principals of ServiceRole.
    *
-   * @param {any} id Role id
+   * @param {any} id ServiceRole id
    *
    * @param {object} filter 
    *
@@ -136,13 +136,13 @@ export class ServiceApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Service` object.)
+   * This usually means the response is a `ServiceRole` object.)
    * </em>
    */
   public getPrincipals(id: any, filter: LoopBackFilter = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Services/:id/principals";
+    "/ServiceRoles/:id/principals";
     let _routeParams: any = {
       id: id
     };
@@ -156,7 +156,7 @@ export class ServiceApi extends BaseLoopBackApi {
   /**
    * Creates a new instance in principals of this model.
    *
-   * @param {any} id Role id
+   * @param {any} id ServiceRole id
    *
    * @param {object} data Request data.
    *
@@ -168,13 +168,13 @@ export class ServiceApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Service` object.)
+   * This usually means the response is a `ServiceRole` object.)
    * </em>
    */
   public createPrincipals(id: any, data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "POST";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Services/:id/principals";
+    "/ServiceRoles/:id/principals";
     let _routeParams: any = {
       id: id
     };
@@ -189,7 +189,7 @@ export class ServiceApi extends BaseLoopBackApi {
   /**
    * Deletes all principals of this model.
    *
-   * @param {any} id Role id
+   * @param {any} id ServiceRole id
    *
    * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -200,7 +200,7 @@ export class ServiceApi extends BaseLoopBackApi {
   public deletePrincipals(id: any, customHeaders?: Function): Observable<any> {
     let _method: string = "DELETE";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Services/:id/principals";
+    "/ServiceRoles/:id/principals";
     let _routeParams: any = {
       id: id
     };
@@ -211,9 +211,9 @@ export class ServiceApi extends BaseLoopBackApi {
   }
 
   /**
-   * Counts principals of Service.
+   * Counts principals of ServiceRole.
    *
-   * @param {any} id Role id
+   * @param {any} id ServiceRole id
    *
    * @param {object} where Criteria to match model instances
    *
@@ -228,7 +228,7 @@ export class ServiceApi extends BaseLoopBackApi {
   public countPrincipals(id: any, where: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Services/:id/principals/count";
+    "/ServiceRoles/:id/principals/count";
     let _routeParams: any = {
       id: id
     };
@@ -252,13 +252,13 @@ export class ServiceApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Service` object.)
+   * This usually means the response is a `ServiceRole` object.)
    * </em>
    */
   public patchOrCreate(data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PATCH";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Services";
+    "/ServiceRoles";
     let _routeParams: any = {};
     let _postBody: any = {
       data: data
@@ -271,7 +271,7 @@ export class ServiceApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param {any} id Role id
+   * @param {any} id ServiceRole id
    *
    * @param {object} data Request data.
    *
@@ -283,13 +283,13 @@ export class ServiceApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Service` object.)
+   * This usually means the response is a `ServiceRole` object.)
    * </em>
    */
   public patchAttributes(id: any, data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PATCH";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Services/:id";
+    "/ServiceRoles/:id";
     let _routeParams: any = {
       id: id
     };
@@ -304,7 +304,7 @@ export class ServiceApi extends BaseLoopBackApi {
   /**
    * Creates a new instance in principals of this model.
    *
-   * @param {any} id Role id
+   * @param {any} id ServiceRole id
    *
    * @param {object} data Request data.
    *
@@ -316,13 +316,13 @@ export class ServiceApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Service` object.)
+   * This usually means the response is a `ServiceRole` object.)
    * </em>
    */
   public createManyPrincipals(id: any, data: any[] = [], customHeaders?: Function): Observable<any> {
     let _method: string = "POST";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Services/:id/principals";
+    "/ServiceRoles/:id/principals";
     let _routeParams: any = {
       id: id
     };
@@ -336,9 +336,9 @@ export class ServiceApi extends BaseLoopBackApi {
 
   /**
    * The name of the model represented by this $resource,
-   * i.e. `Service`.
+   * i.e. `ServiceRole`.
    */
   public getModelName() {
-    return "Service";
+    return "ServiceRole";
   }
 }

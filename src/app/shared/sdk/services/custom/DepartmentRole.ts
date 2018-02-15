@@ -10,19 +10,15 @@ import { JSONSearchParams } from '../core/search.params';
 import { ErrorHandler } from '../core/error.service';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
-import { ServiceMapping } from '../../models/ServiceMapping';
-import { Service } from '../../models/Service';
+import { DepartmentRole } from '../../models/DepartmentRole';
+import { Department } from '../../models/Department';
 
 
 /**
- * Api services for the `ServiceMapping` model.
- *
- * **Details**
- *
- * Map principals to roles
+ * Api services for the `DepartmentRole` model.
  */
 @Injectable()
-export class ServiceMappingApi extends BaseLoopBackApi {
+export class DepartmentRoleApi extends BaseLoopBackApi {
 
   constructor(
     @Inject(Http) protected http: Http,
@@ -35,39 +31,9 @@ export class ServiceMappingApi extends BaseLoopBackApi {
   }
 
   /**
-   * Fetches belongsTo relation role.
+   * Fetches belongsTo relation fkDepartmentRoleDepartment1rel.
    *
-   * @param {any} id RoleMapping id
-   *
-   * @param {boolean} refresh 
-   *
-   * @returns {object} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `ServiceMapping` object.)
-   * </em>
-   */
-  public getRole(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
-    let _method: string = "GET";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/ServiceMappings/:id/role";
-    let _routeParams: any = {
-      id: id
-    };
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    if (typeof refresh !== 'undefined' && refresh !== null) _urlParams.refresh = refresh;
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
-  }
-
-  /**
-   * Fetches belongsTo relation fkServiceMappingService1rel.
-   *
-   * @param {any} id RoleMapping id
+   * @param {any} id DepartmentRole id
    *
    * @param {boolean} refresh 
    *
@@ -77,13 +43,13 @@ export class ServiceMappingApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `ServiceMapping` object.)
+   * This usually means the response is a `DepartmentRole` object.)
    * </em>
    */
-  public getFkServiceMappingService1rel(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
+  public getFkDepartmentRoleDepartment1rel(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/ServiceMappings/:id/fkServiceMappingService1rel";
+    "/DepartmentRoles/:id/fkDepartmentRoleDepartment1rel";
     let _routeParams: any = {
       id: id
     };
@@ -107,13 +73,13 @@ export class ServiceMappingApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `ServiceMapping` object.)
+   * This usually means the response is a `DepartmentRole` object.)
    * </em>
    */
   public patchOrCreate(data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PATCH";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/ServiceMappings";
+    "/DepartmentRoles";
     let _routeParams: any = {};
     let _postBody: any = {
       data: data
@@ -126,7 +92,7 @@ export class ServiceMappingApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param {any} id RoleMapping id
+   * @param {any} id DepartmentRole id
    *
    * @param {object} data Request data.
    *
@@ -138,13 +104,13 @@ export class ServiceMappingApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `ServiceMapping` object.)
+   * This usually means the response is a `DepartmentRole` object.)
    * </em>
    */
   public patchAttributes(id: any, data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PATCH";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/ServiceMappings/:id";
+    "/DepartmentRoles/:id";
     let _routeParams: any = {
       id: id
     };
@@ -158,9 +124,9 @@ export class ServiceMappingApi extends BaseLoopBackApi {
 
   /**
    * The name of the model represented by this $resource,
-   * i.e. `ServiceMapping`.
+   * i.e. `DepartmentRole`.
    */
   public getModelName() {
-    return "ServiceMapping";
+    return "DepartmentRole";
   }
 }

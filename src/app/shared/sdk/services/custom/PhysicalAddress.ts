@@ -33,7 +33,7 @@ export class PhysicalAddressApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation fkPhysicalAddressAddressTypeMaster1rel.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id PhysicalAddress id
    *
    * @param {boolean} refresh 
    *
@@ -92,7 +92,7 @@ export class PhysicalAddressApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id PhysicalAddress id
    *
    * @param {object} data Request data.
    *

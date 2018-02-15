@@ -1,2 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
 @import "@angular/material/prebuilt-themes/indigo-pink.css";
+
+h1 {
+  color: blue;
+  font-family: verdana;
+}
+
+body {
+  font-family: verdana;
+}
+
+.switch {
+    display: block;
+    background-color:#f2f2f3;
+  }
+  
+  fieldset {
+    padding-top:20px; 
+    border: 10px le;
+  }
+  
+  fieldset > div {
+    background-color:green;
+    display: inline-block;
+    width:100%;
+  }

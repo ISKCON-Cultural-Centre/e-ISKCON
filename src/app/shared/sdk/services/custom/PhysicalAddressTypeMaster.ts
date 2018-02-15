@@ -61,7 +61,7 @@ export class PhysicalAddressTypeMasterApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id PhysicalAddressTypeMaster id
    *
    * @param {object} data Request data.
    *

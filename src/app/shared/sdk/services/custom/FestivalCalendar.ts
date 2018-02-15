@@ -33,7 +33,7 @@ export class FestivalCalendarApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation fkFestivalCalendarFestivalMaster1rel.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id FestivalCalendar id
    *
    * @param {boolean} refresh 
    *
@@ -92,7 +92,7 @@ export class FestivalCalendarApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id FestivalCalendar id
    *
    * @param {object} data Request data.
    *

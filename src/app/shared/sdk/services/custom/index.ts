@@ -1,6 +1,6 @@
 /* tslint:disable */
-export * from './Service';
-export * from './ServiceMapping';
+export * from './ServiceRole';
+export * from './ServiceRoleMapping';
 export * from './Circle';
 export * from './Devotee';
 export * from './DevoteeEventCalendar';
@@ -25,8 +25,8 @@ export * from './ApprovalArtefact';
 export * from './ApprovalQue';
 export * from './ApprovalRule';
 export * from './Department';
-export * from './DepartmentService';
-export * from './ServiceTaskMaster';
+export * from './DepartmentRole';
+export * from './RoleTaskMaster';
 export * from './TaskMaster';
 export * from './MgCreditNote';
 export * from './MgDeliveryNote';

@@ -10,16 +10,16 @@ import { JSONSearchParams } from '../core/search.params';
 import { ErrorHandler } from '../core/error.service';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
-import { ServiceTaskMaster } from '../../models/ServiceTaskMaster';
-import { Service } from '../../models/Service';
+import { RoleTaskMaster } from '../../models/RoleTaskMaster';
+import { ServiceRole } from '../../models/ServiceRole';
 import { TaskMaster } from '../../models/TaskMaster';
 
 
 /**
- * Api services for the `ServiceTaskMaster` model.
+ * Api services for the `RoleTaskMaster` model.
  */
 @Injectable()
-export class ServiceTaskMasterApi extends BaseLoopBackApi {
+export class RoleTaskMasterApi extends BaseLoopBackApi {
 
   constructor(
     @Inject(Http) protected http: Http,
@@ -34,7 +34,7 @@ export class ServiceTaskMasterApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation fkServiceTaskMasterService1rel.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id RoleTaskMaster id
    *
    * @param {boolean} refresh 
    *
@@ -44,13 +44,13 @@ export class ServiceTaskMasterApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `ServiceTaskMaster` object.)
+   * This usually means the response is a `RoleTaskMaster` object.)
    * </em>
    */
   public getFkServiceTaskMasterService1rel(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/ServiceTaskMasters/:id/fkServiceTaskMasterService1rel";
+    "/RoleTaskMasters/:id/fkServiceTaskMasterService1rel";
     let _routeParams: any = {
       id: id
     };
@@ -64,7 +64,7 @@ export class ServiceTaskMasterApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation fkRoleTaskMasterTaskMaster1rel.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id RoleTaskMaster id
    *
    * @param {boolean} refresh 
    *
@@ -74,13 +74,13 @@ export class ServiceTaskMasterApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `ServiceTaskMaster` object.)
+   * This usually means the response is a `RoleTaskMaster` object.)
    * </em>
    */
   public getFkRoleTaskMasterTaskMaster1rel(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/ServiceTaskMasters/:id/fkRoleTaskMasterTaskMaster1rel";
+    "/RoleTaskMasters/:id/fkRoleTaskMasterTaskMaster1rel";
     let _routeParams: any = {
       id: id
     };
@@ -104,13 +104,13 @@ export class ServiceTaskMasterApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `ServiceTaskMaster` object.)
+   * This usually means the response is a `RoleTaskMaster` object.)
    * </em>
    */
   public patchOrCreate(data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PATCH";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/ServiceTaskMasters";
+    "/RoleTaskMasters";
     let _routeParams: any = {};
     let _postBody: any = {
       data: data
@@ -123,7 +123,7 @@ export class ServiceTaskMasterApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id RoleTaskMaster id
    *
    * @param {object} data Request data.
    *
@@ -135,13 +135,13 @@ export class ServiceTaskMasterApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `ServiceTaskMaster` object.)
+   * This usually means the response is a `RoleTaskMaster` object.)
    * </em>
    */
   public patchAttributes(id: any, data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PATCH";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/ServiceTaskMasters/:id";
+    "/RoleTaskMasters/:id";
     let _routeParams: any = {
       id: id
     };
@@ -155,9 +155,9 @@ export class ServiceTaskMasterApi extends BaseLoopBackApi {
 
   /**
    * The name of the model represented by this $resource,
-   * i.e. `ServiceTaskMaster`.
+   * i.e. `RoleTaskMaster`.
    */
   public getModelName() {
-    return "ServiceTaskMaster";
+    return "RoleTaskMaster";
   }
 }

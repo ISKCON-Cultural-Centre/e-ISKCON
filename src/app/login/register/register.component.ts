@@ -12,7 +12,7 @@ const PASSWORD_REGEX = /^[a-zA-Z0-9!#$%&’]$/;
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  private state: String = 'login';
+  state: String = 'login';
   model: any = {};
   loading = false;
 

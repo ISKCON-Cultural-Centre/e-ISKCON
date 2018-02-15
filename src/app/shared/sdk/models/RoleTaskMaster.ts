@@ -1,40 +1,40 @@
 /* tslint:disable */
 import {
-  Service,
+  ServiceRole,
   TaskMaster
 } from '../index';
 
 declare var Object: any;
-export interface ServiceTaskMasterInterface {
+export interface RoleTaskMasterInterface {
   "taskMasterId": string;
-  "serviceId": string;
-  fkServiceTaskMasterService1rel?: Service;
+  "roleId": string;
+  fkServiceTaskMasterService1rel?: ServiceRole;
   fkRoleTaskMasterTaskMaster1rel?: TaskMaster;
 }
 
-export class ServiceTaskMaster implements ServiceTaskMasterInterface {
+export class RoleTaskMaster implements RoleTaskMasterInterface {
   "taskMasterId": string;
-  "serviceId": string;
-  fkServiceTaskMasterService1rel: Service;
+  "roleId": string;
+  fkServiceTaskMasterService1rel: ServiceRole;
   fkRoleTaskMasterTaskMaster1rel: TaskMaster;
-  constructor(data?: ServiceTaskMasterInterface) {
+  constructor(data?: RoleTaskMasterInterface) {
     Object.assign(this, data);
   }
   /**
    * The name of the model represented by this $resource,
-   * i.e. `ServiceTaskMaster`.
+   * i.e. `RoleTaskMaster`.
    */
   public static getModelName() {
-    return "ServiceTaskMaster";
+    return "RoleTaskMaster";
   }
   /**
   * @method factory
   * @author Jonathan Casarrubias
   * @license MIT
-  * This method creates an instance of ServiceTaskMaster for dynamic purposes.
+  * This method creates an instance of RoleTaskMaster for dynamic purposes.
   **/
-  public static factory(data: ServiceTaskMasterInterface): ServiceTaskMaster{
-    return new ServiceTaskMaster(data);
+  public static factory(data: RoleTaskMasterInterface): RoleTaskMaster{
+    return new RoleTaskMaster(data);
   }
   /**
   * @method getModelDefinition
@@ -45,27 +45,27 @@ export class ServiceTaskMaster implements ServiceTaskMasterInterface {
   **/
   public static getModelDefinition() {
     return {
-      name: 'ServiceTaskMaster',
-      plural: 'ServiceTaskMasters',
-      path: 'ServiceTaskMasters',
+      name: 'RoleTaskMaster',
+      plural: 'RoleTaskMasters',
+      path: 'RoleTaskMasters',
       idName: 'taskMasterId',
       properties: {
         "taskMasterId": {
           name: 'taskMasterId',
           type: 'string'
         },
-        "serviceId": {
-          name: 'serviceId',
+        "roleId": {
+          name: 'roleId',
           type: 'string'
         },
       },
       relations: {
         fkServiceTaskMasterService1rel: {
           name: 'fkServiceTaskMasterService1rel',
-          type: 'Service',
-          model: 'Service',
+          type: 'ServiceRole',
+          model: 'ServiceRole',
           relationType: 'belongsTo',
-                  keyFrom: 'serviceId',
+                  keyFrom: 'roleId',
           keyTo: 'id'
         },
         fkRoleTaskMasterTaskMaster1rel: {

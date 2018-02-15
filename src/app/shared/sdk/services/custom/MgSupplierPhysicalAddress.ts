@@ -34,7 +34,7 @@ export class MgSupplierPhysicalAddressApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation fkSupplierAddressPhysicalAddress1rel.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id MgSupplierPhysicalAddress id
    *
    * @param {boolean} refresh 
    *
@@ -64,7 +64,7 @@ export class MgSupplierPhysicalAddressApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation fkSupplierPhysicalAddressSupplier1rel.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id MgSupplierPhysicalAddress id
    *
    * @param {boolean} refresh 
    *
@@ -123,7 +123,7 @@ export class MgSupplierPhysicalAddressApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id MgSupplierPhysicalAddress id
    *
    * @param {object} data Request data.
    *

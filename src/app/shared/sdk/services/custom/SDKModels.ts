@@ -1,7 +1,7 @@
 /* tslint:disable */
 import { Injectable } from '@angular/core';
-import { Service } from '../../models/Service';
-import { ServiceMapping } from '../../models/ServiceMapping';
+import { ServiceRole } from '../../models/ServiceRole';
+import { ServiceRoleMapping } from '../../models/ServiceRoleMapping';
 import { Circle } from '../../models/Circle';
 import { Devotee } from '../../models/Devotee';
 import { DevoteeEventCalendar } from '../../models/DevoteeEventCalendar';
@@ -26,8 +26,8 @@ import { ApprovalArtefact } from '../../models/ApprovalArtefact';
 import { ApprovalQue } from '../../models/ApprovalQue';
 import { ApprovalRule } from '../../models/ApprovalRule';
 import { Department } from '../../models/Department';
-import { DepartmentService } from '../../models/DepartmentService';
-import { ServiceTaskMaster } from '../../models/ServiceTaskMaster';
+import { DepartmentRole } from '../../models/DepartmentRole';
+import { RoleTaskMaster } from '../../models/RoleTaskMaster';
 import { TaskMaster } from '../../models/TaskMaster';
 import { MgCreditNote } from '../../models/MgCreditNote';
 import { MgDeliveryNote } from '../../models/MgDeliveryNote';
@@ -78,8 +78,8 @@ export interface Models { [name: string]: any }
 export class SDKModels {
 
   private models: Models = {
-    Service: Service,
-    ServiceMapping: ServiceMapping,
+    ServiceRole: ServiceRole,
+    ServiceRoleMapping: ServiceRoleMapping,
     Circle: Circle,
     Devotee: Devotee,
     DevoteeEventCalendar: DevoteeEventCalendar,
@@ -104,8 +104,8 @@ export class SDKModels {
     ApprovalQue: ApprovalQue,
     ApprovalRule: ApprovalRule,
     Department: Department,
-    DepartmentService: DepartmentService,
-    ServiceTaskMaster: ServiceTaskMaster,
+    DepartmentRole: DepartmentRole,
+    RoleTaskMaster: RoleTaskMaster,
     TaskMaster: TaskMaster,
     MgCreditNote: MgCreditNote,
     MgDeliveryNote: MgDeliveryNote,

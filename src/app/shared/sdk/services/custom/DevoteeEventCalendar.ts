@@ -34,7 +34,7 @@ export class DevoteeEventCalendarApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation fkDevoteeEventCalendarDevotee2rel.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id DevoteeEventCalendar id
    *
    * @param {boolean} refresh 
    *
@@ -64,7 +64,7 @@ export class DevoteeEventCalendarApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation fkDevoteeEventCalendarEventMaster1rel.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id DevoteeEventCalendar id
    *
    * @param {boolean} refresh 
    *
@@ -123,7 +123,7 @@ export class DevoteeEventCalendarApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id DevoteeEventCalendar id
    *
    * @param {object} data Request data.
    *

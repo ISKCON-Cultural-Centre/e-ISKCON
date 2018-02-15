@@ -35,7 +35,7 @@ export class MgOrderApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation fkOrderDevotee1rel.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id MgOrder id
    *
    * @param {boolean} refresh 
    *
@@ -65,7 +65,7 @@ export class MgOrderApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation fkOrderOrderChannel1rel.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id MgOrder id
    *
    * @param {boolean} refresh 
    *
@@ -95,7 +95,7 @@ export class MgOrderApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation fkTable1BookRequestStatus1rel.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id MgOrder id
    *
    * @param {boolean} refresh 
    *
@@ -125,7 +125,7 @@ export class MgOrderApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation fkTable1Devotee2rel.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id MgOrder id
    *
    * @param {boolean} refresh 
    *
@@ -184,7 +184,7 @@ export class MgOrderApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id MgOrder id
    *
    * @param {object} data Request data.
    *

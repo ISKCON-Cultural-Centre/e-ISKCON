@@ -1,9 +1,11 @@
 <div class="signin-content">
+    <h4>Welcome to the Temple Portal</h4>
   <mat-card>
+    <mat-card-header>
+        <p>Please Login to Continue</p>
+    </mat-card-header>
     <mat-card-content>
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
-        <p>ISKCON Cultural Centre - Services Portal</p>
-        <p>Please Login to Continue</p>
         <mat-input-container class="full-width-input">
           <input matInput placeholder="User" formControlName="userName" required>
           <mat-error *ngIf="isFieldInvalid('userName')">
@@ -17,7 +19,9 @@
           </mat-error>
         </mat-input-container>
         <button mat-raised-button color="primary" type="submit">Login</button>
+        <span *ngIf="spinner"><mat-spinner></mat-spinner></span>
       </form>
+      <button mat-raised-button (click) = "onResetPassword()">Forgot Password ?</button>      
     </mat-card-content>
   </mat-card>
 </div>

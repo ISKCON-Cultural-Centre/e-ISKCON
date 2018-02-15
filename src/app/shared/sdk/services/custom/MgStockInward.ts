@@ -61,7 +61,7 @@ export class MgStockInwardApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id MgStockInward id
    *
    * @param {object} data Request data.
    *

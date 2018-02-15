@@ -34,7 +34,7 @@ export class TempleBranchApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation fkTempleBranchTemple1rel.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id TempleBranch id
    *
    * @param {boolean} refresh 
    *
@@ -64,7 +64,7 @@ export class TempleBranchApi extends BaseLoopBackApi {
   /**
    * Fetches belongsTo relation fkTempleBranchPhysicalAddress1rel.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id TempleBranch id
    *
    * @param {boolean} refresh 
    *
@@ -123,7 +123,7 @@ export class TempleBranchApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param {any} id PersistedModel id
+   * @param {any} id TempleBranch id
    *
    * @param {object} data Request data.
    *
