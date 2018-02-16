@@ -1,7 +1,6 @@
 /* tslint:disable */
 import {
-  Devotee,
-  PaymentModeMaster
+  Devotee
 } from '../index';
 
 declare var Object: any;
@@ -14,7 +13,7 @@ export interface PaymentInterface {
   "created-on"?: Date;
   "updated-on"?: Date;
   fkOrderPaymentDevotee1rel?: Devotee;
-  fkDevoteePaymentPaymentModeMaster1rel?: PaymentModeMaster;
+  fkDevoteePaymentPaymentModeMaster1rel?: any;
 }
 
 export class Payment implements PaymentInterface {
@@ -26,7 +25,7 @@ export class Payment implements PaymentInterface {
   "created-on": Date;
   "updated-on": Date;
   fkOrderPaymentDevotee1rel: Devotee;
-  fkDevoteePaymentPaymentModeMaster1rel: PaymentModeMaster;
+  fkDevoteePaymentPaymentModeMaster1rel: any;
   constructor(data?: PaymentInterface) {
     Object.assign(this, data);
   }
@@ -100,8 +99,8 @@ export class Payment implements PaymentInterface {
         },
         fkDevoteePaymentPaymentModeMaster1rel: {
           name: 'fkDevoteePaymentPaymentModeMaster1rel',
-          type: 'PaymentModeMaster',
-          model: 'PaymentModeMaster',
+          type: 'any',
+          model: '',
           relationType: 'belongsTo',
                   keyFrom: 'paymentModeMasterId',
           keyTo: 'id'

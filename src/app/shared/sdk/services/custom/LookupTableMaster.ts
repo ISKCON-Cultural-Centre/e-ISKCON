@@ -10,14 +10,14 @@ import { JSONSearchParams } from '../core/search.params';
 import { ErrorHandler } from '../core/error.service';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
-import { PaymentModeMaster } from '../../models/PaymentModeMaster';
+import { LookupTableMaster } from '../../models/LookupTableMaster';
 
 
 /**
- * Api services for the `PaymentModeMaster` model.
+ * Api services for the `LookupTableMaster` model.
  */
 @Injectable()
-export class PaymentModeMasterApi extends BaseLoopBackApi {
+export class LookupTableMasterApi extends BaseLoopBackApi {
 
   constructor(
     @Inject(Http) protected http: Http,
@@ -42,13 +42,13 @@ export class PaymentModeMasterApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `PaymentModeMaster` object.)
+   * This usually means the response is a `LookupTableMaster` object.)
    * </em>
    */
   public patchOrCreate(data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PATCH";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/PaymentModeMasters";
+    "/LookupTableMasters";
     let _routeParams: any = {};
     let _postBody: any = {
       data: data
@@ -61,7 +61,7 @@ export class PaymentModeMasterApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param {any} id PaymentModeMaster id
+   * @param {any} id LookupTableMaster id
    *
    * @param {object} data Request data.
    *
@@ -73,13 +73,13 @@ export class PaymentModeMasterApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `PaymentModeMaster` object.)
+   * This usually means the response is a `LookupTableMaster` object.)
    * </em>
    */
   public patchAttributes(id: any, data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PATCH";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/PaymentModeMasters/:id";
+    "/LookupTableMasters/:id";
     let _routeParams: any = {
       id: id
     };
@@ -93,9 +93,9 @@ export class PaymentModeMasterApi extends BaseLoopBackApi {
 
   /**
    * The name of the model represented by this $resource,
-   * i.e. `PaymentModeMaster`.
+   * i.e. `LookupTableMaster`.
    */
   public getModelName() {
-    return "PaymentModeMaster";
+    return "LookupTableMaster";
   }
 }

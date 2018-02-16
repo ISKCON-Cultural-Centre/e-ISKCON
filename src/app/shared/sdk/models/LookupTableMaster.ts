@@ -1,40 +1,40 @@
 /* tslint:disable */
 
 declare var Object: any;
-export interface RelationshipMasterInterface {
-  "id"?: string;
-  "relationName"?: string;
+export interface LookupTableMasterInterface {
+  "tableName": string;
+  "tableDisplayName": string;
   "createdBy"?: string;
   "updatedBy"?: string;
-  "created-on"?: Date;
-  "updated-on"?: Date;
+  "createdOn"?: Date;
+  "updatedOn"?: Date;
 }
 
-export class RelationshipMaster implements RelationshipMasterInterface {
-  "id": string;
-  "relationName": string;
+export class LookupTableMaster implements LookupTableMasterInterface {
+  "tableName": string;
+  "tableDisplayName": string;
   "createdBy": string;
   "updatedBy": string;
-  "created-on": Date;
-  "updated-on": Date;
-  constructor(data?: RelationshipMasterInterface) {
+  "createdOn": Date;
+  "updatedOn": Date;
+  constructor(data?: LookupTableMasterInterface) {
     Object.assign(this, data);
   }
   /**
    * The name of the model represented by this $resource,
-   * i.e. `RelationshipMaster`.
+   * i.e. `LookupTableMaster`.
    */
   public static getModelName() {
-    return "RelationshipMaster";
+    return "LookupTableMaster";
   }
   /**
   * @method factory
   * @author Jonathan Casarrubias
   * @license MIT
-  * This method creates an instance of RelationshipMaster for dynamic purposes.
+  * This method creates an instance of LookupTableMaster for dynamic purposes.
   **/
-  public static factory(data: RelationshipMasterInterface): RelationshipMaster{
-    return new RelationshipMaster(data);
+  public static factory(data: LookupTableMasterInterface): LookupTableMaster{
+    return new LookupTableMaster(data);
   }
   /**
   * @method getModelDefinition
@@ -45,17 +45,17 @@ export class RelationshipMaster implements RelationshipMasterInterface {
   **/
   public static getModelDefinition() {
     return {
-      name: 'RelationshipMaster',
-      plural: 'RelationshipMasters',
-      path: 'RelationshipMasters',
-      idName: 'id',
+      name: 'LookupTableMaster',
+      plural: 'LookupTableMasters',
+      path: 'LookupTableMasters',
+      idName: 'tableName',
       properties: {
-        "id": {
-          name: 'id',
+        "tableName": {
+          name: 'tableName',
           type: 'string'
         },
-        "relationName": {
-          name: 'relationName',
+        "tableDisplayName": {
+          name: 'tableDisplayName',
           type: 'string'
         },
         "createdBy": {
@@ -66,12 +66,12 @@ export class RelationshipMaster implements RelationshipMasterInterface {
           name: 'updatedBy',
           type: 'string'
         },
-        "created-on": {
-          name: 'created-on',
+        "createdOn": {
+          name: 'createdOn',
           type: 'Date'
         },
-        "updated-on": {
-          name: 'updated-on',
+        "updatedOn": {
+          name: 'updatedOn',
           type: 'Date'
         },
       },

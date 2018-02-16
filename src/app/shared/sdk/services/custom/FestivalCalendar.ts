@@ -11,7 +11,6 @@ import { ErrorHandler } from '../core/error.service';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
 import { FestivalCalendar } from '../../models/FestivalCalendar';
-import { FestivalMaster } from '../../models/FestivalMaster';
 
 
 /**

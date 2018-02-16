@@ -1,8 +1,7 @@
 /* tslint:disable */
 import {
   Circle,
-  ServiceRoleMapping,
-  Language
+  ServiceRoleMapping
 } from '../index';
 
 declare var Object: any;
@@ -35,7 +34,7 @@ export interface DevoteeInterface {
   accessTokens?: any[];
   fkDevoteeCircle1rel?: Circle;
   roleMappings?: ServiceRoleMapping[];
-  fkDevoteeLanguage1rel?: Language;
+  fkDevoteeLanguage1rel?: any;
 }
 
 export class Devotee implements DevoteeInterface {
@@ -67,7 +66,7 @@ export class Devotee implements DevoteeInterface {
   accessTokens: any[];
   fkDevoteeCircle1rel: Circle;
   roleMappings: ServiceRoleMapping[];
-  fkDevoteeLanguage1rel: Language;
+  fkDevoteeLanguage1rel: any;
   constructor(data?: DevoteeInterface) {
     Object.assign(this, data);
   }
@@ -229,8 +228,8 @@ export class Devotee implements DevoteeInterface {
         },
         fkDevoteeLanguage1rel: {
           name: 'fkDevoteeLanguage1rel',
-          type: 'Language',
-          model: 'Language',
+          type: 'any',
+          model: '',
           relationType: 'belongsTo',
                   keyFrom: 'motherTongueLanguageId',
           keyTo: 'id'

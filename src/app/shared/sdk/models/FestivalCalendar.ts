@@ -1,7 +1,4 @@
 /* tslint:disable */
-import {
-  FestivalMaster
-} from '../index';
 
 declare var Object: any;
 export interface FestivalCalendarInterface {
@@ -11,7 +8,7 @@ export interface FestivalCalendarInterface {
   "date"?: string;
   "created-on"?: Date;
   "updated-on"?: Date;
-  fkFestivalCalendarFestivalMaster1rel?: FestivalMaster;
+  fkFestivalCalendarFestivalMaster1rel?: any;
 }
 
 export class FestivalCalendar implements FestivalCalendarInterface {
@@ -21,7 +18,7 @@ export class FestivalCalendar implements FestivalCalendarInterface {
   "date": string;
   "created-on": Date;
   "updated-on": Date;
-  fkFestivalCalendarFestivalMaster1rel: FestivalMaster;
+  fkFestivalCalendarFestivalMaster1rel: any;
   constructor(data?: FestivalCalendarInterface) {
     Object.assign(this, data);
   }
@@ -83,8 +80,8 @@ export class FestivalCalendar implements FestivalCalendarInterface {
       relations: {
         fkFestivalCalendarFestivalMaster1rel: {
           name: 'fkFestivalCalendarFestivalMaster1rel',
-          type: 'FestivalMaster',
-          model: 'FestivalMaster',
+          type: 'any',
+          model: '',
           relationType: 'belongsTo',
                   keyFrom: 'festivalMasterId',
           keyTo: 'id'

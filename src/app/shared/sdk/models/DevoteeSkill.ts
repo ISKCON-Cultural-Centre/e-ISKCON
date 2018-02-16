@@ -1,7 +1,6 @@
 /* tslint:disable */
 import {
-  Devotee,
-  Skill
+  Devotee
 } from '../index';
 
 declare var Object: any;
@@ -10,7 +9,7 @@ export interface DevoteeSkillInterface {
   "skillId": string;
   "id"?: number;
   fkDevoteeSkillDevotee1rel?: Devotee;
-  fkDevoteeSkillSkill1rel?: Skill;
+  fkDevoteeSkillSkill1rel?: any;
 }
 
 export class DevoteeSkill implements DevoteeSkillInterface {
@@ -18,7 +17,7 @@ export class DevoteeSkill implements DevoteeSkillInterface {
   "skillId": string;
   "id": number;
   fkDevoteeSkillDevotee1rel: Devotee;
-  fkDevoteeSkillSkill1rel: Skill;
+  fkDevoteeSkillSkill1rel: any;
   constructor(data?: DevoteeSkillInterface) {
     Object.assign(this, data);
   }
@@ -76,8 +75,8 @@ export class DevoteeSkill implements DevoteeSkillInterface {
         },
         fkDevoteeSkillSkill1rel: {
           name: 'fkDevoteeSkillSkill1rel',
-          type: 'Skill',
-          model: 'Skill',
+          type: 'any',
+          model: '',
           relationType: 'belongsTo',
                   keyFrom: 'skillId',
           keyTo: 'id'

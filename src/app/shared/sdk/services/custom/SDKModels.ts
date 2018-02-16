@@ -9,26 +9,19 @@ import { DevoteeKarmiFamily } from '../../models/DevoteeKarmiFamily';
 import { DonationTypeMaster } from '../../models/DonationTypeMaster';
 import { EventMaster } from '../../models/EventMaster';
 import { NewContact } from '../../models/NewContact';
-import { OutreachMaster } from '../../models/OutreachMaster';
 import { Payment } from '../../models/Payment';
-import { PaymentModeMaster } from '../../models/PaymentModeMaster';
 import { Pledge } from '../../models/Pledge';
 import { PledgePayment } from '../../models/PledgePayment';
-import { RelationshipMaster } from '../../models/RelationshipMaster';
-import { SpiritualLevelMaster } from '../../models/SpiritualLevelMaster';
 import { Temple } from '../../models/Temple';
 import { TempleBranch } from '../../models/TempleBranch';
 import { ElectronicAddress } from '../../models/ElectronicAddress';
-import { ElectronicAddressTypeMaster } from '../../models/ElectronicAddressTypeMaster';
 import { PhysicalAddress } from '../../models/PhysicalAddress';
-import { PhysicalAddressTypeMaster } from '../../models/PhysicalAddressTypeMaster';
 import { ApprovalArtefact } from '../../models/ApprovalArtefact';
 import { ApprovalQue } from '../../models/ApprovalQue';
 import { ApprovalRule } from '../../models/ApprovalRule';
 import { Department } from '../../models/Department';
 import { DepartmentRole } from '../../models/DepartmentRole';
 import { RoleTaskMaster } from '../../models/RoleTaskMaster';
-import { TaskMaster } from '../../models/TaskMaster';
 import { MgCreditNote } from '../../models/MgCreditNote';
 import { MgDeliveryNote } from '../../models/MgDeliveryNote';
 import { DevoteeElectronicAddress } from '../../models/DevoteeElectronicAddress';
@@ -54,7 +47,6 @@ import { MgTaxCategoryComponent } from '../../models/MgTaxCategoryComponent';
 import { MgTaxComponent } from '../../models/MgTaxComponent';
 import { MgTaxLine } from '../../models/MgTaxLine';
 import { MgUnitOfMeasure } from '../../models/MgUnitOfMeasure';
-import { AsramaMaster } from '../../models/AsramaMaster';
 import { DevoteeAsrama } from '../../models/DevoteeAsrama';
 import { DevoteeLanguage } from '../../models/DevoteeLanguage';
 import { DevoteeService } from '../../models/DevoteeService';
@@ -64,13 +56,12 @@ import { DevoteeSkill } from '../../models/DevoteeSkill';
 import { DevoteeSpiritualProgress } from '../../models/DevoteeSpiritualProgress';
 import { DonationReceipt } from '../../models/DonationReceipt';
 import { FestivalCalendar } from '../../models/FestivalCalendar';
-import { FestivalMaster } from '../../models/FestivalMaster';
-import { Language } from '../../models/Language';
 import { MgHsn } from '../../models/MgHsn';
 import { MgOrder } from '../../models/MgOrder';
 import { ServiceArea } from '../../models/ServiceArea';
-import { Skill } from '../../models/Skill';
 import { SkillCategory } from '../../models/SkillCategory';
+import { LookupTableMaster } from '../../models/LookupTableMaster';
+import { LookupTableDetail } from '../../models/LookupTableDetail';
 
 export interface Models { [name: string]: any }
 
@@ -87,26 +78,19 @@ export class SDKModels {
     DonationTypeMaster: DonationTypeMaster,
     EventMaster: EventMaster,
     NewContact: NewContact,
-    OutreachMaster: OutreachMaster,
     Payment: Payment,
-    PaymentModeMaster: PaymentModeMaster,
     Pledge: Pledge,
     PledgePayment: PledgePayment,
-    RelationshipMaster: RelationshipMaster,
-    SpiritualLevelMaster: SpiritualLevelMaster,
     Temple: Temple,
     TempleBranch: TempleBranch,
     ElectronicAddress: ElectronicAddress,
-    ElectronicAddressTypeMaster: ElectronicAddressTypeMaster,
     PhysicalAddress: PhysicalAddress,
-    PhysicalAddressTypeMaster: PhysicalAddressTypeMaster,
     ApprovalArtefact: ApprovalArtefact,
     ApprovalQue: ApprovalQue,
     ApprovalRule: ApprovalRule,
     Department: Department,
     DepartmentRole: DepartmentRole,
     RoleTaskMaster: RoleTaskMaster,
-    TaskMaster: TaskMaster,
     MgCreditNote: MgCreditNote,
     MgDeliveryNote: MgDeliveryNote,
     DevoteeElectronicAddress: DevoteeElectronicAddress,
@@ -132,7 +116,6 @@ export class SDKModels {
     MgTaxComponent: MgTaxComponent,
     MgTaxLine: MgTaxLine,
     MgUnitOfMeasure: MgUnitOfMeasure,
-    AsramaMaster: AsramaMaster,
     DevoteeAsrama: DevoteeAsrama,
     DevoteeLanguage: DevoteeLanguage,
     DevoteeService: DevoteeService,
@@ -142,13 +125,12 @@ export class SDKModels {
     DevoteeSpiritualProgress: DevoteeSpiritualProgress,
     DonationReceipt: DonationReceipt,
     FestivalCalendar: FestivalCalendar,
-    FestivalMaster: FestivalMaster,
-    Language: Language,
     MgHsn: MgHsn,
     MgOrder: MgOrder,
     ServiceArea: ServiceArea,
-    Skill: Skill,
     SkillCategory: SkillCategory,
+    LookupTableMaster: LookupTableMaster,
+    LookupTableDetail: LookupTableDetail,
     
   };
 

@@ -12,7 +12,6 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
 import { DevoteeSkill } from '../../models/DevoteeSkill';
 import { Devotee } from '../../models/Devotee';
-import { Skill } from '../../models/Skill';
 
 
 /**

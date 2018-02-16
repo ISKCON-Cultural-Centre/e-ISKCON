@@ -11,7 +11,6 @@ import { ErrorHandler } from '../core/error.service';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
 import { DevoteeAsrama } from '../../models/DevoteeAsrama';
-import { AsramaMaster } from '../../models/AsramaMaster';
 import { Devotee } from '../../models/Devotee';
 
 
