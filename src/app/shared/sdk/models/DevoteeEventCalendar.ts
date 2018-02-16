@@ -8,13 +8,11 @@ declare var Object: any;
 export interface DevoteeEventCalendarInterface {
   "devoteeId": string;
   "eventDate": Date;
-  "eventMasterId": string;
+  "eventMasterId"?: string;
   "createdOn"?: Date;
   "updatedOn"?: Date;
   "createdBy"?: string;
   "updatedBy"?: string;
-  "created-on"?: Date;
-  "updated-on"?: Date;
   fkDevoteeEventCalendarDevotee2rel?: Devotee;
   fkDevoteeEventCalendarEventMaster1rel?: EventMaster;
 }
@@ -27,8 +25,6 @@ export class DevoteeEventCalendar implements DevoteeEventCalendarInterface {
   "updatedOn": Date;
   "createdBy": string;
   "updatedBy": string;
-  "created-on": Date;
-  "updated-on": Date;
   fkDevoteeEventCalendarDevotee2rel: Devotee;
   fkDevoteeEventCalendarEventMaster1rel: EventMaster;
   constructor(data?: DevoteeEventCalendarInterface) {
@@ -91,14 +87,6 @@ export class DevoteeEventCalendar implements DevoteeEventCalendarInterface {
         "updatedBy": {
           name: 'updatedBy',
           type: 'string'
-        },
-        "created-on": {
-          name: 'created-on',
-          type: 'Date'
-        },
-        "updated-on": {
-          name: 'updated-on',
-          type: 'Date'
         },
       },
       relations: {

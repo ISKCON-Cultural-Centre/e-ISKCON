@@ -12,7 +12,6 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
 import { Pledge } from '../../models/Pledge';
 import { Devotee } from '../../models/Devotee';
-import { DonationTypeMaster } from '../../models/DonationTypeMaster';
 
 
 /**
@@ -51,36 +50,6 @@ export class PledgeApi extends BaseLoopBackApi {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Pledges/:id/fkPledgeDevotee2rel";
-    let _routeParams: any = {
-      id: id
-    };
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    if (typeof refresh !== 'undefined' && refresh !== null) _urlParams.refresh = refresh;
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
-  }
-
-  /**
-   * Fetches belongsTo relation fkPledgeDonationTypeMaster1rel.
-   *
-   * @param {any} id Pledge id
-   *
-   * @param {boolean} refresh 
-   *
-   * @returns {object} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Pledge` object.)
-   * </em>
-   */
-  public getFkPledgeDonationTypeMaster1rel(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
-    let _method: string = "GET";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Pledges/:id/fkPledgeDonationTypeMaster1rel";
     let _routeParams: any = {
       id: id
     };

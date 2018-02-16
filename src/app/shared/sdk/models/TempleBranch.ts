@@ -6,16 +6,12 @@ import {
 
 declare var Object: any;
 export interface TempleBranchInterface {
-  "id": string;
-  "name": string;
-  "templeId": string;
-  "physicalAddressId": string;
-  "contactNumber": string;
-  "contactName": string;
-  "createdOn"?: Date;
-  "updatedOn"?: Date;
-  "createdBy"?: string;
-  "updatedBy"?: string;
+  "id"?: string;
+  "name"?: string;
+  "templeId"?: string;
+  "physicalAddressId"?: string;
+  "contactNumber"?: string;
+  "contactName"?: string;
   "created-on"?: Date;
   "updated-on"?: Date;
   fkTempleBranchTemple1rel?: Temple;
@@ -29,10 +25,6 @@ export class TempleBranch implements TempleBranchInterface {
   "physicalAddressId": string;
   "contactNumber": string;
   "contactName": string;
-  "createdOn": Date;
-  "updatedOn": Date;
-  "createdBy": string;
-  "updatedBy": string;
   "created-on": Date;
   "updated-on": Date;
   fkTempleBranchTemple1rel: Temple;
@@ -92,22 +84,6 @@ export class TempleBranch implements TempleBranchInterface {
         },
         "contactName": {
           name: 'contactName',
-          type: 'string'
-        },
-        "createdOn": {
-          name: 'createdOn',
-          type: 'Date'
-        },
-        "updatedOn": {
-          name: 'updatedOn',
-          type: 'Date'
-        },
-        "createdBy": {
-          name: 'createdBy',
-          type: 'string'
-        },
-        "updatedBy": {
-          name: 'updatedBy',
           type: 'string'
         },
         "created-on": {

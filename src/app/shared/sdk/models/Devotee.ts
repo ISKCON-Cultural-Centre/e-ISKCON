@@ -1,32 +1,40 @@
 /* tslint:disable */
 import {
-  SpiritualLevelMaster,
-  ElectronicAddress,
-  PhysicalAddress
+  Circle,
+  ServiceRoleMapping
 } from '../index';
 
 declare var Object: any;
 export interface DevoteeInterface {
-  "id": string;
-  "legalName": string;
+  "id"?: string;
+  "legalName"?: string;
   "circleId"?: string;
   "spiritualName"?: string;
-  "gender": boolean;
-  "physicalAddressId"?: string;
-  "electronicAddressId"?: string;
+  "gender"?: boolean;
   "shikshaLevel"?: string;
-  "spiritualLevelMasterId": string;
+  "creditLimit": string;
   "realm"?: string;
   "username"?: string;
-  "email": string;
+  "email"?: string;
+  "verificationtoken"?: string;
+  "createdBy"?: string;
+  "updatedBy"?: string;
+  "accessId"?: string;
+  "gothra"?: string;
+  "nakshatra"?: string;
+  "governmentUniqueId"?: string;
+  "incomeTaxId"?: string;
+  "lpmId"?: string;
+  "kcAssociationDate"?: Date;
+  "motherTongueLanguageId": string;
   "emailVerified"?: boolean;
   "created-on"?: Date;
   "updated-on"?: Date;
   "password"?: string;
   accessTokens?: any[];
-  fkDevoteeSpiritualLevelMaster1rel?: SpiritualLevelMaster;
-  fkDevoteeElectronicAddress1rel?: ElectronicAddress;
-  fkDevoteePhysicalAddress1rel?: PhysicalAddress;
+  fkDevoteeCircle1rel?: Circle;
+  roleMappings?: ServiceRoleMapping[];
+  fkDevoteeLanguage1rel?: any;
 }
 
 export class Devotee implements DevoteeInterface {
@@ -35,21 +43,30 @@ export class Devotee implements DevoteeInterface {
   "circleId": string;
   "spiritualName": string;
   "gender": boolean;
-  "physicalAddressId": string;
-  "electronicAddressId": string;
   "shikshaLevel": string;
-  "spiritualLevelMasterId": string;
+  "creditLimit": string;
   "realm": string;
   "username": string;
   "email": string;
+  "verificationtoken": string;
+  "createdBy": string;
+  "updatedBy": string;
+  "accessId": string;
+  "gothra": string;
+  "nakshatra": string;
+  "governmentUniqueId": string;
+  "incomeTaxId": string;
+  "lpmId": string;
+  "kcAssociationDate": Date;
+  "motherTongueLanguageId": string;
   "emailVerified": boolean;
   "created-on": Date;
   "updated-on": Date;
   "password": string;
   accessTokens: any[];
-  fkDevoteeSpiritualLevelMaster1rel: SpiritualLevelMaster;
-  fkDevoteeElectronicAddress1rel: ElectronicAddress;
-  fkDevoteePhysicalAddress1rel: PhysicalAddress;
+  fkDevoteeCircle1rel: Circle;
+  roleMappings: ServiceRoleMapping[];
+  fkDevoteeLanguage1rel: any;
   constructor(data?: DevoteeInterface) {
     Object.assign(this, data);
   }
@@ -103,20 +120,12 @@ export class Devotee implements DevoteeInterface {
           name: 'gender',
           type: 'boolean'
         },
-        "physicalAddressId": {
-          name: 'physicalAddressId',
-          type: 'string'
-        },
-        "electronicAddressId": {
-          name: 'electronicAddressId',
-          type: 'string'
-        },
         "shikshaLevel": {
           name: 'shikshaLevel',
           type: 'string'
         },
-        "spiritualLevelMasterId": {
-          name: 'spiritualLevelMasterId',
+        "creditLimit": {
+          name: 'creditLimit',
           type: 'string'
         },
         "realm": {
@@ -129,6 +138,50 @@ export class Devotee implements DevoteeInterface {
         },
         "email": {
           name: 'email',
+          type: 'string'
+        },
+        "verificationtoken": {
+          name: 'verificationtoken',
+          type: 'string'
+        },
+        "createdBy": {
+          name: 'createdBy',
+          type: 'string'
+        },
+        "updatedBy": {
+          name: 'updatedBy',
+          type: 'string'
+        },
+        "accessId": {
+          name: 'accessId',
+          type: 'string'
+        },
+        "gothra": {
+          name: 'gothra',
+          type: 'string'
+        },
+        "nakshatra": {
+          name: 'nakshatra',
+          type: 'string'
+        },
+        "governmentUniqueId": {
+          name: 'governmentUniqueId',
+          type: 'string'
+        },
+        "incomeTaxId": {
+          name: 'incomeTaxId',
+          type: 'string'
+        },
+        "lpmId": {
+          name: 'lpmId',
+          type: 'string'
+        },
+        "kcAssociationDate": {
+          name: 'kcAssociationDate',
+          type: 'Date'
+        },
+        "motherTongueLanguageId": {
+          name: 'motherTongueLanguageId',
           type: 'string'
         },
         "emailVerified": {
@@ -157,28 +210,28 @@ export class Devotee implements DevoteeInterface {
                   keyFrom: 'id',
           keyTo: 'userId'
         },
-        fkDevoteeSpiritualLevelMaster1rel: {
-          name: 'fkDevoteeSpiritualLevelMaster1rel',
-          type: 'SpiritualLevelMaster',
-          model: 'SpiritualLevelMaster',
+        fkDevoteeCircle1rel: {
+          name: 'fkDevoteeCircle1rel',
+          type: 'Circle',
+          model: 'Circle',
           relationType: 'belongsTo',
-                  keyFrom: 'spiritualLevelMasterId',
+                  keyFrom: 'circleId',
           keyTo: 'id'
         },
-        fkDevoteeElectronicAddress1rel: {
-          name: 'fkDevoteeElectronicAddress1rel',
-          type: 'ElectronicAddress',
-          model: 'ElectronicAddress',
-          relationType: 'belongsTo',
-                  keyFrom: 'electronicAddressId',
-          keyTo: 'id'
+        roleMappings: {
+          name: 'roleMappings',
+          type: 'ServiceRoleMapping[]',
+          model: 'ServiceRoleMapping',
+          relationType: 'hasMany',
+                  keyFrom: 'id',
+          keyTo: 'principalId'
         },
-        fkDevoteePhysicalAddress1rel: {
-          name: 'fkDevoteePhysicalAddress1rel',
-          type: 'PhysicalAddress',
-          model: 'PhysicalAddress',
+        fkDevoteeLanguage1rel: {
+          name: 'fkDevoteeLanguage1rel',
+          type: 'any',
+          model: '',
           relationType: 'belongsTo',
-                  keyFrom: 'physicalAddressId',
+                  keyFrom: 'motherTongueLanguageId',
           keyTo: 'id'
         },
       }

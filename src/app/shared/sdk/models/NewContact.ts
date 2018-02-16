@@ -6,10 +6,10 @@ import {
 
 declare var Object: any;
 export interface NewContactInterface {
-  "id": string;
-  "name": string;
-  "physicalAddressId": string;
-  "electronicAddressId": string;
+  "id"?: string;
+  "name"?: string;
+  "physicalAddressId"?: string;
+  "electronicAddressId"?: string;
   "reference"?: string;
   "comments"?: string;
   "createdOn"?: Date;

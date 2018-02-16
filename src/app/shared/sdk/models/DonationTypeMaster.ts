@@ -2,10 +2,8 @@
 
 declare var Object: any;
 export interface DonationTypeMasterInterface {
-  "id": string;
-  "donationTypeName": string;
-  "createdOn"?: Date;
-  "updatedOn"?: Date;
+  "id"?: string;
+  "donationTypeName"?: string;
   "createdBy"?: string;
   "updatedBy"?: string;
   "created-on"?: Date;
@@ -15,8 +13,6 @@ export interface DonationTypeMasterInterface {
 export class DonationTypeMaster implements DonationTypeMasterInterface {
   "id": string;
   "donationTypeName": string;
-  "createdOn": Date;
-  "updatedOn": Date;
   "createdBy": string;
   "updatedBy": string;
   "created-on": Date;
@@ -61,14 +57,6 @@ export class DonationTypeMaster implements DonationTypeMasterInterface {
         "donationTypeName": {
           name: 'donationTypeName',
           type: 'string'
-        },
-        "createdOn": {
-          name: 'createdOn',
-          type: 'Date'
-        },
-        "updatedOn": {
-          name: 'updatedOn',
-          type: 'Date'
         },
         "createdBy": {
           name: 'createdBy',

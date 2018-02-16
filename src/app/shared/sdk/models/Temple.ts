@@ -5,15 +5,11 @@ import {
 
 declare var Object: any;
 export interface TempleInterface {
-  "id": string;
-  "name": string;
-  "contactNumber": string;
-  "contactName": string;
-  "createdOn"?: Date;
-  "updatedOn"?: Date;
-  "createdBy"?: string;
-  "updatedBy"?: string;
-  "physicalAddressId": string;
+  "id"?: string;
+  "name"?: string;
+  "contactNumber"?: string;
+  "contactName"?: string;
+  "physicalAddressId"?: string;
   "created-on"?: Date;
   "updated-on"?: Date;
   fkTemplePhysicalAddress1rel?: PhysicalAddress;
@@ -24,10 +20,6 @@ export class Temple implements TempleInterface {
   "name": string;
   "contactNumber": string;
   "contactName": string;
-  "createdOn": Date;
-  "updatedOn": Date;
-  "createdBy": string;
-  "updatedBy": string;
   "physicalAddressId": string;
   "created-on": Date;
   "updated-on": Date;
@@ -79,22 +71,6 @@ export class Temple implements TempleInterface {
         },
         "contactName": {
           name: 'contactName',
-          type: 'string'
-        },
-        "createdOn": {
-          name: 'createdOn',
-          type: 'Date'
-        },
-        "updatedOn": {
-          name: 'updatedOn',
-          type: 'Date'
-        },
-        "createdBy": {
-          name: 'createdBy',
-          type: 'string'
-        },
-        "updatedBy": {
-          name: 'updatedBy',
           type: 'string'
         },
         "physicalAddressId": {

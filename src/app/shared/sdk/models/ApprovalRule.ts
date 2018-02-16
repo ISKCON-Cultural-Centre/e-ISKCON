@@ -2,11 +2,13 @@
 
 declare var Object: any;
 export interface ApprovalRuleInterface {
-  "id": string;
+  "id"?: string;
   "approvalArtefactId": string;
   "sequenceNo": number;
   "roleId": number;
   "lastApprovalSequenceInd": number;
+  "created-on"?: Date;
+  "updated-on"?: Date;
 }
 
 export class ApprovalRule implements ApprovalRuleInterface {
@@ -15,6 +17,8 @@ export class ApprovalRule implements ApprovalRuleInterface {
   "sequenceNo": number;
   "roleId": number;
   "lastApprovalSequenceInd": number;
+  "created-on": Date;
+  "updated-on": Date;
   constructor(data?: ApprovalRuleInterface) {
     Object.assign(this, data);
   }
@@ -67,6 +71,14 @@ export class ApprovalRule implements ApprovalRuleInterface {
         "lastApprovalSequenceInd": {
           name: 'lastApprovalSequenceInd',
           type: 'number'
+        },
+        "created-on": {
+          name: 'created-on',
+          type: 'Date'
+        },
+        "updated-on": {
+          name: 'updated-on',
+          type: 'Date'
         },
       },
       relations: {

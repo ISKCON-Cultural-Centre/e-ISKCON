@@ -1,19 +1,17 @@
 /* tslint:disable */
 import {
-  Devotee,
-  DonationTypeMaster
+  Devotee
 } from '../index';
 
 declare var Object: any;
 export interface PledgeInterface {
-  "id": string;
+  "id"?: string;
   "startDate": Date;
   "endDate"?: string;
   "pledgeAmount": string;
   "instalmentCount"?: number;
   "pauseInd": number;
-  "devoteeId": string;
-  "donationTypeMasterId": string;
+  "devoteeId"?: string;
   "createdOn"?: Date;
   "updatedOn"?: Date;
   "createdBy"?: string;
@@ -21,7 +19,6 @@ export interface PledgeInterface {
   "created-on"?: Date;
   "updated-on"?: Date;
   fkPledgeDevotee2rel?: Devotee;
-  fkPledgeDonationTypeMaster1rel?: DonationTypeMaster;
 }
 
 export class Pledge implements PledgeInterface {
@@ -32,7 +29,6 @@ export class Pledge implements PledgeInterface {
   "instalmentCount": number;
   "pauseInd": number;
   "devoteeId": string;
-  "donationTypeMasterId": string;
   "createdOn": Date;
   "updatedOn": Date;
   "createdBy": string;
@@ -40,7 +36,6 @@ export class Pledge implements PledgeInterface {
   "created-on": Date;
   "updated-on": Date;
   fkPledgeDevotee2rel: Devotee;
-  fkPledgeDonationTypeMaster1rel: DonationTypeMaster;
   constructor(data?: PledgeInterface) {
     Object.assign(this, data);
   }
@@ -102,10 +97,6 @@ export class Pledge implements PledgeInterface {
           name: 'devoteeId',
           type: 'string'
         },
-        "donationTypeMasterId": {
-          name: 'donationTypeMasterId',
-          type: 'string'
-        },
         "createdOn": {
           name: 'createdOn',
           type: 'Date'
@@ -138,14 +129,6 @@ export class Pledge implements PledgeInterface {
           model: 'Devotee',
           relationType: 'belongsTo',
                   keyFrom: 'devoteeId',
-          keyTo: 'id'
-        },
-        fkPledgeDonationTypeMaster1rel: {
-          name: 'fkPledgeDonationTypeMaster1rel',
-          type: 'DonationTypeMaster',
-          model: 'DonationTypeMaster',
-          relationType: 'belongsTo',
-                  keyFrom: 'donationTypeMasterId',
           keyTo: 'id'
         },
       }
