@@ -64,7 +64,7 @@ import { DummyService } from './shared/services/dummy.service';
     MyServicesService,
     GlobalEventsManager,
     NotificationService,
-    DevoteeApi,  
+    DevoteeApi,
     LookupService,
     DummyService
   ],
