@@ -1,0 +1,23 @@
+[{
+		"lookupTableName": "RelationshipMaster",
+		"lookupTableDisplayName": "Relationships",
+		"fields": [{
+			"fieldName": "id",
+			"fieldDisplayName": "Id"			
+		}, {
+			"fieldName": "relationName",
+			"fieldDisplayName": "Relation Name"			
+		}]
+	},
+	{
+		"lookupTableName": "FestivalMaster",
+		"lookupTableDisplayName": "Festivals",
+		"fields": [{
+			"fieldName": "id",
+			"fieldDisplayName": "Id"			
+		}, {
+			"fieldName": "festivalName",
+			"fieldDisplayName": "Festival Name"			
+		}]
+	}
+]
