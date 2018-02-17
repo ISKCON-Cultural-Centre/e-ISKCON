@@ -1,0 +1,18 @@
+[{
+		"id": "101",
+		"relationName": "Father"
+	},
+	{
+		"id": "102",
+		"relationName": "Mother"
+	},
+	{
+		"id": "103",
+		"relationName": "Grand-Father"
+	},
+	{
+		"id": "104",
+		"relationName": "Grand-Mother"
+	}
+	
+]
