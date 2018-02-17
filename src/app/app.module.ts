@@ -29,6 +29,7 @@ import { GlobalEventsManager } from './shared/services/globalEventsManager.servi
 import { NotificationService } from './shared/services/notification.service';
 import { LookupModule } from '../app/lookup/lookup.module';
 import { LookupService } from './shared/services/lookup.service';
+import { DummyService } from './shared/services/dummy.service';
 
 @NgModule({
   declarations: [
@@ -63,8 +64,9 @@ import { LookupService } from './shared/services/lookup.service';
     MyServicesService,
     GlobalEventsManager,
     NotificationService,
-    DevoteeApi,
-    LookupService
+    DevoteeApi,  
+    LookupService,
+    DummyService
   ],
   bootstrap: [AppComponent]
 })

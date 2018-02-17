@@ -5,9 +5,9 @@
 <div>
    <mat-input-container>
           <label>Lookup Table</label>
-          <mat-select [(ngModel)]="selectedLookupTable" (change)="getLookupTableData()">
+          <mat-select [(ngModel)]="selectedLookupTable" (change)="getLookupData()">
             <mat-option *ngFor="let lookupTable of lookupTables" [value]="lookupTable">
-              {{lookupTable.name}}
+              {{lookupTable.lookupTableDisplayName}}
             </mat-option>
           </mat-select>
         </mat-input-container>
@@ -46,9 +46,9 @@
     </ng-container>
 
     
-    <ng-container *ngFor="let column of displayedColumns | slice:1" [matColumnDef]="column">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>{{ column }}</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row[column] }}</mat-cell>
+    <ng-container *ngFor="let col of displayedColumns" [matColumnDef]="col.fieldName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>{{ col.fieldDisplayName }}</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row[col.fieldName] }}</mat-cell>
     </ng-container>
     
 
@@ -64,8 +64,8 @@
       <mat-cell *matCellDef="let row"> {{row.relationName}} </mat-cell>
     </ng-container> -->
 
-<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"></mat-row>
+<mat-header-row *matHeaderRowDef="columns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: columns;" (click)="selection.toggle(row)"></mat-row>
     </mat-table>
 
   <mat-paginator #paginator
