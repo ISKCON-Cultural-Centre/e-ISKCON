@@ -6,6 +6,8 @@ import { LookupService } from '../shared/services/lookup.service';
 import { AuthService } from '../shared/services/auth.service';
 import { NotificationService } from '../shared/services/notification.service';
 import { RelationshipMaster } from '../shared/sdk/models/RelationshipMaster';
+import { LookupData } from '../shared/services/models/lookupData';
+import { LookupTableData } from '../shared/services/models/lookupTableData';
 
 @Component({
   selector: 'app-lookup',
@@ -14,14 +16,16 @@ import { RelationshipMaster } from '../shared/sdk/models/RelationshipMaster';
 })
 export class LookupComponent implements OnInit {
 
-  relationships: RelationshipMaster[];
+  relationships: RelationshipMaster[];  
+  lookupData: LookupData[];
   isLoggedIn: Boolean;
   isLoggedIn$: Observable <Boolean>;
   devoteeName$: Observable <String>;
   username: String = '';
-  selectedLookupTable = {name:'Relationships'};
-  lookupTables = [{name:'Relationships'},{name:'Festivals'},{name:'Events'}];
-  displayedColumns = ['select', 'id', 'relationName'];
+  selectedLookupTable: LookupTableData;
+  lookupTables: LookupTableData[];
+  displayedColumns = []; //Used to store display Column Names and actual coulmn names
+  columns = []; //Used to refer to the actual columns
   selection = new SelectionModel(false, []);
   //dataSource = new MatTableDataSource<Element>(this.relationships);
   dataSource = new MatTableDataSource();  
@@ -36,16 +40,25 @@ export class LookupComponent implements OnInit {
       
      }
 
- getLookupTableData():void{
-   if (this.selectedLookupTable.name == "Relationships"){
+ getLookupData():void{
+   /*if (this.selectedLookupTable.lookupTableName == "RelationshipMaster"){
        this.getRelationships();
    }
-   else if (this.selectedLookupTable.name == "Events"){
+   else if (this.selectedLookupTable.lookupTableName == "EventsMaster"){
        this.getEvents();
    }
-   else if (this.selectedLookupTable.name == "Festivals"){
+   else if (this.selectedLookupTable.lookupTableName == "FestivalMaster"){
        this.getFestivals();
-   }
+   }*/
+   this.lookupService.getLookupData(this.selectedLookupTable.lookupTableName)
+   .subscribe(lookupData=> {(this.dataSource = new MatTableDataSource(lookupData)),
+     (this.selectedLookupTable.fields.forEach((obj,index)=>{this.displayedColumns.push(obj);this.columns.push(obj.fieldName);})), (this.dataSource.paginator = this.paginator),(this.dataSource.sort = this.sort) 
+     });
+ }
+
+ getLookupTableData():void{
+   this.lookupService.getLookupTableData()
+      .subscribe(lookupTables => {(this.lookupTables = lookupTables)});
  }
 
  getRelationships(): void {
@@ -64,7 +77,7 @@ export class LookupComponent implements OnInit {
     this.lookupService.getFestivals()
       .subscribe(festivals => {(this.dataSource = new MatTableDataSource(festivals)),(this.displayedColumns = ['select', 'id', 'festivalName']),(this.dataSource.paginator = this.paginator),(this.dataSource.sort = this.sort) 
       });
-  }  
+  }
 
  ngOnInit() {
 	this.devoteeName$ = this.authService.getDevoteeName;
@@ -75,7 +88,8 @@ export class LookupComponent implements OnInit {
         this.isLoggedIn = isLoggedIn;
         if (isLoggedIn) {
           this.username = this.authService.getCurrentUserData();
-          this.getRelationships();
+          this.getLookupTableData();
+          //this.getRelationships();
           //this.dataSource = new MatTableDataSource(this.relationships);
       } else {}
     });
