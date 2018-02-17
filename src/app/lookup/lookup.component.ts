@@ -18,7 +18,7 @@ import { LookupEntryComponent } from './lookup-entry/lookup-entry.component';
   entryComponents:[ LookupEntryComponent ]
 })
 export class LookupComponent implements OnInit {
-  
+
   relationships: RelationshipMaster[];  
   lookupData: LookupData[];
   newLookupData:LookupData;
