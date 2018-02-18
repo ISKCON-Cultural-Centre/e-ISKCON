@@ -51,7 +51,7 @@ export class LookupComponent implements OnInit {
        this.getFestivals();
    }*/
    this.displayedColumns = [];
-   this.columns = [];
+   this.columns = ['select'];
    this.lookupService.getLookupData(this.selectedLookupTable.lookupTableName)
    .subscribe(lookupData=> {(this.dataSource = new MatTableDataSource(lookupData)),
      (this.selectedLookupTable.fields.forEach((obj,index)=>{this.displayedColumns.push(obj);this.columns.push(obj.fieldName);})), (this.dataSource.paginator = this.paginator),(this.dataSource.sort = this.sort) 
