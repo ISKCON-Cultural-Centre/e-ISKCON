@@ -18,6 +18,15 @@
 		}, {
 			"fieldName": "festivalName",
 			"fieldDisplayName": "Festival Name"			
+		}, {
+			"fieldName": "description",
+			"fieldDisplayName": "Description"			
+		}, {
+			"fieldName": "date",
+			"fieldDisplayName": "Date"			
+		}, {
+			"fieldName": "comments",
+			"fieldDisplayName": "Comments"			
 		}]
 	}
 ]
