@@ -12,10 +12,10 @@ import { CatalogueComponent } from './matchless-gifts/catalogue/catalogue.compon
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'dashboard', component: DashboardComponent , canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'changePassword', component: ChangePasswordComponent },
-  { path: 'resetPassword', component: ResetPasswordComponent },  
+  { path: 'resetPassword', component: ResetPasswordComponent },
   { path: 'devotee', component: DevoteeComponent, canActivate: [AuthGuard] },
   { path: 'reset', component: ResetPasswordComponent },
   { path: '', redirectTo: 'dashboard', pathMatch: 'full', canActivate: [AuthGuard] },

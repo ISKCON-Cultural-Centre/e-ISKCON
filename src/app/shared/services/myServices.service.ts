@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 
-import { DepartmentApi } from '../sdk';
+import { DevoteeApi } from '../sdk';
 import { Department } from '../sdk/models/Department';
 
 
@@ -13,12 +13,11 @@ import { Department } from '../sdk/models/Department';
 export class MyServicesService {
 
   constructor(
-     private departmentApi: DepartmentApi 
+     private devoteeApi: DevoteeApi
     ) { }
 
   getAuthorizedDepartments(): Observable<Department[]> {
-    return this.departmentApi.find();
-      }
-
-    // return of(MYDEPARTMENTS);
+    return this.devoteeApi.getDepartments()
+    .map(res => { return res.departments.map(department => new Department(department));
+      }); }
   }

@@ -1,6 +1,7 @@
 /* tslint:disable */
 import {
   Circle,
+  ServiceRoleMapping,
   Language
 } from '../index';
 
@@ -33,6 +34,7 @@ export interface DevoteeInterface {
   "password"?: string;
   accessTokens?: any[];
   fkDevoteeCircle1rel?: Circle;
+  roleMappings?: ServiceRoleMapping[];
   fkDevoteeLanguage1rel?: Language;
 }
 
@@ -64,6 +66,7 @@ export class Devotee implements DevoteeInterface {
   "password": string;
   accessTokens: any[];
   fkDevoteeCircle1rel: Circle;
+  roleMappings: ServiceRoleMapping[];
   fkDevoteeLanguage1rel: Language;
   constructor(data?: DevoteeInterface) {
     Object.assign(this, data);
@@ -215,6 +218,14 @@ export class Devotee implements DevoteeInterface {
           relationType: 'belongsTo',
                   keyFrom: 'circleId',
           keyTo: 'id'
+        },
+        roleMappings: {
+          name: 'roleMappings',
+          type: 'ServiceRoleMapping[]',
+          model: 'ServiceRoleMapping',
+          relationType: 'hasMany',
+                  keyFrom: 'id',
+          keyTo: 'principalId'
         },
         fkDevoteeLanguage1rel: {
           name: 'fkDevoteeLanguage1rel',

@@ -1,4 +1,59 @@
-<div class="container">
+<div fxLayout="row" fxFlex>
+    <mat-sidenav-container fxFlex>
+        <mat-sidenav #mainSideNav mode="over" closed  >
+            <mat-toolbar color="primary" *ngIf="isLoggedIn$ | async as isLoggedIn">
+               My Departments
+            </mat-toolbar>
+            <mat-nav-list *ngIf="isLoggedIn$ | async as isLoggedIn">
+                <a *ngFor="let myDepartment of myDepartments"
+                   mat-list-item
+                   mat-ripple
+                   [style.position]="'relative'"
+                   routerLinkActive="selected"
+                   [routerLink]="[myDepartment.route]">
+                  <mat-icon *ngIf="myDepartment.icon">{{myDepartment.icon}}</mat-icon>
+                    <span>{{myDepartment.departmentName}}</span>
+                </a>
+            </mat-nav-list>
+          </mat-sidenav>
+          <mat-toolbar color="primary" *ngIf="isLoggedIn$ | async as isLoggedIn">
+            <button md-icon-button (click)="mainSideNav.toggle()">
+                  <mat-icon *ngIf="mainSideNav.opened">chevron_left</mat-icon>
+                  <mat-icon *ngIf="!mainSideNav.opened">menu</mat-icon>
+              </button>
+              <span class="fill-remaining-space"></span>  
+              <span>ISKCON Cultural Centre</span>
+              <span class="fill-remaining-space"></span>  
+              <button md-icon-button routerLink="dashboard">
+                  <mat-icon >home</mat-icon>
+              </button>              
+              <button mat-button [matMenuTriggerFor]="profileMenu">
+                  {{devoteeName$ | async}}
+                </button> 
+              <mat-menu #profileMenu="matMenu">
+                  <button mat-menu-item>
+                    <mat-icon>perm_identity</mat-icon>
+                    <span>My Profile</span>
+                  </button>
+                  <button mat-menu-item routerLink="changePassword" >
+                      <mat-icon>vpn_keyy</mat-icon>
+                      <span>Change Password</span>
+                    </button>    
+                  <button mat-menu-item  (click)="onLogout()" *ngIf="isLoggedIn">
+                    <mat-icon>exit_to_app</mat-icon>
+                    <span>Logout</span>
+                  </button>
+                </mat-menu>               
+          </mat-toolbar>
+      <router-outlet></router-outlet>
+      <footer>
+          Copyright &copy; ISKCON Cultural Centre, Bangalore
+      </footer>      
+    </mat-sidenav-container> 
+  </div>
+  
+
+<!-- <div class="container">
 
   <header>
       <app-header></app-header>  
@@ -20,3 +75,4 @@
   </footer>
   
 </div>
+  -->
