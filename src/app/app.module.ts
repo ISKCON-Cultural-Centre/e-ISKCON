@@ -8,7 +8,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { MaterialModule } from './material.module';
 
-import { SDKBrowserModule } from './shared/sdk';
+import { SDKBrowserModule, DevoteeApi } from './shared/sdk';
 import { AuthGuard, AuthService } from './shared/services';
 import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './pageNotFound.component';
@@ -59,7 +59,8 @@ import { NotificationService } from './shared/services/notification.service';
     MessageService,
     MyServicesService,
     GlobalEventsManager,
-    NotificationService
+    NotificationService,
+    DevoteeApi
   ],
   bootstrap: [AppComponent]
 })
