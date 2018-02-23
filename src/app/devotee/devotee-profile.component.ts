@@ -24,6 +24,11 @@ export class DevoteeProfileComponent implements OnInit {
   filteredStates: Observable<Devotee[]> ;  
   submitted = false;
 
+  personalForm = new FormGroup ({
+    name: new FormControl()
+  });
+
+
   email = new FormControl('', [
     Validators.required]);
   shikshaLevel = new FormControl('', [Validators.required, Validators.email]);
@@ -32,6 +37,7 @@ export class DevoteeProfileComponent implements OnInit {
     private router: Router, 
     private authService: AuthService,    
     private fb: FormBuilder) {
+
   }
 
   ngOnInit() {
@@ -41,6 +47,10 @@ export class DevoteeProfileComponent implements OnInit {
     .subscribe( devotee => {this.devotee = devotee; console.log(devotee);});
   }
 
+  createForm() {
+    this.heroForm = this.fb.group({
+      name: '', // <--- the FormControl called "name"
+    });  
 
 
   // TODO: Remove this when we're done
