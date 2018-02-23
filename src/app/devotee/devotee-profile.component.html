@@ -18,7 +18,7 @@
         <input matInput placeholder="Spiritual Name">
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Circle" aria-label="State" [matAutocomplete]="auto5" [formControl]="stateCtrl">
+        <input matInput placeholder="Circle" aria-label="State" [matAutocomplete]="auto5">
         <mat-autocomplete #auto5="matAutocomplete">
           <mat-option *ngFor="let state of filteredStates | async " [value]="state.name">
             <img style="vertical-align:middle;" aria-hidden src="{{state.flag}}" height="25" />
@@ -79,7 +79,7 @@
     <fieldset>
       <legend>Skill</legend>
       <mat-form-field>
-        <input matInput placeholder="Search Skill" aria-label="State" [matAutocomplete]="auto1" [formControl]="stateCtrl">
+        <input matInput placeholder="Search Skill" aria-label="State" [matAutocomplete]="auto1">
         <mat-autocomplete #auto1="matAutocomplete">
           <mat-option *ngFor="let state of filteredStates | async " [value]="state.name">
             <img style="vertical-align:middle;" aria-hidden src="{{state.flag}}" height="25" />
@@ -93,7 +93,7 @@
     <fieldset>
       <legend>Area of Interest</legend>
       <mat-form-field>
-        <input matInput placeholder="Search Interest" aria-label="State" [matAutocomplete]="auto2" [formControl]="stateCtrl">
+        <input matInput placeholder="Search Interest" aria-label="State" [matAutocomplete]="auto2">
         <mat-autocomplete #auto2="matAutocomplete">
           <mat-option *ngFor="let state of filteredStates | async" [value]="state.name">
             <img style="vertical-align:middle;" aria-hidden src="{{state.flag}}" height="25" />
@@ -110,7 +110,7 @@
         <tr>
           <td>
             <mat-form-field>
-              <input matInput placeholder="Search Interest" aria-label="State" [matAutocomplete]="auto3" [formControl]="stateCtrl">
+              <input matInput placeholder="Search Interest" aria-label="State" [matAutocomplete]="auto3">
               <mat-autocomplete #auto3="matAutocomplete">
                 <mat-option *ngFor="let state of filteredStates | async" [value]="state.name">
                   <img style="vertical-align:middle;" aria-hidden src="{{state.flag}}" height="25" />
@@ -158,7 +158,7 @@
       <input matInput placeholder="Credit Limit">
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Categiry" aria-label="State" [matAutocomplete]="auto6" [formControl]="stateCtrl">
+      <input matInput placeholder="Categiry" aria-label="State" [matAutocomplete]="auto6">
       <mat-autocomplete #auto6="matAutocomplete">
         <mat-option *ngFor="let state of filteredStates | async" [value]="state.name">
           <img style="vertical-align:middle;" aria-hidden src="{{state.flag}}" height="25" />
