@@ -15,7 +15,7 @@ import { map } from 'rxjs/operators/map';
 })
 export class DevoteeProfileComponent implements OnInit {
 
-  @Input() devotee: Devotee;
+  @Input() devoteeId: String;
 
   submitted = false;
 
