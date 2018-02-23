@@ -12,6 +12,7 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
 import { DevoteeSpiritualProgress } from '../../models/DevoteeSpiritualProgress';
 import { Devotee } from '../../models/Devotee';
+import { SpiritualLevelMaster } from '../../models/SpiritualLevelMaster';
 
 
 /**

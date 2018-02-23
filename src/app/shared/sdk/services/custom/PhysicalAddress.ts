@@ -11,6 +11,7 @@ import { ErrorHandler } from '../core/error.service';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
 import { PhysicalAddress } from '../../models/PhysicalAddress';
+import { PhysicalAddressTypeMaster } from '../../models/PhysicalAddressTypeMaster';
 
 
 /**

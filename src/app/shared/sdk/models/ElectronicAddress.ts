@@ -1,4 +1,7 @@
 /* tslint:disable */
+import {
+  ElectronicAddressTypeMaster
+} from '../index';
 
 declare var Object: any;
 export interface ElectronicAddressInterface {
@@ -11,7 +14,7 @@ export interface ElectronicAddressInterface {
   "updatedBy"?: string;
   "created-on"?: Date;
   "updated-on"?: Date;
-  fkElectronicAddressElectronicAddressTypeMaster1rel?: any;
+  fkElectronicAddressElectronicAddressTypeMaster1rel?: ElectronicAddressTypeMaster;
 }
 
 export class ElectronicAddress implements ElectronicAddressInterface {
@@ -24,7 +27,7 @@ export class ElectronicAddress implements ElectronicAddressInterface {
   "updatedBy": string;
   "created-on": Date;
   "updated-on": Date;
-  fkElectronicAddressElectronicAddressTypeMaster1rel: any;
+  fkElectronicAddressElectronicAddressTypeMaster1rel: ElectronicAddressTypeMaster;
   constructor(data?: ElectronicAddressInterface) {
     Object.assign(this, data);
   }
@@ -98,8 +101,8 @@ export class ElectronicAddress implements ElectronicAddressInterface {
       relations: {
         fkElectronicAddressElectronicAddressTypeMaster1rel: {
           name: 'fkElectronicAddressElectronicAddressTypeMaster1rel',
-          type: 'any',
-          model: '',
+          type: 'ElectronicAddressTypeMaster',
+          model: 'ElectronicAddressTypeMaster',
           relationType: 'belongsTo',
                   keyFrom: 'electronicAddressTypeMasterId',
           keyTo: 'id'

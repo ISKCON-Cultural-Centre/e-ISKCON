@@ -1,6 +1,7 @@
 /* tslint:disable */
 import {
-  Devotee
+  Devotee,
+  SpiritualLevelMaster
 } from '../index';
 
 declare var Object: any;
@@ -17,7 +18,7 @@ export interface DevoteeSpiritualProgressInterface {
   "created-on"?: Date;
   "updated-on"?: Date;
   fkDevoteeSpiritualFamilyDevotee1rel?: Devotee;
-  fkDevoteeSpiritualFamilySpiritualLevelMaster1rel?: any;
+  fkDevoteeSpiritualFamilySpiritualLevelMaster1rel?: SpiritualLevelMaster;
 }
 
 export class DevoteeSpiritualProgress implements DevoteeSpiritualProgressInterface {
@@ -33,7 +34,7 @@ export class DevoteeSpiritualProgress implements DevoteeSpiritualProgressInterfa
   "created-on": Date;
   "updated-on": Date;
   fkDevoteeSpiritualFamilyDevotee1rel: Devotee;
-  fkDevoteeSpiritualFamilySpiritualLevelMaster1rel: any;
+  fkDevoteeSpiritualFamilySpiritualLevelMaster1rel: SpiritualLevelMaster;
   constructor(data?: DevoteeSpiritualProgressInterface) {
     Object.assign(this, data);
   }
@@ -123,8 +124,8 @@ export class DevoteeSpiritualProgress implements DevoteeSpiritualProgressInterfa
         },
         fkDevoteeSpiritualFamilySpiritualLevelMaster1rel: {
           name: 'fkDevoteeSpiritualFamilySpiritualLevelMaster1rel',
-          type: 'any',
-          model: '',
+          type: 'SpiritualLevelMaster',
+          model: 'SpiritualLevelMaster',
           relationType: 'belongsTo',
                   keyFrom: 'spiritualLevelMasterId',
           keyTo: 'id'

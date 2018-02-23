@@ -1,7 +1,9 @@
 /* tslint:disable */
 import {
   Circle,
-  ServiceRoleMapping
+  ServiceRoleMapping,
+  GothraMaster,
+  NakshatraMaster
 } from '../index';
 
 declare var Object: any;
@@ -10,9 +12,9 @@ export interface DevoteeInterface {
   "legalName"?: string;
   "circleId"?: string;
   "spiritualName"?: string;
-  "gender"?: boolean;
+  "gender"?: string;
   "shikshaLevel"?: string;
-  "creditLimit": string;
+  "creditLimit": number;
   "realm"?: string;
   "username"?: string;
   "email"?: string;
@@ -27,14 +29,18 @@ export interface DevoteeInterface {
   "lpmId"?: string;
   "kcAssociationDate"?: Date;
   "motherTongueLanguageId": string;
+  "dateOfBirth"?: Date;
+  "dayMonthOfBirth": string;
   "emailVerified"?: boolean;
   "created-on"?: Date;
   "updated-on"?: Date;
   "password"?: string;
-  accessTokens?: any[];
   fkDevoteeCircle1rel?: Circle;
   roleMappings?: ServiceRoleMapping[];
+  accessTokens?: any[];
   fkDevoteeLanguage1rel?: any;
+  fkDevoteeGothraMaster1rel?: GothraMaster;
+  fkDevoteeNakshatraMaster1rel?: NakshatraMaster;
 }
 
 export class Devotee implements DevoteeInterface {
@@ -42,9 +48,9 @@ export class Devotee implements DevoteeInterface {
   "legalName": string;
   "circleId": string;
   "spiritualName": string;
-  "gender": boolean;
+  "gender": string;
   "shikshaLevel": string;
-  "creditLimit": string;
+  "creditLimit": number;
   "realm": string;
   "username": string;
   "email": string;
@@ -59,14 +65,18 @@ export class Devotee implements DevoteeInterface {
   "lpmId": string;
   "kcAssociationDate": Date;
   "motherTongueLanguageId": string;
+  "dateOfBirth": Date;
+  "dayMonthOfBirth": string;
   "emailVerified": boolean;
   "created-on": Date;
   "updated-on": Date;
   "password": string;
-  accessTokens: any[];
   fkDevoteeCircle1rel: Circle;
   roleMappings: ServiceRoleMapping[];
+  accessTokens: any[];
   fkDevoteeLanguage1rel: any;
+  fkDevoteeGothraMaster1rel: GothraMaster;
+  fkDevoteeNakshatraMaster1rel: NakshatraMaster;
   constructor(data?: DevoteeInterface) {
     Object.assign(this, data);
   }
@@ -118,7 +128,7 @@ export class Devotee implements DevoteeInterface {
         },
         "gender": {
           name: 'gender',
-          type: 'boolean'
+          type: 'string'
         },
         "shikshaLevel": {
           name: 'shikshaLevel',
@@ -126,7 +136,7 @@ export class Devotee implements DevoteeInterface {
         },
         "creditLimit": {
           name: 'creditLimit',
-          type: 'string'
+          type: 'number'
         },
         "realm": {
           name: 'realm',
@@ -184,6 +194,14 @@ export class Devotee implements DevoteeInterface {
           name: 'motherTongueLanguageId',
           type: 'string'
         },
+        "dateOfBirth": {
+          name: 'dateOfBirth',
+          type: 'Date'
+        },
+        "dayMonthOfBirth": {
+          name: 'dayMonthOfBirth',
+          type: 'string'
+        },
         "emailVerified": {
           name: 'emailVerified',
           type: 'boolean'
@@ -202,14 +220,6 @@ export class Devotee implements DevoteeInterface {
         },
       },
       relations: {
-        accessTokens: {
-          name: 'accessTokens',
-          type: 'any[]',
-          model: '',
-          relationType: 'hasMany',
-                  keyFrom: 'id',
-          keyTo: 'userId'
-        },
         fkDevoteeCircle1rel: {
           name: 'fkDevoteeCircle1rel',
           type: 'Circle',
@@ -226,6 +236,14 @@ export class Devotee implements DevoteeInterface {
                   keyFrom: 'id',
           keyTo: 'principalId'
         },
+        accessTokens: {
+          name: 'accessTokens',
+          type: 'any[]',
+          model: '',
+          relationType: 'hasMany',
+                  keyFrom: 'id',
+          keyTo: 'userId'
+        },
         fkDevoteeLanguage1rel: {
           name: 'fkDevoteeLanguage1rel',
           type: 'any',
@@ -233,6 +251,22 @@ export class Devotee implements DevoteeInterface {
           relationType: 'belongsTo',
                   keyFrom: 'motherTongueLanguageId',
           keyTo: 'id'
+        },
+        fkDevoteeGothraMaster1rel: {
+          name: 'fkDevoteeGothraMaster1rel',
+          type: 'GothraMaster',
+          model: 'GothraMaster',
+          relationType: 'belongsTo',
+                  keyFrom: 'gothra',
+          keyTo: 'gothra'
+        },
+        fkDevoteeNakshatraMaster1rel: {
+          name: 'fkDevoteeNakshatraMaster1rel',
+          type: 'NakshatraMaster',
+          model: 'NakshatraMaster',
+          relationType: 'belongsTo',
+                  keyFrom: 'nakshatra',
+          keyTo: 'nakshatra'
         },
       }
     }

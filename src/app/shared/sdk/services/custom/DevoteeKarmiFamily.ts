@@ -12,6 +12,7 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
 import { DevoteeKarmiFamily } from '../../models/DevoteeKarmiFamily';
 import { Devotee } from '../../models/Devotee';
+import { RelationshipMaster } from '../../models/RelationshipMaster';
 
 
 /**

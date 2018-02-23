@@ -1,6 +1,7 @@
 /* tslint:disable */
 import {
-  ServiceRole
+  ServiceRole,
+  TaskMaster
 } from '../index';
 
 declare var Object: any;
@@ -8,14 +9,14 @@ export interface RoleTaskMasterInterface {
   "taskMasterId": string;
   "roleId": string;
   fkServiceTaskMasterService1rel?: ServiceRole;
-  fkRoleTaskMasterTaskMaster1rel?: any;
+  fkRoleTaskMasterTaskMaster1rel?: TaskMaster;
 }
 
 export class RoleTaskMaster implements RoleTaskMasterInterface {
   "taskMasterId": string;
   "roleId": string;
   fkServiceTaskMasterService1rel: ServiceRole;
-  fkRoleTaskMasterTaskMaster1rel: any;
+  fkRoleTaskMasterTaskMaster1rel: TaskMaster;
   constructor(data?: RoleTaskMasterInterface) {
     Object.assign(this, data);
   }
@@ -69,8 +70,8 @@ export class RoleTaskMaster implements RoleTaskMasterInterface {
         },
         fkRoleTaskMasterTaskMaster1rel: {
           name: 'fkRoleTaskMasterTaskMaster1rel',
-          type: 'any',
-          model: '',
+          type: 'TaskMaster',
+          model: 'TaskMaster',
           relationType: 'belongsTo',
                   keyFrom: 'taskMasterId',
           keyTo: 'id'

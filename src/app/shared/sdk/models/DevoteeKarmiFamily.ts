@@ -1,6 +1,7 @@
 /* tslint:disable */
 import {
-  Devotee
+  Devotee,
+  RelationshipMaster
 } from '../index';
 
 declare var Object: any;
@@ -15,7 +16,7 @@ export interface DevoteeKarmiFamilyInterface {
   "updatedBy"?: string;
   fkDevoteeKarmiFamilyDevotee1rel?: Devotee;
   fkDevoteeKarmiFamilyDevotee2rel?: Devotee;
-  fkDevoteeKarmiFamilyRelationshipMaster1rel?: any;
+  fkDevoteeKarmiFamilyRelationshipMaster1rel?: RelationshipMaster;
 }
 
 export class DevoteeKarmiFamily implements DevoteeKarmiFamilyInterface {
@@ -29,7 +30,7 @@ export class DevoteeKarmiFamily implements DevoteeKarmiFamilyInterface {
   "updatedBy": string;
   fkDevoteeKarmiFamilyDevotee1rel: Devotee;
   fkDevoteeKarmiFamilyDevotee2rel: Devotee;
-  fkDevoteeKarmiFamilyRelationshipMaster1rel: any;
+  fkDevoteeKarmiFamilyRelationshipMaster1rel: RelationshipMaster;
   constructor(data?: DevoteeKarmiFamilyInterface) {
     Object.assign(this, data);
   }
@@ -115,8 +116,8 @@ export class DevoteeKarmiFamily implements DevoteeKarmiFamilyInterface {
         },
         fkDevoteeKarmiFamilyRelationshipMaster1rel: {
           name: 'fkDevoteeKarmiFamilyRelationshipMaster1rel',
-          type: 'any',
-          model: '',
+          type: 'RelationshipMaster',
+          model: 'RelationshipMaster',
           relationType: 'belongsTo',
                   keyFrom: 'relationshipId',
           keyTo: 'id'

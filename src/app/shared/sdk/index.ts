@@ -54,19 +54,26 @@ import { DevoteeKarmiFamilyApi } from './services/custom/DevoteeKarmiFamily';
 import { DonationTypeMasterApi } from './services/custom/DonationTypeMaster';
 import { EventMasterApi } from './services/custom/EventMaster';
 import { NewContactApi } from './services/custom/NewContact';
+import { OutreachMasterApi } from './services/custom/OutreachMaster';
 import { PaymentApi } from './services/custom/Payment';
+import { PaymentModeMasterApi } from './services/custom/PaymentModeMaster';
 import { PledgeApi } from './services/custom/Pledge';
 import { PledgePaymentApi } from './services/custom/PledgePayment';
+import { RelationshipMasterApi } from './services/custom/RelationshipMaster';
+import { SpiritualLevelMasterApi } from './services/custom/SpiritualLevelMaster';
 import { TempleApi } from './services/custom/Temple';
 import { TempleBranchApi } from './services/custom/TempleBranch';
 import { ElectronicAddressApi } from './services/custom/ElectronicAddress';
+import { ElectronicAddressTypeMasterApi } from './services/custom/ElectronicAddressTypeMaster';
 import { PhysicalAddressApi } from './services/custom/PhysicalAddress';
+import { PhysicalAddressTypeMasterApi } from './services/custom/PhysicalAddressTypeMaster';
 import { ApprovalArtefactApi } from './services/custom/ApprovalArtefact';
 import { ApprovalQueApi } from './services/custom/ApprovalQue';
 import { ApprovalRuleApi } from './services/custom/ApprovalRule';
 import { DepartmentApi } from './services/custom/Department';
 import { DepartmentRoleApi } from './services/custom/DepartmentRole';
 import { RoleTaskMasterApi } from './services/custom/RoleTaskMaster';
+import { TaskMasterApi } from './services/custom/TaskMaster';
 import { MgCreditNoteApi } from './services/custom/MgCreditNote';
 import { MgDeliveryNoteApi } from './services/custom/MgDeliveryNote';
 import { DevoteeElectronicAddressApi } from './services/custom/DevoteeElectronicAddress';
@@ -107,6 +114,9 @@ import { ServiceAreaApi } from './services/custom/ServiceArea';
 import { SkillCategoryApi } from './services/custom/SkillCategory';
 import { LookupTableMasterApi } from './services/custom/LookupTableMaster';
 import { LookupTableDetailApi } from './services/custom/LookupTableDetail';
+import { LookupMasterApi } from './services/custom/LookupMaster';
+import { GothraMasterApi } from './services/custom/GothraMaster';
+import { NakshatraMasterApi } from './services/custom/NakshatraMaster';
 /**
 * @module SDKBrowserModule
 * @description
@@ -145,19 +155,26 @@ export class SDKBrowserModule {
         DonationTypeMasterApi,
         EventMasterApi,
         NewContactApi,
+        OutreachMasterApi,
         PaymentApi,
+        PaymentModeMasterApi,
         PledgeApi,
         PledgePaymentApi,
+        RelationshipMasterApi,
+        SpiritualLevelMasterApi,
         TempleApi,
         TempleBranchApi,
         ElectronicAddressApi,
+        ElectronicAddressTypeMasterApi,
         PhysicalAddressApi,
+        PhysicalAddressTypeMasterApi,
         ApprovalArtefactApi,
         ApprovalQueApi,
         ApprovalRuleApi,
         DepartmentApi,
         DepartmentRoleApi,
         RoleTaskMasterApi,
+        TaskMasterApi,
         MgCreditNoteApi,
         MgDeliveryNoteApi,
         DevoteeElectronicAddressApi,
@@ -198,6 +215,9 @@ export class SDKBrowserModule {
         SkillCategoryApi,
         LookupTableMasterApi,
         LookupTableDetailApi,
+        LookupMasterApi,
+        GothraMasterApi,
+        NakshatraMasterApi,
         internalStorageProvider,
         { provide: SDKStorage, useClass: StorageBrowser }
       ]

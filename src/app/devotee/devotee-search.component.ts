@@ -35,10 +35,6 @@ export class DevoteeSearchComponent implements OnInit {
     });
   }
 
-  ngOnDestroy() {
-
-  }
-
   onSubmit() { this.submitted = true; }
 
   filterDevotees(name?: string)  {

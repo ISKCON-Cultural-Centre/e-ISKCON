@@ -9,19 +9,26 @@ import { DevoteeKarmiFamily } from '../../models/DevoteeKarmiFamily';
 import { DonationTypeMaster } from '../../models/DonationTypeMaster';
 import { EventMaster } from '../../models/EventMaster';
 import { NewContact } from '../../models/NewContact';
+import { OutreachMaster } from '../../models/OutreachMaster';
 import { Payment } from '../../models/Payment';
+import { PaymentModeMaster } from '../../models/PaymentModeMaster';
 import { Pledge } from '../../models/Pledge';
 import { PledgePayment } from '../../models/PledgePayment';
+import { RelationshipMaster } from '../../models/RelationshipMaster';
+import { SpiritualLevelMaster } from '../../models/SpiritualLevelMaster';
 import { Temple } from '../../models/Temple';
 import { TempleBranch } from '../../models/TempleBranch';
 import { ElectronicAddress } from '../../models/ElectronicAddress';
+import { ElectronicAddressTypeMaster } from '../../models/ElectronicAddressTypeMaster';
 import { PhysicalAddress } from '../../models/PhysicalAddress';
+import { PhysicalAddressTypeMaster } from '../../models/PhysicalAddressTypeMaster';
 import { ApprovalArtefact } from '../../models/ApprovalArtefact';
 import { ApprovalQue } from '../../models/ApprovalQue';
 import { ApprovalRule } from '../../models/ApprovalRule';
 import { Department } from '../../models/Department';
 import { DepartmentRole } from '../../models/DepartmentRole';
 import { RoleTaskMaster } from '../../models/RoleTaskMaster';
+import { TaskMaster } from '../../models/TaskMaster';
 import { MgCreditNote } from '../../models/MgCreditNote';
 import { MgDeliveryNote } from '../../models/MgDeliveryNote';
 import { DevoteeElectronicAddress } from '../../models/DevoteeElectronicAddress';
@@ -62,6 +69,9 @@ import { ServiceArea } from '../../models/ServiceArea';
 import { SkillCategory } from '../../models/SkillCategory';
 import { LookupTableMaster } from '../../models/LookupTableMaster';
 import { LookupTableDetail } from '../../models/LookupTableDetail';
+import { LookupMaster } from '../../models/LookupMaster';
+import { GothraMaster } from '../../models/GothraMaster';
+import { NakshatraMaster } from '../../models/NakshatraMaster';
 
 export interface Models { [name: string]: any }
 
@@ -78,19 +88,26 @@ export class SDKModels {
     DonationTypeMaster: DonationTypeMaster,
     EventMaster: EventMaster,
     NewContact: NewContact,
+    OutreachMaster: OutreachMaster,
     Payment: Payment,
+    PaymentModeMaster: PaymentModeMaster,
     Pledge: Pledge,
     PledgePayment: PledgePayment,
+    RelationshipMaster: RelationshipMaster,
+    SpiritualLevelMaster: SpiritualLevelMaster,
     Temple: Temple,
     TempleBranch: TempleBranch,
     ElectronicAddress: ElectronicAddress,
+    ElectronicAddressTypeMaster: ElectronicAddressTypeMaster,
     PhysicalAddress: PhysicalAddress,
+    PhysicalAddressTypeMaster: PhysicalAddressTypeMaster,
     ApprovalArtefact: ApprovalArtefact,
     ApprovalQue: ApprovalQue,
     ApprovalRule: ApprovalRule,
     Department: Department,
     DepartmentRole: DepartmentRole,
     RoleTaskMaster: RoleTaskMaster,
+    TaskMaster: TaskMaster,
     MgCreditNote: MgCreditNote,
     MgDeliveryNote: MgDeliveryNote,
     DevoteeElectronicAddress: DevoteeElectronicAddress,
@@ -131,6 +148,9 @@ export class SDKModels {
     SkillCategory: SkillCategory,
     LookupTableMaster: LookupTableMaster,
     LookupTableDetail: LookupTableDetail,
+    LookupMaster: LookupMaster,
+    GothraMaster: GothraMaster,
+    NakshatraMaster: NakshatraMaster,
     
   };
 

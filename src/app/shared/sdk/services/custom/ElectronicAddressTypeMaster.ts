@@ -10,15 +10,14 @@ import { JSONSearchParams } from '../core/search.params';
 import { ErrorHandler } from '../core/error.service';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
-import { ElectronicAddress } from '../../models/ElectronicAddress';
 import { ElectronicAddressTypeMaster } from '../../models/ElectronicAddressTypeMaster';
 
 
 /**
- * Api services for the `ElectronicAddress` model.
+ * Api services for the `ElectronicAddressTypeMaster` model.
  */
 @Injectable()
-export class ElectronicAddressApi extends BaseLoopBackApi {
+export class ElectronicAddressTypeMasterApi extends BaseLoopBackApi {
 
   constructor(
     @Inject(Http) protected http: Http,
@@ -28,36 +27,6 @@ export class ElectronicAddressApi extends BaseLoopBackApi {
     @Optional() @Inject(ErrorHandler) protected errorHandler: ErrorHandler
   ) {
     super(http,  models, auth, searchParams, errorHandler);
-  }
-
-  /**
-   * Fetches belongsTo relation fkElectronicAddressElectronicAddressTypeMaster1rel.
-   *
-   * @param {any} id ElectronicAddress id
-   *
-   * @param {boolean} refresh 
-   *
-   * @returns {object} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `ElectronicAddress` object.)
-   * </em>
-   */
-  public getFkElectronicAddressElectronicAddressTypeMaster1rel(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
-    let _method: string = "GET";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/ElectronicAddresses/:id/fkElectronicAddressElectronicAddressTypeMaster1rel";
-    let _routeParams: any = {
-      id: id
-    };
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    if (typeof refresh !== 'undefined' && refresh !== null) _urlParams.refresh = refresh;
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
   }
 
   /**
@@ -73,13 +42,13 @@ export class ElectronicAddressApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `ElectronicAddress` object.)
+   * This usually means the response is a `ElectronicAddressTypeMaster` object.)
    * </em>
    */
   public patchOrCreate(data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PATCH";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/ElectronicAddresses";
+    "/ElectronicAddressTypeMasters";
     let _routeParams: any = {};
     let _postBody: any = {
       data: data
@@ -92,7 +61,7 @@ export class ElectronicAddressApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param {any} id ElectronicAddress id
+   * @param {any} id ElectronicAddressTypeMaster id
    *
    * @param {object} data Request data.
    *
@@ -104,13 +73,13 @@ export class ElectronicAddressApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `ElectronicAddress` object.)
+   * This usually means the response is a `ElectronicAddressTypeMaster` object.)
    * </em>
    */
   public patchAttributes(id: any, data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PATCH";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/ElectronicAddresses/:id";
+    "/ElectronicAddressTypeMasters/:id";
     let _routeParams: any = {
       id: id
     };
@@ -124,9 +93,9 @@ export class ElectronicAddressApi extends BaseLoopBackApi {
 
   /**
    * The name of the model represented by this $resource,
-   * i.e. `ElectronicAddress`.
+   * i.e. `ElectronicAddressTypeMaster`.
    */
   public getModelName() {
-    return "ElectronicAddress";
+    return "ElectronicAddressTypeMaster";
   }
 }

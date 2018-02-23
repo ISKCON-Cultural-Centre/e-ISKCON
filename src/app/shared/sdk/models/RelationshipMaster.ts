@@ -1,40 +1,40 @@
 /* tslint:disable */
 
 declare var Object: any;
-export interface LookupTableMasterInterface {
-  "tableName": string;
-  "tableDisplayName": string;
+export interface RelationshipMasterInterface {
+  "id"?: string;
+  "relationName"?: string;
   "createdBy"?: string;
   "updatedBy"?: string;
   "created-on"?: Date;
   "updated-on"?: Date;
 }
 
-export class LookupTableMaster implements LookupTableMasterInterface {
-  "tableName": string;
-  "tableDisplayName": string;
+export class RelationshipMaster implements RelationshipMasterInterface {
+  "id": string;
+  "relationName": string;
   "createdBy": string;
   "updatedBy": string;
   "created-on": Date;
   "updated-on": Date;
-  constructor(data?: LookupTableMasterInterface) {
+  constructor(data?: RelationshipMasterInterface) {
     Object.assign(this, data);
   }
   /**
    * The name of the model represented by this $resource,
-   * i.e. `LookupTableMaster`.
+   * i.e. `RelationshipMaster`.
    */
   public static getModelName() {
-    return "LookupTableMaster";
+    return "RelationshipMaster";
   }
   /**
   * @method factory
   * @author Jonathan Casarrubias
   * @license MIT
-  * This method creates an instance of LookupTableMaster for dynamic purposes.
+  * This method creates an instance of RelationshipMaster for dynamic purposes.
   **/
-  public static factory(data: LookupTableMasterInterface): LookupTableMaster{
-    return new LookupTableMaster(data);
+  public static factory(data: RelationshipMasterInterface): RelationshipMaster{
+    return new RelationshipMaster(data);
   }
   /**
   * @method getModelDefinition
@@ -45,17 +45,17 @@ export class LookupTableMaster implements LookupTableMasterInterface {
   **/
   public static getModelDefinition() {
     return {
-      name: 'LookupTableMaster',
-      plural: 'LookupTableMasters',
-      path: 'LookupTableMasters',
-      idName: 'tableName',
+      name: 'RelationshipMaster',
+      plural: 'RelationshipMasters',
+      path: 'RelationshipMasters',
+      idName: 'id',
       properties: {
-        "tableName": {
-          name: 'tableName',
+        "id": {
+          name: 'id',
           type: 'string'
         },
-        "tableDisplayName": {
-          name: 'tableDisplayName',
+        "relationName": {
+          name: 'relationName',
           type: 'string'
         },
         "createdBy": {

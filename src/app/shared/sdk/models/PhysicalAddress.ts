@@ -1,4 +1,7 @@
 /* tslint:disable */
+import {
+  PhysicalAddressTypeMaster
+} from '../index';
 
 declare var Object: any;
 export interface PhysicalAddressInterface {
@@ -16,7 +19,7 @@ export interface PhysicalAddressInterface {
   "updatedBy"?: string;
   "created-on"?: Date;
   "updated-on"?: Date;
-  fkPhysicalAddressAddressTypeMaster1rel?: any;
+  fkPhysicalAddressAddressTypeMaster1rel?: PhysicalAddressTypeMaster;
 }
 
 export class PhysicalAddress implements PhysicalAddressInterface {
@@ -34,7 +37,7 @@ export class PhysicalAddress implements PhysicalAddressInterface {
   "updatedBy": string;
   "created-on": Date;
   "updated-on": Date;
-  fkPhysicalAddressAddressTypeMaster1rel: any;
+  fkPhysicalAddressAddressTypeMaster1rel: PhysicalAddressTypeMaster;
   constructor(data?: PhysicalAddressInterface) {
     Object.assign(this, data);
   }
@@ -128,8 +131,8 @@ export class PhysicalAddress implements PhysicalAddressInterface {
       relations: {
         fkPhysicalAddressAddressTypeMaster1rel: {
           name: 'fkPhysicalAddressAddressTypeMaster1rel',
-          type: 'any',
-          model: '',
+          type: 'PhysicalAddressTypeMaster',
+          model: 'PhysicalAddressTypeMaster',
           relationType: 'belongsTo',
                   keyFrom: 'addressTypeMasterId',
           keyTo: 'id'

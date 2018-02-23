@@ -12,6 +12,7 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
 import { Payment } from '../../models/Payment';
 import { Devotee } from '../../models/Devotee';
+import { PaymentModeMaster } from '../../models/PaymentModeMaster';
 
 
 /**

@@ -11,8 +11,8 @@ export interface LookupTableDetailInterface {
   "columnDataType"?: string;
   "createdBy"?: string;
   "updatedBy"?: string;
-  "createdOn"?: Date;
-  "updatedOn"?: Date;
+  "created-on"?: Date;
+  "updated-on"?: Date;
   fkLookupTableDetailLookupTableMaster1rel?: LookupTableMaster;
 }
 
@@ -23,8 +23,8 @@ export class LookupTableDetail implements LookupTableDetailInterface {
   "columnDataType": string;
   "createdBy": string;
   "updatedBy": string;
-  "createdOn": Date;
-  "updatedOn": Date;
+  "created-on": Date;
+  "updated-on": Date;
   fkLookupTableDetailLookupTableMaster1rel: LookupTableMaster;
   constructor(data?: LookupTableDetailInterface) {
     Object.assign(this, data);
@@ -83,12 +83,12 @@ export class LookupTableDetail implements LookupTableDetailInterface {
           name: 'updatedBy',
           type: 'string'
         },
-        "createdOn": {
-          name: 'createdOn',
+        "created-on": {
+          name: 'created-on',
           type: 'Date'
         },
-        "updatedOn": {
-          name: 'updatedOn',
+        "updated-on": {
+          name: 'updated-on',
           type: 'Date'
         },
       },
