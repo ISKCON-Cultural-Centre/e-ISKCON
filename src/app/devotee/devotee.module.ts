@@ -6,8 +6,9 @@ import { AuthGuard as AuthGuard } from './../../app/shared/services/auth.guard';
 import { MaterialModule } from '../material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { DevoteeListComponent } from './devotee-list.component';
 import { BrowserModule } from '@angular/platform-browser';
+import { DevoteeSearchComponent } from './devotee-search.component';
+import { DevoteeProfileComponent } from './devotee-profile.component';
 const routes: Routes = [
   { path: 'devotee', component: DevoteeComponent, canActivate: [AuthGuard] }
 ];
@@ -21,6 +22,6 @@ const routes: Routes = [
     FlexLayoutModule,
     BrowserModule
   ],
-  declarations: [DevoteeComponent, DevoteeListComponent]
+  declarations: [DevoteeComponent, DevoteeSearchComponent, DevoteeProfileComponent]
 })
 export class DevoteeModule { }

@@ -1,0 +1,11 @@
+
+  <mat-form-field fxFlex="100%">
+    <input matInput placeholder="Search Devotee" aria-label="State" [matAutocomplete]="auto" [formControl]="devoteeSearchCtrl">
+    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete"  [displayWith]="displayFn" >
+      <mat-option *ngFor="let devotee of filteredDevotees | async" [value]="devotee">
+        <img style="vertical-align:middle;" aria-hidden src="{{devotee.flag}}" height="25" />
+        <span>{{ devotee.spiritualName }} <small *ngIf="devotee.legalName" >| {{devotee.legalName}}</small></span>
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  {{diagnostic}}

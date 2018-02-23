@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DevoteeListComponent } from './devotee-list.component';
+import { DevoteeProfileComponent } from './devotee-profile.component';
 
-describe('DevoteeListComponent', () => {
-  let component: DevoteeListComponent;
-  let fixture: ComponentFixture<DevoteeListComponent>;
+describe('DevoteeProfileComponent', () => {
+  let component: DevoteeProfileComponent;
+  let fixture: ComponentFixture<DevoteeProfileComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DevoteeListComponent ]
+      declarations: [ DevoteeProfileComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DevoteeListComponent);
+    fixture = TestBed.createComponent(DevoteeProfileComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
