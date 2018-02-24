@@ -1,0 +1,27 @@
+<h1 mat-dialog-title> {{data.mode + " " + data.selectedLookupTable.lookupTableDisplayName}}</h1>
+<div mat-dialog-content>
+  <div *ngIf="data.selectedLookupTable.fields.length > 1">
+    <mat-form-field>{{data.selectedLookupTable.fields[1].fieldDisplayName}}
+      <input matInput [(ngModel)]="data.lookupItem.lookupField1">
+    </mat-form-field>
+  </div>
+  <div *ngIf="data.selectedLookupTable.fields.length > 2">
+    <mat-form-field >{{data.selectedLookupTable.fields[2].fieldDisplayName}}
+      <input matInput [(ngModel)]="data.lookupItem.lookupField2">
+    </mat-form-field>
+  </div>
+  <div *ngIf="data.selectedLookupTable.fields.length > 3">
+    <mat-form-field>{{data.selectedLookupTable.fields[3].fieldDisplayName}}
+      <input matInput [(ngModel)]="data.lookupItem.lookupField3">
+    </mat-form-field>
+  </div>
+  <div *ngIf="data.selectedLookupTable.fields.length > 4">
+    <mat-form-field>{{data.selectedLookupTable.fields[4].fieldDisplayName}}
+      <input matInput [(ngModel)]="data.lookupItem.lookupField4">
+    </mat-form-field>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data.lookupItem" cdkFocusInitial>Save</button>
+</div>
