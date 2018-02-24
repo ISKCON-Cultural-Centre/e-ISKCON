@@ -48,15 +48,6 @@ export class LookupComponent implements OnInit {
      }
 
  getLookupData():void{
-   /*if (this.selectedLookupTable.lookupTableName == "RelationshipMaster"){
-       this.getRelationships();
-   }
-   else if (this.selectedLookupTable.lookupTableName == "EventsMaster"){
-       this.getEvents();
-   }
-   else if (this.selectedLookupTable.lookupTableName == "FestivalMaster"){
-       this.getFestivals();
-   }*/
    this.displayedColumns = [];
    this.columns = ['select'];
    this.lookupService.getLookupData(this.selectedLookupTable.lookupTableName)
@@ -68,25 +59,7 @@ export class LookupComponent implements OnInit {
  getLookupTableData():void{
    this.lookupService.getLookupTableData()
       .subscribe(lookupTables => {(this.lookupTables = lookupTables)});
- }
-
- getRelationships(): void {
-    this.lookupService.getRelationships()
-      .subscribe(relationships => {(this.dataSource = new MatTableDataSource(relationships)),(this.displayedColumns = ['select', 'id', 'relationName']), (this.dataSource.paginator = this.paginator),(this.dataSource.sort = this.sort) 
-      });
-  }
-
-  getEvents(): void {
-    this.lookupService.getEvents()
-      .subscribe(events => {(this.dataSource = new MatTableDataSource(events)),(this.displayedColumns = ['select', 'id', 'eventName']),(this.dataSource.paginator = this.paginator),(this.dataSource.sort = this.sort) 
-      });
-  }
-
-  getFestivals(): void {
-    this.lookupService.getFestivals()
-      .subscribe(festivals => {(this.dataSource = new MatTableDataSource(festivals)),(this.displayedColumns = ['select', 'id', 'festivalName']),(this.dataSource.paginator = this.paginator),(this.dataSource.sort = this.sort) 
-      });
-  }
+ }  
 
  ngOnInit() {
 	this.devoteeName$ = this.authService.getDevoteeName;
