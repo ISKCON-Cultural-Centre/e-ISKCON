@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {SelectionModel} from '@angular/cdk/collections';
 import { Observable } from 'rxjs/Observable';
 import { LookupService } from '../shared/services/lookup.service';
@@ -8,16 +9,19 @@ import { NotificationService } from '../shared/services/notification.service';
 import { RelationshipMaster } from '../shared/sdk/models/RelationshipMaster';
 import { LookupData } from '../shared/services/models/lookupData';
 import { LookupTableData } from '../shared/services/models/lookupTableData';
+import { LookupEntryComponent } from './lookup-entry/lookup-entry.component';
 
 @Component({
   selector: 'app-lookup',
   templateUrl: './lookup.component.html',
-  styleUrls: ['./lookup.component.css']
+  styleUrls: ['./lookup.component.css'],
+  entryComponents:[ LookupEntryComponent ]
 })
 export class LookupComponent implements OnInit {
 
   relationships: RelationshipMaster[];  
   lookupData: LookupData[];
+  newLookupData:LookupData;
   isLoggedIn: Boolean;
   isLoggedIn$: Observable <Boolean>;
   devoteeName$: Observable <String>;
@@ -27,13 +31,16 @@ export class LookupComponent implements OnInit {
   displayedColumns = []; //Used to store display Column Names and actual coulmn names
   columns = []; //Used to refer to the actual columns
   selection = new SelectionModel(false, []);
+  modeNew = "New";
+  modeEdit ="Edit";
   //dataSource = new MatTableDataSource<Element>(this.relationships);
   dataSource = new MatTableDataSource();  
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   constructor(private authService: AuthService,
     private notificationService: NotificationService,
-    private lookupService: LookupService) {
+    private lookupService: LookupService,
+    public dialog: MatDialog) {
       if (this.authService.loggedIn) {
         this.authService.devoteeName.next(this.authService.getCurrentUserData());
       }
@@ -54,7 +61,7 @@ export class LookupComponent implements OnInit {
    this.columns = ['select'];
    this.lookupService.getLookupData(this.selectedLookupTable.lookupTableName)
    .subscribe(lookupData=> {(this.dataSource = new MatTableDataSource(lookupData)),
-     (this.selectedLookupTable.fields.forEach((obj,index)=>{this.displayedColumns.push(obj);this.columns.push(obj.fieldName);})), (this.dataSource.paginator = this.paginator),(this.dataSource.sort = this.sort) 
+     (this.selectedLookupTable.fields.forEach((obj,index)=>{this.displayedColumns.push({fieldDisplayName:obj.fieldDisplayName, fieldName:"lookupField"+(index) });if(index>0)this.columns.push("lookupField" + (index))})), (this.dataSource.paginator = this.paginator),(this.dataSource.sort = this.sort) 
      });
  }
 
@@ -120,6 +127,28 @@ export class LookupComponent implements OnInit {
     this.isAllSelected() ?
         this.selection.clear() :
         this.dataSource.data.forEach(row => this.selection.select(row));
+  }
+
+  openDialog(mode:string): void {
+    let dialogRef;
+    if(mode == this.modeNew){
+       dialogRef = this.dialog.open(LookupEntryComponent, {
+        width: '500px',
+        data: {selectedLookupTable: this.selectedLookupTable, lookupItem:new LookupData(), mode:mode}
+      });  
+    }
+    else if(mode == this.modeEdit){     
+       dialogRef = this.dialog.open(LookupEntryComponent, {
+        width: '500px',
+        data: {selectedLookupTable: this.selectedLookupTable, lookupItem:this.selection.selected[0], mode:mode}
+      }); 
+    }
+    
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.newLookupData = result;
+    });
   }
 
 }

@@ -1,18 +1,18 @@
 [{
 		"id": "101",
-		"relationName": "Father"
+		"lookupField1": "Father"
 	},
 	{
 		"id": "102",
-		"relationName": "Mother"
+		"lookupField1": "Mother"
 	},
 	{
 		"id": "103",
-		"relationName": "Grand-Father"
+		"lookupField1": "Grand-Father"
 	},
 	{
 		"id": "104",
-		"relationName": "Grand-Mother"
+		"lookupField1": "Grand-Mother"
 	}
 	
 ]
