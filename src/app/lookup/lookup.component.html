@@ -20,8 +20,10 @@
 </div>
 
 <div style="display: flex; justify-content: flex-end">
-   <button mat-raised-button class="mat-raised-button" color="primary">New</button>
-   <button mat-raised-button class="mat-raised-button" color="primary">Modify</button>
+   <button mat-raised-button class="mat-raised-button" color="primary" (click)="openDialog(modeNew)" 
+   [disabled]="selectedLookupTable==undefined">New</button>
+   <button mat-raised-button class="mat-raised-button" color="primary" (click)="openDialog(modeEdit)"
+   [disabled]="selection.selected.length==0">Modify</button>
    <button mat-raised-button class="mat-raised-button" color="primary">Delete</button>
 
 </div>
@@ -46,7 +48,7 @@
     </ng-container>
 
     
-    <ng-container *ngFor="let col of displayedColumns" [matColumnDef]="col.fieldName">
+    <ng-container *ngFor="let col of displayedColumns | slice:0" [matColumnDef]="col.fieldName">
       <mat-header-cell *matHeaderCellDef mat-sort-header>{{ col.fieldDisplayName }}</mat-header-cell>
       <mat-cell *matCellDef="let row">{{ row[col.fieldName] }}</mat-cell>
     </ng-container>

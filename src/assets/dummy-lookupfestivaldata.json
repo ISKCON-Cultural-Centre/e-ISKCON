@@ -1,22 +1,22 @@
 [{
 		"id": "101",
-		"festivalName": "Janmashtami",
-		"description": "Krishna's Appearance Day",
-		"date": "15th August",
-		"comments": "Om Namo Bhagawate Vasudevayah"
+		"lookupField1": "Janmashtami",
+		"lookupField2": "Krishna's Appearance Day",
+		"lookupField3": "15th August",
+		"lookupField4": "Om Namo Bhagawate Vasudevayah"
 	},
 	{
 		"id": "102",
-		"festivalName": "Gaura Poornima",
-		"description": "Mahaprabhu's Appearance Day",
-		"date": "11th March",
-		"comments": "Hare Krishna Hare Krishna"
+		"lookupField1": "Gaura Poornima",
+		"lookupField2": "Mahaprabhu's Appearance Day",
+		"lookupField3": "11th March",
+		"lookupField4": "Hare Krishna Hare Krishna"
 	},
 	{
 		"id": "103",
-		"festivalName": "Govardhan Pooja",
-		"description": "Govardhan Pooja Celebrations",
-		"date": "10th November",
-		"comments": "Jai Giri Govardhan"
+		"lookupField1": "Govardhan Pooja",
+		"lookupField2": "Govardhan Pooja Celebrations",
+		"lookupField3": "10th November",
+		"lookupField4": "Jai Giri Govardhan"
 	}	
 ]

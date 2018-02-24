@@ -3,4 +3,5 @@ export class LookupData {
     lookupField1: string;
     lookupField2: string;
     lookupField3: string;  
+    lookupField4: string;  
 }
