@@ -22,6 +22,7 @@ export class LookupComponent implements OnInit {
   relationships: RelationshipMaster[];  
   lookupData: LookupData[];
   newLookupData:LookupData;
+  modifiedLookupData:LookupData;
   isLoggedIn: Boolean;
   isLoggedIn$: Observable <Boolean>;
   devoteeName$: Observable <String>;
@@ -103,24 +104,42 @@ export class LookupComponent implements OnInit {
   }
 
   openDialog(mode:string): void {
+    var self = this;
     let dialogRef;
     if(mode == this.modeNew){
        dialogRef = this.dialog.open(LookupEntryComponent, {
         width: '500px',
-        data: {selectedLookupTable: this.selectedLookupTable, lookupItem:new LookupData(), mode:mode}
-      });  
+        data: {selectedLookupTable: this.selectedLookupTable, lookupItem:new Object({id:null}), mode:mode}
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      self.newLookupData = result;
+      self.dataSource.data = self.dataSource.data.concat([self.newLookupData]);
+      self.dataSource = new MatTableDataSource(self.dataSource.data);
+      self.selection = new SelectionModel(false, []);
+      });
     }
     else if(mode == this.modeEdit){     
        dialogRef = this.dialog.open(LookupEntryComponent, {
         width: '500px',
         data: {selectedLookupTable: this.selectedLookupTable, lookupItem:this.selection.selected[0], mode:mode}
       }); 
-    }
-    
 
-    dialogRef.afterClosed().subscribe(result => {
+      dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      this.newLookupData = result;
+      self.modifiedLookupData = result;
+      }); 
+    }
+  }
+
+  onDeleteClick():void {   
+    if(confirm("Are you sure to delete "+this.selection.selected[0].lookupField1 + " entry")) {
+      this.selection.selected.forEach(item => {
+      console.log(item);
+      this.dataSource.data.splice(this.dataSource.data.findIndex(x=>x ==this.selection.selected[0]),1);
+
+      this.dataSource = new MatTableDataSource(this.dataSource.data);
     });
   }  
 }
