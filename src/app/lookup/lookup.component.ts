@@ -140,6 +140,7 @@ export class LookupComponent implements OnInit {
       this.dataSource.data.splice(this.dataSource.data.findIndex(x=>x ==this.selection.selected[0]),1);
 
       this.dataSource = new MatTableDataSource(this.dataSource.data);
-    });
-  }  
+      });
+    }  
+  }
 }
