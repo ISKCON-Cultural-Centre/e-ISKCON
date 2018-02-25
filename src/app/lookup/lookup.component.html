@@ -24,7 +24,8 @@
    [disabled]="selectedLookupTable==undefined">New</button>
    <button mat-raised-button class="mat-raised-button" color="primary" (click)="openDialog(modeEdit)"
    [disabled]="selection.selected.length==0">Modify</button>
-   <button mat-raised-button class="mat-raised-button" color="primary">Delete</button>
+   <button mat-raised-button class="mat-raised-button" color="primary" (click)="onDeleteClick()"
+   [disabled]="selection.selected.length==0">Delete</button>
 
 </div>
 <div class="example-container mat-elevation-z8">

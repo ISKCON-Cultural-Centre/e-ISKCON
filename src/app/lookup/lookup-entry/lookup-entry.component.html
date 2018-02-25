@@ -1,8 +1,13 @@
 <h1 mat-dialog-title> {{data.mode + " " + data.selectedLookupTable.lookupTableDisplayName}}</h1>
 <div mat-dialog-content>
+  <div *ngIf="false">
+    <mat-form-field>{{data.selectedLookupTable.fields[0].fieldDisplayName}}
+      <input matInput [(ngModel)]="data.lookupItem.lookupField0">
+    </mat-form-field>
+  </div>
   <div *ngIf="data.selectedLookupTable.fields.length > 1">
     <mat-form-field>{{data.selectedLookupTable.fields[1].fieldDisplayName}}
-      <input matInput [(ngModel)]="data.lookupItem.lookupField1">
+      <input matInput id="input1" name="input1" [(ngModel)]="data.lookupItem.lookupField1" required>
     </mat-form-field>
   </div>
   <div *ngIf="data.selectedLookupTable.fields.length > 2">
