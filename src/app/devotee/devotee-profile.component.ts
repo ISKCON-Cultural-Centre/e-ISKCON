@@ -1,17 +1,16 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
-import { startWith } from 'rxjs/operators/startWith';
-import { map } from 'rxjs/operators/map';
-import 'rxjs/operators/debounceTime';
+import { debounceTime } from 'rxjs/operators/debounceTime';
 
 import {
   SDKToken, DevoteeApi, GothraMasterApi,
   NakshatraMasterApi, CircleApi, Devotee, Circle,
-  GothraMaster, NakshatraMaster, Language, LanguageApi
+  GothraMaster, NakshatraMaster, Language, LanguageApi, AsramaMaster, AsramaMasterApi
 } from '../../../src/app/shared/sdk';
-import { AuthService } from '../shared/services/auth.service';
+import { AuthService, DevoteeSearchSelectService } from '../shared/services';
+
 
 @Component({
   selector: 'app-devotee-profile',
@@ -20,7 +19,7 @@ import { AuthService } from '../shared/services/auth.service';
 })
 export class DevoteeProfileComponent implements OnInit {
 
-  @Input() devoteeId: String;
+  devoteeId: String;
   devotee: Devotee;
 
   stateCtrl: FormControl;
@@ -31,12 +30,15 @@ export class DevoteeProfileComponent implements OnInit {
   filteredGothras: Observable<GothraMaster[]>;
   filteredNakshatras: Observable<NakshatraMaster[]>;
   languages: Language[];
+  asramas: AsramaMaster[];
 
   constructor(private devoteeApi: DevoteeApi,
     private circleApi: CircleApi,
     private gothraMasterApi: GothraMasterApi,
     private nakshatraMasterApi: NakshatraMasterApi,
     private languageApi: LanguageApi,
+    private asramaMasterApi: AsramaMasterApi,
+    private devoteeSearchSelectService: DevoteeSearchSelectService,
     private router: Router,
     private authService: AuthService,
     private fb: FormBuilder) {
@@ -44,11 +46,23 @@ export class DevoteeProfileComponent implements OnInit {
   }
 
 
+
   ngOnInit() {
 
+    this.devoteeId ? this.devoteeId = this.devoteeId : this.devoteeId = this.authService.getCurrentUserId();
+    this.loadDevotee(this.devoteeId);
+
+    this.devoteeSearchSelectService.missionAnnounced$.
+    subscribe(
+      selectedDevotee => {
+        this.devoteeId = selectedDevotee.option.value.id;
+        this.loadDevotee(selectedDevotee.option.value.id);
+      }
+    );
+
+
     this.devoteeForm.get('gothra').valueChanges
-      .debounceTime(400)
-      .distinctUntilChanged()
+      //.distinctUntilChanged()
       .subscribe(searchTerm => {
         this.filteredGothras = this.gothraMasterApi.find<GothraMaster>(
           { where: { gothra: { like: '%' + searchTerm + '%' } } }
@@ -56,29 +70,39 @@ export class DevoteeProfileComponent implements OnInit {
       });
 
     this.devoteeForm.get('nakshatra').valueChanges
-      .debounceTime(400)
-      .distinctUntilChanged()
+      //.distinctUntilChanged()
       .subscribe(searchTerm => {
         this.filteredNakshatras = this.nakshatraMasterApi.find<NakshatraMaster>(
           { where: { nakshatra: { like: '%' + searchTerm + '%' } } }
         );
       });
 
+    this.asramaMasterApi.find<AsramaMaster>()
+      .subscribe(
+        asramas => {
+          this.asramas = asramas;
+        }
+      );
+
     this.circleApi.find<Circle>()
-      .subscribe(circles => {
-        this.circles = circles;
-      }
+      .subscribe(
+        circles => {
+          this.circles = circles;
+        }
       );
 
       this.languageApi.find<Language>()
       .subscribe(languages => {
         this.languages = languages;
       }
-      );      
+      );
 
-    this.devoteeApi.findById<Devotee>(this.authService.getCurrentUserId())
-      .subscribe(devotee => {
-        this.devotee = devotee;
+  }
+
+  loadDevotee(devoteeId: String) {
+    this.devoteeApi.findById<Devotee>(this.devoteeId)
+    .subscribe(
+      devotee => {
         this.devoteeForm.setValue(
           {
             legalName: devotee.legalName,
@@ -96,10 +120,11 @@ export class DevoteeProfileComponent implements OnInit {
             lpmId: devotee.lpmId,
             dateOfBirth: devotee.dateOfBirth,
             dayMonthOfBirth: devotee.dayMonthOfBirth,
+            asramaMasterId: devotee.asramaMasterId
           }
         );
       }
-      );
+    );
   }
 
   createForm() {
@@ -118,7 +143,9 @@ export class DevoteeProfileComponent implements OnInit {
       motherTongueLanguageId: '',
       dateOfBirth: '',
       dayMonthOfBirth: '',
-      lpmId: ''
+      lpmId: '',
+      asramaMasterId: ''
+
     });
   }
 

@@ -38,7 +38,7 @@ export class AuthService extends LoopBackAuth {
     }
 
     private decode(devotee: Devotee) {
-        this.devoteeName.next(devotee.spiritualName);
+        this.devoteeName.next(devotee.spiritualName ? devotee.spiritualName : devotee.legalName);
     }
 
     get isLoggedIn() {
