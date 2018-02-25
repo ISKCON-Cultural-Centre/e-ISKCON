@@ -13,6 +13,8 @@ import { Observable } from 'rxjs/Rx';
 import { Devotee } from '../../models/Devotee';
 import { Circle } from '../../models/Circle';
 import { ServiceRoleMapping } from '../../models/ServiceRoleMapping';
+import { Accesstoken } from '../../models/Accesstoken';
+import { Language } from '../../models/Language';
 import { GothraMaster } from '../../models/GothraMaster';
 import { NakshatraMaster } from '../../models/NakshatraMaster';
 

@@ -10,16 +10,15 @@ import { JSONSearchParams } from '../core/search.params';
 import { ErrorHandler } from '../core/error.service';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
-import { DevoteeLanguage } from '../../models/DevoteeLanguage';
+import { Accesstoken } from '../../models/Accesstoken';
 import { Devotee } from '../../models/Devotee';
-import { Language } from '../../models/Language';
 
 
 /**
- * Api services for the `DevoteeLanguage` model.
+ * Api services for the `Accesstoken` model.
  */
 @Injectable()
-export class DevoteeLanguageApi extends BaseLoopBackApi {
+export class AccesstokenApi extends BaseLoopBackApi {
 
   constructor(
     @Inject(Http) protected http: Http,
@@ -32,39 +31,9 @@ export class DevoteeLanguageApi extends BaseLoopBackApi {
   }
 
   /**
-   * Fetches belongsTo relation fkDevoteeLanguageDevotee1rel.
+   * Fetches belongsTo relation user.
    *
-   * @param {any} id DevoteeLanguage id
-   *
-   * @param {boolean} refresh 
-   *
-   * @returns {object} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `DevoteeLanguage` object.)
-   * </em>
-   */
-  public getFkDevoteeLanguageDevotee1rel(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
-    let _method: string = "GET";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/DevoteeLanguages/:id/fkDevoteeLanguageDevotee1rel";
-    let _routeParams: any = {
-      id: id
-    };
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    if (typeof refresh !== 'undefined' && refresh !== null) _urlParams.refresh = refresh;
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
-  }
-
-  /**
-   * Fetches belongsTo relation fkTable1Language1rel.
-   *
-   * @param {any} id DevoteeLanguage id
+   * @param {any} id Accesstoken id
    *
    * @param {boolean} refresh 
    *
@@ -74,13 +43,13 @@ export class DevoteeLanguageApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `DevoteeLanguage` object.)
+   * This usually means the response is a `Accesstoken` object.)
    * </em>
    */
-  public getFkTable1Language1rel(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
+  public getUser(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/DevoteeLanguages/:id/fkTable1Language1rel";
+    "/Accesstokens/:id/user";
     let _routeParams: any = {
       id: id
     };
@@ -104,13 +73,13 @@ export class DevoteeLanguageApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `DevoteeLanguage` object.)
+   * This usually means the response is a `Accesstoken` object.)
    * </em>
    */
   public patchOrCreate(data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PATCH";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/DevoteeLanguages";
+    "/Accesstokens";
     let _routeParams: any = {};
     let _postBody: any = {
       data: data
@@ -123,7 +92,7 @@ export class DevoteeLanguageApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param {any} id DevoteeLanguage id
+   * @param {any} id Accesstoken id
    *
    * @param {object} data Request data.
    *
@@ -135,13 +104,13 @@ export class DevoteeLanguageApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `DevoteeLanguage` object.)
+   * This usually means the response is a `Accesstoken` object.)
    * </em>
    */
   public patchAttributes(id: any, data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PATCH";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/DevoteeLanguages/:id";
+    "/Accesstokens/:id";
     let _routeParams: any = {
       id: id
     };
@@ -155,9 +124,9 @@ export class DevoteeLanguageApi extends BaseLoopBackApi {
 
   /**
    * The name of the model represented by this $resource,
-   * i.e. `DevoteeLanguage`.
+   * i.e. `Accesstoken`.
    */
   public getModelName() {
-    return "DevoteeLanguage";
+    return "Accesstoken";
   }
 }

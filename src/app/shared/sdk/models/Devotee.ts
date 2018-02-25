@@ -2,6 +2,8 @@
 import {
   Circle,
   ServiceRoleMapping,
+  Accesstoken,
+  Language,
   GothraMaster,
   NakshatraMaster
 } from '../index';
@@ -37,8 +39,8 @@ export interface DevoteeInterface {
   "password"?: string;
   fkDevoteeCircle1rel?: Circle;
   roleMappings?: ServiceRoleMapping[];
-  accessTokens?: any[];
-  fkDevoteeLanguage1rel?: any;
+  accessTokens?: Accesstoken[];
+  fkDevoteeLanguage1rel?: Language;
   fkDevoteeGothraMaster1rel?: GothraMaster;
   fkDevoteeNakshatraMaster1rel?: NakshatraMaster;
 }
@@ -73,8 +75,8 @@ export class Devotee implements DevoteeInterface {
   "password": string;
   fkDevoteeCircle1rel: Circle;
   roleMappings: ServiceRoleMapping[];
-  accessTokens: any[];
-  fkDevoteeLanguage1rel: any;
+  accessTokens: Accesstoken[];
+  fkDevoteeLanguage1rel: Language;
   fkDevoteeGothraMaster1rel: GothraMaster;
   fkDevoteeNakshatraMaster1rel: NakshatraMaster;
   constructor(data?: DevoteeInterface) {
@@ -238,16 +240,16 @@ export class Devotee implements DevoteeInterface {
         },
         accessTokens: {
           name: 'accessTokens',
-          type: 'any[]',
-          model: '',
+          type: 'Accesstoken[]',
+          model: 'Accesstoken',
           relationType: 'hasMany',
                   keyFrom: 'id',
           keyTo: 'userId'
         },
         fkDevoteeLanguage1rel: {
           name: 'fkDevoteeLanguage1rel',
-          type: 'any',
-          model: '',
+          type: 'Language',
+          model: 'Language',
           relationType: 'belongsTo',
                   keyFrom: 'motherTongueLanguageId',
           keyTo: 'id'

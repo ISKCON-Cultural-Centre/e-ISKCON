@@ -1,6 +1,7 @@
 /* tslint:disable */
 import {
-  Devotee
+  Devotee,
+  Language
 } from '../index';
 
 declare var Object: any;
@@ -11,7 +12,7 @@ export interface DevoteeLanguageInterface {
   "writeInd": number;
   "speakInd": number;
   fkDevoteeLanguageDevotee1rel?: Devotee;
-  fkTable1Language1rel?: any;
+  fkTable1Language1rel?: Language;
 }
 
 export class DevoteeLanguage implements DevoteeLanguageInterface {
@@ -21,7 +22,7 @@ export class DevoteeLanguage implements DevoteeLanguageInterface {
   "writeInd": number;
   "speakInd": number;
   fkDevoteeLanguageDevotee1rel: Devotee;
-  fkTable1Language1rel: any;
+  fkTable1Language1rel: Language;
   constructor(data?: DevoteeLanguageInterface) {
     Object.assign(this, data);
   }
@@ -87,8 +88,8 @@ export class DevoteeLanguage implements DevoteeLanguageInterface {
         },
         fkTable1Language1rel: {
           name: 'fkTable1Language1rel',
-          type: 'any',
-          model: '',
+          type: 'Language',
+          model: 'Language',
           relationType: 'belongsTo',
                   keyFrom: 'languageId',
           keyTo: 'id'

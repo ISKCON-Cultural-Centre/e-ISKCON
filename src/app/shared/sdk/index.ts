@@ -99,6 +99,8 @@ import { MgTaxCategoryComponentApi } from './services/custom/MgTaxCategoryCompon
 import { MgTaxComponentApi } from './services/custom/MgTaxComponent';
 import { MgTaxLineApi } from './services/custom/MgTaxLine';
 import { MgUnitOfMeasureApi } from './services/custom/MgUnitOfMeasure';
+import { AccesstokenApi } from './services/custom/Accesstoken';
+import { AsramaMasterApi } from './services/custom/AsramaMaster';
 import { DevoteeAsramaApi } from './services/custom/DevoteeAsrama';
 import { DevoteeLanguageApi } from './services/custom/DevoteeLanguage';
 import { DevoteeServiceApi } from './services/custom/DevoteeService';
@@ -108,9 +110,12 @@ import { DevoteeSkillApi } from './services/custom/DevoteeSkill';
 import { DevoteeSpiritualProgressApi } from './services/custom/DevoteeSpiritualProgress';
 import { DonationReceiptApi } from './services/custom/DonationReceipt';
 import { FestivalCalendarApi } from './services/custom/FestivalCalendar';
+import { FestivalMasterApi } from './services/custom/FestivalMaster';
+import { LanguageApi } from './services/custom/Language';
 import { MgHsnApi } from './services/custom/MgHsn';
 import { MgOrderApi } from './services/custom/MgOrder';
 import { ServiceAreaApi } from './services/custom/ServiceArea';
+import { SkillApi } from './services/custom/Skill';
 import { SkillCategoryApi } from './services/custom/SkillCategory';
 import { LookupTableMasterApi } from './services/custom/LookupTableMaster';
 import { LookupTableDetailApi } from './services/custom/LookupTableDetail';
@@ -200,6 +205,8 @@ export class SDKBrowserModule {
         MgTaxComponentApi,
         MgTaxLineApi,
         MgUnitOfMeasureApi,
+        AccesstokenApi,
+        AsramaMasterApi,
         DevoteeAsramaApi,
         DevoteeLanguageApi,
         DevoteeServiceApi,
@@ -209,9 +216,12 @@ export class SDKBrowserModule {
         DevoteeSpiritualProgressApi,
         DonationReceiptApi,
         FestivalCalendarApi,
+        FestivalMasterApi,
+        LanguageApi,
         MgHsnApi,
         MgOrderApi,
         ServiceAreaApi,
+        SkillApi,
         SkillCategoryApi,
         LookupTableMasterApi,
         LookupTableDetailApi,

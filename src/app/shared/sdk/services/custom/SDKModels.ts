@@ -54,6 +54,8 @@ import { MgTaxCategoryComponent } from '../../models/MgTaxCategoryComponent';
 import { MgTaxComponent } from '../../models/MgTaxComponent';
 import { MgTaxLine } from '../../models/MgTaxLine';
 import { MgUnitOfMeasure } from '../../models/MgUnitOfMeasure';
+import { Accesstoken } from '../../models/Accesstoken';
+import { AsramaMaster } from '../../models/AsramaMaster';
 import { DevoteeAsrama } from '../../models/DevoteeAsrama';
 import { DevoteeLanguage } from '../../models/DevoteeLanguage';
 import { DevoteeService } from '../../models/DevoteeService';
@@ -63,9 +65,12 @@ import { DevoteeSkill } from '../../models/DevoteeSkill';
 import { DevoteeSpiritualProgress } from '../../models/DevoteeSpiritualProgress';
 import { DonationReceipt } from '../../models/DonationReceipt';
 import { FestivalCalendar } from '../../models/FestivalCalendar';
+import { FestivalMaster } from '../../models/FestivalMaster';
+import { Language } from '../../models/Language';
 import { MgHsn } from '../../models/MgHsn';
 import { MgOrder } from '../../models/MgOrder';
 import { ServiceArea } from '../../models/ServiceArea';
+import { Skill } from '../../models/Skill';
 import { SkillCategory } from '../../models/SkillCategory';
 import { LookupTableMaster } from '../../models/LookupTableMaster';
 import { LookupTableDetail } from '../../models/LookupTableDetail';
@@ -133,6 +138,8 @@ export class SDKModels {
     MgTaxComponent: MgTaxComponent,
     MgTaxLine: MgTaxLine,
     MgUnitOfMeasure: MgUnitOfMeasure,
+    Accesstoken: Accesstoken,
+    AsramaMaster: AsramaMaster,
     DevoteeAsrama: DevoteeAsrama,
     DevoteeLanguage: DevoteeLanguage,
     DevoteeService: DevoteeService,
@@ -142,9 +149,12 @@ export class SDKModels {
     DevoteeSpiritualProgress: DevoteeSpiritualProgress,
     DonationReceipt: DonationReceipt,
     FestivalCalendar: FestivalCalendar,
+    FestivalMaster: FestivalMaster,
+    Language: Language,
     MgHsn: MgHsn,
     MgOrder: MgOrder,
     ServiceArea: ServiceArea,
+    Skill: Skill,
     SkillCategory: SkillCategory,
     LookupTableMaster: LookupTableMaster,
     LookupTableDetail: LookupTableDetail,

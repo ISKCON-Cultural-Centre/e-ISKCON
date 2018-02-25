@@ -1,5 +1,6 @@
 /* tslint:disable */
 import {
+  AsramaMaster,
   Devotee
 } from '../index';
 
@@ -8,7 +9,7 @@ export interface DevoteeAsramaInterface {
   "devoteeId": string;
   "asramaMasterId": string;
   "entryDate": Date;
-  fkTable1AsramaMaster1rel?: any;
+  fkTable1AsramaMaster1rel?: AsramaMaster;
   fkTable1Devotee3rel?: Devotee;
 }
 
@@ -16,7 +17,7 @@ export class DevoteeAsrama implements DevoteeAsramaInterface {
   "devoteeId": string;
   "asramaMasterId": string;
   "entryDate": Date;
-  fkTable1AsramaMaster1rel: any;
+  fkTable1AsramaMaster1rel: AsramaMaster;
   fkTable1Devotee3rel: Devotee;
   constructor(data?: DevoteeAsramaInterface) {
     Object.assign(this, data);
@@ -67,8 +68,8 @@ export class DevoteeAsrama implements DevoteeAsramaInterface {
       relations: {
         fkTable1AsramaMaster1rel: {
           name: 'fkTable1AsramaMaster1rel',
-          type: 'any',
-          model: '',
+          type: 'AsramaMaster',
+          model: 'AsramaMaster',
           relationType: 'belongsTo',
                   keyFrom: 'asramaMasterId',
           keyTo: 'id'
