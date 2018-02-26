@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Devotee } from '../shared/sdk/models/Devotee';
 import { DevoteeApi } from '../shared/sdk/services/custom/Devotee';
+import { DevoteeSearchSelectService } from '../shared/services';
+
+
 import { Router } from '@angular/router';
 import { SDKToken } from '../../../src/app/shared/sdk';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatAutocompleteSelectedEvent } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
-import { startWith } from 'rxjs/operators/startWith';
-import { map } from 'rxjs/operators/map';
-import 'rxjs/operators/debounceTime';
+import { debounceTime } from 'rxjs/operators/debounceTime';
 
 @Component({
   selector: 'app-devotee-search',
@@ -21,19 +23,24 @@ export class DevoteeSearchComponent implements OnInit {
   devotees: Devotee[];
   submitted = false;
 
-  constructor(private devoteeApi: DevoteeApi,
+  constructor(private devoteeApi: DevoteeApi, 
+    private devoteeSearchSelectService: DevoteeSearchSelectService,
     private router: Router, private fb: FormBuilder) {
     this.devoteeSearchCtrl = new FormControl();
   }
 
   ngOnInit() {
     this.devoteeSearchCtrl.valueChanges
-    .debounceTime(400)
+    //.debounceTime(400)
     .subscribe(searchTerm => {
       this.filteredDevotees = this.devoteeApi.find<Devotee>(
         {where: {or: [{legalName: {like: '%' + searchTerm + '%'}}, {spiritualName: {like: '%' + searchTerm + '%'}}]}}
       );
     });
+  }
+
+  onSelectionChanged(event: MatAutocompleteSelectedEvent) {
+    this.devoteeSearchSelectService.announceMission(event);
   }
 
   onSubmit() { this.submitted = true; }

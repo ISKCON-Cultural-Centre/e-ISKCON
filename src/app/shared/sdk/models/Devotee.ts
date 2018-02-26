@@ -3,6 +3,7 @@ import {
   Circle,
   ServiceRoleMapping,
   Accesstoken,
+  AsramaMaster,
   Language,
   GothraMaster,
   NakshatraMaster
@@ -33,6 +34,7 @@ export interface DevoteeInterface {
   "motherTongueLanguageId": string;
   "dateOfBirth"?: Date;
   "dayMonthOfBirth": string;
+  "asramaMasterId"?: string;
   "emailVerified"?: boolean;
   "created-on"?: Date;
   "updated-on"?: Date;
@@ -40,6 +42,7 @@ export interface DevoteeInterface {
   fkDevoteeCircle1rel?: Circle;
   roleMappings?: ServiceRoleMapping[];
   accessTokens?: Accesstoken[];
+  fkDevoteeAsramaMaster1rel?: AsramaMaster;
   fkDevoteeLanguage1rel?: Language;
   fkDevoteeGothraMaster1rel?: GothraMaster;
   fkDevoteeNakshatraMaster1rel?: NakshatraMaster;
@@ -69,6 +72,7 @@ export class Devotee implements DevoteeInterface {
   "motherTongueLanguageId": string;
   "dateOfBirth": Date;
   "dayMonthOfBirth": string;
+  "asramaMasterId": string;
   "emailVerified": boolean;
   "created-on": Date;
   "updated-on": Date;
@@ -76,6 +80,7 @@ export class Devotee implements DevoteeInterface {
   fkDevoteeCircle1rel: Circle;
   roleMappings: ServiceRoleMapping[];
   accessTokens: Accesstoken[];
+  fkDevoteeAsramaMaster1rel: AsramaMaster;
   fkDevoteeLanguage1rel: Language;
   fkDevoteeGothraMaster1rel: GothraMaster;
   fkDevoteeNakshatraMaster1rel: NakshatraMaster;
@@ -204,6 +209,10 @@ export class Devotee implements DevoteeInterface {
           name: 'dayMonthOfBirth',
           type: 'string'
         },
+        "asramaMasterId": {
+          name: 'asramaMasterId',
+          type: 'string'
+        },
         "emailVerified": {
           name: 'emailVerified',
           type: 'boolean'
@@ -245,6 +254,14 @@ export class Devotee implements DevoteeInterface {
           relationType: 'hasMany',
                   keyFrom: 'id',
           keyTo: 'userId'
+        },
+        fkDevoteeAsramaMaster1rel: {
+          name: 'fkDevoteeAsramaMaster1rel',
+          type: 'AsramaMaster',
+          model: 'AsramaMaster',
+          relationType: 'belongsTo',
+                  keyFrom: 'asramaMasterId',
+          keyTo: 'id'
         },
         fkDevoteeLanguage1rel: {
           name: 'fkDevoteeLanguage1rel',
