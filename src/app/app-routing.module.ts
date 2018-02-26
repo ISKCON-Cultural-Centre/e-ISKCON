@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'devotee', component: DevoteeComponent, canActivate: [AuthGuard] },
   { path: 'profile', component: DevoteeProfileComponent, canActivate: [AuthGuard] },  
   { path: 'reset', component: ResetPasswordComponent },
-  { path: 'lookup', component: LookupComponent },
+  { path: 'lookupMaster', component: LookupComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: 'dashboard', pathMatch: 'full', canActivate: [AuthGuard] },
   { path: '**', component: PageNotFoundComponent }
 ];

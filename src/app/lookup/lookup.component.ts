@@ -23,9 +23,9 @@ export class LookupComponent implements OnInit {
   lookupData: LookupData[];
   newLookupData:LookupData;
   modifiedLookupData:LookupData;
-  isLoggedIn: Boolean;
-  isLoggedIn$: Observable <Boolean>;
-  devoteeName$: Observable <String>;
+  //isLoggedIn: Boolean;
+  //isLoggedIn$: Observable <Boolean>;
+  //devoteeName$: Observable <String>;
   username: String = '';
   selectedLookupTable: LookupTableData;
   lookupTables: LookupTableData[];
@@ -38,14 +38,9 @@ export class LookupComponent implements OnInit {
   dataSource = new MatTableDataSource();  
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  constructor(private authService: AuthService,
-    private notificationService: NotificationService,
+  constructor(private notificationService: NotificationService,
     private lookupService: LookupService,
     public dialog: MatDialog) {
-      if (this.authService.loggedIn) {
-        this.authService.devoteeName.next(this.authService.getCurrentUserData());
-      }
-      
      }
 
  getLookupData():void{
@@ -53,7 +48,10 @@ export class LookupComponent implements OnInit {
    this.columns = ['select'];
    this.lookupService.getLookupData(this.selectedLookupTable.lookupTableName)
    .subscribe(lookupData=> {(this.dataSource = new MatTableDataSource(lookupData)),
-     (this.selectedLookupTable.fields.forEach((obj,index)=>{this.displayedColumns.push({fieldDisplayName:obj.fieldDisplayName, fieldName:"lookupField"+(index) });if(index>0)this.columns.push("lookupField" + (index))})), (this.dataSource.paginator = this.paginator),(this.dataSource.sort = this.sort) 
+     (this.selectedLookupTable.fields.forEach((obj,index)=>{this.displayedColumns.
+      push({fieldDisplayName:obj.fieldDisplayName, fieldName:"lookupField"+(index) });
+      if(index>0)this.columns.push("lookupField" + (index))})), (this.dataSource.paginator = 
+        this.paginator),(this.dataSource.sort = this.sort) 
      });
  }
 
@@ -63,19 +61,6 @@ export class LookupComponent implements OnInit {
  }  
 
  ngOnInit() {
-	this.devoteeName$ = this.authService.getDevoteeName;
-    this.isLoggedIn$ = this.authService.isLoggedIn;
-    this.authService.isLoggedIn
-    .subscribe(
-      isLoggedIn => {
-        this.isLoggedIn = isLoggedIn;
-        if (isLoggedIn) {
-          this.username = this.authService.getCurrentUserData();
-          this.getLookupTableData();
-          //this.getRelationships();
-          //this.dataSource = new MatTableDataSource(this.relationships);
-      } else {}
-    });
 
 }
 
