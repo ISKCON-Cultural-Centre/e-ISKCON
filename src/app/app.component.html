@@ -5,14 +5,14 @@
                My Departments
             </mat-toolbar>
             <mat-nav-list *ngIf="isLoggedIn$ | async as isLoggedIn">
-                <a *ngFor="let myDepartment of myDepartments"
+                <a *ngFor="let myTask of myTasks"
                    mat-list-item
                    mat-ripple
                    [style.position]="'relative'"
                    routerLinkActive="selected"
-                   [routerLink]="[myDepartment.route]">
-                  <mat-icon *ngIf="myDepartment.icon">{{myDepartment.icon}}</mat-icon>
-                    <span>{{myDepartment.departmentName}}</span>
+                   [routerLink]="[myTask.applicationRoute]">
+                  <mat-icon *ngIf="myTask.icon">{{myTask.icon}}</mat-icon>
+                    <span>{{myTask.taskName}}</span>
                 </a>
             </mat-nav-list>
           </mat-sidenav>
@@ -30,7 +30,7 @@
                   {{devoteeName$ | async}}
                 </button> 
               <mat-menu #profileMenu="matMenu">
-                  <button mat-menu-item  routerLink="devotee">
+                  <button mat-menu-item  routerLink="profile">
                     <mat-icon>perm_identity</mat-icon>
                     <span>My Profile</span>
                   </button>

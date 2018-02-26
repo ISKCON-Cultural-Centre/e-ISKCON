@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DevoteeComponent } from './devotee.component';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard as AuthGuard } from './../../app/shared/services/auth.guard';
+import { AuthGuard, DevoteeSearchSelectService } from './../../app/shared/services';
 import { MaterialModule } from '../material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -22,6 +22,13 @@ const routes: Routes = [
     FlexLayoutModule,
     BrowserModule
   ],
-  declarations: [DevoteeComponent, DevoteeSearchComponent, DevoteeProfileComponent]
+  declarations: [
+    DevoteeComponent, 
+    DevoteeSearchComponent, 
+    DevoteeProfileComponent
+  ],
+  providers: [
+    DevoteeSearchSelectService
+  ],
 })
 export class DevoteeModule { }

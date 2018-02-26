@@ -71,6 +71,13 @@
           <mat-datepicker #kcpicker></mat-datepicker>
         </mat-form-field>
         <mat-form-field>
+          <mat-select placeholder="Asrama"   aria-label="State" class="form-control" formControlName="asramaMasterId">
+            <mat-option *ngFor="let asrama of asramas" [value]="asrama.id">
+              <span>{{ asrama.asramaName }}</span>
+            </mat-option>
+        </mat-select>  
+        </mat-form-field>        
+        <mat-form-field>
             <input type="number" matInput placeholder="Credit Limit" class="form-control" formControlName="creditLimit">
           </mat-form-field>        
       </fieldset>
@@ -150,7 +157,7 @@
         <input matInput placeholder="Address Line1">
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="2">
+        <input matInput placeholder="Address Line 2">
       </mat-form-field>
       <mat-form-field>
         <input matInput placeholder="Locality">
@@ -166,16 +173,7 @@
       </mat-form-field>
       <mat-checkbox>Is Permanent address same ?</mat-checkbox>
     </fieldset>
-    <mat-form-field>
-      <input matInput placeholder="Ashrama Category" aria-label="State" [matAutocomplete]="auto6">
-      <mat-autocomplete #auto6="matAutocomplete">
-        <mat-option *ngFor="let state of filteredStates | async" [value]="state.name">
-          <img style="vertical-align:middle;" aria-hidden src="{{state.flag}}" height="25" />
-          <span>{{ state.name }}</span> |
-          <small>Population: {{state.population}}</small>
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
+
     <fieldset fxLayout="column" fxLayoutAlign="space-evenly stretch">
       <legend>Family Details</legend>
       <mat-form-field>
