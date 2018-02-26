@@ -8,8 +8,7 @@ import { Observable } from 'rxjs/Observable';
 import { NotificationService } from './shared/services/notification.service';
 import { AuthService } from './shared/services/auth.service';
 
-import { Department } from './shared/sdk/models/Department';
-import { MyDepartment } from './shared/services/models/myDepartment';
+import { Department, TaskMaster } from './shared/sdk/models';
 import { MyServicesService } from './shared/services/myServices.service';
 
 @Component({
@@ -23,6 +22,8 @@ export class AppComponent  implements OnInit {
   mode = new FormControl('over');
 
   myDepartments: Department[] = [];
+  myTasks: TaskMaster[] = [];
+
   isLoggedIn: Boolean;
   isLoggedIn$: Observable <Boolean>;
   devoteeName$: Observable <String>;
@@ -54,13 +55,15 @@ export class AppComponent  implements OnInit {
           this.isLoggedIn = isLoggedIn;
           if (isLoggedIn) {
             this.username = this.authService.getCurrentUserData();
-            this.getAuthorizedDepartments();
+            //this.getAuthorizedDepartments();
+            this.getAuthorizedTasks();            
         } else {}
       });
     }
   
     onLogout() {
       this.myDepartments = [];
+      this.myTasks = [];
       this.authService.logout();
     }
   
@@ -69,6 +72,13 @@ export class AppComponent  implements OnInit {
     getAuthorizedDepartments(): void {
       this.myServicesService.getAuthorizedDepartments()
         .subscribe(departments => { this.myDepartments = departments;
+        });
+    }
+
+    getAuthorizedTasks(): void {
+      this.myServicesService.getAuthorizedTasks()
+        .subscribe(tasks => { 
+          this.myTasks = tasks; 
         });
     }
 
