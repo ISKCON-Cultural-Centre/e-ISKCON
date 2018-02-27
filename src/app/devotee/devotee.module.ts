@@ -9,6 +9,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserModule } from '@angular/platform-browser';
 import { DevoteeSearchComponent } from './devotee-search.component';
 import { DevoteeProfileComponent } from './devotee-profile.component';
+import { DevoteeRoleComponent } from './devotee-role.component';
 const routes: Routes = [
   { path: 'devotee', component: DevoteeComponent, canActivate: [AuthGuard] }
 ];
@@ -25,7 +26,7 @@ const routes: Routes = [
   declarations: [
     DevoteeComponent, 
     DevoteeSearchComponent, 
-    DevoteeProfileComponent
+    DevoteeProfileComponent, DevoteeRoleComponent
   ],
   providers: [
     DevoteeSearchSelectService

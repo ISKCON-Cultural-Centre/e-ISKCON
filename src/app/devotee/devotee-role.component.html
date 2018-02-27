@@ -1,0 +1,31 @@
+<div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0" fxFlex="100%">
+  <div fxFlex="25%">
+    <div>
+      <app-devotee-search></app-devotee-search>
+    </div>
+  </div>
+  <div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0" fxFlex="75%">
+    <div fxFlex="100%">
+      <mat-form-field class="demo-chip-list">
+        <mat-chip-list #chipList>
+          <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable"
+                   [removable]="removable" (remove)="remove(fruit)">
+            {{fruit.roleName}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+        </mat-chip-list>
+      </mat-form-field>
+
+      <mat-form-field class="demo-chip-list">
+        <mat-chip-list #chipList>
+          <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable"
+                   [removable]="removable" (remove)="remove(fruit)">
+            {{fruit.roleName}}
+            <mat-icon matChipRemove *ngIf="removable">add</mat-icon>
+          </mat-chip>
+        </mat-chip-list>
+      </mat-form-field>      
+    </div>  
+  </div>  
+  </div>
+  

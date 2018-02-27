@@ -55,8 +55,8 @@ export class AppComponent  implements OnInit {
           this.isLoggedIn = isLoggedIn;
           if (isLoggedIn) {
             this.username = this.authService.getCurrentUserData();
-            //this.getAuthorizedDepartments();
-            this.getAuthorizedTasks();            
+            // this.getAuthorizedDepartments();
+            this.getAuthorizedTasks();
         } else {}
       });
     }

@@ -11,6 +11,7 @@ import { RegisterComponent } from './login/register/register.component';
 import { ChangePasswordComponent } from './login/change-password.component';
 import { CatalogueComponent } from './matchless-gifts/catalogue/catalogue.component';
 import { LookupComponent } from './lookup/lookup.component';
+import { DevoteeRoleComponent } from './devotee/devotee-role.component';
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'changePassword', component: ChangePasswordComponent },
   { path: 'resetPassword', component: ResetPasswordComponent },
   { path: 'devotee', component: DevoteeComponent, canActivate: [AuthGuard] },
+  { path: 'devoteeRole', component: DevoteeRoleComponent, canActivate: [AuthGuard] },  
   { path: 'profile', component: DevoteeProfileComponent, canActivate: [AuthGuard] },  
   { path: 'reset', component: ResetPasswordComponent },
   { path: 'lookupMaster', component: LookupComponent, canActivate: [AuthGuard] },

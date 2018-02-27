@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Inject } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, Inject } from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {SelectionModel} from '@angular/cdk/collections';
@@ -17,7 +17,7 @@ import { LookupEntryComponent } from './lookup-entry/lookup-entry.component';
   styleUrls: ['./lookup.component.css'],
   entryComponents:[ LookupEntryComponent ]
 })
-export class LookupComponent implements OnInit {
+export class LookupComponent implements OnInit, AfterViewInit {
 
   relationships: RelationshipMaster[];  
   lookupData: LookupData[];
