@@ -6,25 +6,27 @@
   </div>
   <div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0" fxFlex="75%">
     <div fxFlex="100%">
-      <mat-form-field class="demo-chip-list">
+      <p>Assigned Roles</p>
+
         <mat-chip-list #chipList>
-          <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable"
-                   [removable]="removable" (remove)="remove(fruit)">
-            {{fruit.roleName}}
+          <mat-chip *ngFor="let role of assignedRoles" [selectable]="selectable"
+                   [removable]="removable" (remove)="removeRole(role)">
+            {{role.name}}
             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
           </mat-chip>
         </mat-chip-list>
-      </mat-form-field>
 
-      <mat-form-field class="demo-chip-list">
+      
+      <p>Available Roles</p>
+
         <mat-chip-list #chipList>
-          <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable"
-                   [removable]="removable" (remove)="remove(fruit)">
-            {{fruit.roleName}}
+          <mat-chip *ngFor="let role of availableRoles" [selectable]="selectable"
+                   [removable]="removable" (remove)="addRole(role)">
+            {{role.name}}
             <mat-icon matChipRemove *ngIf="removable">add</mat-icon>
           </mat-chip>
         </mat-chip-list>
-      </mat-form-field>      
+      
     </div>  
   </div>  
   </div>
