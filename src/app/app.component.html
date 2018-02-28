@@ -1,8 +1,8 @@
-<div fxLayout="row" fxFlex>
+<div fxLayout="row" fxLayout.xs="column" >
     <mat-sidenav-container fxFlex>
         <mat-sidenav #mainSideNav mode="over" closed  >
             <mat-toolbar color="primary" *ngIf="isLoggedIn$ | async as isLoggedIn">
-               My Departments
+               My Services
             </mat-toolbar>
             <mat-nav-list *ngIf="isLoggedIn$ | async as isLoggedIn">
                 <a *ngFor="let myTask of myTasks"
@@ -15,7 +15,7 @@
                     <span>{{myTask.taskName}}</span>
                 </a>
             </mat-nav-list>
-          </mat-sidenav>
+        </mat-sidenav>
           <mat-toolbar color="primary" *ngIf="isLoggedIn$ | async as isLoggedIn">
             <button md-icon-button (click)="mainSideNav.toggle()">
                   <mat-icon *ngIf="mainSideNav.opened">chevron_left</mat-icon>
@@ -44,11 +44,13 @@
                   </button>
                 </mat-menu>               
           </mat-toolbar>
-      <router-outlet></router-outlet>
-      <footer>
-          Copyright &copy; ISKCON Cultural Centre, Bangalore
-      </footer>      
-    </mat-sidenav-container> 
+          <router-outlet></router-outlet>    
+          <footer>
+              Copyright &copy; ISKCON Cultural Centre, Bangalore
+          </footer>
+        </mat-sidenav-container>    
+      
+
   </div>
   
 

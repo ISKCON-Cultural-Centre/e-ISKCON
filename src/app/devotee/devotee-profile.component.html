@@ -1,189 +1,187 @@
 <form [formGroup]="devoteeForm" novalidate>  
-<div class="example-container">
-    <div fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap.xs="0">
-        <div class="item item-1" fxFlex fxFlexOffset.xs="0">
-          <button mat-button>Create/Update</button>
-          <button mat-button>Cancel</button>
-        </div>
-    </div> 
-<div class="item item-2" fxFlex="33%" >
-      <fieldset fxLayout="column" fxLayoutAlign="space-evenly stretch">
-        <legend>Personal Details</legend>
-        <mat-form-field>
-          <input fxFill matInput placeholder="Legal Name" class="form-control" formControlName="legalName" autofocus>
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput placeholder="Spiritual Name" class="form-control" formControlName="spiritualName">
-        </mat-form-field>
-        <mat-form-field>
-          <mat-select placeholder="Circle"   aria-label="State" class="form-control" formControlName="circleId">
-            <mat-option *ngFor="let circle of circles " [value]="circle.id">
-              <span>{{ circle.name }}</span>
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field>
-            <mat-select placeholder="Gender"  class="form-control" formControlName="gender">
-              <mat-option value="M">
-                Male
+<div fxLayout="row" fxLayout.xs="column"  class="box">
+  <div>
+        <fieldset fxLayout="column" fxLayoutAlign="space-evenly stretch">
+          <legend>Personal Details</legend>
+          <div>
+              <button mat-button>Create/Update</button>
+              <button mat-button>Cancel</button>
+            </div>          
+          <mat-form-field>
+            <input fxFill matInput placeholder="Legal Name" class="form-control" formControlName="legalName" autofocus>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Spiritual Name" class="form-control" formControlName="spiritualName">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="Circle"   aria-label="State" class="form-control" formControlName="circleId">
+              <mat-option *ngFor="let circle of circles " [value]="circle.id">
+                <span>{{ circle.name }}</span>
               </mat-option>
-              <mat-option value="F">
-                  Female
-                </mat-option>              
             </mat-select>
           </mat-form-field>
-        <mat-form-field>
-          <input matInput placeholder="Email Address"  class="form-control" formControlName="email">
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput placeholder="Gothra" aria-label="State" [matAutocomplete]="autoGothra" formControlName="gothra">
-          <mat-autocomplete #autoGothra="matAutocomplete" >
-            <mat-option *ngFor="let gothra of filteredGothras | async" [value]="gothra.gothra">
-              <span>{{ gothra.gothra }}</span>
-            </mat-option>
-          </mat-autocomplete>
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput placeholder="Nakshatra" aria-label="State" [matAutocomplete]="autoNakshatra" formControlName="nakshatra">
-          <mat-autocomplete #autoNakshatra="matAutocomplete" >
-            <mat-option *ngFor="let nakshatra of filteredNakshatras | async" [value]="nakshatra.nakshatra">
-              <span>{{ nakshatra.nakshatra }}</span>
-            </mat-option>
-          </mat-autocomplete>
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput placeholder="Aadhar number"  class="form-control" formControlName="governmentUniqueId">
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput placeholder="PAN"  class="form-control" formControlName="incomeTaxId">
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput placeholder="LPM Number"  class="form-control" formControlName="lpmId">
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput [matDatepicker]="picker" placeholder="Date of Birth" class="form-control" formControlName="dateOfBirth">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput [matDatepicker]="kcpicker" placeholder="KC start date" class="form-control" formControlName="kcAssociationDate">
-          <mat-datepicker-toggle matSuffix [for]="kcpicker"></mat-datepicker-toggle>
-          <mat-datepicker #kcpicker></mat-datepicker>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-select placeholder="Asrama"   aria-label="State" class="form-control" formControlName="asramaMasterId">
-            <mat-option *ngFor="let asrama of asramas" [value]="asrama.id">
-              <span>{{ asrama.asramaName }}</span>
-            </mat-option>
-        </mat-select>  
-        </mat-form-field>        
-        <mat-form-field>
-            <input type="number" matInput placeholder="Credit Limit" class="form-control" formControlName="creditLimit">
+          <mat-form-field>
+              <mat-select placeholder="Gender"  class="form-control" formControlName="gender">
+                <mat-option value="M">
+                  Male
+                </mat-option>
+                <mat-option value="F">
+                    Female
+                  </mat-option>              
+              </mat-select>
+            </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Email Address"  class="form-control" formControlName="email">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Gothra" aria-label="State" [matAutocomplete]="autoGothra" formControlName="gothra">
+            <mat-autocomplete #autoGothra="matAutocomplete" >
+              <mat-option *ngFor="let gothra of filteredGothras | async" [value]="gothra.gothra">
+                <span>{{ gothra.gothra }}</span>
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Nakshatra" aria-label="State" [matAutocomplete]="autoNakshatra" formControlName="nakshatra">
+            <mat-autocomplete #autoNakshatra="matAutocomplete" >
+              <mat-option *ngFor="let nakshatra of filteredNakshatras | async" [value]="nakshatra.nakshatra">
+                <span>{{ nakshatra.nakshatra }}</span>
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Aadhar number"  class="form-control" formControlName="governmentUniqueId">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="PAN"  class="form-control" formControlName="incomeTaxId">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="LPM Number"  class="form-control" formControlName="lpmId">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput [matDatepicker]="picker" placeholder="Date of Birth" class="form-control" formControlName="dateOfBirth">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput [matDatepicker]="kcpicker" placeholder="KC start date" class="form-control" formControlName="kcAssociationDate">
+            <mat-datepicker-toggle matSuffix [for]="kcpicker"></mat-datepicker-toggle>
+            <mat-datepicker #kcpicker></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="Asrama"   aria-label="State" class="form-control" formControlName="asramaMasterId">
+              <mat-option *ngFor="let asrama of asramas" [value]="asrama.id">
+                <span>{{ asrama.asramaName }}</span>
+              </mat-option>
+          </mat-select>  
           </mat-form-field>        
+          <mat-form-field>
+              <input type="number" matInput placeholder="Credit Limit" class="form-control" formControlName="creditLimit">
+            </mat-form-field>        
+        </fieldset>
+
+    </div>
+    <div>
+      <fieldset fxLayout="column" fxLayoutAlign="space-evenly stretch" >
+        <legend>Languages</legend>
+        <mat-form-field>
+          <mat-select placeholder="Mother Tongue"   aria-label="State" class="form-control" formControlName="motherTongueLanguageId">
+              <mat-option *ngFor="let language of languages" [value]="language.id">
+                <span>{{ language.language }}</span>
+              </mat-option>
+          </mat-select>        
+        </mat-form-field>
+
+      </fieldset>
+      <fieldset  fxLayout="column" fxLayoutAlign="space-evenly stretch">
+        <legend>Skill</legend>
+        <mat-form-field>
+          <input matInput placeholder="Search Skill" aria-label="State" [matAutocomplete]="auto1">
+          <mat-autocomplete #auto1="matAutocomplete">
+            <mat-option *ngFor="let state of filteredStates | async " [value]="state.name">
+              <img style="vertical-align:middle;" aria-hidden src="{{state.flag}}" height="25" />
+              <span>{{ state.name }}</span> |
+              <small>Population: {{state.population}}</small>
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+
+      </fieldset>
+      <fieldset  fxLayout="column" fxLayoutAlign="space-evenly stretch">
+        <legend>Area of Interest</legend>
+        <mat-form-field>
+          <input matInput placeholder="Search Interest" aria-label="State" [matAutocomplete]="auto2">
+          <mat-autocomplete #auto2="matAutocomplete">
+            <mat-option *ngFor="let state of filteredStates | async" [value]="state.name">
+              <img style="vertical-align:middle;" aria-hidden src="{{state.flag}}" height="25" />
+              <span>{{ state.name }}</span> |
+              <small>Population: {{state.population}}</small>
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+
+      </fieldset>
+      <fieldset fxLayout="column" fxLayoutAlign="space-evenly stretch">
+        <legend>Service Availablity</legend>
+        <table item-width="inherit">
+          <tr>
+            <td>
+              <mat-form-field>
+                <input matInput placeholder="Search Interest" aria-label="State" [matAutocomplete]="auto3">
+                <mat-autocomplete #auto3="matAutocomplete">
+                  <mat-option *ngFor="let state of filteredStates | async" [value]="state.name">
+                    <img style="vertical-align:middle;" aria-hidden src="{{state.flag}}" height="25" />
+                    <span>{{ state.name }}</span> |
+                    <small>Population: {{state.population}}</small>
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </td>
+            <!-- <td>
+              <input length=5>
+            </td>
+            <td>
+              <input length=5>
+            </td> -->
+          </tr>
+        </table>
+
+      </fieldset>
+    </div>
+    <div >
+      <fieldset fxLayout="column" fxLayoutAlign="space-evenly stretch">
+        <legend>Address Details</legend>
+        <mat-form-field>
+          <input matInput placeholder="Address Line1">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Address Line 2">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Locality">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="City">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="State">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="PIN">
+        </mat-form-field>
+        <mat-checkbox>Is Permanent address same ?</mat-checkbox>
       </fieldset>
 
-  </div>
-  <div class="item item-3" fxFlex="33%" fxLayout="column" fxLayoutAlign="start stretch">
-    <fieldset fxLayout="column" fxLayoutAlign="space-evenly stretch" >
-      <legend>Languages</legend>
-      <mat-form-field>
-        <mat-select placeholder="Mother Tongue"   aria-label="State" class="form-control" formControlName="motherTongueLanguageId">
-            <mat-option *ngFor="let language of languages" [value]="language.id">
-              <span>{{ language.language }}</span>
-            </mat-option>
-        </mat-select>        
-      </mat-form-field>
+      <fieldset fxLayout="column" fxLayoutAlign="space-evenly stretch">
+        <legend>Family Details</legend>
+        <mat-form-field>
+          <input matInput placeholder="Name">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Relation">
+        </mat-form-field>
 
-    </fieldset>
-    <fieldset  fxLayout="column" fxLayoutAlign="space-evenly stretch">
-      <legend>Skill</legend>
-      <mat-form-field>
-        <input matInput placeholder="Search Skill" aria-label="State" [matAutocomplete]="auto1">
-        <mat-autocomplete #auto1="matAutocomplete">
-          <mat-option *ngFor="let state of filteredStates | async " [value]="state.name">
-            <img style="vertical-align:middle;" aria-hidden src="{{state.flag}}" height="25" />
-            <span>{{ state.name }}</span> |
-            <small>Population: {{state.population}}</small>
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
-
-    </fieldset>
-    <fieldset  fxLayout="column" fxLayoutAlign="space-evenly stretch">
-      <legend>Area of Interest</legend>
-      <mat-form-field>
-        <input matInput placeholder="Search Interest" aria-label="State" [matAutocomplete]="auto2">
-        <mat-autocomplete #auto2="matAutocomplete">
-          <mat-option *ngFor="let state of filteredStates | async" [value]="state.name">
-            <img style="vertical-align:middle;" aria-hidden src="{{state.flag}}" height="25" />
-            <span>{{ state.name }}</span> |
-            <small>Population: {{state.population}}</small>
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
-
-    </fieldset>
-    <fieldset fxLayout="column" fxLayoutAlign="space-evenly stretch">
-      <legend>Service Availablity</legend>
-      <table item-width="inherit">
-        <tr>
-          <td>
-            <mat-form-field>
-              <input matInput placeholder="Search Interest" aria-label="State" [matAutocomplete]="auto3">
-              <mat-autocomplete #auto3="matAutocomplete">
-                <mat-option *ngFor="let state of filteredStates | async" [value]="state.name">
-                  <img style="vertical-align:middle;" aria-hidden src="{{state.flag}}" height="25" />
-                  <span>{{ state.name }}</span> |
-                  <small>Population: {{state.population}}</small>
-                </mat-option>
-              </mat-autocomplete>
-            </mat-form-field>
-          </td>
-          <!-- <td>
-            <input length=5>
-          </td>
-          <td>
-            <input length=5>
-          </td> -->
-        </tr>
-      </table>
-
-    </fieldset>
-  </div>
-  <div class="item item-4" fxFlex="33%"  fxLayout="column" fxLayoutAlign="start stretch">
-    <fieldset fxLayout="column" fxLayoutAlign="space-evenly stretch">
-      <legend>Address Details</legend>
-      <mat-form-field>
-        <input matInput placeholder="Address Line1">
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="Address Line 2">
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="Locality">
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="City">
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="State">
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="PIN">
-      </mat-form-field>
-      <mat-checkbox>Is Permanent address same ?</mat-checkbox>
-    </fieldset>
-
-    <fieldset fxLayout="column" fxLayoutAlign="space-evenly stretch">
-      <legend>Family Details</legend>
-      <mat-form-field>
-        <input matInput placeholder="Name">
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="Relation">
-      </mat-form-field>
-
-    </fieldset>
-  </div>
+      </fieldset>
+    </div>
 </div>
 </form>
