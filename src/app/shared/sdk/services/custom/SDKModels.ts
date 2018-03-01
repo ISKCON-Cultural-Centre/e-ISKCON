@@ -77,6 +77,7 @@ import { LookupTableDetail } from '../../models/LookupTableDetail';
 import { LookupMaster } from '../../models/LookupMaster';
 import { GothraMaster } from '../../models/GothraMaster';
 import { NakshatraMaster } from '../../models/NakshatraMaster';
+import { ProfessionMaster } from '../../models/ProfessionMaster';
 
 export interface Models { [name: string]: any }
 
@@ -161,6 +162,7 @@ export class SDKModels {
     LookupMaster: LookupMaster,
     GothraMaster: GothraMaster,
     NakshatraMaster: NakshatraMaster,
+    ProfessionMaster: ProfessionMaster,
     
   };
 

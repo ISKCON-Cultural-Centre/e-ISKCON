@@ -6,7 +6,8 @@ import {
   AsramaMaster,
   Language,
   GothraMaster,
-  NakshatraMaster
+  NakshatraMaster,
+  ProfessionMaster
 } from '../index';
 
 declare var Object: any;
@@ -35,6 +36,7 @@ export interface DevoteeInterface {
   "dateOfBirth"?: Date;
   "dayMonthOfBirth": string;
   "asramaMasterId"?: string;
+  "professionId": string;
   "emailVerified"?: boolean;
   "created-on"?: Date;
   "updated-on"?: Date;
@@ -46,6 +48,7 @@ export interface DevoteeInterface {
   fkDevoteeLanguage1rel?: Language;
   fkDevoteeGothraMaster1rel?: GothraMaster;
   fkDevoteeNakshatraMaster1rel?: NakshatraMaster;
+  fkDevoteeProfessionMaster1rel?: ProfessionMaster;
 }
 
 export class Devotee implements DevoteeInterface {
@@ -73,6 +76,7 @@ export class Devotee implements DevoteeInterface {
   "dateOfBirth": Date;
   "dayMonthOfBirth": string;
   "asramaMasterId": string;
+  "professionId": string;
   "emailVerified": boolean;
   "created-on": Date;
   "updated-on": Date;
@@ -84,6 +88,7 @@ export class Devotee implements DevoteeInterface {
   fkDevoteeLanguage1rel: Language;
   fkDevoteeGothraMaster1rel: GothraMaster;
   fkDevoteeNakshatraMaster1rel: NakshatraMaster;
+  fkDevoteeProfessionMaster1rel: ProfessionMaster;
   constructor(data?: DevoteeInterface) {
     Object.assign(this, data);
   }
@@ -213,6 +218,10 @@ export class Devotee implements DevoteeInterface {
           name: 'asramaMasterId',
           type: 'string'
         },
+        "professionId": {
+          name: 'professionId',
+          type: 'string'
+        },
         "emailVerified": {
           name: 'emailVerified',
           type: 'boolean'
@@ -286,6 +295,14 @@ export class Devotee implements DevoteeInterface {
           relationType: 'belongsTo',
                   keyFrom: 'nakshatra',
           keyTo: 'nakshatra'
+        },
+        fkDevoteeProfessionMaster1rel: {
+          name: 'fkDevoteeProfessionMaster1rel',
+          type: 'ProfessionMaster',
+          model: 'ProfessionMaster',
+          relationType: 'belongsTo',
+                  keyFrom: 'professionId',
+          keyTo: 'professionId'
         },
       }
     }

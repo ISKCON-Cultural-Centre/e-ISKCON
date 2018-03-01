@@ -45,19 +45,16 @@ export class DevoteeRoleComponent implements OnInit {
  
   ngOnInit() {
 
-    this.loadDevoteeRoles('');
-
-    this.serviceRoleApi.find<ServiceRole>()
-      .subscribe(
-        roles => {
-          this.availableRoles = roles;
-        }
-      );
-
     this.devoteeSearchSelectService.missionAnnounced$.
     subscribe(
       selectedDevotee => {
         this.loadDevoteeRoles(selectedDevotee.option.value.id);
+        this.serviceRoleApi.find<ServiceRole>()
+        .subscribe(
+          roles => {
+            this.availableRoles = roles;
+          }
+        );        
       }
     );
 

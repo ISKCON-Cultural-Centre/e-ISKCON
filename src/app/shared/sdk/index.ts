@@ -122,6 +122,7 @@ import { LookupTableDetailApi } from './services/custom/LookupTableDetail';
 import { LookupMasterApi } from './services/custom/LookupMaster';
 import { GothraMasterApi } from './services/custom/GothraMaster';
 import { NakshatraMasterApi } from './services/custom/NakshatraMaster';
+import { ProfessionMasterApi } from './services/custom/ProfessionMaster';
 /**
 * @module SDKBrowserModule
 * @description
@@ -228,6 +229,7 @@ export class SDKBrowserModule {
         LookupMasterApi,
         GothraMasterApi,
         NakshatraMasterApi,
+        ProfessionMasterApi,
         internalStorageProvider,
         { provide: SDKStorage, useClass: StorageBrowser }
       ]

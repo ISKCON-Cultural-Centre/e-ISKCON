@@ -76,5 +76,6 @@ export * from './LookupTableDetail';
 export * from './LookupMaster';
 export * from './GothraMaster';
 export * from './NakshatraMaster';
+export * from './ProfessionMaster';
 export * from './SDKModels';
 export * from './logger.service';
