@@ -12,6 +12,7 @@ import { ChangePasswordComponent } from './login/change-password.component';
 import { CatalogueComponent } from './matchless-gifts/catalogue/catalogue.component';
 import { LookupComponent } from './lookup/lookup.component';
 import { DevoteeRoleComponent } from './devotee/devotee-role.component';
+import { RoleComponent } from './organization/role.component';
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent },
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'profile', component: DevoteeProfileComponent, canActivate: [AuthGuard] },  
   { path: 'reset', component: ResetPasswordComponent },
   { path: 'lookupMaster', component: LookupComponent, canActivate: [AuthGuard] },
+  { path: 'organization/role', component: RoleComponent, canActivate: [AuthGuard] },  
   { path: '', redirectTo: 'dashboard', pathMatch: 'full', canActivate: [AuthGuard] },
   { path: '**', component: PageNotFoundComponent }
 ];

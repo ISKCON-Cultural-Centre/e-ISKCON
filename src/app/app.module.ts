@@ -30,13 +30,16 @@ import { NotificationService } from './shared/services/notification.service';
 import { LookupModule } from '../app/lookup/lookup.module';
 import { LookupService } from './shared/services/lookup.service';
 import { DummyService } from './shared/services/dummy.service';
+import { OrganizationModule } from '../app/organization/organization.module';
+// import { SharedComponentsModule } from './shared/components/shared-components.module';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent,
     DashboardComponent,
-    MessagesComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +58,9 @@ import { DummyService } from './shared/services/dummy.service';
     MyMessagesModule,
     CatalogueModule,
     MatchlessGiftsModule,
-    LookupModule
+    LookupModule,
+    OrganizationModule,
+    // SharedComponentsModule
   ],
   providers: [
     AuthGuard,
