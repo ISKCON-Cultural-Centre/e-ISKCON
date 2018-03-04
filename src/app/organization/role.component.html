@@ -2,7 +2,8 @@
   <div>
     <fieldset fxLayout="column" fxLayoutAlign="space-evenly stretch">
       <legend>Service Roles</legend>
-        <app-inline-edit *ngFor="let role of serviceRoles" [(ngModel)]="name[role.index]" label={{role.name}} [required]="true" type="text">
+        <app-inline-edit *ngFor="let role of serviceRoles; let index = index;" 
+        [(ngModel)]="serviceRoles[index].name" name="serviceRoles[index].id" [required]="true" type="text">
         </app-inline-edit>          
     </fieldset>
   </div>

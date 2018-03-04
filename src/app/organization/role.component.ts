@@ -26,7 +26,7 @@ import { } from '../shared/'
 export class RoleComponent implements OnInit {
 
   roleForm: FormGroup;
-
+  
   serviceRoles: ServiceRole[];  
 
   constructor(
@@ -35,7 +35,7 @@ export class RoleComponent implements OnInit {
     private fb: FormBuilder
   ) 
   {  
-    this.createForm();
+    //this.createForm();
   }
 
   ngOnInit() {
@@ -43,11 +43,11 @@ export class RoleComponent implements OnInit {
   }
 
   createForm() {
-    this.roleForm = this.fb.group({
-      id: ['', Validators.required],      
-      name: ['', Validators.required],
-      description: ['', Validators.required],
-    });
+
+    for (var value in this.serviceRoles) {
+      console.log(value);
+    }
+
   }
   
   loadRoles() {

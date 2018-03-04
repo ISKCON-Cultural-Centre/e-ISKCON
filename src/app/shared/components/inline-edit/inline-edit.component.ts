@@ -4,7 +4,7 @@ import { Component,
   ViewChild,
   Renderer,
   forwardRef,
-  OnInit } from '@angular/core';
+  OnInit, AfterViewInit } from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
 const INLINE_EDIT_CONTROL_VALUE_ACCESSOR = {
@@ -20,7 +20,7 @@ const INLINE_EDIT_CONTROL_VALUE_ACCESSOR = {
   styleUrls: ['./inline-edit.component.css']
 })
 
-export class InlineEditComponent implements ControlValueAccessor, OnInit {
+export class InlineEditComponent implements ControlValueAccessor, OnInit, AfterViewInit {
 
   @ViewChild('inlineEditControl') inlineEditControl: ElementRef; // input DOM element
   @Input() label: string = '';  // Label value for input element
@@ -77,10 +77,17 @@ export class InlineEditComponent implements ControlValueAccessor, OnInit {
     this.preValue = value;
     this.editing = true;
     // Focus on the input element just as the editing begins
-    setTimeout(_ => this._renderer.invokeElementMethod(this.inlineEditControl,
-      'focus', []));
+/*      setTimeout(_ => this._renderer.invokeElementMethod(this.inlineEditControl,
+      'focus', [])); 
+ */
   }
 
   ngOnInit() {
   }
+
+    ngAfterViewInit() {
+      console.log(`ngAfterViewInit - inlineEditControl is ${this.inlineEditControl}`);
+      this._renderer.invokeElementMethod(this.inlineEditControl, 'focus', []);
+
+  }    
 }
