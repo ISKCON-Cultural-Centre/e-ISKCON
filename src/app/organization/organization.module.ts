@@ -7,8 +7,7 @@ import { DepartmentRoleComponent } from './department-role.component';
 import { DepartmentComponent } from './department.component';
 import { MaterialModule } from '../material.module';
 // import { SharedComponentsModule } from '../shared/components/shared-components.module'
-import { InlineEditComponent } 
-from '../shared/components/inline-edit/inline-edit.component';
+import { InlineEditComponent } from '../shared/components/inline-edit/inline-edit.component';
 
 
 

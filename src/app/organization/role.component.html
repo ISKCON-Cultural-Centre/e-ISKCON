@@ -1,12 +1,39 @@
-<div fxLayout="row" fxLayout.xs="column" >
-  <div>
-    <fieldset fxLayout="column" fxLayoutAlign="space-sevenly stretch">
-      <legend>Service Roles</legend>
-      <div *ngFor="let role of serviceRoles; let index = index;" >
-        <app-inline-edit 
-        [(ngModel)]="serviceRoles[index].name" [required]="true" type="text">
-        </app-inline-edit>    
-      </div>         
-    </fieldset>
-  </div>
+<div fxLayout="row" fxLayout.xs="column">
+  <fieldset fxLayout="column" fxLayoutAlign="space-sevenly stretch">  
+      <legend>Roles Master</legend>
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter Roles">
+    </mat-form-field>
+
+    <button (click) = 'createRole()' mat-fab color="primary">+</button>   
+  <mat-table #table [dataSource]="dataSource" matSort matSortActive="created" matSortDisableClear matSortDirection="asc">
+
+    <!-- Name Column -->
+
+    <ng-container matColumnDef="roleName">
+      <mat-header-cell *matHeaderCellDef> Role Name </mat-header-cell>
+      <mat-cell *matCellDef="let role"> 
+          <app-inline-edit (done)='editNameField(role.name, role)' 
+          [(ngModel)]="role.name" [required]="true" type="text" placeholder="Role Name" (keyup.enter)="editNameField($event.target.value, role)">
+        </app-inline-edit> 
+      </mat-cell>
+    </ng-container>
+
+    <!-- Description Column -->
+    <ng-container matColumnDef="roleDescription">
+      <mat-header-cell *matHeaderCellDef> Role Description </mat-header-cell>
+      <mat-cell *matCellDef="let role">           
+        <app-inline-edit (done)='editDescriptionField(role.name, role)'
+          [(ngModel)]="role.description" [required]="true" type="text"  (keyup.enter)="editDescriptionField($event.target.value, role)">
+        </app-inline-edit> 
+     </mat-cell>
+    </ng-container>
+   
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</fieldset>
 </div>
+
+
+

@@ -100,7 +100,7 @@ export class DevoteeProfileComponent implements OnInit {
   }
 
   loadDevotee(devoteeId: String) {
-    this.devoteeApi.findById<Devotee>(this.devoteeId)
+    this.devoteeApi.findById<Devotee>(devoteeId)
     .subscribe(
       devotee => {
         this.devoteeForm.setValue(
