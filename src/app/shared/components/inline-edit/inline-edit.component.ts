@@ -20,7 +20,7 @@ const INLINE_EDIT_CONTROL_VALUE_ACCESSOR = {
   styleUrls: ['./inline-edit.component.css']
 })
 
-export class InlineEditComponent implements ControlValueAccessor, OnInit, AfterViewInit {
+export class InlineEditComponent implements ControlValueAccessor, OnInit {
 
   @ViewChild('inlineEditControl') inlineEditControl: ElementRef; // input DOM element
   @Input() label: string = '';  // Label value for input element
@@ -77,17 +77,12 @@ export class InlineEditComponent implements ControlValueAccessor, OnInit, AfterV
     this.preValue = value;
     this.editing = true;
     // Focus on the input element just as the editing begins
-/*      setTimeout(_ => this._renderer.invokeElementMethod(this.inlineEditControl,
-      'focus', [])); 
- */
+      setTimeout(_ => {console.log(this.inlineEditControl); 
+        this.inlineEditControl.nativeElement.focus();
+      });
   }
 
   ngOnInit() {
   }
 
-    ngAfterViewInit() {
-      console.log(`ngAfterViewInit - inlineEditControl is ${this.inlineEditControl}`);
-      this._renderer.invokeElementMethod(this.inlineEditControl, 'focus', []);
-
-  }    
 }
