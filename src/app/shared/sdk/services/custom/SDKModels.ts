@@ -26,7 +26,6 @@ import { ApprovalArtefact } from '../../models/ApprovalArtefact';
 import { ApprovalQue } from '../../models/ApprovalQue';
 import { ApprovalRule } from '../../models/ApprovalRule';
 import { Department } from '../../models/Department';
-import { DepartmentRole } from '../../models/DepartmentRole';
 import { RoleTaskMaster } from '../../models/RoleTaskMaster';
 import { TaskMaster } from '../../models/TaskMaster';
 import { MgCreditNote } from '../../models/MgCreditNote';
@@ -111,7 +110,6 @@ export class SDKModels {
     ApprovalQue: ApprovalQue,
     ApprovalRule: ApprovalRule,
     Department: Department,
-    DepartmentRole: DepartmentRole,
     RoleTaskMaster: RoleTaskMaster,
     TaskMaster: TaskMaster,
     MgCreditNote: MgCreditNote,

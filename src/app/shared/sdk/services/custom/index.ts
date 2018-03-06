@@ -25,7 +25,6 @@ export * from './ApprovalArtefact';
 export * from './ApprovalQue';
 export * from './ApprovalRule';
 export * from './Department';
-export * from './DepartmentRole';
 export * from './RoleTaskMaster';
 export * from './TaskMaster';
 export * from './MgCreditNote';

@@ -71,7 +71,6 @@ import { ApprovalArtefactApi } from './services/custom/ApprovalArtefact';
 import { ApprovalQueApi } from './services/custom/ApprovalQue';
 import { ApprovalRuleApi } from './services/custom/ApprovalRule';
 import { DepartmentApi } from './services/custom/Department';
-import { DepartmentRoleApi } from './services/custom/DepartmentRole';
 import { RoleTaskMasterApi } from './services/custom/RoleTaskMaster';
 import { TaskMasterApi } from './services/custom/TaskMaster';
 import { MgCreditNoteApi } from './services/custom/MgCreditNote';
@@ -178,7 +177,6 @@ export class SDKBrowserModule {
         ApprovalQueApi,
         ApprovalRuleApi,
         DepartmentApi,
-        DepartmentRoleApi,
         RoleTaskMasterApi,
         TaskMasterApi,
         MgCreditNoteApi,

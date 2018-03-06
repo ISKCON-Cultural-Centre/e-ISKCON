@@ -12,6 +12,7 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
 import { ServiceRole } from '../../models/ServiceRole';
 import { ServiceRoleMapping } from '../../models/ServiceRoleMapping';
+import { Department } from '../../models/Department';
 
 
 /**
@@ -119,6 +120,36 @@ export class ServiceRoleApi extends BaseLoopBackApi {
       data: data
     };
     let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
+   * Fetches belongsTo relation fkServiceRoleDepartment1rel.
+   *
+   * @param {any} id ServiceRole id
+   *
+   * @param {boolean} refresh 
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `ServiceRole` object.)
+   * </em>
+   */
+  public getFkServiceRoleDepartment1rel(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/ServiceRoles/:id/fkServiceRoleDepartment1rel";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (typeof refresh !== 'undefined' && refresh !== null) _urlParams.refresh = refresh;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
