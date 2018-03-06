@@ -61,7 +61,7 @@ export class RoleComponent implements OnInit {
     .subscribe(result => this.notificationService.notificationSubject.next('"' + result.description + '" updated successfully'));
   }
 
-  createRole() {
+  displayCreateRole() {
     this.add = true;
   }
 
@@ -71,6 +71,7 @@ export class RoleComponent implements OnInit {
   
 
   addRole() {
+    console.log(this.roleForm.value);
     this.serviceRoleApi.create<ServiceRole>(this.roleForm.value)
     .subscribe(result => {
       this.serviceRoles.push(result);

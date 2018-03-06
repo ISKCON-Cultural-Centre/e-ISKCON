@@ -6,12 +6,14 @@
       </mat-form-field>
 
 
-    <button mat-icon-button (click) = 'createRole()' >
+    <button mat-icon-button (click) = 'displayCreateRole()' >
       <mat-icon >ic_add_circle</mat-icon>
     </button>
 
     <div fxLayout="column" fxLayoutAlign="space-sevenly stretch" *ngIf="add">
-    <form [formGroup]="roleForm" novalidate  (ngSubmit)="addRole()" >        
+    <form [formGroup]="roleForm" (ngSubmit)="addRole()" novalidate   >   
+        <p>Form value: {{ roleForm.value | json }}</p>
+        <p>Form status: {{ roleForm.status | json }}</p>     
       <fieldset fxLayout="row" fxLayoutAlign="space-evenly stretch">
         <legend>Add a Role</legend>
         <mat-form-field>
@@ -21,7 +23,7 @@
           <input matInput placeholder="Role Description" class="form-control" formControlName="description">
         </mat-form-field>
         <div>
-            <button type="submit" mat-icon-button >
+            <button (ngSubmit)="addRole()" [disabled]="roleForm.pristine" type="submit" mat-icon-button >
               <mat-icon >ic_add</mat-icon>
             </button>
             <button  type="button" mat-icon-button (click) = 'cancel()' >
