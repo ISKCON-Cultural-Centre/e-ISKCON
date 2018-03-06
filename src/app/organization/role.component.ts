@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild} from '@angular/core';
-
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {  ServiceRole, ServiceRoleApi } from '../../../src/app/shared/sdk';
 import {  NotificationService} from '../shared/services';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
@@ -17,8 +17,11 @@ export class RoleComponent implements OnInit {
 
   resultsLength = 0;
   displayedColumns = ['roleName', 'roleDescription'];
+  add = false; // add new role
   serviceRoles: ServiceRole[];
   dataSource = new MatTableDataSource();
+
+  roleForm: FormGroup;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -31,15 +34,22 @@ export class RoleComponent implements OnInit {
 
   constructor(
     private notificationService: NotificationService,
-    private serviceRoleApi: ServiceRoleApi
-  ) 
-  {  
-    //this.createForm();
-  }
+    private serviceRoleApi: ServiceRoleApi,
+    private fb: FormBuilder) {
+      this.createForm();
+    }
 
   ngOnInit() {
     this.loadRoles();
   }
+
+  createForm() {
+    this.roleForm = this.fb.group({
+      name: ['', Validators.required],
+      description: ['', Validators.required]
+    });
+  }
+
 
   editNameField(editValue: string, el: any) {
     this.serviceRoleApi.patchAttributes(el.id, {name: editValue})
@@ -52,9 +62,20 @@ export class RoleComponent implements OnInit {
   }
 
   createRole() {
-    this.serviceRoleApi.create({name: 'TEST', description: 'TEST' })
+    this.add = true;
+  }
+
+  cancel() {
+    this.add = false;
+  }
+  
+
+  addRole() {
+    this.serviceRoleApi.create<ServiceRole>(this.roleForm.value)
     .subscribe(result => {
-      this.loadRoles();
+      this.serviceRoles.push(result);
+      console.log(result);
+      // this.loadRoles();
       this.notificationService.notificationSubject.next('"' + result.name + '" created successfully');
       }
     );

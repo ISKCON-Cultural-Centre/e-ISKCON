@@ -1,12 +1,38 @@
 <div fxLayout="row" fxLayout.xs="column">
   <fieldset fxLayout="column" fxLayoutAlign="space-sevenly stretch">  
-      <legend>Roles Master</legend>
-    <mat-form-field>
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter Roles">
-    </mat-form-field>
+    <legend>Roles Master</legend>
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter Roles">
+      </mat-form-field>
 
-    <button (click) = 'createRole()' mat-fab color="primary">+</button>   
-  <mat-table #table [dataSource]="dataSource" matSort matSortActive="created" matSortDisableClear matSortDirection="asc">
+
+    <button mat-icon-button (click) = 'createRole()' >
+      <mat-icon >ic_add_circle</mat-icon>
+    </button>
+
+    <div fxLayout="column" fxLayoutAlign="space-sevenly stretch" *ngIf="add">
+    <form [formGroup]="roleForm" novalidate  (ngSubmit)="addRole()" >        
+      <fieldset fxLayout="row" fxLayoutAlign="space-evenly stretch">
+        <legend>Add a Role</legend>
+        <mat-form-field>
+          <input fxFill matInput placeholder="Role Name" class="form-control" formControlName="name" autofocus>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Role Description" class="form-control" formControlName="description">
+        </mat-form-field>
+        <div>
+            <button type="submit" mat-icon-button >
+              <mat-icon >ic_add</mat-icon>
+            </button>
+            <button  type="button" mat-icon-button (click) = 'cancel()' >
+              <mat-icon >ic_cancel</mat-icon>
+            </button>     
+        </div>  
+      </fieldset>
+      </form>
+    </div>
+
+    <mat-table #table [dataSource]="dataSource" matSort matSortActive="created" matSortDisableClear matSortDirection="asc">
 
     <!-- Name Column -->
 

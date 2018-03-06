@@ -145,7 +145,6 @@ export class DevoteeProfileComponent implements OnInit {
       dayMonthOfBirth: '',
       lpmId: '',
       asramaMasterId: ''
-
     });
   }
 

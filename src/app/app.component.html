@@ -17,13 +17,13 @@
             </mat-nav-list>
         </mat-sidenav>
           <mat-toolbar color="primary" *ngIf="isLoggedIn$ | async as isLoggedIn">
-            <button md-icon-button (click)="mainSideNav.toggle()">
+            <button mat-icon-button (click)="mainSideNav.toggle()">
                   <mat-icon *ngIf="mainSideNav.opened">chevron_left</mat-icon>
                   <mat-icon *ngIf="!mainSideNav.opened">menu</mat-icon>
               </button>
               <span>ICC</span>
               <span class="fill-remaining-space"></span>  
-              <button md-icon-button routerLink="dashboard">
+              <button mat-icon-button routerLink="dashboard">
                   <mat-icon >home</mat-icon>
               </button>              
               <button mat-button [matMenuTriggerFor]="profileMenu">
