@@ -73,10 +73,10 @@
 
 
     <!-- Delete Column -->
-    <ng-container matColumnDef="select">
+    <ng-container matColumnDef="delete">
         <mat-header-cell *matHeaderCellDef> Delete </mat-header-cell>      
       <mat-cell *matCellDef="let role">
-        <button mat-icon-button (click) = 'deleteRole(role)' >
+        <button mat-icon-button (click)="openDialog(role)">
           <mat-icon>delete</mat-icon>
         </button>
       </mat-cell>

@@ -14,6 +14,9 @@ import { InlineEditComponent } from './inline-edit/inline-edit.component';
   ],
   exports: [
     DialogBoxComponent, InlineEditComponent
-  ]
+  ],
+  entryComponents: [
+    DialogBoxComponent
+  ],
 })
 export class SharedComponentsModule { }

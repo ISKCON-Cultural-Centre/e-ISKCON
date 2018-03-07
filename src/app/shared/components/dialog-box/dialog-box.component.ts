@@ -18,10 +18,14 @@ export class DialogBoxComponent implements OnInit {
   }
 
   onCloseConfirm() {
-    this.thisDialogRef.close('Confirm');
+    this.thisDialogRef.close(true);
   }
   onCloseCancel() {
-    this.thisDialogRef.close('Cancel');
-  }  
+    this.thisDialogRef.close(false);
+  }
+
+  onNoClick(): void {
+    this.thisDialogRef.close(false);
+  }
 
 }

@@ -18,7 +18,7 @@ import { DialogBoxComponent } from '../shared/components/dialog-box/dialog-box.c
 export class RoleComponent implements OnInit {
 
   resultsLength = 0;
-  displayedColumns = ['roleName', 'roleDescription', 'select', 'department'];
+  displayedColumns = ['roleName', 'roleDescription', 'department', 'delete'];
   add = false; // add new role
   serviceRoles: ServiceRole[] = [];
   departments: Department[] = [];
@@ -88,7 +88,7 @@ export class RoleComponent implements OnInit {
   addRole() {
     this.serviceRoleApi.create<ServiceRole>(this.roleForm.value)
     .subscribe(result => {
-      //this.serviceRoles.unshift(result);
+      //this.dataSource.data.push(result);
       this.loadRoles();
       this.notificationService.notificationSubject.next('"' + result.name + '" created successfully');
       this.add = false;
@@ -99,7 +99,6 @@ export class RoleComponent implements OnInit {
 
 
   deleteRole(role: ServiceRole) {
-    this.openDialog()
     this.serviceRoleApi.deleteById(role.id)
     .subscribe(result => {
       //this.serviceRoles.push(result);
@@ -128,14 +127,15 @@ export class RoleComponent implements OnInit {
     )
   }
 
-  openDialog() {
+  openDialog(role: ServiceRole) {
     let dialogRef = this.dialog.open(DialogBoxComponent, {
       width: '600px',
-      data: 'This text is passed into the dialog!'
+      data: 'Delete the role ' + role.name
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog closed: ${result}`);
-      this.dialogResult = result;
+      if(result) {
+        this.deleteRole(role);
+      } else { }
     });
   }  
 

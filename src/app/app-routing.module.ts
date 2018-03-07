@@ -13,6 +13,8 @@ import { CatalogueComponent } from './matchless-gifts/catalogue/catalogue.compon
 import { LookupComponent } from './lookup/lookup.component';
 import { DevoteeRoleComponent } from './devotee/devotee-role.component';
 import { RoleComponent } from './organization/role.component';
+import { TaskMasterComponent } from './organization/task-master.component';
+import { DepartmentComponent } from './organization/department.component';
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent },
@@ -25,7 +27,9 @@ const routes: Routes = [
   { path: 'profile', component: DevoteeProfileComponent, canActivate: [AuthGuard] },  
   { path: 'reset', component: ResetPasswordComponent },
   { path: 'lookupMaster', component: LookupComponent, canActivate: [AuthGuard] },
-  { path: 'organization/role', component: RoleComponent, canActivate: [AuthGuard] },  
+  { path: 'organization/role', component: RoleComponent, canActivate: [AuthGuard] },
+  { path: 'organization/task', component: TaskMasterComponent, canActivate: [AuthGuard] },
+  { path: 'organization/department', component: DepartmentComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: 'dashboard', pathMatch: 'full', canActivate: [AuthGuard] },
   { path: '**', component: PageNotFoundComponent }
 ];

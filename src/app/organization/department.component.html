@@ -1,3 +1,122 @@
-<p>
-  department works!
-</p>
+<div fxLayout="row" fxLayout.xs="column">
+  <fieldset fxLayout="column" fxLayoutAlign="space-sevenly stretch">  
+    <legend>Departments Master</legend>
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter Departments">
+      </mat-form-field>
+
+
+    <button mat-icon-button (click) = 'displayCreateDepartment()' >
+      <mat-icon >add_circle</mat-icon>
+    </button>
+
+    <div fxLayout="row" fxLayoutAlign="space-sevenly stretch" *ngIf="add">
+    <form [formGroup]="departmentForm" (ngSubmit)="addDepartment()" novalidate   >   
+      <fieldset fxLayout="row" fxLayoutAlign="space-evenly stretch">
+        <legend>Add a Department</legend>
+        <mat-form-field>
+          <input fxFill matInput placeholder="Department Name" class="form-control" formControlName="departmentName" autofocus>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select  placeholder="Temple" formControlName="templeId">
+              <mat-option *ngFor="let temple of temples " [value]="temple.id">
+                <span>{{ temple.name }}</span>
+              </mat-option>
+          </mat-select>
+        </mat-form-field>   
+        <mat-form-field>
+          <mat-select  placeholder="Department Leader" formControlName="departmentLeaderDevoteeId">
+              <mat-option *ngFor="let devotee of devotees " [value]="devotee.id" >
+                <span>{{ devotee.spiritualName ? devotee.spiritualName  : devotee.legalName }}</span>
+              </mat-option>
+          </mat-select>
+        </mat-form-field>           
+        <mat-form-field>
+          <input matInput placeholder="Display Icon" class="form-control" formControlName="icon">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Route" class="form-control" formControlName="route">
+        </mat-form-field>        
+          <button [disabled]="departmentForm.invalid" type="submit"  mat-raised-button color="primary">Add Department
+          </button>
+          <button  type="button" (click) = 'cancel()'  mat-raised-button color="warn">
+            Cancel
+          </button>     
+      </fieldset>
+      </form>
+    </div>
+
+    <mat-table #table [dataSource]="dataSource" matSort matSortActive="created" matSortDisableClear matSortDirection="asc">
+
+
+
+    <!-- Temple Column -->
+    <ng-container matColumnDef="temple">
+      <mat-header-cell *matHeaderCellDef> Temple </mat-header-cell>
+      <mat-cell *matCellDef="let department">           
+        <mat-select (selectionChange) = 'editTempleField($event, department)'[value]="department.departmentLeaderDevoteeId">
+            <mat-option *ngFor="let temple of temples " [value]="temple.id">
+              <span>{{ temple.name }}</span>
+            </mat-option>
+        </mat-select>
+     </mat-cell>
+    </ng-container>    
+
+    <!-- Department Name Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Department Name </mat-header-cell>
+      <mat-cell *matCellDef="let department"> 
+          <app-inline-edit (done)='editDepartmentNameField(department.departmentName, department)' 
+          [(ngModel)]="department.departmentName" [required]="true" type="text" placeholder="Role Name" (keyup.enter)="editNameField($event.target.value, department)">
+        </app-inline-edit> 
+      </mat-cell>
+    </ng-container>
+
+    <!-- Department Leader Column -->
+    <ng-container matColumnDef="leader">
+        <mat-header-cell *matHeaderCellDef> Leader </mat-header-cell>
+        <mat-cell *matCellDef="let department">           
+          <mat-select (selectionChange) = 'editDepartmentLeaderField($event, department)'[value]="department.departmentLeaderDevoteeId">
+              <mat-option *ngFor="let devotee of devotees " [value]="devotee.id">
+                <span>{{  devotee.spiritualName ? devotee.spiritualName  : devotee.legalName }}</span>
+              </mat-option>
+          </mat-select>
+       </mat-cell>
+      </ng-container>    
+
+    <!-- Icon Column -->
+    <ng-container matColumnDef="icon">
+      <mat-header-cell *matHeaderCellDef> Icon </mat-header-cell>
+      <mat-cell *matCellDef="let department">           
+        <app-inline-edit (done)='editIconField(department.icon, department)'
+          [(ngModel)]="department.icon" [required]="true" type="text"  (keyup.enter)="editIconField($event.target.value, department)">
+        </app-inline-edit> 
+     </mat-cell>
+    </ng-container>      
+
+    <!-- Route Column -->
+    <ng-container matColumnDef="route">
+      <mat-header-cell *matHeaderCellDef> Route </mat-header-cell>
+      <mat-cell *matCellDef="let department">           
+        <app-inline-edit (done)='editIconField(department.route, department)'
+          [(ngModel)]="department.route" [required]="true" type="text"  (keyup.enter)="editIconField($event.target.value, department)">
+        </app-inline-edit> 
+     </mat-cell>
+    </ng-container>        
+
+    <!-- Delete Column -->
+    <ng-container matColumnDef="delete">
+        <mat-header-cell *matHeaderCellDef> Delete </mat-header-cell>      
+      <mat-cell *matCellDef="let department">
+        <button mat-icon-button (click)="openDialog(department)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>    
+   
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</fieldset>
+</div>
+
