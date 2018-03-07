@@ -2,11 +2,13 @@ import { Component, OnInit, ViewChild} from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {  ServiceRole, ServiceRoleApi, Department, DepartmentApi } from '../../../src/app/shared/sdk';
 import {  NotificationService} from '../shared/services';
+import { MaterialModule } from '../material.module';
 import { MatPaginator, MatSort, MatTableDataSource, MatSelectChange } from '@angular/material';
+import {MatDialog} from '@angular/material';
 
+import { SharedComponentsModule } from '../shared/components/shared-components.module'
 import { InlineEditComponent } from '../shared/components/inline-edit/inline-edit.component';
-
-import { } from '../shared/'
+import { DialogBoxComponent } from '../shared/components/dialog-box/dialog-box.component';
 
 @Component({
   selector: 'app-role',
@@ -22,6 +24,7 @@ export class RoleComponent implements OnInit {
   departments: Department[] = [];
   dataSource = new MatTableDataSource<ServiceRole>();
   selected = '';
+  dialogResult = '';
 
   roleForm: FormGroup;
 
@@ -39,7 +42,8 @@ export class RoleComponent implements OnInit {
     private notificationService: NotificationService,
     private serviceRoleApi: ServiceRoleApi,
     private departmentApi: DepartmentApi,
-    private fb: FormBuilder) {
+    private fb: FormBuilder,
+    public dialog: MatDialog) {
       this.createForm();
     }
 
@@ -95,6 +99,7 @@ export class RoleComponent implements OnInit {
 
 
   deleteRole(role: ServiceRole) {
+    this.openDialog()
     this.serviceRoleApi.deleteById(role.id)
     .subscribe(result => {
       //this.serviceRoles.push(result);
@@ -122,6 +127,17 @@ export class RoleComponent implements OnInit {
       }
     )
   }
+
+  openDialog() {
+    let dialogRef = this.dialog.open(DialogBoxComponent, {
+      width: '600px',
+      data: 'This text is passed into the dialog!'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog closed: ${result}`);
+      this.dialogResult = result;
+    });
+  }  
 
 }
 

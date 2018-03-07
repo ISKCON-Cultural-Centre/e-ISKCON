@@ -31,7 +31,7 @@ import { LookupModule } from '../app/lookup/lookup.module';
 import { LookupService } from './shared/services/lookup.service';
 import { DummyService } from './shared/services/dummy.service';
 import { OrganizationModule } from '../app/organization/organization.module';
-// import { SharedComponentsModule } from './shared/components/shared-components.module';
+import { SharedComponentsModule } from './shared/components/shared-components.module';
 
 
 @NgModule({
@@ -60,7 +60,7 @@ import { OrganizationModule } from '../app/organization/organization.module';
     MatchlessGiftsModule,
     LookupModule,
     OrganizationModule,
-    // SharedComponentsModule
+    SharedComponentsModule
   ],
   providers: [
     AuthGuard,

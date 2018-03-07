@@ -6,7 +6,7 @@ import { RoleComponent } from './role.component';
 import { DepartmentRoleComponent } from './department-role.component';
 import { DepartmentComponent } from './department.component';
 import { MaterialModule } from '../material.module';
-// import { SharedComponentsModule } from '../shared/components/shared-components.module'
+import { SharedComponentsModule } from '../shared/components/shared-components.module'
 import { InlineEditComponent } from '../shared/components/inline-edit/inline-edit.component';
 
 
@@ -14,8 +14,12 @@ import { InlineEditComponent } from '../shared/components/inline-edit/inline-edi
 
 @NgModule({
   imports: [
-    CommonModule, MaterialModule, FormsModule, ReactiveFormsModule
+    CommonModule, MaterialModule, FormsModule, ReactiveFormsModule, 
+    SharedComponentsModule
   ],
-  declarations: [RoleComponent, DepartmentRoleComponent, DepartmentComponent, InlineEditComponent]
+  declarations: [
+    RoleComponent, DepartmentRoleComponent, DepartmentComponent, 
+     // InlineEditComponent
+  ]
 })
 export class OrganizationModule { }
