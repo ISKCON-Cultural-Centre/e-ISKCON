@@ -4,8 +4,8 @@
         <fieldset fxLayout="column" fxLayoutAlign="space-evenly stretch">
           <legend>Personal Details</legend>
           <div>
-              <button mat-button>Create/Update</button>
-              <button mat-button>Cancel</button>
+              <button type = "submit" mat-raised-button color="primary"> {{ devoteeForm.value.id == null ? 'Create' : 'Update' }}</button>
+              <button type = "button" mat-raised-button color="warn">Reset</button>
             </div>          
           <mat-form-field>
             <input fxFill matInput placeholder="Legal Name" class="form-control" formControlName="legalName" autofocus>
@@ -50,6 +50,21 @@
             </mat-autocomplete>
           </mat-form-field>
           <mat-form-field>
+            <input matInput placeholder="Profession" aria-label="State" [matAutocomplete]="autoProfession" formControlName="professionId">
+            <mat-autocomplete #autoProfession="matAutocomplete" >
+              <mat-option *ngFor="let profession of filteredProfessions | async" [value]="profession.professionId">
+                <span>{{ profession.professionName }}</span>
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>        
+          <mat-form-field>
+            <mat-select placeholder="Mother Tongue"   aria-label="State" class="form-control" formControlName="motherTongueLanguageId">
+                <mat-option *ngFor="let language of languages" [value]="language.id">
+                  <span>{{ language.language }}</span>
+                </mat-option>
+            </mat-select>        
+          </mat-form-field>            
+          <mat-form-field>
             <input matInput placeholder="Aadhar number"  class="form-control" formControlName="governmentUniqueId">
           </mat-form-field>
           <mat-form-field>
@@ -83,14 +98,8 @@
     </div>
     <div>
       <fieldset fxLayout="column" fxLayoutAlign="space-evenly stretch" >
-        <legend>Languages</legend>
-        <mat-form-field>
-          <mat-select placeholder="Mother Tongue"   aria-label="State" class="form-control" formControlName="motherTongueLanguageId">
-              <mat-option *ngFor="let language of languages" [value]="language.id">
-                <span>{{ language.language }}</span>
-              </mat-option>
-          </mat-select>        
-        </mat-form-field>
+        <legend>Languages Proficiency</legend>
+
       </fieldset>
       <fieldset  fxLayout="column" fxLayoutAlign="space-evenly stretch">
         <legend>Skill</legend>

@@ -7,7 +7,9 @@ import { debounceTime } from 'rxjs/operators/debounceTime';
 import {
   SDKToken, DevoteeApi, GothraMasterApi,
   NakshatraMasterApi, CircleApi, Devotee, Circle,
-  GothraMaster, NakshatraMaster, Language, LanguageApi, AsramaMaster, AsramaMasterApi
+  GothraMaster, NakshatraMaster, Language, LanguageApi, 
+  AsramaMaster, AsramaMasterApi, 
+  ProfessionMaster, ProfessionMasterApi
 } from '../../../src/app/shared/sdk';
 import { AuthService, DevoteeSearchSelectService } from '../shared/services';
 
@@ -29,6 +31,7 @@ export class DevoteeProfileComponent implements OnInit {
   circles: Circle[];
   filteredGothras: Observable<GothraMaster[]>;
   filteredNakshatras: Observable<NakshatraMaster[]>;
+  filteredProfessions: Observable<ProfessionMaster[]>;
   languages: Language[];
   asramas: AsramaMaster[];
 
@@ -38,6 +41,7 @@ export class DevoteeProfileComponent implements OnInit {
     private nakshatraMasterApi: NakshatraMasterApi,
     private languageApi: LanguageApi,
     private asramaMasterApi: AsramaMasterApi,
+    private professionMasterApi: ProfessionMasterApi,
     private devoteeSearchSelectService: DevoteeSearchSelectService,
     private router: Router,
     private authService: AuthService,
@@ -77,6 +81,14 @@ export class DevoteeProfileComponent implements OnInit {
         );
       });
 
+    this.devoteeForm.get('professionId').valueChanges
+      //.distinctUntilChanged()
+      .subscribe(searchTerm => {
+        this.filteredProfessions = this.professionMasterApi.find<ProfessionMaster>(
+          { where: { professionName: { like: '%' + searchTerm + '%' } } }
+        );
+      });
+
     this.asramaMasterApi.find<AsramaMaster>()
       .subscribe(
         asramas => {
@@ -105,6 +117,7 @@ export class DevoteeProfileComponent implements OnInit {
       devotee => {
         this.devoteeForm.setValue(
           {
+            id: devotee.id,
             legalName: devotee.legalName,
             spiritualName: devotee.spiritualName,
             circleId: devotee.circleId,
@@ -120,7 +133,8 @@ export class DevoteeProfileComponent implements OnInit {
             lpmId: devotee.lpmId,
             dateOfBirth: devotee.dateOfBirth,
             dayMonthOfBirth: devotee.dayMonthOfBirth,
-            asramaMasterId: devotee.asramaMasterId
+            asramaMasterId: devotee.asramaMasterId,
+            professionId: devotee.professionId
           }
         );
       }
@@ -129,6 +143,30 @@ export class DevoteeProfileComponent implements OnInit {
 
   createForm() {
     this.devoteeForm = this.fb.group({
+      id: null,
+      legalName: ['', Validators.required],
+      circleId: '',
+      spiritualName: '',
+      gender: '',
+      creditLimit: '',
+      email: '',
+      gothra: '',
+      nakshatra: '',
+      governmentUniqueId: '',
+      incomeTaxId: '',
+      kcAssociationDate: '',
+      motherTongueLanguageId: '',
+      dateOfBirth: '',
+      dayMonthOfBirth: '',
+      lpmId: '',
+      asramaMasterId: '',
+      professionId: ''
+    });
+  }
+
+  addDevotee() {
+    this.devoteeForm = this.fb.group({
+      id: null,
       legalName: ['', Validators.required],
       circleId: '',
       spiritualName: '',
@@ -146,8 +184,7 @@ export class DevoteeProfileComponent implements OnInit {
       lpmId: '',
       asramaMasterId: ''
     });
-  }
-
+  }  
 
 
   // TODO: Remove this when we're done
