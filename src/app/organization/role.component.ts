@@ -137,7 +137,7 @@ export class RoleComponent implements OnInit {
         this.deleteRole(role);
       } else { }
     });
-  }  
+  }
 
 }
 

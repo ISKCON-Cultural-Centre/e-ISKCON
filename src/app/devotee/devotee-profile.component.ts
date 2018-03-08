@@ -3,15 +3,19 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { debounceTime } from 'rxjs/operators/debounceTime';
+import {MatDialog} from '@angular/material';
+
+import { DialogBoxComponent } from '../shared/components/dialog-box/dialog-box.component';
 
 import {
   SDKToken, DevoteeApi, GothraMasterApi,
   NakshatraMasterApi, CircleApi, Devotee, Circle,
   GothraMaster, NakshatraMaster, Language, LanguageApi, 
   AsramaMaster, AsramaMasterApi, 
-  ProfessionMaster, ProfessionMasterApi
-} from '../../../src/app/shared/sdk';
+  ProfessionMaster, ProfessionMasterApi, PhysicalAddress, PhysicalAddressApi
+  } from '../../../src/app/shared/sdk';
 import { AuthService, DevoteeSearchSelectService } from '../shared/services';
+import { PhysicalAddressComponent } from '../common/physical-address.component';
 
 
 @Component({
@@ -185,7 +189,6 @@ export class DevoteeProfileComponent implements OnInit {
       asramaMasterId: ''
     });
   }  
-
 
   // TODO: Remove this when we're done
   //get diagnostic() { return JSON.stringify(this.model); }

@@ -10,6 +10,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { DevoteeSearchComponent } from './devotee-search.component';
 import { DevoteeProfileComponent } from './devotee-profile.component';
 import { DevoteeRoleComponent } from './devotee-role.component';
+import { CommonComponentsModule } from '../common/common-components.module'
 const routes: Routes = [
   { path: 'devotee', component: DevoteeComponent, canActivate: [AuthGuard] }
 ];
@@ -21,7 +22,8 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    BrowserModule
+    BrowserModule,
+    CommonComponentsModule
   ],
   declarations: [
     DevoteeComponent, 
