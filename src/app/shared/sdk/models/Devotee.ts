@@ -2,6 +2,7 @@
 import {
   Circle,
   ServiceRoleMapping,
+  PhysicalAddress,
   Accesstoken,
   AsramaMaster,
   Language,
@@ -37,12 +38,14 @@ export interface DevoteeInterface {
   "dayMonthOfBirth": string;
   "asramaMasterId"?: string;
   "professionId": string;
+  "physicalAddressId"?: string;
   "emailVerified"?: boolean;
   "created-on"?: Date;
   "updated-on"?: Date;
   "password"?: string;
   fkDevoteeCircle1rel?: Circle;
   roleMappings?: ServiceRoleMapping[];
+  fkDevoteePhysicalAddress1rel?: PhysicalAddress;
   accessTokens?: Accesstoken[];
   fkDevoteeAsramaMaster1rel?: AsramaMaster;
   fkDevoteeLanguage1rel?: Language;
@@ -77,12 +80,14 @@ export class Devotee implements DevoteeInterface {
   "dayMonthOfBirth": string;
   "asramaMasterId": string;
   "professionId": string;
+  "physicalAddressId": string;
   "emailVerified": boolean;
   "created-on": Date;
   "updated-on": Date;
   "password": string;
   fkDevoteeCircle1rel: Circle;
   roleMappings: ServiceRoleMapping[];
+  fkDevoteePhysicalAddress1rel: PhysicalAddress;
   accessTokens: Accesstoken[];
   fkDevoteeAsramaMaster1rel: AsramaMaster;
   fkDevoteeLanguage1rel: Language;
@@ -222,6 +227,10 @@ export class Devotee implements DevoteeInterface {
           name: 'professionId',
           type: 'string'
         },
+        "physicalAddressId": {
+          name: 'physicalAddressId',
+          type: 'string'
+        },
         "emailVerified": {
           name: 'emailVerified',
           type: 'boolean'
@@ -255,6 +264,14 @@ export class Devotee implements DevoteeInterface {
           relationType: 'hasMany',
                   keyFrom: 'id',
           keyTo: 'principalId'
+        },
+        fkDevoteePhysicalAddress1rel: {
+          name: 'fkDevoteePhysicalAddress1rel',
+          type: 'PhysicalAddress',
+          model: 'PhysicalAddress',
+          relationType: 'belongsTo',
+                  keyFrom: 'physicalAddressId',
+          keyTo: 'id'
         },
         accessTokens: {
           name: 'accessTokens',

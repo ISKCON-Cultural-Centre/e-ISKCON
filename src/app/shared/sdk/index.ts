@@ -76,7 +76,6 @@ import { TaskMasterApi } from './services/custom/TaskMaster';
 import { MgCreditNoteApi } from './services/custom/MgCreditNote';
 import { MgDeliveryNoteApi } from './services/custom/MgDeliveryNote';
 import { DevoteeElectronicAddressApi } from './services/custom/DevoteeElectronicAddress';
-import { DevoteePhysicalAddressApi } from './services/custom/DevoteePhysicalAddress';
 import { MgInvoiceApi } from './services/custom/MgInvoice';
 import { MgOrderChannelApi } from './services/custom/MgOrderChannel';
 import { MgOrderLineApi } from './services/custom/MgOrderLine';
@@ -182,7 +181,6 @@ export class SDKBrowserModule {
         MgCreditNoteApi,
         MgDeliveryNoteApi,
         DevoteeElectronicAddressApi,
-        DevoteePhysicalAddressApi,
         MgInvoiceApi,
         MgOrderChannelApi,
         MgOrderLineApi,

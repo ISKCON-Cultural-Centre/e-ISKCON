@@ -30,7 +30,6 @@ export * from './TaskMaster';
 export * from './MgCreditNote';
 export * from './MgDeliveryNote';
 export * from './DevoteeElectronicAddress';
-export * from './DevoteePhysicalAddress';
 export * from './MgInvoice';
 export * from './MgOrderChannel';
 export * from './MgOrderLine';

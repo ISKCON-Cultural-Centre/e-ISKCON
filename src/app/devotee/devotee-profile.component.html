@@ -157,30 +157,10 @@
       </fieldset>
     </div>
     <div >
-        <app-physical-address [addressId]="devoteeId"></app-physical-address>
-<!--       <fieldset fxLayout="column" fxLayoutAlign="space-evenly stretch">
-        <legend>Address Details</legend>
-        <mat-form-field>
-          <input matInput placeholder="Address Line1">
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput placeholder="Address Line 2">
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput placeholder="Locality">
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput placeholder="City">
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput placeholder="State">
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput placeholder="PIN">
-        </mat-form-field>
-        <mat-checkbox>Is Permanent address same ?</mat-checkbox>
-      </fieldset> -->
-
+      <fieldset fxLayout="column" fxLayoutAlign="space-evenly stretch">
+        <legend>Postal Address</legend>
+        <app-physical-address (newAddress)="updateDevoteeAddressId($event)" [addressId]="physicalAddressId" ></app-physical-address>
+      </fieldset>
       <fieldset fxLayout="column" fxLayoutAlign="space-evenly stretch">
         <legend>Family Details</legend>
         <mat-form-field>

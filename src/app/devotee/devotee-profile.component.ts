@@ -38,6 +38,7 @@ export class DevoteeProfileComponent implements OnInit {
   filteredProfessions: Observable<ProfessionMaster[]>;
   languages: Language[];
   asramas: AsramaMaster[];
+  physicalAddressId: String;
 
   constructor(private devoteeApi: DevoteeApi,
     private circleApi: CircleApi,
@@ -119,6 +120,7 @@ export class DevoteeProfileComponent implements OnInit {
     this.devoteeApi.findById<Devotee>(devoteeId)
     .subscribe(
       devotee => {
+        this.physicalAddressId = devotee.physicalAddressId
         this.devoteeForm.setValue(
           {
             id: devotee.id,
@@ -138,7 +140,8 @@ export class DevoteeProfileComponent implements OnInit {
             dateOfBirth: devotee.dateOfBirth,
             dayMonthOfBirth: devotee.dayMonthOfBirth,
             asramaMasterId: devotee.asramaMasterId,
-            professionId: devotee.professionId
+            professionId: devotee.professionId,
+            physicalAddressId: devotee.physicalAddressId
           }
         );
       }
@@ -164,7 +167,8 @@ export class DevoteeProfileComponent implements OnInit {
       dayMonthOfBirth: '',
       lpmId: '',
       asramaMasterId: '',
-      professionId: ''
+      professionId: '',
+      physicalAddressId: ''
     });
   }
 
@@ -190,6 +194,11 @@ export class DevoteeProfileComponent implements OnInit {
     });
   }  
 
+
+  updateDevoteeAddressId($event)  {
+    console.log($event.value);
+    this.devoteeApi.patchAttributes(this.devoteeId, {physicalAddressId: $event.value} )
+  }
   // TODO: Remove this when we're done
   //get diagnostic() { return JSON.stringify(this.model); }
 

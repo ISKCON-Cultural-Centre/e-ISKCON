@@ -31,7 +31,6 @@ import { TaskMaster } from '../../models/TaskMaster';
 import { MgCreditNote } from '../../models/MgCreditNote';
 import { MgDeliveryNote } from '../../models/MgDeliveryNote';
 import { DevoteeElectronicAddress } from '../../models/DevoteeElectronicAddress';
-import { DevoteePhysicalAddress } from '../../models/DevoteePhysicalAddress';
 import { MgInvoice } from '../../models/MgInvoice';
 import { MgOrderChannel } from '../../models/MgOrderChannel';
 import { MgOrderLine } from '../../models/MgOrderLine';
@@ -115,7 +114,6 @@ export class SDKModels {
     MgCreditNote: MgCreditNote,
     MgDeliveryNote: MgDeliveryNote,
     DevoteeElectronicAddress: DevoteeElectronicAddress,
-    DevoteePhysicalAddress: DevoteePhysicalAddress,
     MgInvoice: MgInvoice,
     MgOrderChannel: MgOrderChannel,
     MgOrderLine: MgOrderLine,

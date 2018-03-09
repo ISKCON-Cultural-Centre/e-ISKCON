@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {  ServiceRole, ServiceRoleApi, Department, DepartmentApi } from '../../../src/app/shared/sdk';
 import {  NotificationService} from '../shared/services';
@@ -9,7 +9,7 @@ import {MatDialog} from '@angular/material';
 
 import { DialogBoxComponent } from '../shared/components/dialog-box/dialog-box.component';
 import {
-  PhysicalAddress, PhysicalAddressApi, PhysicalAddressTypeMaster, PhysicalAddressTypeMasterApi
+  PhysicalAddress, PhysicalAddressApi, 
   } from '../../../src/app/shared/sdk';
 
 
@@ -18,21 +18,17 @@ import {
   templateUrl: './physical-address.component.html',
   styleUrls: ['./physical-address.component.css']
 })
-export class PhysicalAddressComponent implements OnInit, OnChanges {
+export class PhysicalAddressComponent implements OnInit {
 
-  @Input() addressId: string;
-  add = false;
-  physicalAddresses: PhysicalAddress[] = [];
-  addressTypes: PhysicalAddressTypeMaster[] = [];
-
-  dialogResult = '';
-
+  @Input() addressId: String;
+  @Output() newAddress:  EventEmitter<any> = new EventEmitter();
+  
+  physicalAddress: PhysicalAddress;
   addressForm: FormGroup;
 
   constructor(
     private notificationService: NotificationService,
     private physicalAddressApi: PhysicalAddressApi,
-    private physicalAddressTypeMasterApi: PhysicalAddressTypeMasterApi,
     private fb: FormBuilder,
     private dialog: MatDialog
   ) {
@@ -41,106 +37,73 @@ export class PhysicalAddressComponent implements OnInit, OnChanges {
 
 
   ngOnInit() {
-    this.loadAddresseTypeMaster();
-    this.loadAddresses();
+    this.addressId ? this.loadAddress() : undefined;
   }
 
 
-  ngOnChanges() {
-    this.addressForm.reset();
-    this.setAddresses(this.physicalAddresses);
-  }
-
-  loadAddresseTypeMaster(){
-    this.physicalAddressTypeMasterApi.find<PhysicalAddressTypeMaster>()
+  loadAddress(){
+    this.physicalAddressApi.findById<PhysicalAddress>({id: this.addressId })
       .subscribe(
-        addressTypes => {
-          this.addressTypes = addressTypes;
+        address => {
+          this.physicalAddress = address;
+          this.loadForm();
         }
       );
-  }
-
-  loadAddresses(){
-    this.physicalAddressApi.find<PhysicalAddress>()
-      .subscribe(
-        addresses => {
-          this.physicalAddresses = addresses;
-          this.setAddresses(addresses);
-        }
-      );
-  }
-
-
-  addAddress() {
-    this.addressList.push(this.fb.group(new PhysicalAddress()));
-    console.log(this.addressForm.controls);
-  }
-
-  onSubmit() {
-
-  }
+  }  
 
   createForm() {
     this.addressForm = this.fb.group({
-      addressList: this.fb.array([
-        this.fb.group({
-          id: ['', Validators.required],
-          addressTypeMasterId: ['', Validators.required],
-          addressLine1: ['', Validators.required],
-          addressLine2: ['', Validators.required],
-          addressArea: ['', Validators.required],
-          addressCity: ['', Validators.required],
-          addressCountry: ['', Validators.required],
-          addressPin: ['', Validators.required]
-        })
-      ])
-
-    });
+      id: ['', Validators.required],
+      addressTypeMasterId: ['', Validators.required],
+      addressLine1: ['', Validators.required],
+      addressLine2: [''],
+      addressArea: ['', Validators.required],
+      addressCity: ['', Validators.required],
+      addressCountry: ['', Validators.required],
+      addressPin: ['', Validators.required],
+      addressState: ['', Validators.required]      
+    });    
   }
 
-  setAddresses(addresses: PhysicalAddress[]) {
-    const addressFGs = addresses.map(address => this.fb.group(address));
-    const addressFormArray = this.fb.array(addressFGs);
-    this.addressForm.setControl('addressList', addressFormArray);
+  loadForm() {
+    this.addressForm.setValue(
+      {
+        id: this.physicalAddress.id,
+        addressTypeMasterId: this.physicalAddress,
+        addressLine1: this.physicalAddress,
+        addressLine2: this.physicalAddress,
+        addressArea: this.physicalAddress,
+        addressCity: this.physicalAddress,
+        addressCountry: this.physicalAddress,
+        addressPin: this.physicalAddress,
+        addressState: this.physicalAddress
+      }
+    );    
   }
 
-  get addressList(): FormArray {
-    return this.addressForm.get('addressList') as FormArray;
-  };
+  onSubmit() {
+    this.physicalAddressApi.create<PhysicalAddress>(this.addressForm.value)
+    .subscribe(
+      physicalAddress => {
+        console.log(physicalAddress.id);
+        this.newAddress.emit(physicalAddress.id);        
+        this.notificationService.notificationSubject.next(' ' + '"' +  physicalAddress.addressLine1 + ', ' 
+        + physicalAddress.addressLine2 + ', ' + physicalAddress.addressArea + ', ' + physicalAddress.addressCity 
+        + ', ' + physicalAddress.addressCountry +
+        ', ' + physicalAddress.addressPin + '" created successfully');        
+      }
+    )
+    }
 
-
-  displayCreateRole() {
-    this.add = true;
-  }
-
-  cancel() {
-    this.add = false;
-  }
-
-
-  deleteAddress(physicalAddress: PhysicalAddress) {
-    this.physicalAddressApi.deleteById(physicalAddress.id)
+  deleteAddress() {
+    this.physicalAddressApi.deleteById(this.physicalAddress.id)
     .subscribe(result => {
-      this.notificationService.notificationSubject.next(' ' + '"' +  physicalAddress.addressLine1 + ', ' 
-      + physicalAddress.addressLine2 + ', ' + physicalAddress.addressArea + ', ' + physicalAddress.addressCity 
-      + ', ' + physicalAddress.addressCountry +
-      ', ' + physicalAddress.addressPin + '" deleted successfully');
+      this.notificationService.notificationSubject.next(' ' + '"' +  this.physicalAddress.addressLine1 + ', ' 
+      + this.physicalAddress.addressLine2 + ', ' + this.physicalAddress.addressArea + ', ' + this.physicalAddress.addressCity 
+      + ', ' + this.physicalAddress.addressCountry +
+      ', ' + this.physicalAddress.addressPin + '" deleted successfully');
       }
     );
   }
-
-  openDialog(physicalAddress: PhysicalAddress) {
-    let dialogRef = this.dialog.open(DialogBoxComponent, {
-      width: '600px',
-      data: 'Delete the address ' + physicalAddress.addressLine1 + ', ' + physicalAddress.addressLine2 + ', ' 
-      + physicalAddress.addressArea + ', ' + physicalAddress.addressCity + ', ' + physicalAddress.addressCountry + 
-      ', ' + physicalAddress.addressPin
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if(result) {
-        this.deleteAddress(physicalAddress);
-      } else { }
-    });
-  } 
 
 }
