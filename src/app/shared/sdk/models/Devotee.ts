@@ -37,8 +37,10 @@ export interface DevoteeInterface {
   "dateOfBirth"?: Date;
   "dayMonthOfBirth": string;
   "asramaMasterId"?: string;
-  "professionId": string;
+  "professionId"?: string;
   "physicalAddressId"?: string;
+  "mobileNo"?: string;
+  "landlineNo"?: string;
   "emailVerified"?: boolean;
   "created-on"?: Date;
   "updated-on"?: Date;
@@ -81,6 +83,8 @@ export class Devotee implements DevoteeInterface {
   "asramaMasterId": string;
   "professionId": string;
   "physicalAddressId": string;
+  "mobileNo": string;
+  "landlineNo": string;
   "emailVerified": boolean;
   "created-on": Date;
   "updated-on": Date;
@@ -229,6 +233,14 @@ export class Devotee implements DevoteeInterface {
         },
         "physicalAddressId": {
           name: 'physicalAddressId',
+          type: 'string'
+        },
+        "mobileNo": {
+          name: 'mobileNo',
+          type: 'string'
+        },
+        "landlineNo": {
+          name: 'landlineNo',
           type: 'string'
         },
         "emailVerified": {

@@ -12,10 +12,11 @@ import {
   NakshatraMasterApi, CircleApi, Devotee, Circle,
   GothraMaster, NakshatraMaster, Language, LanguageApi, 
   AsramaMaster, AsramaMasterApi, 
-  ProfessionMaster, ProfessionMasterApi, PhysicalAddress, PhysicalAddressApi
+  ProfessionMaster, ProfessionMasterApi, PhysicalAddress,
   } from '../../../src/app/shared/sdk';
 import { AuthService, DevoteeSearchSelectService } from '../shared/services';
 import { PhysicalAddressComponent } from '../common/physical-address.component';
+import { PhysicalAddressApi } from '../shared/sdk/services/index';
 
 
 @Component({
@@ -36,9 +37,10 @@ export class DevoteeProfileComponent implements OnInit {
   filteredGothras: Observable<GothraMaster[]>;
   filteredNakshatras: Observable<NakshatraMaster[]>;
   filteredProfessions: Observable<ProfessionMaster[]>;
+  physicalAddress: PhysicalAddress;
   languages: Language[];
   asramas: AsramaMaster[];
-  physicalAddressId: String;
+
 
   constructor(private devoteeApi: DevoteeApi,
     private circleApi: CircleApi,
@@ -50,6 +52,7 @@ export class DevoteeProfileComponent implements OnInit {
     private devoteeSearchSelectService: DevoteeSearchSelectService,
     private router: Router,
     private authService: AuthService,
+    private physicalAddressApi: PhysicalAddressApi,
     private fb: FormBuilder) {
     this.createForm();
   }
@@ -120,7 +123,10 @@ export class DevoteeProfileComponent implements OnInit {
     this.devoteeApi.findById<Devotee>(devoteeId)
     .subscribe(
       devotee => {
-        this.physicalAddressId = devotee.physicalAddressId
+        this.physicalAddressApi.findById<PhysicalAddress>(devotee.physicalAddressId)
+        .subscribe( address =>
+          this.physicalAddress = address
+        )
         this.devoteeForm.setValue(
           {
             id: devotee.id,
@@ -137,11 +143,13 @@ export class DevoteeProfileComponent implements OnInit {
             kcAssociationDate: devotee.kcAssociationDate,
             motherTongueLanguageId: devotee.motherTongueLanguageId,
             lpmId: devotee.lpmId,
-            dateOfBirth: devotee.dateOfBirth,
+            dateOfBirth: 'a',
             dayMonthOfBirth: devotee.dayMonthOfBirth,
             asramaMasterId: devotee.asramaMasterId,
             professionId: devotee.professionId,
-            physicalAddressId: devotee.physicalAddressId
+            physicalAddressId: devotee.physicalAddressId,
+            mobileNo: devotee.mobileNo,
+            landlineNo: devotee.landlineNo
           }
         );
       }
@@ -164,11 +172,13 @@ export class DevoteeProfileComponent implements OnInit {
       kcAssociationDate: '',
       motherTongueLanguageId: '',
       dateOfBirth: '',
-      dayMonthOfBirth: '',
+      dayMonthOfBirth: 'a',
       lpmId: '',
       asramaMasterId: '',
       professionId: '',
-      physicalAddressId: ''
+      physicalAddressId: '',
+      mobileNo: '',
+      landlineNo: ''
     });
   }
 
@@ -188,17 +198,27 @@ export class DevoteeProfileComponent implements OnInit {
       kcAssociationDate: '',
       motherTongueLanguageId: '',
       dateOfBirth: '',
-      dayMonthOfBirth: '',
+      dayMonthOfBirth: 'a',
       lpmId: '',
-      asramaMasterId: ''
+      asramaMasterId: '',
+      professionId: '',
+      physicalAddressId: null,
+      mobileNo: null,
+      landlineNo: null
     });
   }  
 
 
-  updateDevoteeAddressId($event)  {
-    console.log($event.value);
-    this.devoteeApi.patchAttributes(this.devoteeId, {physicalAddressId: $event.value} )
+  updateDevoteeAddressId(addressId)  {
+    console.log(addressId);
+    this.devoteeApi.patchAttributes(this.devoteeId, {physicalAddressId: addressId} )
+    .subscribe(test => console.log(test))
   }
+
+  displayFn(profession?: ProfessionMaster): string | undefined {
+    return profession ? profession.professionName : '';
+  }
+
   // TODO: Remove this when we're done
   //get diagnostic() { return JSON.stringify(this.model); }
 

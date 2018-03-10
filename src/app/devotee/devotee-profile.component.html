@@ -34,6 +34,12 @@
             <input matInput placeholder="Email Address"  class="form-control" formControlName="email">
           </mat-form-field>
           <mat-form-field>
+            <input matInput placeholder="Mobile number"  class="form-control" formControlName="mobileNo">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Landline number"  class="form-control" formControlName="landlineNo">
+          </mat-form-field>                    
+          <mat-form-field>
             <input matInput placeholder="Gothra" aria-label="State" [matAutocomplete]="autoGothra" formControlName="gothra">
             <mat-autocomplete #autoGothra="matAutocomplete" >
               <mat-option *ngFor="let gothra of filteredGothras | async" [value]="gothra.gothra">
@@ -50,9 +56,9 @@
             </mat-autocomplete>
           </mat-form-field>
           <mat-form-field>
-            <input matInput placeholder="Profession" aria-label="State" [matAutocomplete]="autoProfession" formControlName="professionId">
-            <mat-autocomplete #autoProfession="matAutocomplete" >
-              <mat-option *ngFor="let profession of filteredProfessions | async" [value]="profession.professionId">
+            <input matInput placeholder="Profession" aria-label="State" [matAutocomplete]="autoProfession"   formControlName="professionId">
+            <mat-autocomplete #autoProfession="matAutocomplete" [displayWith]="displayFn">
+              <mat-option *ngFor="let profession of filteredProfessions | async" [value]="profession">
                 <span>{{ profession.professionName }}</span>
               </mat-option>
             </mat-autocomplete>
@@ -159,7 +165,7 @@
     <div >
       <fieldset fxLayout="column" fxLayoutAlign="space-evenly stretch">
         <legend>Postal Address</legend>
-        <app-physical-address (newAddress)="updateDevoteeAddressId($event)" [addressId]="physicalAddressId" ></app-physical-address>
+        <app-physical-address (newAddress)="updateDevoteeAddressId($event)" [physicalAddress]="physicalAddress" ></app-physical-address>
       </fieldset>
       <fieldset fxLayout="column" fxLayoutAlign="space-evenly stretch">
         <legend>Family Details</legend>

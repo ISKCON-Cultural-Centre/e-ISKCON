@@ -1,4 +1,4 @@
-import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
+import { Component, Input, Output, OnInit, OnChanges, EventEmitter } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {  ServiceRole, ServiceRoleApi, Department, DepartmentApi } from '../../../src/app/shared/sdk';
 import {  NotificationService} from '../shared/services';
@@ -18,12 +18,11 @@ import {
   templateUrl: './physical-address.component.html',
   styleUrls: ['./physical-address.component.css']
 })
-export class PhysicalAddressComponent implements OnInit {
+export class PhysicalAddressComponent implements OnInit, OnChanges {
 
-  @Input() addressId: String;
+  @Input() physicalAddress: PhysicalAddress;
   @Output() newAddress:  EventEmitter<any> = new EventEmitter();
-  
-  physicalAddress: PhysicalAddress;
+
   addressForm: FormGroup;
 
   constructor(
@@ -37,11 +36,15 @@ export class PhysicalAddressComponent implements OnInit {
 
 
   ngOnInit() {
-    this.addressId ? this.loadAddress() : undefined;
+
   }
 
-
+  ngOnChanges() {
+    this.loadForm()
+  }
+/* 
   loadAddress(){
+    console.log(this.addressId);
     this.physicalAddressApi.findById<PhysicalAddress>({id: this.addressId })
       .subscribe(
         address => {
@@ -50,11 +53,10 @@ export class PhysicalAddressComponent implements OnInit {
         }
       );
   }  
-
+ */
   createForm() {
     this.addressForm = this.fb.group({
       id: ['', Validators.required],
-      addressTypeMasterId: ['', Validators.required],
       addressLine1: ['', Validators.required],
       addressLine2: [''],
       addressArea: ['', Validators.required],
@@ -68,15 +70,14 @@ export class PhysicalAddressComponent implements OnInit {
   loadForm() {
     this.addressForm.setValue(
       {
-        id: this.physicalAddress.id,
-        addressTypeMasterId: this.physicalAddress,
-        addressLine1: this.physicalAddress,
-        addressLine2: this.physicalAddress,
-        addressArea: this.physicalAddress,
-        addressCity: this.physicalAddress,
-        addressCountry: this.physicalAddress,
-        addressPin: this.physicalAddress,
-        addressState: this.physicalAddress
+        id: this.physicalAddress.addressLine1,
+        addressLine1: this.physicalAddress.addressLine1,
+        addressLine2: this.physicalAddress.addressLine2,
+        addressArea: this.physicalAddress.addressArea,
+        addressCity: this.physicalAddress.addressCity,
+        addressCountry: this.physicalAddress.addressCountry,
+        addressPin: this.physicalAddress.addressPin,
+        addressState: this.physicalAddress.addressState
       }
     );    
   }
@@ -86,7 +87,7 @@ export class PhysicalAddressComponent implements OnInit {
     .subscribe(
       physicalAddress => {
         console.log(physicalAddress.id);
-        this.newAddress.emit(physicalAddress.id);        
+        this.newAddress.emit(physicalAddress.id);
         this.notificationService.notificationSubject.next(' ' + '"' +  physicalAddress.addressLine1 + ', ' 
         + physicalAddress.addressLine2 + ', ' + physicalAddress.addressArea + ', ' + physicalAddress.addressCity 
         + ', ' + physicalAddress.addressCountry +
