@@ -4,6 +4,7 @@ import {  ServiceRole, ServiceRoleApi, Department, DepartmentApi } from '../../.
 import {  NotificationService} from '../shared/services';
 import { MaterialModule } from '../material.module';
 import { MatPaginator, MatSort, MatTableDataSource, MatSelectChange } from '@angular/material';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import {MatDialog} from '@angular/material';
 
@@ -20,7 +21,18 @@ import {
 })
 export class PhysicalAddressComponent implements OnInit, OnChanges {
 
-  @Input() physicalAddress: PhysicalAddress;
+  private _data = new BehaviorSubject<PhysicalAddress>(this.physicalAddress);
+
+  @Input()
+  set physicalAddress(value) {
+      // set the latest value for _data BehaviorSubject
+      this._data.next(value);
+  };
+  get data() {
+    // get the latest value from _data BehaviorSubject
+    return this._data.getValue();
+  }
+
   @Output() newAddress:  EventEmitter<any> = new EventEmitter();
 
   addressForm: FormGroup;
@@ -36,11 +48,14 @@ export class PhysicalAddressComponent implements OnInit, OnChanges {
 
 
   ngOnInit() {
+    this._data
+    .takeWhile(() => !this.physicalAddress)
+    .subscribe(x => this.loadForm())
+  };
 
-  }
 
   ngOnChanges() {
-    this.loadForm()
+    
   }
 /* 
   loadAddress(){
@@ -68,16 +83,17 @@ export class PhysicalAddressComponent implements OnInit, OnChanges {
   }
 
   loadForm() {
+    console.log(this.data);
     this.addressForm.setValue(
       {
-        id: this.physicalAddress.addressLine1,
-        addressLine1: this.physicalAddress.addressLine1,
-        addressLine2: this.physicalAddress.addressLine2,
-        addressArea: this.physicalAddress.addressArea,
-        addressCity: this.physicalAddress.addressCity,
-        addressCountry: this.physicalAddress.addressCountry,
-        addressPin: this.physicalAddress.addressPin,
-        addressState: this.physicalAddress.addressState
+        id: this.data.id,
+        addressLine1: this.data.addressLine1,
+        addressLine2: this.data.addressLine2,
+        addressArea: this.data.addressArea,
+        addressCity: this.data.addressCity,
+        addressCountry: this.data.addressCountry,
+        addressPin: this.data.addressPin,
+        addressState: this.data.addressState
       }
     );    
   }
