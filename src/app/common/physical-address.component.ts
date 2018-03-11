@@ -1,10 +1,11 @@
-import { Component, Input, Output, OnInit, OnChanges, EventEmitter } from '@angular/core';
+import { Component, Input, Output, OnInit, OnChanges, EventEmitter, SimpleChanges } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {  ServiceRole, ServiceRoleApi, Department, DepartmentApi } from '../../../src/app/shared/sdk';
 import {  NotificationService} from '../shared/services';
 import { MaterialModule } from '../material.module';
 import { MatPaginator, MatSort, MatTableDataSource, MatSelectChange } from '@angular/material';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
 
 import {MatDialog} from '@angular/material';
 
@@ -21,16 +22,16 @@ import {
 })
 export class PhysicalAddressComponent implements OnInit, OnChanges {
 
-  private _data = new BehaviorSubject<PhysicalAddress>(this.physicalAddress);
+  private _physicalAddress = new BehaviorSubject<PhysicalAddress>(new PhysicalAddress);
 
   @Input()
   set physicalAddress(value) {
       // set the latest value for _data BehaviorSubject
-      this._data.next(value);
+      this._physicalAddress.next(value);
   };
-  get data() {
+  get physicalAddress() {
     // get the latest value from _data BehaviorSubject
-    return this._data.getValue();
+    return this._physicalAddress.getValue();
   }
 
   @Output() newAddress:  EventEmitter<any> = new EventEmitter();
@@ -48,27 +49,20 @@ export class PhysicalAddressComponent implements OnInit, OnChanges {
 
 
   ngOnInit() {
-    this._data
-    .takeWhile(() => !this.physicalAddress)
-    .subscribe(x => this.loadForm())
   };
 
 
-  ngOnChanges() {
-    
-  }
-/* 
-  loadAddress(){
-    console.log(this.addressId);
-    this.physicalAddressApi.findById<PhysicalAddress>({id: this.addressId })
-      .subscribe(
-        address => {
-          this.physicalAddress = address;
-          this.loadForm();
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['physicalAddress']) {
+      this._physicalAddress
+      .subscribe(x => {
+        this.addressForm.reset();
+        this.loadForm();
         }
-      );
-  }  
- */
+      )
+    }
+  }
+
   createForm() {
     this.addressForm = this.fb.group({
       id: ['', Validators.required],
@@ -78,39 +72,46 @@ export class PhysicalAddressComponent implements OnInit, OnChanges {
       addressCity: ['', Validators.required],
       addressCountry: ['', Validators.required],
       addressPin: ['', Validators.required],
-      addressState: ['', Validators.required]      
-    });    
+      addressState: ['', Validators.required]
+    });
   }
 
   loadForm() {
-    console.log(this.data);
+    if (this.physicalAddress) {
     this.addressForm.setValue(
       {
-        id: this.data.id,
-        addressLine1: this.data.addressLine1,
-        addressLine2: this.data.addressLine2,
-        addressArea: this.data.addressArea,
-        addressCity: this.data.addressCity,
-        addressCountry: this.data.addressCountry,
-        addressPin: this.data.addressPin,
-        addressState: this.data.addressState
+        id: this.physicalAddress.id,
+        addressLine1: this.physicalAddress.addressLine1,
+        addressLine2: this.physicalAddress.addressLine2,
+        addressArea: this.physicalAddress.addressArea,
+        addressCity: this.physicalAddress.addressCity,
+        addressCountry: this.physicalAddress.addressCountry,
+        addressPin: this.physicalAddress.addressPin,
+        addressState: this.physicalAddress.addressState
       }
-    );    
+    );
+  }
   }
 
   onSubmit() {
-    this.physicalAddressApi.create<PhysicalAddress>(this.addressForm.value)
-    .subscribe(
-      physicalAddress => {
-        console.log(physicalAddress.id);
-        this.newAddress.emit(physicalAddress.id);
-        this.notificationService.notificationSubject.next(' ' + '"' +  physicalAddress.addressLine1 + ', ' 
-        + physicalAddress.addressLine2 + ', ' + physicalAddress.addressArea + ', ' + physicalAddress.addressCity 
-        + ', ' + physicalAddress.addressCountry +
-        ', ' + physicalAddress.addressPin + '" created successfully');        
-      }
-    )
+    console.log(!this.physicalAddress);
+    if (!this.physicalAddress){
+      this.physicalAddressApi.create<PhysicalAddress>(this.addressForm.value)
+      .subscribe(
+        physicalAddress => {
+          this.newAddress.emit(physicalAddress.id);
+          this.notificationService.notificationSubject.next('Address created successfully');
+        }
+      )
+    } else {
+      this.physicalAddressApi.patchAttributes(this.physicalAddress.id, this.addressForm.value)
+      .subscribe(
+        physicalAddress => {
+          this.notificationService.notificationSubject.next('Address updated successfully');
+        }
+      )
     }
+  }
 
   deleteAddress() {
     this.physicalAddressApi.deleteById(this.physicalAddress.id)

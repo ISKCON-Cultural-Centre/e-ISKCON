@@ -14,7 +14,7 @@ import {
   AsramaMaster, AsramaMasterApi, 
   ProfessionMaster, ProfessionMasterApi, PhysicalAddress,
   } from '../../../src/app/shared/sdk';
-import { AuthService, DevoteeSearchSelectService } from '../shared/services';
+import { AuthService, DevoteeSearchSelectService, NotificationService } from '../shared/services';
 import { PhysicalAddressComponent } from '../common/physical-address.component';
 import { PhysicalAddressApi } from '../shared/sdk/services/index';
 
@@ -37,12 +37,14 @@ export class DevoteeProfileComponent implements OnInit {
   filteredGothras: Observable<GothraMaster[]>;
   filteredNakshatras: Observable<NakshatraMaster[]>;
   filteredProfessions: Observable<ProfessionMaster[]>;
-  physicalAddress: PhysicalAddress;
+  physicalAddress:  PhysicalAddress;
   languages: Language[];
   asramas: AsramaMaster[];
 
 
-  constructor(private devoteeApi: DevoteeApi,
+  constructor(
+    private notificationService: NotificationService,
+    private devoteeApi: DevoteeApi,
     private circleApi: CircleApi,
     private gothraMasterApi: GothraMasterApi,
     private nakshatraMasterApi: NakshatraMasterApi,
@@ -120,13 +122,10 @@ export class DevoteeProfileComponent implements OnInit {
   }
 
   loadDevotee(devoteeId: String) {
-    this.devoteeApi.findById<Devotee>(devoteeId)
+    this.devoteeApi.findById<Devotee>(devoteeId, {include: 'fkDevoteePhysicalAddress1rel'})
     .subscribe(
       devotee => {
-        this.physicalAddressApi.findById<PhysicalAddress>(devotee.physicalAddressId)
-        .subscribe( address =>
-          this.physicalAddress = address
-        )
+        this.physicalAddress = devotee.fkDevoteePhysicalAddress1rel;
         this.devoteeForm.setValue(
           {
             id: devotee.id,
@@ -208,6 +207,18 @@ export class DevoteeProfileComponent implements OnInit {
     });
   }  
 
+  save() {
+    this.devoteeApi.patchAttributes(this.devoteeId, this.devoteeForm.value)
+    .subscribe(
+      devotee => {
+        this.notificationService.notificationSubject.next('Profile updated successfully');
+      }
+    )
+  }
+
+  reset() {
+    this.devoteeForm.reset();
+  }
 
   updateDevoteeAddressId(addressId)  {
     console.log(addressId);

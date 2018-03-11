@@ -4,8 +4,8 @@
         <fieldset fxLayout="column" fxLayoutAlign="space-evenly stretch">
           <legend>Personal Details</legend>
           <div>
-              <button type = "submit" mat-raised-button color="primary"> {{ devoteeForm.value.id == null ? 'Create' : 'Update' }}</button>
-              <button type = "button" mat-raised-button color="warn">Reset</button>
+              <button type = "button" mat-raised-button color="primary" (click)="save()"> {{ devoteeForm.value.id == null ? 'Create' : 'Update' }}</button>
+              <button type = "button" mat-raised-button color="warn" (click)="reset()">Reset</button>
             </div>          
           <mat-form-field>
             <input fxFill matInput placeholder="Legal Name" class="form-control" formControlName="legalName" autofocus>
@@ -102,6 +102,21 @@
         </fieldset>
 
     </div>
+    <div >
+      <fieldset fxLayout="column" fxLayoutAlign="space-evenly stretch">
+        <legend>Postal Address</legend>
+        <app-physical-address (newAddress)="updateDevoteeAddressId($event)" [physicalAddress]="physicalAddress" ></app-physical-address>
+      </fieldset>
+      <fieldset fxLayout="column" fxLayoutAlign="space-evenly stretch">
+        <legend>Family Details</legend>
+        <mat-form-field>
+          <input matInput placeholder="Name">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Relation">
+        </mat-form-field>
+      </fieldset>
+    </div>    
     <div>
       <fieldset fxLayout="column" fxLayoutAlign="space-evenly stretch" >
         <legend>Languages Proficiency</legend>
@@ -159,22 +174,6 @@
             </td> -->
           </tr>
         </table>
-
-      </fieldset>
-    </div>
-    <div >
-      <fieldset fxLayout="column" fxLayoutAlign="space-evenly stretch">
-        <legend>Postal Address</legend>
-        <app-physical-address (newAddress)="updateDevoteeAddressId($event)" [physicalAddress]="physicalAddress" ></app-physical-address>
-      </fieldset>
-      <fieldset fxLayout="column" fxLayoutAlign="space-evenly stretch">
-        <legend>Family Details</legend>
-        <mat-form-field>
-          <input matInput placeholder="Name">
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput placeholder="Relation">
-        </mat-form-field>
 
       </fieldset>
     </div>
