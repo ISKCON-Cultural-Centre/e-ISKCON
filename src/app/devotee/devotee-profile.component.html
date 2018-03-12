@@ -1,5 +1,6 @@
-<form [formGroup]="devoteeForm" novalidate>  
+
 <div fxLayout="row" fxLayout.xs="column"  class="box">
+  <form [formGroup]="devoteeForm" novalidate>  
   <div>
         <fieldset fxLayout="column" fxLayoutAlign="space-evenly stretch">
           <legend>Personal Details</legend>
@@ -98,10 +99,11 @@
           </mat-form-field>        
           <mat-form-field>
               <input type="number" matInput placeholder="Credit Limit" class="form-control" formControlName="creditLimit">
-            </mat-form-field>        
-        </fieldset>
+            </mat-form-field>       
 
+        </fieldset>
     </div>
+  </form>     
     <div >
 
       <fieldset fxLayout="column" fxLayoutAlign="space-evenly stretch">
@@ -172,4 +174,3 @@
       </fieldset>
     </div>
 </div>
-</form>

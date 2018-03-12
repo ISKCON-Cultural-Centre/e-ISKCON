@@ -1,15 +1,23 @@
-  <mat-form-field class="demo-chip-list">      
+<div>
+<form #skillForm="ngForm">
+<mat-form-field class="demo-chip-list">      
     <mat-chip-list #chipList>
-      <mat-chip *ngFor="let skill of selectedSkills" [selectable]="selectable"
-                [removable]="removable" (remove)="removeSkill(skill)">
+      <mat-chip *ngFor="let skill of assignedSkills" [selectable]="selectable"
+                [removable]="removable" (remove)="remove(skill)" [value]="skill.skillId">
         {{skill.skillName}}
         <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
       </mat-chip>
-      <input placeholder="Add Skill..."
+      <input #skillInput placeholder="Add Skill..."
+      [matAutocomplete]="autoSkill"
       [matChipInputFor]="chipList"
-      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-      [matChipInputAddOnBlur]="addOnBlur"
-      (matChipInputTokenEnd)="addSkill($event.value)" />          
+      [matChipInputSeparatorKeyCodes]="separatorKeysCodes" 
+      [(ngModel)]="model" name="name"/>
+      <mat-autocomplete #autoSkill="matAutocomplete" [displayWith]="displayFn" (optionSelected)="onSelectionChanged($event)">
+        <mat-option *ngFor="let skill of availableSkills" [value]="skill">
+          <span>{{ skill.skillName }}</span>
+        </mat-option>
+      </mat-autocomplete>             
     </mat-chip-list>
   </mat-form-field>   
-
+</form>
+</div>

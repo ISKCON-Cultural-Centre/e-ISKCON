@@ -1,6 +1,7 @@
 import { Component,Input, OnInit } from '@angular/core';
 import {ENTER, COMMA} from '@angular/cdk/keycodes';
-import { MatChipInputEvent } from '@angular/material';
+import { MatChipInputEvent, MatAutocompleteSelectedEvent } from '@angular/material';
+import { Observable } from 'rxjs/Observable';
 import * as _ from 'underscore';
 
 import { Skill, DevoteeSkill  } from '../shared/sdk/models';
@@ -18,13 +19,14 @@ export class DevoteeSkillComponent implements OnInit {
   selectable: boolean = true;
   removable: boolean = true;
   addOnBlur: boolean = true;
+  model = {name: 'test'};
 
   // Enter, comma
   separatorKeysCodes = [ENTER, COMMA];
   
-  availableSkills: Skill[] = [];
-  assignedSkills: Skill[] = [];
-  selectedSkills: String[] = [];
+  availableSkills: Skill[];
+  assignedSkills: Skill[];
+  selectedSkills = [];
 
   constructor(
     private devoteeSkillApi: DevoteeSkillApi,
@@ -35,41 +37,90 @@ export class DevoteeSkillComponent implements OnInit {
     this.loadSkills();
     this.loadDevoteeSkills();
 
-
+/*     this.devoteeForm.get('gothra').valueChanges
+    //.distinctUntilChanged()
+    .subscribe(searchTerm => {
+      this.filteredGothras = this.gothraMasterApi.find<GothraMaster>(
+        { where: { gothra: { like: '%' + searchTerm + '%' } } }
+      );
+    }); */
   }
 
   loadSkills() {
     this.skillApi.find<Skill>()
-    .subscribe(
-      devoteeSkills => {
-        console.log(devoteeSkills);
-       // this.availableSkills = devoteeSkills;
-      }
-    );
+    .subscribe(availableSkills => this.availableSkills =  availableSkills);
   }
 
   loadDevoteeSkills() {
-    this.devoteeSkillApi.find(
-      {
+    this.devoteeSkillApi.find<DevoteeSkill>(
+      { 
         where: {devoteeId: this.devoteeId},
         include: {
-          relation: 'fkDevoteeSkillSkill1rel', 
+          relation: 'fkDevoteeSkillSkill1rel'
         }
       }
     )
     .subscribe(
       devoteeSkills => {
-        console.log(devoteeSkills);
-       // this.assignedSkills = devoteeSkills;
+        this.assignedSkills = devoteeSkills.map((skill) => skill.fkDevoteeSkillSkill1rel);
+        console.log(this.assignedSkills);
       }
     );
   }
 
-  add(event: MatChipInputEvent){
-    this.selectedSkills.push(event.value);
+  displayFn(skill?: Skill): string | undefined {
+    return skill ? skill.skillName : '';
   }
 
-  addSkill(skill: Skill): void {
+  onSelectionChanged(event: MatAutocompleteSelectedEvent) {
+    let value = event.option.value.id;
+    this.devoteeSkillApi.create({devoteeId: this.devoteeId, skillId: value })
+    .subscribe(
+      devoteeSkill => {
+        console.log(devoteeSkill);
+        this.assignedSkills.push(value);
+        this.availableSkills =   _.difference(this.availableSkills, this.assignedSkills);
+      }
+    );
+  }
+
+
+
+  addOnTokenEnd(event: MatChipInputEvent): void {
+    let input = event.input;
+    let value = event.value;
+    console.log('inside add');
+    // Add our fruit
+    if ((value || '').trim()) {
+      this.selectedSkills.push({ name: value.trim() });
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+  }
+
+  remove(skill: Skill): void {
+    console.log(this.devoteeId);
+    console.log(skill.id);
+    this.devoteeSkillApi.destroyAll({devoteeId: this.devoteeId, skillId: skill.id })
+    .subscribe(
+      devoteeSkill => {
+        console.log(devoteeSkill);
+        let index = this.assignedSkills.indexOf(skill);
+        if (index >= 0) {
+          this.assignedSkills.splice(index, 1);
+        }
+        this.availableSkills.push(skill);
+      }
+
+    );
+
+
+  }
+
+/*   addSkill(skill: Skill): void {
      const index = this.availableSkills.indexOf(skill);
      this.assignedSkills.push(skill);
 
@@ -88,7 +139,7 @@ export class DevoteeSkillComponent implements OnInit {
 
     this.availableSkills.push(skill);
     this.availableSkills = _.uniq(this.availableSkills);
-  }
+  } */
 
 
 }
