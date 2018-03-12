@@ -1,5 +1,6 @@
 import { Component,Input, OnInit } from '@angular/core';
 import {ENTER, COMMA} from '@angular/cdk/keycodes';
+import { MatChipInputEvent } from '@angular/material';
 import * as _ from 'underscore';
 
 import { Skill, DevoteeSkill  } from '../shared/sdk/models';
@@ -23,6 +24,7 @@ export class DevoteeSkillComponent implements OnInit {
   
   availableSkills: Skill[] = [];
   assignedSkills: Skill[] = [];
+  selectedSkills: String[] = [];
 
   constructor(
     private devoteeSkillApi: DevoteeSkillApi,
@@ -30,10 +32,31 @@ export class DevoteeSkillComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.loadSkills();
+    this.loadDevoteeSkills();
+
+
   }
 
-  loadDevoteeSkills(devoteeId: String) {
-    this.devoteeSkillApi.find({include: 'fkDevoteeSkillSkill1rel'})
+  loadSkills() {
+    this.skillApi.find<Skill>()
+    .subscribe(
+      devoteeSkills => {
+        console.log(devoteeSkills);
+       // this.availableSkills = devoteeSkills;
+      }
+    );
+  }
+
+  loadDevoteeSkills() {
+    this.devoteeSkillApi.find(
+      {
+        where: {devoteeId: this.devoteeId},
+        include: {
+          relation: 'fkDevoteeSkillSkill1rel', 
+        }
+      }
+    )
     .subscribe(
       devoteeSkills => {
         console.log(devoteeSkills);
@@ -42,7 +65,11 @@ export class DevoteeSkillComponent implements OnInit {
     );
   }
 
-  addSkil(skill: Skill): void {
+  add(event: MatChipInputEvent){
+    this.selectedSkills.push(event.value);
+  }
+
+  addSkill(skill: Skill): void {
      const index = this.availableSkills.indexOf(skill);
      this.assignedSkills.push(skill);
 

@@ -1,6 +1,6 @@
   <mat-form-field class="demo-chip-list">      
     <mat-chip-list #chipList>
-      <mat-chip *ngFor="let skill of availableSkills" [selectable]="selectable"
+      <mat-chip *ngFor="let skill of selectedSkills" [selectable]="selectable"
                 [removable]="removable" (remove)="removeSkill(skill)">
         {{skill.skillName}}
         <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>

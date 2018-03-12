@@ -8,7 +8,10 @@ declare var Object: any;
 export interface DevoteeSkillInterface {
   "devoteeId": string;
   "skillId": string;
-  "id"?: number;
+  "createdOn"?: Date;
+  "updatedOn"?: Date;
+  "createdBy"?: string;
+  "updatedBy"?: string;
   fkDevoteeSkillDevotee1rel?: Devotee;
   fkDevoteeSkillSkill1rel?: Skill;
 }
@@ -16,7 +19,10 @@ export interface DevoteeSkillInterface {
 export class DevoteeSkill implements DevoteeSkillInterface {
   "devoteeId": string;
   "skillId": string;
-  "id": number;
+  "createdOn": Date;
+  "updatedOn": Date;
+  "createdBy": string;
+  "updatedBy": string;
   fkDevoteeSkillDevotee1rel: Devotee;
   fkDevoteeSkillSkill1rel: Skill;
   constructor(data?: DevoteeSkillInterface) {
@@ -50,7 +56,7 @@ export class DevoteeSkill implements DevoteeSkillInterface {
       name: 'DevoteeSkill',
       plural: 'DevoteeSkills',
       path: 'DevoteeSkills',
-      idName: 'id',
+      idName: 'devoteeId',
       properties: {
         "devoteeId": {
           name: 'devoteeId',
@@ -60,9 +66,21 @@ export class DevoteeSkill implements DevoteeSkillInterface {
           name: 'skillId',
           type: 'string'
         },
-        "id": {
-          name: 'id',
-          type: 'number'
+        "createdOn": {
+          name: 'createdOn',
+          type: 'Date'
+        },
+        "updatedOn": {
+          name: 'updatedOn',
+          type: 'Date'
+        },
+        "createdBy": {
+          name: 'createdBy',
+          type: 'string'
+        },
+        "updatedBy": {
+          name: 'updatedBy',
+          type: 'string'
         },
       },
       relations: {
