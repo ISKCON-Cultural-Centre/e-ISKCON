@@ -54,7 +54,7 @@ export class DevoteeRoleComponent implements OnInit {
           roles => {
             this.availableRoles = roles;
           }
-        );        
+        );
       }
     );
 
@@ -90,6 +90,6 @@ export class DevoteeRoleComponent implements OnInit {
 
     this.availableRoles.push(role);
     this.availableRoles = _.uniq(this.availableRoles);
-
   }
+
 }

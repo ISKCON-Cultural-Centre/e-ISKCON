@@ -103,10 +103,12 @@
 
     </div>
     <div >
+
       <fieldset fxLayout="column" fxLayoutAlign="space-evenly stretch">
         <legend>Postal Address</legend>
         <app-physical-address (newAddress)="updateDevoteeAddressId($event)" [physicalAddress]="physicalAddress" ></app-physical-address>
       </fieldset>
+
       <fieldset fxLayout="column" fxLayoutAlign="space-evenly stretch">
         <legend>Family Details</legend>
         <mat-form-field>
@@ -120,22 +122,14 @@
     <div>
       <fieldset fxLayout="column" fxLayoutAlign="space-evenly stretch" >
         <legend>Languages Proficiency</legend>
-
       </fieldset>
-      <fieldset  fxLayout="column" fxLayoutAlign="space-evenly stretch">
-        <legend>Skill</legend>
-        <mat-form-field>
-          <input matInput placeholder="Search Skill" aria-label="State" [matAutocomplete]="auto1">
-          <mat-autocomplete #auto1="matAutocomplete">
-            <mat-option *ngFor="let state of filteredStates | async " [value]="state.name">
-              <img style="vertical-align:middle;" aria-hidden src="{{state.flag}}" height="25" />
-              <span>{{ state.name }}</span> |
-              <small>Population: {{state.population}}</small>
-            </mat-option>
-          </mat-autocomplete>
-        </mat-form-field>
 
+      <fieldset fxLayout="column" fxLayoutAlign="space-evenly stretch">
+        <legend>Skill</legend> 
+        <app-devotee-skill [devoteeId]="devoteeId" ></app-devotee-skill>
       </fieldset>
+
+
       <fieldset  fxLayout="column" fxLayoutAlign="space-evenly stretch">
         <legend>Area of Interest</legend>
         <mat-form-field>
