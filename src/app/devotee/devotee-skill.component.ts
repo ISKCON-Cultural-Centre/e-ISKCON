@@ -25,8 +25,8 @@ export class DevoteeSkillComponent implements OnInit {
   // Enter, comma
   separatorKeysCodes = [ENTER, COMMA];
   
-  availableSkills: Skill[];
-  assignedSkills: Skill[];
+  availableSkills = [];
+  assignedSkills = [];
   selectedSkills = [];
 
   constructor(
@@ -37,7 +37,7 @@ export class DevoteeSkillComponent implements OnInit {
   ngOnInit() {
     this.loadSkills();
     this.loadDevoteeSkills();
-
+    this.availableSkills = this.difference(this.availableSkills, this.assignedSkills);
 /*     this.devoteeForm.get('gothra').valueChanges
     //.distinctUntilChanged()
     .subscribe(searchTerm => {
@@ -80,30 +80,44 @@ export class DevoteeSkillComponent implements OnInit {
       devoteeSkill => {
         console.log(devoteeSkill);
         this.assignedSkills.push(new Skill(event.option.value));
-        let index = this.availableSkills.indexOf(event.option.value);
+/*         let index = this.availableSkills.indexOf(event.option.value);
         console.log(index);
         if (index >= 0) {
           this.availableSkills.splice(index, 1);
-        }        
+        }   */      
         //this.availableSkills =   _.difference(this.availableSkills, this.assignedSkills);
-        let res1 = this.diff(this.availableSkills, this.assignedSkills);
-        let res2 = this.diff(this.assignedSkills, this.availableSkills);
-        console.log(res1);
-        console.log(res2);        
+        //this.availableSkills = this.difference(this.availableSkills, this.assignedSkills);
+        this.availableSkills =  __.filter(this.availableSkills, function(o) { 
+          return !__.find(this.availableSkills, {id: o.id});
+       });
       }
     );
   }
 
-  diff = function(obj1, obj2) {
+
+
+
+  difference(object, base) {
+    function changes(object, base) {
+      return __.transform(object, function(result, value, key) {
+        if (!_.isEqual(value, base[key])) {
+          result[key] = (_.isObject(value) && _.isObject(base[key])) ? changes(value, base[key]) : value;
+        }
+      });
+    }
+    return changes(object, base);
+  }
+
+/*   diff = function(obj1, obj2) {
     return __.reduce(obj1, function(result, value, key) {
       if (__.isPlainObject(value)) {
-        result[key] = this.diff(value, obj2[key]);
+        result[key] = __.diff(value, obj2[key]);
       } else if (!__.isEqual(value, obj2[key])) {
         result[key] = value;
       }
       return result;
     }, {});
-  };
+  }; */
   
 
 

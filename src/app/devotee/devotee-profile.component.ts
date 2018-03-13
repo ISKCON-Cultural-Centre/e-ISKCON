@@ -29,6 +29,17 @@ export class DevoteeProfileComponent implements OnInit {
   devoteeId: String;
   devotee: Devotee;
 
+  one$;
+  two$;
+  three$;
+  four$;
+  five$;
+  six$;
+  seven$
+  eight$
+  nine$
+  ten$
+
   stateCtrl: FormControl;
   filteredStates: Observable<Devotee[]>;
   submitted = false;
@@ -66,7 +77,7 @@ export class DevoteeProfileComponent implements OnInit {
     this.devoteeId ? this.devoteeId = this.devoteeId : this.devoteeId = this.authService.getCurrentUserId();
     this.loadDevotee(this.devoteeId);
 
-    this.devoteeSearchSelectService.missionAnnounced$.
+    this.one$ = this.devoteeSearchSelectService.missionAnnounced$.
     subscribe(
       selectedDevotee => {
         this.devoteeId = selectedDevotee.option.value.id;
@@ -75,7 +86,7 @@ export class DevoteeProfileComponent implements OnInit {
     );
 
 
-    this.devoteeForm.get('gothra').valueChanges
+    this.two$ = this.devoteeForm.get('gothra').valueChanges
       //.distinctUntilChanged()
       .subscribe(searchTerm => {
         this.filteredGothras = this.gothraMasterApi.find<GothraMaster>(
@@ -83,7 +94,7 @@ export class DevoteeProfileComponent implements OnInit {
         );
       });
 
-    this.devoteeForm.get('nakshatra').valueChanges
+    this.three$ = this.devoteeForm.get('nakshatra').valueChanges
       //.distinctUntilChanged()
       .subscribe(searchTerm => {
         this.filteredNakshatras = this.nakshatraMasterApi.find<NakshatraMaster>(
@@ -91,7 +102,7 @@ export class DevoteeProfileComponent implements OnInit {
         );
       });
 
-    this.devoteeForm.get('professionId').valueChanges
+      this.four$ = this.devoteeForm.get('professionId').valueChanges
       //.distinctUntilChanged()
       .subscribe(searchTerm => {
         this.filteredProfessions = this.professionMasterApi.find<ProfessionMaster>(
@@ -99,21 +110,21 @@ export class DevoteeProfileComponent implements OnInit {
         );
       });
 
-    this.asramaMasterApi.find<AsramaMaster>()
+      this.five$ = this.asramaMasterApi.find<AsramaMaster>()
       .subscribe(
         asramas => {
           this.asramas = asramas;
         }
       );
 
-    this.circleApi.find<Circle>()
+      this.six$ = this.circleApi.find<Circle>()
       .subscribe(
         circles => {
           this.circles = circles;
         }
       );
 
-      this.languageApi.find<Language>()
+      this.seven$ = this.languageApi.find<Language>()
       .subscribe(languages => {
         this.languages = languages;
       }
@@ -122,7 +133,7 @@ export class DevoteeProfileComponent implements OnInit {
   }
 
   loadDevotee(devoteeId: String) {
-    this.devoteeApi.findById<Devotee>(devoteeId, {include: 'fkDevoteePhysicalAddress1rel'})
+    this.eight$ = this.devoteeApi.findById<Devotee>(devoteeId, {include: 'fkDevoteePhysicalAddress1rel'})
     .subscribe(
       devotee => {
         this.physicalAddress = devotee.fkDevoteePhysicalAddress1rel;
@@ -208,7 +219,7 @@ export class DevoteeProfileComponent implements OnInit {
   }  
 
   save() {
-    this.devoteeApi.patchAttributes(this.devoteeId, this.devoteeForm.value)
+    this.nine$ = this.devoteeApi.patchAttributes(this.devoteeId, this.devoteeForm.value)
     .subscribe(
       devotee => {
         this.notificationService.notificationSubject.next('Profile updated successfully');
@@ -222,7 +233,7 @@ export class DevoteeProfileComponent implements OnInit {
 
   updateDevoteeAddressId(addressId)  {
     console.log(addressId);
-    this.devoteeApi.patchAttributes(this.devoteeId, {physicalAddressId: addressId} )
+    this.ten$ = this.devoteeApi.patchAttributes(this.devoteeId, {physicalAddressId: addressId} )
     .subscribe(test => console.log(test))
   }
 
@@ -230,6 +241,18 @@ export class DevoteeProfileComponent implements OnInit {
     return profession ? profession.professionName : '';
   }
 
+   ngOnDestroy(){
+    this.one$.unsubscribe();
+    this.two$.unsubscribe();
+    this.three$.unsubscribe();
+    this.four$.unsubscribe();
+    this.five$.unsubscribe();
+    this.six$.unsubscribe();
+    this.seven$.unsubscribe();
+    this.eight$.unsubscribe();
+    this.nine$.unsubscribe();
+    this.ten$.unsubscribe();
+   }
   // TODO: Remove this when we're done
   //get diagnostic() { return JSON.stringify(this.model); }
 

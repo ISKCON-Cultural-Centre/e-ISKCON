@@ -1,12 +1,8 @@
-<div fxLayout="row">
+<!-- <div fxLayout="row">
   <form [formGroup]="registerForm" novalidate>  
   <div>
         <fieldset fxLayout="column" fxLayoutAlign="space-evenly stretch">
           <legend>New Registration</legend>
-          <div>
-              <button type = "button" mat-raised-button color="primary" (click)="save()"> {{ devoteeForm.value.id == null ? 'Create' : 'Update' }}</button>
-              <button type = "button" mat-raised-button color="warn" (click)="reset()">Reset</button>
-            </div>          
           <mat-form-field>
             <input fxFill matInput placeholder="Legal Name" class="form-control" formControlName="legalName" autofocus>
           </mat-form-field>
@@ -36,73 +32,12 @@
           <mat-form-field>
             <input matInput placeholder="Mobile number"  class="form-control" formControlName="mobileNo">
           </mat-form-field>
-          <mat-form-field>
-            <input matInput placeholder="Landline number"  class="form-control" formControlName="landlineNo">
-          </mat-form-field>                    
-          <mat-form-field>
-            <input matInput placeholder="Gothra" aria-label="State" [matAutocomplete]="autoGothra" formControlName="gothra">
-            <mat-autocomplete #autoGothra="matAutocomplete" >
-              <mat-option *ngFor="let gothra of filteredGothras | async" [value]="gothra.gothra">
-                <span>{{ gothra.gothra }}</span>
-              </mat-option>
-            </mat-autocomplete>
-          </mat-form-field>
-          <mat-form-field>
-            <input matInput placeholder="Nakshatra" aria-label="State" [matAutocomplete]="autoNakshatra" formControlName="nakshatra">
-            <mat-autocomplete #autoNakshatra="matAutocomplete" >
-              <mat-option *ngFor="let nakshatra of filteredNakshatras | async" [value]="nakshatra.nakshatra">
-                <span>{{ nakshatra.nakshatra }}</span>
-              </mat-option>
-            </mat-autocomplete>
-          </mat-form-field>
-          <mat-form-field>
-            <input matInput placeholder="Profession" aria-label="State" [matAutocomplete]="autoProfession"   formControlName="professionId">
-            <mat-autocomplete #autoProfession="matAutocomplete" [displayWith]="displayFn">
-              <mat-option *ngFor="let profession of filteredProfessions | async" [value]="profession">
-                <span>{{ profession.professionName }}</span>
-              </mat-option>
-            </mat-autocomplete>
-          </mat-form-field>        
-          <mat-form-field>
-            <mat-select placeholder="Mother Tongue"   aria-label="State" class="form-control" formControlName="motherTongueLanguageId">
-                <mat-option *ngFor="let language of languages" [value]="language.id">
-                  <span>{{ language.language }}</span>
-                </mat-option>
-            </mat-select>        
-          </mat-form-field>            
-          <mat-form-field>
-            <input matInput placeholder="Aadhar number"  class="form-control" formControlName="governmentUniqueId">
-          </mat-form-field>
-          <mat-form-field>
-            <input matInput placeholder="PAN"  class="form-control" formControlName="incomeTaxId">
-          </mat-form-field>
-          <mat-form-field>
-            <input matInput placeholder="LPM Number"  class="form-control" formControlName="lpmId">
-          </mat-form-field>
-          <mat-form-field>
-            <input matInput [matDatepicker]="picker" placeholder="Date of Birth" class="form-control" formControlName="dateOfBirth">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-          <mat-form-field>
-            <input matInput [matDatepicker]="kcpicker" placeholder="KC start date" class="form-control" formControlName="kcAssociationDate">
-            <mat-datepicker-toggle matSuffix [for]="kcpicker"></mat-datepicker-toggle>
-            <mat-datepicker #kcpicker></mat-datepicker>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-select placeholder="Asrama"   aria-label="State" class="form-control" formControlName="asramaMasterId">
-              <mat-option *ngFor="let asrama of asramas" [value]="asrama.id">
-                <span>{{ asrama.asramaName }}</span>
-              </mat-option>
-          </mat-select>  
-          </mat-form-field>        
-          <mat-form-field>
-              <input type="number" matInput placeholder="Credit Limit" class="form-control" formControlName="creditLimit">
-            </mat-form-field>       
-
-        </fieldset>
+         </fieldset>
     </div>
   </form>     
+  <div>
+    <button type = "button" mat-raised-button color="primary" (click)="save()">Register</button>
+    <button type = "button" mat-raised-button color="warn" (click)="reset()">Reset</button>
+  </div> 
 
-
-</div>
+</div> -->
