@@ -1,63 +1,108 @@
-<mat-grid-list cols="2" rowHeight="1:1">
-  <mat-grid-tile>
-    <img class="img-responsive" src="assets/images/prabhupada.jpg">
-  </mat-grid-tile>
-  <mat-grid-tile>
-    <div class="row">
-      <div class="col-mat-4">
-        <form *ngIf="state == 'login'">
-          <h3>Register</h3>
+<div fxLayout="row">
+  <form [formGroup]="registerForm" novalidate>  
+  <div>
+        <fieldset fxLayout="column" fxLayoutAlign="space-evenly stretch">
+          <legend>New Registration</legend>
+          <div>
+              <button type = "button" mat-raised-button color="primary" (click)="save()"> {{ devoteeForm.value.id == null ? 'Create' : 'Update' }}</button>
+              <button type = "button" mat-raised-button color="warn" (click)="reset()">Reset</button>
+            </div>          
           <mat-form-field>
-            <input type="text" matInput placeholder="Legal name" #userName [formControl]="userNameFormControl">
-            <mat-error *ngIf="userNameFormControl.hasError('required')">
-              Username is
-              <strong>required</strong>
-            </mat-error>
+            <input fxFill matInput placeholder="Legal Name" class="form-control" formControlName="legalName" autofocus>
           </mat-form-field>
           <mat-form-field>
-            <input type="text" matInput placeholder="Spiritual Name" #userName [formControl]="userNameFormControl">
-            <mat-error *ngIf="userNameFormControl.hasError('required')">
-              Username is
-              <strong>required</strong>
-            </mat-error>
+            <input matInput placeholder="Spiritual Name" class="form-control" formControlName="spiritualName">
           </mat-form-field>
-          <br/>
           <mat-form-field>
-            <input type="text" matInput placeholder="Email Address" #userName [formControl]="userNameFormControl">
-            <mat-error *ngIf="userNameFormControl.hasError('required')">
-              Username is
-              <strong>required</strong>
-            </mat-error>
+            <mat-select placeholder="Circle"   aria-label="State" class="form-control" formControlName="circleId">
+              <mat-option *ngFor="let circle of circles " [value]="circle.id">
+                <span>{{ circle.name }}</span>
+              </mat-option>
+            </mat-select>
           </mat-form-field>
-          <br/>
           <mat-form-field>
-            <input type="text" matInput placeholder="Contact Number" #userName [formControl]="userNameFormControl">
-            <mat-error *ngIf="userNameFormControl.hasError('required')">
-              Username is
-              <strong>required</strong>
-            </mat-error>
-          </mat-form-field>
-          <br/>
+              <mat-select placeholder="Gender"  class="form-control" formControlName="gender">
+                <mat-option value="M">
+                  Male
+                </mat-option>
+                <mat-option value="F">
+                    Female
+                  </mat-option>              
+              </mat-select>
+            </mat-form-field>
           <mat-form-field>
-            <input type="text" matInput placeholder="Username" #userName [formControl]="userNameFormControl">
-            <mat-error *ngIf="userNameFormControl.hasError('required')">
-              Username is
-              <strong>required</strong>
-            </mat-error>
+            <input matInput placeholder="Email Address"  class="form-control" formControlName="email">
           </mat-form-field>
-          <br/>
           <mat-form-field>
-            <input type="password" matInput placeholder="Password" #password [formControl]="passwordFormControl">
-            <mat-error *ngIf="passwordFormControl.hasError('required')">
-              Password is
-              <strong>required</strong>
-            </mat-error>
+            <input matInput placeholder="Mobile number"  class="form-control" formControlName="mobileNo">
           </mat-form-field>
-          <br/>
-          <br/>
-          <button mat-raised-button (click)="Register(userName, password)">Register</button>
-        </form>
-      </div>
+          <mat-form-field>
+            <input matInput placeholder="Landline number"  class="form-control" formControlName="landlineNo">
+          </mat-form-field>                    
+          <mat-form-field>
+            <input matInput placeholder="Gothra" aria-label="State" [matAutocomplete]="autoGothra" formControlName="gothra">
+            <mat-autocomplete #autoGothra="matAutocomplete" >
+              <mat-option *ngFor="let gothra of filteredGothras | async" [value]="gothra.gothra">
+                <span>{{ gothra.gothra }}</span>
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Nakshatra" aria-label="State" [matAutocomplete]="autoNakshatra" formControlName="nakshatra">
+            <mat-autocomplete #autoNakshatra="matAutocomplete" >
+              <mat-option *ngFor="let nakshatra of filteredNakshatras | async" [value]="nakshatra.nakshatra">
+                <span>{{ nakshatra.nakshatra }}</span>
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Profession" aria-label="State" [matAutocomplete]="autoProfession"   formControlName="professionId">
+            <mat-autocomplete #autoProfession="matAutocomplete" [displayWith]="displayFn">
+              <mat-option *ngFor="let profession of filteredProfessions | async" [value]="profession">
+                <span>{{ profession.professionName }}</span>
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>        
+          <mat-form-field>
+            <mat-select placeholder="Mother Tongue"   aria-label="State" class="form-control" formControlName="motherTongueLanguageId">
+                <mat-option *ngFor="let language of languages" [value]="language.id">
+                  <span>{{ language.language }}</span>
+                </mat-option>
+            </mat-select>        
+          </mat-form-field>            
+          <mat-form-field>
+            <input matInput placeholder="Aadhar number"  class="form-control" formControlName="governmentUniqueId">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="PAN"  class="form-control" formControlName="incomeTaxId">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="LPM Number"  class="form-control" formControlName="lpmId">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput [matDatepicker]="picker" placeholder="Date of Birth" class="form-control" formControlName="dateOfBirth">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput [matDatepicker]="kcpicker" placeholder="KC start date" class="form-control" formControlName="kcAssociationDate">
+            <mat-datepicker-toggle matSuffix [for]="kcpicker"></mat-datepicker-toggle>
+            <mat-datepicker #kcpicker></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="Asrama"   aria-label="State" class="form-control" formControlName="asramaMasterId">
+              <mat-option *ngFor="let asrama of asramas" [value]="asrama.id">
+                <span>{{ asrama.asramaName }}</span>
+              </mat-option>
+          </mat-select>  
+          </mat-form-field>        
+          <mat-form-field>
+              <input type="number" matInput placeholder="Credit Limit" class="form-control" formControlName="creditLimit">
+            </mat-form-field>       
+
+        </fieldset>
     </div>
-  </mat-grid-tile>
-</mat-grid-list>
+  </form>     
+
+
+</div>

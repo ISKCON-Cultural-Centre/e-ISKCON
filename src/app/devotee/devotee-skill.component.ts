@@ -3,6 +3,7 @@ import {ENTER, COMMA} from '@angular/cdk/keycodes';
 import { MatChipInputEvent, MatAutocompleteSelectedEvent } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import * as _ from 'underscore';
+import * as __ from 'lodash';
 
 import { Skill, DevoteeSkill  } from '../shared/sdk/models';
 import { SkillApi, DevoteeSkillApi } from '../../../src/app/shared/sdk';
@@ -73,16 +74,38 @@ export class DevoteeSkillComponent implements OnInit {
   }
 
   onSelectionChanged(event: MatAutocompleteSelectedEvent) {
-    let value = event.option.value.id;
-    this.devoteeSkillApi.create({devoteeId: this.devoteeId, skillId: value })
+    //let value = event.option.value;
+    this.devoteeSkillApi.create({devoteeId: this.devoteeId, skillId: event.option.value.id })
     .subscribe(
       devoteeSkill => {
         console.log(devoteeSkill);
-        this.assignedSkills.push(value);
-        this.availableSkills =   _.difference(this.availableSkills, this.assignedSkills);
+        this.assignedSkills.push(new Skill(event.option.value));
+        let index = this.availableSkills.indexOf(event.option.value);
+        console.log(index);
+        if (index >= 0) {
+          this.availableSkills.splice(index, 1);
+        }        
+        //this.availableSkills =   _.difference(this.availableSkills, this.assignedSkills);
+        let res1 = this.diff(this.availableSkills, this.assignedSkills);
+        let res2 = this.diff(this.assignedSkills, this.availableSkills);
+        console.log(res1);
+        console.log(res2);        
       }
     );
   }
+
+  diff = function(obj1, obj2) {
+    return __.reduce(obj1, function(result, value, key) {
+      if (__.isPlainObject(value)) {
+        result[key] = this.diff(value, obj2[key]);
+      } else if (!__.isEqual(value, obj2[key])) {
+        result[key] = value;
+      }
+      return result;
+    }, {});
+  };
+  
+
 
 
 
