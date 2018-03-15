@@ -1,7 +1,9 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
+import { Subscription } from 'rxjs/Subscription';
 import { debounceTime } from 'rxjs/operators/debounceTime';
 import {MatDialog} from '@angular/material';
 
@@ -24,24 +26,26 @@ import { PhysicalAddressApi } from '../shared/sdk/services/index';
   templateUrl: './devotee-profile.component.html',
   styleUrls: ['./devotee-profile.component.css']
 })
-export class DevoteeProfileComponent implements OnInit {
+export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit {
 
   devoteeId: String;
   devotee: Devotee;
 
-  one$;
-  two$;
-  three$;
-  four$;
-  five$;
-  six$;
-  seven$
-  eight$
-  nine$
-  ten$
+  one$ = new Subscription();
+  two$ = new Subscription();
+  three$ = new Subscription();
+  four$ = new Subscription();
+  five$ = new Subscription();
+  six$ = new Subscription();
+  seven$ = new Subscription();
+  eight$ = new Subscription();
+  nine$ = new Subscription();
+  ten$ = new Subscription();
 
   stateCtrl: FormControl;
   filteredStates: Observable<Devotee[]>;
+  currentDevoteeId = new Subject<String>();
+  currentDevoteeId$ = this.currentDevoteeId.asObservable();
   submitted = false;
   devoteeForm: FormGroup;
   circles: Circle[];
@@ -75,13 +79,20 @@ export class DevoteeProfileComponent implements OnInit {
   ngOnInit() {
 
     this.devoteeId ? this.devoteeId = this.devoteeId : this.devoteeId = this.authService.getCurrentUserId();
+    this.currentDevoteeId.next(this.devoteeId);
     this.loadDevotee(this.devoteeId);
+    this.currentDevoteeId.next(this.devoteeId);
+
 
     this.one$ = this.devoteeSearchSelectService.missionAnnounced$.
     subscribe(
       selectedDevotee => {
-        this.devoteeId = selectedDevotee.option.value.id;
-        this.loadDevotee(selectedDevotee.option.value.id);
+        if (selectedDevotee.option != null) {
+          this.currentDevoteeId.next(selectedDevotee.option.value.id);
+          this.loadDevotee(selectedDevotee.option.value.id);
+        } else {
+          this.reset();
+        }
       }
     );
 
@@ -130,6 +141,10 @@ export class DevoteeProfileComponent implements OnInit {
       }
       );
 
+  }
+
+  ngAfterViewInit() {
+    this.currentDevoteeId.next(this.devoteeId);
   }
 
   loadDevotee(devoteeId: String) {
@@ -216,30 +231,32 @@ export class DevoteeProfileComponent implements OnInit {
       mobileNo: null,
       landlineNo: null
     });
-  }  
-
-  save() {
-    this.nine$ = this.devoteeApi.patchAttributes(this.devoteeId, this.devoteeForm.value)
-    .subscribe(
-      devotee => {
-        this.notificationService.notificationSubject.next('Profile updated successfully');
-      }
-    )
-  }
-
-  reset() {
-    this.devoteeForm.reset();
   }
 
   updateDevoteeAddressId(addressId)  {
-    console.log(addressId);
-    this.ten$ = this.devoteeApi.patchAttributes(this.devoteeId, {physicalAddressId: addressId} )
-    .subscribe(test => console.log(test))
+   this.nine$ = this.devoteeApi.patchAttributes(this.devoteeId, {physicalAddressId: addressId} )
+    .subscribe();
   }
 
   displayFn(profession?: ProfessionMaster): string | undefined {
     return profession ? profession.professionName : '';
   }
+
+  save() {
+    this.eight$ = this.devoteeApi.patchAttributes(this.devoteeId, this.devoteeForm.value)
+     .subscribe(
+       devotee => {
+         this.notificationService.notificationSubject.next('Profile updated successfully');
+       }
+     )
+   }
+ 
+   reset() {
+      this.devoteeForm.reset();
+      this.currentDevoteeId.next(null);
+      this.physicalAddress = null;
+   }
+ 
 
    ngOnDestroy(){
     this.one$.unsubscribe();
@@ -250,8 +267,8 @@ export class DevoteeProfileComponent implements OnInit {
     this.six$.unsubscribe();
     this.seven$.unsubscribe();
     this.eight$.unsubscribe();
-    this.nine$.unsubscribe();
-    this.ten$.unsubscribe();
+    //this.nine$.unsubscribe();
+    //this.ten$.unsubscribe();
    }
   // TODO: Remove this when we're done
   //get diagnostic() { return JSON.stringify(this.model); }

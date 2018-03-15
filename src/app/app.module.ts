@@ -32,6 +32,7 @@ import { LookupService } from './shared/services/lookup.service';
 import { DummyService } from './shared/services/dummy.service';
 import { OrganizationModule } from '../app/organization/organization.module';
 import { SharedComponentsModule } from './shared/components/shared-components.module';
+import { CommonComponentsModule } from './common/common-components.module';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { SharedComponentsModule } from './shared/components/shared-components.mo
     MessagesComponent
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
@@ -51,7 +53,6 @@ import { SharedComponentsModule } from './shared/components/shared-components.mo
     HttpModule,
     SDKBrowserModule.forRoot(),
     RouterModule,
-    AppRoutingModule,
     DevoteeModule,
     MyServicesModule,
     MyActionsModule,
@@ -60,7 +61,8 @@ import { SharedComponentsModule } from './shared/components/shared-components.mo
     MatchlessGiftsModule,
     LookupModule,
     OrganizationModule,
-    SharedComponentsModule
+    SharedComponentsModule,
+    CommonComponentsModule
   ],
   providers: [
     AuthGuard,

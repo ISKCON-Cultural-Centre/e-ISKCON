@@ -10,6 +10,7 @@ import { AuthService } from './shared/services/auth.service';
 
 import { Department, TaskMaster } from './shared/sdk/models';
 import { MyServicesService } from './shared/services/myServices.service';
+import { BreadcrumbComponent } from './common/breadcrumb.component';
 
 @Component({
   selector: 'app-root',

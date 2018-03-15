@@ -1,3 +1,7 @@
-.demo-chip-list {
-    width: 100%;
-  }
+.box {
+  display: flex;
+  flex-wrap: wrap;
+}
+.box>* {
+  flex: 1 1 160px;
+}

@@ -51,8 +51,7 @@ export class DevoteeSearchComponent implements OnInit {
   }
 
   displayFn(devotee?: Devotee): string | undefined {
-    return devotee ? (devotee.legalName ? devotee.legalName : '') + 
-                      (devotee.spiritualName ? '  |  ' + devotee.spiritualName  : '') : undefined;
+    return devotee ? (devotee.spiritualName ? devotee.spiritualName : devotee.legalName) : undefined;
   }
 
 

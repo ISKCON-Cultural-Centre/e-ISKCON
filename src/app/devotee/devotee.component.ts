@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,  } from '@angular/core';
+import { MatAutocompleteSelectedEvent } from '@angular/material';
 
 import { DevoteeSearchSelectService } from '../shared/services';
+import { EventEmitter } from 'events';
 
 @Component({
   selector: 'app-home',
@@ -22,7 +24,9 @@ export class DevoteeComponent implements OnInit {
   }
 
 
-  onSubmit() { }
+  addDevotee() {
+    this.devoteeSearchSelectService.announceMission(new MatAutocompleteSelectedEvent(null, null));
+   }
 
 
 }

@@ -17,21 +17,119 @@ import { TaskMasterComponent } from './organization/task-master.component';
 import { DepartmentComponent } from './organization/department.component';
 
 const routes: Routes = [
-  { path: 'register', component: RegisterComponent },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-  { path: 'login', component: LoginComponent },
-  { path: 'changePassword', component: ChangePasswordComponent },
-  { path: 'resetPassword', component: ResetPasswordComponent },
-  { path: 'devotee', component: DevoteeComponent, canActivate: [AuthGuard] },
-  { path: 'devoteeRole', component: DevoteeRoleComponent, canActivate: [AuthGuard] },  
-  { path: 'profile', component: DevoteeProfileComponent, canActivate: [AuthGuard] },  
-  { path: 'reset', component: ResetPasswordComponent },
-  { path: 'lookupMaster', component: LookupComponent, canActivate: [AuthGuard] },
-  { path: 'organization/role', component: RoleComponent, canActivate: [AuthGuard] },
-  { path: 'organization/task', component: TaskMasterComponent, canActivate: [AuthGuard] },
-  { path: 'organization/department', component: DepartmentComponent, canActivate: [AuthGuard] },
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full', canActivate: [AuthGuard] },
-  { path: '**', component: PageNotFoundComponent }
+  {
+    path: 'register',
+    data: {
+      breadcrumb: 'Register'
+    },
+    component: RegisterComponent
+  },
+  { 
+    path: 'dashboard', 
+    data: {
+      breadcrumb: 'Dashboard'
+    },
+    component: DashboardComponent, 
+    canActivate: [AuthGuard] 
+  },
+  { 
+    path: 'login', 
+    data: {
+      breadcrumb: 'Login'
+    },
+    component: LoginComponent 
+  },
+  { 
+    path: 'changePassword', 
+    data: {
+      breadcrumb: 'Change Password'
+    },
+    component: ChangePasswordComponent 
+  },
+  { path: 
+    'resetPassword',
+    data: {
+      breadcrumb: 'Reset Password'
+    }, 
+    component: ResetPasswordComponent 
+  },
+  { 
+    path: 'devotee', 
+    data: {
+      breadcrumb: 'Devotee'
+    },
+    component: DevoteeComponent, 
+    canActivate: [AuthGuard] },
+  { 
+    path: 'devoteeRole', 
+    data: {
+      breadcrumb: 'Roles'
+    },
+    component: DevoteeRoleComponent, 
+    canActivate: [AuthGuard] 
+  },  
+  { 
+    path: 'profile',
+    data: {
+      breadcrumb: 'My Profile'
+    }, 
+    component: DevoteeProfileComponent, 
+    canActivate: [AuthGuard] 
+  },  
+  { 
+    path: 'reset', 
+    data: {
+      breadcrumb: 'Reset Password'
+    },
+    component: ResetPasswordComponent 
+  },
+  { 
+    path: 'lookupMaster', 
+    data: {
+      breadcrumb: 'Lookup Maintenance'
+    },
+    component: LookupComponent, 
+    canActivate: [AuthGuard] 
+  },
+  { 
+    path: 'organization/role', 
+    data: {
+      breadcrumb: 'Role'
+    },
+    component: RoleComponent, 
+    canActivate: [AuthGuard] 
+  },
+  { 
+    path: 'organization/task', 
+    data: {
+      breadcrumb: 'Task'
+    },
+    component: TaskMasterComponent, 
+    canActivate: [AuthGuard] 
+  },
+  { 
+    path: 'organization/department', 
+    data: {
+      breadcrumb: 'Department'
+    },
+    component: DepartmentComponent, 
+    canActivate: [AuthGuard] 
+  },
+  { 
+    path: '', 
+    data: {
+      breadcrumb: 'Home'
+    },
+    redirectTo: 'dashboard', pathMatch: 'full', 
+    canActivate: [AuthGuard] 
+  },
+  { 
+    path: '**', 
+    data: {
+      breadcrumb: 'Not Found'
+    },
+    component: PageNotFoundComponent 
+  }
 ];
 
 

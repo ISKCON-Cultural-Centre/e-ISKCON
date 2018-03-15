@@ -20,7 +20,7 @@
       <p>Available Roles</p>
 
         <mat-chip-list #chipList>
-          <mat-chip *ngFor="let role of availableRoles" [selectable]="selectable"
+          <mat-chip *ngFor="let role of remainingRoles" [selectable]="selectable"
                    [removable]="removable" (remove)="addRole(role)">
             {{role.name}}
             <mat-icon matChipRemove *ngIf="removable">add</mat-icon>

@@ -1,4 +1,3 @@
-<div>
 <form #skillForm="ngForm">
 <mat-form-field class="demo-chip-list">      
     <mat-chip-list #chipList>
@@ -13,11 +12,11 @@
       [matChipInputSeparatorKeyCodes]="separatorKeysCodes" 
       [(ngModel)]="model" name="name"/>
       <mat-autocomplete #autoSkill="matAutocomplete" [displayWith]="displayFn" (optionSelected)="onSelectionChanged($event)">
-        <mat-option *ngFor="let skill of availableSkills" [value]="skill">
+        <mat-option *ngFor="let skill of remainingSkills" [value]="skill">
           <span>{{ skill.skillName }}</span>
         </mat-option>
       </mat-autocomplete>             
     </mat-chip-list>
   </mat-form-field>   
 </form>
-</div>
+

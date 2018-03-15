@@ -1,4 +1,4 @@
-<div fxLayout="row" >
+<div fxFlexFill fxLayout="row" >
     <mat-sidenav-container fxFlex>
         <mat-sidenav #mainSideNav mode="over" closed  >
             <mat-toolbar color="primary" *ngIf="isLoggedIn$ | async as isLoggedIn">
@@ -44,6 +44,7 @@
                   </button>
                 </mat-menu>               
           </mat-toolbar>
+          <app-breadcrumb></app-breadcrumb>          
           <router-outlet></router-outlet>    
 <!--           <footer>
               Copyright &copy; ISKCON Cultural Centre, Bangalore
