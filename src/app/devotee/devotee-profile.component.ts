@@ -58,7 +58,20 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
   languages: Language[];
   asramas: AsramaMaster[];
 
+  step = 0;
 
+  setStep(index: number) {
+    this.step = index;
+  }
+
+  nextStep() {
+    this.step++;
+  }
+
+  prevStep() {
+    this.step--;
+  }
+  
   constructor(
     private notificationService: NotificationService,
     private devoteeApi: DevoteeApi,

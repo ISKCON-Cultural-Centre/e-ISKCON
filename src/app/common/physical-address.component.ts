@@ -94,7 +94,6 @@ export class PhysicalAddressComponent implements OnInit, OnChanges {
   }
 
   onSubmit() {
-    console.log(!this.physicalAddress);
     if (!this.physicalAddress){
       this.physicalAddressApi.create<PhysicalAddress>(this.addressForm.value)
       .subscribe(
