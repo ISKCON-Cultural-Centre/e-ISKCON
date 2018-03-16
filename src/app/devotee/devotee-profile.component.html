@@ -117,7 +117,10 @@
                   </mat-form-field>    -->    
               </fieldset>
             </div>              
-        </form>          
+        </form>   
+        <mat-action-row>
+          <button mat-button color="primary" (click)="nextStep()">Next</button>
+        </mat-action-row>               
         </mat-expansion-panel>
       
         <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle="true">
