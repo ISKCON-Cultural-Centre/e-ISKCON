@@ -99,6 +99,7 @@ export class PhysicalAddressComponent implements OnInit, OnChanges {
       this.physicalAddressApi.create<PhysicalAddress>(this.addressForm.value)
       .subscribe(
         physicalAddress => {
+          console.log(physicalAddress);
           this.newAddress.emit(physicalAddress.id);
           this.notificationService.notificationSubject.next('Address created successfully');
         }

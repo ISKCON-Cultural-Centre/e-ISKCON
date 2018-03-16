@@ -29,53 +29,26 @@ export class RegisterComponent implements OnInit {
   devoteeId: String;
   devotee: Devotee;
 
-  stateCtrl: FormControl;
-  filteredStates: Observable<Devotee[]>;
   submitted = false;
-  devoteeForm: FormGroup;
+  registerForm: FormGroup;
   circles: Circle[];
-  filteredGothras: Observable<GothraMaster[]>;
-  filteredNakshatras: Observable<NakshatraMaster[]>;
-  filteredProfessions: Observable<ProfessionMaster[]>;
-  physicalAddress:  PhysicalAddress;
-  languages: Language[];
-  asramas: AsramaMaster[];
 
 
   constructor(
     private notificationService: NotificationService,
     private devoteeApi: DevoteeApi,
     private circleApi: CircleApi,
-    private gothraMasterApi: GothraMasterApi,
-    private nakshatraMasterApi: NakshatraMasterApi,
-    private languageApi: LanguageApi,
-    private asramaMasterApi: AsramaMasterApi,
-    private professionMasterApi: ProfessionMasterApi,
-    private devoteeSearchSelectService: DevoteeSearchSelectService,
-    private router: Router,
     private authService: AuthService,
-    private physicalAddressApi: PhysicalAddressApi,
     private fb: FormBuilder) {
-    this.createForm();
+    //this.createForm();
   }
 
-
-
+  ngOnInit() {
+  }
+/* 
   ngOnInit() {
 
-    this.devoteeId ? this.devoteeId = this.devoteeId : this.devoteeId = this.authService.getCurrentUserId();
-    this.loadDevotee(this.devoteeId);
-
-    this.devoteeSearchSelectService.missionAnnounced$.
-    subscribe(
-      selectedDevotee => {
-        this.devoteeId = selectedDevotee.option.value.id;
-        this.loadDevotee(selectedDevotee.option.value.id);
-      }
-    );
-
-
-    this.devoteeForm.get('gothra').valueChanges
+    this.registerForm.get('gothra').valueChanges
       //.distinctUntilChanged()
       .subscribe(searchTerm => {
         this.filteredGothras = this.gothraMasterApi.find<GothraMaster>(
@@ -83,7 +56,7 @@ export class RegisterComponent implements OnInit {
         );
       });
 
-    this.devoteeForm.get('nakshatra').valueChanges
+    this.registerForm.get('nakshatra').valueChanges
       //.distinctUntilChanged()
       .subscribe(searchTerm => {
         this.filteredNakshatras = this.nakshatraMasterApi.find<NakshatraMaster>(
@@ -91,7 +64,7 @@ export class RegisterComponent implements OnInit {
         );
       });
 
-    this.devoteeForm.get('professionId').valueChanges
+    this.registerForm.get('professionId').valueChanges
       //.distinctUntilChanged()
       .subscribe(searchTerm => {
         this.filteredProfessions = this.professionMasterApi.find<ProfessionMaster>(
@@ -126,7 +99,7 @@ export class RegisterComponent implements OnInit {
     .subscribe(
       devotee => {
         this.physicalAddress = devotee.fkDevoteePhysicalAddress1rel;
-        this.devoteeForm.setValue(
+        this.registerForm.setValue(
           {
             id: devotee.id,
             legalName: devotee.legalName,
@@ -156,7 +129,7 @@ export class RegisterComponent implements OnInit {
   }
 
   createForm() {
-    this.devoteeForm = this.fb.group({
+    this.registerForm = this.fb.group({
       id: null,
       legalName: ['', Validators.required],
       circleId: '',
@@ -182,7 +155,7 @@ export class RegisterComponent implements OnInit {
   }
 
   addDevotee() {
-    this.devoteeForm = this.fb.group({
+    this.registerForm = this.fb.group({
       id: null,
       legalName: ['', Validators.required],
       circleId: '',
@@ -208,7 +181,7 @@ export class RegisterComponent implements OnInit {
   }  
 
   save() {
-    this.devoteeApi.patchAttributes(this.devoteeId, this.devoteeForm.value)
+    this.devoteeApi.patchAttributes(this.devoteeId, this.registerForm.value)
     .subscribe(
       devotee => {
         this.notificationService.notificationSubject.next('Profile updated successfully');
@@ -217,7 +190,7 @@ export class RegisterComponent implements OnInit {
   }
 
   reset() {
-    this.devoteeForm.reset();
+    this.registerForm.reset();
   }
 
   updateDevoteeAddressId(addressId)  {
@@ -232,5 +205,5 @@ export class RegisterComponent implements OnInit {
 
   // TODO: Remove this when we're done
   //get diagnostic() { return JSON.stringify(this.model); }
-
+ */
 }

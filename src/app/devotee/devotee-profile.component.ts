@@ -41,6 +41,8 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
   eight$ = new Subscription();
   nine$ = new Subscription();
   ten$ = new Subscription();
+  eleven$ = new Subscription();
+  twelve$ = new Subscription();
 
   stateCtrl: FormControl;
   filteredStates: Observable<Devotee[]>;
@@ -96,6 +98,13 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
       }
     );
 
+    this.twelve$ = this.currentDevoteeId$
+    .subscribe(
+      devoteeId => 
+      {
+        this.devoteeId = devoteeId;
+      }
+    );
 
     this.two$ = this.devoteeForm.get('gothra').valueChanges
       //.distinctUntilChanged()
@@ -152,31 +161,35 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
     .subscribe(
       devotee => {
         this.physicalAddress = devotee.fkDevoteePhysicalAddress1rel;
-        this.devoteeForm.setValue(
-          {
-            id: devotee.id,
-            legalName: devotee.legalName,
-            spiritualName: devotee.spiritualName,
-            circleId: devotee.circleId,
-            gender: devotee.gender,
-            email: devotee.email,
-            gothra: devotee.gothra ? devotee.gothra : '',
-            creditLimit: devotee.creditLimit,
-            nakshatra: devotee.nakshatra ? devotee.nakshatra : '',
-            governmentUniqueId: devotee.governmentUniqueId,
-            incomeTaxId: devotee.incomeTaxId,
-            kcAssociationDate: devotee.kcAssociationDate,
-            motherTongueLanguageId: devotee.motherTongueLanguageId,
-            lpmId: devotee.lpmId,
-            dateOfBirth: 'a',
-            dayMonthOfBirth: devotee.dayMonthOfBirth,
-            asramaMasterId: devotee.asramaMasterId,
-            professionId: devotee.professionId,
-            physicalAddressId: devotee.physicalAddressId,
-            mobileNo: devotee.mobileNo,
-            landlineNo: devotee.landlineNo
-          }
-        );
+        this.setDevoteeFormValues(devotee);
+      }
+    );
+  }
+
+  setDevoteeFormValues<Devotee>(devotee) {
+    this.devoteeForm.setValue(
+      {
+        id: devotee.id,
+        legalName: devotee.legalName,
+        spiritualName: devotee.spiritualName,
+        circleId: devotee.circleId,
+        gender: devotee.gender,
+        email: devotee.email,
+        gothra: devotee.gothra ? devotee.gothra : '',
+        creditLimit: devotee.creditLimit,
+        nakshatra: devotee.nakshatra ? devotee.nakshatra : '',
+        governmentUniqueId: devotee.governmentUniqueId,
+        incomeTaxId: devotee.incomeTaxId,
+        kcAssociationDate: devotee.kcAssociationDate,
+        motherTongueLanguageId: devotee.motherTongueLanguageId,
+        lpmId: devotee.lpmId,
+        dateOfBirth: 'a',
+        dayMonthOfBirth: devotee.dayMonthOfBirth,
+        asramaMasterId: devotee.asramaMasterId,
+        professionId: devotee.professionId,
+        physicalAddressId: devotee.physicalAddressId,
+        mobileNo: devotee.mobileNo,
+        landlineNo: devotee.landlineNo
       }
     );
   }
@@ -208,32 +221,20 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
   }
 
   addDevotee() {
-    this.devoteeForm = this.fb.group({
-      id: null,
-      legalName: ['', Validators.required],
-      circleId: '',
-      spiritualName: '',
-      gender: '',
-      creditLimit: '',
-      email: '',
-      gothra: '',
-      nakshatra: '',
-      governmentUniqueId: '',
-      incomeTaxId: '',
-      kcAssociationDate: '',
-      motherTongueLanguageId: '',
-      dateOfBirth: '',
-      dayMonthOfBirth: 'a',
-      lpmId: '',
-      asramaMasterId: '',
-      professionId: '',
-      physicalAddressId: null,
-      mobileNo: null,
-      landlineNo: null
-    });
+    console.log(this.devoteeForm.value);
+    this.eleven$ = this.devoteeApi.create<Devotee>(this.devoteeForm.value)
+    .subscribe(
+      devotee => {
+        this.currentDevoteeId.next(devotee.id);
+        this.setDevoteeFormValues(devotee);
+        this.notificationService.notificationSubject.next('New Devotee [' + devotee.legalName + '] created successfully');
+      }
+    );    
   }
 
   updateDevoteeAddressId(addressId)  {
+    console.log(addressId);
+    console.log(this.devoteeId);
    this.nine$ = this.devoteeApi.patchAttributes(this.devoteeId, {physicalAddressId: addressId} )
     .subscribe();
   }
@@ -255,6 +256,31 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
       this.devoteeForm.reset();
       this.currentDevoteeId.next(null);
       this.physicalAddress = null;
+      this.devoteeForm.setValue(
+        {
+          id: null,
+          legalName: null,
+          circleId: null,
+          spiritualName: null,
+          gender: null,
+          creditLimit: 0,
+          email: null,
+          gothra: null,
+          nakshatra: null,
+          governmentUniqueId: null,
+          incomeTaxId: null,
+          kcAssociationDate: null,
+          motherTongueLanguageId: null,
+          dateOfBirth: null,
+          dayMonthOfBirth: 'a',
+          lpmId: null,
+          asramaMasterId: null,
+          professionId: null,
+          physicalAddressId: null,
+          mobileNo: null,
+          landlineNo: null
+        }
+      );
    }
  
 
@@ -267,8 +293,10 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
     this.six$.unsubscribe();
     this.seven$.unsubscribe();
     this.eight$.unsubscribe();
-    //this.nine$.unsubscribe();
-    //this.ten$.unsubscribe();
+    this.nine$.unsubscribe();
+    this.ten$.unsubscribe();
+    this.eleven$.unsubscribe();
+    this.twelve$.unsubscribe();    
    }
   // TODO: Remove this when we're done
   //get diagnostic() { return JSON.stringify(this.model); }
