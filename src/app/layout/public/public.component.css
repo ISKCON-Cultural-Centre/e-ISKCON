@@ -591,7 +591,11 @@
   
   /*==================================================================
   [ Social ]*/
+<<<<<<< HEAD
   .login-form-social-item {
+=======
+  .login100-form-social-item {
+>>>>>>> a9736a54fb97e2caec8d977c0d32b29d8398aa66
     width: 36px;
     height: 36px;
     font-size: 18px;
@@ -599,6 +603,7 @@
     border-radius: 50%;
   }
   
+<<<<<<< HEAD
   .login-form-social-item:hover {
     background: #333333;
     color: #fff;
@@ -606,3 +611,10 @@
   
 
 
+=======
+  .login100-form-social-item:hover {
+    background: #333333;
+    color: #fff;
+  }
+  
+>>>>>>> a9736a54fb97e2caec8d977c0d32b29d8398aa66
