@@ -1,0 +1,56 @@
+<header>
+
+</header>
+<div fxFlexFill fxLayout="row" >
+    <mat-sidenav-container fxFlex>
+        <mat-sidenav #mainSideNav mode="over" closed  >
+            <mat-toolbar color="primary" *ngIf="isLoggedIn$ | async as isLoggedIn">
+               My Services
+            </mat-toolbar>
+            <mat-nav-list *ngIf="isLoggedIn$ | async as isLoggedIn">
+                <a *ngFor="let myTask of myTasks"
+                   mat-list-item
+                   mat-ripple
+                   [style.position]="'relative'"
+                   routerLinkActive="selected"
+                   [routerLink]="[myTask.applicationRoute]">
+                  <mat-icon *ngIf="myTask.icon">{{myTask.icon}}</mat-icon>
+                    <span>{{myTask.taskName}}</span>
+                </a>
+            </mat-nav-list>
+        </mat-sidenav>
+          <mat-toolbar color="primary" *ngIf="isLoggedIn$ | async as isLoggedIn">
+            <button mat-icon-button (click)="mainSideNav.toggle()">
+                  <mat-icon *ngIf="mainSideNav.opened">chevron_left</mat-icon>
+                  <mat-icon *ngIf="!mainSideNav.opened">menu</mat-icon>
+              </button>
+              <span>ICC</span>
+              <span class="fill-remaining-space"></span>  
+              <button mat-icon-button routerLink="dashboard">
+                  <mat-icon >home</mat-icon>
+              </button>              
+              <button mat-button [matMenuTriggerFor]="profileMenu">
+                  {{devoteeName$ | async}}
+                </button> 
+              <mat-menu #profileMenu="matMenu">
+                  <button mat-menu-item  routerLink="profile">
+                    <mat-icon>perm_identity</mat-icon>
+                    <span>My Profile</span>
+                  </button>
+                  <button mat-menu-item routerLink="changePassword" >
+                      <mat-icon>vpn_keyy</mat-icon>
+                      <span>Change Password</span>
+                    </button>    
+                  <button mat-menu-item  (click)="onLogout()" *ngIf="isLoggedIn">
+                    <mat-icon>exit_to_app</mat-icon>
+                    <span>Logout</span>
+                  </button>
+                </mat-menu>               
+          </mat-toolbar>
+          <app-breadcrumb></app-breadcrumb>          
+          <router-outlet></router-outlet>    
+<!--           <footer>
+              Copyright &copy; ISKCON Cultural Centre, Bangalore
+          </footer> -->
+        </mat-sidenav-container>    
+  </div>
