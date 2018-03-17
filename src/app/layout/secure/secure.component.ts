@@ -4,6 +4,7 @@ import { LoopBackConfig } from '../../shared/sdk';
 import { MatSnackBar, MatRadioButton, MatRadioGroup } from '@angular/material';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
+import { RouterModule, Routes, RouterLink } from '@angular/router';
 
 import { NotificationService } from '../../shared/services/notification.service';
 import { AuthService } from '../../shared/services/auth.service';
@@ -34,9 +35,6 @@ export class SecureComponent implements OnInit {
     private myServicesService: MyServicesService,
     private snackBar: MatSnackBar)
     {
-      if (this.authService.loggedIn) {
-        this.authService.devoteeName.next(this.authService.getCurrentUserData());
-      }
 
       this.notificationService.notificationSubject.subscribe((message) => {
         snackBar.open(message, null , { duration: 2000, });
@@ -47,14 +45,14 @@ export class SecureComponent implements OnInit {
     }
 
     ngOnInit() {
-      this.devoteeName$ = this.authService.getDevoteeName;
-      this.isLoggedIn$ = this.authService.isLoggedIn;
       this.authService.isLoggedIn
       .subscribe(
         isLoggedIn => {
           this.isLoggedIn = isLoggedIn;
           if (isLoggedIn) {
             this.username = this.authService.getCurrentUserData();
+            this.devoteeName$ = this.authService.getDevoteeName;
+            this.isLoggedIn$ = this.authService.isLoggedIn;
             // this.getAuthorizedDepartments();
             this.getAuthorizedTasks();
         } else {}
