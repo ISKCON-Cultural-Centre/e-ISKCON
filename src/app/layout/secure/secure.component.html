@@ -1,6 +1,3 @@
-<header>
-
-</header>
 <div fxFlexFill fxLayout="row" >
     <mat-sidenav-container fxFlex>
         <mat-sidenav #mainSideNav mode="over" closed  >
@@ -33,11 +30,11 @@
                   {{devoteeName$ | async}}
                 </button> 
               <mat-menu #profileMenu="matMenu">
-                  <button mat-menu-item  [routerLink]="['profile']">
+                  <button mat-menu-item routerLink="/profile">
                     <mat-icon>perm_identity</mat-icon>
                     <span>My Profile</span>
                   </button>
-                  <button mat-menu-item routerLink="changePassword" >
+                  <button mat-menu-item routerLink="/changePassword" >
                       <mat-icon>vpn_keyy</mat-icon>
                       <span>Change Password</span>
                     </button>    
