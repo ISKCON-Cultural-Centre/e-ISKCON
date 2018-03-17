@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes, RouterLink } from '@angular/router';
+import { Routes, RouterLink } from '@angular/router';
 import { PageNotFoundComponent } from './../../pageNotFound.component';
 import { DashboardComponent } from './../../secure/dashboard/dashboard.component';
 import { DevoteeComponent } from './../../secure/devotee/devotee.component';

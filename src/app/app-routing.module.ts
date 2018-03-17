@@ -44,7 +44,6 @@ const routes: Routes = [
   imports: [
     [RouterModule.forRoot(routes)]
   ],
-  declarations: [],
-  exports: [RouterModule]
+  declarations: []
 })
 export class AppRoutingModule { }
