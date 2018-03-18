@@ -1,5 +1,5 @@
 
-<div fxLayout="row" class="box" fxLayoutAlign="space-evenly stretch">
+<div fxLayout="row" fxLayoutAlign="space-evenly" class="flex-container wrap">
     <mat-accordion class="example-headers-align">
         <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle="true">
           <mat-expansion-panel-header>
@@ -12,8 +12,7 @@
             </mat-panel-description>
           </mat-expansion-panel-header>
           <form [formGroup]="devoteeForm" novalidate>  
-            <div>
-            <fieldset fxLayoutAlign="space-evenly stretch">
+            <fieldset class="wrap">
                 <mat-form-field>
                   <input matInput placeholder="Legal Name" class="form-control" formControlName="legalName" autofocus>
                 </mat-form-field>
@@ -107,7 +106,7 @@
                     <input type="number" matInput placeholder="Credit Limit" class="form-control" formControlName="creditLimit">
                   </mat-form-field>    -->    
               </fieldset>
-            </div>              
+           
         </form>   
         <mat-action-row>
           <div>
