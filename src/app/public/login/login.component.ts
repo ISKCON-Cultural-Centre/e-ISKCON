@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 
 import { SDKToken, DevoteeApi } from '../../shared/sdk';
 import { AuthService } from '../../shared/services/auth.service';
@@ -17,7 +18,10 @@ const PASSWORD_REGEX = /^[a-zA-Z0-9!#$%&’]$/;
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
+  one$ = new Subscription();
+
+
   form: FormGroup;
   private formSubmitAttempt: boolean; 
 
@@ -63,14 +67,19 @@ export class LoginComponent implements OnInit {
     if (this.form.valid) {
       this.spinner = true;
       this.authService.login(this.form.value);
-      this.authService.loggedIn$
+      this.one$ = this.authService.loggedIn$
       .subscribe (
         loggedIn => {
           console.log(loggedIn);
-          loggedIn ? this.spinner = false : this.spinner = true;
+          this.spinner = false;
         }
       )
       }
       this.formSubmitAttempt = true;
     }
+
+
+    ngOnDestroy(){
+      this.one$.unsubscribe();
+    }    
 }

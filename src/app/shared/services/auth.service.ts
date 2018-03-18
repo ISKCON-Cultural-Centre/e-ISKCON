@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { SDKToken, DevoteeApi } from '../sdk';
 import { LoopBackAuth } from '../sdk';
 
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 import { User } from './models/user';
 import { ChangePassword } from './models/changePassword';
 import { Devotee } from '../sdk';
@@ -15,8 +16,9 @@ import { InternalStorage } from '../sdk/storage/storage.swaps';
 
 declare var Object: any;
 @Injectable()
-export class AuthService extends LoopBackAuth {
+export class AuthService extends LoopBackAuth implements OnDestroy {
 
+  one$ = new Subscription();
   // Create a stream of logged in status to communicate throughout app
   loggedIn$ = new BehaviorSubject<Boolean>(false);
   loggedIn: Boolean = false;
@@ -56,7 +58,7 @@ export class AuthService extends LoopBackAuth {
       }
 
     login(user: User): any {
-        this.devoteeApi.login({ username: user.userName, password: user.password }, 'user')
+    this.one$ = this.devoteeApi.login({ username: user.userName, password: user.password }, 'user')
           .subscribe((token: SDKToken) => {
             this.router.navigate(['dashboard']);
             this.setRememberMe(true);
@@ -90,4 +92,9 @@ export class AuthService extends LoopBackAuth {
       changePassword(changePassword: ChangePassword) {
         return this.devoteeApi.changePassword(changePassword.oldPassword, changePassword.newPassword );
       }
+
+      ngOnDestroy(){
+        this.one$.unsubscribe();
+      }      
+      
 }

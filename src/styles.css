@@ -328,7 +328,7 @@ iframe {
   width: 100%;
   background: transparent;
   font-family: Montserrat-Regular;
-  font-size: 18px;
+  font-size: 30px;
   color: #555555;
   line-height: 1.2;
   padding: 0 26px;
@@ -490,7 +490,7 @@ input.input{
   background: #6675df;
 
   font-family: Montserrat-Bold;
-  font-size: 12px;
+  font-size: 20px;
   color: #fff;
   line-height: 1.2;
   text-transform: uppercase;
