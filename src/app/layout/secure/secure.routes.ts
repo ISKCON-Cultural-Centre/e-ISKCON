@@ -11,6 +11,7 @@ import { DevoteeRoleComponent } from './../../secure/devotee/devotee-role.compon
 import { RoleComponent } from './../../secure/organization/role.component';
 import { TaskMasterComponent } from './../../secure/organization/task-master.component';
 import { DepartmentComponent } from './../../secure/organization/department.component';
+import { ChangePasswordComponent } from './../../secure/devotee/change-password.component';
 
 
 export const SECURE_ROUTES: Routes = [
@@ -45,6 +46,13 @@ export const SECURE_ROUTES: Routes = [
       component: DevoteeProfileComponent, 
       canActivate: [AuthGuard] 
     },  
+    { 
+      path: 'changePassword', 
+      data: {
+        breadcrumb: 'Change Password'
+      },
+      component: ChangePasswordComponent 
+    },
     { 
       path: 'lookupMaster', 
       data: {

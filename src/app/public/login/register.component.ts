@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { debounceTime } from 'rxjs/operators/debounceTime';
 import {MatDialog} from '@angular/material';
 
-import { DialogBoxComponent } from '../../../shared/components/dialog-box/dialog-box.component';
+import { DialogBoxComponent } from '../../shared/components/dialog-box/dialog-box.component';
 
 import {
   SDKToken, DevoteeApi, GothraMasterApi,
@@ -13,10 +13,10 @@ import {
   GothraMaster, NakshatraMaster, Language, LanguageApi, 
   AsramaMaster, AsramaMasterApi, 
   ProfessionMaster, ProfessionMasterApi, PhysicalAddress,
-  } from '../../../shared/sdk';
-import { AuthService, DevoteeSearchSelectService, NotificationService } from '../../../shared/services';
-import { PhysicalAddressComponent } from '../../../secure/common/physical-address.component';
-import { PhysicalAddressApi } from '../../../shared/sdk/services/index';
+  } from '../../shared/sdk';
+import { AuthService, DevoteeSearchSelectService, NotificationService } from '../../shared/services';
+import { PhysicalAddressComponent } from '../../secure/common/physical-address.component';
+import { PhysicalAddressApi } from '../../shared/sdk/services/index';
 
 
 @Component({

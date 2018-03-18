@@ -5,8 +5,7 @@ import { LoginComponent } from '../../public/login/login.component';
 import { ResetPasswordComponent } from './../../public/login/reset-password.component';
 import { PageNotFoundComponent } from './../../pageNotFound.component';
 import { AuthGuard as AuthGuard } from './../../shared/services/auth.guard';
-import { RegisterComponent } from './../../public/login/register/register.component';
-import { ChangePasswordComponent } from './../../public/login/change-password.component';
+import { RegisterComponent } from './../../public/login/register.component';
 
 
 
@@ -25,13 +24,7 @@ export const PUBLIC_ROUTES: Routes = [
       },
       component: LoginComponent 
     },
-    { 
-      path: 'changePassword', 
-      data: {
-        breadcrumb: 'Change Password'
-      },
-      component: ChangePasswordComponent 
-    },
+
     { 
       path:
       'resetPassword',

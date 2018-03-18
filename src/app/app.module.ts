@@ -12,7 +12,6 @@ import { SDKBrowserModule, DevoteeApi } from './shared/sdk';
 import { AuthGuard, AuthService } from './shared/services';
 import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './pageNotFound.component';
-import { RegisterComponent } from './public/login/register/register.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginModule } from './public/login/login.module';
 import { DashboardComponent } from './secure/dashboard/dashboard.component';
