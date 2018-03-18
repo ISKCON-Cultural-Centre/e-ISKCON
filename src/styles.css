@@ -269,14 +269,14 @@ iframe {
   min-height: 100vh;
   display: block;
   background-color: #f7f7f7;
-  padding: 73px 55px 55px 55px;
+  padding: 20px 20px 20px 20px;
 }
 
 .login-form-title {
 	width: 100%;
 	display: block;
 	font-family: Poppins-Regular;
-	font-size: 30px;
+	font-size: 20px;
 	color: #333333;
 	line-height: 1.2;
 	text-align: center;
@@ -305,7 +305,7 @@ iframe {
 
 .label-input{
   font-family: Montserrat-Regular;
-  font-size: 18px;
+  font-size: 30px;
   color: #999999;
   line-height: 1.2;
 
@@ -633,7 +633,7 @@ input.input{
   width: 100%;
   display: block;
   font-family: Poppins-Regular;
-  font-size: 50px;
+  font-size: 40px;
   color: #333333;
   line-height: 1.2;
   text-align: center;
@@ -643,7 +643,7 @@ input.input{
 	width: 100%;
 	display: block;
 	font-family: Poppins-Regular;
-	font-size: 40px;
+	font-size: 30px;
 	color: #333333;
 	line-height: 1.2;
 	text-align: center;

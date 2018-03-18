@@ -63,6 +63,13 @@ export class LoginComponent implements OnInit {
     if (this.form.valid) {
       this.spinner = true;
       this.authService.login(this.form.value);
+      this.authService.loggedIn$
+      .subscribe (
+        loggedIn => {
+          console.log(loggedIn);
+          loggedIn ? this.spinner = false : this.spinner = true;
+        }
+      )
       }
       this.formSubmitAttempt = true;
     }

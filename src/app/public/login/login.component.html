@@ -1,4 +1,4 @@
-<span class="login-form-title p-b-43">
+<span class="login-form-title p-b-20">
   Login to continue
 </span>
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -24,13 +24,14 @@
       <a (click) = "onResetPassword()" class="txt1">
         Forgot Password?
       </a>
+      <a>Registration by Invitation</a>
     </div>
   </div>                  
   <button class="login-form-btn" mat-raised-button color="primary" type="submit">
     Login <span *ngIf="spinner"><i class="fas fa-spinner fa-pulse"></i></span></button>   
   <div class="text-center p-t-46 p-b-20">
       <span class="txt2">
-        or login using
+        or login using your account from
       </span>
   </div>
 

@@ -14,15 +14,6 @@
           <form [formGroup]="devoteeForm" novalidate>  
             <div>
             <fieldset fxLayoutAlign="space-evenly stretch">
-                <div fxLayout="row" fxLayoutAlign="space-evenly stretch">
-                  <div *ngIf="devoteeForm.value.id != null">
-                    <button type = "button" mat-raised-button color="primary" (click)="save()">Update</button>
-                  </div>
-                  <div *ngIf="devoteeForm.value.id == null">
-                      <button type = "button" mat-raised-button color="primary" (click)="addDevotee()">Create</button>
-                    <button type = "button" mat-raised-button color="warn" (click)="reset()">Reset</button>
-                  </div>
-                </div>          
                 <mat-form-field>
                   <input matInput placeholder="Legal Name" class="form-control" formControlName="legalName" autofocus>
                 </mat-form-field>
@@ -119,6 +110,15 @@
             </div>              
         </form>   
         <mat-action-row>
+          <div>
+              <div *ngIf="devoteeForm.value.id != null">
+                <button type = "button" mat-raised-button color="primary" (click)="save()">Update</button>
+              </div>
+              <div *ngIf="devoteeForm.value.id == null">
+                  <button type = "button" mat-raised-button color="primary" (click)="addDevotee()">Create</button>
+                <button type = "button" mat-raised-button color="warn" (click)="reset()">Reset</button>
+              </div>
+          </div>                
           <button mat-button color="primary" (click)="nextStep()">Next</button>
         </mat-action-row>               
         </mat-expansion-panel>

@@ -66,8 +66,8 @@ export class AuthService extends LoopBackAuth {
             this.loggedIn = true;
             this.decode(token.user);
             this.notificationService.notificationSubject.next('Login Successful');
-
           }, err => {
+            this.setLoggedIn(false);            
             this.notificationService.notificationSubject.next('Login Failed');
           });
       }
