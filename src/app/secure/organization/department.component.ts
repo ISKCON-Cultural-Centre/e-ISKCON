@@ -156,7 +156,7 @@ export class DepartmentComponent implements OnInit {
         this.deleteDepartment(department);
       } else { }
     });
-  }  
+  }
 
 }
 

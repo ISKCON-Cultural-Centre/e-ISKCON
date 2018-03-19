@@ -1,3 +1,57 @@
-<p>
-  devotee-language works!
-</p>
+<form #skillForm="ngForm">
+  <div fxLayoutAlign="space-evenly">
+      <label>Select a Language to Add</label>
+        <mat-select (selectionChange) = "addLanguage($event)">
+            <mat-option *ngFor="let language of remainingLanguages " [value]="language">
+              <span>{{ language.language }}</span>
+            </mat-option>
+        </mat-select> 
+  </div>  
+ 
+  <mat-table #table [dataSource]="dataSource" matSort matSortActive="created" matSortDisableClear matSortDirection="asc">
+    <!-- Language Column -->
+    <ng-container matColumnDef="language">
+        <mat-header-cell *matHeaderCellDef> Language </mat-header-cell>
+        <mat-cell *matCellDef="let language"> 
+          <label>{{language.fkTable1Language1rel.language }}</label>
+        </mat-cell>
+    </ng-container>  
+
+    <!-- Read Column -->
+    <ng-container matColumnDef="read">
+      <mat-header-cell *matHeaderCellDef> Read </mat-header-cell>
+      <mat-cell *matCellDef="let language"> 
+          <mat-checkbox (change)="updateDevoteeLanguage(language, $event)" id="read"></mat-checkbox>        
+      </mat-cell>
+    </ng-container>
+
+    <!-- Write Column -->
+    <ng-container matColumnDef="write">
+        <mat-header-cell *matHeaderCellDef> Write </mat-header-cell>
+        <mat-cell *matCellDef="let language"> 
+            <mat-checkbox (change)="updateDevoteeLanguage(language, $event)" id="write"></mat-checkbox>        
+        </mat-cell>
+    </ng-container>  
+
+    <!-- Speak Column -->
+    <ng-container matColumnDef="speak">
+        <mat-header-cell *matHeaderCellDef> Speak </mat-header-cell>
+        <mat-cell *matCellDef="let language"> 
+            <mat-checkbox (change)="updateDevoteeLanguage(language, $event)" id="speak"></mat-checkbox>        
+        </mat-cell>
+    </ng-container>      
+
+  
+    <!-- Delete Column -->
+    <ng-container matColumnDef="delete">
+        <mat-header-cell *matHeaderCellDef> Delete </mat-header-cell>      
+      <mat-cell *matCellDef="let language">
+        <button mat-icon-button (click)="openDialog(language)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>    
+   
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
