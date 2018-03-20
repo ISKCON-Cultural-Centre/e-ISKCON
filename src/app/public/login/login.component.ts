@@ -48,6 +48,12 @@ export class LoginComponent implements OnInit, OnDestroy {
       userName: ['', this.userNameFormControl],
       password: ['', this.passwordFormControl]
     });
+    this.one$ = this.authService.loggedIn$
+    .subscribe (
+      loggedIn => {
+        this.spinner = false;
+      }
+    );
   }
 
   isFieldInvalid(field: string) {
@@ -63,17 +69,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-
     if (this.form.valid) {
       this.spinner = true;
       this.authService.login(this.form.value);
-      this.one$ = this.authService.loggedIn$
-      .subscribe (
-        loggedIn => {
-          console.log(loggedIn);
-          this.spinner = false;
-        }
-      )
       }
       this.formSubmitAttempt = true;
     }

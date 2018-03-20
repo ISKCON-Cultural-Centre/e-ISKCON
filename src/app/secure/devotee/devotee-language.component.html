@@ -1,11 +1,12 @@
 <form #skillForm="ngForm">
-  <div fxLayoutAlign="space-evenly">
-      <label>Select a Language to Add</label>
-        <mat-select (selectionChange) = "addLanguage($event)">
+  <div div fxLayout="row" fxLayoutAlign="space-around center" >
+      <mat-form-field>
+        <mat-select (selectionChange) = "addLanguage($event)" placeholder="Select to Add a Language">
             <mat-option *ngFor="let language of remainingLanguages " [value]="language">
               <span>{{ language.language }}</span>
             </mat-option>
         </mat-select> 
+      </mat-form-field>
   </div>  
  
   <mat-table #table [dataSource]="dataSource" matSort matSortActive="created" matSortDisableClear matSortDirection="asc">
@@ -21,7 +22,7 @@
     <ng-container matColumnDef="read">
       <mat-header-cell *matHeaderCellDef> Read </mat-header-cell>
       <mat-cell *matCellDef="let language"> 
-          <mat-checkbox (change)="updateDevoteeLanguageRead(language, $event)" ></mat-checkbox>        
+          <mat-checkbox (change)="updateDevoteeLanguageRead(language, $event)" [checked]="language.readInd" ></mat-checkbox>        
       </mat-cell>
     </ng-container>
 
@@ -29,7 +30,7 @@
     <ng-container matColumnDef="write">
         <mat-header-cell *matHeaderCellDef> Write </mat-header-cell>
         <mat-cell *matCellDef="let language"> 
-            <mat-checkbox (change)="updateDevoteeLanguageWrite(language, $event)" ></mat-checkbox>        
+            <mat-checkbox (change)="updateDevoteeLanguageWrite(language, $event)" [checked]="language.writeInd"></mat-checkbox>        
         </mat-cell>
     </ng-container>  
 
@@ -37,7 +38,7 @@
     <ng-container matColumnDef="speak">
         <mat-header-cell *matHeaderCellDef> Speak </mat-header-cell>
         <mat-cell *matCellDef="let language"> 
-            <mat-checkbox (change)="updateDevoteeLanguageSpeak(language, $event)" ></mat-checkbox>        
+            <mat-checkbox (change)="updateDevoteeLanguageSpeak(language, $event)" [checked]="language.speakInd"></mat-checkbox>        
         </mat-cell>
     </ng-container>      
 

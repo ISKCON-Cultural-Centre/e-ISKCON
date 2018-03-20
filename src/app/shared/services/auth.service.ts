@@ -69,7 +69,7 @@ export class AuthService extends LoopBackAuth implements OnDestroy {
             this.decode(token.user);
             this.notificationService.notificationSubject.next('Login Successful');
           }, err => {
-            this.setLoggedIn(false);            
+            this.setLoggedIn(false);
             this.notificationService.notificationSubject.next('Login Failed');
           });
       }

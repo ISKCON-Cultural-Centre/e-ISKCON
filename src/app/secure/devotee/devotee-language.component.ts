@@ -120,7 +120,6 @@ export class DevoteeLanguageComponent implements OnInit, OnDestroy {
   }
 
   updateDevoteeLanguageRead(devoteeLanguage: DevoteeLanguage, event$: MatCheckboxChange): void {
-    console.log(devoteeLanguage);
       this.devoteeLanguageApi.patchAttributes(
           devoteeLanguage.id,
         {
@@ -135,7 +134,6 @@ export class DevoteeLanguageComponent implements OnInit, OnDestroy {
      }
 
      updateDevoteeLanguageWrite(devoteeLanguage: DevoteeLanguage, event$: MatCheckboxChange): void {
-      console.log(devoteeLanguage);
         this.devoteeLanguageApi.patchAttributes(
             devoteeLanguage.id,
           {
@@ -150,7 +148,6 @@ export class DevoteeLanguageComponent implements OnInit, OnDestroy {
        }
 
        updateDevoteeLanguageSpeak(devoteeLanguage: DevoteeLanguage, event$: MatCheckboxChange): void {
-        console.log(devoteeLanguage);
           this.devoteeLanguageApi.patchAttributes(
               devoteeLanguage.id,
             {
