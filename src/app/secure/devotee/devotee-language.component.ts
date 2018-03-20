@@ -48,6 +48,7 @@ export class DevoteeLanguageComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    this.loadAllLanguages();
     this.one$ = this.devoteeId
     .subscribe(
       devoteeId => {
@@ -82,7 +83,6 @@ export class DevoteeLanguageComponent implements OnInit, OnDestroy {
        this.assignedLanguages = assignedLanguages.map((devoteeLanguage) => devoteeLanguage.fkTable1Language1rel);
        // this.dataSource.data = this.assignedLanguages;
         this.dataSource.data = assignedLanguages;
-        this.loadAllLanguages();
       }
     );
   }
@@ -106,13 +106,15 @@ export class DevoteeLanguageComponent implements OnInit, OnDestroy {
  
 
   deleteLanguage(devoteeLanguage: DevoteeLanguage): void {
-    this.four$ =  this.devoteeLanguageApi.destroyAll(devoteeLanguage)
+    this.four$ =  this.devoteeLanguageApi.deleteById(devoteeLanguage.id)
     .subscribe(
       devoteeSkill => {
-        let index = this.assignedLanguages.indexOf(devoteeLanguage);
+/*         let index = this.assignedLanguages.indexOf(devoteeLanguage);
+        console.log(index);
         if (index >= 0) {
           this.assignedLanguages.splice(index, 1);
-        }
+        } */
+        this.loadDevoteeLanguages(this.currentDevoteeId);
         this.remainingLanguages = difference(this.allLanguages, this.assignedLanguages, (object) => object.id);
         this.notificationService.notificationSubject.next('Language removed successfully');
       }
