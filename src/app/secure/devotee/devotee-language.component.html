@@ -21,7 +21,7 @@
     <ng-container matColumnDef="read">
       <mat-header-cell *matHeaderCellDef> Read </mat-header-cell>
       <mat-cell *matCellDef="let language"> 
-          <mat-checkbox (change)="updateDevoteeLanguage(language, $event)" id="read"></mat-checkbox>        
+          <mat-checkbox (change)="updateDevoteeLanguageRead(language, $event)" ></mat-checkbox>        
       </mat-cell>
     </ng-container>
 
@@ -29,7 +29,7 @@
     <ng-container matColumnDef="write">
         <mat-header-cell *matHeaderCellDef> Write </mat-header-cell>
         <mat-cell *matCellDef="let language"> 
-            <mat-checkbox (change)="updateDevoteeLanguage(language, $event)" id="write"></mat-checkbox>        
+            <mat-checkbox (change)="updateDevoteeLanguageWrite(language, $event)" ></mat-checkbox>        
         </mat-cell>
     </ng-container>  
 
@@ -37,7 +37,7 @@
     <ng-container matColumnDef="speak">
         <mat-header-cell *matHeaderCellDef> Speak </mat-header-cell>
         <mat-cell *matCellDef="let language"> 
-            <mat-checkbox (change)="updateDevoteeLanguage(language, $event)" id="speak"></mat-checkbox>        
+            <mat-checkbox (change)="updateDevoteeLanguageSpeak(language, $event)" ></mat-checkbox>        
         </mat-cell>
     </ng-container>      
 

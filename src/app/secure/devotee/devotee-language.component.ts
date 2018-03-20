@@ -79,7 +79,7 @@ export class DevoteeLanguageComponent implements OnInit, OnDestroy {
     )
     .subscribe(
       assignedLanguages => {
-       this.assignedLanguages = assignedLanguages.map((skill) => skill.fkTable1Language1rel);
+       this.assignedLanguages = assignedLanguages.map((devoteeLanguage) => devoteeLanguage.fkTable1Language1rel);
        // this.dataSource.data = this.assignedLanguages;
         this.dataSource.data = assignedLanguages;
         this.loadAllLanguages();
@@ -119,14 +119,10 @@ export class DevoteeLanguageComponent implements OnInit, OnDestroy {
     );
   }
 
-  updateDevoteeLanguage(devoteeLanguage: DevoteeLanguage, event$: MatCheckboxChange): void {
+  updateDevoteeLanguageRead(devoteeLanguage: DevoteeLanguage, event$: MatCheckboxChange): void {
     console.log(devoteeLanguage);
-    if (event$.source.id === 'read') {
-      this.devoteeLanguageApi.patchAttributes( 
-        {
-          devoteeId: devoteeLanguage.devoteeId, 
-          languageId: devoteeLanguage.languageId
-        },
+      this.devoteeLanguageApi.patchAttributes(
+          devoteeLanguage.id,
         {
           readInd: event$.checked
         }
@@ -136,13 +132,12 @@ export class DevoteeLanguageComponent implements OnInit, OnDestroy {
           this.notificationService.notificationSubject.next('Language updated successfully');
         }
       );
-    } else {
-      if (event$.source.id === 'write') {
-        this.devoteeLanguageApi.patchAttributes( 
-          {
-            devoteeId: devoteeLanguage.devoteeId, 
-            languageId: devoteeLanguage.languageId
-          },
+     }
+
+     updateDevoteeLanguageWrite(devoteeLanguage: DevoteeLanguage, event$: MatCheckboxChange): void {
+      console.log(devoteeLanguage);
+        this.devoteeLanguageApi.patchAttributes(
+            devoteeLanguage.id,
           {
             writeInd: event$.checked
           }
@@ -152,24 +147,22 @@ export class DevoteeLanguageComponent implements OnInit, OnDestroy {
             this.notificationService.notificationSubject.next('Language updated successfully');
           }
         );
-      } else {
-        this.devoteeLanguageApi.patchAttributes( 
-          {
-            devoteeId: devoteeLanguage.devoteeId, 
-            languageId: devoteeLanguage.languageId
-          },
-          {
-            speakInd: event$.checked
-          }
-        )
-        .subscribe(
-          updateStatus => {
-            this.notificationService.notificationSubject.next('Language updated successfully');
-          }
-        );
-      }
-    }
-  }
+       }
+
+       updateDevoteeLanguageSpeak(devoteeLanguage: DevoteeLanguage, event$: MatCheckboxChange): void {
+        console.log(devoteeLanguage);
+          this.devoteeLanguageApi.patchAttributes(
+              devoteeLanguage.id,
+            {
+              speakInd: event$.checked
+            }
+          )
+          .subscribe(
+            updateStatus => {
+              this.notificationService.notificationSubject.next('Language updated successfully');
+            }
+          );
+         }
 
   openDialog(devoteeLanguage: DevoteeLanguage) {
     let dialogRef = this.dialog.open(DialogBoxComponent, {

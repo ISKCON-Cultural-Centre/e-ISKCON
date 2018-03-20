@@ -6,6 +6,7 @@ import {
 
 declare var Object: any;
 export interface DevoteeLanguageInterface {
+  "id": string;
   "devoteeId": string;
   "languageId": string;
   "readInd": number;
@@ -16,6 +17,7 @@ export interface DevoteeLanguageInterface {
 }
 
 export class DevoteeLanguage implements DevoteeLanguageInterface {
+  "id": string;
   "devoteeId": string;
   "languageId": string;
   "readInd": number;
@@ -54,8 +56,12 @@ export class DevoteeLanguage implements DevoteeLanguageInterface {
       name: 'DevoteeLanguage',
       plural: 'DevoteeLanguages',
       path: 'DevoteeLanguages',
-      idName: 'devoteeId',
+      idName: 'id',
       properties: {
+        "id": {
+          name: 'id',
+          type: 'string'
+        },
         "devoteeId": {
           name: 'devoteeId',
           type: 'string'
