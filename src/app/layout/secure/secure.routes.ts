@@ -12,6 +12,8 @@ import { RoleComponent } from './../../secure/organization/role.component';
 import { TaskMasterComponent } from './../../secure/organization/task-master.component';
 import { DepartmentComponent } from './../../secure/organization/department.component';
 import { ChangePasswordComponent } from './../../secure/devotee/change-password.component';
+import { DevoteeFilterComponent } from './../../secure/devotee/devotee-filter.component';
+
 
 
 export const SECURE_ROUTES: Routes = [
@@ -22,6 +24,14 @@ export const SECURE_ROUTES: Routes = [
       },
       component: DashboardComponent, 
       canActivate: [AuthGuard] 
+    },
+    {
+      path: 'devotee/search',
+      data: {
+        breadcrumb: 'Search Devotee'
+      },
+      component: DevoteeFilterComponent, 
+      canActivate: [AuthGuard]
     },
     { 
       path: 'devotee', 

@@ -1,0 +1,35 @@
+<div class="container">
+  <div>
+    <form fxFill fxLayout="column" class="p-l-20" [formGroup]="devoteeFilterForm" novalidate>      
+      <mat-form-field fxFlex="100%">
+          <input matInput placeholder="Name" aria-label="State" formControlName="name">
+      </mat-form-field>
+      <mat-form-field fxFlex="100%">
+        <input matInput placeholder="Circle" aria-label="State"  formControlName="circleId">
+      </mat-form-field>
+      <mat-form-field fxFlex="100%">
+          <input matInput placeholder="Gender" aria-label="State"  formControlName="gender">
+      </mat-form-field>
+      <mat-form-field fxFlex="100%">
+          <input matInput placeholder="Languages Known" aria-label="State"  formControlName="languageId">
+      </mat-form-field>
+      <mat-form-field fxFlex="100%">
+          <input matInput placeholder="Ashrama" aria-label="State"  formControlName="asramaMasterId">
+      </mat-form-field>
+      <mat-form-field fxFlex="100%">
+          <input matInput placeholder="Profession" aria-label="State"  formControlName="professionId">
+      </mat-form-field>            
+      <mat-form-field fxFlex="100%">
+          <input matInput placeholder="Shiksha Level" aria-label="State"  formControlName="shikshaLevel">
+      </mat-form-field>        
+    </form>
+  </div>
+  <div class="two container">
+      <span>search Result section</span>
+  </div>
+  <div class="container">
+      <span>Detail section</span>    
+  </div>
+</div>
+
+

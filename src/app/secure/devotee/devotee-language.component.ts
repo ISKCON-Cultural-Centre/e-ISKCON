@@ -52,7 +52,7 @@ export class DevoteeLanguageComponent implements OnInit, OnDestroy {
     this.one$ = this.devoteeId
     .subscribe(
       devoteeId => {
-        this.currentDevoteeId = devoteeId.toString();
+        this.currentDevoteeId = devoteeId ? devoteeId.toString() : null;
         this.loadDevoteeLanguages(this.currentDevoteeId);
       }
     );

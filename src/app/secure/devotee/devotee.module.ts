@@ -16,6 +16,7 @@ import { DevoteeLanguageComponent } from './devotee-language.component';
 import { DevoteeServiceInterestComponent } from './devotee-service-interest.component';
 import { DevoteeServiceAvailabilityComponent } from './devotee-service-availability.component';
 import { ChangePasswordComponent } from './change-password.component';
+import { DevoteeFilterComponent } from './devotee-filter.component';
 
 const routes: Routes = [
   { path: 'devotee', component: DevoteeComponent, canActivate: [AuthGuard] }
@@ -36,7 +37,7 @@ const routes: Routes = [
     DevoteeSearchComponent, 
     DevoteeProfileComponent, DevoteeRoleComponent, DevoteeSkillComponent,
     DevoteeLanguageComponent, DevoteeServiceInterestComponent, 
-    DevoteeServiceAvailabilityComponent, ChangePasswordComponent
+    DevoteeServiceAvailabilityComponent, ChangePasswordComponent, DevoteeFilterComponent
   ],
   providers: [
     DevoteeSearchSelectService

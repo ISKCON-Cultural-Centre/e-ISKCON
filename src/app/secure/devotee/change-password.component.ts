@@ -59,14 +59,12 @@ export class ChangePasswordComponent implements OnInit {
   onSubmit() {
     if (this.form.valid) {
       this.spinner = true;
-      this.authService.changePassword(this.form.value);
-
       this.authService.changePassword(this.form.value)
       .subscribe((response: any) => {
           console.log(response);
-          this.notificationService.notificationSubject.next('Password Changed Successfully. Login with your new password');
           this.authService.logout();
           this.router.navigate(['/']);
+          this.notificationService.notificationSubject.next('Password Changed Successfully. Login with your new password');                 
           return response;
         }, err => {
           this.spinner = false;
