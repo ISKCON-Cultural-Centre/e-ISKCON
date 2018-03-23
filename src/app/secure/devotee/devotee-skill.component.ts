@@ -50,7 +50,7 @@ export class DevoteeSkillComponent implements OnInit, OnDestroy {
       devoteeId => {
         this.currentDevoteeId = devoteeId;
         this.loadDevoteeSkills(this.currentDevoteeId);
-      } 
+      }
     );
   }
 

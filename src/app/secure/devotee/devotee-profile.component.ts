@@ -178,7 +178,7 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
     );
   }
 
-  setDevoteeFormValues<Devotee>(devotee) {
+  setDevoteeFormValues(devotee) {
     this.devoteeForm.setValue(
       {
         id: devotee.id,
@@ -187,9 +187,9 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
         circleId: devotee.circleId,
         gender: devotee.gender,
         email: devotee.email,
-        gothra: devotee.gothra ? devotee.gothra : '',
+        gothra: devotee.gothra ? devotee.gothra : null,
         creditLimit: devotee.creditLimit,
-        nakshatra: devotee.nakshatra ? devotee.nakshatra : '',
+        nakshatra: devotee.nakshatra ? devotee.nakshatra : null,
         governmentUniqueId: devotee.governmentUniqueId,
         incomeTaxId: devotee.incomeTaxId,
         kcAssociationDate: devotee.kcAssociationDate,

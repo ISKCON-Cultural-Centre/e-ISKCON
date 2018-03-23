@@ -1,20 +1,26 @@
-import { Component, Input, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import {ENTER, COMMA} from '@angular/cdk/keycodes';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
-import { debounceTime } from 'rxjs/operators/debounceTime';
-import {MatDialog} from '@angular/material';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/switchMap';
+import { Http } from '@angular/http';
+import { MatDialog, MatChipInputEvent, MatAutocompleteSelectedEvent, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import {  difference, union } from 'set-manipulator';
 
+
+import {LoopBackFilter} from '../../shared/sdk/models/BaseModels'
 import { DialogBoxComponent } from '../../shared/components/dialog-box/dialog-box.component';
-
 import {
   SDKToken, DevoteeApi, GothraMasterApi,
   NakshatraMasterApi, CircleApi, Devotee, Circle,
   GothraMaster, NakshatraMaster, Language, LanguageApi, 
   AsramaMaster, AsramaMasterApi, 
-  ProfessionMaster, ProfessionMasterApi, PhysicalAddress,
+  ProfessionMaster, ProfessionMasterApi, PhysicalAddress, SpiritualLevelMaster, SpiritualLevelMasterApi,
   } from '../..//shared/sdk';
 import { AuthService, DevoteeSearchSelectService, NotificationService } from '../../shared/services';
 import { PhysicalAddressComponent } from '../common/physical-address.component';
@@ -25,11 +31,53 @@ import { PhysicalAddressApi } from '../../shared/sdk/services/index';
   templateUrl: './devotee-filter.component.html',
   styleUrls: ['./devotee-filter.component.css']
 })
-export class DevoteeFilterComponent implements OnInit {
+export class DevoteeFilterComponent implements OnInit, OnDestroy {
 
-
+  /***TBD */
+  baseUrl = 'https://api.cdnjs.com/libraries';
+  queryUrl = '?search=';
+/***TBD */
   devoteeId: String;
   devotee: Devotee;
+
+  nameSearchTerm$ = new Subject<string>();
+  assignedCircles = [];
+  remainingCircles = [];
+  allCircles = [];
+
+  assignedGenders = [];
+  remainingGenders = [];
+  allGenders = [{id: 'M', name: 'Prabhujis'}, {id: 'F', name: 'Mathajis'}];
+
+  assignedLanguages = [];
+  remainingLanguages = [];
+  allLanguages = [];
+
+  allAshramas = [];
+  assignedAshramas = [];
+  remainingAshramas = [];
+
+  allProfessions = [];
+  assignedProfessions = [];
+  remainingProfessions = [];
+
+  allShikshas = [];
+  assignedShikshas = [];
+  remainingShikshas = [];
+
+  filter1 = [];
+  filter2 = [];
+  filter3 = [];
+  filter4 = [];
+  filter5 = [];
+  filter6 = [];
+  combinedFilters = '';
+  loopBackFilter: LoopBackFilter = {};
+
+  
+  removable = true;
+  // Enter, comma
+  separatorKeysCodes = [ENTER, COMMA];
 
   one$ = new Subscription();
   two$ = new Subscription();
@@ -38,38 +86,32 @@ export class DevoteeFilterComponent implements OnInit {
   five$ = new Subscription();
   six$ = new Subscription();
   seven$ = new Subscription();
-  eight$ = new Subscription();
-  nine$ = new Subscription();
-  ten$ = new Subscription();
-  eleven$ = new Subscription();
-  twelve$ = new Subscription();
+
+
+  filterCondition = new Subject<any>();
+
+  dataSource = new MatTableDataSource<Devotee>();
+  resultsLength = 0;
+  displayedColumns = ['legalName', 'spiritualName', 'circle'];
+
+  
 
   currentDevoteeId = new Subject<String>();
   currentDevoteeId$ = this.currentDevoteeId.asObservable();
   submitted = false;
   devoteeFilterForm: FormGroup;
-  circles: Circle[];
-  filteredGothras: Observable<GothraMaster[]>;
-  filteredNakshatras: Observable<NakshatraMaster[]>;
-  filteredProfessions: Observable<ProfessionMaster[]>;
-  physicalAddress:  PhysicalAddress;
-  languages: Language[];
-  asramas: AsramaMaster[];
+
 
   constructor(
-    private notificationService: NotificationService,
-    private devoteeApi: DevoteeApi,
     private circleApi: CircleApi,
-    private gothraMasterApi: GothraMasterApi,
-    private nakshatraMasterApi: NakshatraMasterApi,
     private languageApi: LanguageApi,
     private asramaMasterApi: AsramaMasterApi,
     private professionMasterApi: ProfessionMasterApi,
-    private devoteeSearchSelectService: DevoteeSearchSelectService,
-    private router: Router,
+    private spiritualLevelMasterApi: SpiritualLevelMasterApi,
     private authService: AuthService,
-    private physicalAddressApi: PhysicalAddressApi,
-    private fb: FormBuilder) {
+    private devoteeApi: DevoteeApi,
+    private fb: FormBuilder,
+    private http: Http) {
     this.createForm();
   }
 
@@ -87,62 +129,254 @@ export class DevoteeFilterComponent implements OnInit {
 
 
   ngOnInit() {
+   
+    this.loopBackFilter.include = ['fkDevoteeLanguage1rel', 'fkDevoteeProfessionMaster1rel', 'fkDevoteeCircle1rel'];
+    this.loopBackFilter.fields = ['legalName', 'spiritualName', 'fkDevoteeCircle1rel.circleName'];
+    //limit?: any;
+    //order?: any;
+    //skip?: any;
+    //offset?: any;
+
+    this.seven$ = this.filterCondition
+    .subscribe(
+      filter => {
+        this.buildAllFilters();
+        this.loopBackFilter.where = {'and': [this.filter1]};
+        this.devoteeApi.find<Devotee>(
+          this.loopBackFilter
+        )
+        .subscribe(
+          devotees =>
+          {
+            console.log(devotees);
+            this.dataSource.data = devotees;
+          }
+        )
+      }
+    );
+
+    this.nameSearchTerm$
+    .subscribe(
+      val => console.log(val)
+    )
 
     this.devoteeId ? this.devoteeId = this.devoteeId : this.devoteeId = this.authService.getCurrentUserId();
     this.currentDevoteeId.next(this.devoteeId);
-    this.loadDevotee(this.devoteeId);
     this.currentDevoteeId.next(this.devoteeId);
 
-
-    this.one$ = this.devoteeSearchSelectService.missionAnnounced$.
-    subscribe(
-      selectedDevotee => {
-        if (selectedDevotee.option != null) {
-          this.currentDevoteeId.next(selectedDevotee.option.value.id);
-          this.loadDevotee(selectedDevotee.option.value.id);
-        } else {
-          this.reset();
-        }
-      }
-    );
-
-    this.twelve$ = this.currentDevoteeId$
+    this.one$ =
+    this.circleApi.find<Circle>()
     .subscribe(
-      devoteeId => 
-      {
-        this.devoteeId = devoteeId;
+      circles => {
+        this.allCircles = circles;
+        this.remainingCircles = difference(this.allCircles, this.assignedCircles, (object) => object.id);
       }
     );
 
-      this.four$ = this.devoteeFilterForm.get('professionId').valueChanges
-      //.distinctUntilChanged()
-      .subscribe(searchTerm => {
-        this.filteredProfessions = this.professionMasterApi.find<ProfessionMaster>(
-          { where: { professionName: { like: '%' + searchTerm + '%' } } }
-        );
-      });
+    this.remainingGenders = difference(this.allGenders, this.assignedGenders, (object) => object.id);
 
-      this.five$ = this.asramaMasterApi.find<AsramaMaster>()
-      .subscribe(
-        asramas => {
-          this.asramas = asramas;
-        }
-      );
-
-      this.six$ = this.circleApi.find<Circle>()
-      .subscribe(
-        circles => {
-          this.circles = circles;
-        }
-      );
-
-      this.seven$ = this.languageApi.find<Language>()
+    this.two$ =
+      this.languageApi.find<Language>()
       .subscribe(languages => {
-        this.languages = languages;
+        this.allLanguages = languages;
+        this.remainingLanguages = difference(this.allLanguages, this.assignedLanguages, (object) => object.id);
       }
-      );
+    );
 
+
+    this.four$ = this.asramaMasterApi.find<AsramaMaster>()
+    .subscribe(
+      asramas => {
+        this.allAshramas = asramas;
+        this.remainingAshramas = difference(this.allAshramas, this.assignedAshramas, (object) => object.id);
+      }
+    );
+
+    this.five$ = this.professionMasterApi.find<ProfessionMaster>()
+    .subscribe(
+      professions => {
+        this.allProfessions = professions;
+        this.remainingProfessions = difference(this.allProfessions, this.assignedProfessions, (object) => object.id);        
+      }
+    );
+
+    this.six$ = this.spiritualLevelMasterApi.find<SpiritualLevelMaster>()
+    .subscribe(
+      shikshas => {
+        this.allShikshas = shikshas;
+        this.remainingShikshas = difference(this.allShikshas, this.assignedShikshas, (object) => object.id);           
+      }
+    );
   }
+
+  search(terms: Observable<string>) {
+    return terms.debounceTime(400)
+      .distinctUntilChanged()
+      .switchMap(term => this.searchEntries(term));
+  }
+
+  searchEntries(term) {
+    return this.http
+        .get(this.baseUrl + this.queryUrl + term)
+        .map(res => res.json());
+  }  
+
+  onSelectionChanged1(event: MatAutocompleteSelectedEvent) {
+    let value = event.option.value;
+    this.assignedCircles.push(new Circle(value));
+    this.remainingCircles = difference(this.allCircles, this.assignedCircles, (object) => object.id);
+    this.buildFilter1();
+  }
+
+  removeCircle(circle: Circle): void {
+    let index = this.assignedCircles.indexOf(circle);
+      if (index >= 0) {
+        this.assignedCircles.splice(index, 1);
+      }
+      this.remainingCircles = difference(this.allCircles, this.assignedCircles, (object) => object.id);
+      this.buildFilter1();
+  }
+
+
+  onSelectionChanged2(event: MatAutocompleteSelectedEvent) {
+    let value = event.option.value;
+    this.assignedGenders.push(value);
+    this.remainingGenders = difference(this.allGenders, this.assignedGenders, (object) => object.id);
+    this.buildFilter2();
+  }  
+
+  removeGender(gender): void {
+    let index = this.assignedGenders.indexOf(gender);
+      if (index >= 0) {
+        this.assignedGenders.splice(index, 1);
+      }
+      this.remainingGenders = difference(this.allGenders, this.assignedGenders, (object) => object.id);
+      this.buildFilter2();      
+  }
+
+  onSelectionChanged3(event: MatAutocompleteSelectedEvent) {
+    let value = event.option.value;
+    this.assignedLanguages.push(new Language(value));
+    this.remainingLanguages = difference(this.allLanguages, this.assignedLanguages, (object) => object.id);
+    this.buildFilter3();
+  }
+
+  removeLanguage(language: Language): void {
+    let index = this.assignedLanguages.indexOf(language);
+      if (index >= 0) {
+        this.assignedLanguages.splice(index, 1);
+      }
+      this.remainingLanguages = difference(this.allLanguages, this.assignedLanguages, (object) => object.id);
+      this.buildFilter3();
+  }
+
+  onSelectionChanged4(event: MatAutocompleteSelectedEvent) {
+    let value = event.option.value;
+    this.assignedAshramas.push(new AsramaMaster(value));
+    this.remainingAshramas = difference(this.allAshramas, this.assignedAshramas, (object) => object.id);
+    this.buildFilter4();
+  }
+
+  removeAshrama(ashrama: AsramaMaster): void {
+    let index = this.assignedAshramas.indexOf(ashrama);
+      if (index >= 0) {
+        this.assignedAshramas.splice(index, 1);
+      }
+      this.remainingAshramas = difference(this.allAshramas, this.assignedAshramas, (object) => object.id);
+      this.buildFilter4();
+  }
+
+  onSelectionChanged5(event: MatAutocompleteSelectedEvent) {
+    let value = event.option.value;
+    this.assignedProfessions.push(new ProfessionMaster(value));
+    this.remainingProfessions = difference(this.allProfessions, this.assignedProfessions, (object) => object.id);
+    this.buildFilter5();
+  }
+
+  removeProfession(profession: ProfessionMaster): void {
+    let index = this.assignedProfessions.indexOf(profession);
+      if (index >= 0) {
+        this.assignedProfessions.splice(index, 1);
+      }
+      this.remainingProfessions = difference(this.allProfessions, this.assignedProfessions, (object) => object.id);
+      this.buildFilter5();
+  }  
+
+  onSelectionChanged6(event: MatAutocompleteSelectedEvent) {
+    let value = event.option.value;
+    this.assignedShikshas.push(new SpiritualLevelMaster(value));
+    this.remainingShikshas = difference(this.allShikshas, this.assignedShikshas, (object) => object.id);
+    this.buildFilter6();
+  }
+
+  removeShiksha(language: Language): void {
+    let index = this.assignedShikshas.indexOf(language);
+      if (index >= 0) {
+        this.assignedShikshas.splice(index, 1);
+      }
+      this.remainingShikshas = difference(this.allShikshas, this.assignedShikshas, (object) => object.id);
+      this.buildFilter6();
+  }
+
+  
+  buildFilter1(){
+    this.filter1 = this.assignedCircles.map(function (circle) {
+      return  { circleId: circle.id };
+    });
+    this.filterCondition.next(this.filter1.toString());
+  }
+
+  buildFilter2(){
+    this.filter2 = this.assignedGenders.map(function (gender) {
+      return { gender: gender.id };
+    });
+    this.filterCondition.next(this.filter2.toString());
+  }
+
+  buildFilter3(){
+    this.filter3 = this.assignedLanguages.map(function (language) {
+      return { languageId: language.id };
+    });
+    this.filterCondition.next(this.filter3.toString());    
+  }
+
+  buildFilter4(){
+    this.filter4 = this.assignedAshramas.map(function (ashrama) {
+      return { asramaMasterId: ashrama.id };
+    });
+    this.filterCondition.next(this.filter4.toString());
+  }
+
+  buildFilter5(){
+    this.filter5 = this.assignedProfessions.map(function (profession) {
+      return { professionId: profession.professionId };
+    });
+    this.filterCondition.next(this.filter5.toString());
+  }
+
+  buildFilter6(){
+    this.filter6 = this.assignedShikshas.map(function (shiksha) {
+      return { shikshaLevel: shiksha.id };
+    });
+    this.filterCondition.next(this.filter6.toString());
+  }
+
+  buildAllFilters()
+  {
+   //this.combinedFilters = this.extend(this.filter1, this.filter2);
+   //Object.assign(this.combinedFilters, this.filter1, this.filter2/* , this.filter3,
+//     this.filter4, this.filter5, this.filter6 */);
+    //union(union(union(union(union(this.filter1, this.filter2), this.filter3), this.filter4), this.filter5), this.filter6);
+
+/*     this.combinedFilters = '{"where": {"circleId": {"inq": ' + JSON.stringify(this.filter1) + '}}}';
+    this.loopBackFilter = JSON.parse(this.combinedFilters); */
+    console.log(this.loopBackFilter);
+  }
+
+  extend(obj, src) {
+    Object.keys(src).forEach(function(key) { obj[key] = src[key]; });
+    return obj;
+}
 
   createForm() {
     this.devoteeFilterForm = this.fb.group({
@@ -156,52 +390,16 @@ export class DevoteeFilterComponent implements OnInit {
     });
   }
 
-  loadDevotee(devoteeId: String) {
-    this.eight$ = this.devoteeApi.findById<Devotee>(devoteeId, {include: 'fkDevoteePhysicalAddress1rel'})
-    .subscribe(
-      devotee => {
-        this.physicalAddress = devotee.fkDevoteePhysicalAddress1rel;
-      }
-    );
-  }
 
-
-
-  addDevotee() {
-    console.log(this.devoteeFilterForm.value);
-    this.eleven$ = this.devoteeApi.create<Devotee>(this.devoteeFilterForm.value)
-    .subscribe(
-      devotee => {
-        this.currentDevoteeId.next(devotee.id);
-        this.notificationService.notificationSubject.next('New Devotee [' + devotee.legalName + '] created successfully');
-      }
-    );    
-  }
-
-  updateDevoteeAddressId(addressId)  {
-    console.log(addressId);
-    console.log(this.devoteeId);
-   this.nine$ = this.devoteeApi.patchAttributes(this.devoteeId, {physicalAddressId: addressId} )
-    .subscribe();
-  }
 
   displayFn(profession?: ProfessionMaster): string | undefined {
     return profession ? profession.professionName : '';
   }
 
-  save() {
-    this.eight$ = this.devoteeApi.patchAttributes(this.devoteeId, this.devoteeFilterForm.value)
-     .subscribe(
-       devotee => {
-         this.notificationService.notificationSubject.next('Profile updated successfully');
-       }
-     )
-   }
  
    reset() {
       this.devoteeFilterForm.reset();
       this.currentDevoteeId.next(null);
-      this.physicalAddress = null;
       this.devoteeFilterForm.setValue(
         {
           id: null,
@@ -238,11 +436,6 @@ export class DevoteeFilterComponent implements OnInit {
     this.five$.unsubscribe();
     this.six$.unsubscribe();
     this.seven$.unsubscribe();
-    this.eight$.unsubscribe();
-    this.nine$.unsubscribe();
-    this.ten$.unsubscribe();
-    this.eleven$.unsubscribe();
-    this.twelve$.unsubscribe();    
    }
   // TODO: Remove this when we're done
   //get diagnostic() { return JSON.stringify(this.model); }

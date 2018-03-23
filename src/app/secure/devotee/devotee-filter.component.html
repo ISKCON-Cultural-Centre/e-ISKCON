@@ -1,31 +1,158 @@
 <div class="container">
   <div>
-    <form fxFill fxLayout="column" class="p-l-20" [formGroup]="devoteeFilterForm" novalidate>      
+    <form fxFill fxLayout="column" class="p-l-20" novalidate>      
+
       <mat-form-field fxFlex="100%">
-          <input matInput placeholder="Name" aria-label="State" formControlName="name">
+          <input matInput placeholder="Name" aria-label="State" (keyup)="nameSearchTerm$.next($event.target.value)">
       </mat-form-field>
-      <mat-form-field fxFlex="100%">
-        <input matInput placeholder="Circle" aria-label="State"  formControlName="circleId">
-      </mat-form-field>
-      <mat-form-field fxFlex="100%">
-          <input matInput placeholder="Gender" aria-label="State"  formControlName="gender">
-      </mat-form-field>
-      <mat-form-field fxFlex="100%">
-          <input matInput placeholder="Languages Known" aria-label="State"  formControlName="languageId">
-      </mat-form-field>
-      <mat-form-field fxFlex="100%">
-          <input matInput placeholder="Ashrama" aria-label="State"  formControlName="asramaMasterId">
-      </mat-form-field>
-      <mat-form-field fxFlex="100%">
-          <input matInput placeholder="Profession" aria-label="State"  formControlName="professionId">
-      </mat-form-field>            
-      <mat-form-field fxFlex="100%">
-          <input matInput placeholder="Shiksha Level" aria-label="State"  formControlName="shikshaLevel">
-      </mat-form-field>        
+
+      <mat-form-field>      
+        <mat-chip-list #chipList1 name="chiplist1">
+          <mat-chip *ngFor="let circle of assignedCircles" [selectable]="selectable"
+                    [removable]="removable" (remove)="removeCircle(circle)" [value]="circle.id">
+            {{circle.name}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input #skillInput placeholder="Circle Filter..."
+          [matAutocomplete]="autoCircle"
+          [matChipInputFor]="chipList1"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"/>
+          <mat-autocomplete #autoCircle="matAutocomplete" [displayWith]="displayFn" (optionSelected)="onSelectionChanged1($event)">
+            <mat-option *ngFor="let circle of remainingCircles" [value]="circle">
+              <span>{{ circle.name }}</span>
+            </mat-option>
+          </mat-autocomplete>             
+        </mat-chip-list>
+      </mat-form-field>     
+
+      <mat-form-field>      
+        <mat-chip-list #chipList2>
+          <mat-chip *ngFor="let gender of assignedGenders" [selectable]="selectable"
+                    [removable]="removable" (remove)="removeGender(gender)" [value]="gender.id">
+            {{gender.name}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input #skillInput placeholder="Gender Filter..."
+          [matAutocomplete]="autoGender"
+          [matChipInputFor]="chipList2"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"/>
+          <mat-autocomplete #autoGender="matAutocomplete" [displayWith]="displayFn" (optionSelected)="onSelectionChanged2($event)">
+            <mat-option *ngFor="let gender of remainingGenders" [value]="gender">
+              <span>{{ gender.name }}</span>
+            </mat-option>
+          </mat-autocomplete>             
+        </mat-chip-list>
+      </mat-form-field>      
+
+        <mat-form-field>      
+            <mat-chip-list #chipList3>
+                <mat-chip *ngFor="let language of assignedLanguages" [selectable]="selectable"
+                        [removable]="removable" (remove)="removeLanguage(language)" [value]="language.id">
+                {{ language.language }}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input #skillInput placeholder="Languages Filter..."
+                [matAutocomplete]="autoLanguage"
+                [matChipInputFor]="chipList3"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"/>
+                <mat-autocomplete #autoLanguage="matAutocomplete" [displayWith]="displayFn" (optionSelected)="onSelectionChanged3($event)">
+                <mat-option *ngFor="let language of remainingLanguages" [value]="language">
+                    <span>{{ language.language }}</span>
+                </mat-option>
+                </mat-autocomplete>             
+            </mat-chip-list>      
+        </mat-form-field>    
+
+        <mat-form-field>      
+            <mat-chip-list #chipList4>
+                <mat-chip *ngFor="let ashrama of assignedAshramas" [selectable]="selectable"
+                        [removable]="removable" (remove)="removeAshrama(ashrama)" [value]="ashrama.id">
+                {{ ashrama.asramaName }}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input #skillInput placeholder="Asrama Filter..."
+                [matAutocomplete]="autoAshrama"
+                [matChipInputFor]="chipList4"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"/>
+                <mat-autocomplete #autoAshrama="matAutocomplete" [displayWith]="displayFn" (optionSelected)="onSelectionChanged4($event)">
+                <mat-option *ngFor="let ashrama of remainingAshramas" [value]="ashrama">
+                    <span>{{ ashrama.asramaName }}</span>
+                </mat-option>
+                </mat-autocomplete>             
+            </mat-chip-list>      
+        </mat-form-field> 
+
+        <mat-form-field>      
+            <mat-chip-list #chipList5>
+                <mat-chip *ngFor="let profession of assignedProfessions" [selectable]="selectable"
+                        [removable]="removable" (remove)="removeProfession(profession)" [value]="profession.id">
+                {{  profession.professionName }}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input #skillInput placeholder="Profession Filter..."
+                [matAutocomplete]="autoProfession"
+                [matChipInputFor]="chipList5"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"/>
+                <mat-autocomplete #autoProfession="matAutocomplete" [displayWith]="displayFn" (optionSelected)="onSelectionChanged5($event)">
+                <mat-option *ngFor="let profession of remainingProfessions" [value]="profession">
+                    <span>{{ profession.professionName }}</span>
+                </mat-option>
+                </mat-autocomplete>             
+            </mat-chip-list>      
+        </mat-form-field> 
+
+        <mat-form-field>      
+            <mat-chip-list #chipList6>
+                <mat-chip *ngFor="let shiksha of assignedShikshas" [selectable]="selectable"
+                        [removable]="removable" (remove)="removeShiksha(shiksha)" [value]="shiksha.id">
+                {{  shiksha.description }}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input #skillInput placeholder="Shiksha Level Filter..."
+                [matAutocomplete]="autoShiksha"
+                [matChipInputFor]="chipList6"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"/>
+                <mat-autocomplete #autoShiksha="matAutocomplete" [displayWith]="displayFn" (optionSelected)="onSelectionChanged6($event)">
+                <mat-option *ngFor="let shiksha of remainingShikshas" [value]="shiksha">
+                    <span>{{ shiksha.description }}</span>
+                </mat-option>
+                </mat-autocomplete>             
+            </mat-chip-list>      
+        </mat-form-field> 
+           
     </form>
   </div>
   <div class="two container">
-      <span>search Result section</span>
+
+    <mat-table fxFill fxLayout="column" #table [dataSource]="dataSource" matSort matSortActive="created" matSortDisableClear matSortDirection="asc">
+        <!-- Name Column -->
+        <ng-container matColumnDef="legalName">
+            <mat-header-cell *matHeaderCellDef> Legal Name </mat-header-cell>
+            <mat-cell *matCellDef="let devotee"> 
+                {{ devotee.legalName ? devotee.legalName : ''}}
+            </mat-cell>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="spiritualName">
+            <mat-header-cell *matHeaderCellDef> Spiritual Name </mat-header-cell>
+            <mat-cell *matCellDef="let devotee"> 
+                {{ devotee.spiritualName ? devotee.spiritualName : '' }}
+            </mat-cell>
+        </ng-container>      
+        
+        <!-- Name Column -->
+        <ng-container matColumnDef="circle">
+                <mat-header-cell *matHeaderCellDef> Circle </mat-header-cell>
+                <mat-cell *matCellDef="let devotee"> 
+                    {{ devotee.fkDevoteeCircle1rel ? devotee.fkDevoteeCircle1rel.name : '' }}
+                </mat-cell>
+        </ng-container>           
+    
+            
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
   </div>
   <div class="container">
       <span>Detail section</span>    
