@@ -26,3 +26,12 @@ div.container > div.three
 {
     flex:3 3 calc(15em + 20px); /** 20px is the missing margin of the two missing boxes */
 }
+
+.example-card {
+    max-width: 400px;
+  }
+  
+  .example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+  }

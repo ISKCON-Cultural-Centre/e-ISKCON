@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, ViewChild, OnInit, OnDestroy } from '@angular/core';
 import {ENTER, COMMA} from '@angular/cdk/keycodes';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
@@ -25,13 +25,14 @@ import {
 import { AuthService, DevoteeSearchSelectService, NotificationService } from '../../shared/services';
 import { PhysicalAddressComponent } from '../common/physical-address.component';
 import { PhysicalAddressApi } from '../../shared/sdk/services/index';
+import { AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({
   selector: 'app-devotee-filter',
   templateUrl: './devotee-filter.component.html',
   styleUrls: ['./devotee-filter.component.css']
 })
-export class DevoteeFilterComponent implements OnInit, OnDestroy {
+export class DevoteeFilterComponent implements OnInit, AfterViewInit, OnDestroy {
 
   /***TBD */
   baseUrl = 'https://api.cdnjs.com/libraries';
@@ -94,6 +95,7 @@ export class DevoteeFilterComponent implements OnInit, OnDestroy {
   resultsLength = 0;
   displayedColumns = ['legalName', 'spiritualName', 'circle'];
 
+  @ViewChild(MatSort) sort: MatSort;  
   
 
   currentDevoteeId = new Subject<String>();
@@ -209,6 +211,14 @@ export class DevoteeFilterComponent implements OnInit, OnDestroy {
       }
     );
   }
+
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
+  }  
+
+  onRowClicked(row) {
+    console.log('Row clicked: ', row);
+}
 
   search(terms: Observable<string>) {
     return terms.debounceTime(400)
@@ -375,31 +385,23 @@ export class DevoteeFilterComponent implements OnInit, OnDestroy {
     this.combinedFilters = 
     '{ "and": [' 
     + ((this.filter1.length > 0 ) ? '{"circleId": {"inq":' + JSON.stringify(this.filter1) + '}}' : '')
-
-    + (((this.filter2.length || this.filter3.length || this.filter4.length || this.filter5.length )  && 
+    + (((this.filter2.length || this.filter3.length || this.filter4.length || this.filter5.length || this.filter6.length )  &&
       (this.filter1.length )) ? ',' : '')
 
     + ((this.filter2.length > 0 ) ? '{"gender": {"inq":' + JSON.stringify(this.filter2) + '}}' : '')
-
-    + ((this.filter2.length && (this.filter3.length || this.filter4.length || this.filter5.length || this.filter6.length)  && 
-      (this.filter1.length )) ? ',' : '')
+    + ((this.filter2.length && (this.filter3.length || this.filter4.length || this.filter5.length || this.filter6.length)) ? ',' : '')
 
     + ((this.filter3.length > 0 ) ? '{"language": {"inq":' + JSON.stringify(this.filter3) + '}}' : '')
-
-    + ((this.filter3.length && (this.filter4.length || this.filter5.length || this.filter6.length)  && (this.filter1.length || 
-      this.filter2.length  )) ? ',' : '')
+    + ((this.filter3.length && (this.filter4.length || this.filter5.length || this.filter6.length)) ? ',' : '')
 
     + ((this.filter4.length > 0 ) ? '{"asramaMasterId": {"inq":' + JSON.stringify(this.filter4) + '}}' : '')
-
-    + ((this.filter4.length && (this.filter5.length || this.filter6.length)  && (this.filter1.length || this.filter2.length || 
-      this.filter3.length )) ? ',' : '')
+    + ((this.filter4.length && (this.filter5.length || this.filter6.length)) ? ',' : '')
 
     + ((this.filter5.length > 0 ) ? '{"professionId": {"inq":' + JSON.stringify(this.filter5) + '}}' : '')
+    + (((this.filter5.length) && (this.filter1.length || this.filter2.length || this.filter3.length || this.filter5.length ) && 
+      this.filter6.length ) ? ',' : '')
 
-    + (((this.filter6.length) && (this.filter1.length || this.filter2.length || this.filter3.length || this.filter4.length || 
-      this.filter5.length ) > 0 ) ? ',' : '')
-
-    + ((this.filter6.length > 0 ) ? '{"shikshaLevel": {"inq":' + JSON.stringify(this.filter6) + '}}' : '')    
+    + ((this.filter6.length > 0 ) ? '{"shikshaLevel": {"inq":' + JSON.stringify(this.filter6) + '}}' : '')
 
     + '] }';
     console.log(this.combinedFilters);
