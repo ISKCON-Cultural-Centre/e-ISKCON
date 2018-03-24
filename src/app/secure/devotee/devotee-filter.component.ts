@@ -131,7 +131,7 @@ export class DevoteeFilterComponent implements OnInit, OnDestroy {
   ngOnInit() {
    
     this.loopBackFilter.include = ['fkDevoteeLanguage1rel', 'fkDevoteeProfessionMaster1rel', 'fkDevoteeCircle1rel'];
-    this.loopBackFilter.fields = ['legalName', 'spiritualName', 'fkDevoteeCircle1rel.circleName'];
+    //this.loopBackFilter.fields = ['legalName', 'spiritualName', 'fkDevoteeCircle1rel.circleName'];
     //limit?: any;
     //order?: any;
     //skip?: any;
@@ -141,7 +141,8 @@ export class DevoteeFilterComponent implements OnInit, OnDestroy {
     .subscribe(
       filter => {
         this.buildAllFilters();
-        this.loopBackFilter.where = {'and': [this.filter1]};
+        this.loopBackFilter.where = JSON.parse(this.combinedFilters);
+        console.log(this.loopBackFilter);
         this.devoteeApi.find<Devotee>(
           this.loopBackFilter
         )
@@ -321,14 +322,14 @@ export class DevoteeFilterComponent implements OnInit, OnDestroy {
   
   buildFilter1(){
     this.filter1 = this.assignedCircles.map(function (circle) {
-      return  { circleId: circle.id };
+      return  circle.id;
     });
     this.filterCondition.next(this.filter1.toString());
   }
 
   buildFilter2(){
     this.filter2 = this.assignedGenders.map(function (gender) {
-      return { gender: gender.id };
+      return gender.id;
     });
     this.filterCondition.next(this.filter2.toString());
   }
@@ -337,40 +338,80 @@ export class DevoteeFilterComponent implements OnInit, OnDestroy {
     this.filter3 = this.assignedLanguages.map(function (language) {
       return { languageId: language.id };
     });
-    this.filterCondition.next(this.filter3.toString());    
+    this.filterCondition.next(this.filter3.toString());
   }
 
   buildFilter4(){
     this.filter4 = this.assignedAshramas.map(function (ashrama) {
-      return { asramaMasterId: ashrama.id };
+      return ashrama.id;
     });
     this.filterCondition.next(this.filter4.toString());
   }
 
   buildFilter5(){
     this.filter5 = this.assignedProfessions.map(function (profession) {
-      return { professionId: profession.professionId };
+      return profession.professionId;
     });
     this.filterCondition.next(this.filter5.toString());
   }
 
   buildFilter6(){
     this.filter6 = this.assignedShikshas.map(function (shiksha) {
-      return { shikshaLevel: shiksha.id };
+      return shiksha.id;
     });
     this.filterCondition.next(this.filter6.toString());
   }
 
   buildAllFilters()
   {
-   //this.combinedFilters = this.extend(this.filter1, this.filter2);
-   //Object.assign(this.combinedFilters, this.filter1, this.filter2/* , this.filter3,
-//     this.filter4, this.filter5, this.filter6 */);
-    //union(union(union(union(union(this.filter1, this.filter2), this.filter3), this.filter4), this.filter5), this.filter6);
 
-/*     this.combinedFilters = '{"where": {"circleId": {"inq": ' + JSON.stringify(this.filter1) + '}}}';
-    this.loopBackFilter = JSON.parse(this.combinedFilters); */
-    console.log(this.loopBackFilter);
+    this.loopBackFilter.where = null;
+/*     this.combinedFilters = 
+    '{ "or": [' 
+    +  '{"circleId": {"inq":' + JSON.stringify(this.filter1) + '}}' + ','
+    + '{"gender": {"inq":' + JSON.stringify(this.filter2) + '}}'
+    + '] }';     */
+    console.log((this.filter2.length + this.filter3.length + this.filter4.length + this.filter5.length + this.filter6.length) );
+    this.combinedFilters = 
+    '{ "and": [' 
+    + ((this.filter1.length > 0 ) ? '{"circleId": {"inq":' + JSON.stringify(this.filter1) + '}}' : '')
+
+    + (((this.filter2.length || this.filter3.length || this.filter4.length || this.filter5.length )  && 
+      (this.filter1.length )) ? ',' : '')
+
+    + ((this.filter2.length > 0 ) ? '{"gender": {"inq":' + JSON.stringify(this.filter2) + '}}' : '')
+
+    + ((this.filter2.length && (this.filter3.length || this.filter4.length || this.filter5.length || this.filter6.length)  && 
+      (this.filter1.length )) ? ',' : '')
+
+    + ((this.filter3.length > 0 ) ? '{"language": {"inq":' + JSON.stringify(this.filter3) + '}}' : '')
+
+    + ((this.filter3.length && (this.filter4.length || this.filter5.length || this.filter6.length)  && (this.filter1.length || 
+      this.filter2.length  )) ? ',' : '')
+
+    + ((this.filter4.length > 0 ) ? '{"asramaMasterId": {"inq":' + JSON.stringify(this.filter4) + '}}' : '')
+
+    + ((this.filter4.length && (this.filter5.length || this.filter6.length)  && (this.filter1.length || this.filter2.length || 
+      this.filter3.length )) ? ',' : '')
+
+    + ((this.filter5.length > 0 ) ? '{"professionId": {"inq":' + JSON.stringify(this.filter5) + '}}' : '')
+
+    + (((this.filter6.length) && (this.filter1.length || this.filter2.length || this.filter3.length || this.filter4.length || 
+      this.filter5.length ) > 0 ) ? ',' : '')
+
+    + ((this.filter6.length > 0 ) ? '{"shikshaLevel": {"inq":' + JSON.stringify(this.filter6) + '}}' : '')    
+
+    + '] }';
+    console.log(this.combinedFilters);
+
+
+/*    {
+      or: [
+        { and: [{ field1: 'foo' }, { field2: 'bar' }] },
+        { field1: 'morefoo' }
+      ]
+    }     */
+
   }
 
   extend(obj, src) {
