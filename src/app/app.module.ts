@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
@@ -34,7 +34,8 @@ import { SharedComponentsModule } from './shared/components/shared-components.mo
 import { CommonComponentsModule } from './secure/common/common-components.module';
 import { SecureComponent } from './layout/secure';
 import { PublicComponent } from './layout/public';
-
+import { CustomErrorHandler } from './shared/services/custom-error-handler.service';
+import { ErrorLogService } from './shared/services/errorlog.service';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,12 @@ import { PublicComponent } from './layout/public';
     NotificationService,
     DevoteeApi,
     LookupService,
-    DummyService
+    DummyService,
+    {
+      provide: ErrorHandler,
+      useClass: CustomErrorHandler
+    },
+    ErrorLogService
   ],
   bootstrap: [AppComponent]
 })
