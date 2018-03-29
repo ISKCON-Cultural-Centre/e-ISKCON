@@ -17,8 +17,10 @@ import { DevoteeServiceInterestComponent } from './devotee-service-interest.comp
 import { DevoteeServiceAvailabilityComponent } from './devotee-service-availability.component';
 import { ChangePasswordComponent } from './change-password.component';
 import { DevoteeFilterComponent } from './devotee-filter.component';
+import { DevoteesListService } from './devotees-list-service';
 
 const routes: Routes = [
+
   { path: 'devotee', component: DevoteeComponent, canActivate: [AuthGuard] }
 ];
 
@@ -40,7 +42,8 @@ const routes: Routes = [
     DevoteeServiceAvailabilityComponent, ChangePasswordComponent, DevoteeFilterComponent
   ],
   providers: [
-    DevoteeSearchSelectService
+    DevoteeSearchSelectService,
+    DevoteesListService
   ],
 })
 export class DevoteeModule { }

@@ -1,13 +1,12 @@
-import { Component, ViewChild, OnInit, OnDestroy } from '@angular/core';
+import { Component, ViewChild, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import {ENTER, COMMA} from '@angular/cdk/keycodes';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {merge} from "rxjs/observable/merge";
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/distinctUntilChanged';
-import 'rxjs/add/operator/switchMap';
+import {debounceTime, distinctUntilChanged, startWith, tap, delay,switchMap, map} from 'rxjs/operators';
 import { Http } from '@angular/http';
 import { MatDialog, MatChipInputEvent, MatAutocompleteSelectedEvent, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import {  difference, union } from 'set-manipulator';
@@ -25,8 +24,9 @@ import {
 import { AuthService, DevoteeSearchSelectService, NotificationService } from '../../shared/services';
 import { PhysicalAddressComponent } from '../common/physical-address.component';
 import { PhysicalAddressApi } from '../../shared/sdk/services/index';
-import { DevoteesDataSource, DevoteesListService } ;
-import { AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
+import { DevoteesDataSource } from './devotees-data-source';
+import { DevoteesListService } from './devotees-list-service';
+
 
 @Component({
   selector: 'app-devotee-filter',
@@ -93,8 +93,9 @@ export class DevoteeFilterComponent implements OnInit, AfterViewInit, OnDestroy 
   filterCondition = new Subject<any>();
 
   dataSource: DevoteesDataSource;
-  filteredDevoteesCount = 0;
   displayedColumns = ['legalName', 'spiritualName', 'circle'];
+  filteredDevoteesCount = new BehaviorSubject<any>({count: 0});
+  public filteredDevoteesCount$ = this.filteredDevoteesCount.asObservable();
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -134,10 +135,12 @@ export class DevoteeFilterComponent implements OnInit, AfterViewInit, OnDestroy 
 
   ngOnInit() {
    
-    this.dataSource = new DevoteesDataSource(this.devoteesListService);
-    this.dataSource.loadDevotees(1);
 
     this.loopBackFilter.include = ['fkDevoteeLanguage1rel', 'fkDevoteeProfessionMaster1rel', 'fkDevoteeCircle1rel'];
+
+
+    this.dataSource = new DevoteesDataSource(this.devoteesListService);
+    this.dataSource.loadDevotees(this.loopBackFilter, 0, 10);    
     //this.loopBackFilter.limit = 10;
     //this.loopBackFilter.fields = ['legalName', 'spiritualName', 'fkDevoteeCircle1rel.circleName'];
     //limit?: any;
@@ -145,13 +148,14 @@ export class DevoteeFilterComponent implements OnInit, AfterViewInit, OnDestroy 
     //skip?: any;
     //offset?: any;
 
-    this.seven$ = this.filterCondition
+     this.seven$ = this.filterCondition
     .subscribe(
       filter => {
         this.buildAllFilters();
+        this.filteredDevoteesCount.next(this.devoteeApi.count(this.combinedFilters));        
         this.loopBackFilter.where = JSON.parse(this.combinedFilters);
-        console.log(this.loopBackFilter);
-        this.devoteeApi.find<Devotee>(
+        this.dataSource.loadDevotees(this.loopBackFilter, this.paginator.pageIndex, this.paginator.pageSize);            
+/*         this.devoteeApi.find<Devotee>(
           this.loopBackFilter
         )
         .subscribe(
@@ -160,9 +164,9 @@ export class DevoteeFilterComponent implements OnInit, AfterViewInit, OnDestroy 
             console.log(devotees);
             this.dataSource.data = devotees;
           }
-        )
+        ) */
       }
-    );
+    ); 
 
     this.nameSearchTerm$
     .subscribe(
@@ -218,9 +222,29 @@ export class DevoteeFilterComponent implements OnInit, AfterViewInit, OnDestroy 
     );
   }
 
+
   ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
-  }  
+
+      // reset the paginator after sorting
+      this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
+
+       merge(this.sort.sortChange, this.paginator.page)
+          .pipe(
+              tap(() => this.loadDevoteesPage())
+          )
+          .subscribe();
+  }
+
+
+
+
+
+  loadDevoteesPage() {
+      this.dataSource.loadDevotees(
+          this.loopBackFilter,
+          this.paginator.pageIndex,
+          this.paginator.pageSize);
+  }
 
   onRowClicked(row) {
     console.log('Row clicked: ', row);

@@ -6,6 +6,7 @@ import {of} from 'rxjs/observable/of';
 
 import { DevoteeApi, Devotee } from '../..//shared/sdk';
 import { DevoteesListService } from './devotees-list-service';
+import {LoopBackFilter} from '../../shared/sdk/models/BaseModels';
 
 export class DevoteesDataSource implements DataSource<Devotee> {
 
@@ -25,13 +26,15 @@ export class DevoteesDataSource implements DataSource<Devotee> {
         this.loadingSubject.complete();
     }
 
-    loadDevotees(courseId: number, filter = '',
-                sortDirection = 'asc', pageIndex = 0, pageSize = 3) {
+    loadDevotees(devoteeFilter: LoopBackFilter,                 
+                pageIndex:number,
+                pageSize:number) {
 
         this.loadingSubject.next(true);
-
-        this.devoteesListService.findLessons(courseId, filter, sortDirection,
-            pageIndex, pageSize).pipe(
+console.log(devoteeFilter);
+        this.devoteesListService.findDevotees(devoteeFilter,                 
+                pageIndex,
+                pageSize).pipe(
             catchError(() => of([])),
             finalize(() => this.loadingSubject.next(false))
         )

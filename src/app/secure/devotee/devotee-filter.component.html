@@ -127,7 +127,7 @@
         <mat-spinner></mat-spinner>
     </div>
     <mat-table fxFill fxLayout="column" #table [dataSource]="dataSource" matSort>
-        <!-- Name Column -->
+        <!-- Legal Name Column -->
         <ng-container matColumnDef="legalName">
             <mat-header-cell *matHeaderCellDef  mat-sort-header> Legal Name </mat-header-cell>
             <mat-cell *matCellDef="let devotee"> 
@@ -135,7 +135,7 @@
             </mat-cell>
         </ng-container>
 
-        <!-- Name Column -->
+        <!-- Spiritual Name Column -->
         <ng-container matColumnDef="spiritualName">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Spiritual Name </mat-header-cell>
             <mat-cell *matCellDef="let devotee"> 
@@ -143,7 +143,7 @@
             </mat-cell>
         </ng-container>      
         
-        <!-- Name Column -->
+        <!-- Circle Column -->
         <ng-container matColumnDef="circle" > 
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Circle </mat-header-cell>
                 <mat-cell *matCellDef="let devotee"> 
@@ -155,9 +155,9 @@
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)"></mat-row>
     </mat-table>
-    <mat-paginator [length]="course?.lessonsCount" [pageSize]="3"
-                   [pageSizeOptions]="[3, 5, 10]"></mat-paginator>    
   </div>
+    <mat-paginator [length]="filteredDevoteesCount$.count | async" [pageSize]="10"
+                   [pageSizeOptions]="[3, 5, 10]"></mat-paginator>    
   <div >
     <mat-card class="example-card">
         <mat-card-header>
