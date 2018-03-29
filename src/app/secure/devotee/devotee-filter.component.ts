@@ -25,6 +25,7 @@ import {
 import { AuthService, DevoteeSearchSelectService, NotificationService } from '../../shared/services';
 import { PhysicalAddressComponent } from '../common/physical-address.component';
 import { PhysicalAddressApi } from '../../shared/sdk/services/index';
+import { DevoteesDataSource, DevoteesListService } ;
 import { AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({
@@ -91,12 +92,12 @@ export class DevoteeFilterComponent implements OnInit, AfterViewInit, OnDestroy 
 
   filterCondition = new Subject<any>();
 
-  dataSource = new MatTableDataSource<Devotee>();
-  resultsLength = 0;
+  dataSource: DevoteesDataSource;
+  filteredDevoteesCount = 0;
   displayedColumns = ['legalName', 'spiritualName', 'circle'];
 
-  @ViewChild(MatSort) sort: MatSort;  
-  
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   currentDevoteeId = new Subject<String>();
   currentDevoteeId$ = this.currentDevoteeId.asObservable();
@@ -112,6 +113,7 @@ export class DevoteeFilterComponent implements OnInit, AfterViewInit, OnDestroy 
     private spiritualLevelMasterApi: SpiritualLevelMasterApi,
     private authService: AuthService,
     private devoteeApi: DevoteeApi,
+    private devoteesListService: DevoteesListService,
     private fb: FormBuilder,
     private http: Http) {
     this.createForm();
@@ -132,7 +134,11 @@ export class DevoteeFilterComponent implements OnInit, AfterViewInit, OnDestroy 
 
   ngOnInit() {
    
+    this.dataSource = new DevoteesDataSource(this.devoteesListService);
+    this.dataSource.loadDevotees(1);
+
     this.loopBackFilter.include = ['fkDevoteeLanguage1rel', 'fkDevoteeProfessionMaster1rel', 'fkDevoteeCircle1rel'];
+    //this.loopBackFilter.limit = 10;
     //this.loopBackFilter.fields = ['legalName', 'spiritualName', 'fkDevoteeCircle1rel.circleName'];
     //limit?: any;
     //order?: any;
