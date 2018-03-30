@@ -122,10 +122,10 @@
            
     </form>
   </div>
-  <div class="two container">
-    <div class="spinner-container" *ngIf="dataSource.loading$ | async">
-        <mat-spinner></mat-spinner>
-    </div>
+  <div class="two container" >
+  <div fxLayout="column">
+
+    <div>
     <mat-table fxFill fxLayout="column" #table [dataSource]="dataSource" matSort>
         <!-- Legal Name Column -->
         <ng-container matColumnDef="legalName">
@@ -155,11 +155,19 @@
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)"></mat-row>
     </mat-table>
+    </div>
+        <div class="spinner-container" *ngIf="dataSource?.loading$ | async">
+        <mat-spinner></mat-spinner>
+    </div>
+    <div>
+        <mat-paginator [length]="filteredDevoteesCount$ | async" [pageSize]="10"  [pageSizeOptions]="[3, 5, 10]">
+        </mat-paginator>   
+    </div>
+<div>
   </div>
-    <mat-paginator [length]="filteredDevoteesCount$.count | async" [pageSize]="10"
-                   [pageSizeOptions]="[3, 5, 10]"></mat-paginator>    
+ 
   <div >
-    <mat-card class="example-card">
+<!--     <mat-card class="example-card">
         <mat-card-header>
           <div mat-card-avatar><i class="fas fa-female fa-3x"></i></div>
           <mat-card-title>Shiba Inu</mat-card-title>
@@ -177,7 +185,7 @@
           <button mat-button>Message</button>
           <button mat-button>Email</button>
         </mat-card-actions>
-    </mat-card>
+    </mat-card> -->
   </div>
 </div>
 

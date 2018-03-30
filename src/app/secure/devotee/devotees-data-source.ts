@@ -38,6 +38,16 @@ console.log(devoteeFilter);
             catchError(() => of([])),
             finalize(() => this.loadingSubject.next(false))
         )
-        .subscribe(devotees => this.devoteesSubject.next(devotees));
-    }    
+        .subscribe(devotees => 
+            {
+                this.devoteesSubject.next(devotees);
+            }
+        );  
+}
+
+}
+
+export interface DevoteeWithCount {
+    devotee: Devotee[];
+    count: number;
 }

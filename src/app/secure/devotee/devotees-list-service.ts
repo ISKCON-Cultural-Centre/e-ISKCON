@@ -10,7 +10,6 @@ export class DevoteesListService {
     constructor(private devoteeApi: DevoteeApi) {}
 
     findDevotees(devoteeFilter: LoopBackFilter, pageIndex:number, pageSize:number):  Observable<Devotee[]> {
-        //devoteeFilter.order = 10;
         devoteeFilter.limit = pageSize;
         devoteeFilter.skip = pageIndex * pageSize;
 

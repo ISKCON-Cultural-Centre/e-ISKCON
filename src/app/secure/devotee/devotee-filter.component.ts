@@ -92,9 +92,9 @@ export class DevoteeFilterComponent implements OnInit, AfterViewInit, OnDestroy 
 
   filterCondition = new Subject<any>();
 
-  dataSource: DevoteesDataSource;
+  dataSource = new DevoteesDataSource(this.devoteesListService);
   displayedColumns = ['legalName', 'spiritualName', 'circle'];
-  filteredDevoteesCount = new BehaviorSubject<any>({count: 0});
+  filteredDevoteesCount = new BehaviorSubject<number>(0);
   public filteredDevoteesCount$ = this.filteredDevoteesCount.asObservable();
 
   @ViewChild(MatSort) sort: MatSort;
@@ -137,10 +137,19 @@ export class DevoteeFilterComponent implements OnInit, AfterViewInit, OnDestroy 
    
 
     this.loopBackFilter.include = ['fkDevoteeLanguage1rel', 'fkDevoteeProfessionMaster1rel', 'fkDevoteeCircle1rel'];
-
-
-    this.dataSource = new DevoteesDataSource(this.devoteesListService);
-    this.dataSource.loadDevotees(this.loopBackFilter, 0, 10);    
+    this.loopBackFilter.order = ['legalName ASC', 'spiritualName ASC'];
+    this.devoteeApi.count(this.combinedFilters)
+    .subscribe(
+      count => {
+        this.filteredDevoteesCount.next(count.count);
+        //this.dataSource = new DevoteesDataSource(this.devoteesListService);
+        console.log('inside filter comp');
+        this.dataSource.loadDevotees(this.loopBackFilter, 0, 10);
+        this.paginator.pageIndex = 0;   
+      }
+    );
+  //  this.filteredDevoteesCount.next(this.devoteeApi.count(this.combinedFilters));   
+  
     //this.loopBackFilter.limit = 10;
     //this.loopBackFilter.fields = ['legalName', 'spiritualName', 'fkDevoteeCircle1rel.circleName'];
     //limit?: any;
@@ -152,9 +161,17 @@ export class DevoteeFilterComponent implements OnInit, AfterViewInit, OnDestroy 
     .subscribe(
       filter => {
         this.buildAllFilters();
-        this.filteredDevoteesCount.next(this.devoteeApi.count(this.combinedFilters));        
         this.loopBackFilter.where = JSON.parse(this.combinedFilters);
-        this.dataSource.loadDevotees(this.loopBackFilter, this.paginator.pageIndex, this.paginator.pageSize);            
+        this.devoteeApi.count(this.combinedFilters)
+        .subscribe(
+          count => {
+            this.filteredDevoteesCount.next(count.count);
+            //this.dataSource = new DevoteesDataSource(this.devoteesListService);
+            this.dataSource.loadDevotees(this.loopBackFilter, this.paginator.pageIndex, this.paginator.pageSize);       
+          }
+        );    
+        this.paginator.pageIndex = 0;    
+              
 /*         this.devoteeApi.find<Devotee>(
           this.loopBackFilter
         )
@@ -172,6 +189,7 @@ export class DevoteeFilterComponent implements OnInit, AfterViewInit, OnDestroy 
     .subscribe(
       val => console.log(val)
     )
+
 
     this.devoteeId ? this.devoteeId = this.devoteeId : this.devoteeId = this.authService.getCurrentUserId();
     this.currentDevoteeId.next(this.devoteeId);
