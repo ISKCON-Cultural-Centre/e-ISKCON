@@ -1,4 +1,5 @@
-<ol class="breadcrumb">
+<div>
+  <ol class="breadcrumb">
     <li *ngFor="let breadcrumb of breadcrumbs$ | async"
         class="breadcrumb-item">
         <a [routerLink]="[breadcrumb.url]">
@@ -7,3 +8,4 @@
       </a>
     </li>
   </ol>
+</div>  

@@ -36,10 +36,6 @@ import { DevoteesListService } from './devotees-list-service';
 })
 export class DevoteeFilterComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  /***TBD */
-  baseUrl = 'https://api.cdnjs.com/libraries';
-  queryUrl = '?search=';
-/***TBD */
   devoteeId: String;
   devotee: Devotee;
 
@@ -89,6 +85,10 @@ export class DevoteeFilterComponent implements OnInit, AfterViewInit, OnDestroy 
   five$ = new Subscription();
   six$ = new Subscription();
   seven$ = new Subscription();
+  eight$ = new Subscription();
+  nine$ = new Subscription();
+  ten$ = new Subscription();
+  eleven$ = new Subscription();
 
 
   filterCondition = new Subject<any>();
@@ -117,8 +117,7 @@ export class DevoteeFilterComponent implements OnInit, AfterViewInit, OnDestroy 
     private authService: AuthService,
     private devoteeApi: DevoteeApi,
     private devoteesListService: DevoteesListService,
-    private fb: FormBuilder,
-    private http: Http) {
+    private fb: FormBuilder) {
     this.createForm();
   }
 
@@ -140,57 +139,29 @@ export class DevoteeFilterComponent implements OnInit, AfterViewInit, OnDestroy 
 
     this.loopBackFilter.include = ['fkDevoteeLanguage1rel', 'fkDevoteeProfessionMaster1rel', 'fkDevoteeCircle1rel'];
     this.loopBackFilter.order = ['legalName ASC', 'spiritualName ASC'];
-    this.devoteeApi.count(this.combinedFilters)
+    this.eight$ = this.devoteeApi.count(this.combinedFilters)
     .subscribe(
       count => {
         this.filteredDevoteesCount.next(count.count);
-        //this.dataSource = new DevoteesDataSource(this.devoteesListService);
-        console.log('inside filter comp');
-        this.dataSource.loadDevotees(this.loopBackFilter, null, 0, 10);
+        this.dataSource.loadDevotees(this.loopBackFilter, 0, 10);
         this.paginator.pageIndex = 0;   
       }
     );
-  //  this.filteredDevoteesCount.next(this.devoteeApi.count(this.combinedFilters));   
-  
-    //this.loopBackFilter.limit = 10;
-    //this.loopBackFilter.fields = ['legalName', 'spiritualName', 'fkDevoteeCircle1rel.circleName'];
-    //limit?: any;
-    //order?: any;
-    //skip?: any;
-    //offset?: any;
-
      this.seven$ = this.filterCondition
     .subscribe(
       filter => {
         this.buildAllFilters();
-        this.loopBackFilter.where = JSON.parse(this.combinedFilters);
-        this.devoteeApi.count(this.combinedFilters)
+        this.nine$ = this.devoteeApi.count(this.combinedFilters)
         .subscribe(
           count => {
             this.filteredDevoteesCount.next(count.count);
             //this.dataSource = new DevoteesDataSource(this.devoteesListService);
-            this.dataSource.loadDevotees(this.loopBackFilter, this.input.nativeElement.value, this.paginator.pageIndex, this.paginator.pageSize);       
+            this.dataSource.loadDevotees(this.loopBackFilter, this.paginator.pageIndex, this.paginator.pageSize);       
           }
         );    
         this.paginator.pageIndex = 0;    
-              
-/*         this.devoteeApi.find<Devotee>(
-          this.loopBackFilter
-        )
-        .subscribe(
-          devotees =>
-          {
-            console.log(devotees);
-            this.dataSource.data = devotees;
-          }
-        ) */
       }
     ); 
-
-    this.nameSearchTerm$
-    .subscribe(
-      val => console.log(val)
-    )
 
 
     this.devoteeId ? this.devoteeId = this.devoteeId : this.devoteeId = this.authService.getCurrentUserId();
@@ -246,13 +217,13 @@ export class DevoteeFilterComponent implements OnInit, AfterViewInit, OnDestroy 
   ngAfterViewInit() {
 
 
-      fromEvent(this.input.nativeElement,'keyup')
+    this.ten$ = fromEvent(this.input.nativeElement,'keyup')
           .pipe(
               debounceTime(150),
               distinctUntilChanged(),
               tap(() => {
                   this.paginator.pageIndex = 0;
-
+                  this.buildAllFilters();
                   this.loadDevoteesPage();
               })
           )
@@ -263,38 +234,32 @@ export class DevoteeFilterComponent implements OnInit, AfterViewInit, OnDestroy 
 
        merge(this.sort.sortChange, this.paginator.page)
           .pipe(
-              tap(() => this.loadDevoteesPage())
+              tap(() => {
+                this.loadDevoteesPage();
+              }
+            )
           )
           .subscribe();
   }
 
 
-
-
-
   loadDevoteesPage() {
-      this.dataSource.loadDevotees(
+    this.eight$ = this.devoteeApi.count(this.combinedFilters)
+    .subscribe(
+      count => {
+        this.filteredDevoteesCount.next(count.count);
+        this.dataSource.loadDevotees(
           this.loopBackFilter,
-          this.input.nativeElement.value,          
           this.paginator.pageIndex,
           this.paginator.pageSize);
+          this.paginator.pageIndex = 0;   
+      }
+    );     
   }
 
   onRowClicked(row) {
     console.log('Row clicked: ', row);
 }
-
-  search(terms: Observable<string>) {
-    return terms.debounceTime(400)
-      .distinctUntilChanged()
-      .switchMap(term => this.searchEntries(term));
-  }
-
-  searchEntries(term) {
-    return this.http
-        .get(this.baseUrl + this.queryUrl + term)
-        .map(res => res.json());
-  }  
 
   onSelectionChanged1(event: MatAutocompleteSelectedEvent) {
     let value = event.option.value;
@@ -436,18 +401,25 @@ export class DevoteeFilterComponent implements OnInit, AfterViewInit, OnDestroy 
     this.filterCondition.next(this.filter6.toString());
   }
 
+
+
   buildAllFilters()
   {
 
-    this.loopBackFilter.where = null;
 /*     this.combinedFilters = 
     '{ "or": [' 
     +  '{"circleId": {"inq":' + JSON.stringify(this.filter1) + '}}' + ','
     + '{"gender": {"inq":' + JSON.stringify(this.filter2) + '}}'
     + '] }';     */
-    console.log((this.filter2.length + this.filter3.length + this.filter4.length + this.filter5.length + this.filter6.length) );
+
     this.combinedFilters = 
     '{ "and": [' 
+
+    + ((this.input.nativeElement.value.length > 0) ? '{"or": [{"legalName": {"like": "%' + this.input.nativeElement.value + '%"}}, {"spiritualName": {"like": "%' + this.input.nativeElement.value + '%"}}]}' : '')
+
+    + (((this.filter1.length || this.filter2.length || this.filter3.length || this.filter4.length || this.filter5.length || this.filter6.length )  &&
+      (this.input.nativeElement.value.length )) ? ',' : '')    
+
     + ((this.filter1.length > 0 ) ? '{"circleId": {"inq":' + JSON.stringify(this.filter1) + '}}' : '')
     + (((this.filter2.length || this.filter3.length || this.filter4.length || this.filter5.length || this.filter6.length )  &&
       (this.filter1.length )) ? ',' : '')
@@ -468,15 +440,10 @@ export class DevoteeFilterComponent implements OnInit, AfterViewInit, OnDestroy 
     + ((this.filter6.length > 0 ) ? '{"shikshaLevel": {"inq":' + JSON.stringify(this.filter6) + '}}' : '')
 
     + '] }';
-    console.log(this.combinedFilters);
 
+    //console.log(this.combinedFilters);
 
-/*    {
-      or: [
-        { and: [{ field1: 'foo' }, { field2: 'bar' }] },
-        { field1: 'morefoo' }
-      ]
-    }     */
+    this.loopBackFilter.where = JSON.parse(this.combinedFilters);
 
   }
 
@@ -543,6 +510,9 @@ export class DevoteeFilterComponent implements OnInit, AfterViewInit, OnDestroy 
     this.five$.unsubscribe();
     this.six$.unsubscribe();
     this.seven$.unsubscribe();
+    this.eight$.unsubscribe();
+    this.nine$.unsubscribe();
+    this.ten$.unsubscribe();
    }
   // TODO: Remove this when we're done
   //get diagnostic() { return JSON.stringify(this.model); }

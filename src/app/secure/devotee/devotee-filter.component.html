@@ -1,6 +1,8 @@
 <div fxLayout="column" class="container">
   <div>
-    <form fxFill fxLayout="row wrap" fxLayoutAlign="space-evenly center" class="p-l-20 p-t-40" novalidate>      
+<!--     <fieldset>
+    <legend>Devotee Filters</legend>    -->     
+    <form fxFill fxLayout="row wrap" fxLayoutAlign="space-evenly center" class="p-l-20" novalidate>      
 
       <mat-form-field>      
         <mat-chip-list #chipList1 name="chiplist1">
@@ -115,10 +117,13 @@
                 </mat-autocomplete>             
             </mat-chip-list>      
         </mat-form-field> 
-      <mat-form-field fxFlex="100%">
-          <input matInput placeholder="Search Name" #input>
-      </mat-form-field>           
+        <div fxLayoutAlign="space-evenly center" fxFlex="100%">
+            <mat-form-field>
+                <input matInput placeholder="Name Filter" #input>
+            </mat-form-field>           
+        </div>
     </form>
+<!-- </fieldset>   -->    
   </div>
   <div class="two container" >
   <div fxLayout="column">

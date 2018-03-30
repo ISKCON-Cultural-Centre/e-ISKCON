@@ -2,19 +2,20 @@
 @import "@angular/material/prebuilt-themes/indigo-pink.css";
 
 
+
 .switch {
     display: block;
     background-color:#f2f2f3;
   }
   
   fieldset {
-    padding-top:20px; 
+    padding-top:10px; 
     border: 10px le;
   }
   
   fieldset > div {
     background-color:rgb(255, 255, 255);
-    display: inline-block;
+    display: block;
     width:100%;
   }
 

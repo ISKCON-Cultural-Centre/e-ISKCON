@@ -27,12 +27,12 @@ export class DevoteesDataSource implements DataSource<Devotee> {
     }
 
     loadDevotees(devoteeFilter: LoopBackFilter,
-                searchString: String,             
+           
                 pageIndex:number,
                 pageSize:number) {
 
         this.loadingSubject.next(true);
-console.log(devoteeFilter);
+
         this.devoteesListService.findDevotees(devoteeFilter,                 
                 pageIndex,
                 pageSize).pipe(
@@ -46,9 +46,4 @@ console.log(devoteeFilter);
         );  
 }
 
-}
-
-export interface DevoteeWithCount {
-    devotee: Devotee[];
-    count: number;
 }
