@@ -1,10 +1,6 @@
-<div class="container">
+<div fxLayout="column" class="container">
   <div>
-    <form fxFill fxLayout="column" class="p-l-20" novalidate>      
-
-      <mat-form-field fxFlex="100%">
-          <input matInput placeholder="Search Name" #input>
-      </mat-form-field>
+    <form fxFill fxLayout="row wrap" fxLayoutAlign="space-evenly center" class="p-l-20 p-t-40" novalidate>      
 
       <mat-form-field>      
         <mat-chip-list #chipList1 name="chiplist1">
@@ -119,14 +115,16 @@
                 </mat-autocomplete>             
             </mat-chip-list>      
         </mat-form-field> 
-           
+      <mat-form-field fxFlex="100%">
+          <input matInput placeholder="Search Name" #input>
+      </mat-form-field>           
     </form>
   </div>
   <div class="two container" >
   <div fxLayout="column">
 
     <div>
-    <mat-table fxFill fxLayout="column" #table [dataSource]="dataSource" matSort>
+    <mat-table fxFill fxLayout="column" class="m-t-20" #table [dataSource]="dataSource" matSort>
         <!-- Legal Name Column -->
         <ng-container matColumnDef="legalName">
             <mat-header-cell *matHeaderCellDef  mat-sort-header> Legal Name </mat-header-cell>
