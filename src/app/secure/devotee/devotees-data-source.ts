@@ -26,7 +26,8 @@ export class DevoteesDataSource implements DataSource<Devotee> {
         this.loadingSubject.complete();
     }
 
-    loadDevotees(devoteeFilter: LoopBackFilter,                 
+    loadDevotees(devoteeFilter: LoopBackFilter,
+                searchString: String,             
                 pageIndex:number,
                 pageSize:number) {
 

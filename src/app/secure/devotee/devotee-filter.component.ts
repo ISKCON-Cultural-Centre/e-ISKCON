@@ -1,9 +1,10 @@
-import { Component, ViewChild, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, OnInit, ElementRef, OnDestroy, AfterViewInit } from '@angular/core';
 import {ENTER, COMMA} from '@angular/cdk/keycodes';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {merge} from "rxjs/observable/merge";
+import {fromEvent} from 'rxjs/observable/fromEvent';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
 import {debounceTime, distinctUntilChanged, startWith, tap, delay,switchMap, map} from 'rxjs/operators';
@@ -99,6 +100,7 @@ export class DevoteeFilterComponent implements OnInit, AfterViewInit, OnDestroy 
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild('input') input: ElementRef;
 
   currentDevoteeId = new Subject<String>();
   currentDevoteeId$ = this.currentDevoteeId.asObservable();
@@ -144,7 +146,7 @@ export class DevoteeFilterComponent implements OnInit, AfterViewInit, OnDestroy 
         this.filteredDevoteesCount.next(count.count);
         //this.dataSource = new DevoteesDataSource(this.devoteesListService);
         console.log('inside filter comp');
-        this.dataSource.loadDevotees(this.loopBackFilter, 0, 10);
+        this.dataSource.loadDevotees(this.loopBackFilter, null, 0, 10);
         this.paginator.pageIndex = 0;   
       }
     );
@@ -167,7 +169,7 @@ export class DevoteeFilterComponent implements OnInit, AfterViewInit, OnDestroy 
           count => {
             this.filteredDevoteesCount.next(count.count);
             //this.dataSource = new DevoteesDataSource(this.devoteesListService);
-            this.dataSource.loadDevotees(this.loopBackFilter, this.paginator.pageIndex, this.paginator.pageSize);       
+            this.dataSource.loadDevotees(this.loopBackFilter, this.input.nativeElement.value, this.paginator.pageIndex, this.paginator.pageSize);       
           }
         );    
         this.paginator.pageIndex = 0;    
@@ -243,6 +245,19 @@ export class DevoteeFilterComponent implements OnInit, AfterViewInit, OnDestroy 
 
   ngAfterViewInit() {
 
+
+      fromEvent(this.input.nativeElement,'keyup')
+          .pipe(
+              debounceTime(150),
+              distinctUntilChanged(),
+              tap(() => {
+                  this.paginator.pageIndex = 0;
+
+                  this.loadDevoteesPage();
+              })
+          )
+          .subscribe();
+
       // reset the paginator after sorting
       this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 
@@ -260,6 +275,7 @@ export class DevoteeFilterComponent implements OnInit, AfterViewInit, OnDestroy 
   loadDevoteesPage() {
       this.dataSource.loadDevotees(
           this.loopBackFilter,
+          this.input.nativeElement.value,          
           this.paginator.pageIndex,
           this.paginator.pageSize);
   }

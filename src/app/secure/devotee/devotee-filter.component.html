@@ -3,7 +3,7 @@
     <form fxFill fxLayout="column" class="p-l-20" novalidate>      
 
       <mat-form-field fxFlex="100%">
-          <input matInput placeholder="Name" aria-label="State" (keyup)="nameSearchTerm$.next($event.target.value)">
+          <input matInput placeholder="Search Name" #input>
       </mat-form-field>
 
       <mat-form-field>      
@@ -44,7 +44,7 @@
         </mat-chip-list>
       </mat-form-field>      
 
-        <mat-form-field>      
+<!--         <mat-form-field>      
             <mat-chip-list #chipList3>
                 <mat-chip *ngFor="let language of assignedLanguages" [selectable]="selectable"
                         [removable]="removable" (remove)="removeLanguage(language)" [value]="language.id">
@@ -62,7 +62,7 @@
                 </mat-autocomplete>             
             </mat-chip-list>      
         </mat-form-field>    
-
+ -->
         <mat-form-field>      
             <mat-chip-list #chipList4>
                 <mat-chip *ngFor="let ashrama of assignedAshramas" [selectable]="selectable"
@@ -82,7 +82,7 @@
             </mat-chip-list>      
         </mat-form-field> 
 
-        <mat-form-field>      
+<!--         <mat-form-field>      
             <mat-chip-list #chipList5>
                 <mat-chip *ngFor="let profession of assignedProfessions" [selectable]="selectable"
                         [removable]="removable" (remove)="removeProfession(profession)" [value]="profession.id">
@@ -99,7 +99,7 @@
                 </mat-option>
                 </mat-autocomplete>             
             </mat-chip-list>      
-        </mat-form-field> 
+        </mat-form-field>  -->
 
         <mat-form-field>      
             <mat-chip-list #chipList6>
