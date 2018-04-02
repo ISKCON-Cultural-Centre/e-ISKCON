@@ -27,13 +27,12 @@ export class DevoteesDataSource implements DataSource<Devotee> {
     }
 
     loadDevotees(devoteeFilter: LoopBackFilter,
-           
                 pageIndex:number,
                 pageSize:number) {
 
         this.loadingSubject.next(true);
 
-        this.devoteesListService.findDevotees(devoteeFilter,                 
+        this.devoteesListService.findDevotees(devoteeFilter,
                 pageIndex,
                 pageSize).pipe(
             catchError(() => of([])),
@@ -43,7 +42,7 @@ export class DevoteesDataSource implements DataSource<Devotee> {
             {
                 this.devoteesSubject.next(devotees);
             }
-        );  
+        );
 }
 
 }

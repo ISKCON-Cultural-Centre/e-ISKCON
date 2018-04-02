@@ -18,6 +18,8 @@ import { DevoteeServiceAvailabilityComponent } from './devotee-service-availabil
 import { ChangePasswordComponent } from './change-password.component';
 import { DevoteeFilterComponent } from './devotee-filter.component';
 import { DevoteesListService } from './devotees-list-service';
+import { DevoteeDetailComponent } from './devotee-detail.component';
+import { DevoteesListComponent } from './devotees-list.component';
 
 const routes: Routes = [
 
@@ -39,7 +41,7 @@ const routes: Routes = [
     DevoteeSearchComponent, 
     DevoteeProfileComponent, DevoteeRoleComponent, DevoteeSkillComponent,
     DevoteeLanguageComponent, DevoteeServiceInterestComponent, 
-    DevoteeServiceAvailabilityComponent, ChangePasswordComponent, DevoteeFilterComponent
+    DevoteeServiceAvailabilityComponent, ChangePasswordComponent, DevoteeFilterComponent, DevoteeDetailComponent, DevoteesListComponent
   ],
   providers: [
     DevoteeSearchSelectService,

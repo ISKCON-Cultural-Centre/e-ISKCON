@@ -1,6 +1,55 @@
-<header>
+<!-- <header>
     <div fxFlexFill fxLayout="row" >
-        <mat-sidenav-container fxFlex>
+              <mat-toolbar color="primary" *ngIf="isLoggedIn$ | async as isLoggedIn">
+                  <span>ICC</span>
+                  <span class="fill-remaining-space"></span>  
+                  <button mat-icon-button routerLink="/dashboard">
+                      <mat-icon >home</mat-icon>
+                  </button>      
+                  <button mat-button [matMenuTriggerFor]="myServicesMenu">
+                    My Services
+                  </button>                           
+                  <button mat-button [matMenuTriggerFor]="profileMenu">
+                      {{devoteeName$ | async}}
+                    </button> 
+                  <mat-menu #profileMenu="matMenu">
+                      <button mat-menu-item routerLink="/profile">
+                        <mat-icon>perm_identity</mat-icon>
+                        <span>My Profile</span>
+                      </button>
+                      <button mat-menu-item routerLink="/changePassword" >
+                          <mat-icon>vpn_keyy</mat-icon>
+                          <span>Change Password</span>
+                        </button>    
+                      <button mat-menu-item  (click)="onLogout()" *ngIf="isLoggedIn">
+                        <mat-icon>exit_to_app</mat-icon>
+                        <span>Logout</span>
+                      </button>
+                    </mat-menu>    
+                    <mat-menu #myServicesMenu="matMenu">
+                        <button mat-menu-item *ngFor="let myTask of myTasks" routerLink={{myTask.applicationRoute}}>
+                          <mat-icon *ngIf="myTask.icon">{{myTask.icon}}</mat-icon>
+                          <span>{{myTask.taskName + myTask.applicationRoute}}</span>
+                        </button>
+                    </mat-menu>                                 
+              </mat-toolbar>
+    </div>
+</header>
+ <main>
+    <app-breadcrumb></app-breadcrumb>          
+    <router-outlet></router-outlet>      
+
+</main>
+<footer>
+  With &hearts; by ISKCON Cultural Centre - IT, Bangalore
+</footer>
+ -->
+
+
+
+ <div fxFlexFill fxLayout="row" >
+ <mat-sidenav-container fxFlex>
+            
             <mat-sidenav #mainSideNav mode="over" closed  >
                 <mat-toolbar color="primary" *ngIf="isLoggedIn$ | async as isLoggedIn">
                    My Services
@@ -45,14 +94,16 @@
                       </button>
                     </mat-menu>               
               </mat-toolbar>
-            </mat-sidenav-container>    
-    </div>
-</header>
- <main>
-    <app-breadcrumb></app-breadcrumb>          
-    <router-outlet></router-outlet>      
+              <main>
+                    <app-breadcrumb></app-breadcrumb>          
+                    <router-outlet></router-outlet>      
+                
+                </main>              
+                <footer>
+                        With &hearts; by ISKCON Cultural Centre - IT, Bangalore
+                </footer>
+</mat-sidenav-container>        
 
-</main>
-<footer>
-  With &hearts; by ISKCON Cultural Centre - IT, Bangalore
-</footer>
+</div>
+
+

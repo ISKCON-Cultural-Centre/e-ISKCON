@@ -9,7 +9,7 @@ export class DevoteesListService {
 
     constructor(private devoteeApi: DevoteeApi) {}
 
-    findDevotees(devoteeFilter: LoopBackFilter, pageIndex:number, pageSize:number):  Observable<Devotee[]> {
+    findDevotees(devoteeFilter: LoopBackFilter, pageIndex: number, pageSize: number):  Observable<Devotee[]> {
         devoteeFilter.limit = pageSize;
         devoteeFilter.skip = pageIndex * pageSize;
 

@@ -3,7 +3,7 @@
 
 .wrapper {
 	display: flex;
-	flex-flow: row wrap;
+	flex-flow: row;
 	font-weight: bold;
 	text-align: center;
 }
@@ -237,7 +237,6 @@ iframe {
   display: -moz-box;
   display: -ms-flexbox;
   display: flex;
-  flex-wrap: wrap;
   align-items: stretch;
   flex-direction: row-reverse;
 }

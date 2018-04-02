@@ -30,11 +30,11 @@ import { DevoteesListService } from './devotees-list-service';
 
 
 @Component({
-  selector: 'app-devotee-filter',
-  templateUrl: './devotee-filter.component.html',
-  styleUrls: ['./devotee-filter.component.css']
+  selector: 'app-devotees-list',
+  templateUrl: './devotees-list.component.html',
+  styleUrls: ['./devotees-list.component.css']
 })
-export class DevoteeFilterComponent implements OnInit, AfterViewInit, OnDestroy {
+export class DevoteesListComponent  implements OnInit, AfterViewInit, OnDestroy {
 
   devoteeId: String;
   devotee: Devotee;
@@ -135,7 +135,7 @@ export class DevoteeFilterComponent implements OnInit, AfterViewInit, OnDestroy 
 
 
   ngOnInit() {
-   
+    
 
     this.loopBackFilter.include = ['fkDevoteeLanguage1rel', 'fkDevoteeProfessionMaster1rel', 'fkDevoteeCircle1rel'];
     this.loopBackFilter.order = ['legalName ASC', 'spiritualName ASC'];
@@ -147,7 +147,7 @@ export class DevoteeFilterComponent implements OnInit, AfterViewInit, OnDestroy 
         this.paginator.pageIndex = 0;   
       }
     );
-     this.seven$ = this.filterCondition
+      this.seven$ = this.filterCondition
     .subscribe(
       filter => {
         this.buildAllFilters();
@@ -232,7 +232,7 @@ export class DevoteeFilterComponent implements OnInit, AfterViewInit, OnDestroy 
       // reset the paginator after sorting
       this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 
-       merge(this.sort.sortChange, this.paginator.page)
+        merge(this.sort.sortChange, this.paginator.page)
           .pipe(
               tap(() => {
                 this.loadDevoteesPage();
@@ -470,8 +470,8 @@ export class DevoteeFilterComponent implements OnInit, AfterViewInit, OnDestroy 
     return profession ? profession.professionName : '';
   }
 
- 
-   reset() {
+  
+    reset() {
       this.devoteeFilterForm.reset();
       this.currentDevoteeId.next(null);
       this.devoteeFilterForm.setValue(
@@ -499,10 +499,10 @@ export class DevoteeFilterComponent implements OnInit, AfterViewInit, OnDestroy 
           landlineNo: null
         }
       );
-   }
- 
+    }
+  
 
-   ngOnDestroy(){
+    ngOnDestroy(){
     this.one$.unsubscribe();
     this.two$.unsubscribe();
     this.three$.unsubscribe();
@@ -513,9 +513,10 @@ export class DevoteeFilterComponent implements OnInit, AfterViewInit, OnDestroy 
     this.eight$.unsubscribe();
     this.nine$.unsubscribe();
     this.ten$.unsubscribe();
-   }
+    }
   // TODO: Remove this when we're done
   //get diagnostic() { return JSON.stringify(this.model); }
 
 
 }
+  
