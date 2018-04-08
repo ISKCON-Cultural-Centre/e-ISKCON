@@ -441,7 +441,7 @@ export class DevoteeFilterComponent implements OnInit, AfterViewInit, OnDestroy 
 
     + '] }';
 
-    //console.log(this.combinedFilters);
+   // console.log(this.combinedFilters);
 
     this.loopBackFilter.where = JSON.parse(this.combinedFilters);
 

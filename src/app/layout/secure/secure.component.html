@@ -47,8 +47,10 @@
 
 
 
- <div fxFlexFill fxLayout="row" >
- <mat-sidenav-container fxFlex>
+
+ <div fxFlexFill  fxLayout="column">
+  <main fxFlexFill>
+  <mat-sidenav-container fxFlex>
             
             <mat-sidenav #mainSideNav mode="over" closed  >
                 <mat-toolbar color="primary" *ngIf="isLoggedIn$ | async as isLoggedIn">
@@ -94,16 +96,15 @@
                       </button>
                     </mat-menu>               
               </mat-toolbar>
-              <main>
-                    <app-breadcrumb></app-breadcrumb>          
-                    <router-outlet></router-outlet>      
-                
-                </main>              
-                <footer>
-                        With &hearts; by ISKCON Cultural Centre - IT, Bangalore
-                </footer>
-</mat-sidenav-container>        
-
+                <app-breadcrumb></app-breadcrumb>          
+                <router-outlet></router-outlet>                               
+</mat-sidenav-container>       
+</main>  
+<!-- <footer>
+    With &hearts; by ISKCON Cultural Centre - IT, Bangalore
+</footer>   -->
 </div>
+
+ 
 
 
