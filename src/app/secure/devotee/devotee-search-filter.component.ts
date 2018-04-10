@@ -15,50 +15,6 @@ import {  difference, union } from 'set-manipulator';
 
 import {LoopBackFilter} from '../../shared/sdk/models/BaseModels'
 import { DialogBoxComponent } from '../../shared/components/dialog-box/dialog-box.component';
-import { DevoteeSearchFilterShareService } from './devotee-search-Filter-share-service';
-
-@Component({
-  selector: 'app-devotee-filter',
-  templateUrl: './devotee-filter.component.html',
-  styleUrls: ['./devotee-filter.component.css'],
-  providers: [DevoteeSearchFilterShareService]
-})
-export class DevoteeFilterComponent implements OnInit {
-
-  
-
-  constructor(
-    private devoteeSearchFilterShareService: DevoteeSearchFilterShareService
-  ) { }
-
-  ngOnInit() {
-
-  }
-
-
- 
-}
-
-
-
-/*
-import { Component, ViewChild, OnInit, ElementRef, OnDestroy, AfterViewInit } from '@angular/core';
-import {ENTER, COMMA} from '@angular/cdk/keycodes';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs/Observable';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {merge} from 'rxjs/observable/merge';
-import {fromEvent} from 'rxjs/observable/fromEvent';
-import { Subject } from 'rxjs/Subject';
-import { Subscription } from 'rxjs/Subscription';
-import {debounceTime, distinctUntilChanged, startWith, tap, delay,switchMap, map} from 'rxjs/operators';
-import { Http } from '@angular/http';
-import { MatDialog, MatChipInputEvent, MatAutocompleteSelectedEvent, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-import {  difference, union } from 'set-manipulator';
-
-
-import {LoopBackFilter} from '../../shared/sdk/models/BaseModels'
-import { DialogBoxComponent } from '../../shared/components/dialog-box/dialog-box.component';
 import {
   SDKToken, DevoteeApi, GothraMasterApi,
   NakshatraMasterApi, CircleApi, Devotee, Circle,
@@ -66,20 +22,15 @@ import {
   AsramaMaster, AsramaMasterApi, 
   ProfessionMaster, ProfessionMasterApi, PhysicalAddress, SpiritualLevelMaster, SpiritualLevelMasterApi,
   } from '../..//shared/sdk';
-import { AuthService, DevoteeSearchSelectService, NotificationService } from '../../shared/services';
-import { PhysicalAddressComponent } from '../common/physical-address.component';
-import { PhysicalAddressApi } from '../../shared/sdk/services/index';
-import { DevoteesDataSource } from './devotees-data-source';
-import { DevoteesListService } from './devotees-list-service';
-
+import { AuthService, NotificationService } from '../../shared/services';
+import { DevoteeSearchFilterShareService } from './devotee-search-Filter-share-service';
 
 @Component({
-  selector: 'app-devotee-filter',
-  templateUrl: './devotee-filter.component.html',
-  styleUrls: ['./devotee-filter.component.css']
+  selector: 'app-devotee-search-filter',
+  templateUrl: './devotee-search-filter.component.html',
+  styleUrls: ['./devotee-search-filter.component.css']
 })
-export class DevoteeFilterComponent implements OnInit, AfterViewInit, OnDestroy {
-
+export class DevoteeSearchFilterComponent implements OnInit, AfterViewInit, OnDestroy  {
   devoteeId: String;
   devotee: Devotee;
 
@@ -137,18 +88,8 @@ export class DevoteeFilterComponent implements OnInit, AfterViewInit, OnDestroy 
 
   filterCondition = new Subject<any>();
 
-  dataSource = new DevoteesDataSource(this.devoteesListService);
-  displayedColumns = ['name', 'mobileNo', 'circle'];
-  filteredDevoteesCount = new BehaviorSubject<number>(0);
-  public filteredDevoteesCount$ = this.filteredDevoteesCount.asObservable();
-
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild('input') input: ElementRef;
 
-  currentDevoteeId = new Subject<String>();
-  currentDevoteeId$ = this.currentDevoteeId.asObservable();
-  submitted = false;
   devoteeFilterForm: FormGroup;
 
 
@@ -160,39 +101,16 @@ export class DevoteeFilterComponent implements OnInit, AfterViewInit, OnDestroy 
     private spiritualLevelMasterApi: SpiritualLevelMasterApi,
     private authService: AuthService,
     private devoteeApi: DevoteeApi,
-    private devoteesListService: DevoteesListService,
-    private fb: FormBuilder) {
-    this.createForm();
-  }
-
-
+    private devoteeSearchFilterShareService: DevoteeSearchFilterShareService
+  ) { }
 
 
   ngOnInit() {
-   
-
-    this.loopBackFilter.include = ['fkDevoteeLanguage1rel', 'fkDevoteeProfessionMaster1rel', 'fkDevoteeCircle1rel'];
-    this.loopBackFilter.order = ['spiritualName ASC'];
-    this.eight$ = this.devoteeApi.count(this.combinedFilters)
-    .subscribe(
-      count => {
-        this.filteredDevoteesCount.next(count.count);
-        this.dataSource.loadDevotees(this.loopBackFilter, 0, 10);
-        this.paginator.pageIndex = 0;   
-      }
-    );
      this.seven$ = this.filterCondition
     .subscribe(
       filter => {
         this.buildAllFilters();
-        this.nine$ = this.devoteeApi.count(this.combinedFilters)
-        .subscribe(
-          count => {
-            this.filteredDevoteesCount.next(count.count);
-            this.dataSource.loadDevotees(this.loopBackFilter, this.paginator.pageIndex, this.paginator.pageSize);       
-          }
-        );    
-        this.paginator.pageIndex = 0;    
+        this.notifyFilterChange(this.combinedFilters);
       }
     ); 
 
@@ -250,39 +168,16 @@ export class DevoteeFilterComponent implements OnInit, AfterViewInit, OnDestroy 
               debounceTime(150),
               distinctUntilChanged(),
               tap(() => {
-                  this.paginator.pageIndex = 0;
                   this.buildAllFilters();
-                  this.loadDevoteesPage();
+                  this.notifyFilterChange(this.combinedFilters);
               })
-          )
-          .subscribe();
-
-      // reset the paginator after sorting
-      this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
-
-       merge(this.sort.sortChange, this.paginator.page)
-          .pipe(
-              tap(() => {
-                this.loadDevoteesPage();
-              }
-            )
           )
           .subscribe();
   }
 
 
-  loadDevoteesPage() {
-    this.eight$ = this.devoteeApi.count(this.combinedFilters)
-    .subscribe(
-      count => {
-        this.filteredDevoteesCount.next(count.count);
-        this.dataSource.loadDevotees(
-          this.loopBackFilter,
-          this.paginator.pageIndex,
-          this.paginator.pageSize);
-          //this.paginator.pageIndex = 0;   
-      }
-    );     
+  notifyFilterChange(event: String) {
+    this.devoteeSearchFilterShareService.filterChanged(event);
   }
 
   onRowClicked(row) {
@@ -434,7 +329,6 @@ export class DevoteeFilterComponent implements OnInit, AfterViewInit, OnDestroy 
   buildAllFilters()
   {
 
-
     this.combinedFilters = 
     '{ "and": [' 
 
@@ -470,61 +364,6 @@ export class DevoteeFilterComponent implements OnInit, AfterViewInit, OnDestroy 
 
   }
 
-  extend(obj, src) {
-    Object.keys(src).forEach(function(key) { obj[key] = src[key]; });
-    return obj;
-}
-
-  createForm() {
-    this.devoteeFilterForm = this.fb.group({
-      name: null,
-      circleId: null,
-      gender: null,
-      languageId: null,
-      asramaMasterId: null,
-      professionId: null,
-      shikshaLevel: null
-    });
-  }
-
-
-
-  displayFn(profession?: ProfessionMaster): string | undefined {
-    return profession ? profession.professionName : '';
-  }
-
- 
-   reset() {
-      this.devoteeFilterForm.reset();
-      this.currentDevoteeId.next(null);
-      this.devoteeFilterForm.setValue(
-        {
-          id: null,
-          legalName: null,
-          circleId: null,
-          spiritualName: null,
-          gender: null,
-          creditLimit: 0,
-          email: null,
-          gothra: null,
-          nakshatra: null,
-          governmentUniqueId: null,
-          incomeTaxId: null,
-          kcAssociationDate: null,
-          motherTongueLanguageId: null,
-          dateOfBirth: null,
-          dayMonthOfBirth: 'a',
-          lpmId: null,
-          asramaMasterId: null,
-          professionId: null,
-          physicalAddressId: null,
-          mobileNo: null,
-          landlineNo: null
-        }
-      );
-   }
- 
-
    ngOnDestroy(){
     this.one$.unsubscribe();
     this.two$.unsubscribe();
@@ -539,4 +378,3 @@ export class DevoteeFilterComponent implements OnInit, AfterViewInit, OnDestroy 
    }
 
 }
-*/

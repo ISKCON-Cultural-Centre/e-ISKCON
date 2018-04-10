@@ -20,7 +20,8 @@ import { DevoteeFilterComponent } from './devotee-filter.component';
 import { DevoteesListService } from './devotees-list-service';
 import { DevoteeDetailComponent } from './devotee-detail.component';
 import { DevoteesListComponent } from './devotees-list.component';
-import { DevoteeFilterShareService } from './devotee-filter-share-service'
+import { DevoteeSearchFilterShareService } from './devotee-search-filter-share-service';
+import { DevoteeSearchFilterComponent } from './devotee-search-filter.component'
 const routes: Routes = [
 
   { path: 'devotee', component: DevoteeComponent, canActivate: [AuthGuard] }
@@ -41,12 +42,13 @@ const routes: Routes = [
     DevoteeSearchComponent, 
     DevoteeProfileComponent, DevoteeRoleComponent, DevoteeSkillComponent,
     DevoteeLanguageComponent, DevoteeServiceInterestComponent, 
-    DevoteeServiceAvailabilityComponent, ChangePasswordComponent, DevoteeFilterComponent, DevoteeDetailComponent, DevoteesListComponent
+    DevoteeServiceAvailabilityComponent, ChangePasswordComponent, DevoteeFilterComponent, 
+    DevoteeDetailComponent, DevoteesListComponent, DevoteeSearchFilterComponent
   ],
   providers: [
     DevoteeSearchSelectService,
     DevoteesListService,
-    DevoteeFilterShareService
+    DevoteeSearchFilterShareService
   ],
 })
 export class DevoteeModule { }

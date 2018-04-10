@@ -3,7 +3,7 @@ import { Subject } from 'rxjs/Subject';
 
 
 @Injectable()
-export class DevoteeFilterShareService {
+export class DevoteeSearchFilterShareService {
 
   // Observable string sources
   private devoteeFilter = new Subject<String>();

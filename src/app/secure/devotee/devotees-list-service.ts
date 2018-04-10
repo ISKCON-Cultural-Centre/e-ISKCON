@@ -12,7 +12,7 @@ export class DevoteesListService {
     findDevotees(devoteeFilter: LoopBackFilter, pageIndex: number, pageSize: number):  Observable<Devotee[]> {
         devoteeFilter.limit = pageSize;
         devoteeFilter.skip = pageIndex * pageSize;
-
+        //console.log(devoteeFilter);
         return this.devoteeApi.find(devoteeFilter);
     }
 }
