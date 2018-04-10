@@ -15,7 +15,7 @@ import {  difference, union } from 'set-manipulator';
 
 import {LoopBackFilter} from '../../shared/sdk/models/BaseModels'
 import { DialogBoxComponent } from '../../shared/components/dialog-box/dialog-box.component';
-import { DevoteeSearchFilterShareService } from './devotee-search-Filter-share-service';
+import { DevoteeSearchFilterShareService } from './devotee-search-filter-share-service';
 
 @Component({
   selector: 'app-devotee-filter',

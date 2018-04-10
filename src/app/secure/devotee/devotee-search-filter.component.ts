@@ -23,7 +23,7 @@ import {
   ProfessionMaster, ProfessionMasterApi, PhysicalAddress, SpiritualLevelMaster, SpiritualLevelMasterApi,
   } from '../..//shared/sdk';
 import { AuthService, NotificationService } from '../../shared/services';
-import { DevoteeSearchFilterShareService } from './devotee-search-Filter-share-service';
+import { DevoteeSearchFilterShareService } from './devotee-search-filter-share-service';
 
 @Component({
   selector: 'app-devotee-search-filter',
@@ -363,6 +363,10 @@ export class DevoteeSearchFilterComponent implements OnInit, AfterViewInit, OnDe
     this.loopBackFilter.where = JSON.parse(this.combinedFilters);
 
   }
+
+  displayFn(profession?: ProfessionMaster): string | undefined {
+    return profession ? profession.professionName : '';
+  }  
 
    ngOnDestroy(){
     this.one$.unsubscribe();

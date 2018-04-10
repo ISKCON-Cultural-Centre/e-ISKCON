@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit, Input, ElementRef, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, OnInit, Input, Output, ElementRef, OnDestroy, AfterViewInit } from '@angular/core';
 import {ENTER, COMMA} from '@angular/cdk/keycodes';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
@@ -26,7 +26,7 @@ import { PhysicalAddressComponent } from '../common/physical-address.component';
 import { PhysicalAddressApi } from '../../shared/sdk/services/index';
 import { DevoteesDataSource } from './devotees-data-source';
 import { DevoteesListService } from './devotees-list-service';
-import { DevoteeSearchFilterShareService } from './devotee-search-Filter-share-service';
+import { DevoteeSearchFilterShareService } from './devotee-search-filter-share-service';
 
 @Component({
   selector: 'app-devotees-list',
@@ -39,6 +39,7 @@ export class DevoteesListComponent  implements OnInit, AfterViewInit, OnDestroy 
   devotee: Devotee;
 
   @Input() combinedFilters = '';
+  @Output() selectedDevotee: Devotee;
   loopBackFilter: LoopBackFilter = {};
 
 
