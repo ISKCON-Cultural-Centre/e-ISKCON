@@ -10,23 +10,27 @@
   </mat-card-content>
 </mat-card> -->
 <mat-card  [formGroup]="form">
-    <mat-card-header>
+<!--     <mat-card-header>
         <img mat-card-avatar src="https://source.unsplash.com/random/200x200">
         <mat-card-title>Cards are the best</mat-card-title>
         <mat-card-subtitle>Really, they are!</mat-card-subtitle>
-      </mat-card-header>
+      </mat-card-header> -->    
   <mat-tab-group [selectedIndex]="0">
     <mat-tab label="Personal Details">
-      <h3>Breakfast option</h3>
-      <p>Toast /w peanut butter</p>
+        <mat-card-content>
+            <p>Legal Name : {{form.get('legalName').value}}</p>
+            <p>Spiritual Name : {{form.get('spiritualName').value === form.get('legalName').value ? '' : form.get('spiritualName').value}}</p>          
+            <p>Gothra : {{form.get('gothra').value}}</p>    
+            <p>Nakshatra : {{form.get('nakshatra').value}}</p>             
+        </mat-card-content>
     </mat-tab>
     <mat-tab label="Contact Details">
-      <h3>Lunch option</h3>
-      <p>Club sandwich</p>
+        <p>Mobile : {{form.get('mobileNo').value}}</p>
+        <p>Landline : {{form.get('landlineNo').value}}</p>    
+        <p>Email : {{form.get('email').value}}</p>               
     </mat-tab>
     <mat-tab label="Service Availability">
-      <h3>Dinner option</h3>
-      <p>Lasagna</p>
+      <p>No Data</p>
     </mat-tab>
-  </mat-tab-group>
+  </mat-tab-group>   
 </mat-card>
