@@ -28,6 +28,7 @@ import { PhysicalAddressApi } from '../../shared/sdk/services/index';
 })
 export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit {
 
+  @Input() selectedDevotee: Devotee;
   devoteeId: String;
   devotee: Devotee;
 
@@ -92,7 +93,8 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
 
   ngOnInit() {
 
-    this.devoteeId ? this.devoteeId = this.devoteeId : this.devoteeId = this.authService.getCurrentUserId();
+    this.devoteeId ? this.devoteeId = this.devoteeId : (this.selectedDevotee ? this.selectedDevotee 
+      : this.devoteeId = this.authService.getCurrentUserId());
     this.currentDevoteeId.next(this.devoteeId);
     this.loadDevotee(this.devoteeId);
     this.currentDevoteeId.next(this.devoteeId);
@@ -119,7 +121,7 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
     );
 
     this.two$ = this.devoteeForm.get('gothra').valueChanges
-      //.distinctUntilChanged()
+      .distinctUntilChanged()
       .subscribe(searchTerm => {
         this.filteredGothras = this.gothraMasterApi.find<GothraMaster>(
           { where: { gothra: { like: '%' + searchTerm + '%' } } }
@@ -127,7 +129,7 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
       });
 
     this.three$ = this.devoteeForm.get('nakshatra').valueChanges
-      //.distinctUntilChanged()
+      .distinctUntilChanged()
       .subscribe(searchTerm => {
         this.filteredNakshatras = this.nakshatraMasterApi.find<NakshatraMaster>(
           { where: { nakshatra: { like: '%' + searchTerm + '%' } } }
@@ -135,7 +137,7 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
       });
 
       this.four$ = this.devoteeForm.get('professionId').valueChanges
-      //.distinctUntilChanged()
+      .distinctUntilChanged()
       .subscribe(searchTerm => {
         this.filteredProfessions = this.professionMasterApi.find<ProfessionMaster>(
           { where: { professionName: { like: '%' + searchTerm + '%' } } }
@@ -183,7 +185,7 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
       {
         id: devotee.id,
         legalName: devotee.legalName,
-        spiritualName: devotee.spiritualName,
+        spiritualName: devotee.spiritualName ? devotee.spiritualName : devotee.legalName,
         circleId: devotee.circleId,
         gender: devotee.gender,
         email: devotee.email,

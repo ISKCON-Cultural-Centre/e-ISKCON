@@ -9,13 +9,16 @@ import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
 import {debounceTime, distinctUntilChanged, startWith, tap, delay,switchMap, map} from 'rxjs/operators';
 import { Http } from '@angular/http';
-import { MatDialog, MatChipInputEvent, MatAutocompleteSelectedEvent, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatDialog,  MatDialogConfig, MatChipInputEvent, MatAutocompleteSelectedEvent, 
+  MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import {  difference, union } from 'set-manipulator';
 
 
 import {LoopBackFilter} from '../../shared/sdk/models/BaseModels'
 import { DialogBoxComponent } from '../../shared/components/dialog-box/dialog-box.component';
 import { DevoteeSearchFilterShareService } from './devotee-search-filter-share-service';
+import { Devotee } from '../../shared/sdk/index';
+import { DevoteeDetailComponent} from './devotee-detail.component';
 
 @Component({
   selector: 'app-devotee-filter',
@@ -28,6 +31,7 @@ export class DevoteeFilterComponent implements OnInit {
   
 
   constructor(
+    private dialog: MatDialog,
     private devoteeSearchFilterShareService: DevoteeSearchFilterShareService
   ) { }
 
@@ -35,7 +39,27 @@ export class DevoteeFilterComponent implements OnInit {
 
   }
 
+  devoteeDetail(devotee: Devotee){
+    console.log(devotee);
+    this.openDialog(devotee);
+  }
 
+  openDialog(devotee: Devotee) {
+
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.data = devotee;
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.hasBackdrop = true;
+
+    const dialogRef = this.dialog.open(DevoteeDetailComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(
+      data => console.log('Dialog output:', data)
+    );
+}
  
 }
 

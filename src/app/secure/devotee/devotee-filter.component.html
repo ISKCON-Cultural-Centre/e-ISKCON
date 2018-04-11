@@ -3,7 +3,7 @@
     <app-devotee-search-filter></app-devotee-search-filter>
 </div>
 <div fxLayout="column">
-    <app-devotees-list></app-devotees-list>
+    <app-devotees-list (selectedDevotee)='devoteeDetail($event)'></app-devotees-list>
 </div>  
 
         

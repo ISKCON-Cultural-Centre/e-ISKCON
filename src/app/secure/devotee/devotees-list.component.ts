@@ -1,6 +1,4 @@
-import { Component, ViewChild, OnInit, Input, Output, ElementRef, OnDestroy, AfterViewInit } from '@angular/core';
-import {ENTER, COMMA} from '@angular/cdk/keycodes';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, ViewChild, EventEmitter, OnInit, Input, Output, OnDestroy, AfterViewInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {merge} from 'rxjs/observable/merge';
@@ -8,19 +6,12 @@ import {fromEvent} from 'rxjs/observable/fromEvent';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
 import {debounceTime, distinctUntilChanged, startWith, tap, delay,switchMap, map} from 'rxjs/operators';
-import { Http } from '@angular/http';
+
 import { MatDialog, MatChipInputEvent, MatAutocompleteSelectedEvent, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-import {  difference, union } from 'set-manipulator';
 
 import {LoopBackFilter} from '../../shared/sdk/models/BaseModels'
 import { DialogBoxComponent } from '../../shared/components/dialog-box/dialog-box.component';
-import {
-  SDKToken, DevoteeApi, GothraMasterApi,
-  NakshatraMasterApi, CircleApi, Devotee, Circle,
-  GothraMaster, NakshatraMaster, Language, LanguageApi, 
-  AsramaMaster, AsramaMasterApi, 
-  ProfessionMaster, ProfessionMasterApi, PhysicalAddress, SpiritualLevelMaster, SpiritualLevelMasterApi,
-  } from '../..//shared/sdk';
+import { DevoteeApi, Devotee } from '../..//shared/sdk';
 import { AuthService, NotificationService } from '../../shared/services';
 import { PhysicalAddressComponent } from '../common/physical-address.component';
 import { PhysicalAddressApi } from '../../shared/sdk/services/index';
@@ -39,7 +30,7 @@ export class DevoteesListComponent  implements OnInit, AfterViewInit, OnDestroy 
   devotee: Devotee;
 
   @Input() combinedFilters = '';
-  @Output() selectedDevotee: Devotee;
+  @Output() selectedDevotee = new EventEmitter<Devotee>();
   loopBackFilter: LoopBackFilter = {};
 
 
@@ -60,15 +51,15 @@ export class DevoteesListComponent  implements OnInit, AfterViewInit, OnDestroy 
   constructor(
     private devoteesListService: DevoteesListService,
     private devoteeApi: DevoteeApi,
-    private devoteeSearchFilterShareService: DevoteeSearchFilterShareService,
-    private fb: FormBuilder) {
+    private devoteeSearchFilterShareService: DevoteeSearchFilterShareService
+  ) {
   }
 
   ngOnInit() {
 
     this.loopBackFilter.include = ['fkDevoteeLanguage1rel', 'fkDevoteeProfessionMaster1rel', 'fkDevoteeCircle1rel'];
-    this.loopBackFilter.order = ['spiritualName ASC'];    
-    this.one$ = this.devoteeSearchFilterShareService.devoteeFilter$.
+    this.loopBackFilter.order = ['spiritualName ASC'];
+    this.one$ = this.devoteeSearchFilterShareService.devoteeFilter$.startWith( '{ "and": []}' ).
     subscribe(
       filters => {
         if (filters) {
@@ -116,11 +107,12 @@ export class DevoteesListComponent  implements OnInit, AfterViewInit, OnDestroy 
   }
 
   onRowClicked(row) {
-    console.log('Row clicked: ', row);
+    this.selectedDevotee.emit(row);
 }
 
   ngOnDestroy(){
     this.one$.unsubscribe();
     this.two$.unsubscribe();
+    this.three$.unsubscribe();
   }
 }
