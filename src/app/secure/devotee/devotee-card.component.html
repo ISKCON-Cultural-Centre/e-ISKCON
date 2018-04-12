@@ -18,16 +18,16 @@
   <mat-tab-group [selectedIndex]="0">
     <mat-tab label="Personal Details">
         <mat-card-content>
-            <p>Legal Name : {{form.get('legalName').value}}</p>
-            <p>Spiritual Name : {{form.get('spiritualName').value === form.get('legalName').value ? '' : form.get('spiritualName').value}}</p>          
-            <p>Gothra : {{form.get('gothra').value}}</p>    
-            <p>Nakshatra : {{form.get('nakshatra').value}}</p>             
+            <p>{{form.get('legalName').value}}</p>
+            <p>{{form.get('spiritualName').value === form.get('legalName').value ? '' : form.get('spiritualName').value}}</p>          
+            <p>{{form.get('gothra').value}}</p>    
+            <p>{{form.get('nakshatra').value}}</p>             
         </mat-card-content>
     </mat-tab>
     <mat-tab label="Contact Details">
-        <p>Mobile : {{form.get('mobileNo').value}}</p>
-        <p>Landline : {{form.get('landlineNo').value}}</p>    
-        <p>Email : {{form.get('email').value}}</p>               
+        <p>{{form.get('mobileNo').value}}</p>
+        <p>{{form.get('landlineNo').value}}</p>    
+        <p>{{form.get('email').value}}</p>               
     </mat-tab>
     <mat-tab label="Service Availability">
       <p>No Data</p>

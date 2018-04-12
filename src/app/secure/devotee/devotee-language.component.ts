@@ -48,12 +48,12 @@ export class DevoteeLanguageComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.loadAllLanguages();
     this.one$ = this.devoteeId
     .subscribe(
       devoteeId => {
         this.currentDevoteeId = devoteeId ? devoteeId.toString() : null;
         this.loadDevoteeLanguages(this.currentDevoteeId);
+        this.loadAllLanguages();        
       }
     );
   }

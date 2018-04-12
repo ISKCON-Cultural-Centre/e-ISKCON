@@ -88,7 +88,7 @@ export class DevoteeSearchFilterComponent implements OnInit, AfterViewInit, OnDe
 
   filterCondition = new Subject<any>();
 
-  @ViewChild('input') input: ElementRef;
+  @ViewChild('input') search: ElementRef;
 
   devoteeFilterForm: FormGroup;
 
@@ -163,7 +163,7 @@ export class DevoteeSearchFilterComponent implements OnInit, AfterViewInit, OnDe
   ngAfterViewInit() {
 
 
-    this.ten$ = fromEvent(this.input.nativeElement,'keyup')
+    this.ten$ = fromEvent(this.search.nativeElement,'keyup')
           .pipe(
               debounceTime(150),
               distinctUntilChanged(),
@@ -330,12 +330,16 @@ export class DevoteeSearchFilterComponent implements OnInit, AfterViewInit, OnDe
   {
 
     this.combinedFilters = 
-    '{ "and": [' 
+    '{ "and": ['
 
-    + ((this.input.nativeElement.value.length > 0) ? '{"or": [{"legalName": {"like": "%' + this.input.nativeElement.value + '%"}}, {"spiritualName": {"like": "%' + this.input.nativeElement.value + '%"}}]}' : '')
+    + ((this.search.nativeElement.value.length > 0) ? 
+      '{"or": [{"legalName": {"like": "%' + 
+      this.search.nativeElement.value + '%"}}, {"spiritualName": {"like": "%' + 
+      this.search.nativeElement.value + '%"}}, {"mobileNo": {"like": "%' + 
+      this.search.nativeElement.value + '%"}}]}' : '')
 
-    + (((this.filter1.length || this.filter2.length || this.filter3.length || this.filter4.length || this.filter5.length || this.filter6.length )  &&
-      (this.input.nativeElement.value.length )) ? ',' : '')    
+    + (((this.filter1.length || this.filter2.length || this.filter3.length || this.filter4.length || this.filter5.length 
+      || this.filter6.length ) && (this.search.nativeElement.value.length )) ? ',' : '')
 
     + ((this.filter1.length > 0 ) ? '{"circleId": {"inq":' + JSON.stringify(this.filter1) + '}}' : '')
     + (((this.filter2.length || this.filter3.length || this.filter4.length || this.filter5.length || this.filter6.length )  &&
