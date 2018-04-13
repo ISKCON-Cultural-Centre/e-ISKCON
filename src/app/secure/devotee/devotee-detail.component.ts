@@ -19,8 +19,8 @@ title: string;
 
 constructor(
     private dialogRef: MatDialogRef<DevoteeDetailComponent>,
-    @Inject(MAT_DIALOG_DATA) data) {
-
+    @Inject(MAT_DIALOG_DATA) data
+) {
     this.title = data.spiritualName;
     this.selectedDevotee = data;
 }

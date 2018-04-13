@@ -1,0 +1,57 @@
+<h2 mat-dialog-title>Devotee Quick Add</h2>
+<mat-dialog-content>
+  <form [formGroup]="devoteeForm" novalidate>  
+    <fieldset class="wrap">
+      <mat-input-container>
+          <input matInput placeholder="Legal Name" class="form-control" formControlName="legalName" autofocus>
+          <mat-error align="start" *ngIf="formErrors.legalName">
+            {{ formErrors.legalName }}
+          </mat-error>
+      </mat-input-container>      
+
+        <mat-form-field>
+          <input matInput placeholder="Spiritual Name" class="form-control" formControlName="spiritualName">
+        </mat-form-field>
+        <mat-input-container>
+            <mat-select placeholder="Gender"  class="form-control" formControlName="gender">
+                <mat-option value="M">
+                  Male
+                </mat-option>
+                <mat-option value="F">
+                    Female
+                  </mat-option>              
+              </mat-select>
+              <mat-error align="start" *ngIf="formErrors.gender">
+                  {{ formErrors.gender }}
+              </mat-error>
+        </mat-input-container>   
+        <mat-form-field>
+          <input matInput placeholder="Email Address"  class="form-control" formControlName="email">
+          <mat-error align="start" *ngIf="formErrors.email">
+              {{ formErrors.email }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-input-container>
+            <input matInput placeholder="Mobile number"  class="form-control" formControlName="mobileNo">
+            <mat-error align="start" *ngIf="formErrors.mobileNo">
+                {{ formErrors.mobileNo }}
+            </mat-error>
+        </mat-input-container>          
+
+        <mat-form-field>
+          <input matInput placeholder="Landline number"  class="form-control" formControlName="landlineNo">
+        </mat-form-field>                    
+        <mat-form-field>
+          <input matInput placeholder="PAN"  class="form-control" formControlName="incomeTaxId">
+        </mat-form-field>    
+      </fieldset>
+  </form>   
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button class="mat-raised-button mat-primary" [disabled]="devoteeForm.status === 'INVALID'"(click)="save()">Create</button>
+  <button class="mat-raised-button"(click)="close()">Close</button>
+  <button class="mat-raised-button"(click)="reset()">Reset</button>
+</mat-dialog-actions>
+

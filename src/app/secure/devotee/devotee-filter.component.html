@@ -1,9 +1,11 @@
 
-<div class="container" fxLayout="column">
+<div class="container" fxLayout="column" fxLayoutAlign="stretch" >
     <app-devotee-search-filter></app-devotee-search-filter>
+    <button mat-fab color="primary" (click)="openQuickAddDevoteeDialog()">Create</button>
+<!--     <button type = "button" mat-raised-button color="primary" (click)="openQuickAddDevoteeDialog()"> Add Devotee</button> -->
 </div>
 <div fxLayout="column">
-    <app-devotees-list (selectedDevotee)='devoteeDetail($event)'></app-devotees-list>
+    <app-devotees-list (selectedDevotee)='openDevoteeDialog($event)'></app-devotees-list>
 </div>  
 
         

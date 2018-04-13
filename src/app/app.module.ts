@@ -26,6 +26,7 @@ import { MessageService } from './shared/services/message.service';
 import { MyServicesService } from './shared/services/myServices.service';
 import { GlobalEventsManager } from './shared/services/globalEventsManager.service';
 import { NotificationService } from './shared/services/notification.service';
+import { FormErrorService } from './shared/services/form.error.service';
 import { LookupModule } from './secure/lookup/lookup.module';
 import { LookupService } from './shared/services/lookup.service';
 import { DummyService } from './shared/services/dummy.service';
@@ -74,6 +75,7 @@ import { PublicComponent } from './layout/public';
     MyServicesService,
     GlobalEventsManager,
     NotificationService,
+    FormErrorService,
     DevoteeApi,
     LookupService,
     DummyService

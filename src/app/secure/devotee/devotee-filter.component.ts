@@ -19,6 +19,7 @@ import { DialogBoxComponent } from '../../shared/components/dialog-box/dialog-bo
 import { DevoteeSearchFilterShareService } from './devotee-search-filter-share-service';
 import { Devotee } from '../../shared/sdk/index';
 import { DevoteeDetailComponent} from './devotee-detail.component';
+import { DevoteeQuickAddComponent} from './devotee-quick-add.component';
 
 @Component({
   selector: 'app-devotee-filter',
@@ -39,12 +40,7 @@ export class DevoteeFilterComponent implements OnInit {
 
   }
 
-  devoteeDetail(devotee: Devotee){
-    console.log(devotee);
-    this.openDialog(devotee);
-  }
-
-  openDialog(devotee: Devotee) {
+  openDevoteeDialog(devotee: Devotee) {
 
     const dialogConfig = new MatDialogConfig();
 
@@ -60,7 +56,23 @@ export class DevoteeFilterComponent implements OnInit {
       data => console.log('Dialog output:', data)
     );
 }
- 
+
+
+openQuickAddDevoteeDialog() {
+
+  const dialogConfig = new MatDialogConfig();
+
+  dialogConfig.disableClose = true;
+  dialogConfig.autoFocus = true;
+  dialogConfig.hasBackdrop = true;
+
+  const dialogRef = this.dialog.open(DevoteeQuickAddComponent, dialogConfig);
+
+  dialogRef.afterClosed().subscribe(
+    data => console.log('Dialog output:', data)
+  );
+}
+
 }
 
 
