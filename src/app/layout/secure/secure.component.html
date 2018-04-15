@@ -52,7 +52,7 @@
   <main fxFlexFill>
   <mat-sidenav-container fxFlex>
             
-            <mat-sidenav #mainSideNav mode="over" closed  >
+            <mat-sidenav #mainSideNav mode="over" closed (click)="mainSideNav.toggle()" >
                 <mat-toolbar color="primary" *ngIf="isLoggedIn$ | async as isLoggedIn">
                    My Services
                 </mat-toolbar>
