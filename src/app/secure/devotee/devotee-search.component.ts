@@ -34,7 +34,15 @@ export class DevoteeSearchComponent implements OnInit {
     //.debounceTime(400)
     .subscribe(searchTerm => {
       this.filteredDevotees = this.devoteeApi.find<Devotee>(
-        {where: {or: [{legalName: {like: '%' + searchTerm + '%'}}, {spiritualName: {like: '%' + searchTerm + '%'}}]}}
+        {
+          where: {
+            or: [
+              {legalName: {like: '%' + searchTerm + '%'}}, 
+              {spiritualName: {like: '%' + searchTerm + '%'}},
+              {mobileNo: {like: '%' + searchTerm + '%'}}
+            ]
+          }
+        }
       );
     });
   }

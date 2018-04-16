@@ -86,8 +86,14 @@ export class DevoteeQuickAddComponent implements OnInit, OnDestroy {
 
 
   addDevotee() {
-    console.log(this.devoteeForm.value);
-    console.log(this.devoteeForm);
+    //console.log(this.devoteeForm);
+    if (!this.devoteeForm.get('spiritualName').value) {
+      this.devoteeForm.setValue(
+        {
+          spiritualName: this.devoteeForm.get('legalName').value,
+        }
+      );
+    }
     this.one$ = this.devoteeApi.create<Devotee>(this.devoteeForm.value)
     .subscribe(
       devotee => {

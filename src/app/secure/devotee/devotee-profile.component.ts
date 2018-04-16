@@ -185,7 +185,7 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
       {
         id: devotee.id,
         legalName: devotee.legalName,
-        spiritualName: devotee.spiritualName ? devotee.spiritualName : devotee.legalName,
+        spiritualName: devotee.spiritualName,
         circleId: devotee.circleId,
         gender: devotee.gender,
         email: devotee.email,
@@ -235,7 +235,15 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
   }
 
   addDevotee() {
-    console.log(this.devoteeForm.value);
+    //console.log(this.devoteeForm.value);
+    this.setStep(0);
+    if (!this.devoteeForm.get('spiritualName').value) {
+      this.devoteeForm.setValue(
+        {
+          spiritualName: this.devoteeForm.get('legalName').value,
+        }
+      );
+    }    
     this.eleven$ = this.devoteeApi.create<Devotee>(this.devoteeForm.value)
     .subscribe(
       devotee => {
