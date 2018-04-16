@@ -93,7 +93,7 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
 
   ngOnInit() {
 
-    this.devoteeId ? this.devoteeId = this.devoteeId : (this.selectedDevotee ? this.selectedDevotee 
+    this.devoteeId ? (this.devoteeId = this.devoteeId) : (this.selectedDevotee ? this.selectedDevotee 
       : this.devoteeId = this.authService.getCurrentUserId());
     this.currentDevoteeId.next(this.devoteeId);
     this.loadDevotee(this.devoteeId);
@@ -318,9 +318,6 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
     this.nine$.unsubscribe();
     this.ten$.unsubscribe();
     this.eleven$.unsubscribe();
-    this.twelve$.unsubscribe();    
+    this.twelve$.unsubscribe();
    }
-  // TODO: Remove this when we're done
-  //get diagnostic() { return JSON.stringify(this.model); }
-
 }

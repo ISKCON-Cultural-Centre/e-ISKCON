@@ -19,6 +19,7 @@ import { DialogBoxComponent } from '../../shared/components/dialog-box/dialog-bo
 import { DevoteeSearchFilterShareService } from './devotee-search-filter-share-service';
 import { Devotee } from '../../shared/sdk/index';
 import { DevoteeDetailComponent} from './devotee-detail.component';
+import { DevoteeProfileComponent } from './devotee-profile.component'
 import { DevoteeQuickAddComponent} from './devotee-quick-add.component';
 
 @Component({
@@ -67,6 +68,21 @@ openQuickAddDevoteeDialog() {
   dialogConfig.hasBackdrop = true;
 
   const dialogRef = this.dialog.open(DevoteeQuickAddComponent, dialogConfig);
+
+  dialogRef.afterClosed().subscribe(
+    data => console.log('Dialog output:', data)
+  );
+}
+
+openDetailedAddDevoteeDialog() {
+
+  const dialogConfig = new MatDialogConfig();
+
+  dialogConfig.disableClose = false;
+  dialogConfig.autoFocus = true;
+  dialogConfig.hasBackdrop = true;
+
+  const dialogRef = this.dialog.open(DevoteeProfileComponent, dialogConfig);
 
   dialogRef.afterClosed().subscribe(
     data => console.log('Dialog output:', data)
