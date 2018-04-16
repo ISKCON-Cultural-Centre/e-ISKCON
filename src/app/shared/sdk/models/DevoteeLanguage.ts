@@ -12,6 +12,8 @@ export interface DevoteeLanguageInterface {
   "readInd": number;
   "writeInd": number;
   "speakInd": number;
+  "created-on"?: Date;
+  "updated-on"?: Date;
   fkDevoteeLanguageDevotee1rel?: Devotee;
   fkTable1Language1rel?: Language;
 }
@@ -23,6 +25,8 @@ export class DevoteeLanguage implements DevoteeLanguageInterface {
   "readInd": number;
   "writeInd": number;
   "speakInd": number;
+  "created-on": Date;
+  "updated-on": Date;
   fkDevoteeLanguageDevotee1rel: Devotee;
   fkTable1Language1rel: Language;
   constructor(data?: DevoteeLanguageInterface) {
@@ -81,6 +85,14 @@ export class DevoteeLanguage implements DevoteeLanguageInterface {
         "speakInd": {
           name: 'speakInd',
           type: 'number'
+        },
+        "created-on": {
+          name: 'created-on',
+          type: 'Date'
+        },
+        "updated-on": {
+          name: 'updated-on',
+          type: 'Date'
         },
       },
       relations: {
