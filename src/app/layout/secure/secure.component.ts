@@ -29,6 +29,7 @@ export class SecureComponent implements OnInit {
   isLoggedIn$: Observable <Boolean>;
   devoteeName$: Observable <String>;
   username: String = '';
+  userId: String = null;
 
   constructor(private notificationService: NotificationService,
     private authService: AuthService,
@@ -52,6 +53,7 @@ export class SecureComponent implements OnInit {
           if (isLoggedIn) {
             this.username = this.authService.getCurrentUserData();
             this.devoteeName$ = this.authService.getDevoteeName;
+            //console.log(this.username.);
             this.isLoggedIn$ = this.authService.isLoggedIn;
             // this.getAuthorizedDepartments();
             this.getAuthorizedTasks();

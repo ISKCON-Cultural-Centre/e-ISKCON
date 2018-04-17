@@ -16,7 +16,7 @@ import {
   AsramaMaster, AsramaMasterApi, 
   ProfessionMaster, ProfessionMasterApi, PhysicalAddress,
   } from '../..//shared/sdk';
-import { AuthService, DevoteeSearchSelectService, NotificationService } from '../../shared/services';
+import { AuthService, NotificationService } from '../../shared/services';
 import { PhysicalAddressComponent } from '../common/physical-address.component';
 import { PhysicalAddressApi } from '../../shared/sdk/services/index';
 
@@ -28,8 +28,9 @@ import { PhysicalAddressApi } from '../../shared/sdk/services/index';
 })
 export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  @Input() selectedDevotee: Devotee;
-  devoteeId: String;
+  @Input() devoteeId: String;
+  @Input() editMode: boolean;
+  @Input() newDevotee = false;
   devotee: Devotee;
 
   one$ = new Subscription();
@@ -45,9 +46,6 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
   eleven$ = new Subscription();
   twelve$ = new Subscription();
 
-  filteredStates: Observable<Devotee[]>;
-  currentDevoteeId = new Subject<String>();
-  currentDevoteeId$ = this.currentDevoteeId.asObservable();
   submitted = false;
   devoteeForm: FormGroup;
   circles: Circle[];
@@ -81,7 +79,6 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
     private languageApi: LanguageApi,
     private asramaMasterApi: AsramaMasterApi,
     private professionMasterApi: ProfessionMasterApi,
-    private devoteeSearchSelectService: DevoteeSearchSelectService,
     private router: Router,
     private authService: AuthService,
     private physicalAddressApi: PhysicalAddressApi,
@@ -93,32 +90,22 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
 
   ngOnInit() {
 
-    this.devoteeId ? (this.devoteeId = this.devoteeId) : (this.selectedDevotee ? this.selectedDevotee 
-      : this.devoteeId = this.authService.getCurrentUserId());
-    this.currentDevoteeId.next(this.devoteeId);
-    this.loadDevotee(this.devoteeId);
-    this.currentDevoteeId.next(this.devoteeId);
+    this.devoteeForm.disable();
+    /*     this.editMode = true; */
+    if (this.editMode === true){
+      this.devoteeForm.enable();
+    }
 
-
-    this.one$ = this.devoteeSearchSelectService.missionAnnounced$.
-    subscribe(
-      selectedDevotee => {
-        if (selectedDevotee.option != null) {
-          this.currentDevoteeId.next(selectedDevotee.option.value.id);
-          this.loadDevotee(selectedDevotee.option.value.id);
-        } else {
-          this.reset();
-        }
+    if (this.newDevotee) {
+    } else {
+      if (this.devoteeId) {
+        this.loadDevotee(this.devoteeId);
+      } else {
+        this.devoteeId = this.authService.getCurrentUserId();
+        this.loadDevotee(this.devoteeId);  
       }
-    );
+    }
 
-    this.twelve$ = this.currentDevoteeId$
-    .subscribe(
-      devoteeId => 
-      {
-        this.devoteeId = devoteeId;
-      }
-    );
 
     this.two$ = this.devoteeForm.get('gothra').valueChanges
       .distinctUntilChanged()
@@ -167,7 +154,7 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
   }
 
   ngAfterViewInit() {
-    this.currentDevoteeId.next(this.devoteeId);
+
   }
 
   loadDevotee(devoteeId: String) {
@@ -235,7 +222,6 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
   }
 
   addDevotee() {
-    //console.log(this.devoteeForm.value);
     this.setStep(0);
     if (!this.devoteeForm.get('spiritualName').value) {
       this.devoteeForm.setValue(
@@ -247,12 +233,17 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
     this.eleven$ = this.devoteeApi.create<Devotee>(this.devoteeForm.value)
     .subscribe(
       devotee => {
-        this.currentDevoteeId.next(devotee.id);
         this.setDevoteeFormValues(devotee);
         this.notificationService.notificationSubject.next('New Devotee [' + devotee.legalName + '] created successfully');
       }
     );    
   }
+
+  editDevotee(){
+     this.editMode = true;
+     this.devoteeForm.enable();
+  }
+ 
 
   updateDevoteeAddressId(addressId)  {
     console.log(addressId);
@@ -269,6 +260,8 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
     this.eight$ = this.devoteeApi.patchAttributes(this.devoteeId, this.devoteeForm.value)
      .subscribe(
        devotee => {
+         this.editMode = false;
+         this.devoteeForm.disable();
          this.notificationService.notificationSubject.next('Profile updated successfully');
        }
      )
@@ -276,7 +269,6 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
  
    reset() {
       this.devoteeForm.reset();
-      this.currentDevoteeId.next(null);
       this.physicalAddress = null;
       this.devoteeForm.setValue(
         {

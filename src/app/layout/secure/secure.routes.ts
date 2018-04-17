@@ -33,13 +33,13 @@ export const SECURE_ROUTES: Routes = [
       component: DevoteeFilterComponent, 
       canActivate: [AuthGuard]
     },
-    { 
+/*     { 
       path: 'devotee', 
       data: {
         breadcrumb: 'Devotee'
       },
       component: DevoteeComponent, 
-      canActivate: [AuthGuard] },
+      canActivate: [AuthGuard] }, */
     { 
       path: 'devoteeRole',
       data: {

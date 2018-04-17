@@ -46,7 +46,8 @@ const routes: Routes = [
     DevoteeProfileComponent, DevoteeRoleComponent, DevoteeSkillComponent,
     DevoteeLanguageComponent, DevoteeServiceInterestComponent, 
     DevoteeServiceAvailabilityComponent, ChangePasswordComponent, DevoteeFilterComponent, 
-    DevoteeDetailComponent, DevoteesListComponent, DevoteeSearchFilterComponent, DevoteeCardComponent, DevoteeQuickAddComponent, DevoteeDetailAddComponent
+    DevoteeDetailComponent, DevoteesListComponent, DevoteeSearchFilterComponent, DevoteeCardComponent, 
+    DevoteeQuickAddComponent, DevoteeDetailAddComponent
   ],
   providers: [
     DevoteeSearchSelectService,
@@ -55,7 +56,8 @@ const routes: Routes = [
   ],
   entryComponents: [
     DevoteeDetailComponent,
-    DevoteeQuickAddComponent
+    DevoteeQuickAddComponent,
+    DevoteeDetailAddComponent
   ],  
 })
 export class DevoteeModule { }

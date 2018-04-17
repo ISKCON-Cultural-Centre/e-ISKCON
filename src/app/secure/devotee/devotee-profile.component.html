@@ -113,9 +113,12 @@
               <div *ngIf="devoteeForm.value.id != null">
                 <button type = "button" mat-raised-button color="primary" (click)="save()">Update</button>
               </div>
+              <div *ngIf="!editMode">
+                  <button type = "button" [disabled]="editMode" mat-raised-button color="warn" (click)="editDevotee()">Edit</button>                
+              </div>                
               <div *ngIf="devoteeForm.value.id == null">
                   <button type = "button" mat-raised-button color="primary" (click)="addDevotee()">Create</button>
-                <button type = "button" mat-raised-button color="warn" (click)="reset()">Reset</button>
+                  <button type = "button" mat-raised-button color="warn" (click)="reset()">Reset</button>
               </div>
           </div>                
           <button mat-button color="primary" (click)="nextStep()">Next</button>
@@ -183,7 +186,7 @@
               </mat-panel-description>
             </mat-expansion-panel-header>
             <fieldset fxLayout="column" fxLayoutAlign="space-evenly stretch">
-                <app-devotee-skill [devoteeId]="currentDevoteeId$" ></app-devotee-skill>
+                <app-devotee-skill [devoteeId]="devoteeId" ></app-devotee-skill>
             </fieldset>
             <mat-action-row>
               <button mat-button color="warn" (click)="prevStep()">Previous</button>
@@ -202,7 +205,7 @@
                 </mat-panel-description>
               </mat-expansion-panel-header>
               <fieldset fxLayout="column" fxLayoutAlign="space-evenly">
-                <app-devotee-language [devoteeId]="currentDevoteeId$" ></app-devotee-language>
+                <app-devotee-language [devoteeId]="devoteeId" ></app-devotee-language>
               </fieldset>                
               <mat-action-row>
                 <button mat-button color="warn" (click)="prevStep()">Previous</button>
@@ -221,7 +224,7 @@
                 </mat-panel-description>
               </mat-expansion-panel-header>
               <fieldset fxLayout="column" fxLayoutAlign="space-evenly stretch">
-                <app-devotee-service-interest [devoteeId]="currentDevoteeId$" ></app-devotee-service-interest>
+                <app-devotee-service-interest [devoteeId]="devoteeId" ></app-devotee-service-interest>
               </fieldset>          
               <mat-action-row>
                 <button mat-button color="warn" (click)="prevStep()">Previous</button>

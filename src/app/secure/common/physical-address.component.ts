@@ -28,7 +28,7 @@ export class PhysicalAddressComponent implements OnInit, OnChanges {
   set physicalAddress(value) {
       // set the latest value for _data BehaviorSubject
       this._physicalAddress.next(value);
-  };
+  }
   get physicalAddress() {
     // get the latest value from _data BehaviorSubject
     return this._physicalAddress.getValue();

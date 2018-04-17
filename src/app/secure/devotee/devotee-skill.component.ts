@@ -16,8 +16,8 @@ import { Subscription } from 'rxjs/Subscription';
   styleUrls: ['./devotee-skill.component.css']
 })
 export class DevoteeSkillComponent implements OnInit, OnDestroy {
-  @Input() devoteeId: Observable<String>;
-  currentDevoteeId: String = null;
+  @Input() devoteeId: String;
+
 
   one$ = new Subscription();
   two$ = new Subscription();
@@ -45,13 +45,7 @@ export class DevoteeSkillComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.one$ = this.devoteeId
-    .subscribe(
-      devoteeId => {
-        this.currentDevoteeId = devoteeId;
-        this.loadDevoteeSkills(this.currentDevoteeId);
-      }
-    );
+    this.loadDevoteeSkills(this.devoteeId);
   }
 
   loadAllSkills() {
@@ -88,7 +82,7 @@ export class DevoteeSkillComponent implements OnInit, OnDestroy {
 
   onSelectionChanged(event: MatAutocompleteSelectedEvent) {
     let value = event.option.value;
-    this.four$ =  this.devoteeSkillApi.create({devoteeId: this.currentDevoteeId, skillId: value.id })
+    this.four$ =  this.devoteeSkillApi.create({devoteeId: this.devoteeId, skillId: value.id })
     .subscribe(
       devoteeSkill => {
        this.assignedSkills.push(new Skill(value));
@@ -101,7 +95,7 @@ export class DevoteeSkillComponent implements OnInit, OnDestroy {
 
   remove(skill: Skill): void {
     let index = this.assignedSkills.indexOf(skill);
-    this.five$ =  this.devoteeSkillApi.destroyAll({devoteeId: this.currentDevoteeId, skillId: skill.id })
+    this.five$ =  this.devoteeSkillApi.destroyAll({devoteeId: this.devoteeId, skillId: skill.id })
     .subscribe(
       devoteeSkill => {
         let index = this.assignedSkills.indexOf(skill);

@@ -1,1 +1,15 @@
-<app-devotee-profile [selectedDevotee]="null"></app-devotee-profile>
+<h2 mat-dialog-title>{{title}}</h2>
+
+<mat-dialog-content>
+
+    <app-devotee-profile [editMode]="true" [newDevotee]="true" [devoteeId]="null"></app-devotee-profile>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button class="mat-raised-button mat-primary"(click)="close()">Close</button>
+<!--     <button class="mat-raised-button mat-primary"(click)="save()">Save</button> -->
+</mat-dialog-actions>
+
+
+

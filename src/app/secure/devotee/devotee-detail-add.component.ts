@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import {MatCard, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+
+
+import { Devotee } from '../../shared/sdk/index';
+import { DevoteeCardComponent } from './devotee-card.component';
 
 @Component({
   selector: 'app-devotee-detail-add',
@@ -7,9 +12,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DevoteeDetailAddComponent implements OnInit {
 
-  constructor() { }
+selectedDevotee: Devotee;
 
-  ngOnInit() {
-  }
+
+title: string;
+
+constructor(
+    private dialogRef: MatDialogRef<DevoteeDetailAddComponent>,
+    @Inject(MAT_DIALOG_DATA) data
+) {
+    this.title = 'Add New Devotee - Detailed';
+}
+
+ngOnInit() {
+}
+
+save() {
+    this.dialogRef.close();
+}
+
+close() {
+    this.dialogRef.close(this.selectedDevotee);
+}
 
 }

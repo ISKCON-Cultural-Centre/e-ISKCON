@@ -82,7 +82,8 @@
                       {{devoteeName$ | async}}
                     </button> 
                   <mat-menu #profileMenu="matMenu">
-                      <button mat-menu-item routerLink="/profile">
+                      <!-- <button mat-menu-item routerLink="['/profile', {'devoteeId':username.id}]"> -->
+                    <button mat-menu-item routerLink="/profile">
                         <mat-icon>perm_identity</mat-icon>
                         <span>My Profile</span>
                       </button>

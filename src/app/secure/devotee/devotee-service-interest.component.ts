@@ -16,8 +16,8 @@ import { Subscription } from 'rxjs/Subscription';
   styleUrls: ['./devotee-service-interest.component.css']
 })
 export class DevoteeServiceInterestComponent implements OnInit, OnDestroy {
-  @Input() devoteeId: Observable<String>;
-  currentDevoteeId: String = null;
+  @Input() devoteeId: String;  
+
 
   one$ = new Subscription();
   two$ = new Subscription();
@@ -45,13 +45,7 @@ export class DevoteeServiceInterestComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.one$ = this.devoteeId
-    .subscribe(
-      devoteeId => {
-        this.currentDevoteeId = devoteeId;
-        this.loadDevoteeServices(this.currentDevoteeId);
-      }
-    );
+    this.loadDevoteeServices(this.devoteeId);
   }
 
   loadAllServices() {
@@ -89,7 +83,7 @@ export class DevoteeServiceInterestComponent implements OnInit, OnDestroy {
 
   onSelectionChanged(event: MatAutocompleteSelectedEvent) {
     let value = event.option.value;
-    this.four$ =  this.devoteeServiceInterestApi.create({devoteeId: this.currentDevoteeId, serviceAreaId: value.id })
+    this.four$ =  this.devoteeServiceInterestApi.create({devoteeId: this.devoteeId, serviceAreaId: value.id })
     .subscribe(
       devoteeService => {
        this.assignedServices.push(new ServiceArea(value));
@@ -102,7 +96,7 @@ export class DevoteeServiceInterestComponent implements OnInit, OnDestroy {
 
   remove(serviceArea: ServiceArea): void {
     let index = this.assignedServices.indexOf(serviceArea);
-    this.five$ =  this.devoteeServiceInterestApi.destroyAll({devoteeId: this.currentDevoteeId, id: serviceArea.id })
+    this.five$ =  this.devoteeServiceInterestApi.destroyAll({devoteeId: this.devoteeId, id: serviceArea.id })
     .subscribe(
       devoteeService => {
         let index = this.assignedServices.indexOf(serviceArea);

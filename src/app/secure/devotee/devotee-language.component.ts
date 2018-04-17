@@ -17,11 +17,10 @@ import { DialogBoxComponent } from '../../shared/components/dialog-box/dialog-bo
   styleUrls: ['./devotee-language.component.css']
 })
 export class DevoteeLanguageComponent implements OnInit, OnDestroy {
-  @Input() devoteeId: Observable<String>;
+  @Input() devoteeId: String;
 
   displayedColumns = ['language', 'read', 'write', 'speak', 'delete'];
 
-  currentDevoteeId: string = null;
   dataSource = new MatTableDataSource<DevoteeLanguage>();
 
   one$ = new Subscription();
@@ -48,14 +47,8 @@ export class DevoteeLanguageComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.one$ = this.devoteeId
-    .subscribe(
-      devoteeId => {
-        this.currentDevoteeId = devoteeId ? devoteeId.toString() : null;
-        this.loadDevoteeLanguages(this.currentDevoteeId);
-        this.loadAllLanguages();        
-      }
-    );
+    this.loadDevoteeLanguages(this.devoteeId);
+    this.loadAllLanguages();   
   }
 
   loadAllLanguages() {
@@ -92,14 +85,14 @@ export class DevoteeLanguageComponent implements OnInit, OnDestroy {
   }
 
   addLanguage(event: MatSelectChange) {
-    this.devoteeLanguageApi.create({devoteeId: this.currentDevoteeId, languageId: event.value.id,
+    this.devoteeLanguageApi.create({devoteeId: this.devoteeId, languageId: event.value.id,
       readInd: 0, writeInd: 0, speakInd: 0})
       .subscribe(
       devoteeLanguage => {
         this.assignedLanguages.push(new Language(event.value));
         this.remainingLanguages = difference(this.allLanguages, this.assignedLanguages, (object) => object.id);
         this.notificationService.notificationSubject.next('Language added successfully');
-        this.loadDevoteeLanguages(this.currentDevoteeId);
+        this.loadDevoteeLanguages(this.devoteeId);
       }
     )
   }
@@ -114,7 +107,7 @@ export class DevoteeLanguageComponent implements OnInit, OnDestroy {
         if (index >= 0) {
           this.assignedLanguages.splice(index, 1);
         } */
-        this.loadDevoteeLanguages(this.currentDevoteeId);
+        this.loadDevoteeLanguages(this.devoteeId);
         this.remainingLanguages = difference(this.allLanguages, this.assignedLanguages, (object) => object.id);
         this.notificationService.notificationSubject.next('Language removed successfully');
       }
