@@ -13,6 +13,7 @@ import { TaskMasterComponent } from './../../secure/organization/task-master.com
 import { DepartmentComponent } from './../../secure/organization/department.component';
 import { ChangePasswordComponent } from './../../secure/devotee/change-password.component';
 import { DevoteeFilterComponent } from './../../secure/devotee/devotee-filter.component';
+import { MyServicesComponent } from '../../secure/my-services/my-services.component';
 
 
 
@@ -26,11 +27,19 @@ export const SECURE_ROUTES: Routes = [
       canActivate: [AuthGuard] 
     },
     {
+      path: 'myServices',
+      data: {
+        breadcrumb: 'My Services'
+      },
+      component: MyServicesComponent, 
+      canActivate: [AuthGuard]
+    },
+    {
       path: 'devotee/search',
       data: {
         breadcrumb: 'Search Devotee'
       },
-      component: DevoteeFilterComponent, 
+      component: DevoteeFilterComponent,
       canActivate: [AuthGuard]
     },
 /*     { 

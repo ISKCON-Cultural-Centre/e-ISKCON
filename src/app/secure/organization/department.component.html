@@ -54,7 +54,7 @@
     <ng-container matColumnDef="temple">
       <mat-header-cell *matHeaderCellDef> Temple </mat-header-cell>
       <mat-cell *matCellDef="let department">           
-        <mat-select (selectionChange) = 'editTempleField($event, department)'[value]="department.departmentLeaderDevoteeId">
+        <mat-select (selectionChange) = 'editTempleField($event, department)'[value]="department.templeId">
             <mat-option *ngFor="let temple of temples " [value]="temple.id">
               <span>{{ temple.name }}</span>
             </mat-option>

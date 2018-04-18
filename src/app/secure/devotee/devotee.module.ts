@@ -25,10 +25,7 @@ import { DevoteeSearchFilterComponent } from './devotee-search-filter.component'
 import { DevoteeCardComponent } from './devotee-card.component';
 import { DevoteeQuickAddComponent } from './devotee-quick-add.component';
 import { DevoteeDetailAddComponent } from './devotee-detail-add.component'
-const routes: Routes = [
 
-  { path: 'devotee', component: DevoteeComponent, canActivate: [AuthGuard] }
-];
 
 @NgModule({
   imports: [

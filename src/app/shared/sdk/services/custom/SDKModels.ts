@@ -76,6 +76,8 @@ import { LookupMaster } from '../../models/LookupMaster';
 import { GothraMaster } from '../../models/GothraMaster';
 import { NakshatraMaster } from '../../models/NakshatraMaster';
 import { ProfessionMaster } from '../../models/ProfessionMaster';
+import { DepartmentCalendar } from '../../models/DepartmentCalendar';
+import { DepartmentAnnouncement } from '../../models/DepartmentAnnouncement';
 
 export interface Models { [name: string]: any }
 
@@ -159,6 +161,8 @@ export class SDKModels {
     GothraMaster: GothraMaster,
     NakshatraMaster: NakshatraMaster,
     ProfessionMaster: ProfessionMaster,
+    DepartmentCalendar: DepartmentCalendar,
+    DepartmentAnnouncement: DepartmentAnnouncement,
     
   };
 

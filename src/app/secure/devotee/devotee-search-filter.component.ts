@@ -13,7 +13,7 @@ import { MatDialog, MatChipInputEvent, MatAutocompleteSelectedEvent, MatPaginato
 import {  difference, union } from 'set-manipulator';
 
 
-import {LoopBackFilter} from '../../shared/sdk/models/BaseModels'
+import {LoopBackFilter} from '../../shared/sdk/models/BaseModels';
 import { DialogBoxComponent } from '../../shared/components/dialog-box/dialog-box.component';
 import {
   SDKToken, DevoteeApi, GothraMasterApi,

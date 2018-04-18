@@ -8,6 +8,7 @@ import { MaterialModule } from '../../material.module';
 import { PhysicalAddressComponent } from './physical-address.component';
 import { ElectronicAddressComponent } from './electronic-address.component';
 import { BreadcrumbComponent } from './breadcrumb.component';
+import { CalendarDisplayComponent } from './calendar-display.component';
 
 @NgModule({
   imports: [
@@ -20,6 +21,6 @@ import { BreadcrumbComponent } from './breadcrumb.component';
   exports: [
     PhysicalAddressComponent, ElectronicAddressComponent, BreadcrumbComponent
   ],  
-  declarations: [PhysicalAddressComponent, ElectronicAddressComponent, BreadcrumbComponent]
+  declarations: [PhysicalAddressComponent, ElectronicAddressComponent, BreadcrumbComponent, CalendarDisplayComponent]
 })
 export class CommonComponentsModule { }

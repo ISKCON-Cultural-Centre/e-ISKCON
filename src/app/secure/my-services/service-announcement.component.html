@@ -1,0 +1,7 @@
+
+<mat-select placeholder="Department">
+  <mat-option *ngFor="let department of departments" [value]="department.id">
+    <span>{{ department.departmentName }}</span>
+  </mat-option>
+</mat-select>  
+

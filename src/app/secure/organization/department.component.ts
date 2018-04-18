@@ -119,7 +119,7 @@ export class DepartmentComponent implements OnInit {
 
 
   loadDepartments() {
-    this.departmentApi.find<Department>()
+    this.departmentApi.find<Department>({'order': 'departmentName ASC'})
     .subscribe(
       departments => {
         this.departments = departments;
@@ -129,7 +129,7 @@ export class DepartmentComponent implements OnInit {
   }
 
   loadDevotees() {
-    this.devoteeApi.find<Devotee>({"order": "spiritualName ASC"})
+    this.devoteeApi.find<Devotee>({'order': 'spiritualName ASC'})
     .subscribe(
       devotees => {
         this.devotees = devotees;

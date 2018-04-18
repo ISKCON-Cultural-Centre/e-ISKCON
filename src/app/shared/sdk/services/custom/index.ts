@@ -75,5 +75,7 @@ export * from './LookupMaster';
 export * from './GothraMaster';
 export * from './NakshatraMaster';
 export * from './ProfessionMaster';
+export * from './DepartmentCalendar';
+export * from './DepartmentAnnouncement';
 export * from './SDKModels';
 export * from './logger.service';

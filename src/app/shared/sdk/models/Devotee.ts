@@ -19,7 +19,7 @@ export interface DevoteeInterface {
   "spiritualName"?: string;
   "gender"?: string;
   "shikshaLevel"?: string;
-  "creditLimit"?: number;
+  "creditLimit": number;
   "realm"?: string;
   "username"?: string;
   "email"?: string;
@@ -33,9 +33,9 @@ export interface DevoteeInterface {
   "incomeTaxId"?: string;
   "lpmId"?: string;
   "kcAssociationDate"?: Date;
-  "motherTongueLanguageId"?: string;
+  "motherTongueLanguageId": string;
   "dateOfBirth"?: Date;
-  "dayMonthOfBirth"?: string;
+  "dayMonthOfBirth": string;
   "asramaMasterId"?: string;
   "professionId"?: string;
   "physicalAddressId"?: string;
