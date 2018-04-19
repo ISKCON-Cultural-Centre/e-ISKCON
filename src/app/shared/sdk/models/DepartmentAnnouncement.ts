@@ -14,6 +14,8 @@ export interface DepartmentAnnouncementInterface {
   "updatedOn"?: Date;
   "createdBy"?: string;
   "updatedBy"?: string;
+  "created-on"?: Date;
+  "updated-on"?: Date;
   fkDepartmentAnnouncementDepartment1rel?: Department;
 }
 
@@ -27,6 +29,8 @@ export class DepartmentAnnouncement implements DepartmentAnnouncementInterface {
   "updatedOn": Date;
   "createdBy": string;
   "updatedBy": string;
+  "created-on": Date;
+  "updated-on": Date;
   fkDepartmentAnnouncementDepartment1rel: Department;
   constructor(data?: DepartmentAnnouncementInterface) {
     Object.assign(this, data);
@@ -96,6 +100,14 @@ export class DepartmentAnnouncement implements DepartmentAnnouncementInterface {
         "updatedBy": {
           name: 'updatedBy',
           type: 'string'
+        },
+        "created-on": {
+          name: 'created-on',
+          type: 'Date'
+        },
+        "updated-on": {
+          name: 'updated-on',
+          type: 'Date'
         },
       },
       relations: {

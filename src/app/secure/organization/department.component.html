@@ -67,7 +67,7 @@
       <mat-header-cell *matHeaderCellDef> Department Name </mat-header-cell>
       <mat-cell *matCellDef="let department"> 
           <app-inline-edit (done)='editDepartmentNameField(department.departmentName, department)' 
-          [(ngModel)]="department.departmentName" [required]="true" type="text" placeholder="Role Name" (keyup.enter)="editNameField($event.target.value, department)">
+          [(ngModel)]="department.departmentName" [required]="true" type="text" placeholder="Role Name" (keyup.enter)="editDepartmentNameField($event.target.value, department)">
         </app-inline-edit> 
       </mat-cell>
     </ng-container>

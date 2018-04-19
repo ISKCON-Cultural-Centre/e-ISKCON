@@ -5,6 +5,7 @@ import {  NotificationService} from '../../shared/services';
 import { MaterialModule } from '../../material.module';
 import { MatPaginator, MatSort, MatTableDataSource, MatSelectChange } from '@angular/material';
 import {MatDialog} from '@angular/material';
+import { Subscription } from 'rxjs/Subscription';
 
 import { SharedComponentsModule } from '../../shared/components/shared-components.module'
 import { InlineEditComponent } from '../../shared/components/inline-edit/inline-edit.component';
@@ -19,7 +20,7 @@ export class DepartmentComponent implements OnInit {
 
 
   displayedColumns = ['name', 'temple', 'leader', 'icon', 'route', 'delete'];
-  add = false; // add new role
+  add = false; 
   departments: Department[] = [];
   temples: Temple[] = [];
   devotees: Devotee[] = [];

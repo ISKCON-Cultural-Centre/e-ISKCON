@@ -17,6 +17,8 @@ export interface DepartmentCalendarInterface {
   "updatedOn"?: Date;
   "createdBy"?: string;
   "updatedBy"?: string;
+  "created-on"?: Date;
+  "updated-on"?: Date;
   fkDepartmentCalendarDepartment1rel?: Department;
 }
 
@@ -33,6 +35,8 @@ export class DepartmentCalendar implements DepartmentCalendarInterface {
   "updatedOn": Date;
   "createdBy": string;
   "updatedBy": string;
+  "created-on": Date;
+  "updated-on": Date;
   fkDepartmentCalendarDepartment1rel: Department;
   constructor(data?: DepartmentCalendarInterface) {
     Object.assign(this, data);
@@ -114,6 +118,14 @@ export class DepartmentCalendar implements DepartmentCalendarInterface {
         "updatedBy": {
           name: 'updatedBy',
           type: 'string'
+        },
+        "created-on": {
+          name: 'created-on',
+          type: 'Date'
+        },
+        "updated-on": {
+          name: 'updated-on',
+          type: 'Date'
         },
       },
       relations: {

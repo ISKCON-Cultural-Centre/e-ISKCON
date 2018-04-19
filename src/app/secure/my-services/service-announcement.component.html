@@ -1,7 +1,64 @@
+<button mat-icon-button (click) = 'displayCreateAnnouncement()' >
+    <mat-icon >add_circle</mat-icon>
+  </button>
+    <div fxLayout="row" fxLayoutAlign="space-sevenly stretch" *ngIf="add">
+        <form [formGroup]="serviceAnnouncementForm" (ngSubmit)="addDepartmentAnnouncement()" novalidate   >   
+          <fieldset fxLayout="row" fxLayoutAlign="space-evenly stretch">
+            <legend>Make an Announcement</legend>
+            <mat-form-field>    
+                <mat-select placeholder="Department" formControlName="departmentId" autofocus>
+                  <mat-option *ngFor="let department of departments" [value]="department.id">
+                    <span>{{ department.departmentName }}</span>
+                  </mat-option>
+                </mat-select>  
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Subject"  class="form-control" formControlName="subject">
+              </mat-form-field>    
+              <mat-form-field>
+                  <textarea matInput placeholder="Message" matTextareaAutosize matAutosizeMinRows="2"
+                  matAutosizeMaxRows="5" formControlName="message"></textarea>      
+              </mat-form-field>    
+              <mat-form-field>
+                  <input matInput [matDatepicker]="validDate" placeholder="Valid Until" class="form-control" formControlName="validUntil">
+                  <mat-datepicker-toggle matSuffix [for]="validDate"></mat-datepicker-toggle>
+                  <mat-datepicker #validDate></mat-datepicker>
+                </mat-form-field>        
+              <button [disabled]="serviceAnnouncementForm.invalid" type="submit"  mat-raised-button color="primary">Add Announcement
+              </button>
+              <button  type="button" (click) = 'cancel()'  mat-raised-button color="warn">
+                Cancel
+              </button>     
+          </fieldset>
+        </form>
+    </div>
+  <div>
+      <mat-accordion>
+          <mat-expansion-panel *ngFor="let department of departments ">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{ department.departmentName }}
+              </mat-panel-title>
+              <mat-panel-description>
+                {{ department.announcements.length }} Active Announcements
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div fxLayout="row" fxLayoutAlign="space-evenly">
+            <mat-list>
+              <div >
+              <mat-list-item *ngFor="let announcement of department.announcements">
+                  <span>{{announcement.subject}}</span>
+                  <span>{{announcement.message}}</span>
+                  <span>{{announcement.validUntil | date: 'mediumDate'}}</span>
+                   <button mat-icon-button (click)="openDialog(department, announcement)">
+                      <mat-icon>delete</mat-icon>
+                   </button>
+                </mat-list-item>
+              </div>                
+              </mat-list>   
+            </div>     
+          </mat-expansion-panel>
+        </mat-accordion>    
+  </div>
 
-<mat-select placeholder="Department">
-  <mat-option *ngFor="let department of departments" [value]="department.id">
-    <span>{{ department.departmentName }}</span>
-  </mat-option>
-</mat-select>  
 

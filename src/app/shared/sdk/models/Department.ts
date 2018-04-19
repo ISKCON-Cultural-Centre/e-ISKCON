@@ -1,7 +1,9 @@
 /* tslint:disable */
 import {
   Devotee,
-  Temple
+  Temple,
+  DepartmentCalendar,
+  DepartmentAnnouncement
 } from '../index';
 
 declare var Object: any;
@@ -16,6 +18,8 @@ export interface DepartmentInterface {
   "updated-on"?: Date;
   fkDepartmentDevotee1rel?: Devotee;
   fkDepartmentTemple1rel?: Temple;
+  events?: DepartmentCalendar[];
+  announcements?: DepartmentAnnouncement[];
 }
 
 export class Department implements DepartmentInterface {
@@ -29,6 +33,8 @@ export class Department implements DepartmentInterface {
   "updated-on": Date;
   fkDepartmentDevotee1rel: Devotee;
   fkDepartmentTemple1rel: Temple;
+  events: DepartmentCalendar[];
+  announcements: DepartmentAnnouncement[];
   constructor(data?: DepartmentInterface) {
     Object.assign(this, data);
   }
@@ -111,6 +117,22 @@ export class Department implements DepartmentInterface {
           relationType: 'belongsTo',
                   keyFrom: 'templeId',
           keyTo: 'id'
+        },
+        events: {
+          name: 'events',
+          type: 'DepartmentCalendar[]',
+          model: 'DepartmentCalendar',
+          relationType: 'hasMany',
+                  keyFrom: 'id',
+          keyTo: 'departmentId'
+        },
+        announcements: {
+          name: 'announcements',
+          type: 'DepartmentAnnouncement[]',
+          model: 'DepartmentAnnouncement',
+          relationType: 'hasMany',
+                  keyFrom: 'id',
+          keyTo: 'departmentId'
         },
       }
     }

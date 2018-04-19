@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild} from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild, OnDestroy} from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {  Department, DepartmentApi,
   DepartmentAnnouncement, DepartmentAnnouncementApi } from '../../shared/sdk';
 import { MaterialModule } from '../../material.module';
 import { MatPaginator, MatSort, MatTableDataSource, MatSelectChange } from '@angular/material';
 import {MatDialog} from '@angular/material';
+import { Subscription } from 'rxjs/Subscription';
 
 import {LoopBackFilter} from '../../shared/sdk/models/BaseModels';
 import { SharedComponentsModule } from '../../shared/components/shared-components.module'
@@ -17,16 +18,17 @@ import { AuthService, NotificationService } from '../../shared/services';
   templateUrl: './service-announcement.component.html',
   styleUrls: ['./service-announcement.component.css']
 })
-export class ServiceAnnouncementComponent implements OnInit {
+export class ServiceAnnouncementComponent implements OnInit, OnDestroy {
 
+  panelOpenState: boolean = false;
 
   displayedColumns = ['name', 'temple', 'leader', 'icon', 'route', 'delete'];
   
-  announcementsArray: any[] = [];
-  departments: Department[] = [];
-  announcements: DepartmentAnnouncement[] = [];
-  departmentAnnouncementMap: { [department: string]: {department: Department, announcements: DepartmentAnnouncement[] }} = {};
+  one$ = new Subscription();
 
+
+  departments: Department[] = [];
+  add = false; 
   loopBackFilter: LoopBackFilter = {};
 
   dataSource = new MatTableDataSource<Department>();
@@ -55,15 +57,6 @@ export class ServiceAnnouncementComponent implements OnInit {
 
   ngOnInit() {
     this.loadDepartments();
-    this.loadDepartmentAnnouncements();
-    this.departments.forEach((department) => {
-      this.announcements.forEach( (announcement) => {
-        if (!this.departmentAnnouncementMap[department.departmentName]) {
-          this.departmentAnnouncementMap[department.departmentName] = {department, announcements: [] };
-        }
-        this.departmentAnnouncementMap[department.departmentName].announcements.push(announcement);
-        });
-    });
   }
 
   createForm() {
@@ -77,61 +70,84 @@ export class ServiceAnnouncementComponent implements OnInit {
 
 
   addDepartmentAnnouncement() {
-    this.departmentAnnouncementApi.create<Department>(this.serviceAnnouncementForm.value)
+    this.one$ = this.departmentAnnouncementApi.create<DepartmentAnnouncement>(this.serviceAnnouncementForm.value)
     .subscribe(result => {
       this.loadDepartments();
-      this.notificationService.notificationSubject.next('"' + result.departmentName + '" created successfully');
+/*       const departmentIndex = this.departments.indexOf(this.serviceAnnouncementForm.get('departmentId').value);
+      console.log(this.serviceAnnouncementForm.get('departmentId').value);
+      console.log(departmentIndex);
+      if (departmentIndex !== -1) {
+        this.serviceAnnouncementForm.setValue({departmentId: result.id})
+        this.departments[departmentIndex].announcements.push(this.serviceAnnouncementForm.value);
+      } */
+      this.add = false;
+      //console.log(result.subject);
+      this.notificationService.notificationSubject.next('"' + result.subject + '" created successfully');
       this.serviceAnnouncementForm.reset();
       }
     );
   }
 
 
-  deleteDepartmentAnnouncement(announcement: DepartmentAnnouncement) {
-    this.departmentApi.deleteById(announcement.id)
+  deleteDepartmentAnnouncement(department: Department, announcement: DepartmentAnnouncement) {
+    this.departmentAnnouncementApi.deleteById(announcement.id)
     .subscribe(result => {
-      this.loadDepartments();
+      //this.loadDepartments();
+      const departmentIndex = this.departments.indexOf(department);
+      if (departmentIndex !== -1) {
+        const announcmentIndex = this.departments[departmentIndex].announcements.indexOf(announcement);
+        if (announcmentIndex !== -1) {
+          this.departments[departmentIndex].announcements.splice(announcmentIndex, 1);
+        }
+      }
       this.notificationService.notificationSubject.next('Announcement ' + '"' + announcement.subject + '" deleted successfully');
       }
     );
   }
 
-
   loadDepartments() {
     this.loopBackFilter.where = {'departmentLeaderDevoteeId': this.authService.getCurrentUserId()};
-    this.loopBackFilter.include = ['fkDepartmentDevotee1rel', ];
+    this.loopBackFilter.include = ['fkDepartmentDevotee1rel', 'announcements'];
     this.loopBackFilter.order = ['departmentName ASC'];
     this.departmentApi.find<Department>(this.loopBackFilter)
     .subscribe(
       departments => {
         this.departments = departments;
-        console.log('departments');
-        console.log(departments);
-        //this.dataSource.data = departments;
+        //console.log('departments');
+        //console.log(departments);
       }
     )
   }
 
-  loadDepartmentAnnouncements() {
-    this.departmentAnnouncementApi.find<DepartmentAnnouncement>({'order': 'validUntil DESC'})
-    .subscribe(
-      announcements => {
-        this.announcements = announcements;
-      }
-    )
+
+  displayCreateAnnouncement() {
+    this.add = true;
   }
 
-  openDialog(departmentAnnouncement: DepartmentAnnouncement) {
+  cancel() {
+    this.add = false;
+    this.serviceAnnouncementForm.reset();
+  }
+
+
+
+
+  openDialog(department: Department, departmentAnnouncement: DepartmentAnnouncement) {
     let dialogRef = this.dialog.open(DialogBoxComponent, {
       width: '600px',
       data: 'Delete the Announcement ' + departmentAnnouncement.subject
     });
     dialogRef.afterClosed().subscribe(result => {
       if(result) {
-        this.deleteDepartmentAnnouncement(departmentAnnouncement);
+        this.deleteDepartmentAnnouncement(department, departmentAnnouncement);
       } else { }
     });
   }
+
+
+  ngOnDestroy(){
+    this.one$.unsubscribe();
+   }  
 
 }
 
