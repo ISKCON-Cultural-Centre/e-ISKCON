@@ -15,7 +15,6 @@ import { PageNotFoundComponent } from './pageNotFound.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginModule } from './public/login/login.module';
 import { DashboardComponent } from './secure/dashboard/dashboard.component';
-import { MessagesComponent } from './secure/messages/messages.component';
 import { DevoteeModule } from './secure/devotee/devotee.module';
 import { MyServicesModule } from './secure/my-services/my-services.module';
 import { MyActionsModule } from './secure/my-actions/my-actions.module';
@@ -42,7 +41,6 @@ import { PublicComponent } from './layout/public';
     AppComponent,
     PageNotFoundComponent,
     DashboardComponent,
-    MessagesComponent,
     SecureComponent,
     PublicComponent,
   ],

@@ -8,6 +8,8 @@ import { SharedComponentsModule } from '../../shared/components/shared-component
 import { MyServicesComponent } from './my-services.component';
 import { ServiceCalendarEntryComponent } from './service-calendar-entry.component';
 import { ServiceAnnouncementComponent } from './service-announcement.component';
+import { AnnouncementListComponent } from './announcement-list.component';
+import { AnnouncementListService } from './announcement-list-service';
 
 @NgModule({
   imports: [
@@ -18,6 +20,9 @@ import { ServiceAnnouncementComponent } from './service-announcement.component';
     SharedComponentsModule,
     MyServicesRoutingModule,
   ],
-  declarations: [MyServicesComponent, ServiceCalendarEntryComponent, ServiceAnnouncementComponent]
+  declarations: [MyServicesComponent, ServiceCalendarEntryComponent, ServiceAnnouncementComponent, AnnouncementListComponent],
+  providers: [
+    AnnouncementListService,
+  ],
 })
 export class MyServicesModule { }

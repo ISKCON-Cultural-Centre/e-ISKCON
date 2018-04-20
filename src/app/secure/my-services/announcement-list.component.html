@@ -1,0 +1,57 @@
+<div>
+  <mat-table fxFill fxLayout="column" class="m-t-20" #table [dataSource]="dataSource" matSort>
+      <!-- Department Column -->
+      <ng-container matColumnDef="department">
+          <mat-header-cell *matHeaderCellDef  mat-sort-header> Department </mat-header-cell>
+          <mat-cell *matCellDef="let announcement"> 
+              {{ announcement.fkDepartmentAnnouncementDepartment1rel.departmentName }}
+          </mat-cell>
+      </ng-container>
+
+      <!-- Subject Column -->
+      <ng-container matColumnDef="subject">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Subject </mat-header-cell>
+          <mat-cell *matCellDef="let announcement"> 
+              {{ announcement.subject}}
+          </mat-cell>
+      </ng-container>
+      
+      <!-- Message Column -->
+       <ng-container matColumnDef="message" > 
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Message </mat-header-cell>
+              <mat-cell *matCellDef="let announcement"> 
+                  {{ announcement.message }}
+              </mat-cell>
+      </ng-container>     
+      
+      <!-- Validity Column -->
+        <ng-container matColumnDef="validity" > 
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Vali Until</mat-header-cell>
+              <mat-cell *matCellDef="let announcement"> 
+                  {{ announcement.validUntil  | date: 'mediumDate' }}
+              </mat-cell>
+      </ng-container>    
+  
+    <!-- Done Column -->
+<!--     <ng-container matColumnDef="delete">
+      <mat-header-cell *matHeaderCellDef> Delete </mat-header-cell>      
+    <mat-cell *matCellDef="let announcement">
+      <button mat-icon-button (click)="doneAnnouncing(announcement)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>        --> 
+          
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)"></mat-row>
+  </mat-table>
+  </div>
+      <div class="spinner-container" *ngIf="dataSource?.loading$ | async">
+      <mat-spinner></mat-spinner>
+  </div>
+  <div>
+      <mat-paginator [length]="filteredAnnouncementsCount$ | async" [pageSize]="10"  [pageSizeOptions]="[3, 5, 10]">
+      </mat-paginator>   
+  </div>
+
+

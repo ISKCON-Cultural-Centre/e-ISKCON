@@ -14,6 +14,7 @@ import { DepartmentComponent } from './../../secure/organization/department.comp
 import { ChangePasswordComponent } from './../../secure/devotee/change-password.component';
 import { DevoteeFilterComponent } from './../../secure/devotee/devotee-filter.component';
 import { MyServicesComponent } from '../../secure/my-services/my-services.component';
+import { AnnouncementListComponent } from '../../secure/my-services/announcement-list.component';
 
 
 
@@ -34,6 +35,14 @@ export const SECURE_ROUTES: Routes = [
       component: MyServicesComponent, 
       canActivate: [AuthGuard]
     },
+    {
+      path: 'announcements',
+      data: {
+        breadcrumb: 'Announcements'
+      },
+      component: AnnouncementListComponent, 
+      canActivate: [AuthGuard]
+    },    
     {
       path: 'devotee/search',
       data: {

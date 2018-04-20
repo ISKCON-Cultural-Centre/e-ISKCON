@@ -11,20 +11,19 @@ import { MatDialog, MatChipInputEvent, MatAutocompleteSelectedEvent, MatPaginato
 
 import {LoopBackFilter} from '../../shared/sdk/models/BaseModels'
 import { DialogBoxComponent } from '../../shared/components/dialog-box/dialog-box.component';
-import { DevoteeApi, Devotee } from '../..//shared/sdk';
+import { DevoteeApi, Devotee, DepartmentAnnouncementApi, DepartmentAnnouncement } from '../..//shared/sdk';
 import { AuthService, NotificationService } from '../../shared/services';
 import { PhysicalAddressComponent } from '../common/physical-address.component';
 import { PhysicalAddressApi } from '../../shared/sdk/services/index';
-import { DevoteesDataSource } from './devotees-data-source';
-import { DevoteesListService } from './devotees-list-service';
-import { DevoteeSearchFilterShareService } from './devotee-search-filter-share-service';
+import { AnnouncementDataSource } from './announcement-data-source';
+import { AnnouncementListService } from './announcement-list-service';
 
 @Component({
-  selector: 'app-devotees-list',
-  templateUrl: './devotees-list.component.html',
-  styleUrls: ['./devotees-list.component.css']
+  selector: 'app-announcement-list',
+  templateUrl: './announcement-list.component.html',
+  styleUrls: ['./announcement-list.component.css']
 })
-export class DevoteesListComponent  implements OnInit, AfterViewInit, OnDestroy {
+export class AnnouncementListComponent  implements OnInit, AfterViewInit, OnDestroy {
 
   devoteeId: String;
   devotee: Devotee;
@@ -39,41 +38,27 @@ export class DevoteesListComponent  implements OnInit, AfterViewInit, OnDestroy 
   three$ = new Subscription();
 
 
-  dataSource = new DevoteesDataSource(this.devoteesListService);
-  displayedColumns = ['name', 'mobileNo', 'circle'];
-  filteredDevoteesCount = new BehaviorSubject<number>(0);
-  public filteredDevoteesCount$ = this.filteredDevoteesCount.asObservable();
+  dataSource = new AnnouncementDataSource(this.announcementListService);
+  displayedColumns = ['department', 'subject', 'message', 'validity'];
+  filteredAnnouncementsCount = new BehaviorSubject<number>(0);
+  public filteredAnnouncementsCount$ = this.filteredAnnouncementsCount.asObservable();
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
 
   constructor(
-    private devoteesListService: DevoteesListService,
-    private devoteeApi: DevoteeApi,
-    private devoteeSearchFilterShareService: DevoteeSearchFilterShareService
+    private announcementListService: AnnouncementListService,
+    private departmentAnnouncementApi: DepartmentAnnouncementApi
   ) {
   }
 
   ngOnInit() {
-    this.loopBackFilter.include = ['fkDevoteeLanguage1rel', 'fkDevoteeProfessionMaster1rel', 'fkDevoteeCircle1rel'];
-    this.loopBackFilter.order = ['spiritualName ASC'];
-    this.one$ = this.devoteeSearchFilterShareService.devoteeFilter$.startWith( '{ "and": []}' ).
-    subscribe(
-      filters => {
-        if (filters) {
-          this.loopBackFilter.where = JSON.parse(filters.toString());
-          this.three$ = this.devoteeApi.count(filters)
-          .subscribe(
-            count => {
-              this.filteredDevoteesCount.next(count.count);
-              this.dataSource.loadDevotees(this.loopBackFilter, 0, 10);
+    //this.loopBackFilter.where = {'departmentLeaderDevoteeId': this.authService.getCurrentUserId()};
+    this.loopBackFilter.include = ['fkDepartmentAnnouncementDepartment1rel'];
+    this.loopBackFilter.order = ['validUntil DESC'];
+              this.dataSource.loadAnnouncements(this.loopBackFilter, 0, 10);
               this.paginator.pageIndex = 0;
-            }
-          );
-      }
-    }
-    );
   }
 
 
@@ -84,7 +69,7 @@ export class DevoteesListComponent  implements OnInit, AfterViewInit, OnDestroy 
         merge(this.sort.sortChange, this.paginator.page)
           .pipe(
               tap(() => {
-                this.loadDevoteesPage();
+                this.loadAnnouncementsPage();
               }
             )
           )
@@ -92,12 +77,12 @@ export class DevoteesListComponent  implements OnInit, AfterViewInit, OnDestroy 
   }
 
 
-  loadDevoteesPage() {
-    this.two$ = this.devoteeApi.count(this.combinedFilters)
+  loadAnnouncementsPage() {
+    this.two$ = this.departmentAnnouncementApi.count(this.combinedFilters)
     .subscribe(
       count => {
-        this.filteredDevoteesCount.next(count.count);
-        this.dataSource.loadDevotees(
+        this.filteredAnnouncementsCount.next(count.count);
+        this.dataSource.loadAnnouncements(
           this.loopBackFilter,
           this.paginator.pageIndex,
           this.paginator.pageSize);
@@ -107,6 +92,10 @@ export class DevoteesListComponent  implements OnInit, AfterViewInit, OnDestroy 
 
   onRowClicked(row) {
     this.selectedDevotee.emit(row);
+}
+
+doneAnnouncing(announcement: DepartmentAnnouncement) {
+
 }
 
   ngOnDestroy(){

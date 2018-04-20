@@ -22,16 +22,12 @@ export class ServiceAnnouncementComponent implements OnInit, OnDestroy {
 
   panelOpenState: boolean = false;
 
-  displayedColumns = ['name', 'temple', 'leader', 'icon', 'route', 'delete'];
-  
   one$ = new Subscription();
-
 
   departments: Department[] = [];
   add = false; 
   loopBackFilter: LoopBackFilter = {};
 
-  dataSource = new MatTableDataSource<Department>();
 
   serviceAnnouncementForm: FormGroup;
 
@@ -39,13 +35,7 @@ export class ServiceAnnouncementComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort: MatSort;
 
 
-  applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-    this.dataSource.filter = filterValue;
-  }
-
-  constructor(
+   constructor(
     private notificationService: NotificationService,
     private authService: AuthService,
     private departmentApi: DepartmentApi,

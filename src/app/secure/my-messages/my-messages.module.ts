@@ -4,6 +4,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { MyMessagesRoutingModule } from './my-messages-routing.module';
 import { MyMessagesComponent } from './my-messages.component';
+import { AgendaProposalComponent } from './agenda-proposal.component';
+import { AgendaSettingComponent } from './agenda-setting.component';
 
 @NgModule({
   imports: [
@@ -11,6 +13,6 @@ import { MyMessagesComponent } from './my-messages.component';
     ReactiveFormsModule,
     MyMessagesRoutingModule,
   ],
-  declarations: [MyMessagesComponent]
+  declarations: [MyMessagesComponent, AgendaProposalComponent, AgendaSettingComponent]
 })
 export class MyMessagesModule { }
