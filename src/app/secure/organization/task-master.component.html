@@ -1,3 +1,108 @@
-<p>
-  task-master works!
-</p>
+<div fxLayout="row" fxLayout.xs="column">
+    <fieldset fxLayout="column" fxLayoutAlign="space-sevenly stretch">  
+      <legend>Tasks Master</legend>
+        <mat-form-field>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter Tasks">
+        </mat-form-field>
+  
+  
+      <button mat-icon-button (click) = 'displayCreateTask()' >
+        <mat-icon >add_circle</mat-icon>
+      </button>
+  
+      <div fxLayout="row" fxLayoutAlign="space-sevenly stretch" *ngIf="add">
+      <form [formGroup]="taskForm" (ngSubmit)="addTask()" novalidate   >   
+        <fieldset fxLayout="row" fxLayoutAlign="space-evenly stretch">
+          <legend>Add a Task</legend>
+          <mat-form-field>
+            <input fxFill matInput placeholder="Task Name" class="form-control" formControlName="taskName" autofocus>
+          </mat-form-field>
+       
+          <mat-form-field>
+            <input matInput placeholder="Task Description" class="form-control" formControlName="taskDescription">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Route" class="form-control" formControlName="applicationRoute">
+          </mat-form-field>   
+
+<!--               <input matCheckbox placeholder="Approval Rules" class="form-control" formControlName="approvalRulesApplyInd">             -->
+            <mat-checkbox class="form-control" formControlName="approvalRulesApplyInd">
+              Aproval Rules apply
+            </mat-checkbox>
+          
+          
+            <button [disabled]="taskForm.invalid" type="submit"  mat-raised-button color="primary">Add Task
+            </button>
+            <button  type="button" (click) = 'cancel()'  mat-raised-button color="warn">
+              Cancel
+            </button>     
+        </fieldset>
+        </form>
+      </div>
+  
+      <mat-table #table [dataSource]="dataSource" matSort matSortActive="created" matSortDisableClear matSortDirection="asc">
+  
+  
+
+      <!-- Task Name Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Task Name </mat-header-cell>
+        <mat-cell *matCellDef="let task"> 
+            <app-inline-edit (done)='editTaskNameField(task.taskName, task)' 
+            [(ngModel)]="task.taskName" [required]="true" type="text" placeholder="Task Name" (keyup.enter)="editTaskNameField($event.target.value, task)">
+          </app-inline-edit> 
+        </mat-cell>
+      </ng-container>
+  
+
+  
+      <!-- Description Column -->
+      <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+        <mat-cell *matCellDef="let task">           
+          <app-inline-edit (done)='editTaskDescriptionField(task.taskDescription, task)'
+            [(ngModel)]="task.taskDescription" [required]="true" type="text"  (keyup.enter)="editTaskDescriptionField($event.target.value, task)">
+          </app-inline-edit> 
+       </mat-cell>
+      </ng-container>      
+  
+      <!-- Route Column -->
+      <ng-container matColumnDef="route">
+        <mat-header-cell *matHeaderCellDef> Route </mat-header-cell>
+        <mat-cell *matCellDef="let task">           
+          <app-inline-edit (done)='editAplicationRouteField(task.applicationRoute, task)'
+            [(ngModel)]="task.applicationRoute" [required]="true" type="text"  (keyup.enter)="editApplicationRouteField($event.target.value, task)">
+          </app-inline-edit> 
+       </mat-cell>
+      </ng-container>    
+      
+      <!-- Approval Column -->
+      <ng-container matColumnDef="approvalRuleInd">
+          <mat-header-cell *matHeaderCellDef> Approval Rules Apply </mat-header-cell>
+          <mat-cell *matCellDef="let task"> 
+              <mat-checkbox placeholder="Approval Rules Apply" (change)="editApprovalRulesApplyInd($event, task)" [checked]="task.approvalRulesApplyInd">
+                 
+              </mat-checkbox>                      
+<!--             <app-inline-edit (done)='editApprovalRulesApplyInd(task.approvalRulesApplyInd, task)'
+              [(ngModel)]="task.approvalRulesApplyInd" [required]="true" type="text"  (keyup.enter)="editApprovalRulesApplyInd($event.target.value, task)">
+            </app-inline-edit>  -->
+         </mat-cell>
+        </ng-container>          
+  
+      <!-- Delete Column -->
+      <ng-container matColumnDef="delete">
+          <mat-header-cell *matHeaderCellDef> Delete </mat-header-cell>      
+        <mat-cell *matCellDef="let task">
+          <button mat-icon-button (click)="openDialog(task)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>    
+     
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </fieldset>
+  </div>
+  
+  

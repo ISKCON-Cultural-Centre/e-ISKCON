@@ -1,11 +1,11 @@
-import { Component, Input, OnInit, OnDestroy, AfterViewInit, Inject } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
 import { debounceTime } from 'rxjs/operators/debounceTime';
-import {MatDialog,  MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {MatDialog} from '@angular/material';
 
 import { DialogBoxComponent } from '../../shared/components/dialog-box/dialog-box.component';
 
@@ -22,11 +22,11 @@ import { PhysicalAddressApi } from '../../shared/sdk/services/index';
 
 
 @Component({
-  selector: 'app-devotee-profile',
-  templateUrl: './devotee-profile.component.html',
-  styleUrls: ['./devotee-profile.component.css']
+  selector: 'app-devotee-material-family',
+  templateUrl: './devotee-material-family.component.html',
+  styleUrls: ['./devotee-material-family.component.css']
 })
-export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit {
+export class DevoteeMaterialFamilyComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @Input() devoteeId: String;
   @Input() editMode: boolean;
@@ -82,13 +82,8 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
     private router: Router,
     private authService: AuthService,
     private physicalAddressApi: PhysicalAddressApi,
-/*     private dialogRef: MatDialogRef<DevoteeProfileComponent>,
-    @Inject(MAT_DIALOG_DATA) data, */
     private fb: FormBuilder) {
     this.createForm();
-/*     if (data) {
-      this.devoteeId = data.id;
-    } */
   }
 
 
@@ -96,7 +91,6 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
   ngOnInit() {
 
     this.devoteeForm.disable();
-    /*     this.editMode = true; */
     if (this.editMode === true){
       this.devoteeForm.enable();
     }

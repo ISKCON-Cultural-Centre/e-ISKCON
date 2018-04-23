@@ -31,6 +31,17 @@
                   {{ devotee.mobileNo }}
               </mat-cell>
       </ng-container>    
+
+      <!-- Edit Column -->
+<!--       <ng-container matColumnDef="edit" > 
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Edit </mat-header-cell>
+
+        <mat-cell *matCellDef="let devotee"> 
+            <button mat-icon-button (click)="openEditDialog(devotee)">
+                <mat-icon>edit</mat-icon>
+            </button>            
+        </mat-cell>
+    </ng-container>  -->         
   
           
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

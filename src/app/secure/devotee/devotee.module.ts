@@ -24,7 +24,8 @@ import { DevoteeSearchFilterShareService } from './devotee-search-filter-share-s
 import { DevoteeSearchFilterComponent } from './devotee-search-filter.component';
 import { DevoteeCardComponent } from './devotee-card.component';
 import { DevoteeQuickAddComponent } from './devotee-quick-add.component';
-import { DevoteeDetailAddComponent } from './devotee-detail-add.component'
+import { DevoteeDetailAddComponent } from './devotee-detail-add.component';
+import { DevoteeMaterialFamilyComponent } from './devotee-material-family.component'
 
 
 @NgModule({
@@ -44,7 +45,7 @@ import { DevoteeDetailAddComponent } from './devotee-detail-add.component'
     DevoteeLanguageComponent, DevoteeServiceInterestComponent, 
     DevoteeServiceAvailabilityComponent, ChangePasswordComponent, DevoteeFilterComponent, 
     DevoteeDetailComponent, DevoteesListComponent, DevoteeSearchFilterComponent, DevoteeCardComponent, 
-    DevoteeQuickAddComponent, DevoteeDetailAddComponent
+    DevoteeQuickAddComponent, DevoteeDetailAddComponent, DevoteeMaterialFamilyComponent
   ],
   providers: [
     DevoteeSearchSelectService,
@@ -54,7 +55,8 @@ import { DevoteeDetailAddComponent } from './devotee-detail-add.component'
   entryComponents: [
     DevoteeDetailComponent,
     DevoteeQuickAddComponent,
-    DevoteeDetailAddComponent
+    DevoteeDetailAddComponent,
+    DevoteeProfileComponent
   ],  
 })
 export class DevoteeModule { }

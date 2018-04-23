@@ -48,7 +48,7 @@ export class DevoteeFilterComponent implements OnInit {
 
     dialogConfig.data = devotee;
 
-    dialogConfig.disableClose = true;
+    dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
     dialogConfig.hasBackdrop = true;
 

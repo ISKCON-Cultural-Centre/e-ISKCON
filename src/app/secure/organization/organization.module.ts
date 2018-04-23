@@ -9,6 +9,7 @@ import { SharedComponentsModule } from '../../shared/components/shared-component
 import { InlineEditComponent } from '../../shared/components/inline-edit/inline-edit.component';
 import { TaskMasterComponent } from './task-master.component';
 import { TaskRoleComponent } from './task-role.component';
+import { ServiceMasterComponent } from './service-master.component';
 
 
 
@@ -19,7 +20,7 @@ import { TaskRoleComponent } from './task-role.component';
     SharedComponentsModule
   ],
   declarations: [
-    RoleComponent, DepartmentComponent, TaskMasterComponent, TaskRoleComponent, 
+    RoleComponent, DepartmentComponent, TaskMasterComponent, TaskRoleComponent, ServiceMasterComponent, 
   ]
 })
 export class OrganizationModule { }

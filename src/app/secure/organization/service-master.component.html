@@ -1,0 +1,75 @@
+<div fxLayout="row" fxLayout.xs="column">
+    <fieldset fxLayout="column" fxLayoutAlign="space-sevenly stretch">  
+      <legend>Services Master</legend>
+        <mat-form-field>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter Services">
+        </mat-form-field>
+  
+  
+      <button mat-icon-button (click) = 'displayCreateService()' >
+        <mat-icon >add_circle</mat-icon>
+      </button>
+  
+      <div fxLayout="row" fxLayoutAlign="space-sevenly stretch" *ngIf="add">
+      <form [formGroup]="serviceForm" (ngSubmit)="addService()" novalidate   >   
+        <fieldset fxLayout="row" fxLayoutAlign="space-evenly stretch">
+          <legend>Add a service</legend>
+          <mat-form-field>
+            <input fxFill matInput placeholder="Service Name" class="form-control" formControlName="serviceName" autofocus>
+          </mat-form-field>
+         
+          <mat-form-field>
+            <textarea matInput placeholder="Service Description" class="form-control" formControlName="description">
+            </textarea>
+          </mat-form-field>
+      
+            <button [disabled]="serviceForm.invalid" type="submit"  mat-raised-button color="primary">Add Service
+            </button>
+            <button  type="button" (click) = 'cancel()'  mat-raised-button color="warn">
+              Cancel
+            </button>     
+        </fieldset>
+        </form>
+      </div>
+  
+      <mat-table #table [dataSource]="dataSource" matSort matSortActive="created" matSortDisableClear matSortDirection="asc">
+  
+      <!-- Service Name Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Service Name </mat-header-cell>
+        <mat-cell *matCellDef="let service"> 
+            <app-inline-edit (done)='editServiceNameField(service.serviceName, service)' 
+            [(ngModel)]="service.serviceName" [required]="true" type="text" placeholder="Service Name" (keyup.enter)="editServiceNameField($event.target.value, service)">
+          </app-inline-edit> 
+        </mat-cell>
+      </ng-container>
+  
+  
+      <!-- Description Column -->
+      <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef> Service Description </mat-header-cell>
+        <mat-cell *matCellDef="let service">           
+          <app-inline-edit (done)='editServiceDescriptionField(service.description, service)'
+            [(ngModel)]="service.description" [required]="true" type="text"  (keyup.enter)="editServiceDescriptionField($event.target.value, service)">
+          </app-inline-edit> 
+       </mat-cell>
+      </ng-container>      
+  
+  
+      <!-- Delete Column -->
+      <ng-container matColumnDef="delete">
+          <mat-header-cell *matHeaderCellDef> Delete </mat-header-cell>      
+        <mat-cell *matCellDef="let service">
+          <button mat-icon-button (click)="openDialog(service)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>    
+     
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </fieldset>
+  </div>
+  
+  

@@ -14,6 +14,7 @@ import { DepartmentComponent } from './../../secure/organization/department.comp
 import { ChangePasswordComponent } from './../../secure/devotee/change-password.component';
 import { DevoteeFilterComponent } from './../../secure/devotee/devotee-filter.component';
 import { MyServicesComponent } from '../../secure/my-services/my-services.component';
+import { ServiceMasterComponent } from '../../secure/organization/service-master.component';
 import { AnnouncementListComponent } from '../../secure/my-services/announcement-list.component';
 
 
@@ -81,14 +82,14 @@ export const SECURE_ROUTES: Routes = [
       },
       component: ChangePasswordComponent 
     },
-    { 
+/*     { 
       path: 'lookupMaster', 
       data: {
         breadcrumb: 'Lookup Maintenance'
       },
       component: LookupComponent, 
       canActivate: [AuthGuard] 
-    },
+    }, */
     { 
       path: 'organization/role', 
       data: {
@@ -100,11 +101,19 @@ export const SECURE_ROUTES: Routes = [
     { 
       path: 'organization/task', 
       data: {
-        breadcrumb: 'Task'
+        breadcrumb: 'Task Master'
       },
       component: TaskMasterComponent, 
       canActivate: [AuthGuard] 
     },
+    { 
+      path: 'organization/service', 
+      data: {
+        breadcrumb: 'Service Master'
+      },
+      component: ServiceMasterComponent, 
+      canActivate: [AuthGuard] 
+    },    
     { 
       path: 'organization/department', 
       data: {
