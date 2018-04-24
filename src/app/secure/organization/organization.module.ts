@@ -8,8 +8,8 @@ import { MaterialModule } from '../../material.module';
 import { SharedComponentsModule } from '../../shared/components/shared-components.module'
 import { InlineEditComponent } from '../../shared/components/inline-edit/inline-edit.component';
 import { TaskMasterComponent } from './task-master.component';
-import { TaskRoleComponent } from './task-role.component';
 import { ServiceMasterComponent } from './service-master.component';
+import { RoleTaskComponent } from './role-task.component';
 
 
 
@@ -20,7 +20,7 @@ import { ServiceMasterComponent } from './service-master.component';
     SharedComponentsModule
   ],
   declarations: [
-    RoleComponent, DepartmentComponent, TaskMasterComponent, TaskRoleComponent, ServiceMasterComponent, 
+    RoleComponent, DepartmentComponent, TaskMasterComponent, ServiceMasterComponent, RoleTaskComponent, 
   ]
 })
 export class OrganizationModule { }

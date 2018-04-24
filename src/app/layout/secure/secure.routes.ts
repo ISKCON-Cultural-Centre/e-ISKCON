@@ -10,6 +10,7 @@ import { LookupComponent } from './../../secure/lookup/lookup.component';
 import { DevoteeRoleComponent } from './../../secure/devotee/devotee-role.component';
 import { RoleComponent } from './../../secure/organization/role.component';
 import { TaskMasterComponent } from './../../secure/organization/task-master.component';
+import { RoleTaskComponent } from './../../secure/organization/role-task.component';
 import { DepartmentComponent } from './../../secure/organization/department.component';
 import { ChangePasswordComponent } from './../../secure/devotee/change-password.component';
 import { DevoteeFilterComponent } from './../../secure/devotee/devotee-filter.component';
@@ -104,6 +105,14 @@ export const SECURE_ROUTES: Routes = [
         breadcrumb: 'Task Master'
       },
       component: TaskMasterComponent, 
+      canActivate: [AuthGuard] 
+    },
+    { 
+      path: 'organization/roleTask', 
+      data: {
+        breadcrumb: 'Role Task Assignment'
+      },
+      component: RoleTaskComponent, 
       canActivate: [AuthGuard] 
     },
     { 

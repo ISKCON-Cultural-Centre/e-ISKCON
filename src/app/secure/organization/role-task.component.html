@@ -1,0 +1,34 @@
+      <div fxLayout="column">
+          <mat-form-field fxFill="100%">
+              <input matInput placeholder="Search Role" [formControl]="roleSearchCtrl">
+            </mat-form-field>        
+              <mat-list>
+                  <mat-list-item *ngFor="let role of filteredRoles | async; last as last">
+                    <button mat-button (click)="loadRoleTasks(role.id)">{{ role.name }}</button>
+                    <mat-divider [inset]="true" *ngIf="!last"></mat-divider>        
+                  </mat-list-item>
+              </mat-list> 
+      </div>    
+
+
+
+
+<div fxLayout="row" fxLayoutAlign="space-around start">
+
+ <div>
+    <div fxLayout="column" fxLayoutAlign="space-around start">
+        <div>
+          <p>Assigned Tasks</p>
+
+          <mat-selection-list>
+              <mat-list-option *ngFor="let task of allTasks | async" [selected]="taskAssigned(task.id)">
+                {{task.taskName}}
+              </mat-list-option>
+          </mat-selection-list>
+         
+        </div>  
+      </div>  
+ </div>
+
+  </div>
+  

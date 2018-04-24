@@ -1,0 +1,38 @@
+div.container
+{
+    display: flex;
+    margin-bottom: 10px;
+}
+
+div.container > div
+{
+    flex: 1 1 5em;
+    margin-left: 10px;
+    height:50px;
+    background-color: white;
+}
+
+div.container > div:first-child
+{
+    margin-left: 0;
+}
+
+div.container > div.two
+{
+    margin-top: 200;
+    flex:2 2 calc(10em + 10px); /** 10px is the missing margin of the missing box */
+}
+
+div.container > div.three
+{
+    flex:3 3 calc(15em + 20px); /** 20px is the missing margin of the two missing boxes */
+}
+
+.example-card {
+    max-width: 400px;
+  }
+  
+  .example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+  }
