@@ -8,6 +8,8 @@ declare var Object: any;
 export interface RoleTaskMasterInterface {
   "taskMasterId": string;
   "roleId": string;
+  "created-on"?: Date;
+  "updated-on"?: Date;
   fkServiceTaskMasterService1rel?: ServiceRole;
   fkRoleTaskMasterTaskMaster1rel?: TaskMaster;
 }
@@ -15,6 +17,8 @@ export interface RoleTaskMasterInterface {
 export class RoleTaskMaster implements RoleTaskMasterInterface {
   "taskMasterId": string;
   "roleId": string;
+  "created-on": Date;
+  "updated-on": Date;
   fkServiceTaskMasterService1rel: ServiceRole;
   fkRoleTaskMasterTaskMaster1rel: TaskMaster;
   constructor(data?: RoleTaskMasterInterface) {
@@ -57,6 +61,14 @@ export class RoleTaskMaster implements RoleTaskMasterInterface {
         "roleId": {
           name: 'roleId',
           type: 'string'
+        },
+        "created-on": {
+          name: 'created-on',
+          type: 'Date'
+        },
+        "updated-on": {
+          name: 'updated-on',
+          type: 'Date'
         },
       },
       relations: {

@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { debounceTime } from 'rxjs/operators/debounceTime';
 import { MatChipInputEvent } from '@angular/material';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
-import { MatAutocompleteSelectedEvent } from '@angular/material';
+import { MatListOptionChange, MatSelectionListChange } from '@angular/material';
 
 import * as _ from 'underscore';
 import {  difference } from 'set-manipulator';
@@ -35,7 +35,7 @@ export class RoleTaskComponent implements OnInit, OnDestroy {
   filteredRoles: Observable<ServiceRole[]> ;
   allTasks: Observable<TaskMaster[]> ;
   loopBackFilter: LoopBackFilter = {};
-
+  selectedRole: String;
   visible: boolean = true;
   selectable: boolean = true;
   removable: boolean = true;
@@ -65,7 +65,6 @@ export class RoleTaskComponent implements OnInit, OnDestroy {
 
  
   ngOnInit() {
-
     this.one$ = this.roleSearchCtrl.valueChanges
     .debounceTime(400)
     .startWith('' )
@@ -76,7 +75,8 @@ export class RoleTaskComponent implements OnInit, OnDestroy {
             or: [
               {name: {like: '%' + searchTerm + '%'}}
             ]
-          }
+          },
+          order: 'name ASC',
         }
       );
     });
@@ -84,10 +84,8 @@ export class RoleTaskComponent implements OnInit, OnDestroy {
 
 
   loadRoleTasks(roleId: String) {
-    console.log(roleId);
+    this.selectedRole = roleId;
     this.loopBackFilter.where = {'roleId': roleId};
-    this.loopBackFilter.include = ['fkRoleTaskMasterTaskMaster1rel'];
-    this.loopBackFilter.order = ['roleId ASC'];
     this.two$ = this.roleTaskMasterApi.find<RoleTaskMaster>(this.loopBackFilter)
     .subscribe(
       tasks => {
@@ -95,17 +93,12 @@ export class RoleTaskComponent implements OnInit, OnDestroy {
           return task.taskMasterId;
         });
         this.roleTasks = rTasks;
-        console.log(this.roleTasks);
         this.loadAllTasks();
-        this.remainingRoles = difference(this.allRoles, this.assignedRoles, (object) => object.id);
       }
     );
   }
 
   taskAssigned<Boolean>(taskId: string) {
-    console.log(taskId);
-    console.log(this.roleTasks);
-    console.log(this.roleTasks.indexOf(taskId));
     if (this.roleTasks.indexOf(taskId) === -1) {
       return false;
     } else {
@@ -114,8 +107,20 @@ export class RoleTaskComponent implements OnInit, OnDestroy {
 
   }
 
+  optionChanged(selectionListChange: MatListOptionChange){
+    if (selectionListChange.selected){
+      this.addTask(this.selectedRole, selectionListChange.source.value);
+    } else {
+      this.removeTask(this.selectedRole, selectionListChange.source.value);
+    }
+  }
+
   loadAllTasks() {
-    this.allTasks = this.taskMasterApi.find<TaskMaster>();
+    this.allTasks = this.taskMasterApi.find<TaskMaster>(
+      {
+        order: 'taskName ASC',
+      }
+    );
 /*     .subscribe(
       tasks => {
         this.allTasks = tasks;
@@ -124,42 +129,21 @@ export class RoleTaskComponent implements OnInit, OnDestroy {
     ); */
   }
 
-  onSelectionChanged(event: MatAutocompleteSelectedEvent) {
-    this.devoteeSearchSelectService.announceMission(event);
-  }
-
-  onSubmit() { this.submitted = true; }
-
-  filterRoles(name?: string)  {
-    const pattern = new RegExp('.*' + name + '.*', 'i'); /* case-insensitive RegExp search */
-    this.serviceRoleApi.find<ServiceRole>({ 'where': {'name': { 'like': 'pattern'} } });
-  }
-
-  displayFn(role?: ServiceRole): string | undefined {
-    return role ? role.name : undefined;
-  }  
-
-  addTask(roleTask: RoleTaskMaster): void {
-    this.four$ = this.roleTaskMasterApi.create<RoleTaskMaster>(roleTask)
+  addTask(roleId: String, taskId: String): void {
+    this.four$ = this.roleTaskMasterApi.create({roleId: roleId, taskMasterId: taskId})
      .subscribe(
        devoteeRole => {
-        this.assignedRoles.push(roleTask);
-        this.remainingRoles = difference(this.allRoles, this.assignedRoles, (object) => object.id);
-        this.notificationService.notificationSubject.next('Role added successfully');
+        this.notificationService.notificationSubject.next('Task added successfully');
        }
      );
   }
 
-  removeRole(role: ServiceRole): void {
-    this.five$ = this.roleTaskMasterApi.deleteById ({principalId: this.devoteeId, principalType: 'USER', roleId: role.id})
+  removeTask(roleId: String, taskId: String): void {
+    this.five$ = this.roleTaskMasterApi.destroyAll({roleId: roleId, taskId: taskId})
     .subscribe(
       devoteeRole => {
-        const index = this.assignedRoles.indexOf(role);
-        if (index >= 0) {
-          this.assignedRoles.splice(index, 1);
-        }
-        this.remainingRoles = difference(this.allRoles, this.assignedRoles, (object) => object.id);
-       this.notificationService.notificationSubject.next('Role deleted successfully');
+        console.log(devoteeRole);
+       this.notificationService.notificationSubject.next('Task deleted successfully');
       }
     );
   }

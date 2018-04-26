@@ -53,13 +53,6 @@ export const SECURE_ROUTES: Routes = [
       component: DevoteeFilterComponent,
       canActivate: [AuthGuard]
     },
-/*     { 
-      path: 'devotee', 
-      data: {
-        breadcrumb: 'Devotee'
-      },
-      component: DevoteeComponent, 
-      canActivate: [AuthGuard] }, */
     { 
       path: 'devoteeRole',
       data: {
@@ -83,14 +76,6 @@ export const SECURE_ROUTES: Routes = [
       },
       component: ChangePasswordComponent 
     },
-/*     { 
-      path: 'lookupMaster', 
-      data: {
-        breadcrumb: 'Lookup Maintenance'
-      },
-      component: LookupComponent, 
-      canActivate: [AuthGuard] 
-    }, */
     { 
       path: 'organization/role', 
       data: {

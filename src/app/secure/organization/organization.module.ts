@@ -20,7 +20,9 @@ import { RoleTaskComponent } from './role-task.component';
     SharedComponentsModule
   ],
   declarations: [
-    RoleComponent, DepartmentComponent, TaskMasterComponent, ServiceMasterComponent, RoleTaskComponent, 
+    RoleComponent, DepartmentComponent, 
+    TaskMasterComponent, ServiceMasterComponent, 
+    RoleTaskComponent, 
   ]
 })
 export class OrganizationModule { }

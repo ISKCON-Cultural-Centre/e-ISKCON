@@ -27,7 +27,6 @@ import { DevoteeQuickAddComponent } from './devotee-quick-add.component';
 import { DevoteeDetailAddComponent } from './devotee-detail-add.component';
 import { DevoteeMaterialFamilyComponent } from './devotee-material-family.component'
 
-
 @NgModule({
   imports: [
     CommonModule,

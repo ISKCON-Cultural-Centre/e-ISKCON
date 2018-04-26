@@ -13,9 +13,7 @@ import {  difference } from 'set-manipulator';
 import { ServiceRoleMapping, ServiceRole  } from '../../shared/sdk/models';
 import { DevoteeApi, ServiceRoleMappingApi, ServiceRoleApi } from '../../shared/sdk';
 import { AuthService, DevoteeSearchSelectService, NotificationService } from '../../shared/services';
-/**
- * @title Role Mappings
- */
+
 @Component({
   selector: 'app-devotee-role',
   templateUrl: './devotee-role.component.html',
@@ -76,15 +74,6 @@ export class DevoteeRoleComponent implements OnInit, OnDestroy {
     );
   }
 
-/*   loadDevoteeRoles(devoteeId: String) {
-    this.three$ = this.devoteeApi.getRoles()
-    .subscribe(
-      devoteeRoles => {
-        this.assignedRoles = devoteeRoles.roles;
-        this.loadAllRoles();
-      }
-    );
-  } */
 
   loadDevoteeRoles(devoteeId: String) {
     this.three$ =  this.serviceRoleMappingApi.find<ServiceRoleMapping>(
