@@ -202,7 +202,7 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
 
   createForm() {
     this.devoteeForm = this.fb.group({
-      id: null,
+      id: '',
       legalName: ['', Validators.required],
       circleId: '',
       spiritualName: '',

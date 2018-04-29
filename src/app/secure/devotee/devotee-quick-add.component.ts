@@ -67,7 +67,7 @@ export class DevoteeQuickAddComponent implements OnInit, OnDestroy {
 
   createForm() {
     this.devoteeForm = this.fb.group({
-      id: null,
+      id: '',
       legalName: ['', Validators.required],
       spiritualName: '',
       gender: ['', Validators.required],

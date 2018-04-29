@@ -11,6 +11,21 @@
               <mat-icon>account_circle</mat-icon>
             </mat-panel-description>
           </mat-expansion-panel-header>
+          <mat-action-row>
+            <div>
+                <div *ngIf="devoteeForm.value.id != null && editMode == true">
+                  <button type = "button" mat-raised-button color="primary" (click)="save()">Update</button>
+                </div>
+                <div *ngIf="!editMode">
+                    <button type = "button" [disabled]="editMode" mat-raised-button color="warn" (click)="editDevotee()">Edit</button>                
+                </div>                
+                <div *ngIf="devoteeForm.value.id == null">
+                    <button type = "button" mat-raised-button color="primary" (click)="addDevotee()">Create</button>
+                    <button type = "button" mat-raised-button color="warn" (click)="reset()">Reset</button>
+                </div>
+            </div>                
+            <button mat-button color="primary" (click)="nextStep()">Next</button>
+          </mat-action-row>           
           <form [formGroup]="devoteeForm" novalidate>  
             <fieldset class="wrap">
                 <mat-form-field>
@@ -108,21 +123,7 @@
               </fieldset>
            
         </form>   
-        <mat-action-row>
-          <div>
-              <div *ngIf="devoteeForm.value.id != null && editMode == true">
-                <button type = "button" mat-raised-button color="primary" (click)="save()">Update</button>
-              </div>
-              <div *ngIf="!editMode">
-                  <button type = "button" [disabled]="editMode" mat-raised-button color="warn" (click)="editDevotee()">Edit</button>                
-              </div>                
-              <div *ngIf="devoteeForm.value.id == null">
-                  <button type = "button" mat-raised-button color="primary" (click)="addDevotee()">Create</button>
-                  <button type = "button" mat-raised-button color="warn" (click)="reset()">Reset</button>
-              </div>
-          </div>                
-          <button mat-button color="primary" (click)="nextStep()">Next</button>
-        </mat-action-row>               
+              
         </mat-expansion-panel>
       
         <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle="true">
