@@ -17,7 +17,7 @@ import { DevoteeFilterComponent } from './../../secure/devotee/devotee-filter.co
 import { MyServicesComponent } from '../../secure/my-services/my-services.component';
 import { ServiceMasterComponent } from '../../secure/organization/service-master.component';
 import { AnnouncementListComponent } from '../../secure/my-services/announcement-list.component';
-
+import { DevoteeGroupComponent } from '../../secure/devotee/devotee-group.component';
 
 
 export const SECURE_ROUTES: Routes = [
@@ -61,6 +61,14 @@ export const SECURE_ROUTES: Routes = [
       component: DevoteeRoleComponent, 
       canActivate: [AuthGuard] 
     },  
+    { 
+      path: 'devotee/group',
+      data: {
+        breadcrumb: 'Devotee Grouping'
+      },
+      component: DevoteeGroupComponent, 
+      canActivate: [AuthGuard] 
+    },      
     { 
       path: 'profile',
       data: {
