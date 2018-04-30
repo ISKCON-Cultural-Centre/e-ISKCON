@@ -34,6 +34,7 @@ import { SharedComponentsModule } from './shared/components/shared-components.mo
 import { CommonComponentsModule } from './secure/common/common-components.module';
 import { SecureComponent } from './layout/secure';
 import { PublicComponent } from './layout/public';
+import { FullCalendarModule } from 'ng-fullcalendar';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import { PublicComponent } from './layout/public';
   imports: [
     AppRoutingModule,
     BrowserModule,
+    FullCalendarModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
     MaterialModule,

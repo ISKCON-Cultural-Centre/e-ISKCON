@@ -10,6 +10,7 @@ import { InlineEditComponent } from '../../shared/components/inline-edit/inline-
 import { TaskMasterComponent } from './task-master.component';
 import { ServiceMasterComponent } from './service-master.component';
 import { RoleTaskComponent } from './role-task.component';
+import { EventCalendarComponent } from './event-calendar.component';
 
 
 
@@ -22,7 +23,7 @@ import { RoleTaskComponent } from './role-task.component';
   declarations: [
     RoleComponent, DepartmentComponent, 
     TaskMasterComponent, ServiceMasterComponent, 
-    RoleTaskComponent, 
+    RoleTaskComponent, EventCalendarComponent, 
   ]
 })
 export class OrganizationModule { }
