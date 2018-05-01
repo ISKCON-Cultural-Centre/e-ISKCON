@@ -40,7 +40,7 @@ export class DevoteesListComponent  implements OnInit, AfterViewInit, OnDestroy 
 
 
   dataSource = new DevoteesDataSource(this.devoteesListService);
-  displayedColumns = ['name', 'mobileNo', 'circle'];
+  displayedColumns = ['name', 'mobileNo', 'circle', 'edit', 'delete'];
   filteredDevoteesCount = new BehaviorSubject<number>(0);
   public filteredDevoteesCount$ = this.filteredDevoteesCount.asObservable();
 
@@ -49,9 +49,11 @@ export class DevoteesListComponent  implements OnInit, AfterViewInit, OnDestroy 
 
 
   constructor(
+    private notificationService: NotificationService,
     private devoteesListService: DevoteesListService,
     private devoteeApi: DevoteeApi,
-    private devoteeSearchFilterShareService: DevoteeSearchFilterShareService
+    private devoteeSearchFilterShareService: DevoteeSearchFilterShareService,
+    public dialog: MatDialog
   ) {
   }
 
@@ -105,8 +107,30 @@ export class DevoteesListComponent  implements OnInit, AfterViewInit, OnDestroy 
     );
   }
 
-  onRowClicked(row) {
-    this.selectedDevotee.emit(row);
+  editDevotee(devotee: Devotee) {
+    this.selectedDevotee.emit(devotee);
+}
+
+deleteDevotee(devotee: Devotee) {
+  this.devoteeApi.deleteById(devotee.id)
+  .subscribe(result => {
+    this.loadDevoteesPage();
+    this.notificationService.notificationSubject.next('Role ' + '"' + devotee.spiritualName + '" deleted successfully');
+    }
+  );
+}
+
+
+openDialog(devotee: Devotee) {
+  let dialogRef = this.dialog.open(DialogBoxComponent, {
+    width: '600px',
+    data: 'Delete the devotee ' + devotee.spiritualName
+  });
+  dialogRef.afterClosed().subscribe(result => {
+    if(result) {
+      this.deleteDevotee(devotee);
+    } else { }
+  });
 }
 
   ngOnDestroy(){

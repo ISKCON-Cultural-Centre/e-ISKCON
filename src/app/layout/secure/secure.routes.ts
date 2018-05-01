@@ -18,7 +18,7 @@ import { MyServicesComponent } from '../../secure/my-services/my-services.compon
 import { ServiceMasterComponent } from '../../secure/organization/service-master.component';
 import { AnnouncementListComponent } from '../../secure/my-services/announcement-list.component';
 import { DevoteeGroupComponent } from '../../secure/devotee/devotee-group.component';
-
+import { EventCalendarComponent } from './../../secure/organization/event-calendar.component';
 
 export const SECURE_ROUTES: Routes = [
     { 
@@ -115,8 +115,8 @@ export const SECURE_ROUTES: Routes = [
       },
       component: ServiceMasterComponent, 
       canActivate: [AuthGuard] 
-    },    
-    { 
+    },
+    {
       path: 'organization/department', 
       data: {
         breadcrumb: 'Department'
@@ -124,5 +124,13 @@ export const SECURE_ROUTES: Routes = [
       component: DepartmentComponent, 
       canActivate: [AuthGuard] 
     },
+    {
+      path: 'organization/eventCalendar', 
+      data: {
+        breadcrumb: 'Calendar'
+      },
+      component: EventCalendarComponent, 
+      canActivate: [AuthGuard] 
+    },    
   ];
   

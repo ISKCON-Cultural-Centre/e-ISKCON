@@ -78,6 +78,8 @@ import { NakshatraMaster } from '../../models/NakshatraMaster';
 import { ProfessionMaster } from '../../models/ProfessionMaster';
 import { DepartmentCalendar } from '../../models/DepartmentCalendar';
 import { DepartmentAnnouncement } from '../../models/DepartmentAnnouncement';
+import { GroupMaster } from '../../models/GroupMaster';
+import { DevoteeGrouping } from '../../models/DevoteeGrouping';
 
 export interface Models { [name: string]: any }
 
@@ -163,6 +165,8 @@ export class SDKModels {
     ProfessionMaster: ProfessionMaster,
     DepartmentCalendar: DepartmentCalendar,
     DepartmentAnnouncement: DepartmentAnnouncement,
+    GroupMaster: GroupMaster,
+    DevoteeGrouping: DevoteeGrouping,
     
   };
 

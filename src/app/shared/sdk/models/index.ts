@@ -77,5 +77,7 @@ export * from './NakshatraMaster';
 export * from './ProfessionMaster';
 export * from './DepartmentCalendar';
 export * from './DepartmentAnnouncement';
+export * from './GroupMaster';
+export * from './DevoteeGrouping';
 export * from './BaseModels';
 

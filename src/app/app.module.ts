@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
+//import { HashLocationStrategy, LocationStrategy} from '@angular/common';
 
 import { MaterialModule } from './material.module';
 
@@ -14,7 +15,7 @@ import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './pageNotFound.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginModule } from './public/login/login.module';
-import { DashboardComponent } from './secure/dashboard/dashboard.component';
+//import { DashboardComponent } from './secure/dashboard/dashboard.component';
 import { DevoteeModule } from './secure/devotee/devotee.module';
 import { MyServicesModule } from './secure/my-services/my-services.module';
 import { MyActionsModule } from './secure/my-actions/my-actions.module';
@@ -34,21 +35,20 @@ import { SharedComponentsModule } from './shared/components/shared-components.mo
 import { CommonComponentsModule } from './secure/common/common-components.module';
 import { SecureComponent } from './layout/secure';
 import { PublicComponent } from './layout/public';
-import { FullCalendarModule } from 'ng-fullcalendar';
+import { DashboardModule } from './secure/dashboard/dashboard.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent,
-    DashboardComponent,
+    //DashboardComponent,
     SecureComponent,
     PublicComponent,
   ],
   imports: [
     AppRoutingModule,
     BrowserModule,
-    FullCalendarModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
     MaterialModule,
@@ -66,9 +66,11 @@ import { FullCalendarModule } from 'ng-fullcalendar';
     LookupModule,
     OrganizationModule,
     SharedComponentsModule,
-    CommonComponentsModule
+    CommonComponentsModule,
+    DashboardModule
   ],
   providers: [
+    //{provide: LocationStrategy, useClass: HashLocationStrategy},
     AuthGuard,
     AuthService,
     MessageService,

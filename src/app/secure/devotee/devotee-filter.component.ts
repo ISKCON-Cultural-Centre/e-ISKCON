@@ -55,7 +55,7 @@ export class DevoteeFilterComponent implements OnInit {
     const dialogRef = this.dialog.open(DevoteeDetailComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(
-      data => console.log('Dialog output:', data)
+      //data => console.log('Dialog output:', data)
     );
 }
 
@@ -71,7 +71,7 @@ openQuickAddDevoteeDialog() {
   const dialogRef = this.dialog.open(DevoteeQuickAddComponent, dialogConfig);
 
   dialogRef.afterClosed().subscribe(
-    data => console.log('Dialog output:', data)
+    //data => console.log('Dialog output:', data)
   );
 }
 
@@ -86,7 +86,7 @@ openDetailedAddDevoteeDialog() {
   const dialogRef = this.dialog.open(DevoteeDetailAddComponent, dialogConfig);
 
   dialogRef.afterClosed().subscribe(
-    data => console.log('Dialog output:', data)
+    //data => console.log('Dialog output:', data)
   );
 }
 

@@ -123,6 +123,8 @@ import { NakshatraMasterApi } from './services/custom/NakshatraMaster';
 import { ProfessionMasterApi } from './services/custom/ProfessionMaster';
 import { DepartmentCalendarApi } from './services/custom/DepartmentCalendar';
 import { DepartmentAnnouncementApi } from './services/custom/DepartmentAnnouncement';
+import { GroupMasterApi } from './services/custom/GroupMaster';
+import { DevoteeGroupingApi } from './services/custom/DevoteeGrouping';
 /**
 * @module SDKBrowserModule
 * @description
@@ -230,6 +232,8 @@ export class SDKBrowserModule {
         ProfessionMasterApi,
         DepartmentCalendarApi,
         DepartmentAnnouncementApi,
+        GroupMasterApi,
+        DevoteeGroupingApi,
         internalStorageProvider,
         { provide: SDKStorage, useClass: StorageBrowser }
       ]

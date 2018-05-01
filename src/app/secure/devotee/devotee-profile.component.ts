@@ -97,7 +97,7 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
 
     this.devoteeForm.disable();
     /*     this.editMode = true; */
-    if (this.editMode === true){
+    if (this.editMode === true || this.newDevotee === true){
       this.devoteeForm.enable();
     }
 
@@ -202,27 +202,27 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
 
   createForm() {
     this.devoteeForm = this.fb.group({
-      id: '',
-      legalName: ['', Validators.required],
-      circleId: '',
-      spiritualName: '',
-      gender: '',
-      creditLimit: '',
-      email: '',
-      gothra: '',
-      nakshatra: '',
-      governmentUniqueId: '',
-      incomeTaxId: '',
-      kcAssociationDate: '',
-      motherTongueLanguageId: '',
-      dateOfBirth: '',
+      id: null,
+      legalName: [null, Validators.required],
+      circleId: null,
+      spiritualName: null,
+      gender: null,
+      creditLimit: 0,
+      email: null,
+      gothra: null,
+      nakshatra: null,
+      governmentUniqueId: null,
+      incomeTaxId: null,
+      kcAssociationDate: null,
+      motherTongueLanguageId: null,
+      dateOfBirth: null,
       dayMonthOfBirth: 'a',
-      lpmId: '',
-      asramaMasterId: '',
-      professionId: '',
-      physicalAddressId: '',
-      mobileNo: '',
-      landlineNo: ''
+      lpmId: null,
+      asramaMasterId: null,
+      professionId: null,
+      physicalAddressId: null,
+      mobileNo: null,
+      landlineNo: null
     });
   }
 
@@ -239,6 +239,7 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
     .subscribe(
       devotee => {
         this.setDevoteeFormValues(devotee);
+        this.devoteeForm.reset();
         this.notificationService.notificationSubject.next('New Devotee [' + devotee.legalName + '] created successfully');
       }
     );    

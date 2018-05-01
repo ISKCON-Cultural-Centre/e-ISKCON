@@ -16,10 +16,10 @@
                 <div *ngIf="devoteeForm.value.id != null && editMode == true">
                   <button type = "button" mat-raised-button color="primary" (click)="save()">Update</button>
                 </div>
-                <div *ngIf="!editMode">
+                <div *ngIf="!editMode && !newDevotee">
                     <button type = "button" [disabled]="editMode" mat-raised-button color="warn" (click)="editDevotee()">Edit</button>                
                 </div>                
-                <div *ngIf="devoteeForm.value.id == null">
+                <div *ngIf="newDevotee">
                     <button type = "button" mat-raised-button color="primary" (click)="addDevotee()">Create</button>
                     <button type = "button" mat-raised-button color="warn" (click)="reset()">Reset</button>
                 </div>

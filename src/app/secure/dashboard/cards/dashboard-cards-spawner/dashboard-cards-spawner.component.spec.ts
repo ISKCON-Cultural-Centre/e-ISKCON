@@ -1,6 +1,6 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {DashboardCardsSpawnerComponent} from './dashboard-cards-spawner.component';
+import { DashboardCardsSpawnerComponent } from './dashboard-cards-spawner.component';
 
 describe('DashboardCardsSpawnerComponent', () => {
   let component: DashboardCardsSpawnerComponent;
@@ -8,9 +8,9 @@ describe('DashboardCardsSpawnerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [DashboardCardsSpawnerComponent]
+      declarations: [ DashboardCardsSpawnerComponent ]
     })
-      .compileComponents();
+    .compileComponents();
   }));
 
   beforeEach(() => {
