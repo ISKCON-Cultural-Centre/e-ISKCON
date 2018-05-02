@@ -1,5 +1,32 @@
-<p>Display event : {{displayEvent | json}}</p>
-<div *ngIf="calendarOptions">
-    <ng-fullcalendar #ucCalendar [options]="calendarOptions" (eventClick)="eventClick($event.detail)" (eventDrop)="updateEvent($event.detail)"
-        (eventResize)="updateEvent($event.detail)" (clickButton)="clickButton($event.detail)"></ng-fullcalendar>
-</div>
+<mat-card style="margin: 15px;" class="mat-elevation-z15" fxFlex fxLayoutAlign="space-between" fxLayout="column">
+    <mat-card-header>
+      <mat-card-title>Event Calendar</mat-card-title>
+    </mat-card-header>
+    <mat-card-content fxLayout="column" fxLayoutAlign="space-between" fxFlex>
+        <p>Display event : {{displayEvent | json}}</p>
+        <div *ngIf="calendarOptions">
+            <ng-fullcalendar #ucCalendar 
+            [options]="calendarOptions" 
+            (eventClick)="eventClick($event.detail)" 
+            (eventDrop)="updateEvent($event.detail)"
+            (eventResize)="updateEvent($event.detail)" 
+            (clickButton)="clickButton($event.detail)"
+            (windowResize)="windowResize($event.detail)"
+
+            (viewDestroy)="viewDestroy($event.detail)"
+
+            (select)="select($event.detail)"
+            (unselect)="unselect($event.detail)"
+            (dayClick)="dayClick($event.detail)"
+            (navLinkDayClick)="navLinkDayClick($event.detail)"
+            (navLinkWeekClick)="navLinkWeekClick($event.detail)">
+        </ng-fullcalendar>
+        </div>
+    </mat-card-content>
+    <mat-card-footer>
+      <mat-card-actions fxFlex>
+        <button mat-raised-button color="primary" (click)="openAddEventDialog()">Add an Event</button>
+      </mat-card-actions>
+    </mat-card-footer>
+  </mat-card>
+

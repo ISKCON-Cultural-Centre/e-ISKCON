@@ -13,6 +13,8 @@ import { RoleTaskComponent } from './role-task.component';
 import { EventCalendarComponent } from './event-calendar.component';
 import { FullCalendarModule } from 'ng-fullcalendar';
 import { EventService } from './event-calendar.service';
+import { AddEventComponent } from './add-event.component';
+import { ServiceCalendarEntryComponent} from '../my-services/service-calendar-entry.component';
 
 
 @NgModule({
@@ -23,8 +25,11 @@ import { EventService } from './event-calendar.service';
   declarations: [
     RoleComponent, DepartmentComponent, 
     TaskMasterComponent, ServiceMasterComponent, 
-    RoleTaskComponent, EventCalendarComponent, 
+    RoleTaskComponent, EventCalendarComponent, AddEventComponent, 
   ],
-  providers: [ EventService ]
+  providers: [ EventService ],
+  entryComponents: [
+    ServiceCalendarEntryComponent
+  ]
 })
 export class OrganizationModule { }

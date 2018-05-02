@@ -1,3 +1,51 @@
-<p>
-  service-calendar-entry works!
-</p>
+  <div fxLayout="row" fxLayoutAlign="space-sevenly stretch">
+      <form class="event-entry" [formGroup]="eventForm" (ngSubmit)="addDepartmentEvent()" novalidate   >   
+        <fieldset fxLayout="row" fxLayoutAlign="space-evenly stretch">
+          <legend>Create an Event</legend>
+
+          <mat-form-field>
+            <input matInput placeholder="Event Name"  class="form-control" formControlName="eventName">
+          </mat-form-field>    
+          <mat-form-field>
+              <textarea matInput placeholder="Description" matTextareaAutosize matAutosizeMinRows="3"
+              matAutosizeMaxRows="5" formControlName="eventDescription"></textarea>      
+          </mat-form-field> 
+
+          <mat-form-field>    
+              <mat-select placeholder="Department" formControlName="departmentId" autofocus>
+                <mat-option *ngFor="let department of departments" [value]="department.id">
+                  <span>{{ department.departmentName }}</span>
+                </mat-option>
+              </mat-select>  
+            </mat-form-field>
+            
+            <mat-checkbox class="form-control" formControlName="allDayInd">
+              All Day Event ?
+            </mat-checkbox>   
+
+            <mat-form-field>
+                <input matInput [matDatepicker]="startTime" placeholder="Start" class="form-control" formControlName="startTime">
+                <mat-datepicker-toggle matSuffix [for]="startTime"></mat-datepicker-toggle>
+                <mat-datepicker #startTime></mat-datepicker>
+            </mat-form-field>        
+
+            <mat-form-field>
+              <input matInput [matDatepicker]="endTime" placeholder="End" class="form-control" formControlName="endTime">
+              <mat-datepicker-toggle matSuffix [for]="endTime"></mat-datepicker-toggle>
+              <mat-datepicker #endTime></mat-datepicker>
+            </mat-form-field> 
+
+            <mat-checkbox class="form-control" formControlName="publicInd">
+              Public Event ?
+            </mat-checkbox>         
+
+            <button [disabled]="eventForm.invalid" type="submit"  mat-raised-button color="primary">Add Event
+            </button>
+            <button  type="button" (click) = 'cancel()'  mat-raised-button color="warn">
+              Cancel
+            </button>     
+        </fieldset>
+      </form>
+  </div>
+
+

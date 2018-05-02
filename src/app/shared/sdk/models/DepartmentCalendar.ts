@@ -8,9 +8,9 @@ export interface DepartmentCalendarInterface {
   "id": string;
   "departmentId": string;
   "eventName": string;
-  "date": Date;
-  "startTime": string;
-  "endTime"?: string;
+  "eventDescription"?: string;
+  "startTime": Date;
+  "endTime"?: Date;
   "allDayInd": boolean;
   "publicInd": number;
   "createdOn"?: Date;
@@ -26,9 +26,9 @@ export class DepartmentCalendar implements DepartmentCalendarInterface {
   "id": string;
   "departmentId": string;
   "eventName": string;
-  "date": Date;
-  "startTime": string;
-  "endTime": string;
+  "eventDescription": string;
+  "startTime": Date;
+  "endTime": Date;
   "allDayInd": boolean;
   "publicInd": number;
   "createdOn": Date;
@@ -83,17 +83,17 @@ export class DepartmentCalendar implements DepartmentCalendarInterface {
           name: 'eventName',
           type: 'string'
         },
-        "date": {
-          name: 'date',
-          type: 'Date'
+        "eventDescription": {
+          name: 'eventDescription',
+          type: 'string'
         },
         "startTime": {
           name: 'startTime',
-          type: 'string'
+          type: 'Date'
         },
         "endTime": {
           name: 'endTime',
-          type: 'string'
+          type: 'Date'
         },
         "allDayInd": {
           name: 'allDayInd',
