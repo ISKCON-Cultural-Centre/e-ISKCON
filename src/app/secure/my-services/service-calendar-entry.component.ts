@@ -40,8 +40,10 @@ export class ServiceCalendarEntryComponent  implements OnInit, OnDestroy {
     private dialogRef: MatDialogRef<ServiceCalendarEntryComponent>,
     @Inject(MAT_DIALOG_DATA) data
   )  {
-     console.log(data);
+     console.log(data.start.format());
       this.createForm(data);
+      this.eventForm.get('startTime').setValue(data.start.format());
+      this.eventForm.get('endTime').setValue(data.end.format());
     }
 
   ngOnInit() {
@@ -71,7 +73,7 @@ export class ServiceCalendarEntryComponent  implements OnInit, OnDestroy {
 
       //console.log(result.subject);
       this.notificationService.notificationSubject.next('"' + result.eventName + '" created successfully');
-      this.eventForm.reset();
+      this.dialogRef.close(result);
       }
     );
   }
@@ -107,6 +109,10 @@ export class ServiceCalendarEntryComponent  implements OnInit, OnDestroy {
 
   cancel() {
     this.eventForm.reset();
+  }
+
+  close() {
+    this.dialogRef.close();
   }
 
 

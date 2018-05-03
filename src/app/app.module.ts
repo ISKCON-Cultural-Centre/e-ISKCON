@@ -5,9 +5,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
-//import { HashLocationStrategy, LocationStrategy} from '@angular/common';
+
 
 import { MaterialModule } from './material.module';
+import { OwlDateTimeModule, OWL_DATE_TIME_FORMATS } from 'ng-pick-datetime';
+import { OwlMomentDateTimeModule } from 'ng-pick-datetime-moment';
 
 import { SDKBrowserModule, DevoteeApi } from './shared/sdk';
 import { AuthGuard, AuthService } from './shared/services';
@@ -15,7 +17,6 @@ import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './pageNotFound.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginModule } from './public/login/login.module';
-//import { DashboardComponent } from './secure/dashboard/dashboard.component';
 import { DevoteeModule } from './secure/devotee/devotee.module';
 import { MyServicesModule } from './secure/my-services/my-services.module';
 import { MyActionsModule } from './secure/my-actions/my-actions.module';
@@ -37,6 +38,17 @@ import { SecureComponent } from './layout/secure';
 import { PublicComponent } from './layout/public';
 import { DashboardModule } from './secure/dashboard/dashboard.module';
 
+// See the Moment.js docs for the meaning of these formats:
+// https://momentjs.com/docs/#/displaying/format/
+export const MY_MOMENT_FORMATS = {
+  parseInput: 'l LT',
+  fullPickerInput: 'l LT',
+  datePickerInput: 'l',
+  timePickerInput: 'LT',
+  monthYearLabel: 'MMM YYYY',
+  dateA11yLabel: 'LL',
+  monthYearA11yLabel: 'MMMM YYYY',
+};
 
 @NgModule({
   declarations: [
@@ -67,7 +79,9 @@ import { DashboardModule } from './secure/dashboard/dashboard.module';
     OrganizationModule,
     SharedComponentsModule,
     CommonComponentsModule,
-    DashboardModule
+    DashboardModule, 
+    OwlDateTimeModule, 
+    OwlMomentDateTimeModule
   ],
   providers: [
     //{provide: LocationStrategy, useClass: HashLocationStrategy},
@@ -80,7 +94,8 @@ import { DashboardModule } from './secure/dashboard/dashboard.module';
     FormErrorService,
     DevoteeApi,
     LookupService,
-    DummyService
+    DummyService,
+    {provide: OWL_DATE_TIME_FORMATS, useValue: MY_MOMENT_FORMATS},
   ],
   bootstrap: [AppComponent]
 })

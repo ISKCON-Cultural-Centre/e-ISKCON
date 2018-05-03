@@ -9,7 +9,7 @@ import {debounceTime, distinctUntilChanged, startWith, tap, delay,switchMap, map
 
 import { MatDialog, MatChipInputEvent, MatAutocompleteSelectedEvent, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 
-import {LoopBackFilter} from '../../shared/sdk/models/BaseModels'
+import {LoopBackFilter} from '../../shared/sdk/models/BaseModels';
 import { DialogBoxComponent } from '../../shared/components/dialog-box/dialog-box.component';
 import { DevoteeApi, Devotee, DepartmentAnnouncementApi, DepartmentAnnouncement } from '../..//shared/sdk';
 import { AuthService, NotificationService } from '../../shared/services';

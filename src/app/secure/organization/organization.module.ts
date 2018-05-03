@@ -13,6 +13,7 @@ import { RoleTaskComponent } from './role-task.component';
 import { EventCalendarComponent } from './event-calendar.component';
 import { FullCalendarModule } from 'ng-fullcalendar';
 import { EventService } from './event-calendar.service';
+import { MyDepartmentsService } from './my-departments.service';
 import { AddEventComponent } from './add-event.component';
 import { ServiceCalendarEntryComponent} from '../my-services/service-calendar-entry.component';
 
@@ -27,7 +28,7 @@ import { ServiceCalendarEntryComponent} from '../my-services/service-calendar-en
     TaskMasterComponent, ServiceMasterComponent, 
     RoleTaskComponent, EventCalendarComponent, AddEventComponent, 
   ],
-  providers: [ EventService ],
+  providers: [ EventService, MyDepartmentsService ],
   entryComponents: [
     ServiceCalendarEntryComponent
   ]

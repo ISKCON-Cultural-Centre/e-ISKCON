@@ -6,7 +6,8 @@ import { Options } from 'fullcalendar';
 import { EventService } from './event-calendar.service';
 
 import { ServiceCalendarEntryComponent} from '../my-services/service-calendar-entry.component';
-import { DepartmentCalendar } from '../../shared/sdk/index';
+import { Department, DepartmentCalendar, DepartmentAnnouncementApi } from '../../shared/sdk/index';
+import { MyDepartmentsService } from './my-departments.service';
 
 @Component({
   selector: 'app-event-calendar',
@@ -15,39 +16,58 @@ import { DepartmentCalendar } from '../../shared/sdk/index';
 })
 export class EventCalendarComponent implements OnInit {
   calendarOptions: Options;
- displayEvent: any;
+  displayEvent: any;
+  departments: string [];
   @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
   constructor(
     protected eventService: EventService,
+    protected myDepartmentsService: MyDepartmentsService,
     private dialog: MatDialog,
   ) { }
 
   ngOnInit() {
-    this.eventService.getCurrentEvents().subscribe(events => {
-      const calendarEvents = events.map(function (event) {
-        return {id: event.id, title: event.eventName, allDay: event.allDayInd === 0 ? false : true,
-          start: event.startTime, end: event.endTime };
-        //return {id: event.id, title: event.title, allDay: event.allDay, start: event.start, end: event.end };
-      });
-      this.calendarOptions = {
-        selectable: true,
-        selectHelper: true,
-        editable: true,
-        eventLimit: false,
-        unselectCancel: '.event-entry',
-        header: {
-          left: 'prev,next today',
-          center: 'title',
-          right: 'month,agendaWeek,agendaDay,listMonth'
-        },
-        events: calendarEvents
-      };
-      console.log(calendarEvents);
-    });
+    this.myDepartmentsService.getMyDepartments().subscribe(
+      departments => {
+        this.departments = departments.map(function (department) {
+          return department.id;
+          });
+          //console.log(this.departments);
+        this.eventService.getCurrentEvents().subscribe(events => {
+          const calendarEvents = events.map(function (event) {
+            return {
+              id: event.id, 
+              title: event.eventName, 
+              allDay: event.allDayInd === 0 ? false : true,
+              start: event.startTime,
+              end: event.endTime,
+              color: 'blue' //event.departmentId
+            };
+          });
+          this.calendarOptions = {
+            selectable: true,
+            selectHelper: true,
+            editable: true,
+            eventLimit: false,
+            //unselectCancel: '.event-entry',
+            header: {
+              left: 'prev,next today',
+              center: 'title',
+              right: 'month,agendaWeek,agendaDay,listMonth'
+            },
+            events: calendarEvents
+          };
+          //console.log(calendarEvents);
+        });
+      }
+    );
+
   }
+
+
   clickButton(model: any) {
     this.displayEvent = model;
   }
+
   eventClick(model: any) {
     model = {
       event: {
@@ -77,20 +97,16 @@ export class EventCalendarComponent implements OnInit {
     }
     this.displayEvent = model;
   }
-  eventRender(model: any) {
-    model = {
-      event: {
-        id: model.event.id,
-        start: model.event.start,
-        end: model.event.end,
-        title: model.event.title
-        // other params
-      },
-      duration: {
-        _data: model.duration._data
-      }
+  eventRender(event: any) {
+    console.log(event);
+    let newEvent = {
+      title: event.eventName,
+      start: event.startTime,
+      end: (event.allDayInd === 1 ? null : event.endTime),
+      allDay: event.allDayInd === 1 ? true : false,
+      //color: 
     }
-    this.displayEvent = model;
+    this.ucCalendar.fullCalendar('renderEvent', newEvent);
   }
 /*   windowResize(model: any) {
     model = {
@@ -194,7 +210,11 @@ export class EventCalendarComponent implements OnInit {
     const dialogRef = this.dialog.open(ServiceCalendarEntryComponent, dialogConfig);
   
     dialogRef.afterClosed().subscribe(
-      //data => console.log('Dialog output:', data)
+      data => {
+        if (data) {
+          this.eventRender(data);
+        }
+      }
     );
   }
 

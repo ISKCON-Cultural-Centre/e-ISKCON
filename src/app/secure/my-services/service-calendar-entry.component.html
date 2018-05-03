@@ -24,15 +24,13 @@
             </mat-checkbox>   
 
             <mat-form-field>
-                <input matInput [matDatepicker]="startTime" placeholder="Start" class="form-control" formControlName="startTime">
-                <mat-datepicker-toggle matSuffix [for]="startTime"></mat-datepicker-toggle>
-                <mat-datepicker #startTime></mat-datepicker>
+                <input matInput placeholder="Start Date/Time" [owlDateTimeTrigger]="dtStart" [owlDateTime]="dtStart" class="form-control" formControlName="startTime">
+                <owl-date-time #dtStart></owl-date-time>
             </mat-form-field>        
 
             <mat-form-field>
-              <input matInput [matDatepicker]="endTime" placeholder="End" class="form-control" formControlName="endTime">
-              <mat-datepicker-toggle matSuffix [for]="endTime"></mat-datepicker-toggle>
-              <mat-datepicker #endTime></mat-datepicker>
+                <input matInput [owlDateTimeTrigger]="dtEnd" [owlDateTime]="dtEnd" placeholder="End Date/Time" class="form-control" formControlName="endTime">
+                <owl-date-time #dtEnd></owl-date-time>              
             </mat-form-field> 
 
             <mat-checkbox class="form-control" formControlName="publicInd">
@@ -43,7 +41,10 @@
             </button>
             <button  type="button" (click) = 'cancel()'  mat-raised-button color="warn">
               Cancel
-            </button>     
+            </button>
+            <button  type="button" (click) = 'close()'  mat-raised-button color="warn">
+                Close
+            </button>             
         </fieldset>
       </form>
   </div>
