@@ -98,7 +98,7 @@ export class EventCalendarComponent implements OnInit {
     this.displayEvent = model;
   }
   eventRender(event: any) {
-    console.log(event);
+    //console.log(event);
     let newEvent = {
       title: event.eventName,
       start: event.startTime,
@@ -160,10 +160,10 @@ export class EventCalendarComponent implements OnInit {
     this.openAddEventDialog(model);
   }
   unselect(model: any) {
-    console.log(model);
+    //console.log(model);
   }
   dayClick(model: any) {
-    console.log(model);
+    //console.log(model);
   }
   navLinkDayClick(model: any) {
     model = {

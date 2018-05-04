@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators, FormsModule, ReactiveF
 import {  Department, DepartmentApi,
   DepartmentAnnouncement, DepartmentAnnouncementApi } from '../../shared/sdk';
 import { MaterialModule } from '../../material.module';
-import { MatPaginator, MatSort, MatTableDataSource, MatSelectChange } from '@angular/material';
+import { MatPaginator, MatSort, MatTable, MatTableDataSource, MatSelectChange } from '@angular/material';
 import {MatDialog} from '@angular/material';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -19,6 +19,7 @@ import { AuthService, NotificationService } from '../../shared/services';
   styleUrls: ['./service-announcement.component.css']
 })
 export class ServiceAnnouncementComponent implements OnInit, OnDestroy {
+  displayedColumns = ['subject', 'message', 'validity', 'delete' ];
 
   panelOpenState: boolean = false;
 

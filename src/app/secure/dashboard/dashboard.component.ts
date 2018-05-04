@@ -140,7 +140,7 @@ export class DashboardComponent implements OnInit {
           },
           rows: {
             key: DashboardCard.metadata.ROWS,
-            value: this.cols_sml
+            value: this.cols_big
           },
           color: {
             key: DashboardCard.metadata.COLOR,

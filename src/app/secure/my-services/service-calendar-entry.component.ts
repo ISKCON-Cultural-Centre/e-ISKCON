@@ -40,17 +40,20 @@ export class ServiceCalendarEntryComponent  implements OnInit, OnDestroy {
     private dialogRef: MatDialogRef<ServiceCalendarEntryComponent>,
     @Inject(MAT_DIALOG_DATA) data
   )  {
-     console.log(data.start.format());
-      this.createForm(data);
-      this.eventForm.get('startTime').setValue(data.start.format());
-      this.eventForm.get('endTime').setValue(data.end.format());
+     //console.log(data.start.format());
+
+      this.createForm();
+        if (data.start) {
+          this.eventForm.get('startTime').setValue(data.start.format());
+          this.eventForm.get('endTime').setValue(data.end.format());
+        }
     }
 
   ngOnInit() {
     this.loadDepartments();
   }
 
-  createForm(data) {
+  createForm() {
     this.eventForm = this.fb.group({
       eventName: [null, Validators.required],
       departmentId: [null, Validators.required],
