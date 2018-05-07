@@ -11,15 +11,14 @@ import { ErrorHandler } from '../core/error.service';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
 import { Devotee } from '../../models/Devotee';
-import { Circle } from '../../models/Circle';
-import { ServiceRoleMapping } from '../../models/ServiceRoleMapping';
-import { PhysicalAddress } from '../../models/PhysicalAddress';
-import { Accesstoken } from '../../models/Accesstoken';
 import { AsramaMaster } from '../../models/AsramaMaster';
-import { Language } from '../../models/Language';
+import { Circle } from '../../models/Circle';
 import { GothraMaster } from '../../models/GothraMaster';
+import { Language } from '../../models/Language';
 import { NakshatraMaster } from '../../models/NakshatraMaster';
+import { PhysicalAddress } from '../../models/PhysicalAddress';
 import { ProfessionMaster } from '../../models/ProfessionMaster';
+import { ServiceRoleMapping } from '../../models/ServiceRoleMapping';
 
 
 /**
@@ -36,159 +35,6 @@ export class DevoteeApi extends BaseLoopBackApi {
     @Optional() @Inject(ErrorHandler) protected errorHandler: ErrorHandler
   ) {
     super(http,  models, auth, searchParams, errorHandler);
-  }
-
-  /**
-   * Fetches belongsTo relation fkDevoteeCircle1rel.
-   *
-   * @param {any} id Devotee id
-   *
-   * @param {boolean} refresh 
-   *
-   * @returns {object} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Devotee` object.)
-   * </em>
-   */
-  public getFkDevoteeCircle1rel(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
-    let _method: string = "GET";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Devotees/:id/fkDevoteeCircle1rel";
-    let _routeParams: any = {
-      id: id
-    };
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    if (typeof refresh !== 'undefined' && refresh !== null) _urlParams.refresh = refresh;
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
-  }
-
-  /**
-   * Find a related item by id for roleMappings.
-   *
-   * @param {any} id Devotee id
-   *
-   * @param {any} fk Foreign key for roleMappings
-   *
-   * @returns {object} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Devotee` object.)
-   * </em>
-   */
-  public findByIdRoleMappings(id: any, fk: any, customHeaders?: Function): Observable<any> {
-    let _method: string = "GET";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Devotees/:id/roleMappings/:fk";
-    let _routeParams: any = {
-      id: id,
-      fk: fk
-    };
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
-  }
-
-  /**
-   * Delete a related item by id for roleMappings.
-   *
-   * @param {any} id Devotee id
-   *
-   * @param {any} fk Foreign key for roleMappings
-   *
-   * @returns {object} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * This method returns no data.
-   */
-  public destroyByIdRoleMappings(id: any, fk: any, customHeaders?: Function): Observable<any> {
-    let _method: string = "DELETE";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Devotees/:id/roleMappings/:fk";
-    let _routeParams: any = {
-      id: id,
-      fk: fk
-    };
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
-  }
-
-  /**
-   * Update a related item by id for roleMappings.
-   *
-   * @param {any} id Devotee id
-   *
-   * @param {any} fk Foreign key for roleMappings
-   *
-   * @param {object} data Request data.
-   *
-   * This method expects a subset of model properties as request parameters.
-   *
-   * @returns {object} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Devotee` object.)
-   * </em>
-   */
-  public updateByIdRoleMappings(id: any, fk: any, data: any = {}, customHeaders?: Function): Observable<any> {
-    let _method: string = "PUT";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Devotees/:id/roleMappings/:fk";
-    let _routeParams: any = {
-      id: id,
-      fk: fk
-    };
-    let _postBody: any = {
-      data: data
-    };
-    let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
-  }
-
-  /**
-   * Fetches belongsTo relation fkDevoteePhysicalAddress1rel.
-   *
-   * @param {any} id Devotee id
-   *
-   * @param {boolean} refresh 
-   *
-   * @returns {object} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Devotee` object.)
-   * </em>
-   */
-  public getFkDevoteePhysicalAddress1rel(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
-    let _method: string = "GET";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Devotees/:id/fkDevoteePhysicalAddress1rel";
-    let _routeParams: any = {
-      id: id
-    };
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    if (typeof refresh !== 'undefined' && refresh !== null) _urlParams.refresh = refresh;
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
   }
 
   /**
@@ -315,7 +161,7 @@ export class DevoteeApi extends BaseLoopBackApi {
   }
 
   /**
-   * Fetches belongsTo relation fkDevoteeLanguage1rel.
+   * Fetches belongsTo relation fkDevoteeCircle1rel.
    *
    * @param {any} id Devotee id
    *
@@ -330,10 +176,10 @@ export class DevoteeApi extends BaseLoopBackApi {
    * This usually means the response is a `Devotee` object.)
    * </em>
    */
-  public getFkDevoteeLanguage1rel(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
+  public getFkDevoteeCircle1rel(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Devotees/:id/fkDevoteeLanguage1rel";
+    "/Devotees/:id/fkDevoteeCircle1rel";
     let _routeParams: any = {
       id: id
     };
@@ -375,6 +221,36 @@ export class DevoteeApi extends BaseLoopBackApi {
   }
 
   /**
+   * Fetches belongsTo relation fkDevoteeLanguage1rel.
+   *
+   * @param {any} id Devotee id
+   *
+   * @param {boolean} refresh 
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Devotee` object.)
+   * </em>
+   */
+  public getFkDevoteeLanguage1rel(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Devotees/:id/fkDevoteeLanguage1rel";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (typeof refresh !== 'undefined' && refresh !== null) _urlParams.refresh = refresh;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
    * Fetches belongsTo relation fkDevoteeNakshatraMaster1rel.
    *
    * @param {any} id Devotee id
@@ -394,6 +270,36 @@ export class DevoteeApi extends BaseLoopBackApi {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Devotees/:id/fkDevoteeNakshatraMaster1rel";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (typeof refresh !== 'undefined' && refresh !== null) _urlParams.refresh = refresh;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
+   * Fetches belongsTo relation fkDevoteePhysicalAddress1rel.
+   *
+   * @param {any} id Devotee id
+   *
+   * @param {boolean} refresh 
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Devotee` object.)
+   * </em>
+   */
+  public getFkDevoteePhysicalAddress1rel(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Devotees/:id/fkDevoteePhysicalAddress1rel";
     let _routeParams: any = {
       id: id
     };
@@ -435,13 +341,13 @@ export class DevoteeApi extends BaseLoopBackApi {
   }
 
   /**
-   * Queries roleMappings of Devotee.
+   * Find a related item by id for roleMappings.
    *
    * @param {any} id Devotee id
    *
-   * @param {object} filter 
+   * @param {any} fk Foreign key for roleMappings
    *
-   * @returns {object[]} An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -450,24 +356,53 @@ export class DevoteeApi extends BaseLoopBackApi {
    * This usually means the response is a `Devotee` object.)
    * </em>
    */
-  public getRoleMappings(id: any, filter: LoopBackFilter = {}, customHeaders?: Function): Observable<any> {
+  public findByIdRoleMappings(id: any, fk: any, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Devotees/:id/roleMappings";
+    "/Devotees/:id/roleMappings/:fk";
     let _routeParams: any = {
-      id: id
+      id: id,
+      fk: fk
     };
     let _postBody: any = {};
     let _urlParams: any = {};
-    if (typeof filter !== 'undefined' && filter !== null) _urlParams.filter = filter;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
 
   /**
-   * Creates a new instance in roleMappings of this model.
+   * Delete a related item by id for roleMappings.
    *
    * @param {any} id Devotee id
+   *
+   * @param {any} fk Foreign key for roleMappings
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * This method returns no data.
+   */
+  public destroyByIdRoleMappings(id: any, fk: any, customHeaders?: Function): Observable<any> {
+    let _method: string = "DELETE";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Devotees/:id/roleMappings/:fk";
+    let _routeParams: any = {
+      id: id,
+      fk: fk
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
+   * Update a related item by id for roleMappings.
+   *
+   * @param {any} id Devotee id
+   *
+   * @param {any} fk Foreign key for roleMappings
    *
    * @param {object} data Request data.
    *
@@ -482,70 +417,18 @@ export class DevoteeApi extends BaseLoopBackApi {
    * This usually means the response is a `Devotee` object.)
    * </em>
    */
-  public createRoleMappings(id: any, data: any = {}, customHeaders?: Function): Observable<any> {
-    let _method: string = "POST";
+  public updateByIdRoleMappings(id: any, fk: any, data: any = {}, customHeaders?: Function): Observable<any> {
+    let _method: string = "PUT";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Devotees/:id/roleMappings";
+    "/Devotees/:id/roleMappings/:fk";
     let _routeParams: any = {
-      id: id
+      id: id,
+      fk: fk
     };
     let _postBody: any = {
       data: data
     };
     let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
-  }
-
-  /**
-   * Deletes all roleMappings of this model.
-   *
-   * @param {any} id Devotee id
-   *
-   * @returns {object} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * This method returns no data.
-   */
-  public deleteRoleMappings(id: any, customHeaders?: Function): Observable<any> {
-    let _method: string = "DELETE";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Devotees/:id/roleMappings";
-    let _routeParams: any = {
-      id: id
-    };
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
-  }
-
-  /**
-   * Counts roleMappings of Devotee.
-   *
-   * @param {any} id Devotee id
-   *
-   * @param {object} where Criteria to match model instances
-   *
-   * @returns {object} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * Data properties:
-   *
-   *  - `count` – `{number}` - 
-   */
-  public countRoleMappings(id: any, where: any = {}, customHeaders?: Function): Observable<any> {
-    let _method: string = "GET";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Devotees/:id/roleMappings/count";
-    let _routeParams: any = {
-      id: id
-    };
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    if (typeof where !== 'undefined' && where !== null) _urlParams.where = where;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -656,6 +539,122 @@ export class DevoteeApi extends BaseLoopBackApi {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Devotees/:id/accessTokens/count";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (typeof where !== 'undefined' && where !== null) _urlParams.where = where;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
+   * Queries roleMappings of Devotee.
+   *
+   * @param {any} id Devotee id
+   *
+   * @param {object} filter 
+   *
+   * @returns {object[]} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Devotee` object.)
+   * </em>
+   */
+  public getRoleMappings(id: any, filter: LoopBackFilter = {}, customHeaders?: Function): Observable<any> {
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Devotees/:id/roleMappings";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (typeof filter !== 'undefined' && filter !== null) _urlParams.filter = filter;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
+   * Creates a new instance in roleMappings of this model.
+   *
+   * @param {any} id Devotee id
+   *
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Devotee` object.)
+   * </em>
+   */
+  public createRoleMappings(id: any, data: any = {}, customHeaders?: Function): Observable<any> {
+    let _method: string = "POST";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Devotees/:id/roleMappings";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {
+      data: data
+    };
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
+   * Deletes all roleMappings of this model.
+   *
+   * @param {any} id Devotee id
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * This method returns no data.
+   */
+  public deleteRoleMappings(id: any, customHeaders?: Function): Observable<any> {
+    let _method: string = "DELETE";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Devotees/:id/roleMappings";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
+   * Counts roleMappings of Devotee.
+   *
+   * @param {any} id Devotee id
+   *
+   * @param {object} where Criteria to match model instances
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * Data properties:
+   *
+   *  - `count` – `{number}` - 
+   */
+  public countRoleMappings(id: any, where: any = {}, customHeaders?: Function): Observable<any> {
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Devotees/:id/roleMappings/count";
     let _routeParams: any = {
       id: id
     };
@@ -1020,39 +1019,6 @@ export class DevoteeApi extends BaseLoopBackApi {
   }
 
   /**
-   * Creates a new instance in roleMappings of this model.
-   *
-   * @param {any} id Devotee id
-   *
-   * @param {object} data Request data.
-   *
-   * This method expects a subset of model properties as request parameters.
-   *
-   * @returns {object[]} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Devotee` object.)
-   * </em>
-   */
-  public createManyRoleMappings(id: any, data: any[] = [], customHeaders?: Function): Observable<any> {
-    let _method: string = "POST";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Devotees/:id/roleMappings";
-    let _routeParams: any = {
-      id: id
-    };
-    let _postBody: any = {
-      data: data
-    };
-    let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
-  }
-
-  /**
    * Creates a new instance in accessTokens of this model.
    *
    * @param {any} id Devotee id
@@ -1074,6 +1040,39 @@ export class DevoteeApi extends BaseLoopBackApi {
     let _method: string = "POST";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Devotees/:id/accessTokens";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {
+      data: data
+    };
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
+   * Creates a new instance in roleMappings of this model.
+   *
+   * @param {any} id Devotee id
+   *
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns {object[]} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Devotee` object.)
+   * </em>
+   */
+  public createManyRoleMappings(id: any, data: any[] = [], customHeaders?: Function): Observable<any> {
+    let _method: string = "POST";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Devotees/:id/roleMappings";
     let _routeParams: any = {
       id: id
     };

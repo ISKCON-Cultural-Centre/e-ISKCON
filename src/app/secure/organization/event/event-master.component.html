@@ -1,0 +1,79 @@
+<div fxLayout="row" fxLayout.xs="column">
+  <fieldset fxLayout="column" fxLayoutAlign="space-sevenly stretch">  
+    <legend>Events Master</legend>
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter Events">
+      </mat-form-field>
+
+
+    <button mat-icon-button (click) = 'displayCreateEvent()' >
+      <mat-icon >add_circle</mat-icon>
+    </button>
+
+    <div fxLayout="row" fxLayoutAlign="space-sevenly stretch" *ngIf="add">
+    <form [formGroup]="eventForm" (ngSubmit)="addEvent()" novalidate   >   
+      <fieldset fxLayout="row" fxLayoutAlign="space-evenly stretch">
+        <legend>Add a Role</legend>
+        <mat-form-field>
+          <input fxFill matInput placeholder="Event Name" class="form-control" formControlName="eventName" autofocus>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select  placeholder="Department" formControlName="departmentId">
+              <mat-option *ngFor="let department of departments " [value]="department.id">
+                <span>{{ department.departmentName }}</span>
+              </mat-option>
+          </mat-select>
+        </mat-form-field>        
+          <button [disabled]="eventForm.invalid" type="submit"  mat-raised-button color="primary">Add Event
+          </button>
+          <button  type="button" (click) = 'cancel()'  mat-raised-button color="warn">
+            Cancel
+          </button>     
+      </fieldset>
+      </form>
+    </div>
+
+    <mat-table #table [dataSource]="dataSource" matSort matSortActive="created" matSortDisableClear matSortDirection="asc">
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="eventName">
+      <mat-header-cell *matHeaderCellDef> Event Name </mat-header-cell>
+      <mat-cell *matCellDef="let event"> 
+          <app-inline-edit (done)='editNameField(event.eventName, event)' 
+          [(ngModel)]="event.eventName" [required]="true" type="text" placeholder="Event Name" (keyup.enter)="editNameField($event.target.value, event)">
+        </app-inline-edit> 
+      </mat-cell>
+    </ng-container>
+
+
+    <!-- Department Column -->
+    <ng-container matColumnDef="department">
+        <mat-header-cell *matHeaderCellDef> Department </mat-header-cell>
+        <mat-cell *matCellDef="let event">           
+          <mat-select (selectionChange) = 'editDepartmentField($event, event)'[value]="event.departmentId">
+              <mat-option *ngFor="let department of departments " [value]="department.id">
+                <span>{{ department.departmentName }}</span>
+              </mat-option>
+          </mat-select>
+       </mat-cell>
+      </ng-container>    
+
+
+    <!-- Delete Column -->
+    <ng-container matColumnDef="delete">
+        <mat-header-cell *matHeaderCellDef> Delete </mat-header-cell>      
+      <mat-cell *matCellDef="let event">
+        <button mat-icon-button (click)="openDialog(event)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>    
+   
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</fieldset>
+</div>
+
+
+

@@ -11,7 +11,7 @@ export interface DepartmentCalendarInterface {
   "eventDescription"?: string;
   "startTime": Date;
   "endTime"?: Date;
-  "allDayInd": boolean;
+  "allDayInd": number;
   "publicInd": number;
   "createdOn"?: Date;
   "updatedOn"?: Date;
@@ -29,7 +29,7 @@ export class DepartmentCalendar implements DepartmentCalendarInterface {
   "eventDescription": string;
   "startTime": Date;
   "endTime": Date;
-  "allDayInd": boolean;
+  "allDayInd": number;
   "publicInd": number;
   "createdOn": Date;
   "updatedOn": Date;
@@ -97,7 +97,7 @@ export class DepartmentCalendar implements DepartmentCalendarInterface {
         },
         "allDayInd": {
           name: 'allDayInd',
-          type: 'boolean'
+          type: 'number'
         },
         "publicInd": {
           name: 'publicInd',

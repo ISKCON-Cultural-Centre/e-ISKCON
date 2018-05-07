@@ -10,17 +10,15 @@ import { JSONSearchParams } from '../core/search.params';
 import { ErrorHandler } from '../core/error.service';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
-import { MgProductSku } from '../../models/MgProductSku';
-import { MgProductAttributeInstance } from '../../models/MgProductAttributeInstance';
-import { MgHsn } from '../../models/MgHsn';
-import { MgProduct } from '../../models/MgProduct';
+import { EventDonationMaster } from '../../models/EventDonationMaster';
+import { EventMaster } from '../../models/EventMaster';
 
 
 /**
- * Api services for the `MgProductSku` model.
+ * Api services for the `EventDonationMaster` model.
  */
 @Injectable()
-export class MgProductSkuApi extends BaseLoopBackApi {
+export class EventDonationMasterApi extends BaseLoopBackApi {
 
   constructor(
     @Inject(Http) protected http: Http,
@@ -33,39 +31,9 @@ export class MgProductSkuApi extends BaseLoopBackApi {
   }
 
   /**
-   * Fetches belongsTo relation fkProductInstanceProductAttributeInstance1rel.
+   * Fetches belongsTo relation fkFestivalDonationMasterFestivalMaster1rel.
    *
-   * @param {any} id MgProductSku id
-   *
-   * @param {boolean} refresh 
-   *
-   * @returns {object} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `MgProductSku` object.)
-   * </em>
-   */
-  public getFkProductInstanceProductAttributeInstance1rel(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
-    let _method: string = "GET";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/MgProductSkus/:id/fkProductInstanceProductAttributeInstance1rel";
-    let _routeParams: any = {
-      id: id
-    };
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    if (typeof refresh !== 'undefined' && refresh !== null) _urlParams.refresh = refresh;
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
-  }
-
-  /**
-   * Fetches belongsTo relation fkProductSkuHsn1rel.
-   *
-   * @param {any} id MgProductSku id
+   * @param {any} id EventDonationMaster id
    *
    * @param {boolean} refresh 
    *
@@ -75,43 +43,13 @@ export class MgProductSkuApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `MgProductSku` object.)
+   * This usually means the response is a `EventDonationMaster` object.)
    * </em>
    */
-  public getFkProductSkuHsn1rel(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
+  public getFkFestivalDonationMasterFestivalMaster1rel(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/MgProductSkus/:id/fkProductSkuHsn1rel";
-    let _routeParams: any = {
-      id: id
-    };
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    if (typeof refresh !== 'undefined' && refresh !== null) _urlParams.refresh = refresh;
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
-  }
-
-  /**
-   * Fetches belongsTo relation fkProductSkuProduct1rel.
-   *
-   * @param {any} id MgProductSku id
-   *
-   * @param {boolean} refresh 
-   *
-   * @returns {object} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `MgProductSku` object.)
-   * </em>
-   */
-  public getFkProductSkuProduct1rel(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
-    let _method: string = "GET";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/MgProductSkus/:id/fkProductSkuProduct1rel";
+    "/EventDonationMasters/:id/fkFestivalDonationMasterFestivalMaster1rel";
     let _routeParams: any = {
       id: id
     };
@@ -135,13 +73,13 @@ export class MgProductSkuApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `MgProductSku` object.)
+   * This usually means the response is a `EventDonationMaster` object.)
    * </em>
    */
   public patchOrCreate(data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PATCH";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/MgProductSkus";
+    "/EventDonationMasters";
     let _routeParams: any = {};
     let _postBody: any = {
       data: data
@@ -154,7 +92,7 @@ export class MgProductSkuApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param {any} id MgProductSku id
+   * @param {any} id EventDonationMaster id
    *
    * @param {object} data Request data.
    *
@@ -166,13 +104,13 @@ export class MgProductSkuApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `MgProductSku` object.)
+   * This usually means the response is a `EventDonationMaster` object.)
    * </em>
    */
   public patchAttributes(id: any, data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PATCH";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/MgProductSkus/:id";
+    "/EventDonationMasters/:id";
     let _routeParams: any = {
       id: id
     };
@@ -186,9 +124,9 @@ export class MgProductSkuApi extends BaseLoopBackApi {
 
   /**
    * The name of the model represented by this $resource,
-   * i.e. `MgProductSku`.
+   * i.e. `EventDonationMaster`.
    */
   public getModelName() {
-    return "MgProductSku";
+    return "EventDonationMaster";
   }
 }

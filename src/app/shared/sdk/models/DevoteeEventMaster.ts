@@ -1,46 +1,40 @@
 /* tslint:disable */
 
 declare var Object: any;
-export interface EventMasterInterface {
+export interface DevoteeEventMasterInterface {
   "id": string;
-  "eventName": string;
-  "departmentId": string;
+  "eventName"?: string;
   "createdOn"?: Date;
   "updatedOn"?: Date;
   "createdBy"?: string;
   "updatedBy"?: string;
-  "created-on"?: Date;
-  "updated-on"?: Date;
 }
 
-export class EventMaster implements EventMasterInterface {
+export class DevoteeEventMaster implements DevoteeEventMasterInterface {
   "id": string;
   "eventName": string;
-  "departmentId": string;
   "createdOn": Date;
   "updatedOn": Date;
   "createdBy": string;
   "updatedBy": string;
-  "created-on": Date;
-  "updated-on": Date;
-  constructor(data?: EventMasterInterface) {
+  constructor(data?: DevoteeEventMasterInterface) {
     Object.assign(this, data);
   }
   /**
    * The name of the model represented by this $resource,
-   * i.e. `EventMaster`.
+   * i.e. `DevoteeEventMaster`.
    */
   public static getModelName() {
-    return "EventMaster";
+    return "DevoteeEventMaster";
   }
   /**
   * @method factory
   * @author Jonathan Casarrubias
   * @license MIT
-  * This method creates an instance of EventMaster for dynamic purposes.
+  * This method creates an instance of DevoteeEventMaster for dynamic purposes.
   **/
-  public static factory(data: EventMasterInterface): EventMaster{
-    return new EventMaster(data);
+  public static factory(data: DevoteeEventMasterInterface): DevoteeEventMaster{
+    return new DevoteeEventMaster(data);
   }
   /**
   * @method getModelDefinition
@@ -51,9 +45,9 @@ export class EventMaster implements EventMasterInterface {
   **/
   public static getModelDefinition() {
     return {
-      name: 'EventMaster',
-      plural: 'EventMasters',
-      path: 'EventMasters',
+      name: 'DevoteeEventMaster',
+      plural: 'DevoteeEventMasters',
+      path: 'DevoteeEventMasters',
       idName: 'id',
       properties: {
         "id": {
@@ -62,10 +56,6 @@ export class EventMaster implements EventMasterInterface {
         },
         "eventName": {
           name: 'eventName',
-          type: 'string'
-        },
-        "departmentId": {
-          name: 'departmentId',
           type: 'string'
         },
         "createdOn": {
@@ -83,14 +73,6 @@ export class EventMaster implements EventMasterInterface {
         "updatedBy": {
           name: 'updatedBy',
           type: 'string'
-        },
-        "created-on": {
-          name: 'created-on',
-          type: 'Date'
-        },
-        "updated-on": {
-          name: 'updated-on',
-          type: 'Date'
         },
       },
       relations: {

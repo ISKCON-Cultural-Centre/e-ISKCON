@@ -10,15 +10,14 @@ import { JSONSearchParams } from '../core/search.params';
 import { ErrorHandler } from '../core/error.service';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
-import { Accesstoken } from '../../models/Accesstoken';
-import { Devotee } from '../../models/Devotee';
+import { Guru } from '../../models/Guru';
 
 
 /**
- * Api services for the `Accesstoken` model.
+ * Api services for the `Guru` model.
  */
 @Injectable()
-export class AccesstokenApi extends BaseLoopBackApi {
+export class GuruApi extends BaseLoopBackApi {
 
   constructor(
     @Inject(Http) protected http: Http,
@@ -28,36 +27,6 @@ export class AccesstokenApi extends BaseLoopBackApi {
     @Optional() @Inject(ErrorHandler) protected errorHandler: ErrorHandler
   ) {
     super(http,  models, auth, searchParams, errorHandler);
-  }
-
-  /**
-   * Fetches belongsTo relation user.
-   *
-   * @param {any} id Accesstoken id
-   *
-   * @param {boolean} refresh 
-   *
-   * @returns {object} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Accesstoken` object.)
-   * </em>
-   */
-  public getUser(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
-    let _method: string = "GET";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Accesstokens/:id/user";
-    let _routeParams: any = {
-      id: id
-    };
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    if (typeof refresh !== 'undefined' && refresh !== null) _urlParams.refresh = refresh;
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
   }
 
   /**
@@ -73,13 +42,13 @@ export class AccesstokenApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Accesstoken` object.)
+   * This usually means the response is a `Guru` object.)
    * </em>
    */
   public patchOrCreate(data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PATCH";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Accesstokens";
+    "/Gurus";
     let _routeParams: any = {};
     let _postBody: any = {
       data: data
@@ -92,7 +61,7 @@ export class AccesstokenApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param {any} id Accesstoken id
+   * @param {any} id Guru id
    *
    * @param {object} data Request data.
    *
@@ -104,13 +73,13 @@ export class AccesstokenApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Accesstoken` object.)
+   * This usually means the response is a `Guru` object.)
    * </em>
    */
   public patchAttributes(id: any, data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PATCH";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Accesstokens/:id";
+    "/Gurus/:id";
     let _routeParams: any = {
       id: id
     };
@@ -124,9 +93,9 @@ export class AccesstokenApi extends BaseLoopBackApi {
 
   /**
    * The name of the model represented by this $resource,
-   * i.e. `Accesstoken`.
+   * i.e. `Guru`.
    */
   public getModelName() {
-    return "Accesstoken";
+    return "Guru";
   }
 }

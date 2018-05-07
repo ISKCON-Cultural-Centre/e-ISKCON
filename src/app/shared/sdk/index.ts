@@ -45,38 +45,50 @@ import { CommonModule } from '@angular/common';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CookieBrowser } from './storage/cookie.browser';
 import { StorageBrowser } from './storage/storage.browser';
-import { ServiceRoleApi } from './services/custom/ServiceRole';
-import { ServiceRoleMappingApi } from './services/custom/ServiceRoleMapping';
-import { CircleApi } from './services/custom/Circle';
-import { DevoteeApi } from './services/custom/Devotee';
-import { DevoteeEventCalendarApi } from './services/custom/DevoteeEventCalendar';
-import { DevoteeKarmiFamilyApi } from './services/custom/DevoteeKarmiFamily';
-import { DonationTypeMasterApi } from './services/custom/DonationTypeMaster';
-import { EventMasterApi } from './services/custom/EventMaster';
-import { NewContactApi } from './services/custom/NewContact';
-import { OutreachMasterApi } from './services/custom/OutreachMaster';
-import { PaymentApi } from './services/custom/Payment';
-import { PaymentModeMasterApi } from './services/custom/PaymentModeMaster';
-import { PledgeApi } from './services/custom/Pledge';
-import { PledgePaymentApi } from './services/custom/PledgePayment';
-import { RelationshipMasterApi } from './services/custom/RelationshipMaster';
-import { SpiritualLevelMasterApi } from './services/custom/SpiritualLevelMaster';
-import { TempleApi } from './services/custom/Temple';
-import { TempleBranchApi } from './services/custom/TempleBranch';
-import { ElectronicAddressApi } from './services/custom/ElectronicAddress';
-import { ElectronicAddressTypeMasterApi } from './services/custom/ElectronicAddressTypeMaster';
-import { PhysicalAddressApi } from './services/custom/PhysicalAddress';
-import { PhysicalAddressTypeMasterApi } from './services/custom/PhysicalAddressTypeMaster';
 import { ApprovalArtefactApi } from './services/custom/ApprovalArtefact';
 import { ApprovalQueApi } from './services/custom/ApprovalQue';
 import { ApprovalRuleApi } from './services/custom/ApprovalRule';
+import { AsramaMasterApi } from './services/custom/AsramaMaster';
+import { CircleApi } from './services/custom/Circle';
 import { DepartmentApi } from './services/custom/Department';
-import { RoleTaskMasterApi } from './services/custom/RoleTaskMaster';
-import { TaskMasterApi } from './services/custom/TaskMaster';
+import { DepartmentAnnouncementApi } from './services/custom/DepartmentAnnouncement';
+import { DepartmentCalendarApi } from './services/custom/DepartmentCalendar';
+import { DevoteeApi } from './services/custom/Devotee';
+import { DevoteeAsramaApi } from './services/custom/DevoteeAsrama';
+import { DevoteeElectronicAddressApi } from './services/custom/DevoteeElectronicAddress';
+import { DevoteeEventCalendarApi } from './services/custom/DevoteeEventCalendar';
+import { DevoteeEventMasterApi } from './services/custom/DevoteeEventMaster';
+import { DevoteeGroupingApi } from './services/custom/DevoteeGrouping';
+import { DevoteeKarmiFamilyApi } from './services/custom/DevoteeKarmiFamily';
+import { DevoteeLanguageApi } from './services/custom/DevoteeLanguage';
+import { DevoteeServiceApi } from './services/custom/DevoteeService';
+import { DevoteeServiceAvailabilityApi } from './services/custom/DevoteeServiceAvailability';
+import { DevoteeServiceInterestApi } from './services/custom/DevoteeServiceInterest';
+import { DevoteeSkillApi } from './services/custom/DevoteeSkill';
+import { DevoteeSpiritualProgressApi } from './services/custom/DevoteeSpiritualProgress';
+import { DonationCategoryMasterApi } from './services/custom/DonationCategoryMaster';
+import { DonationReceiptApi } from './services/custom/DonationReceipt';
+import { DonationTypeMasterApi } from './services/custom/DonationTypeMaster';
+import { ElectronicAddressApi } from './services/custom/ElectronicAddress';
+import { ElectronicAddressTypeMasterApi } from './services/custom/ElectronicAddressTypeMaster';
+import { EventDonationItemApi } from './services/custom/EventDonationItem';
+import { EventDonationMasterApi } from './services/custom/EventDonationMaster';
+import { EventMasterApi } from './services/custom/EventMaster';
+import { EventServiceApi } from './services/custom/EventService';
+import { EventServiceMasterApi } from './services/custom/EventServiceMaster';
+import { FestivalCalendarApi } from './services/custom/FestivalCalendar';
+import { FestivalMasterApi } from './services/custom/FestivalMaster';
+import { GothraMasterApi } from './services/custom/GothraMaster';
+import { GroupMasterApi } from './services/custom/GroupMaster';
+import { GuruApi } from './services/custom/Guru';
+import { LanguageApi } from './services/custom/Language';
+import { LookupTableDetailApi } from './services/custom/LookupTableDetail';
+import { LookupTableMasterApi } from './services/custom/LookupTableMaster';
 import { MgCreditNoteApi } from './services/custom/MgCreditNote';
 import { MgDeliveryNoteApi } from './services/custom/MgDeliveryNote';
-import { DevoteeElectronicAddressApi } from './services/custom/DevoteeElectronicAddress';
+import { MgHsnApi } from './services/custom/MgHsn';
 import { MgInvoiceApi } from './services/custom/MgInvoice';
+import { MgOrderApi } from './services/custom/MgOrder';
 import { MgOrderChannelApi } from './services/custom/MgOrderChannel';
 import { MgOrderLineApi } from './services/custom/MgOrderLine';
 import { MgOrderReturnApi } from './services/custom/MgOrderReturn';
@@ -97,34 +109,27 @@ import { MgTaxCategoryComponentApi } from './services/custom/MgTaxCategoryCompon
 import { MgTaxComponentApi } from './services/custom/MgTaxComponent';
 import { MgTaxLineApi } from './services/custom/MgTaxLine';
 import { MgUnitOfMeasureApi } from './services/custom/MgUnitOfMeasure';
-import { AccesstokenApi } from './services/custom/Accesstoken';
-import { AsramaMasterApi } from './services/custom/AsramaMaster';
-import { DevoteeAsramaApi } from './services/custom/DevoteeAsrama';
-import { DevoteeLanguageApi } from './services/custom/DevoteeLanguage';
-import { DevoteeServiceApi } from './services/custom/DevoteeService';
-import { DevoteeServiceAvailabilityApi } from './services/custom/DevoteeServiceAvailability';
-import { DevoteeServiceInterestApi } from './services/custom/DevoteeServiceInterest';
-import { DevoteeSkillApi } from './services/custom/DevoteeSkill';
-import { DevoteeSpiritualProgressApi } from './services/custom/DevoteeSpiritualProgress';
-import { DonationReceiptApi } from './services/custom/DonationReceipt';
-import { FestivalCalendarApi } from './services/custom/FestivalCalendar';
-import { FestivalMasterApi } from './services/custom/FestivalMaster';
-import { LanguageApi } from './services/custom/Language';
-import { MgHsnApi } from './services/custom/MgHsn';
-import { MgOrderApi } from './services/custom/MgOrder';
+import { NakshatraMasterApi } from './services/custom/NakshatraMaster';
+import { NewContactApi } from './services/custom/NewContact';
+import { OutreachMasterApi } from './services/custom/OutreachMaster';
+import { PaymentApi } from './services/custom/Payment';
+import { PaymentModeMasterApi } from './services/custom/PaymentModeMaster';
+import { PhysicalAddressApi } from './services/custom/PhysicalAddress';
+import { PhysicalAddressTypeMasterApi } from './services/custom/PhysicalAddressTypeMaster';
+import { PledgeApi } from './services/custom/Pledge';
+import { PledgePaymentApi } from './services/custom/PledgePayment';
+import { ProfessionMasterApi } from './services/custom/ProfessionMaster';
+import { RelationshipMasterApi } from './services/custom/RelationshipMaster';
+import { RoleTaskMasterApi } from './services/custom/RoleTaskMaster';
 import { ServiceAreaApi } from './services/custom/ServiceArea';
+import { ServiceRoleApi } from './services/custom/ServiceRole';
+import { ServiceRoleMappingApi } from './services/custom/ServiceRoleMapping';
 import { SkillApi } from './services/custom/Skill';
 import { SkillCategoryApi } from './services/custom/SkillCategory';
-import { LookupTableMasterApi } from './services/custom/LookupTableMaster';
-import { LookupTableDetailApi } from './services/custom/LookupTableDetail';
-import { LookupMasterApi } from './services/custom/LookupMaster';
-import { GothraMasterApi } from './services/custom/GothraMaster';
-import { NakshatraMasterApi } from './services/custom/NakshatraMaster';
-import { ProfessionMasterApi } from './services/custom/ProfessionMaster';
-import { DepartmentCalendarApi } from './services/custom/DepartmentCalendar';
-import { DepartmentAnnouncementApi } from './services/custom/DepartmentAnnouncement';
-import { GroupMasterApi } from './services/custom/GroupMaster';
-import { DevoteeGroupingApi } from './services/custom/DevoteeGrouping';
+import { SpiritualLevelMasterApi } from './services/custom/SpiritualLevelMaster';
+import { TaskMasterApi } from './services/custom/TaskMaster';
+import { TempleApi } from './services/custom/Temple';
+import { TempleBranchApi } from './services/custom/TempleBranch';
 /**
 * @module SDKBrowserModule
 * @description
@@ -154,38 +159,50 @@ export class SDKBrowserModule {
         LoggerService,
         JSONSearchParams,
         SDKModels,
-        ServiceRoleApi,
-        ServiceRoleMappingApi,
-        CircleApi,
-        DevoteeApi,
-        DevoteeEventCalendarApi,
-        DevoteeKarmiFamilyApi,
-        DonationTypeMasterApi,
-        EventMasterApi,
-        NewContactApi,
-        OutreachMasterApi,
-        PaymentApi,
-        PaymentModeMasterApi,
-        PledgeApi,
-        PledgePaymentApi,
-        RelationshipMasterApi,
-        SpiritualLevelMasterApi,
-        TempleApi,
-        TempleBranchApi,
-        ElectronicAddressApi,
-        ElectronicAddressTypeMasterApi,
-        PhysicalAddressApi,
-        PhysicalAddressTypeMasterApi,
         ApprovalArtefactApi,
         ApprovalQueApi,
         ApprovalRuleApi,
+        AsramaMasterApi,
+        CircleApi,
         DepartmentApi,
-        RoleTaskMasterApi,
-        TaskMasterApi,
+        DepartmentAnnouncementApi,
+        DepartmentCalendarApi,
+        DevoteeApi,
+        DevoteeAsramaApi,
+        DevoteeElectronicAddressApi,
+        DevoteeEventCalendarApi,
+        DevoteeEventMasterApi,
+        DevoteeGroupingApi,
+        DevoteeKarmiFamilyApi,
+        DevoteeLanguageApi,
+        DevoteeServiceApi,
+        DevoteeServiceAvailabilityApi,
+        DevoteeServiceInterestApi,
+        DevoteeSkillApi,
+        DevoteeSpiritualProgressApi,
+        DonationCategoryMasterApi,
+        DonationReceiptApi,
+        DonationTypeMasterApi,
+        ElectronicAddressApi,
+        ElectronicAddressTypeMasterApi,
+        EventDonationItemApi,
+        EventDonationMasterApi,
+        EventMasterApi,
+        EventServiceApi,
+        EventServiceMasterApi,
+        FestivalCalendarApi,
+        FestivalMasterApi,
+        GothraMasterApi,
+        GroupMasterApi,
+        GuruApi,
+        LanguageApi,
+        LookupTableDetailApi,
+        LookupTableMasterApi,
         MgCreditNoteApi,
         MgDeliveryNoteApi,
-        DevoteeElectronicAddressApi,
+        MgHsnApi,
         MgInvoiceApi,
+        MgOrderApi,
         MgOrderChannelApi,
         MgOrderLineApi,
         MgOrderReturnApi,
@@ -206,34 +223,27 @@ export class SDKBrowserModule {
         MgTaxComponentApi,
         MgTaxLineApi,
         MgUnitOfMeasureApi,
-        AccesstokenApi,
-        AsramaMasterApi,
-        DevoteeAsramaApi,
-        DevoteeLanguageApi,
-        DevoteeServiceApi,
-        DevoteeServiceAvailabilityApi,
-        DevoteeServiceInterestApi,
-        DevoteeSkillApi,
-        DevoteeSpiritualProgressApi,
-        DonationReceiptApi,
-        FestivalCalendarApi,
-        FestivalMasterApi,
-        LanguageApi,
-        MgHsnApi,
-        MgOrderApi,
+        NakshatraMasterApi,
+        NewContactApi,
+        OutreachMasterApi,
+        PaymentApi,
+        PaymentModeMasterApi,
+        PhysicalAddressApi,
+        PhysicalAddressTypeMasterApi,
+        PledgeApi,
+        PledgePaymentApi,
+        ProfessionMasterApi,
+        RelationshipMasterApi,
+        RoleTaskMasterApi,
         ServiceAreaApi,
+        ServiceRoleApi,
+        ServiceRoleMappingApi,
         SkillApi,
         SkillCategoryApi,
-        LookupTableMasterApi,
-        LookupTableDetailApi,
-        LookupMasterApi,
-        GothraMasterApi,
-        NakshatraMasterApi,
-        ProfessionMasterApi,
-        DepartmentCalendarApi,
-        DepartmentAnnouncementApi,
-        GroupMasterApi,
-        DevoteeGroupingApi,
+        SpiritualLevelMasterApi,
+        TaskMasterApi,
+        TempleApi,
+        TempleBranchApi,
         internalStorageProvider,
         { provide: SDKStorage, useClass: StorageBrowser }
       ]

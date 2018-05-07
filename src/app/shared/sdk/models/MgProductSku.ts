@@ -1,8 +1,8 @@
 /* tslint:disable */
 import {
   MgProductAttributeInstance,
-  MgProduct,
-  MgHsn
+  MgHsn,
+  MgProduct
 } from '../index';
 
 declare var Object: any;
@@ -27,8 +27,8 @@ export interface MgProductSkuInterface {
   "created-on"?: Date;
   "updated-on"?: Date;
   fkProductInstanceProductAttributeInstance1rel?: MgProductAttributeInstance;
-  fkProductSkuProduct1rel?: MgProduct;
   fkProductSkuHsn1rel?: MgHsn;
+  fkProductSkuProduct1rel?: MgProduct;
 }
 
 export class MgProductSku implements MgProductSkuInterface {
@@ -52,8 +52,8 @@ export class MgProductSku implements MgProductSkuInterface {
   "created-on": Date;
   "updated-on": Date;
   fkProductInstanceProductAttributeInstance1rel: MgProductAttributeInstance;
-  fkProductSkuProduct1rel: MgProduct;
   fkProductSkuHsn1rel: MgHsn;
+  fkProductSkuProduct1rel: MgProduct;
   constructor(data?: MgProductSkuInterface) {
     Object.assign(this, data);
   }
@@ -173,14 +173,6 @@ export class MgProductSku implements MgProductSkuInterface {
                   keyFrom: 'productAttributeInstanceId',
           keyTo: 'id'
         },
-        fkProductSkuProduct1rel: {
-          name: 'fkProductSkuProduct1rel',
-          type: 'MgProduct',
-          model: 'MgProduct',
-          relationType: 'belongsTo',
-                  keyFrom: 'productId',
-          keyTo: 'id'
-        },
         fkProductSkuHsn1rel: {
           name: 'fkProductSkuHsn1rel',
           type: 'MgHsn',
@@ -188,6 +180,14 @@ export class MgProductSku implements MgProductSkuInterface {
           relationType: 'belongsTo',
                   keyFrom: 'hsnCode',
           keyTo: 'hsnCode'
+        },
+        fkProductSkuProduct1rel: {
+          name: 'fkProductSkuProduct1rel',
+          type: 'MgProduct',
+          model: 'MgProduct',
+          relationType: 'belongsTo',
+                  keyFrom: 'productId',
+          keyTo: 'id'
         },
       }
     }

@@ -1,6 +1,7 @@
 /* tslint:disable */
 import {
   Devotee,
+  Guru,
   SpiritualLevelMaster
 } from '../index';
 
@@ -18,6 +19,7 @@ export interface DevoteeSpiritualProgressInterface {
   "created-on"?: Date;
   "updated-on"?: Date;
   fkDevoteeSpiritualFamilyDevotee1rel?: Devotee;
+  fkDevoteeSpiritualFamilyGuru1rel?: Guru;
   fkDevoteeSpiritualFamilySpiritualLevelMaster1rel?: SpiritualLevelMaster;
 }
 
@@ -34,6 +36,7 @@ export class DevoteeSpiritualProgress implements DevoteeSpiritualProgressInterfa
   "created-on": Date;
   "updated-on": Date;
   fkDevoteeSpiritualFamilyDevotee1rel: Devotee;
+  fkDevoteeSpiritualFamilyGuru1rel: Guru;
   fkDevoteeSpiritualFamilySpiritualLevelMaster1rel: SpiritualLevelMaster;
   constructor(data?: DevoteeSpiritualProgressInterface) {
     Object.assign(this, data);
@@ -120,6 +123,14 @@ export class DevoteeSpiritualProgress implements DevoteeSpiritualProgressInterfa
           model: 'Devotee',
           relationType: 'belongsTo',
                   keyFrom: 'devoteeId',
+          keyTo: 'id'
+        },
+        fkDevoteeSpiritualFamilyGuru1rel: {
+          name: 'fkDevoteeSpiritualFamilyGuru1rel',
+          type: 'Guru',
+          model: 'Guru',
+          relationType: 'belongsTo',
+                  keyFrom: 'guruId',
           keyTo: 'id'
         },
         fkDevoteeSpiritualFamilySpiritualLevelMaster1rel: {

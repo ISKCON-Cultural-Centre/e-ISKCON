@@ -1,7 +1,7 @@
 /* tslint:disable */
 import {
-  Payment,
-  MgOrder
+  MgOrder,
+  Payment
 } from '../index';
 
 declare var Object: any;
@@ -11,8 +11,8 @@ export interface MgInvoiceInterface {
   "paymentId"?: string;
   "creditNoteId"?: string;
   "invoiceAmount": string;
-  fkInvoicePayment1rel?: Payment;
   fkInvoiceOrder1rel?: MgOrder;
+  fkInvoicePayment1rel?: Payment;
 }
 
 export class MgInvoice implements MgInvoiceInterface {
@@ -21,8 +21,8 @@ export class MgInvoice implements MgInvoiceInterface {
   "paymentId": string;
   "creditNoteId": string;
   "invoiceAmount": string;
-  fkInvoicePayment1rel: Payment;
   fkInvoiceOrder1rel: MgOrder;
+  fkInvoicePayment1rel: Payment;
   constructor(data?: MgInvoiceInterface) {
     Object.assign(this, data);
   }
@@ -78,20 +78,20 @@ export class MgInvoice implements MgInvoiceInterface {
         },
       },
       relations: {
-        fkInvoicePayment1rel: {
-          name: 'fkInvoicePayment1rel',
-          type: 'Payment',
-          model: 'Payment',
-          relationType: 'belongsTo',
-                  keyFrom: 'paymentId',
-          keyTo: 'id'
-        },
         fkInvoiceOrder1rel: {
           name: 'fkInvoiceOrder1rel',
           type: 'MgOrder',
           model: 'MgOrder',
           relationType: 'belongsTo',
                   keyFrom: 'orderId',
+          keyTo: 'id'
+        },
+        fkInvoicePayment1rel: {
+          name: 'fkInvoicePayment1rel',
+          type: 'Payment',
+          model: 'Payment',
+          relationType: 'belongsTo',
+                  keyFrom: 'paymentId',
           keyTo: 'id'
         },
       }

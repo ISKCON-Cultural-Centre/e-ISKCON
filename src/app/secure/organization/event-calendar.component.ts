@@ -8,6 +8,7 @@ import { EventService } from './event-calendar.service';
 import { ServiceCalendarEntryComponent} from '../my-services/service-calendar-entry.component';
 import { Department, DepartmentCalendar, DepartmentAnnouncementApi } from '../../shared/sdk/index';
 import { MyDepartmentsService } from './my-departments.service';
+import { AuthService } from '../../shared/services';
 
 @Component({
   selector: 'app-event-calendar',
@@ -21,16 +22,18 @@ export class EventCalendarComponent implements OnInit {
   @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
   constructor(
     protected eventService: EventService,
-    protected myDepartmentsService: MyDepartmentsService,
+    private authService: AuthService,
+    //protected myDepartmentsService: MyDepartmentsService,
     private dialog: MatDialog,
   ) { }
 
   ngOnInit() {
-    this.myDepartmentsService.getMyDepartments().subscribe(
-      departments => {
-        this.departments = departments.map(function (department) {
+
+        this.departments = this.authService.getMyDepartments.map(function (department) {
           return department.id;
-          });
+         });
+        console.log(this.departments);
+
           //console.log(this.departments);
         this.eventService.getCurrentEvents().subscribe(events => {
           const calendarEvents = events.map(function (event) {
@@ -58,9 +61,6 @@ export class EventCalendarComponent implements OnInit {
           };
           //console.log(calendarEvents);
         });
-      }
-    );
-
   }
 
 

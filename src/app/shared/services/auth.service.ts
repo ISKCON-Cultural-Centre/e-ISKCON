@@ -10,6 +10,8 @@ import { User } from './models/user';
 import { ChangePassword } from './models/changePassword';
 import { Devotee } from '../sdk';
 import { NotificationService } from './notification.service';
+import { DepartmentApi, Department } from '../sdk';
+import {LoopBackFilter} from '../sdk/models/BaseModels';
 
 import { InternalStorage } from '../sdk/storage/storage.swaps';
 
@@ -17,18 +19,20 @@ import { InternalStorage } from '../sdk/storage/storage.swaps';
 declare var Object: any;
 @Injectable()
 export class AuthService extends LoopBackAuth implements OnDestroy {
-
+  loopBackFilter: LoopBackFilter = {};
   one$ = new Subscription();
+  two$ = new Subscription();
   // Create a stream of logged in status to communicate throughout app
   loggedIn$ = new BehaviorSubject<Boolean>(false);
   loggedIn: Boolean = false;
-
+  departments: Department[] = [];
   public devoteeName = new BehaviorSubject<string>('');
 
     constructor(
         internalStorage: InternalStorage, 
         private router: Router,
         private devoteeApi: DevoteeApi,
+        private departmentApi: DepartmentApi,
         private notificationService: NotificationService
     )
     {
@@ -36,6 +40,7 @@ export class AuthService extends LoopBackAuth implements OnDestroy {
         if (this.devoteeApi.isAuthenticated()) {
             this.setLoggedIn(true);
             this.decode(this.getCurrentUserData());
+            this.loadDepartments();
         }
     }
 
@@ -68,6 +73,12 @@ export class AuthService extends LoopBackAuth implements OnDestroy {
             this.loggedIn = true;
             this.decode(token.user);
             this.notificationService.notificationSubject.next('Login Successful');
+            this.loopBackFilter.where = {'departmentLeaderDevoteeId': token.userId};
+            this.two$ = this.departmentApi.find<Department>(this.loopBackFilter).subscribe(
+              departments => {
+                this.departments = departments;
+              }
+            )
           }, err => {
             this.setLoggedIn(false);
             this.notificationService.notificationSubject.next('Login Failed');
@@ -93,8 +104,24 @@ export class AuthService extends LoopBackAuth implements OnDestroy {
         return this.devoteeApi.changePassword(changePassword.oldPassword, changePassword.newPassword );
       }
 
+      loadDepartments() {
+        this.loopBackFilter.where = {'departmentLeaderDevoteeId': this.getCurrentUserId()};
+        this.two$ = this.departmentApi.find<Department>(this.loopBackFilter).subscribe(
+          departments => {
+            this.departments = departments;
+          }
+        )
+      }
+
+      get getMyDepartments() {
+        return this.departments;
+    }
+
       ngOnDestroy(){
         this.one$.unsubscribe();
-      }      
+        this.two$.unsubscribe();
+      }
       
 }
+
+

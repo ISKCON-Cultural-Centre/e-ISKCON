@@ -19,6 +19,7 @@ import { ServiceMasterComponent } from '../../secure/organization/service-master
 import { AnnouncementListComponent } from '../../secure/my-services/announcement-list.component';
 import { DevoteeGroupComponent } from '../../secure/devotee/devotee-group.component';
 import { EventCalendarComponent } from './../../secure/organization/event-calendar.component';
+import { EventMasterComponent } from './../../secure/organization/event/event-master.component';
 
 export const SECURE_ROUTES: Routes = [
     { 
@@ -131,6 +132,14 @@ export const SECURE_ROUTES: Routes = [
       },
       component: EventCalendarComponent, 
       canActivate: [AuthGuard] 
-    },    
+    },
+    {
+      path: 'organization/event/eventMaster', 
+      data: {
+        breadcrumb: 'Event Master'
+      },
+      component: EventMasterComponent, 
+      canActivate: [AuthGuard] 
+    },     
   ];
   

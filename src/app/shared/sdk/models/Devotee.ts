@@ -1,14 +1,13 @@
 /* tslint:disable */
 import {
-  Circle,
-  ServiceRoleMapping,
-  PhysicalAddress,
-  Accesstoken,
   AsramaMaster,
-  Language,
+  Circle,
   GothraMaster,
+  Language,
   NakshatraMaster,
-  ProfessionMaster
+  PhysicalAddress,
+  ProfessionMaster,
+  ServiceRoleMapping
 } from '../index';
 
 declare var Object: any;
@@ -45,15 +44,15 @@ export interface DevoteeInterface {
   "created-on"?: Date;
   "updated-on"?: Date;
   "password"?: string;
-  fkDevoteeCircle1rel?: Circle;
-  roleMappings?: ServiceRoleMapping[];
-  fkDevoteePhysicalAddress1rel?: PhysicalAddress;
-  accessTokens?: Accesstoken[];
+  accessTokens?: any[];
   fkDevoteeAsramaMaster1rel?: AsramaMaster;
-  fkDevoteeLanguage1rel?: Language;
+  fkDevoteeCircle1rel?: Circle;
   fkDevoteeGothraMaster1rel?: GothraMaster;
+  fkDevoteeLanguage1rel?: Language;
   fkDevoteeNakshatraMaster1rel?: NakshatraMaster;
+  fkDevoteePhysicalAddress1rel?: PhysicalAddress;
   fkDevoteeProfessionMaster1rel?: ProfessionMaster;
+  roleMappings?: ServiceRoleMapping[];
 }
 
 export class Devotee implements DevoteeInterface {
@@ -89,15 +88,15 @@ export class Devotee implements DevoteeInterface {
   "created-on": Date;
   "updated-on": Date;
   "password": string;
-  fkDevoteeCircle1rel: Circle;
-  roleMappings: ServiceRoleMapping[];
-  fkDevoteePhysicalAddress1rel: PhysicalAddress;
-  accessTokens: Accesstoken[];
+  accessTokens: any[];
   fkDevoteeAsramaMaster1rel: AsramaMaster;
-  fkDevoteeLanguage1rel: Language;
+  fkDevoteeCircle1rel: Circle;
   fkDevoteeGothraMaster1rel: GothraMaster;
+  fkDevoteeLanguage1rel: Language;
   fkDevoteeNakshatraMaster1rel: NakshatraMaster;
+  fkDevoteePhysicalAddress1rel: PhysicalAddress;
   fkDevoteeProfessionMaster1rel: ProfessionMaster;
+  roleMappings: ServiceRoleMapping[];
   constructor(data?: DevoteeInterface) {
     Object.assign(this, data);
   }
@@ -261,34 +260,10 @@ export class Devotee implements DevoteeInterface {
         },
       },
       relations: {
-        fkDevoteeCircle1rel: {
-          name: 'fkDevoteeCircle1rel',
-          type: 'Circle',
-          model: 'Circle',
-          relationType: 'belongsTo',
-                  keyFrom: 'circleId',
-          keyTo: 'id'
-        },
-        roleMappings: {
-          name: 'roleMappings',
-          type: 'ServiceRoleMapping[]',
-          model: 'ServiceRoleMapping',
-          relationType: 'hasMany',
-                  keyFrom: 'id',
-          keyTo: 'principalId'
-        },
-        fkDevoteePhysicalAddress1rel: {
-          name: 'fkDevoteePhysicalAddress1rel',
-          type: 'PhysicalAddress',
-          model: 'PhysicalAddress',
-          relationType: 'belongsTo',
-                  keyFrom: 'physicalAddressId',
-          keyTo: 'id'
-        },
         accessTokens: {
           name: 'accessTokens',
-          type: 'Accesstoken[]',
-          model: 'Accesstoken',
+          type: 'any[]',
+          model: '',
           relationType: 'hasMany',
                   keyFrom: 'id',
           keyTo: 'userId'
@@ -301,12 +276,12 @@ export class Devotee implements DevoteeInterface {
                   keyFrom: 'asramaMasterId',
           keyTo: 'id'
         },
-        fkDevoteeLanguage1rel: {
-          name: 'fkDevoteeLanguage1rel',
-          type: 'Language',
-          model: 'Language',
+        fkDevoteeCircle1rel: {
+          name: 'fkDevoteeCircle1rel',
+          type: 'Circle',
+          model: 'Circle',
           relationType: 'belongsTo',
-                  keyFrom: 'motherTongueLanguageId',
+                  keyFrom: 'circleId',
           keyTo: 'id'
         },
         fkDevoteeGothraMaster1rel: {
@@ -317,6 +292,14 @@ export class Devotee implements DevoteeInterface {
                   keyFrom: 'gothra',
           keyTo: 'gothra'
         },
+        fkDevoteeLanguage1rel: {
+          name: 'fkDevoteeLanguage1rel',
+          type: 'Language',
+          model: 'Language',
+          relationType: 'belongsTo',
+                  keyFrom: 'motherTongueLanguageId',
+          keyTo: 'id'
+        },
         fkDevoteeNakshatraMaster1rel: {
           name: 'fkDevoteeNakshatraMaster1rel',
           type: 'NakshatraMaster',
@@ -325,6 +308,14 @@ export class Devotee implements DevoteeInterface {
                   keyFrom: 'nakshatra',
           keyTo: 'nakshatra'
         },
+        fkDevoteePhysicalAddress1rel: {
+          name: 'fkDevoteePhysicalAddress1rel',
+          type: 'PhysicalAddress',
+          model: 'PhysicalAddress',
+          relationType: 'belongsTo',
+                  keyFrom: 'physicalAddressId',
+          keyTo: 'id'
+        },
         fkDevoteeProfessionMaster1rel: {
           name: 'fkDevoteeProfessionMaster1rel',
           type: 'ProfessionMaster',
@@ -332,6 +323,14 @@ export class Devotee implements DevoteeInterface {
           relationType: 'belongsTo',
                   keyFrom: 'professionId',
           keyTo: 'professionId'
+        },
+        roleMappings: {
+          name: 'roleMappings',
+          type: 'ServiceRoleMapping[]',
+          model: 'ServiceRoleMapping',
+          relationType: 'hasMany',
+                  keyFrom: 'id',
+          keyTo: 'principalId'
         },
       }
     }

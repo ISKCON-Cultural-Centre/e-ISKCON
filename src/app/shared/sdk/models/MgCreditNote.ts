@@ -1,7 +1,7 @@
 /* tslint:disable */
 import {
-  Payment,
-  MgOrder
+  MgOrder,
+  Payment
 } from '../index';
 
 declare var Object: any;
@@ -12,8 +12,8 @@ export interface MgCreditNoteInterface {
   "paymentId"?: string;
   "created-on"?: Date;
   "updated-on"?: Date;
-  fkCreditNotePayment1rel?: Payment;
   fkCreditNoteOrder1rel?: MgOrder;
+  fkCreditNotePayment1rel?: Payment;
 }
 
 export class MgCreditNote implements MgCreditNoteInterface {
@@ -23,8 +23,8 @@ export class MgCreditNote implements MgCreditNoteInterface {
   "paymentId": string;
   "created-on": Date;
   "updated-on": Date;
-  fkCreditNotePayment1rel: Payment;
   fkCreditNoteOrder1rel: MgOrder;
+  fkCreditNotePayment1rel: Payment;
   constructor(data?: MgCreditNoteInterface) {
     Object.assign(this, data);
   }
@@ -84,20 +84,20 @@ export class MgCreditNote implements MgCreditNoteInterface {
         },
       },
       relations: {
-        fkCreditNotePayment1rel: {
-          name: 'fkCreditNotePayment1rel',
-          type: 'Payment',
-          model: 'Payment',
-          relationType: 'belongsTo',
-                  keyFrom: 'paymentId',
-          keyTo: 'id'
-        },
         fkCreditNoteOrder1rel: {
           name: 'fkCreditNoteOrder1rel',
           type: 'MgOrder',
           model: 'MgOrder',
           relationType: 'belongsTo',
                   keyFrom: 'orderId',
+          keyTo: 'id'
+        },
+        fkCreditNotePayment1rel: {
+          name: 'fkCreditNotePayment1rel',
+          type: 'Payment',
+          model: 'Payment',
+          relationType: 'belongsTo',
+                  keyFrom: 'paymentId',
           keyTo: 'id'
         },
       }

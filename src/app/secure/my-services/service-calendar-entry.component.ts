@@ -50,6 +50,7 @@ export class ServiceCalendarEntryComponent  implements OnInit, OnDestroy {
     }
 
   ngOnInit() {
+    console.log( this.authService.getCurrentUserId());
     this.loadDepartments();
   }
 
@@ -72,8 +73,6 @@ export class ServiceCalendarEntryComponent  implements OnInit, OnDestroy {
       this.eventForm.value
     )
     .subscribe(result => {
-      this.loadDepartments();
-
       //console.log(result.subject);
       this.notificationService.notificationSubject.next('"' + result.eventName + '" created successfully');
       this.dialogRef.close(result);
@@ -98,15 +97,9 @@ export class ServiceCalendarEntryComponent  implements OnInit, OnDestroy {
   }
 
   loadDepartments() {
-    this.loopBackFilter.where = {'departmentLeaderDevoteeId': this.authService.getCurrentUserId()};
-    this.loopBackFilter.include = ['fkDepartmentDevotee1rel', 'events'];
-    this.loopBackFilter.order = ['departmentName ASC'];
-    this.departmentApi.find<Department>(this.loopBackFilter)
-    .subscribe(
-      departments => {
-        this.departments = departments;
-      }
-    )
+    this.departments = this.authService.getMyDepartments;
+    console.log(this.departments);
+
   }
 
 

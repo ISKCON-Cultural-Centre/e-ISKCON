@@ -97,7 +97,8 @@ export class ServiceAnnouncementComponent implements OnInit, OnDestroy {
   }
 
   loadDepartments() {
-    this.loopBackFilter.where = {'departmentLeaderDevoteeId': this.authService.getCurrentUserId()};
+    //this.departments = this.authService.departments;
+     this.loopBackFilter.where = {'departmentLeaderDevoteeId': this.authService.getCurrentUserId()};
     this.loopBackFilter.include = ['fkDepartmentDevotee1rel', 'announcements'];
     this.loopBackFilter.order = ['departmentName ASC'];
     this.departmentApi.find<Department>(this.loopBackFilter)
@@ -107,7 +108,7 @@ export class ServiceAnnouncementComponent implements OnInit, OnDestroy {
         //console.log('departments');
         //console.log(departments);
       }
-    )
+    ) 
   }
 
 

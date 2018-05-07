@@ -10,16 +10,14 @@ import { JSONSearchParams } from '../core/search.params';
 import { ErrorHandler } from '../core/error.service';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
-import { MgInvoice } from '../../models/MgInvoice';
-import { MgOrder } from '../../models/MgOrder';
-import { Payment } from '../../models/Payment';
+import { EventService } from '../../models/EventService';
 
 
 /**
- * Api services for the `MgInvoice` model.
+ * Api services for the `EventService` model.
  */
 @Injectable()
-export class MgInvoiceApi extends BaseLoopBackApi {
+export class EventServiceApi extends BaseLoopBackApi {
 
   constructor(
     @Inject(Http) protected http: Http,
@@ -29,66 +27,6 @@ export class MgInvoiceApi extends BaseLoopBackApi {
     @Optional() @Inject(ErrorHandler) protected errorHandler: ErrorHandler
   ) {
     super(http,  models, auth, searchParams, errorHandler);
-  }
-
-  /**
-   * Fetches belongsTo relation fkInvoiceOrder1rel.
-   *
-   * @param {any} id MgInvoice id
-   *
-   * @param {boolean} refresh 
-   *
-   * @returns {object} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `MgInvoice` object.)
-   * </em>
-   */
-  public getFkInvoiceOrder1rel(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
-    let _method: string = "GET";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/MgInvoices/:id/fkInvoiceOrder1rel";
-    let _routeParams: any = {
-      id: id
-    };
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    if (typeof refresh !== 'undefined' && refresh !== null) _urlParams.refresh = refresh;
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
-  }
-
-  /**
-   * Fetches belongsTo relation fkInvoicePayment1rel.
-   *
-   * @param {any} id MgInvoice id
-   *
-   * @param {boolean} refresh 
-   *
-   * @returns {object} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `MgInvoice` object.)
-   * </em>
-   */
-  public getFkInvoicePayment1rel(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
-    let _method: string = "GET";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/MgInvoices/:id/fkInvoicePayment1rel";
-    let _routeParams: any = {
-      id: id
-    };
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    if (typeof refresh !== 'undefined' && refresh !== null) _urlParams.refresh = refresh;
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
   }
 
   /**
@@ -104,13 +42,13 @@ export class MgInvoiceApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `MgInvoice` object.)
+   * This usually means the response is a `EventService` object.)
    * </em>
    */
   public patchOrCreate(data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PATCH";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/MgInvoices";
+    "/EventServices";
     let _routeParams: any = {};
     let _postBody: any = {
       data: data
@@ -123,7 +61,7 @@ export class MgInvoiceApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param {any} id MgInvoice id
+   * @param {any} id EventService id
    *
    * @param {object} data Request data.
    *
@@ -135,13 +73,13 @@ export class MgInvoiceApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `MgInvoice` object.)
+   * This usually means the response is a `EventService` object.)
    * </em>
    */
   public patchAttributes(id: any, data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PATCH";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/MgInvoices/:id";
+    "/EventServices/:id";
     let _routeParams: any = {
       id: id
     };
@@ -155,9 +93,9 @@ export class MgInvoiceApi extends BaseLoopBackApi {
 
   /**
    * The name of the model represented by this $resource,
-   * i.e. `MgInvoice`.
+   * i.e. `EventService`.
    */
   public getModelName() {
-    return "MgInvoice";
+    return "EventService";
   }
 }

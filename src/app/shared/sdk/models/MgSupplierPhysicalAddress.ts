@@ -1,22 +1,22 @@
 /* tslint:disable */
 import {
-  PhysicalAddress,
-  MgSupplier
+  MgSupplier,
+  PhysicalAddress
 } from '../index';
 
 declare var Object: any;
 export interface MgSupplierPhysicalAddressInterface {
   "physicalAddressId": string;
   "supplierId": string;
-  fkSupplierAddressPhysicalAddress1rel?: PhysicalAddress;
   fkSupplierPhysicalAddressSupplier1rel?: MgSupplier;
+  fkSupplierAddressPhysicalAddress1rel?: PhysicalAddress;
 }
 
 export class MgSupplierPhysicalAddress implements MgSupplierPhysicalAddressInterface {
   "physicalAddressId": string;
   "supplierId": string;
-  fkSupplierAddressPhysicalAddress1rel: PhysicalAddress;
   fkSupplierPhysicalAddressSupplier1rel: MgSupplier;
+  fkSupplierAddressPhysicalAddress1rel: PhysicalAddress;
   constructor(data?: MgSupplierPhysicalAddressInterface) {
     Object.assign(this, data);
   }
@@ -60,20 +60,20 @@ export class MgSupplierPhysicalAddress implements MgSupplierPhysicalAddressInter
         },
       },
       relations: {
-        fkSupplierAddressPhysicalAddress1rel: {
-          name: 'fkSupplierAddressPhysicalAddress1rel',
-          type: 'PhysicalAddress',
-          model: 'PhysicalAddress',
-          relationType: 'belongsTo',
-                  keyFrom: 'physicalAddressId',
-          keyTo: 'id'
-        },
         fkSupplierPhysicalAddressSupplier1rel: {
           name: 'fkSupplierPhysicalAddressSupplier1rel',
           type: 'MgSupplier',
           model: 'MgSupplier',
           relationType: 'belongsTo',
                   keyFrom: 'supplierId',
+          keyTo: 'id'
+        },
+        fkSupplierAddressPhysicalAddress1rel: {
+          name: 'fkSupplierAddressPhysicalAddress1rel',
+          type: 'PhysicalAddress',
+          model: 'PhysicalAddress',
+          relationType: 'belongsTo',
+                  keyFrom: 'physicalAddressId',
           keyTo: 'id'
         },
       }

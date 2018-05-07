@@ -1,7 +1,7 @@
 /* tslint:disable */
 import {
-  Temple,
-  PhysicalAddress
+  PhysicalAddress,
+  Temple
 } from '../index';
 
 declare var Object: any;
@@ -14,8 +14,8 @@ export interface TempleBranchInterface {
   "contactName"?: string;
   "created-on"?: Date;
   "updated-on"?: Date;
-  fkTempleBranchTemple1rel?: Temple;
   fkTempleBranchPhysicalAddress1rel?: PhysicalAddress;
+  fkTempleBranchTemple1rel?: Temple;
 }
 
 export class TempleBranch implements TempleBranchInterface {
@@ -27,8 +27,8 @@ export class TempleBranch implements TempleBranchInterface {
   "contactName": string;
   "created-on": Date;
   "updated-on": Date;
-  fkTempleBranchTemple1rel: Temple;
   fkTempleBranchPhysicalAddress1rel: PhysicalAddress;
+  fkTempleBranchTemple1rel: Temple;
   constructor(data?: TempleBranchInterface) {
     Object.assign(this, data);
   }
@@ -96,20 +96,20 @@ export class TempleBranch implements TempleBranchInterface {
         },
       },
       relations: {
-        fkTempleBranchTemple1rel: {
-          name: 'fkTempleBranchTemple1rel',
-          type: 'Temple',
-          model: 'Temple',
-          relationType: 'belongsTo',
-                  keyFrom: 'templeId',
-          keyTo: 'id'
-        },
         fkTempleBranchPhysicalAddress1rel: {
           name: 'fkTempleBranchPhysicalAddress1rel',
           type: 'PhysicalAddress',
           model: 'PhysicalAddress',
           relationType: 'belongsTo',
                   keyFrom: 'physicalAddressId',
+          keyTo: 'id'
+        },
+        fkTempleBranchTemple1rel: {
+          name: 'fkTempleBranchTemple1rel',
+          type: 'Temple',
+          model: 'Temple',
+          relationType: 'belongsTo',
+                  keyFrom: 'templeId',
           keyTo: 'id'
         },
       }

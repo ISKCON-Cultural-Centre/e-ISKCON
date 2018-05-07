@@ -1,7 +1,7 @@
 /* tslint:disable */
 import {
-  MgProductSku,
-  MgOrder
+  MgOrder,
+  MgProductSku
 } from '../index';
 
 declare var Object: any;
@@ -17,8 +17,8 @@ export interface MgOrderLineInterface {
   "updatedOn"?: Date;
   "createdBy"?: string;
   "updatedBy"?: string;
-  fkBookMarathonOrderDetailBook1rel?: MgProductSku;
   fkBookMarathonOrderDetailBookMarathonOrder1rel?: MgOrder;
+  fkBookMarathonOrderDetailBook1rel?: MgProductSku;
 }
 
 export class MgOrderLine implements MgOrderLineInterface {
@@ -33,8 +33,8 @@ export class MgOrderLine implements MgOrderLineInterface {
   "updatedOn": Date;
   "createdBy": string;
   "updatedBy": string;
-  fkBookMarathonOrderDetailBook1rel: MgProductSku;
   fkBookMarathonOrderDetailBookMarathonOrder1rel: MgOrder;
+  fkBookMarathonOrderDetailBook1rel: MgProductSku;
   constructor(data?: MgOrderLineInterface) {
     Object.assign(this, data);
   }
@@ -114,20 +114,20 @@ export class MgOrderLine implements MgOrderLineInterface {
         },
       },
       relations: {
-        fkBookMarathonOrderDetailBook1rel: {
-          name: 'fkBookMarathonOrderDetailBook1rel',
-          type: 'MgProductSku',
-          model: 'MgProductSku',
-          relationType: 'belongsTo',
-                  keyFrom: 'productInstanceId',
-          keyTo: 'id'
-        },
         fkBookMarathonOrderDetailBookMarathonOrder1rel: {
           name: 'fkBookMarathonOrderDetailBookMarathonOrder1rel',
           type: 'MgOrder',
           model: 'MgOrder',
           relationType: 'belongsTo',
                   keyFrom: 'orderId',
+          keyTo: 'id'
+        },
+        fkBookMarathonOrderDetailBook1rel: {
+          name: 'fkBookMarathonOrderDetailBook1rel',
+          type: 'MgProductSku',
+          model: 'MgProductSku',
+          relationType: 'belongsTo',
+                  keyFrom: 'productInstanceId',
           keyTo: 'id'
         },
       }

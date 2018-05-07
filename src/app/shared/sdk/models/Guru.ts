@@ -1,10 +1,9 @@
 /* tslint:disable */
 
 declare var Object: any;
-export interface EventMasterInterface {
-  "id": string;
-  "eventName": string;
-  "departmentId": string;
+export interface GuruInterface {
+  "id"?: string;
+  "name"?: string;
   "createdOn"?: Date;
   "updatedOn"?: Date;
   "createdBy"?: string;
@@ -13,34 +12,33 @@ export interface EventMasterInterface {
   "updated-on"?: Date;
 }
 
-export class EventMaster implements EventMasterInterface {
+export class Guru implements GuruInterface {
   "id": string;
-  "eventName": string;
-  "departmentId": string;
+  "name": string;
   "createdOn": Date;
   "updatedOn": Date;
   "createdBy": string;
   "updatedBy": string;
   "created-on": Date;
   "updated-on": Date;
-  constructor(data?: EventMasterInterface) {
+  constructor(data?: GuruInterface) {
     Object.assign(this, data);
   }
   /**
    * The name of the model represented by this $resource,
-   * i.e. `EventMaster`.
+   * i.e. `Guru`.
    */
   public static getModelName() {
-    return "EventMaster";
+    return "Guru";
   }
   /**
   * @method factory
   * @author Jonathan Casarrubias
   * @license MIT
-  * This method creates an instance of EventMaster for dynamic purposes.
+  * This method creates an instance of Guru for dynamic purposes.
   **/
-  public static factory(data: EventMasterInterface): EventMaster{
-    return new EventMaster(data);
+  public static factory(data: GuruInterface): Guru{
+    return new Guru(data);
   }
   /**
   * @method getModelDefinition
@@ -51,21 +49,17 @@ export class EventMaster implements EventMasterInterface {
   **/
   public static getModelDefinition() {
     return {
-      name: 'EventMaster',
-      plural: 'EventMasters',
-      path: 'EventMasters',
+      name: 'Guru',
+      plural: 'Gurus',
+      path: 'Gurus',
       idName: 'id',
       properties: {
         "id": {
           name: 'id',
           type: 'string'
         },
-        "eventName": {
-          name: 'eventName',
-          type: 'string'
-        },
-        "departmentId": {
-          name: 'departmentId',
+        "name": {
+          name: 'name',
           type: 'string'
         },
         "createdOn": {

@@ -5,15 +5,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RoleComponent } from './role.component';
 import { DepartmentComponent } from './department.component';
 import { MaterialModule } from '../../material.module';
-import { SharedComponentsModule } from '../../shared/components/shared-components.module'
-import { InlineEditComponent } from '../../shared/components/inline-edit/inline-edit.component';
+import { SharedComponentsModule } from '../../shared/components/shared-components.module';
 import { TaskMasterComponent } from './task-master.component';
 import { ServiceMasterComponent } from './service-master.component';
 import { RoleTaskComponent } from './role-task.component';
 import { EventCalendarComponent } from './event-calendar.component';
 import { FullCalendarModule } from 'ng-fullcalendar';
 import { EventService } from './event-calendar.service';
-import { MyDepartmentsService } from './my-departments.service';
+//import { MyDepartmentsService } from './my-departments.service';
 import { ServiceCalendarEntryComponent} from '../my-services/service-calendar-entry.component';
 
 
@@ -27,7 +26,7 @@ import { ServiceCalendarEntryComponent} from '../my-services/service-calendar-en
     TaskMasterComponent, ServiceMasterComponent, 
     RoleTaskComponent, EventCalendarComponent,
   ],
-  providers: [ EventService, MyDepartmentsService ],
+  providers: [ EventService,  ],
   entryComponents: [
     ServiceCalendarEntryComponent
   ]

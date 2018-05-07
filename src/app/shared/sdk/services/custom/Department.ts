@@ -11,10 +11,10 @@ import { ErrorHandler } from '../core/error.service';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
 import { Department } from '../../models/Department';
+import { DepartmentAnnouncement } from '../../models/DepartmentAnnouncement';
+import { DepartmentCalendar } from '../../models/DepartmentCalendar';
 import { Devotee } from '../../models/Devotee';
 import { Temple } from '../../models/Temple';
-import { DepartmentCalendar } from '../../models/DepartmentCalendar';
-import { DepartmentAnnouncement } from '../../models/DepartmentAnnouncement';
 
 
 /**
@@ -34,11 +34,11 @@ export class DepartmentApi extends BaseLoopBackApi {
   }
 
   /**
-   * Fetches belongsTo relation fkDepartmentDevotee1rel.
+   * Find a related item by id for announcements.
    *
    * @param {any} id Department id
    *
-   * @param {boolean} refresh 
+   * @param {any} fk Foreign key for announcements
    *
    * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -49,26 +49,57 @@ export class DepartmentApi extends BaseLoopBackApi {
    * This usually means the response is a `Department` object.)
    * </em>
    */
-  public getFkDepartmentDevotee1rel(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
+  public findByIdAnnouncements(id: any, fk: any, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Departments/:id/fkDepartmentDevotee1rel";
+    "/Departments/:id/announcements/:fk";
     let _routeParams: any = {
-      id: id
+      id: id,
+      fk: fk
     };
     let _postBody: any = {};
     let _urlParams: any = {};
-    if (typeof refresh !== 'undefined' && refresh !== null) _urlParams.refresh = refresh;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
 
   /**
-   * Fetches belongsTo relation fkDepartmentTemple1rel.
+   * Delete a related item by id for announcements.
    *
    * @param {any} id Department id
    *
-   * @param {boolean} refresh 
+   * @param {any} fk Foreign key for announcements
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * This method returns no data.
+   */
+  public destroyByIdAnnouncements(id: any, fk: any, customHeaders?: Function): Observable<any> {
+    let _method: string = "DELETE";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Departments/:id/announcements/:fk";
+    let _routeParams: any = {
+      id: id,
+      fk: fk
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
+   * Update a related item by id for announcements.
+   *
+   * @param {any} id Department id
+   *
+   * @param {any} fk Foreign key for announcements
+   *
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
    *
    * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -79,16 +110,18 @@ export class DepartmentApi extends BaseLoopBackApi {
    * This usually means the response is a `Department` object.)
    * </em>
    */
-  public getFkDepartmentTemple1rel(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
-    let _method: string = "GET";
+  public updateByIdAnnouncements(id: any, fk: any, data: any = {}, customHeaders?: Function): Observable<any> {
+    let _method: string = "PUT";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Departments/:id/fkDepartmentTemple1rel";
+    "/Departments/:id/announcements/:fk";
     let _routeParams: any = {
-      id: id
+      id: id,
+      fk: fk
     };
-    let _postBody: any = {};
+    let _postBody: any = {
+      data: data
+    };
     let _urlParams: any = {};
-    if (typeof refresh !== 'undefined' && refresh !== null) _urlParams.refresh = refresh;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -187,11 +220,11 @@ export class DepartmentApi extends BaseLoopBackApi {
   }
 
   /**
-   * Find a related item by id for announcements.
+   * Fetches belongsTo relation fkDepartmentDevotee1rel.
    *
    * @param {any} id Department id
    *
-   * @param {any} fk Foreign key for announcements
+   * @param {boolean} refresh 
    *
    * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -202,57 +235,26 @@ export class DepartmentApi extends BaseLoopBackApi {
    * This usually means the response is a `Department` object.)
    * </em>
    */
-  public findByIdAnnouncements(id: any, fk: any, customHeaders?: Function): Observable<any> {
+  public getFkDepartmentDevotee1rel(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Departments/:id/announcements/:fk";
+    "/Departments/:id/fkDepartmentDevotee1rel";
     let _routeParams: any = {
-      id: id,
-      fk: fk
+      id: id
     };
     let _postBody: any = {};
     let _urlParams: any = {};
+    if (typeof refresh !== 'undefined' && refresh !== null) _urlParams.refresh = refresh;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
 
   /**
-   * Delete a related item by id for announcements.
+   * Fetches belongsTo relation fkDepartmentTemple1rel.
    *
    * @param {any} id Department id
    *
-   * @param {any} fk Foreign key for announcements
-   *
-   * @returns {object} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * This method returns no data.
-   */
-  public destroyByIdAnnouncements(id: any, fk: any, customHeaders?: Function): Observable<any> {
-    let _method: string = "DELETE";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Departments/:id/announcements/:fk";
-    let _routeParams: any = {
-      id: id,
-      fk: fk
-    };
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
-  }
-
-  /**
-   * Update a related item by id for announcements.
-   *
-   * @param {any} id Department id
-   *
-   * @param {any} fk Foreign key for announcements
-   *
-   * @param {object} data Request data.
-   *
-   * This method expects a subset of model properties as request parameters.
+   * @param {boolean} refresh 
    *
    * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -263,134 +265,16 @@ export class DepartmentApi extends BaseLoopBackApi {
    * This usually means the response is a `Department` object.)
    * </em>
    */
-  public updateByIdAnnouncements(id: any, fk: any, data: any = {}, customHeaders?: Function): Observable<any> {
-    let _method: string = "PUT";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Departments/:id/announcements/:fk";
-    let _routeParams: any = {
-      id: id,
-      fk: fk
-    };
-    let _postBody: any = {
-      data: data
-    };
-    let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
-  }
-
-  /**
-   * Queries events of Department.
-   *
-   * @param {any} id Department id
-   *
-   * @param {object} filter 
-   *
-   * @returns {object[]} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Department` object.)
-   * </em>
-   */
-  public getEvents(id: any, filter: LoopBackFilter = {}, customHeaders?: Function): Observable<any> {
+  public getFkDepartmentTemple1rel(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Departments/:id/events";
+    "/Departments/:id/fkDepartmentTemple1rel";
     let _routeParams: any = {
       id: id
     };
     let _postBody: any = {};
     let _urlParams: any = {};
-    if (typeof filter !== 'undefined' && filter !== null) _urlParams.filter = filter;
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
-  }
-
-  /**
-   * Creates a new instance in events of this model.
-   *
-   * @param {any} id Department id
-   *
-   * @param {object} data Request data.
-   *
-   * This method expects a subset of model properties as request parameters.
-   *
-   * @returns {object} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Department` object.)
-   * </em>
-   */
-  public createEvents(id: any, data: any = {}, customHeaders?: Function): Observable<any> {
-    let _method: string = "POST";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Departments/:id/events";
-    let _routeParams: any = {
-      id: id
-    };
-    let _postBody: any = {
-      data: data
-    };
-    let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
-  }
-
-  /**
-   * Deletes all events of this model.
-   *
-   * @param {any} id Department id
-   *
-   * @returns {object} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * This method returns no data.
-   */
-  public deleteEvents(id: any, customHeaders?: Function): Observable<any> {
-    let _method: string = "DELETE";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Departments/:id/events";
-    let _routeParams: any = {
-      id: id
-    };
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
-  }
-
-  /**
-   * Counts events of Department.
-   *
-   * @param {any} id Department id
-   *
-   * @param {object} where Criteria to match model instances
-   *
-   * @returns {object} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * Data properties:
-   *
-   *  - `count` – `{number}` - 
-   */
-  public countEvents(id: any, where: any = {}, customHeaders?: Function): Observable<any> {
-    let _method: string = "GET";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Departments/:id/events/count";
-    let _routeParams: any = {
-      id: id
-    };
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    if (typeof where !== 'undefined' && where !== null) _urlParams.where = where;
+    if (typeof refresh !== 'undefined' && refresh !== null) _urlParams.refresh = refresh;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -512,6 +396,122 @@ export class DepartmentApi extends BaseLoopBackApi {
   }
 
   /**
+   * Queries events of Department.
+   *
+   * @param {any} id Department id
+   *
+   * @param {object} filter 
+   *
+   * @returns {object[]} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Department` object.)
+   * </em>
+   */
+  public getEvents(id: any, filter: LoopBackFilter = {}, customHeaders?: Function): Observable<any> {
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Departments/:id/events";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (typeof filter !== 'undefined' && filter !== null) _urlParams.filter = filter;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
+   * Creates a new instance in events of this model.
+   *
+   * @param {any} id Department id
+   *
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Department` object.)
+   * </em>
+   */
+  public createEvents(id: any, data: any = {}, customHeaders?: Function): Observable<any> {
+    let _method: string = "POST";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Departments/:id/events";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {
+      data: data
+    };
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
+   * Deletes all events of this model.
+   *
+   * @param {any} id Department id
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * This method returns no data.
+   */
+  public deleteEvents(id: any, customHeaders?: Function): Observable<any> {
+    let _method: string = "DELETE";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Departments/:id/events";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
+   * Counts events of Department.
+   *
+   * @param {any} id Department id
+   *
+   * @param {object} where Criteria to match model instances
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * Data properties:
+   *
+   *  - `count` – `{number}` - 
+   */
+  public countEvents(id: any, where: any = {}, customHeaders?: Function): Observable<any> {
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Departments/:id/events/count";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (typeof where !== 'undefined' && where !== null) _urlParams.where = where;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
    * Patch an existing model instance or insert a new one into the data source.
    *
    * @param {object} data Request data.
@@ -574,39 +574,6 @@ export class DepartmentApi extends BaseLoopBackApi {
   }
 
   /**
-   * Creates a new instance in events of this model.
-   *
-   * @param {any} id Department id
-   *
-   * @param {object} data Request data.
-   *
-   * This method expects a subset of model properties as request parameters.
-   *
-   * @returns {object[]} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Department` object.)
-   * </em>
-   */
-  public createManyEvents(id: any, data: any[] = [], customHeaders?: Function): Observable<any> {
-    let _method: string = "POST";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Departments/:id/events";
-    let _routeParams: any = {
-      id: id
-    };
-    let _postBody: any = {
-      data: data
-    };
-    let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
-  }
-
-  /**
    * Creates a new instance in announcements of this model.
    *
    * @param {any} id Department id
@@ -628,6 +595,39 @@ export class DepartmentApi extends BaseLoopBackApi {
     let _method: string = "POST";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Departments/:id/announcements";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {
+      data: data
+    };
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
+   * Creates a new instance in events of this model.
+   *
+   * @param {any} id Department id
+   *
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns {object[]} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Department` object.)
+   * </em>
+   */
+  public createManyEvents(id: any, data: any[] = [], customHeaders?: Function): Observable<any> {
+    let _method: string = "POST";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Departments/:id/events";
     let _routeParams: any = {
       id: id
     };

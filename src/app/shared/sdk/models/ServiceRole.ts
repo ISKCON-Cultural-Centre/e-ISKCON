@@ -1,7 +1,7 @@
 /* tslint:disable */
 import {
-  ServiceRoleMapping,
-  Department
+  Department,
+  ServiceRoleMapping
 } from '../index';
 
 declare var Object: any;
@@ -14,8 +14,8 @@ export interface ServiceRoleInterface {
   "departmentId": string;
   "created-on"?: Date;
   "updated-on"?: Date;
-  principals?: ServiceRoleMapping[];
   fkServiceRoleDepartment1rel?: Department;
+  principals?: ServiceRoleMapping[];
 }
 
 export class ServiceRole implements ServiceRoleInterface {
@@ -27,8 +27,8 @@ export class ServiceRole implements ServiceRoleInterface {
   "departmentId": string;
   "created-on": Date;
   "updated-on": Date;
-  principals: ServiceRoleMapping[];
   fkServiceRoleDepartment1rel: Department;
+  principals: ServiceRoleMapping[];
   constructor(data?: ServiceRoleInterface) {
     Object.assign(this, data);
   }
@@ -96,14 +96,6 @@ export class ServiceRole implements ServiceRoleInterface {
         },
       },
       relations: {
-        principals: {
-          name: 'principals',
-          type: 'ServiceRoleMapping[]',
-          model: 'ServiceRoleMapping',
-          relationType: 'hasMany',
-                  keyFrom: 'id',
-          keyTo: 'roleId'
-        },
         fkServiceRoleDepartment1rel: {
           name: 'fkServiceRoleDepartment1rel',
           type: 'Department',
@@ -111,6 +103,14 @@ export class ServiceRole implements ServiceRoleInterface {
           relationType: 'belongsTo',
                   keyFrom: 'departmentId',
           keyTo: 'id'
+        },
+        principals: {
+          name: 'principals',
+          type: 'ServiceRoleMapping[]',
+          model: 'ServiceRoleMapping',
+          relationType: 'hasMany',
+                  keyFrom: 'id',
+          keyTo: 'roleId'
         },
       }
     }

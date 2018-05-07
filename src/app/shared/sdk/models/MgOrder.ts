@@ -22,9 +22,9 @@ export interface MgOrderInterface {
   "created-on"?: Date;
   "updated-on"?: Date;
   fkOrderDevotee1rel?: Devotee;
+  fkTable1Devotee2rel?: Devotee;
   fkOrderOrderChannel1rel?: MgOrderChannel;
   fkTable1BookRequestStatus1rel?: MgOrderStatus;
-  fkTable1Devotee2rel?: Devotee;
 }
 
 export class MgOrder implements MgOrderInterface {
@@ -43,9 +43,9 @@ export class MgOrder implements MgOrderInterface {
   "created-on": Date;
   "updated-on": Date;
   fkOrderDevotee1rel: Devotee;
+  fkTable1Devotee2rel: Devotee;
   fkOrderOrderChannel1rel: MgOrderChannel;
   fkTable1BookRequestStatus1rel: MgOrderStatus;
-  fkTable1Devotee2rel: Devotee;
   constructor(data?: MgOrderInterface) {
     Object.assign(this, data);
   }
@@ -145,6 +145,14 @@ export class MgOrder implements MgOrderInterface {
                   keyFrom: 'servingDevoteeId',
           keyTo: 'id'
         },
+        fkTable1Devotee2rel: {
+          name: 'fkTable1Devotee2rel',
+          type: 'Devotee',
+          model: 'Devotee',
+          relationType: 'belongsTo',
+                  keyFrom: 'devoteeId',
+          keyTo: 'id'
+        },
         fkOrderOrderChannel1rel: {
           name: 'fkOrderOrderChannel1rel',
           type: 'MgOrderChannel',
@@ -159,14 +167,6 @@ export class MgOrder implements MgOrderInterface {
           model: 'MgOrderStatus',
           relationType: 'belongsTo',
                   keyFrom: 'orderStatusId',
-          keyTo: 'id'
-        },
-        fkTable1Devotee2rel: {
-          name: 'fkTable1Devotee2rel',
-          type: 'Devotee',
-          model: 'Devotee',
-          relationType: 'belongsTo',
-                  keyFrom: 'devoteeId',
           keyTo: 'id'
         },
       }

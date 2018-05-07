@@ -25,6 +25,7 @@ import { CatalogueModule } from './secure/matchless-gifts/catalogue/catalogue.mo
 import { MatchlessGiftsModule } from './secure/matchless-gifts/matchless-gifts.module';
 import { MessageService } from './shared/services/message.service';
 import { MyServicesService } from './shared/services/myServices.service';
+import { MyDepartmentsService } from './secure/organization/my-departments.service';
 import { GlobalEventsManager } from './shared/services/globalEventsManager.service';
 import { NotificationService } from './shared/services/notification.service';
 import { FormErrorService } from './shared/services/form.error.service';
@@ -89,6 +90,7 @@ export const MY_MOMENT_FORMATS = {
     AuthService,
     MessageService,
     MyServicesService,
+    MyDepartmentsService,
     GlobalEventsManager,
     NotificationService,
     FormErrorService,

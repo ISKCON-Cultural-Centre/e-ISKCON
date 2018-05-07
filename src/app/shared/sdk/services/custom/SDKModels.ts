@@ -1,37 +1,49 @@
 /* tslint:disable */
 import { Injectable } from '@angular/core';
-import { ServiceRole } from '../../models/ServiceRole';
-import { ServiceRoleMapping } from '../../models/ServiceRoleMapping';
-import { Circle } from '../../models/Circle';
-import { Devotee } from '../../models/Devotee';
-import { DevoteeEventCalendar } from '../../models/DevoteeEventCalendar';
-import { DevoteeKarmiFamily } from '../../models/DevoteeKarmiFamily';
-import { DonationTypeMaster } from '../../models/DonationTypeMaster';
-import { EventMaster } from '../../models/EventMaster';
-import { NewContact } from '../../models/NewContact';
-import { OutreachMaster } from '../../models/OutreachMaster';
-import { Payment } from '../../models/Payment';
-import { PaymentModeMaster } from '../../models/PaymentModeMaster';
-import { Pledge } from '../../models/Pledge';
-import { PledgePayment } from '../../models/PledgePayment';
-import { RelationshipMaster } from '../../models/RelationshipMaster';
-import { SpiritualLevelMaster } from '../../models/SpiritualLevelMaster';
-import { Temple } from '../../models/Temple';
-import { TempleBranch } from '../../models/TempleBranch';
-import { ElectronicAddress } from '../../models/ElectronicAddress';
-import { ElectronicAddressTypeMaster } from '../../models/ElectronicAddressTypeMaster';
-import { PhysicalAddress } from '../../models/PhysicalAddress';
-import { PhysicalAddressTypeMaster } from '../../models/PhysicalAddressTypeMaster';
 import { ApprovalArtefact } from '../../models/ApprovalArtefact';
 import { ApprovalQue } from '../../models/ApprovalQue';
 import { ApprovalRule } from '../../models/ApprovalRule';
+import { AsramaMaster } from '../../models/AsramaMaster';
+import { Circle } from '../../models/Circle';
 import { Department } from '../../models/Department';
-import { RoleTaskMaster } from '../../models/RoleTaskMaster';
-import { TaskMaster } from '../../models/TaskMaster';
+import { DepartmentAnnouncement } from '../../models/DepartmentAnnouncement';
+import { DepartmentCalendar } from '../../models/DepartmentCalendar';
+import { Devotee } from '../../models/Devotee';
+import { DevoteeAsrama } from '../../models/DevoteeAsrama';
+import { DevoteeElectronicAddress } from '../../models/DevoteeElectronicAddress';
+import { DevoteeEventCalendar } from '../../models/DevoteeEventCalendar';
+import { DevoteeEventMaster } from '../../models/DevoteeEventMaster';
+import { DevoteeGrouping } from '../../models/DevoteeGrouping';
+import { DevoteeKarmiFamily } from '../../models/DevoteeKarmiFamily';
+import { DevoteeLanguage } from '../../models/DevoteeLanguage';
+import { DevoteeService } from '../../models/DevoteeService';
+import { DevoteeServiceAvailability } from '../../models/DevoteeServiceAvailability';
+import { DevoteeServiceInterest } from '../../models/DevoteeServiceInterest';
+import { DevoteeSkill } from '../../models/DevoteeSkill';
+import { DevoteeSpiritualProgress } from '../../models/DevoteeSpiritualProgress';
+import { DonationCategoryMaster } from '../../models/DonationCategoryMaster';
+import { DonationReceipt } from '../../models/DonationReceipt';
+import { DonationTypeMaster } from '../../models/DonationTypeMaster';
+import { ElectronicAddress } from '../../models/ElectronicAddress';
+import { ElectronicAddressTypeMaster } from '../../models/ElectronicAddressTypeMaster';
+import { EventDonationItem } from '../../models/EventDonationItem';
+import { EventDonationMaster } from '../../models/EventDonationMaster';
+import { EventMaster } from '../../models/EventMaster';
+import { EventService } from '../../models/EventService';
+import { EventServiceMaster } from '../../models/EventServiceMaster';
+import { FestivalCalendar } from '../../models/FestivalCalendar';
+import { FestivalMaster } from '../../models/FestivalMaster';
+import { GothraMaster } from '../../models/GothraMaster';
+import { GroupMaster } from '../../models/GroupMaster';
+import { Guru } from '../../models/Guru';
+import { Language } from '../../models/Language';
+import { LookupTableDetail } from '../../models/LookupTableDetail';
+import { LookupTableMaster } from '../../models/LookupTableMaster';
 import { MgCreditNote } from '../../models/MgCreditNote';
 import { MgDeliveryNote } from '../../models/MgDeliveryNote';
-import { DevoteeElectronicAddress } from '../../models/DevoteeElectronicAddress';
+import { MgHsn } from '../../models/MgHsn';
 import { MgInvoice } from '../../models/MgInvoice';
+import { MgOrder } from '../../models/MgOrder';
 import { MgOrderChannel } from '../../models/MgOrderChannel';
 import { MgOrderLine } from '../../models/MgOrderLine';
 import { MgOrderReturn } from '../../models/MgOrderReturn';
@@ -52,34 +64,27 @@ import { MgTaxCategoryComponent } from '../../models/MgTaxCategoryComponent';
 import { MgTaxComponent } from '../../models/MgTaxComponent';
 import { MgTaxLine } from '../../models/MgTaxLine';
 import { MgUnitOfMeasure } from '../../models/MgUnitOfMeasure';
-import { Accesstoken } from '../../models/Accesstoken';
-import { AsramaMaster } from '../../models/AsramaMaster';
-import { DevoteeAsrama } from '../../models/DevoteeAsrama';
-import { DevoteeLanguage } from '../../models/DevoteeLanguage';
-import { DevoteeService } from '../../models/DevoteeService';
-import { DevoteeServiceAvailability } from '../../models/DevoteeServiceAvailability';
-import { DevoteeServiceInterest } from '../../models/DevoteeServiceInterest';
-import { DevoteeSkill } from '../../models/DevoteeSkill';
-import { DevoteeSpiritualProgress } from '../../models/DevoteeSpiritualProgress';
-import { DonationReceipt } from '../../models/DonationReceipt';
-import { FestivalCalendar } from '../../models/FestivalCalendar';
-import { FestivalMaster } from '../../models/FestivalMaster';
-import { Language } from '../../models/Language';
-import { MgHsn } from '../../models/MgHsn';
-import { MgOrder } from '../../models/MgOrder';
+import { NakshatraMaster } from '../../models/NakshatraMaster';
+import { NewContact } from '../../models/NewContact';
+import { OutreachMaster } from '../../models/OutreachMaster';
+import { Payment } from '../../models/Payment';
+import { PaymentModeMaster } from '../../models/PaymentModeMaster';
+import { PhysicalAddress } from '../../models/PhysicalAddress';
+import { PhysicalAddressTypeMaster } from '../../models/PhysicalAddressTypeMaster';
+import { Pledge } from '../../models/Pledge';
+import { PledgePayment } from '../../models/PledgePayment';
+import { ProfessionMaster } from '../../models/ProfessionMaster';
+import { RelationshipMaster } from '../../models/RelationshipMaster';
+import { RoleTaskMaster } from '../../models/RoleTaskMaster';
 import { ServiceArea } from '../../models/ServiceArea';
+import { ServiceRole } from '../../models/ServiceRole';
+import { ServiceRoleMapping } from '../../models/ServiceRoleMapping';
 import { Skill } from '../../models/Skill';
 import { SkillCategory } from '../../models/SkillCategory';
-import { LookupTableMaster } from '../../models/LookupTableMaster';
-import { LookupTableDetail } from '../../models/LookupTableDetail';
-import { LookupMaster } from '../../models/LookupMaster';
-import { GothraMaster } from '../../models/GothraMaster';
-import { NakshatraMaster } from '../../models/NakshatraMaster';
-import { ProfessionMaster } from '../../models/ProfessionMaster';
-import { DepartmentCalendar } from '../../models/DepartmentCalendar';
-import { DepartmentAnnouncement } from '../../models/DepartmentAnnouncement';
-import { GroupMaster } from '../../models/GroupMaster';
-import { DevoteeGrouping } from '../../models/DevoteeGrouping';
+import { SpiritualLevelMaster } from '../../models/SpiritualLevelMaster';
+import { TaskMaster } from '../../models/TaskMaster';
+import { Temple } from '../../models/Temple';
+import { TempleBranch } from '../../models/TempleBranch';
 
 export interface Models { [name: string]: any }
 
@@ -87,38 +92,50 @@ export interface Models { [name: string]: any }
 export class SDKModels {
 
   private models: Models = {
-    ServiceRole: ServiceRole,
-    ServiceRoleMapping: ServiceRoleMapping,
-    Circle: Circle,
-    Devotee: Devotee,
-    DevoteeEventCalendar: DevoteeEventCalendar,
-    DevoteeKarmiFamily: DevoteeKarmiFamily,
-    DonationTypeMaster: DonationTypeMaster,
-    EventMaster: EventMaster,
-    NewContact: NewContact,
-    OutreachMaster: OutreachMaster,
-    Payment: Payment,
-    PaymentModeMaster: PaymentModeMaster,
-    Pledge: Pledge,
-    PledgePayment: PledgePayment,
-    RelationshipMaster: RelationshipMaster,
-    SpiritualLevelMaster: SpiritualLevelMaster,
-    Temple: Temple,
-    TempleBranch: TempleBranch,
-    ElectronicAddress: ElectronicAddress,
-    ElectronicAddressTypeMaster: ElectronicAddressTypeMaster,
-    PhysicalAddress: PhysicalAddress,
-    PhysicalAddressTypeMaster: PhysicalAddressTypeMaster,
     ApprovalArtefact: ApprovalArtefact,
     ApprovalQue: ApprovalQue,
     ApprovalRule: ApprovalRule,
+    AsramaMaster: AsramaMaster,
+    Circle: Circle,
     Department: Department,
-    RoleTaskMaster: RoleTaskMaster,
-    TaskMaster: TaskMaster,
+    DepartmentAnnouncement: DepartmentAnnouncement,
+    DepartmentCalendar: DepartmentCalendar,
+    Devotee: Devotee,
+    DevoteeAsrama: DevoteeAsrama,
+    DevoteeElectronicAddress: DevoteeElectronicAddress,
+    DevoteeEventCalendar: DevoteeEventCalendar,
+    DevoteeEventMaster: DevoteeEventMaster,
+    DevoteeGrouping: DevoteeGrouping,
+    DevoteeKarmiFamily: DevoteeKarmiFamily,
+    DevoteeLanguage: DevoteeLanguage,
+    DevoteeService: DevoteeService,
+    DevoteeServiceAvailability: DevoteeServiceAvailability,
+    DevoteeServiceInterest: DevoteeServiceInterest,
+    DevoteeSkill: DevoteeSkill,
+    DevoteeSpiritualProgress: DevoteeSpiritualProgress,
+    DonationCategoryMaster: DonationCategoryMaster,
+    DonationReceipt: DonationReceipt,
+    DonationTypeMaster: DonationTypeMaster,
+    ElectronicAddress: ElectronicAddress,
+    ElectronicAddressTypeMaster: ElectronicAddressTypeMaster,
+    EventDonationItem: EventDonationItem,
+    EventDonationMaster: EventDonationMaster,
+    EventMaster: EventMaster,
+    EventService: EventService,
+    EventServiceMaster: EventServiceMaster,
+    FestivalCalendar: FestivalCalendar,
+    FestivalMaster: FestivalMaster,
+    GothraMaster: GothraMaster,
+    GroupMaster: GroupMaster,
+    Guru: Guru,
+    Language: Language,
+    LookupTableDetail: LookupTableDetail,
+    LookupTableMaster: LookupTableMaster,
     MgCreditNote: MgCreditNote,
     MgDeliveryNote: MgDeliveryNote,
-    DevoteeElectronicAddress: DevoteeElectronicAddress,
+    MgHsn: MgHsn,
     MgInvoice: MgInvoice,
+    MgOrder: MgOrder,
     MgOrderChannel: MgOrderChannel,
     MgOrderLine: MgOrderLine,
     MgOrderReturn: MgOrderReturn,
@@ -139,34 +156,27 @@ export class SDKModels {
     MgTaxComponent: MgTaxComponent,
     MgTaxLine: MgTaxLine,
     MgUnitOfMeasure: MgUnitOfMeasure,
-    Accesstoken: Accesstoken,
-    AsramaMaster: AsramaMaster,
-    DevoteeAsrama: DevoteeAsrama,
-    DevoteeLanguage: DevoteeLanguage,
-    DevoteeService: DevoteeService,
-    DevoteeServiceAvailability: DevoteeServiceAvailability,
-    DevoteeServiceInterest: DevoteeServiceInterest,
-    DevoteeSkill: DevoteeSkill,
-    DevoteeSpiritualProgress: DevoteeSpiritualProgress,
-    DonationReceipt: DonationReceipt,
-    FestivalCalendar: FestivalCalendar,
-    FestivalMaster: FestivalMaster,
-    Language: Language,
-    MgHsn: MgHsn,
-    MgOrder: MgOrder,
+    NakshatraMaster: NakshatraMaster,
+    NewContact: NewContact,
+    OutreachMaster: OutreachMaster,
+    Payment: Payment,
+    PaymentModeMaster: PaymentModeMaster,
+    PhysicalAddress: PhysicalAddress,
+    PhysicalAddressTypeMaster: PhysicalAddressTypeMaster,
+    Pledge: Pledge,
+    PledgePayment: PledgePayment,
+    ProfessionMaster: ProfessionMaster,
+    RelationshipMaster: RelationshipMaster,
+    RoleTaskMaster: RoleTaskMaster,
     ServiceArea: ServiceArea,
+    ServiceRole: ServiceRole,
+    ServiceRoleMapping: ServiceRoleMapping,
     Skill: Skill,
     SkillCategory: SkillCategory,
-    LookupTableMaster: LookupTableMaster,
-    LookupTableDetail: LookupTableDetail,
-    LookupMaster: LookupMaster,
-    GothraMaster: GothraMaster,
-    NakshatraMaster: NakshatraMaster,
-    ProfessionMaster: ProfessionMaster,
-    DepartmentCalendar: DepartmentCalendar,
-    DepartmentAnnouncement: DepartmentAnnouncement,
-    GroupMaster: GroupMaster,
-    DevoteeGrouping: DevoteeGrouping,
+    SpiritualLevelMaster: SpiritualLevelMaster,
+    TaskMaster: TaskMaster,
+    Temple: Temple,
+    TempleBranch: TempleBranch,
     
   };
 
