@@ -29,10 +29,10 @@ export class EventCalendarComponent implements OnInit {
 
   ngOnInit() {
 
-        this.departments = this.authService.getMyDepartments.map(function (department) {
+/*         this.departments = this.authService.getMyDepartments.map(function (department) {
           return department.id;
-         });
-        console.log(this.departments);
+         }); */
+       // console.log(this.departments);
 
           //console.log(this.departments);
         this.eventService.getCurrentEvents().subscribe(events => {

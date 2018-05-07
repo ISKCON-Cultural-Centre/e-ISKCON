@@ -1,14 +1,16 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {DashboardCard} from './cards/dashboard-card';
 import {Observable} from 'rxjs/Observable';
 import {DashboardCardsService} from './dashboard-cards.service';
 import {ObservableMedia} from '@angular/flex-layout';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/startWith';
+import { Subscription } from 'rxjs/Subscription';
 
 import {DashboardUsersComponent} from './cards/dashboard-users/dashboard-users.component';
 import { EventCalendarComponent } from './../../secure/organization/event-calendar.component';
 import { MyServicesComponent } from '../../secure/my-services/my-services.component';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -16,7 +18,9 @@ import { MyServicesComponent } from '../../secure/my-services/my-services.compon
   styleUrls: ['./dashboard.component.scss'],
   entryComponents: [DashboardUsersComponent]
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
+
+  one$ = new Subscription();
 
   cards: DashboardCard[] = [];
   cols: Observable<number>;
@@ -25,7 +29,7 @@ export class DashboardComponent implements OnInit {
 
   constructor(private cardsService: DashboardCardsService,
               private observableMedia: ObservableMedia) {
-    this.cardsService.cards.subscribe(cards => {
+    this.one$ = this.cardsService.cards.subscribe(cards => {
       this.cards = cards;
     });
   }
@@ -85,7 +89,10 @@ export class DashboardComponent implements OnInit {
       .map(change => {
         return cols_map_sml.get(change.mqAlias);
       }).startWith(start_cols_sml);
-    this.createCards();
+
+      if (this.cards.length === 0 ) {
+        this.createCards();
+      }
   }
 
   createCards(): void {
@@ -149,354 +156,10 @@ export class DashboardComponent implements OnInit {
         }, MyServicesComponent
       )
     );
-/*     this.cardsService.addCard(
-      new DashboardCard(
-        {
-          name: {
-            key: DashboardCard.metadata.NAME,
-            value: 'users'
-          },
-          routerLink: {
-            key: DashboardCard.metadata.ROUTERLINK,
-            value: '/dashboard/users'
-          },
-          iconClass: {
-            key: DashboardCard.metadata.ICONCLASS,
-            value: 'fa-users'
-          },
-          cols: {
-            key: DashboardCard.metadata.COLS,
-            value: this.cols_sml
-          },
-          rows: {
-            key: DashboardCard.metadata.ROWS,
-            value: this.cols_sml
-          },
-          color: {
-            key: DashboardCard.metadata.COLOR,
-            value: 'blue'
-          }
-        }, DashboardUsersComponent
-      )
-    );
-    this.cardsService.addCard(
-      new DashboardCard(
-        {
-          name: {
-            key: DashboardCard.metadata.NAME,
-            value: 'users'
-          },
-          routerLink: {
-            key: DashboardCard.metadata.ROUTERLINK,
-            value: '/dashboard/users'
-          },
-          iconClass: {
-            key: DashboardCard.metadata.ICONCLASS,
-            value: 'fa-users'
-          },
-          cols: {
-            key: DashboardCard.metadata.COLS,
-            value: this.cols_sml
-          },
-          rows: {
-            key: DashboardCard.metadata.ROWS,
-            value: this.cols_sml
-          },
-          color: {
-            key: DashboardCard.metadata.COLOR,
-            value: 'blue'
-          }
-        }, DashboardUsersComponent
-      )
-    );
-    this.cardsService.addCard(
-      new DashboardCard(
-        {
-          name: {
-            key: DashboardCard.metadata.NAME,
-            value: 'users'
-          },
-          routerLink: {
-            key: DashboardCard.metadata.ROUTERLINK,
-            value: '/dashboard/users'
-          },
-          iconClass: {
-            key: DashboardCard.metadata.ICONCLASS,
-            value: 'fa-users'
-          },
-          cols: {
-            key: DashboardCard.metadata.COLS,
-            value: this.cols_big
-          },
-          rows: {
-            key: DashboardCard.metadata.ROWS,
-            value: this.cols_sml
-          },
-          color: {
-            key: DashboardCard.metadata.COLOR,
-            value: 'blue'
-          }
-        }, DashboardUsersComponent
-      )
-    );
-    this.cardsService.addCard(
-      new DashboardCard(
-        {
-          name: {
-            key: DashboardCard.metadata.NAME,
-            value: 'users'
-          },
-          routerLink: {
-            key: DashboardCard.metadata.ROUTERLINK,
-            value: '/dashboard/users'
-          },
-          iconClass: {
-            key: DashboardCard.metadata.ICONCLASS,
-            value: 'fa-users'
-          },
-          cols: {
-            key: DashboardCard.metadata.COLS,
-            value: this.cols_big
-          },
-          rows: {
-            key: DashboardCard.metadata.ROWS,
-            value: this.cols_sml
-          },
-          color: {
-            key: DashboardCard.metadata.COLOR,
-            value: 'blue'
-          }
-        }, DashboardUsersComponent
-      )
-    );
-    this.cardsService.addCard(
-      new DashboardCard(
-        {
-          name: {
-            key: DashboardCard.metadata.NAME,
-            value: 'users'
-          },
-          routerLink: {
-            key: DashboardCard.metadata.ROUTERLINK,
-            value: '/dashboard/users'
-          },
-          iconClass: {
-            key: DashboardCard.metadata.ICONCLASS,
-            value: 'fa-users'
-          },
-          cols: {
-            key: DashboardCard.metadata.COLS,
-            value: this.cols_big
-          },
-          rows: {
-            key: DashboardCard.metadata.ROWS,
-            value: this.cols_sml
-          },
-          color: {
-            key: DashboardCard.metadata.COLOR,
-            value: 'blue'
-          }
-        }, DashboardUsersComponent
-      )
-    );
-    this.cardsService.addCard(
-      new DashboardCard(
-        {
-          name: {
-            key: DashboardCard.metadata.NAME,
-            value: 'users'
-          },
-          routerLink: {
-            key: DashboardCard.metadata.ROUTERLINK,
-            value: '/dashboard/users'
-          },
-          iconClass: {
-            key: DashboardCard.metadata.ICONCLASS,
-            value: 'fa-users'
-          },
-          cols: {
-            key: DashboardCard.metadata.COLS,
-            value: this.cols_sml
-          },
-          rows: {
-            key: DashboardCard.metadata.ROWS,
-            value: this.cols_sml
-          },
-          color: {
-            key: DashboardCard.metadata.COLOR,
-            value: 'blue'
-          }
-        }, DashboardUsersComponent
-      )
-    );
-    this.cardsService.addCard(
-      new DashboardCard(
-        {
-          name: {
-            key: DashboardCard.metadata.NAME,
-            value: 'users'
-          },
-          routerLink: {
-            key: DashboardCard.metadata.ROUTERLINK,
-            value: '/dashboard/users'
-          },
-          iconClass: {
-            key: DashboardCard.metadata.ICONCLASS,
-            value: 'fa-users'
-          },
-          cols: {
-            key: DashboardCard.metadata.COLS,
-            value: this.cols_sml
-          },
-          rows: {
-            key: DashboardCard.metadata.ROWS,
-            value: this.cols_sml
-          },
-          color: {
-            key: DashboardCard.metadata.COLOR,
-            value: 'blue'
-          }
-        }, DashboardUsersComponent
-      )
-    );
-    this.cardsService.addCard(
-      new DashboardCard(
-        {
-          name: {
-            key: DashboardCard.metadata.NAME,
-            value: 'users'
-          },
-          routerLink: {
-            key: DashboardCard.metadata.ROUTERLINK,
-            value: '/dashboard/users'
-          },
-          iconClass: {
-            key: DashboardCard.metadata.ICONCLASS,
-            value: 'fa-users'
-          },
-          cols: {
-            key: DashboardCard.metadata.COLS,
-            value: this.cols_sml
-          },
-          rows: {
-            key: DashboardCard.metadata.ROWS,
-            value: this.cols_sml
-          },
-          color: {
-            key: DashboardCard.metadata.COLOR,
-            value: 'blue'
-          }
-        }, DashboardUsersComponent
-      )
-    );
-    this.cardsService.addCard(
-      new DashboardCard(
-        {
-          name: {
-            key: DashboardCard.metadata.NAME,
-            value: 'users'
-          },
-          routerLink: {
-            key: DashboardCard.metadata.ROUTERLINK,
-            value: '/dashboard/users'
-          },
-          iconClass: {
-            key: DashboardCard.metadata.ICONCLASS,
-            value: 'fa-users'
-          },
-          cols: {
-            key: DashboardCard.metadata.COLS,
-            value: this.cols_sml
-          },
-          rows: {
-            key: DashboardCard.metadata.ROWS,
-            value: this.cols_sml
-          },
-          color: {
-            key: DashboardCard.metadata.COLOR,
-            value: 'blue'
-          }
-        }, DashboardUsersComponent
-      )
-    );
-    this.cardsService.addCard(
-      new DashboardCard(
-        {
-          name: {
-            key: DashboardCard.metadata.NAME,
-            value: 'users'
-          },
-          routerLink: {
-            key: DashboardCard.metadata.ROUTERLINK,
-            value: '/dashboard/users'
-          },
-          iconClass: {
-            key: DashboardCard.metadata.ICONCLASS,
-            value: 'fa-users'
-          },
-          cols: {
-            key: DashboardCard.metadata.COLS,
-            value: this.cols_sml
-          },
-          rows: {
-            key: DashboardCard.metadata.ROWS,
-            value: this.cols_sml
-          },
-          color: {
-            key: DashboardCard.metadata.COLOR,
-            value: 'blue'
-          }
-        }, DashboardUsersComponent
-      )
-    );
-    this.cardsService.addCard(
-      new DashboardCard(
-        {
-          name: {
-            key: DashboardCard.metadata.NAME,
-            value: 'users'
-          },
-          routerLink: {
-            key: DashboardCard.metadata.ROUTERLINK,
-            value: '/dashboard/users'
-          },
-          iconClass: {
-            key: DashboardCard.metadata.ICONCLASS,
-            value: 'fa-users'
-          },
-          cols: {
-            key: DashboardCard.metadata.COLS,
-            value: this.cols_sml
-          },
-          rows: {
-            key: DashboardCard.metadata.ROWS,
-            value: this.cols_sml
-          },
-          color: {
-            key: DashboardCard.metadata.COLOR,
-            value: 'blue'
-          }
-        }, DashboardUsersComponent
-      )
-    ); */
   }
 
-}
-
-/* import { Component, OnInit } from '@angular/core';
-
-@Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
-})
-export class DashboardComponent implements OnInit {
-
-  constrtilesuctor() { }
-
-  ngOnInit() {
-  }
+  ngOnDestroy(){
+    this.one$.unsubscribe();
+   }  
 
 }
-
- */

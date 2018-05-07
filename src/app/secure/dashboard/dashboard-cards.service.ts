@@ -17,4 +17,5 @@ export class DashboardCardsService {
   get cards(): BehaviorSubject<DashboardCard[]> {
     return this._cards;
   }
+
 }

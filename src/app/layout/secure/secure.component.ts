@@ -55,7 +55,7 @@ export class SecureComponent implements OnInit {
             this.devoteeName$ = this.authService.getDevoteeName;
             //console.log(this.username.);
             this.isLoggedIn$ = this.authService.isLoggedIn;
-            // this.getAuthorizedDepartments();
+            //this.getAuthorizedDepartments();
             this.getAuthorizedTasks();
         } else {}
       });

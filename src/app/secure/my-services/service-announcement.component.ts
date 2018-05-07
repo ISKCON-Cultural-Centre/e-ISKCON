@@ -97,7 +97,6 @@ export class ServiceAnnouncementComponent implements OnInit, OnDestroy {
   }
 
   loadDepartments() {
-    //this.departments = this.authService.departments;
      this.loopBackFilter.where = {'departmentLeaderDevoteeId': this.authService.getCurrentUserId()};
     this.loopBackFilter.include = ['fkDepartmentDevotee1rel', 'announcements'];
     this.loopBackFilter.order = ['departmentName ASC'];
@@ -105,10 +104,8 @@ export class ServiceAnnouncementComponent implements OnInit, OnDestroy {
     .subscribe(
       departments => {
         this.departments = departments;
-        //console.log('departments');
-        //console.log(departments);
       }
-    ) 
+    )
   }
 
 

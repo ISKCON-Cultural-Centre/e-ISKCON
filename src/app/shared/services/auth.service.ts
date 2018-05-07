@@ -25,7 +25,7 @@ export class AuthService extends LoopBackAuth implements OnDestroy {
   // Create a stream of logged in status to communicate throughout app
   loggedIn$ = new BehaviorSubject<Boolean>(false);
   loggedIn: Boolean = false;
-  departments: Department[] = [];
+  departments = new BehaviorSubject<Department[]>([]);
   public devoteeName = new BehaviorSubject<string>('');
 
     constructor(
@@ -40,7 +40,7 @@ export class AuthService extends LoopBackAuth implements OnDestroy {
         if (this.devoteeApi.isAuthenticated()) {
             this.setLoggedIn(true);
             this.decode(this.getCurrentUserData());
-            this.loadDepartments();
+            this.loadDepartments(this.getCurrentUserId());
         }
     }
 
@@ -73,12 +73,7 @@ export class AuthService extends LoopBackAuth implements OnDestroy {
             this.loggedIn = true;
             this.decode(token.user);
             this.notificationService.notificationSubject.next('Login Successful');
-            this.loopBackFilter.where = {'departmentLeaderDevoteeId': token.userId};
-            this.two$ = this.departmentApi.find<Department>(this.loopBackFilter).subscribe(
-              departments => {
-                this.departments = departments;
-              }
-            )
+            this.loadDepartments(this.getCurrentUserId());
           }, err => {
             this.setLoggedIn(false);
             this.notificationService.notificationSubject.next('Login Failed');
@@ -104,17 +99,17 @@ export class AuthService extends LoopBackAuth implements OnDestroy {
         return this.devoteeApi.changePassword(changePassword.oldPassword, changePassword.newPassword );
       }
 
-      loadDepartments() {
-        this.loopBackFilter.where = {'departmentLeaderDevoteeId': this.getCurrentUserId()};
+      loadDepartments(currentUserId: string) {
+        this.loopBackFilter.where = {'departmentLeaderDevoteeId': currentUserId};
         this.two$ = this.departmentApi.find<Department>(this.loopBackFilter).subscribe(
           departments => {
-            this.departments = departments;
+            this.departments.next(departments);
           }
         )
       }
 
       get getMyDepartments() {
-        return this.departments;
+        return this.departments.asObservable();
     }
 
       ngOnDestroy(){

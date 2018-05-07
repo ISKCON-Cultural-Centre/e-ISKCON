@@ -11,6 +11,7 @@ import { SharedComponentsModule } from '../../shared/components/shared-component
 import { InlineEditComponent } from '../../shared/components/inline-edit/inline-edit.component';
 import { DialogBoxComponent } from '../../shared/components/dialog-box/dialog-box.component';
 import { AuthService, NotificationService } from '../../shared/services';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-service-calendar-entry',
@@ -22,7 +23,8 @@ export class ServiceCalendarEntryComponent  implements OnInit, OnDestroy {
 
   one$ = new Subscription();
 
-  departments: Department[] = [];
+  //departments: Observable<Department[]>;
+  departments: Department[];
 
   loopBackFilter: LoopBackFilter = {};
 
@@ -50,7 +52,6 @@ export class ServiceCalendarEntryComponent  implements OnInit, OnDestroy {
     }
 
   ngOnInit() {
-    console.log( this.authService.getCurrentUserId());
     this.loadDepartments();
   }
 
@@ -64,7 +65,6 @@ export class ServiceCalendarEntryComponent  implements OnInit, OnDestroy {
       allDayInd: [0, Validators.required],
       publicInd: [0, Validators.required],
     });
-    
   }
 
 
@@ -84,23 +84,31 @@ export class ServiceCalendarEntryComponent  implements OnInit, OnDestroy {
   deleteDepartmentEvent(department: Department, calendar: DepartmentCalendar) {
     this.departmentCalendarApi.deleteById(calendar.id)
     .subscribe(result => {
-      const departmentIndex = this.departments.indexOf(department);
+/*       const departmentIndex = this.departments.indexOf(department);
       if (departmentIndex !== -1) {
         const eventIndex = this.departments[departmentIndex].events.indexOf(calendar);
         if (eventIndex !== -1) {
           this.departments[departmentIndex].events.splice(eventIndex, 1);
         }
-      }
+      } */
       this.notificationService.notificationSubject.next('Event ' + '"' + calendar.eventName + '" deleted successfully');
       }
     );
   }
 
   loadDepartments() {
-    this.departments = this.authService.getMyDepartments;
-    console.log(this.departments);
+    this.loopBackFilter.where = {'departmentLeaderDevoteeId': this.authService.getCurrentUserId()};
+    this.loopBackFilter.order = ['departmentName ASC'];
+    this.departmentApi.find<Department>(this.loopBackFilter)
+    .subscribe(
+     departments => {
+       this.departments = departments;
+       console.log(this.departments);
+       console.log(this.authService.getCurrentUserId());
+     }
+    )
+ }
 
-  }
 
 
   cancel() {
