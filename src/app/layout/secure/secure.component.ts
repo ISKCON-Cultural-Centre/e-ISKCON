@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BASE_URL, API_VERSION } from '../../shared/base.url';
 import { LoopBackConfig } from '../../shared/sdk';
 import { MatSnackBar, MatRadioButton, MatRadioGroup } from '@angular/material';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { RouterModule, Routes, RouterLink } from '@angular/router';
-
+import { Subscription } from 'rxjs/Subscription';
+import {LoopBackFilter} from '../../shared/sdk/models/BaseModels';
 import { NotificationService } from '../../shared/services/notification.service';
 import { AuthService } from '../../shared/services/auth.service';
 
-import { Department, TaskMaster } from '../../shared/sdk/models';
+import { Department, DepartmentApi, TaskMaster, } from '../../shared/sdk/';
 import { MyServicesService } from '../../shared/services/myServices.service';
 import { BreadcrumbComponent } from '../../secure/common/breadcrumb.component';
 
@@ -18,7 +20,8 @@ import { BreadcrumbComponent } from '../../secure/common/breadcrumb.component';
   templateUrl: './secure.component.html',
   styleUrls: ['./secure.component.css']
 })
-export class SecureComponent implements OnInit {
+export class SecureComponent implements OnInit, OnDestroy {
+  one$ = new Subscription();
 
   mode = new FormControl('over');
 
@@ -30,10 +33,12 @@ export class SecureComponent implements OnInit {
   devoteeName$: Observable <String>;
   username: String = '';
   userId: String = null;
+  loopBackFilter: LoopBackFilter = {};
 
   constructor(private notificationService: NotificationService,
     private authService: AuthService,
     private myServicesService: MyServicesService,
+    private departmentApi: DepartmentApi,
     private snackBar: MatSnackBar)
     {
 
@@ -51,11 +56,11 @@ export class SecureComponent implements OnInit {
         isLoggedIn => {
           this.isLoggedIn = isLoggedIn;
           if (isLoggedIn) {
-            this.username = this.authService.getCurrentUserData();
+            this.userId = this.authService.getCurrentUserId();
             this.devoteeName$ = this.authService.getDevoteeName;
             //console.log(this.username.);
             this.isLoggedIn$ = this.authService.isLoggedIn;
-            //this.getAuthorizedDepartments();
+            this.getAuthorizedDepartments(this.userId);
             this.getAuthorizedTasks();
         } else {}
       });
@@ -69,10 +74,15 @@ export class SecureComponent implements OnInit {
   
   
    
-    getAuthorizedDepartments(): void {
-      this.myServicesService.getAuthorizedDepartments()
-        .subscribe(departments => { this.myDepartments = departments;
-        });
+    getAuthorizedDepartments(currentUserId: String): void {
+      this.loopBackFilter.where = {'departmentLeaderDevoteeId': currentUserId};
+      this.one$ = this.departmentApi.find<Department>(this.loopBackFilter).subscribe(
+        departments => {
+          console.log(currentUserId);
+          console.log(departments);
+          this.myDepartments = departments;
+        }
+      )
     }
 
     getAuthorizedTasks(): void {
@@ -82,5 +92,9 @@ export class SecureComponent implements OnInit {
         });
     }
 
+    ngOnDestroy(){
+      this.one$.unsubscribe();
+
+    }
 
 }

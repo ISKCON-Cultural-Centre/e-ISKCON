@@ -24,10 +24,10 @@ export class ServiceCalendarEntryComponent  implements OnInit, OnDestroy {
   one$ = new Subscription();
 
   //departments: Observable<Department[]>;
-  departments: Department[];
-
+  departments: Department[] = [];
+  newEvent: boolean;
   loopBackFilter: LoopBackFilter = {};
-
+  userId: String = null;
 
   eventForm: FormGroup;
 
@@ -45,18 +45,35 @@ export class ServiceCalendarEntryComponent  implements OnInit, OnDestroy {
      //console.log(data.start.format());
 
       this.createForm();
-        if (data.start) {
+      this.newEvent = data.newEvent;
+      if (!data.newEvent) {
+          this.eventForm.get('startTime').setValue(data.event.start.format());
+          this.eventForm.get('endTime').setValue(data.event.end.format());
+          this.eventForm.get('eventName').setValue(data.event.title);
+          this.eventForm.get('eventDescription').setValue(data.event.description);
+          this.eventForm.get('id').setValue(data.event.id);
+          this.eventForm.get('departmentId').setValue(data.event.departmentId);
+        } else {
           this.eventForm.get('startTime').setValue(data.start.format());
           this.eventForm.get('endTime').setValue(data.end.format());
         }
     }
 
   ngOnInit() {
-    this.loadDepartments();
+    this.authService.isLoggedIn
+    .subscribe(
+      isLoggedIn => {
+        if (isLoggedIn) {
+          this.userId = this.authService.getCurrentUserId();
+          this.loadDepartments(this.userId);
+      } else {}
+    });    
+
   }
 
   createForm() {
     this.eventForm = this.fb.group({
+      id: [null],
       eventName: [null, Validators.required],
       departmentId: [null, Validators.required],
       eventDescription: [null, Validators.required],
@@ -67,6 +84,14 @@ export class ServiceCalendarEntryComponent  implements OnInit, OnDestroy {
     });
   }
 
+  addEditDepartmentEvent() {
+    if (this.newEvent) {
+      this.addDepartmentEvent();
+    } else {
+      this.updateDepartmentEvent();
+    }
+
+  }
 
   addDepartmentEvent() {
     this.one$ = this.departmentCalendarApi.create<DepartmentCalendar>(
@@ -80,6 +105,15 @@ export class ServiceCalendarEntryComponent  implements OnInit, OnDestroy {
     );
   }
 
+  updateDepartmentEvent() {
+    this.one$ = this.departmentCalendarApi.patchAttributes(this.eventForm.get('id').value, this.eventForm.value)
+    .subscribe(result => {
+      //console.log(result.subject);
+      this.notificationService.notificationSubject.next('"' + result.eventName + '" updated successfully');
+      this.dialogRef.close(result);
+      }
+    );
+  }
 
   deleteDepartmentEvent(department: Department, calendar: DepartmentCalendar) {
     this.departmentCalendarApi.deleteById(calendar.id)
@@ -96,17 +130,17 @@ export class ServiceCalendarEntryComponent  implements OnInit, OnDestroy {
     );
   }
 
-  loadDepartments() {
-    this.loopBackFilter.where = {'departmentLeaderDevoteeId': this.authService.getCurrentUserId()};
-    this.loopBackFilter.order = ['departmentName ASC'];
-    this.departmentApi.find<Department>(this.loopBackFilter)
-    .subscribe(
+
+  loadDepartments(currentUserId: String) {
+    console.log('loadDepartments' + currentUserId);
+   this.loopBackFilter.where = {'departmentLeaderDevoteeId': currentUserId};
+   this.loopBackFilter.order = ['departmentName ASC'];
+   this.departmentApi.find<Department>(this.loopBackFilter)
+   .subscribe(
      departments => {
        this.departments = departments;
-       console.log(this.departments);
-       console.log(this.authService.getCurrentUserId());
      }
-    )
+   )
  }
 
 
@@ -116,7 +150,19 @@ export class ServiceCalendarEntryComponent  implements OnInit, OnDestroy {
   }
 
   close() {
-    this.dialogRef.close();
+    this.dialogRef.close({ data: 
+        {
+          id: this.eventForm.get('id').value,
+          title: this.eventForm.get('eventName').value,
+          description: this.eventForm.get('eventDescription').value,
+          start: this.eventForm.get('startTime').value,
+          end: this.eventForm.get('endTime').value,
+          departmentId: this.eventForm.get('departmentId').value,
+          allDay: this.eventForm.get('allDayInd').value,
+          publicInd: this.eventForm.get('publicInd').value
+        }
+      }
+    );
   }
 
 

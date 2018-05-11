@@ -14,6 +14,7 @@ import { FullCalendarModule } from 'ng-fullcalendar';
 import { EventService } from './event-calendar.service';
 //import { MyDepartmentsService } from './my-departments.service';
 import { ServiceCalendarEntryComponent} from '../my-services/service-calendar-entry.component';
+import { AuthService } from '../../shared/services/index';
 
 
 @NgModule({
@@ -26,7 +27,7 @@ import { ServiceCalendarEntryComponent} from '../my-services/service-calendar-en
     TaskMasterComponent, ServiceMasterComponent, 
     RoleTaskComponent, EventCalendarComponent,
   ],
-  providers: [ EventService,  ],
+  providers: [ EventService, ],
   entryComponents: [
     ServiceCalendarEntryComponent
   ]

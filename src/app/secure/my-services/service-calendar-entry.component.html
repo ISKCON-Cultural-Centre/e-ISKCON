@@ -1,5 +1,5 @@
 <div fxLayout="row" fxLayoutAlign="space-sevenly stretch">
-      <form class="event-entry" [formGroup]="eventForm" (ngSubmit)="addDepartmentEvent()" novalidate   >   
+      <form class="event-entry" [formGroup]="eventForm" (ngSubmit)="addEditDepartmentEvent()" novalidate   >   
         <fieldset fxLayout="row" fxLayoutAlign="space-evenly stretch">
           <legend>Create an Event</legend>
 
@@ -37,7 +37,9 @@
               Public Event ?
             </mat-checkbox>         
 
-            <button [disabled]="eventForm.invalid" type="submit"  mat-raised-button color="primary">Add Event
+            <button *ngIf="newEvent" [disabled]="eventForm.invalid" type="submit"  mat-raised-button color="primary">Add Event
+            </button>
+            <button *ngIf="!newEvent" [disabled]="eventForm.invalid" type="submit"  mat-raised-button color="primary">Edit Event
             </button>
             <button  type="button" (click) = 'cancel()'  mat-raised-button color="warn">
               Cancel

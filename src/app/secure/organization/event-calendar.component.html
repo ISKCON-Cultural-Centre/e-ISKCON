@@ -6,19 +6,20 @@
         <div *ngIf="calendarOptions">
             <ng-fullcalendar #ucCalendar 
             [options]="calendarOptions" 
-            (eventClick)="eventClick($event.detail)" 
+            (eventClick)="eventClick(false, $event.detail)" 
             (eventDrop)="updateEvent($event.detail)"
             (eventResize)="updateEvent($event.detail)" 
             (clickButton)="clickButton($event.detail)"
-            (select)="select($event.detail)"
+            (select)="select(true,$event.detail)"
             (unselect)="unselect($event.detail)"
             (dayClick)="dayClick($event.detail)"
             (navLinkDayClick)="navLinkDayClick($event.detail)"
-            (navLinkWeekClick)="navLinkWeekClick($event.detail)">
+            (navLinkWeekClick)="navLinkWeekClick($event.detail)"
+            (eventMouseover) = "eventMouseover($event.detail)">
         </ng-fullcalendar>
         </div>
         <mat-card-actions fxFlex>
-            <button mat-raised-button color="primary" (click)="openAddEventDialog()">Add an Event</button>
+            <button mat-raised-button color="primary" (click)="openEventDialog(true)">Add an Event</button>
           </mat-card-actions>
       </mat-card-content>
     <mat-card-footer>

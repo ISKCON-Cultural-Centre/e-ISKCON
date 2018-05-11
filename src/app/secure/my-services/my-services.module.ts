@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { OwlDateTimeModule, OWL_DATE_TIME_FORMATS } from 'ng-pick-datetime';
+import { OwlDateTimeModule, OWL_DATE_TIME_FORMATS, OWL_DATE_TIME_LOCALE } from 'ng-pick-datetime';
 import { OwlMomentDateTimeModule } from 'ng-pick-datetime-moment';
 
 import { MaterialModule } from '../../material.module';
@@ -28,6 +28,7 @@ import { AnnouncementListService } from './announcement-list-service';
   declarations: [MyServicesComponent, ServiceCalendarEntryComponent, ServiceAnnouncementComponent, AnnouncementListComponent],
   providers: [
     AnnouncementListService,
+    //{provide: OWL_DATE_TIME_LOCALE, useValue: 'en-SG'}
   ],
 })
 export class MyServicesModule { }

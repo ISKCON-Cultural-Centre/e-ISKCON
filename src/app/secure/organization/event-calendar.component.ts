@@ -43,14 +43,27 @@ export class EventCalendarComponent implements OnInit {
               allDay: event.allDayInd === 0 ? false : true,
               start: event.startTime,
               end: event.endTime,
-              color: 'blue' //event.departmentId
+              color: 'blue',
+              //event.departmentId
+              description: event.eventDescription,
+              departmentId: event.departmentId
             };
           });
+          
           this.calendarOptions = {
+            timezone: 'Asia/Kolkata',
             selectable: true,
             selectHelper: true,
             editable: true,
-            eventLimit: false,
+            eventLimit: true,
+            views: {
+              agenda: {
+                eventLimit: 5 // adjust only for agendaWeek/agendaDay
+              },
+              month: {
+                eventLimit: 3 // adjust only for month
+              },
+            },
             //unselectCancel: '.event-entry',
             header: {
               left: 'prev,next today',
@@ -59,7 +72,6 @@ export class EventCalendarComponent implements OnInit {
             },
             events: calendarEvents
           };
-          //console.log(calendarEvents);
         });
   }
 
@@ -68,20 +80,10 @@ export class EventCalendarComponent implements OnInit {
     this.displayEvent = model;
   }
 
-  eventClick(model: any) {
-    model = {
-      event: {
-        id: model.event.id,
-        start: model.event.start,
-        end: model.event.end,
-        title: model.event.title,
-        allDay: model.event.allDay
-        // other params
-      },
-      duration: {}
-    }
-    this.displayEvent = model;
+  eventClick(newEvent: boolean, event: DepartmentCalendar) {
+    this.openEventDialog(newEvent, event)
   }
+
   updateEvent(model: any) {
     model = {
       event: {
@@ -97,6 +99,7 @@ export class EventCalendarComponent implements OnInit {
     }
     this.displayEvent = model;
   }
+
   eventRender(event: any) {
     //console.log(event);
     let newEvent = {
@@ -156,8 +159,8 @@ export class EventCalendarComponent implements OnInit {
     }
     this.displayEvent = model;
   }
-  select(model: any) {
-    this.openAddEventDialog(model);
+  select(newEvent: boolean, event: DepartmentCalendar) {
+    this.openEventDialog(newEvent, event);
   }
   unselect(model: any) {
     //console.log(model);
@@ -196,13 +199,15 @@ export class EventCalendarComponent implements OnInit {
     this.displayEvent = model;
   }
 
-  openAddEventDialog(newEvent?: DepartmentCalendar) {
-
+  openEventDialog(newEvent: boolean, event?: any) {
+//console.log(newEvent);
     const dialogConfig = new MatDialogConfig();
-    if (!newEvent) {
-      newEvent = new DepartmentCalendar();
+    if (!event) {
+      event = new DepartmentCalendar();
     }
-    dialogConfig.data = newEvent;
+
+    dialogConfig.data = event;
+    dialogConfig.data.newEvent = newEvent;
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
     dialogConfig.hasBackdrop = true;
@@ -211,8 +216,17 @@ export class EventCalendarComponent implements OnInit {
   
     dialogRef.afterClosed().subscribe(
       data => {
-        if (data) {
+        if (newEvent) {
           this.eventRender(data);
+        } else {
+          event.event.id = data.id;
+          event.event.title = data.eventName;
+          event.event.description = data.description;
+          event.event.start = data.start;
+          event.event.end = data.end;
+          event.event.allDay = data.allDay;
+          event.event.publicInd = data.publicInd;
+          this.ucCalendar.fullCalendar('updateEvent', event.event);
         }
       }
     );
