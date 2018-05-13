@@ -79,7 +79,7 @@
                 <mat-form-field>
                   <input matInput placeholder="Profession" aria-label="State" [matAutocomplete]="autoProfession"   formControlName="professionId">
                   <mat-autocomplete #autoProfession="matAutocomplete" [displayWith]="displayFn">
-                    <mat-option *ngFor="let profession of filteredProfessions | async" [value]="profession">
+                    <mat-option *ngFor="let profession of filteredProfessions | async" [value]="profession.professionId">
                       <span>{{ profession.professionName }}</span>
                     </mat-option>
                   </mat-autocomplete>

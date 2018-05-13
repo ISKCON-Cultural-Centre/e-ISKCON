@@ -4,9 +4,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
-import { debounceTime } from 'rxjs/operators/debounceTime';
 import {MatDialog,  MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
-
+import {debounceTime, distinctUntilChanged, startWith, tap, delay,switchMap, map} from 'rxjs/operators';
 import { DialogBoxComponent } from '../../shared/components/dialog-box/dialog-box.component';
 
 import {
@@ -113,7 +112,7 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
 
 
     this.two$ = this.devoteeForm.get('gothra').valueChanges
-      .distinctUntilChanged()
+      .distinctUntilChanged().startWith( '{ "and": []}' )
       .subscribe(searchTerm => {
         this.filteredGothras = this.gothraMasterApi.find<GothraMaster>(
           { where: { gothra: { like: '%' + searchTerm + '%' } } }
@@ -181,9 +180,9 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
         circleId: devotee.circleId,
         gender: devotee.gender,
         email: devotee.email,
-        gothra: devotee.gothra ? devotee.gothra : null,
+        gothra: devotee.gothra,
         creditLimit: devotee.creditLimit,
-        nakshatra: devotee.nakshatra ? devotee.nakshatra : null,
+        nakshatra: devotee.nakshatra,
         governmentUniqueId: devotee.governmentUniqueId,
         incomeTaxId: devotee.incomeTaxId,
         kcAssociationDate: devotee.kcAssociationDate,
