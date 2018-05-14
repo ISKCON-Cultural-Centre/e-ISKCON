@@ -58,7 +58,6 @@ export class SecureComponent implements OnInit, OnDestroy {
           if (isLoggedIn) {
             this.userId = this.authService.getCurrentUserId();
             this.devoteeName$ = this.authService.getDevoteeName;
-            //console.log(this.username.);
             this.isLoggedIn$ = this.authService.isLoggedIn;
             this.getAuthorizedDepartments(this.userId);
             this.getAuthorizedTasks();
@@ -78,8 +77,6 @@ export class SecureComponent implements OnInit, OnDestroy {
       this.loopBackFilter.where = {'departmentLeaderDevoteeId': currentUserId};
       this.one$ = this.departmentApi.find<Department>(this.loopBackFilter).subscribe(
         departments => {
-          console.log(currentUserId);
-          console.log(departments);
           this.myDepartments = departments;
         }
       )

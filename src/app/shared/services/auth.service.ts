@@ -46,9 +46,6 @@ export class AuthService extends LoopBackAuth implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-      this.userId$.subscribe(
-        userId =>  console.log(userId)
-      );
 
     }
 
@@ -76,16 +73,13 @@ export class AuthService extends LoopBackAuth implements OnInit, OnDestroy {
             this.setRememberMe(true);
             this.setToken(token);
             this.setUser(token.user);
-            console.log(token);
             this.save();
             this.userId$.next(token.userId);
-            console.log(this.getCurrentUserId());
             this.setLoggedIn(true);
             this.loggedIn = true;
             this.decode(token.user);
             this.notificationService.notificationSubject.next('Login Successful');
             this.router.navigate(['dashboard']);
-            //this.loadDepartments(token.userId);
           }, err => {
             this.setLoggedIn(false);
             this.notificationService.notificationSubject.next('Login Failed');
@@ -115,7 +109,6 @@ export class AuthService extends LoopBackAuth implements OnInit, OnDestroy {
         this.loopBackFilter.where = {'departmentLeaderDevoteeId': currentUserId};
         this.two$ = this.departmentApi.find<Department>(this.loopBackFilter).subscribe(
           departments => {
-            console.log(departments);
             this.departments.next(departments);
           }
         )

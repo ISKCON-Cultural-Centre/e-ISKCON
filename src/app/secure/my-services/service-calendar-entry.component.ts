@@ -23,14 +23,14 @@ export class ServiceCalendarEntryComponent  implements OnInit, OnDestroy {
 
   one$ = new Subscription();
 
-  //departments: Observable<Department[]>;
-  departments: Department[] = [];
+  departments: Observable<Department[]>;
+  //departments: Department[] = [];
   newEvent: boolean;
   loopBackFilter: LoopBackFilter = {};
   userId: String = null;
 
   eventForm: FormGroup;
-
+  deleteEvent = false;
 
   constructor(
     private notificationService: NotificationService,
@@ -46,8 +46,10 @@ export class ServiceCalendarEntryComponent  implements OnInit, OnDestroy {
 
       this.createForm();
       this.newEvent = data.newEvent;
+      this.departments = data.departments;
       if (!data.newEvent) {
-          this.eventForm.get('startTime').setValue(data.event.start.format());
+        this.eventForm.get('id').setValue(data.event.id);
+        this.eventForm.get('startTime').setValue(data.event.start.format());
           this.eventForm.get('endTime').setValue(data.event.end.format());
           this.eventForm.get('eventName').setValue(data.event.title);
           this.eventForm.get('eventDescription').setValue(data.event.description);
@@ -60,15 +62,6 @@ export class ServiceCalendarEntryComponent  implements OnInit, OnDestroy {
     }
 
   ngOnInit() {
-    this.authService.isLoggedIn
-    .subscribe(
-      isLoggedIn => {
-        if (isLoggedIn) {
-          this.userId = this.authService.getCurrentUserId();
-          this.loadDepartments(this.userId);
-      } else {}
-    });    
-
   }
 
   createForm() {
@@ -115,43 +108,36 @@ export class ServiceCalendarEntryComponent  implements OnInit, OnDestroy {
     );
   }
 
-  deleteDepartmentEvent(department: Department, calendar: DepartmentCalendar) {
-    this.departmentCalendarApi.deleteById(calendar.id)
+  deleteDepartmentEvent(calendarId: String) {
+    this.deleteEvent = true;
+    this.departmentCalendarApi.deleteById(calendarId)
     .subscribe(result => {
-/*       const departmentIndex = this.departments.indexOf(department);
-      if (departmentIndex !== -1) {
-        const eventIndex = this.departments[departmentIndex].events.indexOf(calendar);
-        if (eventIndex !== -1) {
-          this.departments[departmentIndex].events.splice(eventIndex, 1);
-        }
-      } */
-      this.notificationService.notificationSubject.next('Event ' + '"' + calendar.eventName + '" deleted successfully');
+      this.notificationService.notificationSubject.next('Event deleted successfully');
+      this.close();
       }
     );
   }
-
-
-  loadDepartments(currentUserId: String) {
-    console.log('loadDepartments' + currentUserId);
-   this.loopBackFilter.where = {'departmentLeaderDevoteeId': currentUserId};
-   this.loopBackFilter.order = ['departmentName ASC'];
-   this.departmentApi.find<Department>(this.loopBackFilter)
-   .subscribe(
-     departments => {
-       this.departments = departments;
-     }
-   )
- }
-
 
 
   cancel() {
     this.eventForm.reset();
   }
 
+
+  cleanClose() {
+    this.dialogRef.close({forceClose: true});
+  }
+
   close() {
-    this.dialogRef.close({ data: 
+    if (this.deleteEvent) {
+      this.dialogRef.close({
+          deleteEvent: this.deleteEvent,
+          id: this.eventForm.get('id').value
+    } );
+  } else {
+    this.dialogRef.close({ data:
         {
+          deleteEvent: this.deleteEvent,
           id: this.eventForm.get('id').value,
           title: this.eventForm.get('eventName').value,
           description: this.eventForm.get('eventDescription').value,
@@ -162,20 +148,21 @@ export class ServiceCalendarEntryComponent  implements OnInit, OnDestroy {
           publicInd: this.eventForm.get('publicInd').value
         }
       }
-    );
+      );
+    }
   }
 
 
 
 
-  openDialog(department: Department, calendar: DepartmentCalendar) {
+  openDialog(calendar: FormGroup) {
     let dialogRef = this.dialog.open(DialogBoxComponent, {
       width: '600px',
-      data: 'Delete the Event ' + calendar.eventName
+      data: 'Delete the Event '
     });
-    dialogRef.afterClosed().subscribe(result => {
+    this.one$ = dialogRef.afterClosed().subscribe(result => {
       if(result) {
-        this.deleteDepartmentEvent(department, calendar);
+        this.deleteDepartmentEvent(calendar.get('id').value);
       } else { }
     });
   }

@@ -26,7 +26,7 @@ export class ServiceAnnouncementComponent implements OnInit, OnDestroy {
   one$ = new Subscription();
 
   departments: Department[] = [];
-  add = false; 
+  add = false;
   loopBackFilter: LoopBackFilter = {};
 
 
@@ -105,7 +105,7 @@ export class ServiceAnnouncementComponent implements OnInit, OnDestroy {
       departments => {
         this.departments = departments;
       }
-    )
+    );
   }
 
 

@@ -18,5 +18,4 @@ export class EventService {
     //this.loopBackFilter.order = ['validUntil DESC'];
     return this.departmentCalendarApi.find<DepartmentCalendar>(this.loopBackFilter);
     }
-
 }
