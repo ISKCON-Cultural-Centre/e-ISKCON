@@ -211,10 +211,8 @@ export class EventCalendarComponent implements OnInit, OnDestroy {
       data => {
         if (!data.forceClose) {
         if (newEvent) {
-          console.log(data);
           this.eventRender(data);
         } else {
-          console.log('inside update');
           event.event.id = data.id;
           event.event.title = data.eventName;
           event.event.description = data.description;
@@ -222,7 +220,6 @@ export class EventCalendarComponent implements OnInit, OnDestroy {
           event.event.end = data.end;
           event.event.allDay = data.allDay;
           event.event.publicInd = data.publicInd;
-          console.log(event);
           this.ucCalendar.fullCalendar('updateEvent', event.event);
           if (data.deleteEvent) {
             this.ucCalendar.fullCalendar('removeEvents', data.id);

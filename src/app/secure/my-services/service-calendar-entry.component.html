@@ -1,7 +1,7 @@
 <div fxLayout="row" fxLayoutAlign="space-sevenly stretch">
       <form class="event-entry" [formGroup]="eventForm" (ngSubmit)="addEditDepartmentEvent()" novalidate   >   
         <fieldset fxLayout="row" fxLayoutAlign="space-evenly stretch">
-          <legend>Create an Event</legend>
+          <legend>{{dialogTitle}}</legend>
 
           <mat-form-field>
             <input matInput placeholder="Event Name"  class="form-control" formControlName="eventName">
@@ -37,18 +37,20 @@
               Public Event ?
             </mat-checkbox>         
 
-            <button *ngIf="newEvent" [disabled]="eventForm.invalid" type="submit"  mat-raised-button color="primary">Add Event
+            <button *ngIf="newEvent" [disabled]="eventForm.invalid" type="submit"  mat-raised-button color="primary">
+                <span><i class="fas fa-save"></i></span> Save Event
             </button>
-            <button *ngIf="!newEvent" [disabled]="eventForm.invalid" type="submit"  mat-raised-button color="primary">Edit Event
+            <button *ngIf="!newEvent" [disabled]="eventForm.invalid" type="submit"  mat-raised-button color="primary">
+                <span><i class="fas fa-save"></i></span> Save Event
             </button>
             <button  type="button" (click) = 'cancel()'  mat-raised-button color="warn">
-              Reset
+                <span><i class="fas fa-eraser"></i></span>  Reset
             </button>
             <button  type="button" (click) = 'cleanClose()'  mat-raised-button color="warn">
-                Close
+                <span><i class="fas fa-window-close"></i></span> Close
             </button>      
             <button  *ngIf="!newEvent" type="button" (click) = 'openDialog(eventForm)'  mat-raised-button color="warn">
-              Delete
+                <span><i class="fas fa-trash-alt"></i></span>  Delete
           </button>                    
         </fieldset>
       </form>

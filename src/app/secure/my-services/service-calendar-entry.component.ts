@@ -12,6 +12,7 @@ import { InlineEditComponent } from '../../shared/components/inline-edit/inline-
 import { DialogBoxComponent } from '../../shared/components/dialog-box/dialog-box.component';
 import { AuthService, NotificationService } from '../../shared/services';
 import { Observable } from 'rxjs/Observable';
+import { Input } from '@angular/core/src/metadata/directives';
 
 @Component({
   selector: 'app-service-calendar-entry',
@@ -20,7 +21,7 @@ import { Observable } from 'rxjs/Observable';
 })
 export class ServiceCalendarEntryComponent  implements OnInit, OnDestroy {
   panelOpenState: boolean = false;
-
+  dialogTitle:  String;
   one$ = new Subscription();
 
   departments: Observable<Department[]>;
@@ -42,11 +43,16 @@ export class ServiceCalendarEntryComponent  implements OnInit, OnDestroy {
     private dialogRef: MatDialogRef<ServiceCalendarEntryComponent>,
     @Inject(MAT_DIALOG_DATA) data
   )  {
-     //console.log(data.start.format());
 
       this.createForm();
       this.newEvent = data.newEvent;
       this.departments = data.departments;
+      if (data.newEvent) {
+        this.dialogTitle = 'Create a New Event';
+      } else {
+        this.dialogTitle = 'Edit Event';
+      }
+
       if (!data.newEvent) {
         this.eventForm.get('id').setValue(data.event.id);
         this.eventForm.get('startTime').setValue(data.event.start.format());
@@ -56,12 +62,16 @@ export class ServiceCalendarEntryComponent  implements OnInit, OnDestroy {
           this.eventForm.get('id').setValue(data.event.id);
           this.eventForm.get('departmentId').setValue(data.event.departmentId);
         } else {
+          if (data.start) {
           this.eventForm.get('startTime').setValue(data.start.format());
           this.eventForm.get('endTime').setValue(data.end.format());
+          }
+
         }
     }
 
   ngOnInit() {
+
   }
 
   createForm() {
