@@ -16,7 +16,7 @@ import { DevoteeLanguageComponent } from './devotee-language.component';
 import { DevoteeServiceInterestComponent } from './devotee-service-interest.component';
 import { DevoteeServiceAvailabilityComponent } from './devotee-service-availability.component';
 import { ChangePasswordComponent } from './change-password.component';
-import { DevoteeFilterComponent } from './devotee-filter.component';
+import { DevoteeDetailSearchComponent } from './devotee-detail-search.component';
 import { DevoteesListService } from './devotees-list-service';
 import { DevoteeDetailComponent } from './devotee-detail.component';
 import { DevoteesListComponent } from './devotees-list.component';
@@ -26,7 +26,8 @@ import { DevoteeCardComponent } from './devotee-card.component';
 import { DevoteeQuickAddComponent } from './devotee-quick-add.component';
 import { DevoteeDetailAddComponent } from './devotee-detail-add.component';
 import { DevoteeMaterialFamilyComponent } from './devotee-material-family.component';
-import { DevoteeGroupComponent } from './devotee-group.component'
+import { DevoteeGroupComponent } from './devotee-group.component';
+import { DevoteeLiteSearchComponent } from './devotee-lite-search.component'
 
 @NgModule({
   imports: [
@@ -43,9 +44,9 @@ import { DevoteeGroupComponent } from './devotee-group.component'
     DevoteeSearchComponent, 
     DevoteeProfileComponent, DevoteeRoleComponent, DevoteeSkillComponent,
     DevoteeLanguageComponent, DevoteeServiceInterestComponent, 
-    DevoteeServiceAvailabilityComponent, ChangePasswordComponent, DevoteeFilterComponent, 
+    DevoteeServiceAvailabilityComponent, ChangePasswordComponent, DevoteeDetailSearchComponent, 
     DevoteeDetailComponent, DevoteesListComponent, DevoteeSearchFilterComponent, DevoteeCardComponent, 
-    DevoteeQuickAddComponent, DevoteeDetailAddComponent, DevoteeMaterialFamilyComponent, DevoteeGroupComponent
+    DevoteeQuickAddComponent, DevoteeDetailAddComponent, DevoteeMaterialFamilyComponent, DevoteeGroupComponent, DevoteeLiteSearchComponent
   ],
   providers: [
     DevoteeSearchSelectService,
@@ -56,7 +57,8 @@ import { DevoteeGroupComponent } from './devotee-group.component'
     DevoteeDetailComponent,
     DevoteeQuickAddComponent,
     DevoteeDetailAddComponent,
-    DevoteeProfileComponent
+    DevoteeProfileComponent,
+    DevoteeCardComponent
   ],  
 })
 export class DevoteeModule { }

@@ -31,6 +31,7 @@ export class DevoteesListComponent  implements OnInit, AfterViewInit, OnDestroy 
 
   @Input() combinedFilters = '';
   @Output() selectedDevotee = new EventEmitter<Devotee>();
+
   loopBackFilter: LoopBackFilter = {};
 
 
@@ -40,7 +41,7 @@ export class DevoteesListComponent  implements OnInit, AfterViewInit, OnDestroy 
 
 
   dataSource = new DevoteesDataSource(this.devoteesListService);
-  displayedColumns = ['name', 'mobileNo', 'circle', 'edit', 'delete'];
+  displayedColumns = ['name', 'mobileNo', 'circle', /* 'edit', 'delete' */];
   filteredDevoteesCount = new BehaviorSubject<number>(0);
   public filteredDevoteesCount$ = this.filteredDevoteesCount.asObservable();
 
@@ -109,6 +110,10 @@ export class DevoteesListComponent  implements OnInit, AfterViewInit, OnDestroy 
 
   editDevotee(devotee: Devotee) {
     this.selectedDevotee.emit(devotee);
+}
+
+onRowClicked(row) {
+  this.selectedDevotee.emit(row);
 }
 
 deleteDevotee(devotee: Devotee) {

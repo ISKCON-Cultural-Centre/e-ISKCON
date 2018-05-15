@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DevoteeFilterComponent } from './devotee-filter.component';
+import { DevoteeLiteSearchComponent } from './devotee-lite-search.component';
 
-describe('DevoteeQueryComponent', () => {
-  let component: DevoteeFilterComponent;
-  let fixture: ComponentFixture<DevoteeFilterComponent>;
+describe('DevoteeLiteSearchComponent', () => {
+  let component: DevoteeLiteSearchComponent;
+  let fixture: ComponentFixture<DevoteeLiteSearchComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DevoteeFilterComponent ]
+      declarations: [ DevoteeLiteSearchComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DevoteeFilterComponent);
+    fixture = TestBed.createComponent(DevoteeLiteSearchComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {MatCard, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { Devotee } from '../../shared/sdk/index';
 
@@ -10,36 +11,39 @@ import { Devotee } from '../../shared/sdk/index';
 })
 export class DevoteeCardComponent implements OnInit {
 
-  form: FormGroup;  
-  @Input() devotee: Devotee;
+  form: FormGroup;
 
   constructor(
+    private dialogRef: MatDialogRef<DevoteeCardComponent>,
+    @Inject(MAT_DIALOG_DATA) devotee,
     private fb: FormBuilder,
-  ) { }
+  ) {
+    this.form = fb.group({
+      id: devotee.id,
+      legalName: devotee.legalName,
+      spiritualName: devotee.spiritualName ? devotee.spiritualName : devotee.legalName,
+      circleId: devotee.circleId,
+      gender: devotee.gender,
+      email: devotee.email,
+      gothra: devotee.gothra ? devotee.gothra : null,
+      creditLimit: devotee.creditLimit,
+      nakshatra: devotee.nakshatra ? devotee.nakshatra : null,
+      governmentUniqueId: devotee.governmentUniqueId,
+      incomeTaxId: devotee.incomeTaxId,
+      kcAssociationDate: devotee.kcAssociationDate,
+      motherTongueLanguageId: devotee.motherTongueLanguageId,
+      lpmId: devotee.lpmId,
+      dateOfBirth: devotee.dateOfBirth,
+      asramaMasterId: devotee.asramaMasterId,
+      professionId: devotee.professionId,
+      physicalAddressId: devotee.physicalAddressId,
+      mobileNo: devotee.mobileNo,
+      landlineNo: devotee.landlineNo
+    }); 
+
+   }
 
   ngOnInit() {
-    this.form = this.fb.group({
-      id: this.devotee.id,
-      legalName: this.devotee.legalName,
-      spiritualName: this.devotee.spiritualName ? this.devotee.spiritualName : this.devotee.legalName,
-      circleId: this.devotee.circleId,
-      gender: this.devotee.gender,
-      email: this.devotee.email,
-      gothra: this.devotee.gothra ? this.devotee.gothra : null,
-      creditLimit: this.devotee.creditLimit,
-      nakshatra: this.devotee.nakshatra ? this.devotee.nakshatra : null,
-      governmentUniqueId: this.devotee.governmentUniqueId,
-      incomeTaxId: this.devotee.incomeTaxId,
-      kcAssociationDate: this.devotee.kcAssociationDate,
-      motherTongueLanguageId: this.devotee.motherTongueLanguageId,
-      lpmId: this.devotee.lpmId,
-      dateOfBirth: this.devotee.dateOfBirth,
-      asramaMasterId: this.devotee.asramaMasterId,
-      professionId: this.devotee.professionId,
-      physicalAddressId: this.devotee.physicalAddressId,
-      mobileNo: this.devotee.mobileNo,
-      landlineNo: this.devotee.landlineNo
-    }); 
   }
 
 }

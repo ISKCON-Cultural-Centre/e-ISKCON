@@ -24,7 +24,7 @@
               </mat-cell>
       </ng-container>     
       
-      <!-- Circle Column -->
+      <!-- Mobile # Column -->
         <ng-container matColumnDef="mobileNo" > 
               <mat-header-cell *matHeaderCellDef mat-sort-header> Mobile # </mat-header-cell>
               <mat-cell *matCellDef="let devotee"> 
@@ -33,28 +33,28 @@
       </ng-container>    
 
         <!-- Delete Column -->
-        <ng-container matColumnDef="delete">
+<!--         <ng-container matColumnDef="delete">
             <mat-header-cell *matHeaderCellDef> Delete </mat-header-cell>      
           <mat-cell *matCellDef="let devotee">
             <button mat-icon-button (click)="openDialog(devotee)">
               <mat-icon>delete</mat-icon>
             </button>
           </mat-cell>
-        </ng-container> 
+        </ng-container>  -->
 
       <!-- Edit Column -->
-    <ng-container matColumnDef="edit">
-        <mat-header-cell *matHeaderCellDef> Edit </mat-header-cell>      
+<!--     <ng-container matColumnDef="edit">
+        <mat-header-cell *matHeaderCellDef> View </mat-header-cell>      
       <mat-cell *matCellDef="let devotee">
         <button mat-icon-button (click)="editDevotee(devotee)">
-          <mat-icon>edit</mat-icon>
+            <i class="fas fa-eye"></i>
         </button>
       </mat-cell>
-    </ng-container>        
+    </ng-container>       -->  
   
           
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;" ></mat-row>
+      <mat-row (click)="onRowClicked(row)" *matRowDef="let row; columns: displayedColumns;" ></mat-row>
   </mat-table>
   </div>
       <div class="spinner-container" *ngIf="dataSource?.loading$ | async">

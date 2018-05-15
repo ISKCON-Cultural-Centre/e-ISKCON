@@ -25,17 +25,14 @@ import { DevoteeDetailAddComponent} from './devotee-detail-add.component';
 
 @Component({
   selector: 'app-devotee-filter',
-  templateUrl: './devotee-filter.component.html',
-  styleUrls: ['./devotee-filter.component.css'],
-  providers: [DevoteeSearchFilterShareService]
+  templateUrl: './devotee-detail-search.component.html',
+  styleUrls: ['./devotee-detail-search.component.css'],
 })
-export class DevoteeFilterComponent implements OnInit {
+export class DevoteeDetailSearchComponent implements OnInit {
 
-  
 
   constructor(
-    private dialog: MatDialog,
-    private devoteeSearchFilterShareService: DevoteeSearchFilterShareService
+    private dialog: MatDialog
   ) { }
 
   ngOnInit() {

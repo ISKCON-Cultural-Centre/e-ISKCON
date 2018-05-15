@@ -13,7 +13,8 @@ import { TaskMasterComponent } from './../../secure/organization/task-master.com
 import { RoleTaskComponent } from './../../secure/organization/role-task.component';
 import { DepartmentComponent } from './../../secure/organization/department.component';
 import { ChangePasswordComponent } from './../../secure/devotee/change-password.component';
-import { DevoteeFilterComponent } from './../../secure/devotee/devotee-filter.component';
+import { DevoteeDetailSearchComponent } from './../../secure/devotee/devotee-detail-search.component';
+import { DevoteeLiteSearchComponent } from './../../secure/devotee/devotee-lite-search.component';
 import { MyServicesComponent } from '../../secure/my-services/my-services.component';
 import { ServiceMasterComponent } from '../../secure/organization/service-master.component';
 import { AnnouncementListComponent } from '../../secure/my-services/announcement-list.component';
@@ -47,13 +48,21 @@ export const SECURE_ROUTES: Routes = [
       canActivate: [AuthGuard]
     },    
     {
-      path: 'devotee/search',
+      path: 'devotee/manage',
       data: {
-        breadcrumb: 'Search Devotee'
+        breadcrumb: 'Manage Devotee Data'
       },
-      component: DevoteeFilterComponent,
+      component: DevoteeDetailSearchComponent,
       canActivate: [AuthGuard]
     },
+    {
+      path: 'devotee/view',
+      data: {
+        breadcrumb: 'Devotee View'
+      },
+      component: DevoteeLiteSearchComponent,
+      canActivate: [AuthGuard]
+    },    
     { 
       path: 'devoteeRole',
       data: {

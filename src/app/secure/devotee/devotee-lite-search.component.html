@@ -1,0 +1,11 @@
+
+<div fxLayout="column" fxLayoutAlign="space-around center" >
+  <div fxLayout="row">
+      <app-devotee-search-filter></app-devotee-search-filter>
+  </div>    
+</div>
+<div fxLayout="column">
+  <div>
+      <app-devotees-list (selectedDevotee)='openDevoteeDialog($event)'></app-devotees-list>
+  </div>
+</div>  
