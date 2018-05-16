@@ -1,23 +1,24 @@
-<form>
-  <mat-form-field class="demo-chip-list">      
-      <mat-chip-list #chipList>
-        <mat-chip *ngFor="let service of assignedServices" [selectable]="selectable"
-                  [removable]="removable" (remove)="remove(service)" [value]="service.id">
-          {{service.serviceName}}
-          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-        </mat-chip>
-        <input #serviceInput placeholder="Add Service..."
-        [matAutocomplete]="autoSkill"
-        [matChipInputFor]="chipList"
-        [matChipInputSeparatorKeyCodes]="separatorKeysCodes" 
-        [(ngModel)]="model" name="name"/>
-        <mat-autocomplete #autoSkill="matAutocomplete" [displayWith]="displayFn" (optionSelected)="onSelectionChanged($event)">
-          <mat-option *ngFor="let service of remainingServices" [value]="service">
-            <span>{{ service.serviceName }}</span>
-          </mat-option>
-        </mat-autocomplete>             
-      </mat-chip-list>
-    </mat-form-field>   
-  </form>
-  
-  
+  <div fxLayout="column" fxLayoutAlign="center">
+    <div fxLayout="row" fxLayoutAlign="center">
+      <div fxFlex="75%">
+        <p *ngIf="remainingServices.length > 0">Available Services</p>
+          <mat-chip-list #chipList>
+            <mat-chip color="Accent" selected="true" *ngFor="let service of remainingServices" [selectable]="selectable"
+                     [removable]="removable" (remove)="addService(service)">
+              {{service.serviceName}}
+              <mat-icon matChipRemove *ngIf="removable">add</mat-icon>
+            </mat-chip>
+          </mat-chip-list>
+      </div>  
+      <div fxFlex="25%">
+        <p *ngIf="assignedServices.length > 0">Interested Services</p>
+          <mat-chip-list #chipList>
+            <mat-chip color="primary"  selected="true" *ngFor="let service of assignedServices"  [selectable]="selectable"
+                     [removable]="removable" (remove)="removeService(service)">
+              {{service.serviceName}}
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+          </mat-chip-list>
+      </div>
+    </div>  
+    </div>

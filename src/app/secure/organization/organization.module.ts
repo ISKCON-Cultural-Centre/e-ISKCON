@@ -25,7 +25,7 @@ import { AuthService } from '../../shared/services/index';
   declarations: [
     RoleComponent, DepartmentComponent, 
     TaskMasterComponent, ServiceMasterComponent, 
-    RoleTaskComponent, EventCalendarComponent,
+    RoleTaskComponent, EventCalendarComponent, 
   ],
   providers: [ EventService, ],
   entryComponents: [

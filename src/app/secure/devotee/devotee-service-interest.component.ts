@@ -9,6 +9,7 @@ import { ServiceArea, DevoteeServiceInterest  } from '../../shared/sdk/models';
 import { ServiceAreaApi, DevoteeServiceInterestApi } from '../../shared/sdk';
 import { NotificationService } from '../../shared/services';
 import { Subscription } from 'rxjs/Subscription';
+import {LoopBackFilter} from '../../shared/sdk/models/BaseModels';
 
 @Component({
   selector: 'app-devotee-service-interest',
@@ -17,7 +18,7 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class DevoteeServiceInterestComponent implements OnInit, OnDestroy {
   @Input() devoteeId: String;  
-
+  loopBackFilter: LoopBackFilter = {};
 
   one$ = new Subscription();
   two$ = new Subscription();
@@ -49,11 +50,12 @@ export class DevoteeServiceInterestComponent implements OnInit, OnDestroy {
   }
 
   loadAllServices() {
-    this.two$ =  this.serviceAreaApi.find<ServiceArea>()
+    //this.loopBackFilter.where = {'startTime': {gte: new Date()}};
+    //this.loopBackFilter.include = ['fkDepartmentAnnouncementDepartment1rel'];
+    this.loopBackFilter.order = ['serviceName ASC'];
+    this.two$ =  this.serviceAreaApi.find<ServiceArea>(this.loopBackFilter)
     .subscribe(
-      allServices => 
-      {
-        //console.log(allServices);
+      allServices => {
         this.allServices =  allServices;
         this.remainingServices = difference(this.allServices, this.assignedServices, (object) => object.id);
       }
@@ -62,7 +64,7 @@ export class DevoteeServiceInterestComponent implements OnInit, OnDestroy {
 
   loadDevoteeServices(devoteeId: String) {
     this.three$ =  this.devoteeServiceInterestApi.find<DevoteeServiceInterest>(
-      { 
+      {
         where: {devoteeId: devoteeId},
         include: {
           relation: 'fkDevoteeServiceInterestServiceArea1rel'
@@ -108,6 +110,32 @@ export class DevoteeServiceInterestComponent implements OnInit, OnDestroy {
       }
     );
   }
+
+  addService(serviceArea: ServiceArea): void {
+    this.four$ = this.devoteeServiceInterestApi.create({devoteeId: this.devoteeId, serviceAreaId: serviceArea.id})
+     .subscribe(
+       devoteeRole => {
+        this.assignedServices.push(serviceArea);
+        this.remainingServices = difference(this.allServices, this.assignedServices, (object) => object.id);
+        this.notificationService.notificationSubject.next('Service added successfully');
+       }
+     );
+  }
+
+  removeService(serviceArea: ServiceArea): void {
+    this.five$ = this.devoteeServiceInterestApi.destroyAll({devoteeId: this.devoteeId, serviceAreaId: serviceArea.id })
+    .subscribe(
+      devoteeRole => {
+        const index = this.assignedServices.indexOf(serviceArea);
+        if (index >= 0) {
+          this.assignedServices.splice(index, 1);
+        }
+        this.remainingServices = difference(this.allServices, this.assignedServices, (object) => object.id);
+       this.notificationService.notificationSubject.next('Role deleted successfully');
+      }
+    );
+  }
+
 
   ngOnDestroy(){
     this.one$.unsubscribe();

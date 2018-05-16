@@ -1,12 +1,20 @@
-<div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0" fxFlex="100%">
-  <div fxFlex="25%">
-    <div>
+<div fxLayout="column" fxLayoutAlign="center">
+  <div>
       <app-devotee-search></app-devotee-search>
-    </div>
   </div>
-  <div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0" fxFlex="75%">
-    <div fxFlex="100%">
-      <p>Assigned Roles</p>
+  <div fxLayout="row" fxLayoutAlign="center">
+    <div fxFlex="75%">
+      <p *ngIf="remainingRoles.length > 0">Available Roles</p>
+        <mat-chip-list #chipList>
+          <mat-chip *ngFor="let role of remainingRoles" [selectable]="selectable"
+                   [removable]="removable" (remove)="addRole(role)">
+            {{role.name}}
+            <mat-icon matChipRemove *ngIf="removable">add</mat-icon>
+          </mat-chip>
+        </mat-chip-list>
+    </div>  
+    <div fxFlex="25%">
+      <p *ngIf="assignedRoles.length > 0">Assigned Roles</p>
 
         <mat-chip-list #chipList>
           <mat-chip *ngFor="let role of assignedRoles" [selectable]="selectable"
@@ -15,18 +23,6 @@
             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
           </mat-chip>
         </mat-chip-list>
-
-      
-      <p>Available Roles</p>
-
-        <mat-chip-list #chipList>
-          <mat-chip *ngFor="let role of remainingRoles" [selectable]="selectable"
-                   [removable]="removable" (remove)="addRole(role)">
-            {{role.name}}
-            <mat-icon matChipRemove *ngIf="removable">add</mat-icon>
-          </mat-chip>
-        </mat-chip-list>
-      
-    </div>  
+    </div>
   </div>  
   </div>
