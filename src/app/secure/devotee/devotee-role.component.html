@@ -1,8 +1,8 @@
-<div fxLayout="column" fxLayoutAlign="center">
-  <div>
+<div fxLayout="row" fxLayoutAlign="start">
+  <div fxFlex="25%">
       <app-devotee-search></app-devotee-search>
   </div>
-  <div fxLayout="row" fxLayoutAlign="center">
+  <div fxFlex="75%" fxLayout="row" fxLayoutAlign="center">
     <div fxFlex="75%">
       <p *ngIf="remainingRoles.length > 0">Available Roles</p>
         <mat-chip-list #chipList>
@@ -14,10 +14,9 @@
         </mat-chip-list>
     </div>  
     <div fxFlex="25%">
-      <p *ngIf="assignedRoles.length > 0">Assigned Roles</p>
-
+      <p *ngIf="assignedRoles.length > 0">Assigned Roles for {{devotee.spiritualName}}</p>
         <mat-chip-list #chipList>
-          <mat-chip *ngFor="let role of assignedRoles" [selectable]="selectable"
+          <mat-chip  color="primary"  selected="true" *ngFor="let role of assignedRoles" [selectable]="selectable"
                    [removable]="removable" (remove)="removeRole(role)">
             {{role.name}}
             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>

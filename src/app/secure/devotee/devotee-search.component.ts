@@ -47,8 +47,8 @@ export class DevoteeSearchComponent implements OnInit {
     });
   }
 
-  onSelectionChanged(event: MatAutocompleteSelectedEvent) {
-    this.devoteeSearchSelectService.announceMission(event);
+  onSelectionChanged(devotee: Devotee) {
+    this.devoteeSearchSelectService.announceMission(devotee);
   }
 
   onSubmit() { this.submitted = true; }

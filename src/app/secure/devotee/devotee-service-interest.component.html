@@ -1,6 +1,6 @@
   <div fxLayout="column" fxLayoutAlign="center">
-    <div fxLayout="row" fxLayoutAlign="center">
-      <div fxFlex="75%">
+    <!-- <div fxLayout="row" fxLayoutAlign="center"> -->
+      <div class="p-t-20 p-b-20 p-l-10">
         <p *ngIf="remainingServices.length > 0">Available Services</p>
           <mat-chip-list #chipList>
             <mat-chip color="Accent" selected="true" *ngFor="let service of remainingServices" [selectable]="selectable"
@@ -9,9 +9,11 @@
               <mat-icon matChipRemove *ngIf="removable">add</mat-icon>
             </mat-chip>
           </mat-chip-list>
-      </div>  
-      <div fxFlex="25%">
-        <p *ngIf="assignedServices.length > 0">Interested Services</p>
+<!--       </div> -->  
+      <div class="p-t-20 p-b-20 p-l-10">
+        <mat-divider></mat-divider>
+        <p *ngIf="devotee && assignedServices.length == 0">{{devotee.spiritualName}} has not signed up for any services</p>
+        <p *ngIf="assignedServices.length > 0">{{devotee.spiritualName}} has signed for :</p>
           <mat-chip-list #chipList>
             <mat-chip color="primary"  selected="true" *ngFor="let service of assignedServices"  [selectable]="selectable"
                      [removable]="removable" (remove)="removeService(service)">

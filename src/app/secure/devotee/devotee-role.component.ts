@@ -10,7 +10,7 @@ import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import * as _ from 'underscore';
 import {  difference } from 'set-manipulator';
 
-import { ServiceRoleMapping, ServiceRole  } from '../../shared/sdk/models';
+import { Devotee, ServiceRoleMapping, ServiceRole  } from '../../shared/sdk/models';
 import { DevoteeApi, ServiceRoleMappingApi, ServiceRoleApi } from '../../shared/sdk';
 import { AuthService, DevoteeSearchSelectService, NotificationService } from '../../shared/services';
 
@@ -36,7 +36,7 @@ export class DevoteeRoleComponent implements OnInit, OnDestroy {
   // Enter, comma
   separatorKeysCodes = [ENTER, COMMA];
 
-  devoteeId: String = null;
+  devotee: Devotee;
   allRoles = [];
   remainingRoles = [];
   assignedRoles = [];
@@ -56,8 +56,8 @@ export class DevoteeRoleComponent implements OnInit, OnDestroy {
     this.one$ = this.devoteeSearchSelectService.missionAnnounced$.
     subscribe(
       selectedDevotee => {
-        this.loadDevoteeRoles(selectedDevotee.option.value.id);
-        this.devoteeId = selectedDevotee.option.value.id;
+        this.loadDevoteeRoles(selectedDevotee.id);
+        this.devotee = selectedDevotee;
       }
     );
 
@@ -94,7 +94,7 @@ export class DevoteeRoleComponent implements OnInit, OnDestroy {
 
 
   addRole(role: ServiceRole): void {
-    this.four$ = this.serviceRoleMappingApi.create({principalType: 'USER', principalId: this.devoteeId, roleId: role.id})
+    this.four$ = this.serviceRoleMappingApi.create({principalType: 'USER', principalId: this.devotee.id, roleId: role.id})
      .subscribe(
        devoteeRole => {
         this.assignedRoles.push(role);
@@ -105,7 +105,7 @@ export class DevoteeRoleComponent implements OnInit, OnDestroy {
   }
 
   removeRole(role: ServiceRole): void {
-    this.five$ = this.serviceRoleMappingApi.destroyAll({principalId: this.devoteeId, principalType: 'USER', roleId: role.id})
+    this.five$ = this.serviceRoleMappingApi.destroyAll({principalId: this.devotee.id, principalType: 'USER', roleId: role.id})
     .subscribe(
       devoteeRole => {
         const index = this.assignedRoles.indexOf(role);

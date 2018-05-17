@@ -25,7 +25,7 @@ export class DevoteeComponent implements OnInit {
 
 
   addDevotee() {
-    this.devoteeSearchSelectService.announceMission(new MatAutocompleteSelectedEvent(null, null));
+    this.devoteeSearchSelectService.announceMission(null);
    }
 
 

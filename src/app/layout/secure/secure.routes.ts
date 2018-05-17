@@ -21,6 +21,7 @@ import { AnnouncementListComponent } from '../../secure/my-services/announcement
 import { DevoteeGroupComponent } from '../../secure/devotee/devotee-group.component';
 import { EventCalendarComponent } from './../../secure/organization/event-calendar.component';
 import { EventMasterComponent } from './../../secure/organization/event/event-master.component';
+import { DevoteeServiceComponent } from '../../secure/devotee/devotee-service.component';
 
 export const SECURE_ROUTES: Routes = [
     { 
@@ -71,6 +72,14 @@ export const SECURE_ROUTES: Routes = [
       component: DevoteeRoleComponent, 
       canActivate: [AuthGuard] 
     },  
+    { 
+      path: 'devotee/service',
+      data: {
+        breadcrumb: 'Service Interest'
+      },
+      component: DevoteeServiceComponent, 
+      canActivate: [AuthGuard] 
+    },      
     { 
       path: 'devotee/group',
       data: {

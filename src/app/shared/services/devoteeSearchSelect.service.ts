@@ -1,18 +1,19 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
-import { MatAutocompleteSelectedEvent } from '@angular/material';
+
+import { Devotee  } from '../../shared/sdk/models';
 
 @Injectable()
 export class DevoteeSearchSelectService {
 
   // Observable string sources
-  private missionAnnouncedSource = new Subject<MatAutocompleteSelectedEvent>();
+  private missionAnnouncedSource = new Subject<Devotee>();
 
   missionAnnounced$ = this.missionAnnouncedSource.asObservable();
 
   // Service message commands
-  announceMission(mission: MatAutocompleteSelectedEvent) {
-    this.missionAnnouncedSource.next(mission);
+  announceMission(devotee: Devotee) {
+    this.missionAnnouncedSource.next(devotee);
   }
 
 }

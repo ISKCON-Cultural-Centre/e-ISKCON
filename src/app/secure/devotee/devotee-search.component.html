@@ -1,9 +1,27 @@
-  <mat-form-field fxFlex="100%">
+<div fxLayout="column">
+  <div>
+  <mat-form-field>
     <input matInput placeholder="Search Devotee" aria-label="State" [matAutocomplete]="auto" [formControl]="devoteeSearchCtrl">
     <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="onSelectionChanged($event)" [displayWith]="displayFn" >
-      <mat-option *ngFor="let devotee of filteredDevotees | async" [value]="devotee">
+<!--       <mat-option *ngFor="let devotee of filteredDevotees | async" [value]="devotee">
           <span>{{ devotee.spiritualName }} <small *ngIf="devotee.legalName" >| {{devotee.legalName}}</small></span>
-      </mat-option>
+      </mat-option> -->
     </mat-autocomplete>
   </mat-form-field>
-
+<div>
+  <mat-card  *ngFor="let devotee of filteredDevotees | async" >
+            <!-- <img mat-card-avatar src="https://source.unsplash.com/random/200x200"> -->
+            
+    <mat-card-content>
+        <!-- <mat-card-subtitle>{{devotee.spiritualName}}<button mat-icon-button (click)="onSelectionChanged(devotee)"><mat-icon >chevron_right</mat-icon></button></mat-card-subtitle>     -->
+        <p *ngIf="devotee.spiritualName"><strong>{{devotee.spiritualName}} </strong><button mat-icon-button (click)="onSelectionChanged(devotee)"><mat-icon >chevron_right</mat-icon></button></p>
+        <p *ngIf="devotee.legalName">{{devotee.legalName}}</p>
+        <p  *ngIf="devotee.mobileNo">{{devotee.mobileNo}}</p>
+        <p  *ngIf="devotee.email">{{devotee.email}}</p>      
+    </mat-card-content>
+<!--     <mat-card-actions>
+      <button mat-button (click)="onSelectionChanged(devotee)">>></button>
+    </mat-card-actions>    --> 
+  </mat-card>
+</div>  
+</div>

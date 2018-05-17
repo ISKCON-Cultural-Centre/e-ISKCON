@@ -5,9 +5,9 @@ import { Observable } from 'rxjs/Observable';
 
 import {  difference } from 'set-manipulator';
 
-import { ServiceArea, DevoteeServiceInterest  } from '../../shared/sdk/models';
+import { Devotee, ServiceArea, DevoteeServiceInterest  } from '../../shared/sdk/models';
 import { ServiceAreaApi, DevoteeServiceInterestApi } from '../../shared/sdk';
-import { NotificationService } from '../../shared/services';
+import { DevoteeSearchSelectService, NotificationService } from '../../shared/services';
 import { Subscription } from 'rxjs/Subscription';
 import {LoopBackFilter} from '../../shared/sdk/models/BaseModels';
 
@@ -17,9 +17,10 @@ import {LoopBackFilter} from '../../shared/sdk/models/BaseModels';
   styleUrls: ['./devotee-service-interest.component.css']
 })
 export class DevoteeServiceInterestComponent implements OnInit, OnDestroy {
-  @Input() devoteeId: String;  
+  @Input() devoteeId: String = ' ';
   loopBackFilter: LoopBackFilter = {};
 
+  devotee: Devotee;
   one$ = new Subscription();
   two$ = new Subscription();
   three$ = new Subscription();
@@ -42,11 +43,20 @@ export class DevoteeServiceInterestComponent implements OnInit, OnDestroy {
   constructor(
     private notificationService: NotificationService,
     private devoteeServiceInterestApi: DevoteeServiceInterestApi,
+    private devoteeSearchSelectService: DevoteeSearchSelectService,
     private serviceAreaApi: ServiceAreaApi
   ) { }
 
   ngOnInit() {
     this.loadDevoteeServices(this.devoteeId);
+    this.one$ = this.devoteeSearchSelectService.missionAnnounced$.
+    subscribe(
+      selectedDevotee => {
+        this.loadDevoteeServices(selectedDevotee.id);
+        this.devotee = selectedDevotee;
+        this.devoteeId = selectedDevotee.id;
+      }
+    );
   }
 
   loadAllServices() {
