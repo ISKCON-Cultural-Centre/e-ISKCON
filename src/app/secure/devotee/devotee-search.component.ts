@@ -30,8 +30,8 @@ export class DevoteeSearchComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.devoteeSearchCtrl.valueChanges
-    //.debounceTime(400)
+    this.devoteeSearchCtrl.valueChanges.filter(term => term !== '')
+    .debounceTime(400)
     .subscribe(searchTerm => {
       this.filteredDevotees = this.devoteeApi.find<Devotee>(
         {
@@ -41,7 +41,8 @@ export class DevoteeSearchComponent implements OnInit {
               {spiritualName: {like: '%' + searchTerm + '%'}},
               {mobileNo: {like: '%' + searchTerm + '%'}}
             ]
-          }
+          },
+          limit: 20
         }
       );
     });

@@ -17,10 +17,10 @@ import {LoopBackFilter} from '../../shared/sdk/models/BaseModels';
   styleUrls: ['./devotee-service-interest.component.css']
 })
 export class DevoteeServiceInterestComponent implements OnInit, OnDestroy {
-  @Input() devoteeId: String = ' ';
+  @Input() devotee: Devotee;
   loopBackFilter: LoopBackFilter = {};
 
-  devotee: Devotee;
+  //devotee: Devotee;
   one$ = new Subscription();
   two$ = new Subscription();
   three$ = new Subscription();
@@ -48,13 +48,12 @@ export class DevoteeServiceInterestComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.loadDevoteeServices(this.devoteeId);
     this.one$ = this.devoteeSearchSelectService.missionAnnounced$.
     subscribe(
       selectedDevotee => {
         this.loadDevoteeServices(selectedDevotee.id);
         this.devotee = selectedDevotee;
-        this.devoteeId = selectedDevotee.id;
+        //this.devoteeId = selectedDevotee.id;
       }
     );
   }
@@ -89,13 +88,13 @@ export class DevoteeServiceInterestComponent implements OnInit, OnDestroy {
     );
   }
 
-  displayFn(service?: ServiceArea): string | undefined {
+/*   displayFn(service?: ServiceArea): string | undefined {
     return service ? service.serviceName : '';
   }
 
   onSelectionChanged(event: MatAutocompleteSelectedEvent) {
     let value = event.option.value;
-    this.four$ =  this.devoteeServiceInterestApi.create({devoteeId: this.devoteeId, serviceAreaId: value.id })
+    this.four$ =  this.devoteeServiceInterestApi.create({devoteeId: this.devotee.id, serviceAreaId: value.id })
     .subscribe(
       devoteeService => {
        this.assignedServices.push(new ServiceArea(value));
@@ -108,7 +107,7 @@ export class DevoteeServiceInterestComponent implements OnInit, OnDestroy {
 
   remove(serviceArea: ServiceArea): void {
     let index = this.assignedServices.indexOf(serviceArea);
-    this.five$ =  this.devoteeServiceInterestApi.destroyAll({devoteeId: this.devoteeId, id: serviceArea.id })
+    this.five$ =  this.devoteeServiceInterestApi.destroyAll({devoteeId: this.devotee.id, id: serviceArea.id })
     .subscribe(
       devoteeService => {
         let index = this.assignedServices.indexOf(serviceArea);
@@ -120,9 +119,9 @@ export class DevoteeServiceInterestComponent implements OnInit, OnDestroy {
       }
     );
   }
-
+ */
   addService(serviceArea: ServiceArea): void {
-    this.four$ = this.devoteeServiceInterestApi.create({devoteeId: this.devoteeId, serviceAreaId: serviceArea.id})
+    this.four$ = this.devoteeServiceInterestApi.create({devoteeId: this.devotee.id, serviceAreaId: serviceArea.id})
      .subscribe(
        devoteeRole => {
         this.assignedServices.push(serviceArea);
@@ -133,7 +132,7 @@ export class DevoteeServiceInterestComponent implements OnInit, OnDestroy {
   }
 
   removeService(serviceArea: ServiceArea): void {
-    this.five$ = this.devoteeServiceInterestApi.destroyAll({devoteeId: this.devoteeId, serviceAreaId: serviceArea.id })
+    this.five$ = this.devoteeServiceInterestApi.destroyAll({devoteeId: this.devotee.id, serviceAreaId: serviceArea.id })
     .subscribe(
       devoteeRole => {
         const index = this.assignedServices.indexOf(serviceArea);

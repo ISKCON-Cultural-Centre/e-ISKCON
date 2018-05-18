@@ -12,7 +12,7 @@ import { RoleTaskComponent } from './role-task.component';
 import { EventCalendarComponent } from './event-calendar.component';
 import { FullCalendarModule } from 'ng-fullcalendar';
 import { EventService } from './event-calendar.service';
-//import { MyDepartmentsService } from './my-departments.service';
+import { EventModule } from './event/event.module';
 import { ServiceCalendarEntryComponent} from '../my-services/service-calendar-entry.component';
 import { AuthService } from '../../shared/services/index';
 
@@ -20,7 +20,7 @@ import { AuthService } from '../../shared/services/index';
 @NgModule({
   imports: [
     CommonModule, MaterialModule, FormsModule, ReactiveFormsModule, 
-    SharedComponentsModule, FullCalendarModule,
+    SharedComponentsModule, FullCalendarModule, EventModule
   ],
   declarations: [
     RoleComponent, DepartmentComponent, 

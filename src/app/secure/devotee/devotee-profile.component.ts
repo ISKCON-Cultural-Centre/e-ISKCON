@@ -106,7 +106,8 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
         this.loadDevotee(this.devoteeId);
       } else {
         this.devoteeId = this.authService.getCurrentUserId();
-        this.loadDevotee(this.devoteeId);  
+        this.devotee = this.authService.getCurrentUserData();
+        this.loadDevotee(this.devoteeId);
       }
     }
 
@@ -167,6 +168,7 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
       devotee => {
         this.physicalAddress = devotee.fkDevoteePhysicalAddress1rel;
         this.setDevoteeFormValues(devotee);
+        this.devotee = devotee;
       }
     );
   }
