@@ -36,10 +36,7 @@ export class RoleTaskComponent implements OnInit, OnDestroy {
   allTasks: Observable<TaskMaster[]> ;
   loopBackFilter: LoopBackFilter = {};
   selectedRole: String;
-  visible: boolean = true;
-  selectable: boolean = true;
-  removable: boolean = true;
-  addOnBlur: boolean = true;
+
 
   // Enter, comma
   separatorKeysCodes = [ENTER, COMMA];

@@ -1,27 +1,29 @@
 <div fxLayout="row" fxLayoutAlign="start">
-  <div fxFlex="25%">
+  <div class="p-t-20 p-b-20 p-l-10" fxFlex="25%">
       <app-devotee-search></app-devotee-search>
   </div>
   <div fxFlex="75%" fxLayout="row" fxLayoutAlign="center">
-    <div fxFlex="75%">
+    <div class="p-t-20 p-b-20 p-l-10">
       <p *ngIf="remainingRoles.length > 0">Available Roles</p>
-        <mat-chip-list #chipList>
-          <mat-chip *ngFor="let role of remainingRoles" [selectable]="selectable"
-                   [removable]="removable" (remove)="addRole(role)">
-            {{role.name}}
-            <mat-icon matChipRemove *ngIf="removable">add</mat-icon>
-          </mat-chip>
-        </mat-chip-list>
-    </div>  
-    <div fxFlex="25%">
-      <p *ngIf="assignedRoles.length > 0">Assigned Roles for {{devotee.spiritualName}}</p>
-        <mat-chip-list #chipList>
-          <mat-chip  color="primary"  selected="true" *ngFor="let role of assignedRoles" [selectable]="selectable"
-                   [removable]="removable" (remove)="removeRole(role)">
-            {{role.name}}
-            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-          </mat-chip>
-        </mat-chip-list>
+      <mat-chip-list #chipList>
+        <mat-chip *ngFor="let role of remainingRoles" [selectable]="selectable"
+                 [removable]="removable" (remove)="addRole(role)">
+          {{role.name}}
+          <mat-icon matChipRemove *ngIf="removable">add</mat-icon>
+        </mat-chip>
+      </mat-chip-list>
+    <div class="p-t-20 p-b-20 p-l-10">
+      <mat-divider></mat-divider>
+      <p *ngIf="devotee && assignedRoles.length == 0">{{devotee.spiritualName}} has no roles assigned</p>
+      <p *ngIf="assignedRoles.length > 0">{{devotee.spiritualName}} has been assigned :</p>
+      <mat-chip-list #chipList>
+        <mat-chip  color="primary"  selected="true" *ngFor="let role of assignedRoles" [selectable]="selectable"
+                 [removable]="removable" (remove)="removeRole(role)">
+          {{role.name}}
+          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        </mat-chip>
+      </mat-chip-list>
     </div>
+  </div>  
   </div>  
   </div>

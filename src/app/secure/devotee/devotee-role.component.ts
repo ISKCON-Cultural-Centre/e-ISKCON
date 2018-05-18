@@ -9,6 +9,7 @@ import { ENTER, COMMA } from '@angular/cdk/keycodes';
 
 import * as _ from 'underscore';
 import {  difference } from 'set-manipulator';
+import {LoopBackFilter} from '../../shared/sdk/models/BaseModels';
 
 import { Devotee, ServiceRoleMapping, ServiceRole  } from '../../shared/sdk/models';
 import { DevoteeApi, ServiceRoleMappingApi, ServiceRoleApi } from '../../shared/sdk';
@@ -41,6 +42,8 @@ export class DevoteeRoleComponent implements OnInit, OnDestroy {
   remainingRoles = [];
   assignedRoles = [];
 
+  loopBackFilter: LoopBackFilter = {};
+
   constructor(
     private notificationService: NotificationService,
     private devoteeApi: DevoteeApi,
@@ -65,7 +68,10 @@ export class DevoteeRoleComponent implements OnInit, OnDestroy {
 
 
   loadAllRoles() {
-    this.two$ = this.serviceRoleApi.find<ServiceRole>()
+    //this.loopBackFilter.where = {'startTime': {gte: new Date()}};
+    //this.loopBackFilter.include = ['fkDepartmentAnnouncementDepartment1rel'];
+    this.loopBackFilter.order = ['name ASC'];    
+    this.two$ = this.serviceRoleApi.find<ServiceRole>(this.loopBackFilter)
     .subscribe(
       roles => {
         this.allRoles = roles;
