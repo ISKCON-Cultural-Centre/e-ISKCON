@@ -48,6 +48,10 @@ export class DevoteeServiceInterestComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    if (this.devotee) {
+      this.loadDevoteeServices(this.devotee.id);
+    }
+    
     this.one$ = this.devoteeSearchSelectService.missionAnnounced$.
     subscribe(
       selectedDevotee => {
@@ -88,38 +92,6 @@ export class DevoteeServiceInterestComponent implements OnInit, OnDestroy {
     );
   }
 
-/*   displayFn(service?: ServiceArea): string | undefined {
-    return service ? service.serviceName : '';
-  }
-
-  onSelectionChanged(event: MatAutocompleteSelectedEvent) {
-    let value = event.option.value;
-    this.four$ =  this.devoteeServiceInterestApi.create({devoteeId: this.devotee.id, serviceAreaId: value.id })
-    .subscribe(
-      devoteeService => {
-       this.assignedServices.push(new ServiceArea(value));
-       this.remainingServices = difference(this.allServices, this.assignedServices, (object) => object.id);
-       this.notificationService.notificationSubject.next('Service added successfully');
-      }
-    );
-  }
-
-
-  remove(serviceArea: ServiceArea): void {
-    let index = this.assignedServices.indexOf(serviceArea);
-    this.five$ =  this.devoteeServiceInterestApi.destroyAll({devoteeId: this.devotee.id, id: serviceArea.id })
-    .subscribe(
-      devoteeService => {
-        let index = this.assignedServices.indexOf(serviceArea);
-        if (index >= 0) {
-          this.assignedServices.splice(index, 1);
-        }
-        this.remainingServices = difference(this.allServices, this.assignedServices, (object) => object.id);
-        this.notificationService.notificationSubject.next('Service removed successfully');
-      }
-    );
-  }
- */
   addService(serviceArea: ServiceArea): void {
     this.four$ = this.devoteeServiceInterestApi.create({devoteeId: this.devotee.id, serviceAreaId: serviceArea.id})
      .subscribe(
