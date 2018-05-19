@@ -136,9 +136,8 @@ export class FundInstrumentComponent implements OnInit, OnDestroy {
     this.two$ = this.fundInstrumentTypeApi.find<FundInstrumentType>(this.loopBackFilter)
     .subscribe(
       fundInstruments => {
-        //this.fundInstruments = fundInstrument;
+        this.fundInstrumentTypes = fundInstruments;
         this.dataSource.data = fundInstruments;
-        console.log(this.fundInstruments);
       }
     )
   }
