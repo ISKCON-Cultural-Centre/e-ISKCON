@@ -45,6 +45,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CookieBrowser } from './storage/cookie.browser';
 import { StorageBrowser } from './storage/storage.browser';
+import { AccesstokenApi } from './services/custom/Accesstoken';
 import { ApprovalArtefactApi } from './services/custom/ApprovalArtefact';
 import { ApprovalQueApi } from './services/custom/ApprovalQue';
 import { ApprovalRuleApi } from './services/custom/ApprovalRule';
@@ -130,6 +131,11 @@ import { SpiritualLevelMasterApi } from './services/custom/SpiritualLevelMaster'
 import { TaskMasterApi } from './services/custom/TaskMaster';
 import { TempleApi } from './services/custom/Temple';
 import { TempleBranchApi } from './services/custom/TempleBranch';
+import { FundInstrumentApi } from './services/custom/FundInstrument';
+import { FundInstrumentTypeApi } from './services/custom/FundInstrumentType';
+import { InstrumentIssueRegisterApi } from './services/custom/InstrumentIssueRegister';
+import { InstrumentReturnRegisterApi } from './services/custom/InstrumentReturnRegister';
+import { InstrumentPaymentRegisterApi } from './services/custom/InstrumentPaymentRegister';
 /**
 * @module SDKBrowserModule
 * @description
@@ -159,6 +165,7 @@ export class SDKBrowserModule {
         LoggerService,
         JSONSearchParams,
         SDKModels,
+        AccesstokenApi,
         ApprovalArtefactApi,
         ApprovalQueApi,
         ApprovalRuleApi,
@@ -244,6 +251,11 @@ export class SDKBrowserModule {
         TaskMasterApi,
         TempleApi,
         TempleBranchApi,
+        FundInstrumentApi,
+        FundInstrumentTypeApi,
+        InstrumentIssueRegisterApi,
+        InstrumentReturnRegisterApi,
+        InstrumentPaymentRegisterApi,
         internalStorageProvider,
         { provide: SDKStorage, useClass: StorageBrowser }
       ]

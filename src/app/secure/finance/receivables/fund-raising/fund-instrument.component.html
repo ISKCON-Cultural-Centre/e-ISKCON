@@ -1,0 +1,173 @@
+<div fxLayout="row" fxLayout.xs="column">
+  <fieldset fxLayout="column" fxLayoutAlign="space-sevenly stretch">  
+    <legend>Departments Master</legend>
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter Fund Instruments">
+      </mat-form-field>
+
+    <button mat-icon-button (click) = 'displayCreateFundInstrument()' >
+      <mat-icon >add_circle</mat-icon>
+    </button>
+
+    <div fxLayout="row" fxLayoutAlign="space-sevenly stretch" *ngIf="add">
+      <form [formGroup]="fundInstrumentForm" (ngSubmit)="addFundInstrument()" novalidate   >   
+        <fieldset fxLayout="row" fxLayoutAlign="space-evenly stretch">
+          <legend>Add a Fund Instrument</legend>
+          <mat-form-field>
+            <mat-select  placeholder="Instrument Type" formControlName="receiptInstrumentTypeId" autofocus>
+                <mat-option *ngFor="let fundInstrumentType of fundInstrumentTypes " [value]="fundInstrumentType.id">
+                  <span>{{ fundInstrumentType.instrumentName }}</span>
+                </mat-option>
+            </mat-select>
+          </mat-form-field>  
+          <mat-form-field>
+            <input fxFill matInput placeholder="Instrument Ref No" class="form-control" formControlName="instrumentRefNo">
+          </mat-form-field>     
+          <mat-form-field>
+            <input type="number" matInput placeholder="Start Number" class="form-control" formControlName="startNo">
+          </mat-form-field>
+          <mat-form-field>
+            <input type="number" matInput placeholder="End Number" class="form-control" formControlName="endNo">
+          </mat-form-field>        
+            <button [disabled]="fundInstrumentForm.invalid" type="submit"  mat-raised-button color="primary">Add Fund Instrument
+            </button>
+            <button  type="button" (click) = 'cancel()'  mat-raised-button color="warn">
+              Cancel
+            </button>     
+        </fieldset>
+        </form>
+      </div>
+
+
+    <mat-table #table [dataSource]="dataSource" matSort matSortActive="created" matSortDisableClear matSortDirection="asc">
+      <!-- iNSTRUMENT tYPE Column -->
+      <ng-container matColumnDef="instrument">
+        <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+        <mat-cell *matCellDef="let fundInstrument">           
+          <mat-select (selectionChange) = 'editInstrumentTypeField($event, fundInstrument)'[value]="fundInstrument.receiptInstrumentTypeId">
+              <mat-option *ngFor="let fundInstrumentType of fundInstrumentTypes " [value]="fundInstrumentType.id">
+                <span>{{ fundInstrumentType.instrumentName }}</span>
+              </mat-option>
+          </mat-select>
+       </mat-cell>
+      </ng-container>    
+  
+      <!-- Instrument Reference Number -->
+      <ng-container matColumnDef="ref">
+        <mat-header-cell *matHeaderCellDef> Instrument Reference </mat-header-cell>
+        <mat-cell *matCellDef="let fundInstrument"> 
+            <app-inline-edit (done)='editInstrumentRefNoField(fundInstrument.instrumentRefNo, fundInstrument)' 
+            [(ngModel)]="fundInstrument.instrumentRefNo" [required]="true" type="text" placeholder="Role Name" (keyup.enter)="fundInstrument($event.target.value, fundInstrument)">
+          </app-inline-edit> 
+        </mat-cell>
+      </ng-container>
+  
+      <!-- Start No Column -->
+      <ng-container matColumnDef="start">
+        <mat-header-cell *matHeaderCellDef> Start # </mat-header-cell>
+        <mat-cell *matCellDef="let fundInstrument">           
+          <app-inline-edit (done)='editInstrumentStartNoField(fundInstrument.icon, fundInstrument)'
+            [(ngModel)]="fundInstrument.startNo" [required]="true" type="text"  (keyup.enter)="editInstrumentStartNoField($event.target.value, fundInstrument)">
+          </app-inline-edit> 
+       </mat-cell>
+      </ng-container>      
+  
+      <!-- End No Column -->
+      <ng-container matColumnDef="end">
+        <mat-header-cell *matHeaderCellDef> End # </mat-header-cell>
+        <mat-cell *matCellDef="let fundInstrument">           
+          <app-inline-edit (done)='editInstrumentEndNoField(fundInstrument.icon, fundInstrument)'
+            [(ngModel)]="fundInstrument.endNo" [required]="true" type="text"  (keyup.enter)="editInstrumentEndNoField($event.target.value, fundInstrument)">
+          </app-inline-edit> 
+       </mat-cell>
+      </ng-container>    
+  
+      <!-- Delete Column -->
+      <ng-container matColumnDef="delete">
+          <mat-header-cell *matHeaderCellDef> Delete </mat-header-cell>      
+        <mat-cell *matCellDef="let fundInstrument">
+          <button mat-icon-button (click)="openDialog(fundInstrument)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>    
+     
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+</fieldset>
+</div>
+
+<mat-accordion>
+  <mat-expansion-panel  *ngFor="let fundInstrumentType of fundInstrumentTypes">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{ fundInstrumentType.instrumentName }}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{ fundInstrumentType.fundInstruments.length }}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div fxLayout="row" fxLayoutAlign="space-evenly">
+        <mat-table fxFill fxLayout="column" class="m-t-20" #table [dataSource]="fundInstrumentType.fundInstruments" matSort>
+          <mat-table #table [dataSource]="dataSource" #table matSort matSortActive="ref" matSortDisableClear matSortDirection="asc">
+            <!-- iNSTRUMENT tYPE Column -->
+            <ng-container matColumnDef="instrument">
+              <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+              <mat-cell *matCellDef="let fundInstrument">           
+                <mat-select (selectionChange) = 'editInstrumentTypeField($event, fundInstrument)'[value]="fundInstrument.receiptInstrumentTypeId">
+                    <mat-option *ngFor="let fundInstrumentType of fundInstrumentTypes " [value]="fundInstrumentType.id">
+                      <span>{{ fundInstrumentType.instrumentName }}</span>
+                    </mat-option>
+                </mat-select>
+             </mat-cell>
+            </ng-container>    
+        
+            <!-- Instrument Reference Number -->
+            <ng-container matColumnDef="ref">
+              <mat-header-cell *matHeaderCellDef> Instrument Reference </mat-header-cell>
+              <mat-cell *matCellDef="let fundInstrument"> 
+                  <app-inline-edit (done)='editInstrumentRefNoField(fundInstrument.instrumentRefNo, fundInstrument)' 
+                  [(ngModel)]="fundInstrument.instrumentRefNo" [required]="true" type="text" placeholder="Role Name" (keyup.enter)="fundInstrument($event.target.value, fundInstrument)">
+                </app-inline-edit> 
+              </mat-cell>
+            </ng-container>
+        
+            <!-- Start No Column -->
+            <ng-container matColumnDef="start">
+              <mat-header-cell *matHeaderCellDef> Start # </mat-header-cell>
+              <mat-cell *matCellDef="let fundInstrument">           
+                <app-inline-edit (done)='editInstrumentStartNoField(fundInstrument.icon, fundInstrument)'
+                  [(ngModel)]="fundInstrument.startNo" [required]="true" type="text"  (keyup.enter)="editInstrumentStartNoField($event.target.value, fundInstrument)">
+                </app-inline-edit> 
+             </mat-cell>
+            </ng-container>      
+        
+            <!-- End No Column -->
+            <ng-container matColumnDef="end">
+              <mat-header-cell *matHeaderCellDef> End # </mat-header-cell>
+              <mat-cell *matCellDef="let fundInstrument">           
+                <app-inline-edit (done)='editInstrumentEndNoField(fundInstrument.icon, fundInstrument)'
+                  [(ngModel)]="fundInstrument.endNo" [required]="true" type="text"  (keyup.enter)="editInstrumentEndNoField($event.target.value, fundInstrument)">
+                </app-inline-edit> 
+             </mat-cell>
+            </ng-container>    
+        
+            <!-- Delete Column -->
+            <ng-container matColumnDef="delete">
+                <mat-header-cell *matHeaderCellDef> Delete </mat-header-cell>      
+              <mat-cell *matCellDef="let fundInstrument">
+                <button mat-icon-button (click)="openDialog(fundInstrument)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </mat-cell>
+            </ng-container>    
+           
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+        </mat-table>     
+    </div>     
+  </mat-expansion-panel>
+</mat-accordion>    

@@ -33,6 +33,7 @@ import { LookupModule } from './secure/lookup/lookup.module';
 import { LookupService } from './shared/services/lookup.service';
 import { DummyService } from './shared/services/dummy.service';
 import { OrganizationModule } from './secure/organization/organization.module';
+import { FinanceModule } from './secure/finance/finance.module';
 import { SharedComponentsModule } from './shared/components/shared-components.module';
 import { CommonComponentsModule } from './secure/common/common-components.module';
 import { SecureComponent } from './layout/secure';
@@ -78,6 +79,7 @@ export const MY_MOMENT_FORMATS = {
     MatchlessGiftsModule,
     LookupModule,
     OrganizationModule,
+    FinanceModule,
     SharedComponentsModule,
     CommonComponentsModule,
     DashboardModule, 

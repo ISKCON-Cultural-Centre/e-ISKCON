@@ -1,5 +1,6 @@
 /* tslint:disable */
 import {
+  Accesstoken,
   AsramaMaster,
   Circle,
   GothraMaster,
@@ -44,7 +45,7 @@ export interface DevoteeInterface {
   "created-on"?: Date;
   "updated-on"?: Date;
   "password"?: string;
-  accessTokens?: any[];
+  accessTokens?: Accesstoken[];
   fkDevoteeAsramaMaster1rel?: AsramaMaster;
   fkDevoteeCircle1rel?: Circle;
   fkDevoteeGothraMaster1rel?: GothraMaster;
@@ -88,7 +89,7 @@ export class Devotee implements DevoteeInterface {
   "created-on": Date;
   "updated-on": Date;
   "password": string;
-  accessTokens: any[];
+  accessTokens: Accesstoken[];
   fkDevoteeAsramaMaster1rel: AsramaMaster;
   fkDevoteeCircle1rel: Circle;
   fkDevoteeGothraMaster1rel: GothraMaster;
@@ -262,8 +263,8 @@ export class Devotee implements DevoteeInterface {
       relations: {
         accessTokens: {
           name: 'accessTokens',
-          type: 'any[]',
-          model: '',
+          type: 'Accesstoken[]',
+          model: 'Accesstoken',
           relationType: 'hasMany',
                   keyFrom: 'id',
           keyTo: 'userId'

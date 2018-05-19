@@ -1,4 +1,5 @@
 /* tslint:disable */
+export * from './Accesstoken';
 export * from './ApprovalArtefact';
 export * from './ApprovalQue';
 export * from './ApprovalRule';
@@ -84,5 +85,10 @@ export * from './SpiritualLevelMaster';
 export * from './TaskMaster';
 export * from './Temple';
 export * from './TempleBranch';
+export * from './FundInstrument';
+export * from './FundInstrumentType';
+export * from './InstrumentIssueRegister';
+export * from './InstrumentReturnRegister';
+export * from './InstrumentPaymentRegister';
 export * from './BaseModels';
 
