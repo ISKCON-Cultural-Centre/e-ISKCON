@@ -1,6 +1,4 @@
 <div fxLayout="row" fxLayout.xs="column">
-  <fieldset fxLayout="column" fxLayoutAlign="space-sevenly stretch">  
-    <legend>Departments Master</legend>
       <mat-form-field>
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter Fund Instruments">
       </mat-form-field>
@@ -11,12 +9,10 @@
 
     <div fxLayout="row" fxLayoutAlign="space-sevenly stretch" *ngIf="add">
       <form [formGroup]="fundInstrumentForm" (ngSubmit)="addFundInstrument()" novalidate   >   
-        <fieldset fxLayout="row" fxLayoutAlign="space-evenly stretch">
-          <legend>Add a Fund Instrument</legend>
           <mat-form-field>
             <mat-select  placeholder="Instrument Type" formControlName="receiptInstrumentTypeId" autofocus>
                 <mat-option *ngFor="let fundInstrumentType of fundInstrumentTypes " [value]="fundInstrumentType.id">
-                  <span>{{ fundInstrumentType.instrumentName }}</span>
+                  <span>{{ fundInstrumentType.instrumentName }}</span> <span matBadge="4" matBadgeOverlap="false"></span>
                 </mat-option>
             </mat-select>
           </mat-form-field>  
@@ -34,7 +30,6 @@
             <button  type="button" (click) = 'cancel()'  mat-raised-button color="warn">
               Cancel
             </button>     
-        </fieldset>
         </form>
       </div>
 
@@ -43,15 +38,16 @@
         <mat-expansion-panel  *ngFor="let fundInstrumentType of fundInstrumentTypes">
           <mat-expansion-panel-header>
             <mat-panel-title>
-              {{ fundInstrumentType.instrumentName }}
+              {{ fundInstrumentType.instrumentName }}<span matBadge="4" matBadgeOverlap="false"></span>
             </mat-panel-title>
             <mat-panel-description>
+<!--               {{fundInstrumentType.fundInstruments.length}} -->
               {{ fundInstrumentType.fundInstruments ? fundInstrumentType.fundInstruments.length : ''}}
             </mat-panel-description>
           </mat-expansion-panel-header>
           <div fxLayout="row" fxLayoutAlign="space-evenly">
               <mat-table fxFill fxLayout="column" class="m-t-20" #table [dataSource]="fundInstrumentType.fundInstruments" matSort>
-                  <!-- iNSTRUMENT tYPE Column -->
+                  <!-- Instrument Type Column -->
                   <ng-container matColumnDef="instrument">
                     <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
                     <mat-cell *matCellDef="let fundInstrument">           
@@ -108,9 +104,7 @@
               </mat-table>     
           </div>     
         </mat-expansion-panel>
-      </mat-accordion>    
-
-</fieldset>
+      </mat-accordion>
 </div>
 
 

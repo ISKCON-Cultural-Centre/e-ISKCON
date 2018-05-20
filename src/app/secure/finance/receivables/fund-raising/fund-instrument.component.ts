@@ -29,7 +29,7 @@ export class FundInstrumentComponent implements OnInit, OnDestroy {
 
   displayedColumns = ['instrument', 'ref', 'start', 'end', 'delete'];
   add = false; 
-  fundInstruments: FundInstrument[];
+  fundInstruments: FundInstrument[] = [];
   devotees: Devotee[] = [];
   dataSource = new MatTableDataSource<FundInstrumentType>();
 
@@ -57,7 +57,7 @@ export class FundInstrumentComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.loadFundInstruments();
-    this.loadFundInstrumentTypes();
+    //this.loadFundInstrumentTypes();
   }
 
   createForm() {
@@ -138,18 +138,19 @@ export class FundInstrumentComponent implements OnInit, OnDestroy {
       fundInstruments => {
         this.fundInstrumentTypes = fundInstruments;
         this.dataSource.data = fundInstruments;
+        //console.log(fundInstruments);
       }
     )
   }
 
-  loadFundInstrumentTypes() {
+/*   loadFundInstrumentTypes() {
     this.three$ = this.fundInstrumentTypeApi.find<FundInstrumentType>({'order': 'instrumentName ASC'})
     .subscribe(
       fundInstrumentTypes => {
         this.fundInstrumentTypes = fundInstrumentTypes;
       }
     )
-  }
+  } */
 
   openDialog(fundInstrument: FundInstrument) {
     let dialogRef = this.dialog.open(DialogBoxComponent, {
