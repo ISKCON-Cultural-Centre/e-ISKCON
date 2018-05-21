@@ -22,6 +22,7 @@ import { DevoteeGroupComponent } from '../../secure/devotee/devotee-group.compon
 import { EventCalendarComponent } from './../../secure/organization/event-calendar.component';
 import { DevoteeServiceComponent } from '../../secure/devotee/devotee-service.component';
 import { EventMasterComponent } from './../../secure/organization/event/event-master.component';
+import { EventPlannerComponent } from './../../secure/organization/event/event-planner.component';
 import { FundInstrumentComponent } from '../../secure/finance/receivables/fund-raising/fund-instrument.component'
 
 export const SECURE_ROUTES: Routes = [
@@ -168,5 +169,13 @@ export const SECURE_ROUTES: Routes = [
       component: FundInstrumentComponent, 
       canActivate: [AuthGuard] 
     },
+    {
+      path: 'organization/event/eventPlanner', 
+      data: {
+        breadcrumb: 'Event Planner'
+      },
+      component: EventPlannerComponent, 
+      canActivate: [AuthGuard] 
+    },    
   ];
   
