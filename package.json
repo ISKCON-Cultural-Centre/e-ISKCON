@@ -37,10 +37,14 @@
     "ng-fullcalendar": "^1.5.6",
     "ng-pick-datetime": "5.2.6",
     "ng-pick-datetime-moment": "1.0.5",
+    "print-js": "^1.0.43",
+    "qz-tray": "^2.0.6-1",
     "react-scripts-ts": "^2.13.0",
     "rxjs": "^5.5.6",
     "set-manipulator": "^0.3.1",
+    "sha": "^2.0.1",
     "underscore": "^1.8.3",
+    "ws": "^5.2.0",
     "zone.js": "^0.8.20"
   },
   "devDependencies": {

@@ -39,6 +39,7 @@ import { CommonComponentsModule } from './secure/common/common-components.module
 import { SecureComponent } from './layout/secure';
 import { PublicComponent } from './layout/public';
 import { DashboardModule } from './secure/dashboard/dashboard.module';
+import { RawPrintService } from './shared/services/raw-print.service';
 
 // See the Moment.js docs for the meaning of these formats:
 // https://momentjs.com/docs/#/displaying/format/
@@ -92,6 +93,7 @@ export const MY_MOMENT_FORMATS = {
     AuthService,
     MessageService,
     MyServicesService,
+    RawPrintService,
     MyDepartmentsService,
     GlobalEventsManager,
     NotificationService,
