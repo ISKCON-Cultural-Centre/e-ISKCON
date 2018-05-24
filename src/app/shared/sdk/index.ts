@@ -53,7 +53,7 @@ import { AsramaMasterApi } from './services/custom/AsramaMaster';
 import { CircleApi } from './services/custom/Circle';
 import { DepartmentApi } from './services/custom/Department';
 import { DepartmentAnnouncementApi } from './services/custom/DepartmentAnnouncement';
-import { DepartmentCalendarApi } from './services/custom/DepartmentCalendar';
+import { DepartmentEventApi } from './services/custom/DepartmentEvent';
 import { DevoteeApi } from './services/custom/Devotee';
 import { DevoteeAsramaApi } from './services/custom/DevoteeAsrama';
 import { DevoteeElectronicAddressApi } from './services/custom/DevoteeElectronicAddress';
@@ -173,7 +173,7 @@ export class SDKBrowserModule {
         CircleApi,
         DepartmentApi,
         DepartmentAnnouncementApi,
-        DepartmentCalendarApi,
+        DepartmentEventApi,
         DevoteeApi,
         DevoteeAsramaApi,
         DevoteeElectronicAddressApi,

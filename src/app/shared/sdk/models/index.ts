@@ -7,7 +7,7 @@ export * from './AsramaMaster';
 export * from './Circle';
 export * from './Department';
 export * from './DepartmentAnnouncement';
-export * from './DepartmentCalendar';
+export * from './DepartmentEvent';
 export * from './Devotee';
 export * from './DevoteeAsrama';
 export * from './DevoteeElectronicAddress';

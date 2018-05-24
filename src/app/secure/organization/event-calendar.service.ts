@@ -4,18 +4,18 @@ import 'rxjs/add/observable/of';
 
 import {LoopBackFilter} from '../../shared/sdk/models/BaseModels';
 
-import { DepartmentCalendarApi, DepartmentCalendar } from '../..//shared/sdk';
+import { DepartmentEventApi, DepartmentEvent } from '../..//shared/sdk';
 
 @Injectable()
 export class EventService {
-    events: DepartmentCalendar[];
+    events: DepartmentEvent[];
     loopBackFilter: LoopBackFilter = {};
-    constructor(private departmentCalendarApi: DepartmentCalendarApi) {}
+    constructor(private departmentCalendarApi: DepartmentEventApi) {}
 
     public getCurrentEvents(): Observable<any> {
     this.loopBackFilter.where = {'startTime': {gte: new Date()}};
     //this.loopBackFilter.include = ['fkDepartmentAnnouncementDepartment1rel'];
     //this.loopBackFilter.order = ['validUntil DESC'];
-    return this.departmentCalendarApi.find<DepartmentCalendar>(this.loopBackFilter);
+    return this.departmentCalendarApi.find<DepartmentEvent>(this.loopBackFilter);
     }
 }

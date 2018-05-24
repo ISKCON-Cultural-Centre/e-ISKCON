@@ -67,9 +67,9 @@ export const SECURE_ROUTES: Routes = [
       canActivate: [AuthGuard]
     },    
     { 
-      path: 'devoteeRole',
+      path: 'devotee/role',
       data: {
-        breadcrumb: 'Roles'
+        breadcrumb: 'Devotee Roles'
       },
       component: DevoteeRoleComponent, 
       canActivate: [AuthGuard] 

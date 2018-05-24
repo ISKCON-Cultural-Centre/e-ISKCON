@@ -8,7 +8,7 @@ import { AsramaMaster } from '../../models/AsramaMaster';
 import { Circle } from '../../models/Circle';
 import { Department } from '../../models/Department';
 import { DepartmentAnnouncement } from '../../models/DepartmentAnnouncement';
-import { DepartmentCalendar } from '../../models/DepartmentCalendar';
+import { DepartmentEvent } from '../../models/DepartmentEvent';
 import { Devotee } from '../../models/Devotee';
 import { DevoteeAsrama } from '../../models/DevoteeAsrama';
 import { DevoteeElectronicAddress } from '../../models/DevoteeElectronicAddress';
@@ -106,7 +106,7 @@ export class SDKModels {
     Circle: Circle,
     Department: Department,
     DepartmentAnnouncement: DepartmentAnnouncement,
-    DepartmentCalendar: DepartmentCalendar,
+    DepartmentEvent: DepartmentEvent,
     Devotee: Devotee,
     DevoteeAsrama: DevoteeAsrama,
     DevoteeElectronicAddress: DevoteeElectronicAddress,

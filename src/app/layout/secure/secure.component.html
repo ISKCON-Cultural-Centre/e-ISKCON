@@ -1,7 +1,4 @@
- <div fxFlexFill  fxLayout="column">
-  <main fxFlexFill>
-  <mat-sidenav-container fxFlex>
-            
+  <mat-sidenav-container fxFlexFill>
             <mat-sidenav #mainSideNav mode="over" closed (click)="mainSideNav.toggle()" >
                 <mat-toolbar color="primary" *ngIf="isLoggedIn$ | async as isLoggedIn">
                    My Services
@@ -18,6 +15,8 @@
                     </a>
                 </mat-nav-list>
             </mat-sidenav>
+            <mat-sidenav-content>
+            <div fxLayout="column">         
               <mat-toolbar color="primary" *ngIf="isLoggedIn$ | async as isLoggedIn">
                 <button mat-icon-button (click)="mainSideNav.toggle()">
                       <mat-icon *ngIf="mainSideNav.opened">chevron_left</mat-icon>
@@ -46,18 +45,14 @@
                         <span>Logout</span>
                       </button>
                     </mat-menu>               
-              </mat-toolbar>
-                <app-breadcrumb></app-breadcrumb>   
-                <router-outlet></router-outlet>   
-    
-                                               
+                </mat-toolbar>
+                   <app-breadcrumb></app-breadcrumb> 
+                   <router-outlet></router-outlet>         
+            </div>                  
+            </mat-sidenav-content>
 </mat-sidenav-container>       
-</main>  
+
 <!-- <footer>
     With &hearts; by ISKCON Cultural Centre - IT, Bangalore
 </footer>   -->
-</div>
-
- 
-
 

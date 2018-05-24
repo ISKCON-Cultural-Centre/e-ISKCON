@@ -1,22 +1,30 @@
 /* tslint:disable */
+import {
+  EventMaster,
+  ServiceArea
+} from '../index';
 
 declare var Object: any;
 export interface EventServiceMasterInterface {
-  "eventMasterId": string;
   "serviceAreaId": string;
+  "eventMasterId": string;
   "createdOn"?: Date;
   "updatedOn"?: Date;
   "createdBy"?: string;
   "updatedBy"?: string;
+  fkEventServiceMasterEventMaster1rel?: EventMaster;
+  fkEventServiceMasterServiceArea1rel?: ServiceArea;
 }
 
 export class EventServiceMaster implements EventServiceMasterInterface {
-  "eventMasterId": string;
   "serviceAreaId": string;
+  "eventMasterId": string;
   "createdOn": Date;
   "updatedOn": Date;
   "createdBy": string;
   "updatedBy": string;
+  fkEventServiceMasterEventMaster1rel: EventMaster;
+  fkEventServiceMasterServiceArea1rel: ServiceArea;
   constructor(data?: EventServiceMasterInterface) {
     Object.assign(this, data);
   }
@@ -48,14 +56,14 @@ export class EventServiceMaster implements EventServiceMasterInterface {
       name: 'EventServiceMaster',
       plural: 'EventServiceMasters',
       path: 'EventServiceMasters',
-      idName: 'eventMasterId',
+      idName: 'serviceAreaId',
       properties: {
-        "eventMasterId": {
-          name: 'eventMasterId',
-          type: 'string'
-        },
         "serviceAreaId": {
           name: 'serviceAreaId',
+          type: 'string'
+        },
+        "eventMasterId": {
+          name: 'eventMasterId',
           type: 'string'
         },
         "createdOn": {
@@ -76,6 +84,22 @@ export class EventServiceMaster implements EventServiceMasterInterface {
         },
       },
       relations: {
+        fkEventServiceMasterEventMaster1rel: {
+          name: 'fkEventServiceMasterEventMaster1rel',
+          type: 'EventMaster',
+          model: 'EventMaster',
+          relationType: 'belongsTo',
+                  keyFrom: 'eventMasterId',
+          keyTo: 'id'
+        },
+        fkEventServiceMasterServiceArea1rel: {
+          name: 'fkEventServiceMasterServiceArea1rel',
+          type: 'ServiceArea',
+          model: 'ServiceArea',
+          relationType: 'belongsTo',
+                  keyFrom: 'serviceAreaId',
+          keyTo: 'id'
+        },
       }
     }
   }

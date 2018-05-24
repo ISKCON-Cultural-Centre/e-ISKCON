@@ -3,6 +3,27 @@
 @import "~ng-pick-datetime/assets/style/picker.min.css";
 @import "@angular/material/prebuilt-themes/indigo-pink.css";
 
+@media screen {
+    #printSection {
+        display: none;
+    }
+}
+
+@media print {
+    body * {
+        visibility:hidden;
+    }
+    #printSection, #printSection * {
+        visibility:visible;
+    }
+    #printSection {
+        position:absolute;
+        left:0;
+        top:0;
+    }
+}
+
+
 .wrapper {
 	display: flex;
 	flex-flow: row;

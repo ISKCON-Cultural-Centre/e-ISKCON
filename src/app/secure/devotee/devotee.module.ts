@@ -63,5 +63,8 @@ import { DevoteeServiceComponent } from './devotee-service.component'
     DevoteeProfileComponent,
     DevoteeCardComponent
   ],  
+  exports: [
+    DevoteeSearchComponent
+  ],
 })
 export class DevoteeModule { }

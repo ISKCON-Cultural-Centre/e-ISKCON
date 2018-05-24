@@ -1,5 +1,6 @@
 /* tslint:disable */
 import {
+  DonationCategoryMaster,
   EventMaster
 } from '../index';
 
@@ -11,6 +12,7 @@ export interface EventDonationMasterInterface {
   "updatedOn"?: Date;
   "createdBy"?: string;
   "updatedBy"?: string;
+  fkEventDonationMasterDonationCategoryMaster1rel?: DonationCategoryMaster;
   fkFestivalDonationMasterFestivalMaster1rel?: EventMaster;
 }
 
@@ -21,6 +23,7 @@ export class EventDonationMaster implements EventDonationMasterInterface {
   "updatedOn": Date;
   "createdBy": string;
   "updatedBy": string;
+  fkEventDonationMasterDonationCategoryMaster1rel: DonationCategoryMaster;
   fkFestivalDonationMasterFestivalMaster1rel: EventMaster;
   constructor(data?: EventDonationMasterInterface) {
     Object.assign(this, data);
@@ -81,6 +84,14 @@ export class EventDonationMaster implements EventDonationMasterInterface {
         },
       },
       relations: {
+        fkEventDonationMasterDonationCategoryMaster1rel: {
+          name: 'fkEventDonationMasterDonationCategoryMaster1rel',
+          type: 'DonationCategoryMaster',
+          model: 'DonationCategoryMaster',
+          relationType: 'belongsTo',
+                  keyFrom: 'donationCategoryMasterId',
+          keyTo: 'id'
+        },
         fkFestivalDonationMasterFestivalMaster1rel: {
           name: 'fkFestivalDonationMasterFestivalMaster1rel',
           type: 'EventMaster',

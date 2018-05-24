@@ -9,7 +9,7 @@ import { EventService } from './event-calendar.service';
 
 import {LoopBackFilter} from '../../shared/sdk/models/BaseModels';
 import { ServiceCalendarEntryComponent} from '../my-services/service-calendar-entry.component';
-import { Department, DepartmentCalendar, DepartmentApi } from '../../shared/sdk/index';
+import { Department, DepartmentEvent, DepartmentApi } from '../../shared/sdk/index';
 import { AuthService } from '../../shared/services';
 
 @Component({
@@ -147,7 +147,7 @@ export class EventCalendarComponent implements OnInit, OnDestroy {
     this.displayEvent = model;
   }
 
-  select(newEvent: boolean, event: DepartmentCalendar) {
+  select(newEvent: boolean, event: DepartmentEvent) {
       this.openEventDialog(newEvent, event);
   }
 
@@ -195,7 +195,7 @@ export class EventCalendarComponent implements OnInit, OnDestroy {
   openEventDialog(newEvent: boolean, event?: any) {
     const dialogConfig = new MatDialogConfig();
     if (!event) {
-      event = new DepartmentCalendar();
+      event = new DepartmentEvent();
     }
 
     dialogConfig.data = event;

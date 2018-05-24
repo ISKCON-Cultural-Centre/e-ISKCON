@@ -1,7 +1,6 @@
 /* tslint:disable */
 import {
   DepartmentAnnouncement,
-  DepartmentCalendar,
   Devotee,
   Temple
 } from '../index';
@@ -17,7 +16,6 @@ export interface DepartmentInterface {
   "created-on"?: Date;
   "updated-on"?: Date;
   announcements?: DepartmentAnnouncement[];
-  events?: DepartmentCalendar[];
   fkDepartmentDevotee1rel?: Devotee;
   fkDepartmentTemple1rel?: Temple;
 }
@@ -32,7 +30,6 @@ export class Department implements DepartmentInterface {
   "created-on": Date;
   "updated-on": Date;
   announcements: DepartmentAnnouncement[];
-  events: DepartmentCalendar[];
   fkDepartmentDevotee1rel: Devotee;
   fkDepartmentTemple1rel: Temple;
   constructor(data?: DepartmentInterface) {
@@ -106,14 +103,6 @@ export class Department implements DepartmentInterface {
           name: 'announcements',
           type: 'DepartmentAnnouncement[]',
           model: 'DepartmentAnnouncement',
-          relationType: 'hasMany',
-                  keyFrom: 'id',
-          keyTo: 'departmentId'
-        },
-        events: {
-          name: 'events',
-          type: 'DepartmentCalendar[]',
-          model: 'DepartmentCalendar',
           relationType: 'hasMany',
                   keyFrom: 'id',
           keyTo: 'departmentId'

@@ -7,6 +7,7 @@ import { SharedComponentsModule } from '../../../shared/components/shared-compon
 
 import { QRCodeModule } from 'angularx-qrcode';
 import { EventPlannerComponent } from './event-planner.component';
+import { DevoteeModule } from '../../devotee/devotee.module';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { EventPlannerComponent } from './event-planner.component';
     MaterialModule,
     SharedComponentsModule,
     FormsModule, ReactiveFormsModule,
-    QRCodeModule
+    QRCodeModule,
+    DevoteeModule
   ],
   declarations: [EventMasterComponent, EventPlannerComponent]
 })

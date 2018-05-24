@@ -7,8 +7,6 @@ import { MatPaginator, MatSort, MatTableDataSource, MatSelectChange } from '@ang
 import {MatDialog} from '@angular/material';
 import { Subscription } from 'rxjs/Subscription';
 
-import { SharedComponentsModule } from '../../shared/components/shared-components.module'
-import { InlineEditComponent } from '../../shared/components/inline-edit/inline-edit.component';
 import { DialogBoxComponent } from '../../shared/components/dialog-box/dialog-box.component';
 
 @Component({

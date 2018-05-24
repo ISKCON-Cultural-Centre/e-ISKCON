@@ -8,6 +8,8 @@ export interface DonationCategoryMasterInterface {
   "updatedOn"?: Date;
   "createdBy"?: string;
   "updatedBy"?: string;
+  "created-on"?: Date;
+  "updated-on"?: Date;
 }
 
 export class DonationCategoryMaster implements DonationCategoryMasterInterface {
@@ -17,6 +19,8 @@ export class DonationCategoryMaster implements DonationCategoryMasterInterface {
   "updatedOn": Date;
   "createdBy": string;
   "updatedBy": string;
+  "created-on": Date;
+  "updated-on": Date;
   constructor(data?: DonationCategoryMasterInterface) {
     Object.assign(this, data);
   }
@@ -73,6 +77,14 @@ export class DonationCategoryMaster implements DonationCategoryMasterInterface {
         "updatedBy": {
           name: 'updatedBy',
           type: 'string'
+        },
+        "created-on": {
+          name: 'created-on',
+          type: 'Date'
+        },
+        "updated-on": {
+          name: 'updated-on',
+          type: 'Date'
         },
       },
       relations: {

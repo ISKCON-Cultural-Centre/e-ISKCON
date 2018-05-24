@@ -1,24 +1,32 @@
 /* tslint:disable */
+import {
+  DepartmentEvent,
+  ServiceArea
+} from '../index';
 
 declare var Object: any;
 export interface EventServiceInterface {
-  "id": string;
-  "departmentCalendarId": string;
+  "departmentEventId": string;
   "serviceAreaId": string;
+  "serviceQty": number;
   "createdOn"?: Date;
   "updatedOn"?: Date;
   "createdBy"?: string;
   "updatedBy"?: string;
+  fkEventServiceDepartmentEvent1rel?: DepartmentEvent;
+  fkEventServiceServiceArea1rel?: ServiceArea;
 }
 
 export class EventService implements EventServiceInterface {
-  "id": string;
-  "departmentCalendarId": string;
+  "departmentEventId": string;
   "serviceAreaId": string;
+  "serviceQty": number;
   "createdOn": Date;
   "updatedOn": Date;
   "createdBy": string;
   "updatedBy": string;
+  fkEventServiceDepartmentEvent1rel: DepartmentEvent;
+  fkEventServiceServiceArea1rel: ServiceArea;
   constructor(data?: EventServiceInterface) {
     Object.assign(this, data);
   }
@@ -50,19 +58,19 @@ export class EventService implements EventServiceInterface {
       name: 'EventService',
       plural: 'EventServices',
       path: 'EventServices',
-      idName: 'id',
+      idName: 'departmentEventId',
       properties: {
-        "id": {
-          name: 'id',
-          type: 'string'
-        },
-        "departmentCalendarId": {
-          name: 'departmentCalendarId',
+        "departmentEventId": {
+          name: 'departmentEventId',
           type: 'string'
         },
         "serviceAreaId": {
           name: 'serviceAreaId',
           type: 'string'
+        },
+        "serviceQty": {
+          name: 'serviceQty',
+          type: 'number'
         },
         "createdOn": {
           name: 'createdOn',
@@ -82,6 +90,22 @@ export class EventService implements EventServiceInterface {
         },
       },
       relations: {
+        fkEventServiceDepartmentEvent1rel: {
+          name: 'fkEventServiceDepartmentEvent1rel',
+          type: 'DepartmentEvent',
+          model: 'DepartmentEvent',
+          relationType: 'belongsTo',
+                  keyFrom: 'departmentEventId',
+          keyTo: 'id'
+        },
+        fkEventServiceServiceArea1rel: {
+          name: 'fkEventServiceServiceArea1rel',
+          type: 'ServiceArea',
+          model: 'ServiceArea',
+          relationType: 'belongsTo',
+                  keyFrom: 'serviceAreaId',
+          keyTo: 'id'
+        },
       }
     }
   }

@@ -1,12 +1,14 @@
 /* tslint:disable */
 import {
-  Department
+  Department,
+  EventMaster
 } from '../index';
 
 declare var Object: any;
-export interface DepartmentCalendarInterface {
+export interface DepartmentEventInterface {
   "id": string;
   "departmentId": string;
+  "eventMasterId": string;
   "eventName": string;
   "eventDescription"?: string;
   "startTime": Date;
@@ -19,12 +21,14 @@ export interface DepartmentCalendarInterface {
   "updatedBy"?: string;
   "created-on"?: Date;
   "updated-on"?: Date;
-  fkDepartmentCalendarDepartment1rel?: Department;
+  fkDepartmentCalendarDepartmentrel?: Department;
+  fkDepartmentEventEventMaster1rel?: EventMaster;
 }
 
-export class DepartmentCalendar implements DepartmentCalendarInterface {
+export class DepartmentEvent implements DepartmentEventInterface {
   "id": string;
   "departmentId": string;
+  "eventMasterId": string;
   "eventName": string;
   "eventDescription": string;
   "startTime": Date;
@@ -37,25 +41,26 @@ export class DepartmentCalendar implements DepartmentCalendarInterface {
   "updatedBy": string;
   "created-on": Date;
   "updated-on": Date;
-  fkDepartmentCalendarDepartment1rel: Department;
-  constructor(data?: DepartmentCalendarInterface) {
+  fkDepartmentCalendarDepartmentrel: Department;
+  fkDepartmentEventEventMaster1rel: EventMaster;
+  constructor(data?: DepartmentEventInterface) {
     Object.assign(this, data);
   }
   /**
    * The name of the model represented by this $resource,
-   * i.e. `DepartmentCalendar`.
+   * i.e. `DepartmentEvent`.
    */
   public static getModelName() {
-    return "DepartmentCalendar";
+    return "DepartmentEvent";
   }
   /**
   * @method factory
   * @author Jonathan Casarrubias
   * @license MIT
-  * This method creates an instance of DepartmentCalendar for dynamic purposes.
+  * This method creates an instance of DepartmentEvent for dynamic purposes.
   **/
-  public static factory(data: DepartmentCalendarInterface): DepartmentCalendar{
-    return new DepartmentCalendar(data);
+  public static factory(data: DepartmentEventInterface): DepartmentEvent{
+    return new DepartmentEvent(data);
   }
   /**
   * @method getModelDefinition
@@ -66,9 +71,9 @@ export class DepartmentCalendar implements DepartmentCalendarInterface {
   **/
   public static getModelDefinition() {
     return {
-      name: 'DepartmentCalendar',
-      plural: 'DepartmentCalendars',
-      path: 'DepartmentCalendars',
+      name: 'DepartmentEvent',
+      plural: 'DepartmentEvents',
+      path: 'DepartmentEvents',
       idName: 'id',
       properties: {
         "id": {
@@ -77,6 +82,10 @@ export class DepartmentCalendar implements DepartmentCalendarInterface {
         },
         "departmentId": {
           name: 'departmentId',
+          type: 'string'
+        },
+        "eventMasterId": {
+          name: 'eventMasterId',
           type: 'string'
         },
         "eventName": {
@@ -129,12 +138,20 @@ export class DepartmentCalendar implements DepartmentCalendarInterface {
         },
       },
       relations: {
-        fkDepartmentCalendarDepartment1rel: {
-          name: 'fkDepartmentCalendarDepartment1rel',
+        fkDepartmentCalendarDepartmentrel: {
+          name: 'fkDepartmentCalendarDepartmentrel',
           type: 'Department',
           model: 'Department',
           relationType: 'belongsTo',
                   keyFrom: 'departmentId',
+          keyTo: 'id'
+        },
+        fkDepartmentEventEventMaster1rel: {
+          name: 'fkDepartmentEventEventMaster1rel',
+          type: 'EventMaster',
+          model: 'EventMaster',
+          relationType: 'belongsTo',
+                  keyFrom: 'eventMasterId',
           keyTo: 'id'
         },
       }

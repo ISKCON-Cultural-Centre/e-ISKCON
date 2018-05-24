@@ -11,7 +11,7 @@ import { ErrorHandler } from '../core/error.service';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
 import { EventDonationItem } from '../../models/EventDonationItem';
-import { DepartmentCalendar } from '../../models/DepartmentCalendar';
+import { DepartmentEvent } from '../../models/DepartmentEvent';
 
 
 /**

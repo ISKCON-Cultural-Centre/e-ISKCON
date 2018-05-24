@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, OnDestroy, Inject} from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {  Department, DepartmentApi,
-  DepartmentCalendar, DepartmentCalendarApi } from '../../shared/sdk';
+  DepartmentEvent, DepartmentEventApi } from '../../shared/sdk';
 import { MaterialModule } from '../../material.module';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { Subscription } from 'rxjs/Subscription';
@@ -37,7 +37,7 @@ export class ServiceCalendarEntryComponent  implements OnInit, OnDestroy {
     private notificationService: NotificationService,
     private authService: AuthService,
     private departmentApi: DepartmentApi,
-    private departmentCalendarApi: DepartmentCalendarApi,
+    private departmentCalendarApi: DepartmentEventApi,
     private fb: FormBuilder,
     public dialog: MatDialog,
     private dialogRef: MatDialogRef<ServiceCalendarEntryComponent>,
@@ -97,7 +97,7 @@ export class ServiceCalendarEntryComponent  implements OnInit, OnDestroy {
   }
 
   addDepartmentEvent() {
-    this.one$ = this.departmentCalendarApi.create<DepartmentCalendar>(
+    this.one$ = this.departmentCalendarApi.create<DepartmentEvent>(
       this.eventForm.value
     )
     .subscribe(result => {

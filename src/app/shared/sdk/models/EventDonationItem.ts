@@ -1,6 +1,6 @@
 /* tslint:disable */
 import {
-  DepartmentCalendar
+  DepartmentEvent
 } from '../index';
 
 declare var Object: any;
@@ -12,7 +12,9 @@ export interface EventDonationItemInterface {
   "updatedOn"?: Date;
   "createdBy"?: string;
   "updatedBy"?: string;
-  fkEventDonationMasterDepartmentCalendar1rel?: DepartmentCalendar;
+  "created-on"?: Date;
+  "updated-on"?: Date;
+  fkEventDonationMasterDepartmentCalendar1rel?: DepartmentEvent;
 }
 
 export class EventDonationItem implements EventDonationItemInterface {
@@ -23,7 +25,9 @@ export class EventDonationItem implements EventDonationItemInterface {
   "updatedOn": Date;
   "createdBy": string;
   "updatedBy": string;
-  fkEventDonationMasterDepartmentCalendar1rel: DepartmentCalendar;
+  "created-on": Date;
+  "updated-on": Date;
+  fkEventDonationMasterDepartmentCalendar1rel: DepartmentEvent;
   constructor(data?: EventDonationItemInterface) {
     Object.assign(this, data);
   }
@@ -85,12 +89,20 @@ export class EventDonationItem implements EventDonationItemInterface {
           name: 'updatedBy',
           type: 'string'
         },
+        "created-on": {
+          name: 'created-on',
+          type: 'Date'
+        },
+        "updated-on": {
+          name: 'updated-on',
+          type: 'Date'
+        },
       },
       relations: {
         fkEventDonationMasterDepartmentCalendar1rel: {
           name: 'fkEventDonationMasterDepartmentCalendar1rel',
-          type: 'DepartmentCalendar',
-          model: 'DepartmentCalendar',
+          type: 'DepartmentEvent',
+          model: 'DepartmentEvent',
           relationType: 'belongsTo',
                   keyFrom: 'departmentCalendarId',
           keyTo: 'id'

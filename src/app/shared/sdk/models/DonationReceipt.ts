@@ -9,10 +9,11 @@ declare var Object: any;
 export interface DonationReceiptInterface {
   "id"?: string;
   "devoteeId": string;
-  "donationTypeMasterId": string;
+  "eventDonationItemId": string;
   "mgPaymentId": string;
   "created-on"?: Date;
   "updated-on"?: Date;
+  "donationTypeMasterId"?: string;
   fkDonationReceiptDevotee1rel?: Devotee;
   fkDonationReceiptDonationTypeMaster1rel?: DonationTypeMaster;
   fkDonationReceiptMgPayment1rel?: Payment;
@@ -21,10 +22,11 @@ export interface DonationReceiptInterface {
 export class DonationReceipt implements DonationReceiptInterface {
   "id": string;
   "devoteeId": string;
-  "donationTypeMasterId": string;
+  "eventDonationItemId": string;
   "mgPaymentId": string;
   "created-on": Date;
   "updated-on": Date;
+  "donationTypeMasterId": string;
   fkDonationReceiptDevotee1rel: Devotee;
   fkDonationReceiptDonationTypeMaster1rel: DonationTypeMaster;
   fkDonationReceiptMgPayment1rel: Payment;
@@ -69,8 +71,8 @@ export class DonationReceipt implements DonationReceiptInterface {
           name: 'devoteeId',
           type: 'string'
         },
-        "donationTypeMasterId": {
-          name: 'donationTypeMasterId',
+        "eventDonationItemId": {
+          name: 'eventDonationItemId',
           type: 'string'
         },
         "mgPaymentId": {
@@ -84,6 +86,10 @@ export class DonationReceipt implements DonationReceiptInterface {
         "updated-on": {
           name: 'updated-on',
           type: 'Date'
+        },
+        "donationTypeMasterId": {
+          name: 'donationTypeMasterId',
+          type: 'string'
         },
       },
       relations: {
