@@ -2,10 +2,12 @@ import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { MatDialog,  MatDialogConfig } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 import { CalendarComponent } from 'ng-fullcalendar';
 import { Options } from 'fullcalendar';
-import { EventService } from './event-calendar.service';
+import { EventsService } from './events.service';
+import { EventsDataSource } from './events-data-source';
 
 import {LoopBackFilter} from '../../shared/sdk/models/BaseModels';
 import { ServiceCalendarEntryComponent} from '../my-services/service-calendar-entry.component';
@@ -22,37 +24,41 @@ export class EventCalendarComponent implements OnInit, OnDestroy {
   displayEvent: any;
   departments: Department[];
   departmentsArray: String[] = [];
-  //  departments: Observable<Department[]>;
-  loopBackFilter: LoopBackFilter = {};
+  dataSource = new EventsDataSource(this.eventService);
+  filteredDevoteesCount = new BehaviorSubject<number>(0);  
+  loopBackFilter1: LoopBackFilter = {};
+  loopBackFilter2: LoopBackFilter = {};
   one$ = new Subscription();
+
   @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
+
   constructor(
-    protected eventService: EventService,
+    protected eventService: EventsService,
     private authService: AuthService,
     private departmentApi: DepartmentApi,
     private dialog: MatDialog,
   ) { }
 
   ngOnInit() {
-    this.loopBackFilter.where = {'departmentLeaderDevoteeId': this.authService.getCurrentUserId()};
-    this.loopBackFilter.include = ['fkDepartmentDevotee1rel', 'announcements'];
-    this.loopBackFilter.order = ['departmentName ASC'];
-    this.departmentApi.find<Department>(this.loopBackFilter).subscribe(
+    //this.loadEvents();
+    this.loopBackFilter2.where = {'departmentLeaderDevoteeId': this.authService.getCurrentUserId()};
+    this.departmentApi.find<Department>(this.loopBackFilter2).subscribe(
      departments => {
        this.departments = departments;
        this.departmentsArray = departments.map(function (department) {
          return department.id;
        });
        this.loadEvents();
+        this.loopBackFilter1.where = {'startTime': {gte: new Date()}};
+        this.dataSource.loadEvents(this.loopBackFilter1);       
      }
     );
-
+ 
   }
 
-
-
   loadEvents() {
-    this.one$ = this.eventService.getCurrentEvents().subscribe(events => {
+    this.one$ = this.dataSource.connect().subscribe(events => {
+      //console.log(events);
       const calendarEvents = events.map((event) => {
         return {
           id: event.id, 
@@ -66,7 +72,7 @@ export class EventCalendarComponent implements OnInit, OnDestroy {
           departmentId: event.departmentId
         };
       });
-
+console.log(calendarEvents);
   this.calendarOptions = {
     timezone: 'Asia/Kolkata',
     selectable: true,
@@ -91,6 +97,7 @@ export class EventCalendarComponent implements OnInit, OnDestroy {
   };
 });
   }
+
 
   clickButton(model: any) {
     this.displayEvent = model;

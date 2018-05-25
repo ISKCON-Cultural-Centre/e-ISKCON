@@ -8,7 +8,7 @@ declare var Object: any;
 export interface DepartmentEventInterface {
   "id": string;
   "departmentId": string;
-  "eventMasterId": string;
+  "eventMasterId"?: string;
   "eventName": string;
   "eventDescription"?: string;
   "startTime": Date;
