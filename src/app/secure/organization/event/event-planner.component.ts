@@ -45,9 +45,9 @@ export class EventPlannerComponent implements OnInit {
         this.departments = departments;
         this.loopBackFilter2.where = {'departmentId': {eq: this.departments}};
         this.dataSource.loadEvents(this.loopBackFilter2);
-        this.dataSource.connect().subscribe(
+         this.dataSource.connect().subscribe(
           events => console.log(events)
-        )
+        );
        });
 
   }

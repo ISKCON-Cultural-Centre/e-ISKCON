@@ -1,16 +1,16 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { MatDialog,  MatDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { CalendarComponent } from 'ng-fullcalendar';
 import { Options } from 'fullcalendar';
 import { EventsService } from './events.service';
 import { EventsDataSource } from './events-data-source';
 
-import {LoopBackFilter} from '../../shared/sdk/models/BaseModels';
-import { ServiceCalendarEntryComponent} from '../my-services/service-calendar-entry.component';
+import { LoopBackFilter } from '../../shared/sdk/models/BaseModels';
+import { ServiceCalendarEntryComponent } from '../my-services/service-calendar-entry.component';
 import { Department, DepartmentEvent, DepartmentApi } from '../../shared/sdk/index';
 import { AuthService } from '../../shared/services';
 
@@ -25,10 +25,11 @@ export class EventCalendarComponent implements OnInit, OnDestroy {
   departments: Department[];
   departmentsArray: String[] = [];
   dataSource = new EventsDataSource(this.eventService);
-  filteredDevoteesCount = new BehaviorSubject<number>(0);  
+  filteredDevoteesCount = new BehaviorSubject<number>(0);
   loopBackFilter1: LoopBackFilter = {};
   loopBackFilter2: LoopBackFilter = {};
   one$ = new Subscription();
+  //departmentEvents: Observable<DepartmentEvent[]>;
 
   @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
 
@@ -41,28 +42,27 @@ export class EventCalendarComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     //this.loadEvents();
-    this.loopBackFilter2.where = {'departmentLeaderDevoteeId': this.authService.getCurrentUserId()};
+    this.loopBackFilter1.where = { 'startTime': { gte: new Date() } };
+    this.dataSource.loadEvents(this.loopBackFilter1);
+    this.loopBackFilter2.where = { 'departmentLeaderDevoteeId': this.authService.getCurrentUserId() };
     this.departmentApi.find<Department>(this.loopBackFilter2).subscribe(
-     departments => {
-       this.departments = departments;
-       this.departmentsArray = departments.map(function (department) {
-         return department.id;
-       });
-       this.loadEvents();
-        this.loopBackFilter1.where = {'startTime': {gte: new Date()}};
-        this.dataSource.loadEvents(this.loopBackFilter1);       
-     }
+      departments => {
+        this.departments = departments;
+        this.departmentsArray = departments.map(function (department) {
+          return department.id;
+        });
+        //this.departmentEvents = this.dataSource.connect();
+        this.loadEvents();
+      }
     );
- 
   }
 
   loadEvents() {
     this.one$ = this.dataSource.connect().subscribe(events => {
-      //console.log(events);
       const calendarEvents = events.map((event) => {
         return {
-          id: event.id, 
-          title: event.eventName, 
+          id: event.id,
+          title: event.eventName,
           allDay: event.allDayInd === 0 ? false : true,
           start: event.startTime,
           end: event.endTime,
@@ -72,30 +72,29 @@ export class EventCalendarComponent implements OnInit, OnDestroy {
           departmentId: event.departmentId
         };
       });
-console.log(calendarEvents);
-  this.calendarOptions = {
-    timezone: 'Asia/Kolkata',
-    selectable: true,
-    selectHelper: true,
-    editable: false,
-    eventLimit: true,
-    views: {
-      agenda: {
-        eventLimit: 5 // adjust only for agendaWeek/agendaDay
-      },
-      month: {
-        eventLimit: 3 // adjust only for month
-      },
-    },
-    //unselectCancel: '.event-entry',
-    header: {
-      left: 'prev,next today',
-      center: 'title',
-      right: 'month,agendaWeek,agendaDay,listMonth'
-    },
-    events: calendarEvents
-  };
-});
+      this.calendarOptions = {
+        timezone: 'Asia/Kolkata',
+        selectable: true,
+        selectHelper: true,
+        editable: false,
+        eventLimit: true,
+        views: {
+          agenda: {
+            eventLimit: 5 // adjust only for agendaWeek/agendaDay
+          },
+          month: {
+            eventLimit: 3 // adjust only for month
+          },
+        },
+        //unselectCancel: '.event-entry',
+        header: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'month,agendaWeek,agendaDay,listMonth'
+        },
+        events: calendarEvents
+      };
+    });
   }
 
 
@@ -105,7 +104,7 @@ console.log(calendarEvents);
 
   eventClick(newEvent: boolean, event: any) {
     if (event.event.editable) {
-    this.openEventDialog(newEvent, event);
+      this.openEventDialog(newEvent, event);
     }
   }
 
@@ -155,7 +154,7 @@ console.log(calendarEvents);
   }
 
   select(newEvent: boolean, event: DepartmentEvent) {
-      this.openEventDialog(newEvent, event);
+    this.openEventDialog(newEvent, event);
   }
 
   unselect(model: any) {
@@ -211,34 +210,34 @@ console.log(calendarEvents);
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.hasBackdrop = true;
-  
+
     const dialogRef = this.dialog.open(ServiceCalendarEntryComponent, dialogConfig);
-  
+
     this.one$ = dialogRef.afterClosed().subscribe(
       data => {
         if (!data.forceClose) {
-        if (newEvent) {
-          this.eventRender(data);
-        } else {
-          event.event.id = data.id;
-          event.event.title = data.eventName;
-          event.event.description = data.description;
-          event.event.start = data.start;
-          event.event.end = data.end;
-          event.event.allDay = data.allDay;
-          event.event.publicInd = data.publicInd;
-          this.ucCalendar.fullCalendar('updateEvent', event.event);
-          if (data.deleteEvent) {
-            this.ucCalendar.fullCalendar('removeEvents', data.id);
+          if (newEvent) {
+            this.eventRender(data);
+          } else {
+            event.event.id = data.id;
+            event.event.title = data.eventName;
+            event.event.description = data.description;
+            event.event.start = data.start;
+            event.event.end = data.end;
+            event.event.allDay = data.allDay;
+            event.event.publicInd = data.publicInd;
+            this.ucCalendar.fullCalendar('updateEvent', event.event);
+            if (data.deleteEvent) {
+              this.ucCalendar.fullCalendar('removeEvents', data.id);
+            }
           }
         }
-      }
       }
     );
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.one$.unsubscribe();
-   }    
+  }
 
 }

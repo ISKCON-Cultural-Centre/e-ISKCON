@@ -91,6 +91,8 @@ import { FundInstrumentType } from '../../models/FundInstrumentType';
 import { InstrumentIssueRegister } from '../../models/InstrumentIssueRegister';
 import { InstrumentReturnRegister } from '../../models/InstrumentReturnRegister';
 import { InstrumentPaymentRegister } from '../../models/InstrumentPaymentRegister';
+import { Organization } from '../../models/Organization';
+import { OrganizationLevelMaster } from '../../models/OrganizationLevelMaster';
 
 export interface Models { [name: string]: any }
 
@@ -189,6 +191,8 @@ export class SDKModels {
     InstrumentIssueRegister: InstrumentIssueRegister,
     InstrumentReturnRegister: InstrumentReturnRegister,
     InstrumentPaymentRegister: InstrumentPaymentRegister,
+    Organization: Organization,
+    OrganizationLevelMaster: OrganizationLevelMaster,
     
   };
 

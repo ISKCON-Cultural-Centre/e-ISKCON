@@ -90,5 +90,7 @@ export * from './FundInstrumentType';
 export * from './InstrumentIssueRegister';
 export * from './InstrumentReturnRegister';
 export * from './InstrumentPaymentRegister';
+export * from './Organization';
+export * from './OrganizationLevelMaster';
 export * from './SDKModels';
 export * from './logger.service';

@@ -8,7 +8,8 @@ import {
   NakshatraMaster,
   PhysicalAddress,
   ProfessionMaster,
-  ServiceRoleMapping
+  ServiceRoleMapping,
+  Organization
 } from '../index';
 
 declare var Object: any;
@@ -16,6 +17,7 @@ export interface DevoteeInterface {
   "id"?: string;
   "legalName"?: string;
   "circleId"?: string;
+  "organizationId"?: string;
   "spiritualName"?: string;
   "gender"?: string;
   "shikshaLevel"?: string;
@@ -54,12 +56,14 @@ export interface DevoteeInterface {
   fkDevoteePhysicalAddress1rel?: PhysicalAddress;
   fkDevoteeProfessionMaster1rel?: ProfessionMaster;
   roleMappings?: ServiceRoleMapping[];
+  fkDevoteeOrganization1rel?: Organization;
 }
 
 export class Devotee implements DevoteeInterface {
   "id": string;
   "legalName": string;
   "circleId": string;
+  "organizationId": string;
   "spiritualName": string;
   "gender": string;
   "shikshaLevel": string;
@@ -98,6 +102,7 @@ export class Devotee implements DevoteeInterface {
   fkDevoteePhysicalAddress1rel: PhysicalAddress;
   fkDevoteeProfessionMaster1rel: ProfessionMaster;
   roleMappings: ServiceRoleMapping[];
+  fkDevoteeOrganization1rel: Organization;
   constructor(data?: DevoteeInterface) {
     Object.assign(this, data);
   }
@@ -141,6 +146,10 @@ export class Devotee implements DevoteeInterface {
         },
         "circleId": {
           name: 'circleId',
+          type: 'string'
+        },
+        "organizationId": {
+          name: 'organizationId',
           type: 'string'
         },
         "spiritualName": {
@@ -332,6 +341,14 @@ export class Devotee implements DevoteeInterface {
           relationType: 'hasMany',
                   keyFrom: 'id',
           keyTo: 'principalId'
+        },
+        fkDevoteeOrganization1rel: {
+          name: 'fkDevoteeOrganization1rel',
+          type: 'Organization',
+          model: 'Organization',
+          relationType: 'belongsTo',
+                  keyFrom: 'organizationId',
+          keyTo: 'id'
         },
       }
     }
