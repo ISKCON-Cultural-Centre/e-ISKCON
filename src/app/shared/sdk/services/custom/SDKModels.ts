@@ -93,6 +93,7 @@ import { InstrumentReturnRegister } from '../../models/InstrumentReturnRegister'
 import { InstrumentPaymentRegister } from '../../models/InstrumentPaymentRegister';
 import { Organization } from '../../models/Organization';
 import { OrganizationLevelMaster } from '../../models/OrganizationLevelMaster';
+import { OrganizationTree } from '../../models/OrganizationTree';
 
 export interface Models { [name: string]: any }
 
@@ -193,6 +194,7 @@ export class SDKModels {
     InstrumentPaymentRegister: InstrumentPaymentRegister,
     Organization: Organization,
     OrganizationLevelMaster: OrganizationLevelMaster,
+    OrganizationTree: OrganizationTree,
     
   };
 

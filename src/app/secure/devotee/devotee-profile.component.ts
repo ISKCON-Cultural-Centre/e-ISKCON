@@ -10,10 +10,10 @@ import { DialogBoxComponent } from '../../shared/components/dialog-box/dialog-bo
 
 import {
   SDKToken, DevoteeApi, GothraMasterApi,
-  NakshatraMasterApi, CircleApi, Devotee, Circle,
+  NakshatraMasterApi, Devotee, Organization, OrganizationApi, OrganizationLevelMasterApi,  
   GothraMaster, NakshatraMaster, Language, LanguageApi, 
   AsramaMaster, AsramaMasterApi, 
-  ProfessionMaster, ProfessionMasterApi, PhysicalAddress,
+  ProfessionMaster, ProfessionMasterApi, PhysicalAddress, OrganizationLevelMaster,
   } from '../..//shared/sdk';
 import { AuthService, NotificationService } from '../../shared/services';
 import { PhysicalAddressComponent } from '../common/physical-address.component';
@@ -32,6 +32,7 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
   @Input() newDevotee = false;
   devotee: Devotee;
 
+
   one$ = new Subscription();
   two$ = new Subscription();
   three$ = new Subscription();
@@ -47,7 +48,7 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
 
   submitted = false;
   devoteeForm: FormGroup;
-  circles: Circle[];
+  circles: Organization[];
   filteredGothras: Observable<GothraMaster[]>;
   filteredNakshatras: Observable<NakshatraMaster[]>;
   filteredProfessions: Observable<ProfessionMaster[]>;
@@ -72,7 +73,8 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
   constructor(
     private notificationService: NotificationService,
     private devoteeApi: DevoteeApi,
-    private circleApi: CircleApi,
+    private circleApi: OrganizationApi,
+    private organizationLevelMasterApi: OrganizationLevelMasterApi,    
     private gothraMasterApi: GothraMasterApi,
     private nakshatraMasterApi: NakshatraMasterApi,
     private languageApi: LanguageApi,
@@ -143,12 +145,22 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
         }
       );
 
-      this.six$ = this.circleApi.find<Circle>()
-      .subscribe(
-        circles => {
-          this.circles = circles;
+      this.nine$ = this.organizationLevelMasterApi.findOne<OrganizationLevelMaster>(
+        { where: { level:  1  } }
+      ).subscribe(
+        level => {
+          console.log(level.id);
+          this.six$ = this.circleApi.find<Organization>(
+            { where: { organizationLevelMasterId: level.id } }
+          )
+          .subscribe(
+            circles => {
+              this.circles = circles;
+            }
+          );
         }
-      );
+      )
+
 
       this.seven$ = this.languageApi.find<Language>()
       .subscribe(languages => {
@@ -179,7 +191,7 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
         id: devotee.id,
         legalName: devotee.legalName,
         spiritualName: devotee.spiritualName,
-        circleId: devotee.circleId,
+        circleId: devotee.organizationId,
         gender: devotee.gender,
         email: devotee.email,
         gothra: devotee.gothra,

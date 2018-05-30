@@ -138,6 +138,7 @@ import { InstrumentReturnRegisterApi } from './services/custom/InstrumentReturnR
 import { InstrumentPaymentRegisterApi } from './services/custom/InstrumentPaymentRegister';
 import { OrganizationApi } from './services/custom/Organization';
 import { OrganizationLevelMasterApi } from './services/custom/OrganizationLevelMaster';
+import { OrganizationTreeApi } from './services/custom/OrganizationTree';
 /**
 * @module SDKBrowserModule
 * @description
@@ -260,6 +261,7 @@ export class SDKBrowserModule {
         InstrumentPaymentRegisterApi,
         OrganizationApi,
         OrganizationLevelMasterApi,
+        OrganizationTreeApi,
         internalStorageProvider,
         { provide: SDKStorage, useClass: StorageBrowser }
       ]

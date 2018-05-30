@@ -24,6 +24,7 @@ import { DevoteeServiceComponent } from '../../secure/devotee/devotee-service.co
 import { EventMasterComponent } from './../../secure/organization/event/event-master.component';
 import { EventPlannerComponent } from './../../secure/organization/event/event-planner.component';
 import { FundInstrumentComponent } from '../../secure/finance/receivables/fund-raising/fund-instrument.component'
+import { DevoteeManagementComponent } from '../../secure/devotee/devotee-management.component';
 
 export const SECURE_ROUTES: Routes = [
     { 
@@ -58,6 +59,14 @@ export const SECURE_ROUTES: Routes = [
       component: DevoteeDetailSearchComponent,
       canActivate: [AuthGuard]
     },
+    {
+      path: 'organization/manageDevotee',
+      data: {
+        breadcrumb: 'Manage Organization Devotee Data'
+      },
+      component: DevoteeManagementComponent,
+      canActivate: [AuthGuard]
+    },    
     {
       path: 'devotee/view',
       data: {
