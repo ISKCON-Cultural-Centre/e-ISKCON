@@ -9,8 +9,9 @@ import {MatCard, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA} from '@angular/
 
 import { DialogBoxComponent } from '../../shared/components/dialog-box/dialog-box.component';
 
-import { DevoteeApi, Devotee } from '../..//shared/sdk';
+import { DevoteeApi, Devotee, Organization, OrganizationApi } from '../..//shared/sdk';
 import { NotificationService, FormErrorService } from '../../shared/services';
+import { OrganizationDataSource } from '../organization/organization-data-source';
 
 
 
@@ -21,9 +22,7 @@ import { NotificationService, FormErrorService } from '../../shared/services';
 })
 export class DevoteeQuickAddComponent implements OnInit, OnDestroy {
 
-  @Input() selectedDevotee: Devotee;
-  devoteeId: String;
-  devotee: Devotee;
+  @Input() circle: String = null;
 
   one$ = new Subscription();
 
@@ -34,7 +33,7 @@ export class DevoteeQuickAddComponent implements OnInit, OnDestroy {
     legalName: '',
     email: '',
     gender: '',
-    mobileNo: '',  
+    mobileNo: '',
   }
 
   constructor(
@@ -42,6 +41,7 @@ export class DevoteeQuickAddComponent implements OnInit, OnDestroy {
     public formErrorService: FormErrorService,
     private dialogRef: MatDialogRef<DevoteeQuickAddComponent>,
     private devoteeApi: DevoteeApi,
+    private organizationApi: OrganizationApi,
     @Inject(MAT_DIALOG_DATA) data,
     private fb: FormBuilder) {
     this.createForm();
@@ -50,6 +50,9 @@ export class DevoteeQuickAddComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.createForm();
+    this.organizationApi.find<Organization>(
+      { 'where': {'level': { 'like': 'pattern'} } }
+    )
   }
 
 
@@ -62,7 +65,7 @@ export class DevoteeQuickAddComponent implements OnInit, OnDestroy {
   }
 
   close() {
-      this.dialogRef.close(this.selectedDevotee);
+      this.dialogRef.close();
   }
 
   createForm() {
@@ -74,7 +77,8 @@ export class DevoteeQuickAddComponent implements OnInit, OnDestroy {
       email: ['', Validators.email],
       incomeTaxId: '',
       mobileNo: ['', Validators.required],
-      landlineNo: ''
+      landlineNo: '',
+      organizationId: this.circle,
     });
     // on each value change we call the validateForm function
     // We only validate form controls that are dirty, meaning they are touched

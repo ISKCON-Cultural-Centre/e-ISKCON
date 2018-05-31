@@ -12,7 +12,7 @@ import { MatDialog,  MatDialogConfig, MatChipInputEvent, MatAutocompleteSelected
 
 import {LoopBackFilter} from '../../shared/sdk/models/BaseModels'
 import { DialogBoxComponent } from '../../shared/components/dialog-box/dialog-box.component';
-import { DevoteeApi, Devotee, OrganizationTree, OrganizationTreeApi } from '../..//shared/sdk';
+import { DevoteeApi, Devotee, OrganizationTree, OrganizationTreeApi } from '../../shared/sdk';
 import { AuthService, NotificationService } from '../../shared/services';
 import { PhysicalAddressComponent } from '../common/physical-address.component';
 import { PhysicalAddressApi } from '../../shared/sdk/services/index';
@@ -21,6 +21,8 @@ import { DevoteesListService } from './devotees-list-service';
 import { DevoteeSearchFilterShareService } from './devotee-search-filter-share-service';
 import { DevoteeQuickAddComponent} from './devotee-quick-add.component';
 import { DevoteeDetailAddComponent} from './devotee-detail-add.component';
+import { OrganizationTreeService } from '../organization/organization-tree.service';
+import { DevoteeDetailComponent} from './devotee-detail.component';
 
 @Component({
   selector: 'app-devotee-management',
@@ -57,6 +59,7 @@ export class DevoteeManagementComponent implements OnInit, AfterViewInit {
     private devoteesListService: DevoteesListService,
     private devoteeApi: DevoteeApi,
     private organizationTreeApi: OrganizationTreeApi,
+    private organizationTreeService: OrganizationTreeService,
     private authService: AuthService,
     private devoteeSearchFilterShareService: DevoteeSearchFilterShareService,
     public dialog: MatDialog
@@ -65,30 +68,23 @@ export class DevoteeManagementComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.devotee = this.authService.getCurrentUserData();
-    this.organizationTreeApi.find(
-      { 'where': {'lvl1': this.devotee.organizationId } }
-    ).subscribe(
-      tree => {
-        console.log(tree);
+    this.organizationTreeService.getOrganizationChildren(this.devotee.organizationId);
+    this.organizationTreeService.connect().subscribe(
+      orgTree => {
+        this.loopBackFilter.include = ['fkDevoteeLanguage1rel', 'fkDevoteeProfessionMaster1rel', 'fkDevoteeCircle1rel'];
+        this.loopBackFilter.order = ['spiritualName ASC'];
+        this.loopBackFilter.where = { 'organizationId': { inq: orgTree}};
+
+              this.three$ = this.devoteeApi.count(this.loopBackFilter.where)
+              .subscribe(
+                count => {
+                  this.filteredDevoteesCount.next(count.count);
+                  this.dataSource.loadDevotees(this.loopBackFilter, 0, 10);
+                  this.paginator.pageIndex = 0;
+                }
+              );
+
       }
-    );
-    this.loopBackFilter.include = ['fkDevoteeLanguage1rel', 'fkDevoteeProfessionMaster1rel', 'fkDevoteeCircle1rel'];
-    this.loopBackFilter.order = ['spiritualName ASC'];
-    this.one$ = this.devoteeSearchFilterShareService.devoteeFilter$.startWith( '{ "and": []}' ).
-    subscribe(
-      filters => {
-        if (filters) {
-          this.loopBackFilter.where = JSON.parse(filters.toString());
-          this.three$ = this.devoteeApi.count(filters)
-          .subscribe(
-            count => {
-              this.filteredDevoteesCount.next(count.count);
-              this.dataSource.loadDevotees(this.loopBackFilter, 0, 10);
-              this.paginator.pageIndex = 0;
-            }
-          );
-      }
-    }
     );
   }
 
@@ -121,13 +117,24 @@ export class DevoteeManagementComponent implements OnInit, AfterViewInit {
     );
   }
 
-  editDevotee(devotee: Devotee) {
-    this.selectedDevotee.emit(devotee);
+
+onRowClicked(devotee: Devotee) {
+
+  const dialogConfig = new MatDialogConfig();
+
+  dialogConfig.data = devotee;
+
+  dialogConfig.disableClose = false;
+  dialogConfig.autoFocus = true;
+  dialogConfig.hasBackdrop = true;
+
+  const dialogRef = this.dialog.open(DevoteeDetailComponent, dialogConfig);
+
+  dialogRef.afterClosed().subscribe(
+    //data => console.log('Dialog output:', data)
+  );
 }
 
-onRowClicked(row) {
-  this.selectedDevotee.emit(row);
-}
 
 deleteDevotee(devotee: Devotee) {
   this.devoteeApi.deleteById(devotee.id)

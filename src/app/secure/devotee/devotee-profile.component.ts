@@ -149,7 +149,7 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
         { where: { level:  1  } }
       ).subscribe(
         level => {
-          console.log(level.id);
+          //console.log(level.id);
           this.six$ = this.circleApi.find<Organization>(
             { where: { organizationLevelMasterId: level.id } }
           )

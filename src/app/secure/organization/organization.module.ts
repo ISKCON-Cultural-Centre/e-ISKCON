@@ -12,6 +12,9 @@ import { RoleTaskComponent } from './role-task.component';
 import { EventCalendarComponent } from './event-calendar.component';
 import { FullCalendarModule } from 'ng-fullcalendar';
 import { EventsService } from './events.service';
+import { OrganizationDataSource } from './organization-data-source';
+import { OrganizationService } from './organization.service';
+import { OrganizationTreeService } from './organization-tree.service';
 import { EventModule } from './event/event.module';
 import { ServiceCalendarEntryComponent} from '../my-services/service-calendar-entry.component';
 import { AuthService } from '../../shared/services/index';
@@ -26,9 +29,10 @@ import { AuthService } from '../../shared/services/index';
   declarations: [
     RoleComponent, DepartmentComponent, 
     TaskMasterComponent, ServiceMasterComponent, 
-    RoleTaskComponent, EventCalendarComponent, 
+    RoleTaskComponent, EventCalendarComponent,
   ],
-  providers: [ EventsService, ],
+  providers: [ EventsService, OrganizationService, OrganizationTreeService,
+  ],
   entryComponents: [
     ServiceCalendarEntryComponent
   ]

@@ -29,7 +29,8 @@ import { DevoteeMaterialFamilyComponent } from './devotee-material-family.compon
 import { DevoteeGroupComponent } from './devotee-group.component';
 import { DevoteeLiteSearchComponent } from './devotee-lite-search.component';
 import { DevoteeServiceComponent } from './devotee-service.component';
-import { DevoteeManagementComponent } from './devotee-management.component'
+import { DevoteeManagementComponent } from './devotee-management.component';
+
 
 @NgModule({
   imports: [
@@ -39,7 +40,7 @@ import { DevoteeManagementComponent } from './devotee-management.component'
     ReactiveFormsModule,
     FlexLayoutModule,
     BrowserModule,
-    CommonComponentsModule
+    CommonComponentsModule,
   ],
   declarations: [
     DevoteeComponent, 
