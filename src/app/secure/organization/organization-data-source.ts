@@ -28,7 +28,7 @@ export class OrganizationDataSource implements DataSource<Organization> {
 
     loadOrganization(loopBackFilter: LoopBackFilter) {
         this.loadingSubject.next(true);
-        this.organizationService.findEvents(loopBackFilter).pipe(
+        this.organizationService.findOrgs(loopBackFilter).pipe(
             catchError(() => of([])),
             finalize(() => this.loadingSubject.next(false))
             )

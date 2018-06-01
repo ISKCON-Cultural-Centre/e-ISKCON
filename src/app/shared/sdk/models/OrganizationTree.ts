@@ -2,19 +2,17 @@
 
 declare var Object: any;
 export interface OrganizationTreeInterface {
-  "lev1": string;
-  "lev2"?: string;
-  "lev3"?: string;
-  "lev4"?: string;
-  "id"?: number;
+  "id": string;
+  "name"?: string;
+  "depth": number;
+  "displayOrder": number;
 }
 
 export class OrganizationTree implements OrganizationTreeInterface {
-  "lev1": string;
-  "lev2": string;
-  "lev3": string;
-  "lev4": string;
-  "id": number;
+  "id": string;
+  "name": string;
+  "depth": number;
+  "displayOrder": number;
   constructor(data?: OrganizationTreeInterface) {
     Object.assign(this, data);
   }
@@ -48,24 +46,20 @@ export class OrganizationTree implements OrganizationTreeInterface {
       path: 'OrganizationTrees',
       idName: 'id',
       properties: {
-        "lev1": {
-          name: 'lev1',
-          type: 'string'
-        },
-        "lev2": {
-          name: 'lev2',
-          type: 'string'
-        },
-        "lev3": {
-          name: 'lev3',
-          type: 'string'
-        },
-        "lev4": {
-          name: 'lev4',
-          type: 'string'
-        },
         "id": {
           name: 'id',
+          type: 'string'
+        },
+        "name": {
+          name: 'name',
+          type: 'string'
+        },
+        "depth": {
+          name: 'depth',
+          type: 'number'
+        },
+        "displayOrder": {
+          name: 'displayOrder',
           type: 'number'
         },
       },

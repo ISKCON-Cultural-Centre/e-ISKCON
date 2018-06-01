@@ -94,6 +94,7 @@ import { InstrumentPaymentRegister } from '../../models/InstrumentPaymentRegiste
 import { Organization } from '../../models/Organization';
 import { OrganizationLevelMaster } from '../../models/OrganizationLevelMaster';
 import { OrganizationTree } from '../../models/OrganizationTree';
+import { OrganizationChildren } from '../../models/OrganizationChildren';
 
 export interface Models { [name: string]: any }
 
@@ -195,6 +196,7 @@ export class SDKModels {
     Organization: Organization,
     OrganizationLevelMaster: OrganizationLevelMaster,
     OrganizationTree: OrganizationTree,
+    OrganizationChildren: OrganizationChildren,
     
   };
 

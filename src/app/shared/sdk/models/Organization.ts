@@ -7,14 +7,14 @@ declare var Object: any;
 export interface OrganizationInterface {
   "id": string;
   "name": string;
+  "lft": number;
+  "rgt": number;
   "organizationLevelMasterId": string;
   "parentId"?: string;
   "createdOn"?: Date;
   "updatedOn"?: Date;
   "createdBy"?: string;
   "updatedBy"?: string;
-  "created-on"?: Date;
-  "updated-on"?: Date;
   fkOrganizationOrganization1rel?: Organization;
   fkOrganizationOrganizationLevelMaster1rel?: OrganizationLevelMaster;
 }
@@ -22,14 +22,14 @@ export interface OrganizationInterface {
 export class Organization implements OrganizationInterface {
   "id": string;
   "name": string;
+  "lft": number;
+  "rgt": number;
   "organizationLevelMasterId": string;
   "parentId": string;
   "createdOn": Date;
   "updatedOn": Date;
   "createdBy": string;
   "updatedBy": string;
-  "created-on": Date;
-  "updated-on": Date;
   fkOrganizationOrganization1rel: Organization;
   fkOrganizationOrganizationLevelMaster1rel: OrganizationLevelMaster;
   constructor(data?: OrganizationInterface) {
@@ -73,6 +73,14 @@ export class Organization implements OrganizationInterface {
           name: 'name',
           type: 'string'
         },
+        "lft": {
+          name: 'lft',
+          type: 'number'
+        },
+        "rgt": {
+          name: 'rgt',
+          type: 'number'
+        },
         "organizationLevelMasterId": {
           name: 'organizationLevelMasterId',
           type: 'string'
@@ -96,14 +104,6 @@ export class Organization implements OrganizationInterface {
         "updatedBy": {
           name: 'updatedBy',
           type: 'string'
-        },
-        "created-on": {
-          name: 'created-on',
-          type: 'Date'
-        },
-        "updated-on": {
-          name: 'updated-on',
-          type: 'Date'
         },
       },
       relations: {

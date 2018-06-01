@@ -21,7 +21,7 @@ import { DevoteesListService } from './devotees-list-service';
 import { DevoteeSearchFilterShareService } from './devotee-search-filter-share-service';
 import { DevoteeQuickAddComponent} from './devotee-quick-add.component';
 import { DevoteeDetailAddComponent} from './devotee-detail-add.component';
-import { OrganizationTreeService } from '../organization/organization-tree.service';
+import { OrganizationChildrenService } from '../organization/organization-children.service';
 import { DevoteeDetailComponent} from './devotee-detail.component';
 
 @Component({
@@ -59,7 +59,7 @@ export class DevoteeManagementComponent implements OnInit, AfterViewInit {
     private devoteesListService: DevoteesListService,
     private devoteeApi: DevoteeApi,
     private organizationTreeApi: OrganizationTreeApi,
-    private organizationTreeService: OrganizationTreeService,
+    private organizationChildrenService: OrganizationChildrenService,
     private authService: AuthService,
     private devoteeSearchFilterShareService: DevoteeSearchFilterShareService,
     public dialog: MatDialog
@@ -68,12 +68,15 @@ export class DevoteeManagementComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.devotee = this.authService.getCurrentUserData();
-    this.organizationTreeService.getOrganizationChildren(this.devotee.organizationId);
-    this.organizationTreeService.connect().subscribe(
+    this.organizationChildrenService.getOrganizationChildren(this.devotee.organizationId);
+    this.organizationChildrenService.connect().subscribe(
       orgTree => {
+        var conditions = orgTree.map(function (org) {
+          return { organizationId: org.nodeId };
+        });
         this.loopBackFilter.include = ['fkDevoteeLanguage1rel', 'fkDevoteeProfessionMaster1rel', 'fkDevoteeCircle1rel'];
         this.loopBackFilter.order = ['spiritualName ASC'];
-        this.loopBackFilter.where = { 'organizationId': { inq: orgTree}};
+        this.loopBackFilter.where = { or: conditions };
 
               this.three$ = this.devoteeApi.count(this.loopBackFilter.where)
               .subscribe(

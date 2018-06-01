@@ -13,8 +13,10 @@ import {
   NakshatraMasterApi, Devotee, Organization, OrganizationApi, OrganizationLevelMasterApi,  
   GothraMaster, NakshatraMaster, Language, LanguageApi, 
   AsramaMaster, AsramaMasterApi, 
-  ProfessionMaster, ProfessionMasterApi, PhysicalAddress, OrganizationLevelMaster,
+  ProfessionMaster, ProfessionMasterApi, PhysicalAddress, OrganizationLevelMaster, OrganizationTree
   } from '../..//shared/sdk';
+
+import { OrganizationTreeService } from '../organization/organization-tree.service';
 import { AuthService, NotificationService } from '../../shared/services';
 import { PhysicalAddressComponent } from '../common/physical-address.component';
 import { PhysicalAddressApi } from '../../shared/sdk/services/index';
@@ -48,7 +50,7 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
 
   submitted = false;
   devoteeForm: FormGroup;
-  circles: Organization[];
+  organizationTree: OrganizationTree[];
   filteredGothras: Observable<GothraMaster[]>;
   filteredNakshatras: Observable<NakshatraMaster[]>;
   filteredProfessions: Observable<ProfessionMaster[]>;
@@ -83,13 +85,9 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
     private router: Router,
     private authService: AuthService,
     private physicalAddressApi: PhysicalAddressApi,
-/*     private dialogRef: MatDialogRef<DevoteeProfileComponent>,
-    @Inject(MAT_DIALOG_DATA) data, */
+    private organizationTreeService: OrganizationTreeService,
     private fb: FormBuilder) {
     this.createForm();
-/*     if (data) {
-      this.devoteeId = data.id;
-    } */
   }
 
 
@@ -145,7 +143,15 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
         }
       );
 
-      this.nine$ = this.organizationLevelMasterApi.findOne<OrganizationLevelMaster>(
+      this.organizationTreeService.getOrganizationTree();
+      this.nine$ = this.organizationTreeService.connect().subscribe(
+        orgTree => {
+          this.organizationTree = orgTree;
+          //console.log(orgTree);
+        }
+      )
+
+/*       this.nine$ = this.organizationLevelMasterApi.findOne<OrganizationLevelMaster>(
         { where: { level:  1  } }
       ).subscribe(
         level => {
@@ -159,7 +165,7 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
             }
           );
         }
-      )
+      ) */
 
 
       this.seven$ = this.languageApi.find<Language>()
@@ -191,7 +197,7 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
         id: devotee.id,
         legalName: devotee.legalName,
         spiritualName: devotee.spiritualName,
-        circleId: devotee.organizationId,
+        organizationId: devotee.organizationId,
         gender: devotee.gender,
         email: devotee.email,
         gothra: devotee.gothra,
@@ -217,7 +223,7 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
     this.devoteeForm = this.fb.group({
       id: null,
       legalName: [null, Validators.required],
-      circleId: null,
+      organizationId: null,
       spiritualName: null,
       gender: null,
       creditLimit: 0,
@@ -265,8 +271,8 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
  
 
   updateDevoteeAddressId(addressId)  {
-    console.log(addressId);
-    console.log(this.devoteeId);
+/*     console.log(addressId);
+    console.log(this.devoteeId); */
    this.nine$ = this.devoteeApi.patchAttributes(this.devoteeId, {physicalAddressId: addressId} )
     .subscribe();
   }

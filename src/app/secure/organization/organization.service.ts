@@ -9,7 +9,7 @@ export class OrganizationService {
 
     constructor(private organizationApi: OrganizationApi) {}
 
-    findEvents(loopBackFilter: LoopBackFilter, pageIndex?: number, pageSize?: number):  Observable<Organization[]> {
+    findOrgs(loopBackFilter: LoopBackFilter, pageIndex?: number, pageSize?: number):  Observable<Organization[]> {
         if (pageSize) {
             loopBackFilter.limit = pageSize;
             loopBackFilter.skip = pageIndex * pageSize;

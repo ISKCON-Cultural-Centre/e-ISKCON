@@ -93,5 +93,6 @@ export * from './InstrumentPaymentRegister';
 export * from './Organization';
 export * from './OrganizationLevelMaster';
 export * from './OrganizationTree';
+export * from './OrganizationChildren';
 export * from './BaseModels';
 

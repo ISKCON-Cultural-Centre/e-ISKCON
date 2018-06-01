@@ -14,6 +14,7 @@ import { FullCalendarModule } from 'ng-fullcalendar';
 import { EventsService } from './events.service';
 import { OrganizationDataSource } from './organization-data-source';
 import { OrganizationService } from './organization.service';
+import { OrganizationChildrenService } from './organization-children.service';
 import { OrganizationTreeService } from './organization-tree.service';
 import { EventModule } from './event/event.module';
 import { ServiceCalendarEntryComponent} from '../my-services/service-calendar-entry.component';
@@ -31,7 +32,7 @@ import { AuthService } from '../../shared/services/index';
     TaskMasterComponent, ServiceMasterComponent, 
     RoleTaskComponent, EventCalendarComponent,
   ],
-  providers: [ EventsService, OrganizationService, OrganizationTreeService,
+  providers: [ EventsService, OrganizationService, OrganizationChildrenService, OrganizationTreeService,
   ],
   entryComponents: [
     ServiceCalendarEntryComponent

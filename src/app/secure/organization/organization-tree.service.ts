@@ -6,17 +6,15 @@ import {catchError, finalize} from 'rxjs/operators';
 
 import { LoopBackFilter } from '../../shared/sdk/models/BaseModels';
 
-import { Organization, OrganizationTree, OrganizationTreeApi, OrganizationApi } from '../..//shared/sdk';
-import { OrganizationService } from './organization.service';
+import { OrganizationTree, OrganizationTreeApi } from '../../shared/sdk';
 
 @Injectable()
 export class OrganizationTreeService implements OnInit, OnDestroy {
   
-  private treeSubject = new BehaviorSubject<String[]>([]);
+  private treeSubject = new BehaviorSubject<OrganizationTree[]>([]);
   loopBackFilter: LoopBackFilter = {};
   
   constructor(
-    private organizationService: OrganizationService,
     private organizationTreeApi: OrganizationTreeApi,
   ) {
 
@@ -25,18 +23,18 @@ export class OrganizationTreeService implements OnInit, OnDestroy {
   ngOnInit() {
   }
 
-  connect(): Observable<String[]> {
+  connect(): Observable<OrganizationTree[]> {
     return this.treeSubject.asObservable();
 }
 
 
-  getOrganizationChildren(organizationId: String) {
-    this.loopBackFilter.where = {'lev1': organizationId};
-    this.loopBackFilter.order = ['lev1 ASC'];
-    this.loopBackFilter.fields = ['lev1', 'lev2', 'lev3', 'lev4'];
-    this.organizationTreeApi.findOne(this.loopBackFilter).subscribe(
+  getOrganizationTree() {
+    //this.loopBackFilter.where = {'parentId': organizationId};
+    this.loopBackFilter.order = ['displayOrder ASC'];
+    //this.loopBackFilter.fields = ['nodeId'];
+    this.organizationTreeApi.find<OrganizationTree>(this.loopBackFilter).subscribe(
       orgs => {
-        this.treeSubject.next(Object.keys(orgs).map(function(k) {return orgs[k]; }));
+        this.treeSubject.next(orgs);
         //console.log(orgs);
       }
     )
