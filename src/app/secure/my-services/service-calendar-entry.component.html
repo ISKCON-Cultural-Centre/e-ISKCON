@@ -24,12 +24,12 @@
             </mat-checkbox>   
 
             <mat-form-field>
-                <input matInput placeholder="Start Date/Time" [owlDateTimeTrigger]="dtStart" [owlDateTime]="dtStart" class="form-control" formControlName="startTime">
+                <input type="datetime-local" matInput  placeholder="Start Date/Time" class="form-control" formControlName="startTime">
                 <owl-date-time #dtStart></owl-date-time>
             </mat-form-field>        
 
             <mat-form-field>
-                <input matInput [owlDateTimeTrigger]="dtEnd" [owlDateTime]="dtEnd" placeholder="End Date/Time" class="form-control" formControlName="endTime">
+                <input type="datetime-local" matInput  placeholder="End Date/Time" class="form-control" formControlName="endTime">
                 <owl-date-time #dtEnd></owl-date-time>              
             </mat-form-field> 
 

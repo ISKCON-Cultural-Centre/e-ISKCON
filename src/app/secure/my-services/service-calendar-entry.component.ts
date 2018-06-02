@@ -55,16 +55,17 @@ export class ServiceCalendarEntryComponent  implements OnInit, OnDestroy {
 
       if (!data.newEvent) {
         this.eventForm.get('id').setValue(data.event.id);
-        this.eventForm.get('startTime').setValue(data.event.start.format());
-          this.eventForm.get('endTime').setValue(data.event.end.format());
+        this.eventForm.get('startTime').setValue(data.event.start.format('YYYY-MM-DD') + 'T' + data.event.start.format('HH:mm'));
+          this.eventForm.get('endTime').setValue(data.event.end.format('YYYY-MM-DD') + 'T' + data.event.end.format('HH:mm'));
           this.eventForm.get('eventName').setValue(data.event.title);
           this.eventForm.get('eventDescription').setValue(data.event.description);
           this.eventForm.get('id').setValue(data.event.id);
           this.eventForm.get('departmentId').setValue(data.event.departmentId);
         } else {
           if (data.start) {
-          this.eventForm.get('startTime').setValue(data.start.format());
-          this.eventForm.get('endTime').setValue(data.end.format());
+            console.log(data.start);
+          this.eventForm.get('startTime').setValue(data.start.format('YYYY-MM-DD') + 'T' + data.start.format('HH:mm'));
+          this.eventForm.get('endTime').setValue(data.end.format('YYYY-MM-DD') + 'T' + data.end.format('HH:mm'));
           }
 
         }

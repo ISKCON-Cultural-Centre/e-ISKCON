@@ -73,7 +73,7 @@ export class EventCalendarComponent implements OnInit, OnDestroy {
         };
       });
       this.calendarOptions = {
-        timezone: 'Asia/Kolkata',
+        timezone: false,
         selectable: true,
         selectHelper: true,
         editable: false,
@@ -128,6 +128,8 @@ export class EventCalendarComponent implements OnInit, OnDestroy {
     let newEvent = {
       id: event.id,
       title: event.eventName,
+      description: event.eventDescription,
+      departmentId: event.departmentId,
       start: event.startTime,
       end: (event.allDayInd === 1 ? null : event.endTime),
       allDay: event.allDayInd === 1 ? true : false,
@@ -203,7 +205,6 @@ export class EventCalendarComponent implements OnInit, OnDestroy {
     if (!event) {
       event = new DepartmentEvent();
     }
-
     dialogConfig.data = event;
     dialogConfig.data.newEvent = newEvent;
     dialogConfig.data.departments = this.departments;
@@ -218,6 +219,7 @@ export class EventCalendarComponent implements OnInit, OnDestroy {
         if (!data.forceClose) {
           if (newEvent) {
             this.eventRender(data);
+            
           } else {
             event.event.id = data.id;
             event.event.title = data.eventName;
