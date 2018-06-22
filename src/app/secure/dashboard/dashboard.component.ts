@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs/Subscription';
 
 import {DashboardUsersComponent} from './cards/dashboard-users/dashboard-users.component';
 import { EventCalendarComponent } from './../../secure/organization/event-calendar.component';
-import { MyServicesComponent } from '../../secure/my-services/my-services.component';
+import { AnnouncementListComponent } from '../../secure/my-services/announcement-list.component';
 
 
 @Component({
@@ -131,11 +131,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
         {
           name: {
             key: DashboardCard.metadata.NAME,
-            value: 'users'
+            value: 'announcements'
           },
           routerLink: {
             key: DashboardCard.metadata.ROUTERLINK,
-            value: '/myServices'
+            value: '/announcements'
           },
           iconClass: {
             key: DashboardCard.metadata.ICONCLASS,
@@ -153,7 +153,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
             key: DashboardCard.metadata.COLOR,
             value: 'blue'
           }
-        }, MyServicesComponent
+        }, AnnouncementListComponent
       )
     );
   }

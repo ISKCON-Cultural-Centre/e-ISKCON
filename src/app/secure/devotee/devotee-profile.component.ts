@@ -30,6 +30,7 @@ import { PhysicalAddressApi } from '../../shared/sdk/services/index';
 export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @Input() devoteeId: String;
+  @Input() organizationId: String;
   @Input() editMode: boolean;
   @Input() newDevotee = false;
   devotee: Devotee;
@@ -111,6 +112,10 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
       }
     }
 
+    if (this.organizationId) {
+      this.devoteeForm.get('organizationId').setValue(this.organizationId);
+      this.devoteeForm.get('organizationId').disable();
+    }
 
     this.two$ = this.devoteeForm.get('gothra').valueChanges
       .distinctUntilChanged().startWith( '{ "and": []}' )

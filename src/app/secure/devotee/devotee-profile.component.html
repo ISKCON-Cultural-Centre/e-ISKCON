@@ -35,7 +35,7 @@
                   <input matInput placeholder="Spiritual Name" class="form-control" formControlName="spiritualName">
                 </mat-form-field>
                 <mat-form-field>
-                  <mat-select placeholder="Organization"   aria-label="State" class="form-control" formControlName="organizationId">
+                  <mat-select placeholder="Circle/Sector"   aria-label="State" class="form-control" formControlName="organizationId">
                     <mat-option *ngFor="let org of organizationTree " [value]="org.id">
                       <span>{{ ".....".repeat(org.depth) + org.name }}</span>
                     </mat-option>

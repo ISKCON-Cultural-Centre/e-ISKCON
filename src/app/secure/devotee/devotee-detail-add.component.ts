@@ -16,12 +16,14 @@ selectedDevotee: Devotee;
 
 
 title: string;
+organizationId: string;
 
 constructor(
     private dialogRef: MatDialogRef<DevoteeDetailAddComponent>,
     @Inject(MAT_DIALOG_DATA) data
 ) {
     this.title = 'Add New Devotee - Detailed';
+    this.organizationId = data;
 }
 
 ngOnInit() {

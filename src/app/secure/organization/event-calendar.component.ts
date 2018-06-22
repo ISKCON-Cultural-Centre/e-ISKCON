@@ -41,7 +41,7 @@ export class EventCalendarComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    //this.loadEvents();
+    this.loadEvents();
     this.loopBackFilter1.where = { 'startTime': { gte: new Date() } };
     this.dataSource.loadEvents(this.loopBackFilter1);
     this.loopBackFilter2.where = { 'departmentLeaderDevoteeId': this.authService.getCurrentUserId() };
@@ -72,6 +72,7 @@ export class EventCalendarComponent implements OnInit, OnDestroy {
           departmentId: event.departmentId
         };
       });
+
       this.calendarOptions = {
         timezone: false,
         selectable: true,

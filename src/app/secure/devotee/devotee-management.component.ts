@@ -153,6 +153,7 @@ openQuickAddDevoteeDialog() {
 
   const dialogConfig = new MatDialogConfig();
 
+  dialogConfig.data = this.devotee.organizationId;
   dialogConfig.disableClose = true;
   dialogConfig.autoFocus = true;
   dialogConfig.hasBackdrop = true;
@@ -168,6 +169,7 @@ openDetailedAddDevoteeDialog() {
 
   const dialogConfig = new MatDialogConfig();
 
+  dialogConfig.data = this.devotee.organizationId;
   dialogConfig.disableClose = false;
   dialogConfig.autoFocus = true;
   dialogConfig.hasBackdrop = true;

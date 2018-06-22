@@ -54,7 +54,9 @@ export class AnnouncementListComponent  implements OnInit, AfterViewInit, OnDest
   }
 
   ngOnInit() {
-    //this.loopBackFilter.where = {'departmentLeaderDevoteeId': this.authService.getCurrentUserId()};
+    this.loopBackFilter.where = {
+      'validUntil': {gte: new Date()}
+    };
     this.loopBackFilter.include = ['fkDepartmentAnnouncementDepartment1rel'];
     this.loopBackFilter.order = ['validUntil DESC'];
               this.dataSource.loadAnnouncements(this.loopBackFilter, 0, 10);

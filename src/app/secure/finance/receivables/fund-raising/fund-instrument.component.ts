@@ -131,7 +131,7 @@ export class FundInstrumentComponent implements OnInit, OnDestroy {
 
   loadFundInstruments() {
     //this.loopBackFilter.where = {'departmentLeaderDevoteeId': this.authService.getCurrentUserId()};
-    this.loopBackFilter.include = ['fundInstruments', 'fundInstruments'];
+    this.loopBackFilter.include = ['fundInstruments'];
     this.loopBackFilter.order = ['instrumentName ASC'];
     this.two$ = this.fundInstrumentTypeApi.find<FundInstrumentType>(this.loopBackFilter)
     .subscribe(

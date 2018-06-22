@@ -30,6 +30,7 @@ import { DevoteeGroupComponent } from './devotee-group.component';
 import { DevoteeLiteSearchComponent } from './devotee-lite-search.component';
 import { DevoteeServiceComponent } from './devotee-service.component';
 import { DevoteeManagementComponent } from './devotee-management.component';
+import { DevoteeKarmiFamilyComponent } from './devotee-karmi-family.component';
 
 
 @NgModule({
@@ -51,7 +52,7 @@ import { DevoteeManagementComponent } from './devotee-management.component';
     DevoteeDetailComponent, DevoteesListComponent, DevoteeSearchFilterComponent, DevoteeCardComponent, 
     DevoteeQuickAddComponent, DevoteeDetailAddComponent, 
     DevoteeMaterialFamilyComponent, DevoteeGroupComponent, 
-    DevoteeLiteSearchComponent, DevoteeServiceComponent, DevoteeManagementComponent
+    DevoteeLiteSearchComponent, DevoteeServiceComponent, DevoteeManagementComponent, DevoteeKarmiFamilyComponent
   ],
   providers: [
     DevoteeSearchSelectService,

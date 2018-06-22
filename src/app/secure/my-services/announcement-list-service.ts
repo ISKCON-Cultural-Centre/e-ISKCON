@@ -12,7 +12,7 @@ export class AnnouncementListService {
     findAnnouncements(announcementFilter: LoopBackFilter, pageIndex: number, pageSize: number):  Observable<DepartmentAnnouncement[]> {
         announcementFilter.limit = pageSize;
         announcementFilter.skip = pageIndex * pageSize;
-        console.log(announcementFilter);
+        //console.log(announcementFilter);
         return this.departmentAnnouncementApi.find(announcementFilter);
     }
 }

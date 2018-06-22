@@ -31,7 +31,7 @@ export class AnnouncementDataSource implements DataSource<DepartmentAnnouncement
                 pageSize: number) {
 
         this.loadingSubject.next(true);
-        console.log(announcementFilter);
+        //console.log(announcementFilter);
         this.devoteesListService.findAnnouncements(announcementFilter,
                 pageIndex,
                 pageSize).pipe(
