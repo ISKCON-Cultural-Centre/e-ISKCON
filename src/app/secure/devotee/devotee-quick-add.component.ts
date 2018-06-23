@@ -9,10 +9,10 @@ import {MatCard, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA} from '@angular/
 
 import { DialogBoxComponent } from '../../shared/components/dialog-box/dialog-box.component';
 
-import { DevoteeApi, Devotee, Organization, OrganizationApi } from '../..//shared/sdk';
+import { DevoteeApi, Devotee, Organization, OrganizationApi, OrganizationLevelMaster, OrganizationTree } from '../..//shared/sdk';
 import { NotificationService, FormErrorService } from '../../shared/services';
 import { OrganizationDataSource } from '../organization/organization-data-source';
-
+import { OrganizationTreeService } from '../organization/organization-tree.service';
 
 
 @Component({
@@ -23,8 +23,11 @@ import { OrganizationDataSource } from '../organization/organization-data-source
 export class DevoteeQuickAddComponent implements OnInit, OnDestroy {
 
   @Input() circle: String = null;
+  @Input() organizationId: String;
 
   one$ = new Subscription();
+  two$ = new Subscription();
+  organizationTree: OrganizationTree[];
 
   submitted = false;
   devoteeForm: FormGroup;
@@ -42,9 +45,11 @@ export class DevoteeQuickAddComponent implements OnInit, OnDestroy {
     private dialogRef: MatDialogRef<DevoteeQuickAddComponent>,
     private devoteeApi: DevoteeApi,
     private organizationApi: OrganizationApi,
+    private organizationTreeService: OrganizationTreeService,
     @Inject(MAT_DIALOG_DATA) data,
     private fb: FormBuilder) {
     this.createForm();
+    this.organizationId = data;
   }
 
 
@@ -52,7 +57,13 @@ export class DevoteeQuickAddComponent implements OnInit, OnDestroy {
     this.createForm();
     this.organizationApi.find<Organization>(
       { 'where': {'level': { 'like': 'pattern'} } }
-    )
+    );
+    this.organizationTreeService.getOrganizationTree();
+    this.two$ = this.organizationTreeService.connect().subscribe(
+      orgTree => {
+        this.organizationTree = orgTree;
+      }
+    )    
   }
 
 
@@ -78,14 +89,18 @@ export class DevoteeQuickAddComponent implements OnInit, OnDestroy {
       incomeTaxId: '',
       mobileNo: ['', Validators.required],
       landlineNo: '',
-      organizationId: this.circle,
+      organizationId: this.organizationId,
     });
     // on each value change we call the validateForm function
     // We only validate form controls that are dirty, meaning they are touched
     // the result is passed to the formErrors object
     this.devoteeForm.valueChanges.subscribe((data) => {
       this.formErrors = this.formErrorService.validateForm(this.devoteeForm, this.formErrors, true)
-    })
+    });
+    if (this.organizationId) {
+      this.devoteeForm.get('organizationId').setValue(this.organizationId);
+      this.devoteeForm.get('organizationId').disable();
+    }
   }
 
 
@@ -123,6 +138,7 @@ export class DevoteeQuickAddComponent implements OnInit, OnDestroy {
 
    ngOnDestroy(){
     this.one$.unsubscribe();
+    this.two$.unsubscribe();
    }
 
 }

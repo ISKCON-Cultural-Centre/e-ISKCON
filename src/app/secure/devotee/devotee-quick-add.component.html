@@ -26,6 +26,13 @@
               </mat-error>
         </mat-input-container>   
         <mat-form-field>
+          <mat-select placeholder="Circle/Sector"   aria-label="State" class="form-control" formControlName="organizationId">
+            <mat-option *ngFor="let org of organizationTree " [value]="org.id">
+              <span>{{ ".....".repeat(org.depth) + org.name }}</span>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>        
+        <mat-form-field>
           <input matInput placeholder="Email Address"  class="form-control" formControlName="email">
           <mat-error align="start" *ngIf="formErrors.email">
               {{ formErrors.email }}

@@ -102,6 +102,10 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
     }
 
     if (this.newDevotee) {
+      if (this.organizationId) {
+        this.devoteeForm.get('organizationId').setValue(this.organizationId);
+        this.devoteeForm.get('organizationId').disable();
+      }
     } else {
       if (this.devoteeId) {
         this.loadDevotee(this.devoteeId);
@@ -112,10 +116,7 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
       }
     }
 
-    if (this.organizationId) {
-      this.devoteeForm.get('organizationId').setValue(this.organizationId);
-      this.devoteeForm.get('organizationId').disable();
-    }
+
 
     this.two$ = this.devoteeForm.get('gothra').valueChanges
       .distinctUntilChanged().startWith( '{ "and": []}' )
