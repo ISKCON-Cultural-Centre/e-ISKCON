@@ -1,15 +1,14 @@
-import { Component, OnInit, OnDestroy, ViewChild} from '@angular/core';
+import { Component, OnInit, OnDestroy, Input} from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator, MatSort, MatTableDataSource, MatSelectChange } from '@angular/material';
 import { MatDialog } from '@angular/material';
 import { Subscription } from 'rxjs/Subscription';
 
 import {LoopBackFilter} from '../../../../shared/sdk/models/BaseModels';
-import { Devotee, DevoteeApi, FundInstrumentType, FundInstrumentTypeApi, FundInstrument, FundInstrumentApi } from '../../../../shared/sdk';
+import { Devotee, DevoteeApi, FundInstrumentType, FundInstrumentTypeApi, 
+  InstrumentIssueRegister, InstrumentIssueRegisterApi } from '../../../../shared/sdk';
 import { NotificationService } from '../../../../shared/services';
 import { MaterialModule } from '../../../../material.module';
-import { SharedComponentsModule } from '../../../../shared/components/shared-components.module';
-import { InlineEditComponent } from '../../../../shared/components/inline-edit/inline-edit.component';
 import { DialogBoxComponent } from '../../../../shared/components/dialog-box/dialog-box.component';
 
 @Component({
@@ -19,35 +18,23 @@ import { DialogBoxComponent } from '../../../../shared/components/dialog-box/dia
 })
 export class FundInstrumentIssueComponent implements OnInit, OnDestroy {
 
+  @Input() fundInstrumentId: string;
   one$ = new Subscription();
   two$ = new Subscription();
   three$ = new Subscription();
   four$ = new Subscription();
   five$ = new Subscription();
 
-  loopBackFilter: LoopBackFilter = {};
-
-  displayedColumns = ['instrument', 'ref', 'start', 'end', 'delete'];
   add = false; 
-  fundInstruments: FundInstrument[] = [];
+
   devotees: Devotee[] = [];
-  dataSource = new MatTableDataSource<FundInstrumentType>();
-
-  fundInstrumentForm: FormGroup;
-  fundInstrumentTypes: FundInstrumentType[];
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
 
 
-  applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-    this.dataSource.filter = filterValue;
-  }  
+  instrumentIssueRegisterForm: FormGroup;
 
   constructor(
     private notificationService: NotificationService,
-    private fundInstrumentApi: FundInstrumentApi,
+    private instrumentIssueRegisterApi: InstrumentIssueRegisterApi,
     private fundInstrumentTypeApi: FundInstrumentTypeApi,
     private devoteeApi: DevoteeApi,
     private fb: FormBuilder,
@@ -61,39 +48,16 @@ export class FundInstrumentIssueComponent implements OnInit, OnDestroy {
   }
 
   createForm() {
-    this.fundInstrumentForm = this.fb.group({
-      instrumentRefNo: [null, Validators.required],
-      receiptInstrumentTypeId: [null, Validators.required],
-      startNo: [null, Validators.required],
-      endNo: [null, Validators.required],
-      currentStartNo: 0,
-      currentEndNo: 0,
-      statusId: [0]
+    this.instrumentIssueRegisterForm = this.fb.group({
+      fundInstrumentId: [this.fundInstrumentId, Validators.required],
+      owningDevoteeId: [null, Validators.required],
+      receiptNo: [null, Validators.required],
+      issueDate: [null, Validators.required],
+      issuerId: [null, Validators.required],
     });
   }
 
-  editInstrumentTypeField($event: MatSelectChange, fundInstrument: FundInstrument ) {
-    this.fundInstrumentApi.patchAttributes(fundInstrument.id, {fundInstrumentType: $event.value})
-    .subscribe(result => this.notificationService.notificationSubject.next('"' + result.departmentName + '" updated successfully'));
-  }
-
-  editInstrumentRefNoField(editValue: string, el: any) {
-    this.fundInstrumentApi.patchAttributes(el.id, {instrumentRefNo: editValue})
-    .subscribe(result => this.notificationService.notificationSubject.next('"' + result.departmentName + '" updated successfully'));
-  }
-
-
-  editInstrumentStartNoField(editValue: string, el: any) {
-    this.fundInstrumentApi.patchAttributes(el.id, {startNo: editValue})
-    .subscribe(result => this.notificationService.notificationSubject.next('"' + result.departmentName + '" updated successfully'));
-  }
-
-  editInstrumentEndNoField(editValue: string, el: any) {
-    this.fundInstrumentApi.patchAttributes(el.id, {endNo: editValue})
-    .subscribe(result => this.notificationService.notificationSubject.next('"' + result.departmentName + '" updated successfully'));
-  }
-
-  displayCreateFundInstrument() {
+   displayCreateFundInstrument() {
     this.add = true;
   }
 
@@ -172,11 +136,3 @@ export class FundInstrumentIssueComponent implements OnInit, OnDestroy {
 
 
 }
-
-
-
-"fundInstrumentId": string;
-"owningDevoteeId": string;
-"receiptNo": number;
-"issueDate": Date;
-"issuerId": string;

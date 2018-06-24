@@ -1,9 +1,9 @@
 <form [formGroup]="devoteeForm" novalidate>  
   <fieldset class="wrap">
     <mat-input-container>
-        <input matInput placeholder="Legal Name" class="form-control" formControlName="legalName" autofocus>
-        <mat-error align="start" *ngIf="formErrors.legalName">
-          {{ formErrors.legalName }}
+        <input matInput placeholder="Issued To" class="form-control" formControlName="owningDevoteeId" autofocus>
+        <mat-error align="start" *ngIf="formErrors.owningDevoteeId">
+          {{ formErrors.owningDevoteeId }}
         </mat-error>
     </mat-input-container>      
 
