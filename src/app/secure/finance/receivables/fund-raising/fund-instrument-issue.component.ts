@@ -72,30 +72,30 @@ export class FundInstrumentIssueComponent implements OnInit, OnDestroy {
         currentEndNo: this.fundInstrumentForm.get('endNo').value,
       }
     ); */
-    this.one$ = this.fundInstrumentApi.create<FundInstrument>(this.fundInstrumentForm.value)
+/*     this.one$ = this.fundInstrumentApi.create<FundInstrument>(this.fundInstrumentForm.value)
     .subscribe(result => {
       this.loadFundInstruments();
       this.notificationService.notificationSubject.next('"' + result.instrumentRefNo + '" created successfully');
       this.add = false;
       this.fundInstrumentForm.reset();
       }
-    );
+    ); */
   }
 
 
-  deleteFundInstrument(fundInstrument: FundInstrument) {
-    this.fundInstrumentApi.deleteById(fundInstrument.id)
+  deleteFundInstrument(/* fundInstrument: FundInstrument */) {
+/*     this.fundInstrumentApi.deleteById(fundInstrument.id)
     .subscribe(result => {
       this.loadFundInstruments();
       this.notificationService.notificationSubject.next('Role ' + '"' + fundInstrument.instrumentRefNo + '" deleted successfully');
       }
-    );
+    ); */
   }
 
 
   loadFundInstruments() {
     //this.loopBackFilter.where = {'departmentLeaderDevoteeId': this.authService.getCurrentUserId()};
-    this.loopBackFilter.include = ['fundInstruments'];
+/*     this.loopBackFilter.include = ['fundInstruments'];
     this.loopBackFilter.order = ['instrumentName ASC'];
     this.two$ = this.fundInstrumentTypeApi.find<FundInstrumentType>(this.loopBackFilter)
     .subscribe(
@@ -104,7 +104,7 @@ export class FundInstrumentIssueComponent implements OnInit, OnDestroy {
         this.dataSource.data = fundInstruments;
         //console.log(fundInstruments);
       }
-    )
+    ) */
   }
 
 /*   loadFundInstrumentTypes() {
@@ -116,8 +116,8 @@ export class FundInstrumentIssueComponent implements OnInit, OnDestroy {
     )
   } */
 
-  openDialog(fundInstrument: FundInstrument) {
-    let dialogRef = this.dialog.open(DialogBoxComponent, {
+  openDialog(/* fundInstrument: FundInstrument */) {
+/*     let dialogRef = this.dialog.open(DialogBoxComponent, {
       width: '600px',
       data: 'Delete the department ' + fundInstrument.instrumentRefNo
     });
@@ -125,7 +125,7 @@ export class FundInstrumentIssueComponent implements OnInit, OnDestroy {
       if(result) {
         this.deleteFundInstrument(fundInstrument);
       } else { }
-    });
+    }); */
   }
 
   ngOnDestroy(){
