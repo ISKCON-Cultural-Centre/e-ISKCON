@@ -119,7 +119,7 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
 
 
     this.two$ = this.devoteeForm.get('gothra').valueChanges
-      .distinctUntilChanged().startWith( '{ "and": []}' )
+      .distinctUntilChanged().startWith( '' )
       .subscribe(searchTerm => {
         this.filteredGothras = this.gothraMasterApi.find<GothraMaster>(
           { where: { gothra: { like: '%' + searchTerm + '%' } } }
@@ -127,7 +127,7 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
       });
 
     this.three$ = this.devoteeForm.get('nakshatra').valueChanges
-      .distinctUntilChanged()
+      .distinctUntilChanged().startWith( '' )
       .subscribe(searchTerm => {
         this.filteredNakshatras = this.nakshatraMasterApi.find<NakshatraMaster>(
           { where: { nakshatra: { like: '%' + searchTerm + '%' } } }
@@ -135,7 +135,7 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
       });
 
       this.four$ = this.devoteeForm.get('professionId').valueChanges
-      .distinctUntilChanged()
+      .distinctUntilChanged().startWith( '' )
       .subscribe(searchTerm => {
         this.filteredProfessions = this.professionMasterApi.find<ProfessionMaster>(
           { where: { professionName: { like: '%' + searchTerm + '%' } } }

@@ -42,4 +42,4 @@ testem.log
 Thumbs.db
 
 # Web Services URL
-base.url.ts
+src/app/shared/base.url.ts
