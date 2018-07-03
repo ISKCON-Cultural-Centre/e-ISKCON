@@ -57,14 +57,16 @@ export class DevoteesListComponent  implements OnInit, AfterViewInit, OnDestroy 
     this.loopBackFilter.include = ['fkDevoteeLanguage1rel', 'fkDevoteeProfessionMaster1rel', 'fkDevoteeCircle1rel'];
     this.loopBackFilter.order = ['spiritualName ASC'];
     this.one$ = this.devoteeSearchFilterShareService.devoteeFilter$
-    .pipe(startWith( '{ "and": []}' ))
+    .pipe(startWith( '{ "or": []}' ))
     .subscribe(
       filters => {
         if (filters) {
           this.loopBackFilter.where = JSON.parse(filters.toString());
-          this.three$ = this.devoteeApi.count(filters)
+          console.log(filters);
+          this.three$ = this.devoteeApi.count()
           .subscribe(
             count => {
+              console.log(count);
               this.filteredDevoteesCount.next(count.count);
               this.dataSource.loadDevotees(this.loopBackFilter, 0, 10);
               this.paginator.pageIndex = 0;

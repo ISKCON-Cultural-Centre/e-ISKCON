@@ -267,8 +267,8 @@ export class DevoteeSearchFilterComponent implements OnInit, AfterViewInit, OnDe
     this.buildFilter6();
   }
 
-  removeShiksha(language: Language): void {
-    let index = this.assignedShikshas.indexOf(language);
+  removeShiksha(spiritualLevelMaster: SpiritualLevelMaster): void {
+    let index = this.assignedShikshas.indexOf(spiritualLevelMaster);
       if (index >= 0) {
         this.assignedShikshas.splice(index, 1);
       }

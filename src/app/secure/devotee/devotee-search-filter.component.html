@@ -6,7 +6,7 @@
       <mat-form-field>      
         <mat-chip-list #chipList1 name="chiplist1">
           <mat-chip *ngFor="let circle of assignedCircles" [selectable]="selectable"
-                    [removable]="removable" (remove)="removeCircle(circle)" [value]="circle.id">
+                    [removable]="removable" (removed)="removeCircle(circle)" [value]="circle.id">
             {{circle.name}}
             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
           </mat-chip>
@@ -25,7 +25,7 @@
       <mat-form-field>      
         <mat-chip-list #chipList2>
           <mat-chip *ngFor="let gender of assignedGenders" [selectable]="selectable"
-                    [removable]="removable" (remove)="removeGender(gender)" [value]="gender.id">
+                    [removable]="removable" (removed)="removeGender(gender)" [value]="gender.id">
             {{gender.name}}
             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
           </mat-chip>
@@ -44,7 +44,7 @@
 <!--         <mat-form-field>      
             <mat-chip-list #chipList3>
                 <mat-chip *ngFor="let language of assignedLanguages" [selectable]="selectable"
-                        [removable]="removable" (remove)="removeLanguage(language)" [value]="language.id">
+                        [removable]="removable" (removed)="removeLanguage(language)" [value]="language.id">
                 {{ language.language }}
                 <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                 </mat-chip>
@@ -63,7 +63,7 @@
         <mat-form-field>      
             <mat-chip-list #chipList4>
                 <mat-chip *ngFor="let ashrama of assignedAshramas" [selectable]="selectable"
-                        [removable]="removable" (remove)="removeAshrama(ashrama)" [value]="ashrama.id">
+                        [removable]="removable" (removed)="removeAshrama(ashrama)" [value]="ashrama.id">
                 {{ ashrama.asramaName }}
                 <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                 </mat-chip>
@@ -82,7 +82,7 @@
 <!--         <mat-form-field>      
             <mat-chip-list #chipList5>
                 <mat-chip *ngFor="let profession of assignedProfessions" [selectable]="selectable"
-                        [removable]="removable" (remove)="removeProfession(profession)" [value]="profession.id">
+                        [removable]="removable" (removed)="removeProfession(profession)" [value]="profession.id">
                 {{  profession.professionName }}
                 <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                 </mat-chip>
@@ -101,7 +101,7 @@
         <mat-form-field>      
             <mat-chip-list #chipList6>
                 <mat-chip *ngFor="let shiksha of assignedShikshas" [selectable]="selectable"
-                        [removable]="removable" (remove)="removeShiksha(shiksha)" [value]="shiksha.id">
+                        [removable]="removable" (removed)="removeShiksha(shiksha)" [value]="shiksha.id">
                 {{  shiksha.description }}
                 <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                 </mat-chip>

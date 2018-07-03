@@ -7,7 +7,7 @@
       <p *ngIf="remainingRoles.length > 0">Available Roles</p>
       <mat-chip-list #chipList>
         <mat-chip *ngFor="let role of remainingRoles" [selectable]="selectable"
-                 [removable]="removable" (remove)="addRole(role)">
+                 [removable]="removable" (removed)="addRole(role)">
           {{role.name}}
           <mat-icon matChipRemove *ngIf="removable">add</mat-icon>
         </mat-chip>
@@ -18,7 +18,7 @@
       <p *ngIf="assignedRoles.length > 0">{{devotee.spiritualName}} has been assigned :</p>
       <mat-chip-list #chipList>
         <mat-chip  color="primary"  selected="true" *ngFor="let role of assignedRoles" [selectable]="selectable"
-                 [removable]="removable" (remove)="removeRole(role)">
+                 [removable]="removable" (removed)="removeRole(role)">
           {{role.name}}
           <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
         </mat-chip>

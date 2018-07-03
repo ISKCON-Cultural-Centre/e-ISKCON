@@ -102,8 +102,8 @@ export class RoleTaskComponent implements OnInit, OnDestroy {
 
   }
 
-  optionChanged(selectionListChange: MatSelectionListChange){
-    if (selectionListChange.option.value.selected){
+  optionChanged(selectionListChange: MatSelectionListChange) {
+    if (selectionListChange.option.selected){
       this.addTask(this.selectedRole, selectionListChange.option.value);
     } else {
       this.removeTask(this.selectedRole, selectionListChange.option.value);

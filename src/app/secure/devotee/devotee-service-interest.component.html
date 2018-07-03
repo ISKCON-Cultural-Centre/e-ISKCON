@@ -4,7 +4,7 @@
         <p *ngIf="remainingServices.length > 0">Available Services</p>
           <mat-chip-list #chipList>
             <mat-chip color="Accent" selected="true" *ngFor="let service of remainingServices" [selectable]="selectable"
-                     [removable]="removable" (remove)="addService(service)">
+                     [removable]="removable" (removed)="addService(service)">
               {{service.serviceName}}
               <mat-icon matChipRemove *ngIf="removable">add</mat-icon>
             </mat-chip>
@@ -16,7 +16,7 @@
         <p *ngIf="assignedServices.length > 0">{{devotee.spiritualName}} has signed for :</p>
           <mat-chip-list #chipList>
             <mat-chip color="primary"  selected="true" *ngFor="let service of assignedServices"  [selectable]="selectable"
-                     [removable]="removable" (remove)="removeService(service)">
+                     [removable]="removable" (removed)="removeService(service)">
               {{service.serviceName}}
               <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
             </mat-chip>

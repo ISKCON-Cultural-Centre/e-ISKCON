@@ -19,8 +19,8 @@
           </div>
           <div class="p-t-20 p-b-20 p-l-10">
               <mat-divider></mat-divider>
-              <mat-selection-list>
-                <mat-list-option *ngFor="let task of allTasks | async" [value]="task.id" [selected]="taskAssigned(task.id)" (selectionChange)="optionChanged($event)">
+              <mat-selection-list (selectionChange)="optionChanged($event)">
+                <mat-list-option *ngFor="let task of allTasks | async" [value]="task.id" [selected]="taskAssigned(task.id)">
                   {{task.taskName}}
                 </mat-list-option>
             </mat-selection-list>
