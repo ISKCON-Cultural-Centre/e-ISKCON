@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
+import { Observable, Subject, Subscription } from 'rxjs';
+import { MatDialog} from '@angular/material';
 
 import { SDKToken, DevoteeApi } from '../../shared/sdk';
 import { AuthService } from '../../shared/services/auth.service';

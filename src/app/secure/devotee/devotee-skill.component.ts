@@ -1,14 +1,14 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import {ENTER, COMMA} from '@angular/cdk/keycodes';
 import { MatChipInputEvent, MatAutocompleteSelectedEvent } from '@angular/material';
-import { Observable } from 'rxjs/Observable';
+import { Observable, Subscription } from 'rxjs';
 
 import {  difference } from 'set-manipulator';
 
 import { Skill, DevoteeSkill  } from '../../shared/sdk/models';
 import { SkillApi, DevoteeSkillApi } from '../../shared/sdk';
 import { NotificationService } from '../../shared/services';
-import { Subscription } from 'rxjs/Subscription';
+import {  } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-devotee-skill',

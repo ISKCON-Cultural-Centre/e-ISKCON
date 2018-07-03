@@ -1,11 +1,9 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {DashboardCard} from './cards/dashboard-card';
-import {Observable} from 'rxjs/Observable';
+import { Observable, Subscription } from 'rxjs';
 import {DashboardCardsService} from './dashboard-cards.service';
 import {ObservableMedia} from '@angular/flex-layout';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/startWith';
-import { Subscription } from 'rxjs/Subscription';
+import { map, startWith } from 'rxjs/operators';
 
 import {DashboardUsersComponent} from './cards/dashboard-users/dashboard-users.component';
 import { EventCalendarComponent } from './../../secure/organization/event-calendar.component';
@@ -78,17 +76,26 @@ export class DashboardComponent implements OnInit, OnDestroy {
       }
     });
     this.cols = this.observableMedia.asObservable()
-      .map(change => {
+    .pipe(
+      map(change => cols_map.get(change.mqAlias)),
+      startWith(start_cols)
+    );
+/*       .map(change => {
         return cols_map.get(change.mqAlias);
-      }).startWith(start_cols);
+      }).startWith(start_cols); */
     this.cols_big = this.observableMedia.asObservable()
-      .map(change => {
+    .pipe(
+      map(change => cols_map_big.get(change.mqAlias)),
+        startWith(start_cols_big)
+    );
+/*       .map(change => {
         return cols_map_big.get(change.mqAlias);
-      }).startWith(start_cols_big);
+      }).startWith(start_cols_big); */
     this.cols_sml = this.observableMedia.asObservable()
-      .map(change => {
-        return cols_map_sml.get(change.mqAlias);
-      }).startWith(start_cols_sml);
+    .pipe(
+      map(change => cols_map_sml.get(change.mqAlias)),
+      startWith(start_cols_sml)
+    );
 
       if (this.cards.length === 0 ) {
         this.createCards();

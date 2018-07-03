@@ -1,13 +1,12 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { MatChipInputEvent, MatTableDataSource, MatCheckboxChange, MatSelectChange, MatDialog } from '@angular/material';
-import { Observable } from 'rxjs/Observable';
+import { Observable, Subscription } from 'rxjs';
 
 import {  difference } from 'set-manipulator';
 
 import { Language, DevoteeLanguage } from '../../shared/sdk/models'
 import { LanguageApi, DevoteeLanguageApi } from '../../shared/sdk';
 import { NotificationService } from '../../shared/services';
-import { Subscription } from 'rxjs/Subscription';
 import { DialogBoxComponent } from '../../shared/components/dialog-box/dialog-box.component';
 
 

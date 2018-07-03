@@ -1,8 +1,7 @@
 import {CollectionViewer, DataSource} from '@angular/cdk/collections';
-import {Observable} from 'rxjs/Observable';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import { Observable, Subscription, of, BehaviorSubject } from 'rxjs';
 import {catchError, finalize} from 'rxjs/operators';
-import {of} from 'rxjs/observable/of';
+
 
 import { DepartmentAnnouncementApi, DepartmentAnnouncement } from '../..//shared/sdk';
 import { AnnouncementListService } from './announcement-list-service';

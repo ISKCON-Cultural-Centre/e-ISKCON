@@ -3,7 +3,7 @@ import { BASE_URL, API_VERSION } from './shared/base.url';
 import { LoopBackConfig } from './shared/sdk';
 import { MatSnackBar, MatRadioButton, MatRadioGroup } from '@angular/material';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { Observable } from 'rxjs/Observable';
+import { Observable, Subject } from 'rxjs';
 
 import { NotificationService } from './shared/services/notification.service';
 import { AuthService } from './shared/services/auth.service';

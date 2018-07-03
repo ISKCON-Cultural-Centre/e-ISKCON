@@ -1,9 +1,7 @@
 import { Component, Input, OnInit, OnDestroy, AfterViewInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
-import { Subscription } from 'rxjs/Subscription';
+import { Observable, Subject, Subscription } from 'rxjs';
 import {MatDialog,  MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import {debounceTime, distinctUntilChanged, startWith, tap, delay,switchMap, map} from 'rxjs/operators';
 import { DialogBoxComponent } from '../../shared/components/dialog-box/dialog-box.component';
@@ -119,7 +117,7 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
 
 
     this.two$ = this.devoteeForm.get('gothra').valueChanges
-      .distinctUntilChanged().startWith( '' )
+      .pipe(distinctUntilChanged(), startWith( '' ))
       .subscribe(searchTerm => {
         this.filteredGothras = this.gothraMasterApi.find<GothraMaster>(
           { where: { gothra: { like: '%' + searchTerm + '%' } } }
@@ -127,7 +125,7 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
       });
 
     this.three$ = this.devoteeForm.get('nakshatra').valueChanges
-      .distinctUntilChanged().startWith( '' )
+    .pipe(distinctUntilChanged(), startWith( '' ))
       .subscribe(searchTerm => {
         this.filteredNakshatras = this.nakshatraMasterApi.find<NakshatraMaster>(
           { where: { nakshatra: { like: '%' + searchTerm + '%' } } }
@@ -135,7 +133,7 @@ export class DevoteeProfileComponent implements OnInit, OnDestroy, AfterViewInit
       });
 
       this.four$ = this.devoteeForm.get('professionId').valueChanges
-      .distinctUntilChanged().startWith( '' )
+      .pipe(distinctUntilChanged(), startWith( '' ))
       .subscribe(searchTerm => {
         this.filteredProfessions = this.professionMasterApi.find<ProfessionMaster>(
           { where: { professionName: { like: '%' + searchTerm + '%' } } }

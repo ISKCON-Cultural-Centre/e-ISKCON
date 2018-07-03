@@ -2,17 +2,17 @@
 <mat-dialog-content>
   <form [formGroup]="devoteeForm" novalidate>  
     <fieldset class="wrap">
-      <mat-input-container>
+      <mat-form-field>
           <input matInput placeholder="Legal Name" class="form-control" formControlName="legalName" autofocus>
           <mat-error align="start" *ngIf="formErrors.legalName">
             {{ formErrors.legalName }}
           </mat-error>
-      </mat-input-container>      
+      </mat-form-field>      
 
         <mat-form-field>
           <input matInput placeholder="Spiritual Name" class="form-control" formControlName="spiritualName">
         </mat-form-field>
-        <mat-input-container>
+        <mat-form-field>
             <mat-select placeholder="Gender"  class="form-control" formControlName="gender">
                 <mat-option value="M">
                   Male
@@ -24,7 +24,7 @@
               <mat-error align="start" *ngIf="formErrors.gender">
                   {{ formErrors.gender }}
               </mat-error>
-        </mat-input-container>   
+        </mat-form-field>   
         <mat-form-field>
           <mat-select placeholder="Circle/Sector"   aria-label="State" class="form-control" formControlName="organizationId">
             <mat-option *ngFor="let org of organizationTree " [value]="org.id">
@@ -39,12 +39,12 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-input-container>
+        <mat-form-field>
             <input matInput placeholder="Mobile number"  class="form-control" formControlName="mobileNo">
             <mat-error align="start" *ngIf="formErrors.mobileNo">
                 {{ formErrors.mobileNo }}
             </mat-error>
-        </mat-input-container>          
+        </mat-form-field>          
 
         <mat-form-field>
           <input matInput placeholder="Landline number"  class="form-control" formControlName="landlineNo">

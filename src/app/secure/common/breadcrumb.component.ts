@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { BreadCrumb } from './breadcrumb';
+import { filter, distinctUntilChanged, map } from 'rxjs/operators';
 
 @Component({
     selector: 'app-breadcrumb',
@@ -9,10 +10,12 @@ import { BreadCrumb } from './breadcrumb';
     encapsulation: ViewEncapsulation.None
 })
 export class BreadcrumbComponent implements OnInit {
-    breadcrumbs$ = this.router.events
-        .filter(event => event instanceof NavigationEnd)
+    breadcrumbs$ = this.router.events.pipe(filter(event => event instanceof NavigationEnd), 
+    distinctUntilChanged(), 
+    map(event => this.buildBreadCrumb(this.activatedRoute.root)));
+/*         .filter(event => event instanceof NavigationEnd)
         .distinctUntilChanged()
-        .map(event => this.buildBreadCrumb(this.activatedRoute.root));
+        .map(event => this.buildBreadCrumb(this.activatedRoute.root)); */
     // Build your breadcrumb starting with the root route of your current activated route
 
     constructor(private activatedRoute: ActivatedRoute,

@@ -1,5 +1,5 @@
 import {Injectable, Input} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 import { OrganizationApi, Organization } from '../../shared/sdk';
 import {LoopBackFilter} from '../../shared/sdk/models/BaseModels';

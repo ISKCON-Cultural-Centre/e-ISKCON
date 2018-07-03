@@ -8,8 +8,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 import { MaterialModule } from './material.module';
-import { OwlDateTimeModule, OWL_DATE_TIME_FORMATS } from 'ng-pick-datetime';
-import { OwlMomentDateTimeModule } from 'ng-pick-datetime-moment';
 
 import { SDKBrowserModule, DevoteeApi } from './shared/sdk';
 import { AuthGuard, AuthService } from './shared/services';
@@ -29,9 +27,6 @@ import { MyDepartmentsService } from './secure/organization/my-departments.servi
 import { GlobalEventsManager } from './shared/services/globalEventsManager.service';
 import { NotificationService } from './shared/services/notification.service';
 import { FormErrorService } from './shared/services/form.error.service';
-import { LookupModule } from './secure/lookup/lookup.module';
-import { LookupService } from './shared/services/lookup.service';
-import { DummyService } from './shared/services/dummy.service';
 import { OrganizationModule } from './secure/organization/organization.module';
 import { FinanceModule } from './secure/finance/finance.module';
 import { SharedComponentsModule } from './shared/components/shared-components.module';
@@ -39,7 +34,6 @@ import { CommonComponentsModule } from './secure/common/common-components.module
 import { SecureComponent } from './layout/secure';
 import { PublicComponent } from './layout/public';
 import { DashboardModule } from './secure/dashboard/dashboard.module';
-import { RawPrintService } from './shared/services/raw-print.service';
 
 // See the Moment.js docs for the meaning of these formats:
 // https://momentjs.com/docs/#/displaying/format/
@@ -78,14 +72,11 @@ export const MY_MOMENT_FORMATS = {
     MyMessagesModule,
     CatalogueModule,
     MatchlessGiftsModule,
-    LookupModule,
     OrganizationModule,
     FinanceModule,
     SharedComponentsModule,
     CommonComponentsModule,
-    DashboardModule, 
-    OwlDateTimeModule, 
-    OwlMomentDateTimeModule
+    DashboardModule,
   ],
   providers: [
     //{provide: LocationStrategy, useClass: HashLocationStrategy},
@@ -93,15 +84,11 @@ export const MY_MOMENT_FORMATS = {
     AuthService,
     MessageService,
     MyServicesService,
-    RawPrintService,
     MyDepartmentsService,
     GlobalEventsManager,
     NotificationService,
     FormErrorService,
     DevoteeApi,
-    LookupService,
-    DummyService,
-    {provide: OWL_DATE_TIME_FORMATS, useValue: MY_MOMENT_FORMATS},
   ],
   bootstrap: [AppComponent]
 })

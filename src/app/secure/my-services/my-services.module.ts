@@ -2,9 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { OwlDateTimeModule, OWL_DATE_TIME_FORMATS, OWL_DATE_TIME_LOCALE } from 'ng-pick-datetime';
-import { OwlMomentDateTimeModule } from 'ng-pick-datetime-moment';
-
 import { MaterialModule } from '../../material.module';
 import { MyServicesRoutingModule } from './my-services-routing.module';
 import { SharedComponentsModule } from '../../shared/components/shared-components.module'
@@ -21,9 +18,7 @@ import { AnnouncementListService } from './announcement-list-service';
     ReactiveFormsModule,
     MaterialModule,
     SharedComponentsModule,
-    MyServicesRoutingModule,
-    OwlDateTimeModule,
-    OwlMomentDateTimeModule
+    MyServicesRoutingModule
   ],
   declarations: [MyServicesComponent, ServiceCalendarEntryComponent, ServiceAnnouncementComponent, AnnouncementListComponent],
   providers: [

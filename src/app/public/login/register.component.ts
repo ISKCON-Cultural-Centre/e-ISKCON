@@ -1,8 +1,8 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs/Observable';
-import { debounceTime } from 'rxjs/operators/debounceTime';
+import { Observable } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 import {MatDialog} from '@angular/material';
 
 import { DialogBoxComponent } from '../../shared/components/dialog-box/dialog-box.component';

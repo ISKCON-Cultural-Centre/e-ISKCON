@@ -5,7 +5,7 @@ import { MaterialModule } from '../../../material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedComponentsModule } from '../../../shared/components/shared-components.module';
 
-import { QRCodeModule } from 'angularx-qrcode';
+//import { QRCodeModule } from 'angularx-qrcode';
 import { EventPlannerComponent } from './event-planner.component';
 import { DevoteeModule } from '../../devotee/devotee.module';
 
@@ -15,7 +15,7 @@ import { DevoteeModule } from '../../devotee/devotee.module';
     MaterialModule,
     SharedComponentsModule,
     FormsModule, ReactiveFormsModule,
-    QRCodeModule,
+    //QRCodeModule,
     DevoteeModule
   ],
   declarations: [EventMasterComponent, EventPlannerComponent]

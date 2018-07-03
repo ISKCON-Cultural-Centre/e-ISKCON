@@ -1,10 +1,8 @@
 import { Component, Input, Inject, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
-import { Subscription } from 'rxjs/Subscription';
-import { debounceTime } from 'rxjs/operators/debounceTime';
+import { Observable, Subject, Subscription } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 import {MatCard, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 import { DialogBoxComponent } from '../../shared/components/dialog-box/dialog-box.component';

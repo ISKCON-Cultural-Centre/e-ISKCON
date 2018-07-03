@@ -1,12 +1,11 @@
 import { Component, OnInit, OnDestroy} from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
-import { debounceTime } from 'rxjs/operators/debounceTime';
+import { Observable, Subscription } from 'rxjs';
+import { debounceTime, startWith } from 'rxjs/operators';
 import { MatChipInputEvent } from '@angular/material';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
-import { MatListOptionChange, MatSelectionListChange } from '@angular/material';
+import { MatSelectionListChange } from '@angular/material';
 
 import * as _ from 'underscore';
 import {  difference } from 'set-manipulator';
@@ -63,8 +62,7 @@ export class RoleTaskComponent implements OnInit, OnDestroy {
  
   ngOnInit() {
     this.one$ = this.roleSearchCtrl.valueChanges
-    .debounceTime(400)
-    .startWith('' )
+    .pipe(debounceTime(400), startWith('' ))
     .subscribe(searchTerm => {
       this.filteredRoles = this.serviceRoleApi.find<ServiceRole>(
         {
@@ -104,11 +102,11 @@ export class RoleTaskComponent implements OnInit, OnDestroy {
 
   }
 
-  optionChanged(selectionListChange: MatListOptionChange){
-    if (selectionListChange.selected){
-      this.addTask(this.selectedRole, selectionListChange.source.value);
+  optionChanged(selectionListChange: MatSelectionListChange){
+    if (selectionListChange.option.value.selected){
+      this.addTask(this.selectedRole, selectionListChange.option.value);
     } else {
-      this.removeTask(this.selectedRole, selectionListChange.source.value);
+      this.removeTask(this.selectedRole, selectionListChange.option.value);
     }
   }
 

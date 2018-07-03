@@ -1,5 +1,5 @@
 import {InjectionToken} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import { Observable} from 'rxjs';
 
 export class DashboardCard {
   static metadata: any = {

@@ -8,8 +8,8 @@ import { Router } from '@angular/router';
 import { SDKToken } from '../..//shared/sdk';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material';
-import { Observable } from 'rxjs/Observable';
-import { debounceTime } from 'rxjs/operators/debounceTime';
+import { Observable } from 'rxjs';
+import { debounceTime, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-devotee-search',
@@ -30,8 +30,8 @@ export class DevoteeSearchComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.devoteeSearchCtrl.valueChanges.filter(term => term !== '')
-    .debounceTime(400)
+    this.devoteeSearchCtrl.valueChanges
+    .pipe(filter(term => term !== ''), debounceTime(400))
     .subscribe(searchTerm => {
       this.filteredDevotees = this.devoteeApi.find<Devotee>(
         {

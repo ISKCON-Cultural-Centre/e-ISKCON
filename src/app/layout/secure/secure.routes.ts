@@ -6,7 +6,6 @@ import { DevoteeComponent } from './../../secure/devotee/devotee.component';
 import { DevoteeProfileComponent } from './../../secure/devotee/devotee-profile.component';
 import { AuthGuard as AuthGuard } from './../../shared/services/auth.guard';
 import { CatalogueComponent } from './../../secure/matchless-gifts/catalogue/catalogue.component';
-import { LookupComponent } from './../../secure/lookup/lookup.component';
 import { DevoteeRoleComponent } from './../../secure/devotee/devotee-role.component';
 import { RoleComponent } from './../../secure/organization/role.component';
 import { TaskMasterComponent } from './../../secure/organization/task-master.component';

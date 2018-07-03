@@ -3,9 +3,7 @@ import { SDKToken, DevoteeApi } from '../sdk';
 import { LoopBackAuth } from '../sdk';
 
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
+import { Observable, Subscription, BehaviorSubject } from 'rxjs';
 import { User } from './models/user';
 import { ChangePassword } from './models/changePassword';
 import { Devotee } from '../sdk';

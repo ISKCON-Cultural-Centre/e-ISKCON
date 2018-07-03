@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ViewChild} from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator, MatSort, MatTableDataSource, MatSelectChange } from '@angular/material';
 import { MatDialog } from '@angular/material';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 
 import {LoopBackFilter} from '../../../../shared/sdk/models/BaseModels';
 import { Devotee, DevoteeApi, FundInstrumentType, FundInstrumentTypeApi, FundInstrument, FundInstrumentApi } from '../../../../shared/sdk';

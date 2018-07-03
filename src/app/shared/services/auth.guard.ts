@@ -8,9 +8,8 @@ import {
 } from '@angular/router';
 import { AuthService } from './auth.service';
 import { DevoteeApi } from '../sdk';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/take';
-import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs';
+import { map, take } from 'rxjs/operators';
 
 @Injectable()
 export class AuthGuard implements CanActivate {

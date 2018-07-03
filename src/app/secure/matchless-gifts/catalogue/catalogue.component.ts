@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DummyService } from '../../../shared/services/dummy.service';
+
 //import { Book } from '../../shared/sdk';
 
 @Component({
@@ -10,7 +10,7 @@ import { DummyService } from '../../../shared/services/dummy.service';
 export class CatalogueComponent implements OnInit {
 
   public titles:Object[];
-  constructor(private dummyService: DummyService) {
+  constructor() {
     this.getCatalogue();
   }
 
@@ -18,12 +18,12 @@ export class CatalogueComponent implements OnInit {
   }
 
   getCatalogue() {
-    this.dummyService.getCatalogueJSON()
+/*     this.dummyService.getCatalogueJSON()
       .subscribe((res) => {
         this.titles = res;
       }, err => {
         alert(err && err.message ? err.message : 'Something Wrong!');
-      });
+      }); */
   }
 
 }

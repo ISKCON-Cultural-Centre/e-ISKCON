@@ -4,8 +4,7 @@ import {  ServiceRole, ServiceRoleApi, Department, DepartmentApi } from '../../s
 import {  NotificationService} from '../../shared/services';
 import { MaterialModule } from '../../material.module';
 import { MatPaginator, MatSort, MatTableDataSource, MatSelectChange } from '@angular/material';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Observable } from 'rxjs/Observable';
+import { Observable, Subject, BehaviorSubject } from 'rxjs';
 
 import {MatDialog} from '@angular/material';
 

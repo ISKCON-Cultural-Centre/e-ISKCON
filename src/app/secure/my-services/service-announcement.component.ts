@@ -5,7 +5,7 @@ import {  Department, DepartmentApi,
 import { MaterialModule } from '../../material.module';
 import { MatPaginator, MatSort, MatTable, MatTableDataSource, MatSelectChange } from '@angular/material';
 import {MatDialog} from '@angular/material';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 
 import {LoopBackFilter} from '../../shared/sdk/models/BaseModels';
 import { SharedComponentsModule } from '../../shared/components/shared-components.module'

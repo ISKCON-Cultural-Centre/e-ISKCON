@@ -1,10 +1,5 @@
 import { Component, ViewChild, EventEmitter, OnInit, Input, Output, OnDestroy, AfterViewInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {merge} from 'rxjs/observable/merge';
-import {fromEvent} from 'rxjs/observable/fromEvent';
-import { Subject } from 'rxjs/Subject';
-import { Subscription } from 'rxjs/Subscription';
+import { Observable, Subscription, Subject, BehaviorSubject, merge, fromEvent } from 'rxjs';
 import {debounceTime, distinctUntilChanged, startWith, tap, delay,switchMap, map} from 'rxjs/operators';
 
 import { MatDialog, MatChipInputEvent, MatAutocompleteSelectedEvent, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
@@ -61,8 +56,9 @@ export class DevoteesListComponent  implements OnInit, AfterViewInit, OnDestroy 
   ngOnInit() {
     this.loopBackFilter.include = ['fkDevoteeLanguage1rel', 'fkDevoteeProfessionMaster1rel', 'fkDevoteeCircle1rel'];
     this.loopBackFilter.order = ['spiritualName ASC'];
-    this.one$ = this.devoteeSearchFilterShareService.devoteeFilter$.startWith( '{ "and": []}' ).
-    subscribe(
+    this.one$ = this.devoteeSearchFilterShareService.devoteeFilter$
+    .pipe(startWith( '{ "and": []}' ))
+    .subscribe(
       filters => {
         if (filters) {
           this.loopBackFilter.where = JSON.parse(filters.toString());

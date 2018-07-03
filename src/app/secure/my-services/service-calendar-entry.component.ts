@@ -4,14 +4,14 @@ import {  Department, DepartmentApi,
   DepartmentEvent, DepartmentEventApi } from '../../shared/sdk';
 import { MaterialModule } from '../../material.module';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
-import { Subscription } from 'rxjs/Subscription';
+
 
 import {LoopBackFilter} from '../../shared/sdk/models/BaseModels';
 import { SharedComponentsModule } from '../../shared/components/shared-components.module'
 import { InlineEditComponent } from '../../shared/components/inline-edit/inline-edit.component';
 import { DialogBoxComponent } from '../../shared/components/dialog-box/dialog-box.component';
 import { AuthService, NotificationService } from '../../shared/services';
-import { Observable } from 'rxjs/Observable';
+import { Observable, Subscription } from 'rxjs';
 import { Input } from '@angular/core/src/metadata/directives';
 
 @Component({

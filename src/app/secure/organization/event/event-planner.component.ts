@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 
 //import { RawPrintService } from '../../../shared/services/raw-print.service';
 //import * as print from 'print-js';

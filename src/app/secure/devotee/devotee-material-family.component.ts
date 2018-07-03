@@ -1,10 +1,8 @@
 import { Component, Input, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
-import { Subscription } from 'rxjs/Subscription';
-import { debounceTime } from 'rxjs/operators/debounceTime';
+import { Observable, Subject, Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import {MatDialog} from '@angular/material';
 
 import { DialogBoxComponent } from '../../shared/components/dialog-box/dialog-box.component';
@@ -107,7 +105,7 @@ export class DevoteeMaterialFamilyComponent implements OnInit, OnDestroy, AfterV
 
 
     this.two$ = this.devoteeForm.get('gothra').valueChanges
-      .distinctUntilChanged()
+      .pipe(distinctUntilChanged())
       .subscribe(searchTerm => {
         this.filteredGothras = this.gothraMasterApi.find<GothraMaster>(
           { where: { gothra: { like: '%' + searchTerm + '%' } } }
@@ -115,7 +113,7 @@ export class DevoteeMaterialFamilyComponent implements OnInit, OnDestroy, AfterV
       });
 
     this.three$ = this.devoteeForm.get('nakshatra').valueChanges
-      .distinctUntilChanged()
+    .pipe(distinctUntilChanged())
       .subscribe(searchTerm => {
         this.filteredNakshatras = this.nakshatraMasterApi.find<NakshatraMaster>(
           { where: { nakshatra: { like: '%' + searchTerm + '%' } } }
@@ -123,7 +121,7 @@ export class DevoteeMaterialFamilyComponent implements OnInit, OnDestroy, AfterV
       });
 
       this.four$ = this.devoteeForm.get('professionId').valueChanges
-      .distinctUntilChanged()
+      .pipe(distinctUntilChanged())
       .subscribe(searchTerm => {
         this.filteredProfessions = this.professionMasterApi.find<ProfessionMaster>(
           { where: { professionName: { like: '%' + searchTerm + '%' } } }

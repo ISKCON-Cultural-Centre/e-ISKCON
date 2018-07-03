@@ -3,21 +3,21 @@
 </span>
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <div>
-    <mat-input-container class="wrap-input">
+    <mat-form-field class="wrap-input">
       <input matInput placeholder="User" 
             formControlName="userName" required autofocus>
       <mat-error *ngIf="isFieldInvalid('userName')">
         Please inform your user name
       </mat-error>
-    </mat-input-container>
+    </mat-form-field>
   </div>
   <div>
-    <mat-input-container class="wrap-input">
+    <mat-form-field class="wrap-input">
       <input class="input" matInput type="password" placeholder="Password" formControlName="password" required>
       <mat-error *ngIf="isFieldInvalid('userName')">
         Please inform your password
       </mat-error>
-    </mat-input-container>
+    </mat-form-field>
   </div>
   <div class="flex-sb-m w-full p-t-3 p-b-32">
       <a (click) = "onResetPassword()" class="txt1">
